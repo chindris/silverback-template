@@ -1,0 +1,35 @@
+{
+  "name": "PROJECT_MACHINE_NAME",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "author": "Amazee Labs <development@amazeelabs.com>",
+  "scripts": {
+    "commit": "git-cz",
+    "build": "pnpm run -r build",
+    "postinstall": "husky install || true",
+    "test:static": "pnpm run -r test:static",
+    "test:static:all": "pnpm run -r test:static",
+    "test:unit": "pnpm run -r test:unit",
+    "test:unit:all": "pnpm run -r test:unit",
+    "test:integration": "pnpm run -r test:integration",
+    "test:integration:all": "pnpm run -r test:integration"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "private": true,
+  "optionalDependencies": {
+    "@amazeelabs/prettier-config": "^1.1.1",
+    "@amazeelabs/recipes": "^1.13.0",
+    "@commitlint/cli": "^16.2.3",
+    "@commitlint/config-conventional": "^16.2.1",
+    "commitizen": "^4.2.4",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.3.7",
+    "prettier": "^2.6.2",
+    "turbo": "^1.6.3"
+  }
+}

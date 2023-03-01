@@ -1,0 +1,34 @@
+{
+  "name": "@PROJECT_MACHINE_NAME/cms",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "private": true,
+  "description": "Content management system for PROJECT_NAME",
+  "scripts": {
+    "build": "./prepare.sh 2>&1",
+    "drush": "SB_ENVIRONMENT=1 SIMPLETEST_DB=sqlite://localhost/sites/default/files/.sqlite DRUSH_OPTIONS_URI=http://127.0.0.1:8888 vendor/bin/drush",
+    "silverback": "SB_ENVIRONMENT=1 SIMPLETEST_DB=sqlite://localhost/sites/default/files/.sqlite SB_ADMIN_USER=admin SB_ADMIN_PASS=admin vendor/bin/silverback",
+    "drupal-install": "SB_SETUP=1 pnpm silverback setup --profile minimal && pnpm drush php-eval 'node_access_rebuild();'",
+    "setup": "pnpm silverback setup && pnpm schema:export",
+    "start": "pnpm drush serve 0.0.0.0:8888",
+    "dev": "pnpm drush serve",
+    "start:silent": "pnpm start > /tmp/drupal.log 2>&1",
+    "clear": "pnpm drush cr",
+    "snapshot-create": "pnpm silverback snapshot-create test -y",
+    "snapshot-restore": "pnpm silverback snapshot-restore test && pnpm drush php-eval 'node_access_rebuild();'",
+    "login": "pnpm drush uli",
+    "config:export": "pnpm drush cex -y",
+    "config:import": "pnpm drush -y cim",
+    "schema:export": "pnpm drush silverback-gatsby:schema-export",
+    "schema:test": "pnpm jest --testMatch '<rootDir>/generated/__tests__/test-queries.js'",
+    "schema:test:update": "pnpm schema:test -u",
+    "test:integration": "pnpm snapshot-restore && start-server-and-test start:silent http://127.0.0.1:8888/user/login schema:test",
+    "___import-translations": "pnpm drush scr scripts/translations-import.php"
+  },
+  "optionalDependencies": {
+    "@amazeelabs/graphql-schema-test": "^1.1.9",
+    "jest": "^27.5.1",
+    "start-server-and-test": "^1.14.0"
+  }
+}

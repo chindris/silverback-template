@@ -1,0 +1,47 @@
+{
+  "$schema": "https://turborepo.org/schema.json",
+  "pipeline": {
+    "build": {
+      // A package's `build` script depends on that package's
+      // dependencies and devDependencies
+      // `build` tasks  being completed first
+      // (the `^` symbol signifies `upstream`).
+      "dependsOn": ["^build"],
+      // By default, the build task will produce a "build" folder
+      // in the packages directory.
+      "outputs": ["build/**"],
+      // Builds should only re-run when files in src change.
+      "inputs": ["src/**"]
+    },
+    "test:static": {
+      // Static tests don't require a build of the package, but they
+      // require dependencies to be built, since these might contain
+      // type definitions.
+      "dependsOn": ["^build"],
+      "outputs": [],
+      // Static tests only have to be re-run when something in the "src"
+      // folder changes.
+      "inputs": ["src/**"]
+    },
+    "test:unit": {
+      // Unit tests also don't require the package to be built since test
+      // tools build packages on the fly. Dependencies need to be built though.
+      // Also unit tests should not even run without static tests passing or
+      // dependencies unit tests failing.
+      "dependsOn": ["^build", "test:static", "^test:unit"],
+      "outputs": [],
+      // Unit tests only have to be re-run when something in the "src"
+      // folder changes.
+      "inputs": ["src/**"]
+    },
+    "test:integration": {
+      // Integration tests run the full system and require the package to be
+      // built and unit tested.
+      "dependsOn": ["build", "test:unit"],
+      "outputs": [],
+      // Integration tests only have to be re-run when something in the "src"
+      // folder changes.
+      "inputs": ["src/**"]
+    }
+  }
+}
