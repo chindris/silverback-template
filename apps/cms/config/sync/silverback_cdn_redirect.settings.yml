@@ -1,0 +1,7 @@
+_core:
+  default_config_hash: _erKSnrIOkU_-RtZg4nfHukX0ujHjUbYuOy2JxqsSe0
+base_url: ''
+404_path: ''
+should_prefix_404_path: false
+netlify_password: ''
+missing_translation_redirect_entity_types: {  }

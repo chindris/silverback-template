@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a8fc45e10c6a9464134097d44c8512e8",
+    "content-hash": "01f5cbbce2364b3749be7fbd79a0c335",
     "packages": [
         {
             "name": "amazeeio/drupal_integrations",
@@ -59,6 +59,40 @@
                 "source": "https://github.com/amazeeio/drupal-integrations/tree/0.3.7"
             },
             "time": "2022-03-03T01:57:35+00:00"
+        },
+        {
+            "name": "amazeelabs/graphql_directives",
+            "version": "2.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/AmazeeLabs/graphql_directives.git",
+                "reference": "68d1f1348dac3f83d9b7f16fe93ef0aad147f0e3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AmazeeLabs/graphql_directives/zipball/68d1f1348dac3f83d9b7f16fe93ef0aad147f0e3",
+                "reference": "68d1f1348dac3f83d9b7f16fe93ef0aad147f0e3",
+                "shasum": ""
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drush": {
+                    "services": {
+                        "drush.services.yml": "^10"
+                    }
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "description": "Directive based GraphQL schemas for Drupal.",
+            "homepage": "https://silverback.netlify.app",
+            "support": {
+                "issues": "https://github.com/AmazeeLabs/graphql_directives/issues",
+                "source": "https://github.com/AmazeeLabs/graphql_directives/tree/2.0.4"
+            },
+            "time": "2023-01-30T06:21:04+00:00"
         },
         {
             "name": "amazeelabs/proxy-drupal-core",
