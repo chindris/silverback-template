@@ -1,0 +1,5 @@
+node_modules
+.turbo
+
+# Local Netlify folder
+.netlify

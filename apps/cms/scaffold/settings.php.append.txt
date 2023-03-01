@@ -1,0 +1,83 @@
+// Basic settings
+$settings['hash_salt'] = 'DRUPAL_HASH_SALT';
+$settings['config_sync_directory'] = '../config/sync';
+$settings['file_private_path'] = $app_root . '/sites/default/files/private';
+
+// Environment indicator.
+$config['environment_indicator.indicator']['name'] = 'Local Silverback';
+$config['environment_indicator.indicator']['bg_color'] = '#42a877';
+$config['environment_indicator.indicator']['fg_color'] = '#ffffff';
+
+// Build service
+// Configure builds status indicators and preview buttons to point to the
+// currently active domain.
+$buildServerUrl = function ($environment, $useAuth = false) {
+  if (getenv('SB_ENVIRONMENT')) {
+   return 'http://localhost:8000';
+  }
+  $user = getenv('PUBLISHER_USERNAME');
+  $pass = getenv('PUBLISHER_PASSWORD');
+  $auth = $user && $pass && $useAuth ? "$user:$pass@" : "";
+  return "https://{$auth}build.{$environment}.PROJECT_MACHINE_NAME.ch4.amazee.io";
+};
+
+$branch = $_SERVER['LAGOON_GIT_SAFE_BRANCH'];
+$config['silverback_external_preview.settings'] = [
+  'preview_host' => $buildServerUrl($branch),
+  'live_host' => $buildServerUrl($branch),
+];
+
+putenv('PUBLISHER_BASE_URL=' . $buildServerUrl($branch));
+putenv(
+  'PUBLISHER_SCRIPT_URL=' . $buildServerUrl(
+    $branch
+  ) . '/___status/elements.js'
+);
+
+$config['graphql.graphql_servers.build']['schema_configuration']['website']['build_webhook'] = $buildServerUrl($branch) . '/___status/build';
+$config['graphql.graphql_servers.build']['schema_configuration']['website']['update_webhook'] = $buildServerUrl($branch) . '/___status/update';
+
+if (getenv('LAGOON')) {
+  if (getenv('LAGOON_ENVIRONMENT') === 'prod') {
+    $config['environment_indicator.indicator']['name'] = 'PROD';
+    $config['environment_indicator.indicator']['bg_color'] = '#8e0000';
+  }
+  elseif (getenv('LAGOON_ENVIRONMENT') === 'dev') {
+    $config['environment_indicator.indicator']['name'] = 'Dev';
+    $config['environment_indicator.indicator']['bg_color'] = '#0036b1';
+  }
+  elseif (getenv('LAGOON_ENVIRONMENT') === 'stage') {
+    $config['environment_indicator.indicator']['name'] = 'Stage';
+    $config['environment_indicator.indicator']['bg_color'] = '#6b008e';
+  }
+  else {
+    $config['environment_indicator.indicator']['name'] = 'Local Docker';
+    $config['environment_indicator.indicator']['bg_color'] = '#0036b1';
+  }
+}
+
+if (getenv('LAGOON')) {
+  $config['gatsby_build_monitor.settings']['site_url'] = $buildServerUrl($branch);
+  if (getenv('LAGOON_ENVIRONMENT') === 'prod') {
+      $config['silverback_cdn_redirect.settings']['base_url'] = 'PROD_FE_BASE_URL';
+      $config['silverback_cdn_redirect.settings']['netlify_password'] = 'PROD_FE_NETLIFY_PASSWORD';
+  }
+  if (getenv('LAGOON_ENVIRONMENT') === 'stage') {
+      $config['silverback_cdn_redirect.settings']['base_url'] = 'STAGE_FE_BASE_URL';
+      $config['silverback_cdn_redirect.settings']['netlify_password'] = 'STAGE_FE_NETLIFY_PASSWORD';
+  }
+  if (getenv('LAGOON_ENVIRONMENT') === 'dev') {
+    $config['silverback_cdn_redirect.settings']['base_url'] = 'DEV_FE_BASE_URL';
+    $config['silverback_cdn_redirect.settings']['netlify_password'] = 'DEV_FE_NETLIFY_PASSWORD';
+  }
+
+  $config['silverback_external_preview.settings'] = [
+    'preview_host' => $config['silverback_cdn_redirect.settings']['base_url'],
+    'live_host' => $config['silverback_cdn_redirect.settings']['base_url'],
+  ];
+}
+$settings['silverback_graphql_persisted_map'] = '../generated/operations.json';
+
+// Gatsby builds act like a reverse proxies for images, so always-enable it.
+$settings['reverse_proxy'] = TRUE;
+$settings['reverse_proxy_addresses'] = [$_SERVER['REMOTE_ADDR']];
