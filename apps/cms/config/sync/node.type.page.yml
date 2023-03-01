@@ -1,0 +1,17 @@
+uuid: b43289d6-87ce-44ba-bc69-604ef19016af
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: 'Basic page'
+type: page
+description: ''
+help: ''
+new_revision: true
+preview_mode: 0
+display_submitted: false
