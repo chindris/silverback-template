@@ -24,7 +24,7 @@
     "schema:test": "pnpm jest --testMatch '<rootDir>/generated/__tests__/test-queries.js'",
     "schema:test:update": "pnpm schema:test -u",
     "test:integration": "pnpm snapshot-restore && start-server-and-test start:silent http://127.0.0.1:8888/user/login schema:test",
-    "___import-translations": "pnpm drush scr scripts/translations-import.php"
+    "import-translations": "pnpm drush scr scripts/translations-import.php"
   },
   "optionalDependencies": {
     "@amazeelabs/graphql-schema-test": "^1.1.9",
