@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "01f5cbbce2364b3749be7fbd79a0c335",
+    "content-hash": "09cad6de976312f0b6f5427b4eeb12d5",
     "packages": [
         {
             "name": "amazeeio/drupal_integrations",
@@ -61,6 +61,40 @@
             "time": "2022-03-03T01:57:35+00:00"
         },
         {
+            "name": "amazeelabs/default-content",
+            "version": "1.2.9",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/AmazeeLabs/default-content.git",
+                "reference": "595dbbedcb320242a3cac333eda19b0fb50ba472"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AmazeeLabs/default-content/zipball/595dbbedcb320242a3cac333eda19b0fb50ba472",
+                "reference": "595dbbedcb320242a3cac333eda19b0fb50ba472",
+                "shasum": ""
+            },
+            "require": {
+                "amazeelabs/proxy-default-content": "^1.1.6"
+            },
+            "type": "package",
+            "autoload": {
+                "psr-4": {
+                    "AmazeeLabs\\DefaultContent\\": "src/AmazeeLabs/DefaultContent"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "description": "Helpers for managing the Drupal's default content.",
+            "support": {
+                "issues": "https://github.com/AmazeeLabs/default-content/issues",
+                "source": "https://github.com/AmazeeLabs/default-content/tree/1.2.9"
+            },
+            "time": "2023-02-04T12:40:35+00:00"
+        },
+        {
             "name": "amazeelabs/graphql_directives",
             "version": "2.0.4",
             "source": {
@@ -93,6 +127,46 @@
                 "source": "https://github.com/AmazeeLabs/graphql_directives/tree/2.0.4"
             },
             "time": "2023-01-30T06:21:04+00:00"
+        },
+        {
+            "name": "amazeelabs/proxy-default-content",
+            "version": "1.1.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/AmazeeLabs/proxy-default-content.git",
+                "reference": "7c00e282cba73931708e305246c7a3e15103c8f5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AmazeeLabs/proxy-default-content/zipball/7c00e282cba73931708e305246c7a3e15103c8f5",
+                "reference": "7c00e282cba73931708e305246c7a3e15103c8f5",
+                "shasum": ""
+            },
+            "require": {
+                "cweagans/composer-patches": "^1.7.3",
+                "drupal/default_content": "^2.0.0-alpha1"
+            },
+            "type": "library",
+            "extra": {
+                "enable-patching": true,
+                "composer-exit-on-patch-failure": true,
+                "patches": {
+                    "drupal/default_content": {
+                        "Paragraphs support": "https://www.drupal.org/files/issues/2022-05-09/2698425-173.patch"
+                    }
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "description": "Proxy package for drupal/default_content.",
+            "homepage": "https://silverback.netlify.app",
+            "support": {
+                "issues": "https://github.com/AmazeeLabs/proxy-default-content/issues",
+                "source": "https://github.com/AmazeeLabs/proxy-default-content/tree/1.1.6"
+            },
+            "time": "2023-01-30T06:21:06+00:00"
         },
         {
             "name": "amazeelabs/proxy-drupal-core",
@@ -1358,6 +1432,22 @@
                 "source": "https://github.com/consolidation/site-process/tree/4.2.1"
             },
             "time": "2022-10-18T13:19:35+00:00"
+        },
+        {
+            "name": "custom-cms/custom_default_content",
+            "version": "dev-dev",
+            "dist": {
+                "type": "path",
+                "url": "node_modules/@custom-cms/custom_default_content",
+                "reference": "e77a8e16d2fb8b979f92fa6df67db1cb62c71eac"
+            },
+            "require": {
+                "amazeelabs/default-content": "^1.1"
+            },
+            "type": "drupal-module",
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "cweagans/composer-patches",
@@ -12019,7 +12109,6 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "drupal/default_content": 15,
         "drupal/entity_usage": 10,
         "drupal/linkit": 10
     },

@@ -27,12 +27,18 @@ importers:
   apps/cms:
     specifiers:
       '@amazeelabs/graphql-schema-test': ^1.1.9
+      '@custom-cms/custom_default_content': workspace:*
       jest: ^27.5.1
       start-server-and-test: ^1.14.0
+    dependencies:
+      '@custom-cms/custom_default_content': link:../../packages/@custom-cms/custom_default_content
     optionalDependencies:
       '@amazeelabs/graphql-schema-test': 1.1.34_jest@27.5.1
       jest: 27.5.1
       start-server-and-test: 1.15.4
+
+  packages/@custom-cms/custom_default_content:
+    specifiers: {}
 
 packages:
 

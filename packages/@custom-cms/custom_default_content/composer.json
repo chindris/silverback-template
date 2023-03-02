@@ -1,0 +1,7 @@
+{
+  "name": "custom-cms/custom_default_content",
+  "type": "drupal-module",
+  "require": {
+    "amazeelabs/default-content": "^1.1"
+  }
+}
