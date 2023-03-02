@@ -9,7 +9,7 @@ This should install all the needed files and a fully working Drupal CMS.
 
 ## CMS run
 
-Navigate to the `apps/cms` folder (in case the enviroment variable were not loaded, just run `direnv allow`) and then run `drush serve` or `pnpm dev`. This should start Drupal at `localhost:8888`. The Drupal instance comes with an admin user which has the credentials: `admin/admin`.
+Navigate to the `apps/cms` folder (in case the enviroment variables were not loaded, just run `direnv allow`) and then run `drush serve` or `pnpm dev`. This should start Drupal at `localhost:8888`. The Drupal instance comes with an admin user which has the credentials: `admin/admin`.
 
 ## Further settings
 Inside the template, there are a few places where you will need to replace some placeholder strings with the actual values for the project: 
