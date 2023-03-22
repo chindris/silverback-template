@@ -1,0 +1,23 @@
+{
+  "name": "@custom/schema",
+  "description": "GraphQL schema and operation definitions.",
+  "main": "build/index.ts",
+  "types": "build/index.ts",
+  "private": true,
+  "scripts": {
+    "build": "graphql-codegen --verbose",
+    "test:static": "tsc && eslint \"**/*.{ts,tsx,js,jsx}\" --fix"
+  },
+  "devDependencies": {
+    "@amazeelabs/codegen-gatsby-fragments": "^1.1.0",
+    "@amazeelabs/codegen-operation-ids": "^0.1.9",
+    "@graphql-codegen/cli": "^3.2.2",
+    "@graphql-codegen/typescript": "^3.0.2",
+    "@graphql-codegen/typescript-operations": "^3.0.2",
+    "graphql": "^16.6.0",
+    "typescript": "^4.9.3"
+  },
+  "dependencies": {
+    "@amazeelabs/scalars": "^1.1.0"
+  }
+}

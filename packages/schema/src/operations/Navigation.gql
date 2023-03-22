@@ -1,0 +1,4 @@
+# The main static query, fetching all navigational items.
+query Navigation {
+  ...Navigation
+}

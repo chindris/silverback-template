@@ -1,0 +1,40 @@
+scalar Url
+scalar Markup
+scalar ImageSource
+
+enum Locale {
+  EN
+  DE
+}
+
+"""
+A single navigation item. Can be available in multiple languages
+and nested into a tree structure. The tree structure is not modeled
+in the GraphQL schema since it does not allow recursive fragments. Instead
+the consumer should use the `parent` field to traverse the tree.
+"""
+type NavigationItem {
+  id: ID!
+  parent: ID!
+  locale: Locale!
+  title: String!
+  target: Url!
+}
+
+"""
+A generic page.
+"""
+type Page {
+  id: ID!
+  locale: Locale!
+  path: String!
+  title: String!
+}
+
+type Query {
+  allPages: [Page!]!
+  page(id: ID!, locale: Locale!): Page
+  metaNavigation: [NavigationItem!]!
+  mainNavigation: [NavigationItem!]!
+  footerNavigation: [NavigationItem!]!
+}

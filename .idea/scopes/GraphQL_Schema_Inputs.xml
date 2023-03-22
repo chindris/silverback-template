@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="GraphQL Schema Inputs" pattern="file[silverback-template]:packages/schema/src//*||file:packages/schema/codegen.ts||file:packages/schema/.graphqlconfig" />
+</component>

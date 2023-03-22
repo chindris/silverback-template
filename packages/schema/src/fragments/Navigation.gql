@@ -1,0 +1,19 @@
+fragment Navigation on Query {
+  mainNavigation {
+    ...NavigationItem
+  }
+  metaNavigation {
+    ...NavigationItem
+  }
+  footerNavigation {
+    ...NavigationItem
+  }
+}
+
+fragment NavigationItem on NavigationItem {
+  id
+  parent
+  locale
+  title
+  target
+}
