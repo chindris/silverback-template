@@ -5,4 +5,4 @@ if (PHP_SAPI !== 'cli') {
   die;
 }
 
-Import::run('custom_default_content');
+Import::run('test_content');

@@ -1,35 +1,32 @@
 {
-  "name": "PROJECT_MACHINE_NAME",
+  "name": "@amazeelabs/silverback-template",
   "version": "1.0.0",
-  "main": "index.js",
   "license": "MIT",
   "author": "Amazee Labs <development@amazeelabs.com>",
   "scripts": {
-    "commit": "git-cz",
-    "build": "pnpm run -r build",
     "postinstall": "husky install || true",
-    "test:static": "pnpm run -r test:static",
-    "test:static:all": "pnpm run -r test:static",
-    "test:unit": "pnpm run -r test:unit",
-    "test:unit:all": "pnpm run -r test:unit",
-    "test:integration": "pnpm run -r test:integration",
-    "test:integration:all": "pnpm run -r test:integration"
-  },
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ]
+    "commit": "git-cz",
+    "build": "pnpm turbo build",
+    "test": "pnpm turbo test:integration"
   },
   "private": true,
   "optionalDependencies": {
-    "@amazeelabs/prettier-config": "^1.1.1",
-    "@amazeelabs/recipes": "^1.13.0",
-    "@commitlint/cli": "^16.2.3",
-    "@commitlint/config-conventional": "^16.2.1",
-    "commitizen": "^4.2.4",
-    "husky": "^7.0.4",
-    "lint-staged": "^12.3.7",
-    "prettier": "^2.6.2",
-    "turbo": "^1.6.3"
+    "@commitlint/cli": "^17.1.2",
+    "@commitlint/config-conventional": "^17.1.0",
+    "@typescript-eslint/eslint-plugin": "^5.45.0",
+    "@typescript-eslint/parser": "^5.45.0",
+    "eslint": "^8",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-no-only-tests": "^3.1.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-react": "^7.31.11",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-simple-import-sort": "^8.0.0",
+    "husky": "^8.0.1",
+    "prettier": "^2.7.1",
+    "turbo": "^1.8.3",
+    "typescript": "^4.9.3",
+    "vitest": "^0.29.7"
   }
 }

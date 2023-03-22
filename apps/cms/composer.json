@@ -1,155 +1,155 @@
 {
-    "name": "drupal/composer_project_name",
-    "description": "Project template for Drupal 9 projects with a relocated document root",
-    "type": "project",
-    "license": "GPL-2.0-or-later",
-    "homepage": "https://www.drupal.org/project/drupal",
-    "support": {
-        "docs": "https://www.drupal.org/docs/user_guide/en/index.html",
-        "chat": "https://www.drupal.org/node/314178"
+  "name": "custom/cms",
+  "description": "Project template for Drupal 9 projects with a relocated document root",
+  "type": "project",
+  "license": "GPL-2.0-or-later",
+  "homepage": "https://www.drupal.org/project/drupal",
+  "support": {
+    "docs": "https://www.drupal.org/docs/user_guide/en/index.html",
+    "chat": "https://www.drupal.org/node/314178"
+  },
+  "repositories": [
+    {
+      "type": "path",
+      "url": "node_modules/@custom/*"
     },
-    "repositories": [
-        {
-            "type": "path",
-            "url": "node_modules/@custom-cms/*"
-        },
-        {
-            "type": "composer",
-            "url": "https://packages.drupal.org/8"
-        },
-        {
-            "type": "package",
-            "package": {
-                "name": "enyo/dropzone",
-                "version": "5.7.1",
-                "type": "drupal-library",
-                "dist": {
-                    "url": "https://github.com/enyo/dropzone/archive/v5.7.1.zip",
-                    "type": "zip"
-                }
-            }
+    {
+      "type": "composer",
+      "url": "https://packages.drupal.org/8"
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "enyo/dropzone",
+        "version": "5.7.1",
+        "type": "drupal-library",
+        "dist": {
+          "url": "https://github.com/enyo/dropzone/archive/v5.7.1.zip",
+          "type": "zip"
         }
-    ],
-    "require": {
-        "amazeeio/drupal_integrations": "^0.3.7",
-        "amazeelabs/graphql_directives": "^2.0",
-        "amazeelabs/proxy-drupal-core": "^1.1",
-        "amazeelabs/proxy-graphql": "^1.1",
-        "amazeelabs/proxy-gutenberg": "^1.1",
-        "amazeelabs/silverback-cli": "^2.7",
-        "amazeelabs/silverback_cdn_redirect": "^2.2",
-        "amazeelabs/silverback_external_preview": "^2.0",
-        "amazeelabs/silverback_gatsby": "^2.0",
-        "amazeelabs/silverback_graphql_persisted": "^1.1",
-        "amazeelabs/silverback_gutenberg": "^2.1",
-        "amazeelabs/silverback_translations": "^1.0",
-        "custom-cms/custom_default_content": "*",
-        "composer/installers": "^2.2",
-        "drupal/admin_toolbar": "^3.3",
-        "drupal/core-composer-scaffold": "^9.5",
-        "drupal/core-recommended": "^9.5",
-        "drupal/dropzonejs": "^2.8",
-        "drupal/entity_usage": "^2.0@beta",
-        "drupal/environment_indicator": "^4.0",
-        "drupal/field_group": "^3.4",
-        "drupal/gatsby_build_monitor": "^1.4",
-        "drupal/linkit": "^6.0@beta",
-        "drupal/pathauto": "^1.11",
-        "drupal/redirect": "^1.7",
-        "drupal/stage_file_proxy": "^2.0",
-        "drush/drush": "^10",
-        "enyo/dropzone": "^5.7"
-    },
-    "conflict": {
-        "drupal/drupal": "*"
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
-    "config": {
-        "sort-packages": true,
-        "allow-plugins": {
-            "composer/installers": true,
-            "cweagans/composer-patches": true,
-            "drupal/core-composer-scaffold": true,
-            "dealerdirect/phpcodesniffer-composer-installer": true
-        }
-    },
-    "extra": {
-        "patchLevel": {
-            "drupal/core": "-p2"
-        },
-        "drupal-scaffold": {
-            "locations": {
-                "web-root": "web/"
-            },
-            "file-mapping": {
-                "[web-root]/sites/default/settings.php": {
-                    "append": "scaffold/settings.php.append.txt"
-                },
-                "[web-root]/sites/default/all.services.yml": "scaffold/all.services.yml",
-                "[web-root]/sites/default/production.settings.php": "scaffold/production.settings.php",
-                "[web-root]/robots.txt": "scaffold/robots.txt"
-            },
-            "allowed-packages": [
-                "amazeeio/drupal_integrations",
-                "amazeelabs/silverback-cli"
-            ]
-        },
-        "installer-paths": {
-            "web/core": [
-                "type:drupal-core"
-            ],
-            "web/libraries/{$name}": [
-                "type:drupal-library"
-            ],
-            "web/modules/contrib/{$name}": [
-                "type:drupal-module"
-            ],
-            "web/profiles/contrib/{$name}": [
-                "type:drupal-profile"
-            ],
-            "web/themes/contrib/{$name}": [
-                "type:drupal-theme"
-            ],
-            "drush/Commands/contrib/{$name}": [
-                "type:drupal-drush"
-            ],
-            "web/modules/custom/{$name}": [
-                "type:drupal-custom-module"
-            ],
-            "web/profiles/custom/{$name}": [
-                "type:drupal-custom-profile"
-            ],
-            "web/themes/custom/{$name}": [
-                "type:drupal-custom-theme"
-            ]
-        },
-        "drupal-core-project-message": {
-            "include-keys": [
-                "homepage",
-                "support"
-            ],
-            "post-create-project-cmd-message": [
-                "<bg=blue;fg=white>                                                         </>",
-                "<bg=blue;fg=white>  Congratulations, you’ve installed the Drupal codebase  </>",
-                "<bg=blue;fg=white>  from the drupal/recommended-project template!          </>",
-                "<bg=blue;fg=white>                                                         </>",
-                "",
-                "<bg=yellow;fg=black>Next steps</>:",
-                "  * Install the site: https://www.drupal.org/docs/8/install",
-                "  * Read the user guide: https://www.drupal.org/docs/user_guide/en/index.html",
-                "  * Get support: https://www.drupal.org/support",
-                "  * Get involved with the Drupal community:",
-                "      https://www.drupal.org/getting-involved",
-                "  * Remove the plugin that prints this message:",
-                "      composer remove drupal/core-project-message"
-            ]
-        },
-        "enable-patching": true,
-        "composer-exit-on-patch-failure": true
-    },
-    "require-dev": {
-        "drupal/core-dev": "^9.5",
-        "phpspec/prophecy-phpunit": "^2"
+      }
     }
+  ],
+  "require": {
+    "amazeeio/drupal_integrations": "^0.3.7",
+    "amazeelabs/graphql_directives": "^2.0",
+    "amazeelabs/proxy-drupal-core": "^1.1",
+    "amazeelabs/proxy-graphql": "^1.1",
+    "amazeelabs/proxy-gutenberg": "^1.1",
+    "amazeelabs/silverback-cli": "^2.7",
+    "amazeelabs/silverback_cdn_redirect": "^2.2",
+    "amazeelabs/silverback_external_preview": "^2.0",
+    "amazeelabs/silverback_gatsby": "^2.0",
+    "amazeelabs/silverback_graphql_persisted": "^1.1",
+    "amazeelabs/silverback_gutenberg": "^2.1",
+    "amazeelabs/silverback_translations": "^1.0",
+    "custom/test_content": "*",
+    "composer/installers": "^2.2",
+    "drupal/admin_toolbar": "^3.3",
+    "drupal/core-composer-scaffold": "^9.5",
+    "drupal/core-recommended": "^9.5",
+    "drupal/dropzonejs": "^2.8",
+    "drupal/entity_usage": "^2.0@beta",
+    "drupal/environment_indicator": "^4.0",
+    "drupal/field_group": "^3.4",
+    "drupal/gatsby_build_monitor": "^1.4",
+    "drupal/linkit": "^6.0@beta",
+    "drupal/pathauto": "^1.11",
+    "drupal/redirect": "^1.7",
+    "drupal/stage_file_proxy": "^2.0",
+    "drush/drush": "^10",
+    "enyo/dropzone": "^5.7"
+  },
+  "conflict": {
+    "drupal/drupal": "*"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "config": {
+    "sort-packages": true,
+    "allow-plugins": {
+      "composer/installers": true,
+      "cweagans/composer-patches": true,
+      "drupal/core-composer-scaffold": true,
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
+  },
+  "extra": {
+    "patchLevel": {
+      "drupal/core": "-p2"
+    },
+    "drupal-scaffold": {
+      "locations": {
+        "web-root": "web/"
+      },
+      "file-mapping": {
+        "[web-root]/sites/default/settings.php": {
+          "append": "scaffold/settings.php.append.txt"
+        },
+        "[web-root]/sites/default/all.services.yml": "scaffold/all.services.yml",
+        "[web-root]/sites/default/production.settings.php": "scaffold/production.settings.php",
+        "[web-root]/robots.txt": "scaffold/robots.txt"
+      },
+      "allowed-packages": [
+        "amazeeio/drupal_integrations",
+        "amazeelabs/silverback-cli"
+      ]
+    },
+    "installer-paths": {
+      "web/core": [
+        "type:drupal-core"
+      ],
+      "web/libraries/{$name}": [
+        "type:drupal-library"
+      ],
+      "web/modules/contrib/{$name}": [
+        "type:drupal-module"
+      ],
+      "web/profiles/contrib/{$name}": [
+        "type:drupal-profile"
+      ],
+      "web/themes/contrib/{$name}": [
+        "type:drupal-theme"
+      ],
+      "drush/Commands/contrib/{$name}": [
+        "type:drupal-drush"
+      ],
+      "web/modules/custom/{$name}": [
+        "type:drupal-custom-module"
+      ],
+      "web/profiles/custom/{$name}": [
+        "type:drupal-custom-profile"
+      ],
+      "web/themes/custom/{$name}": [
+        "type:drupal-custom-theme"
+      ]
+    },
+    "drupal-core-project-message": {
+      "include-keys": [
+        "homepage",
+        "support"
+      ],
+      "post-create-project-cmd-message": [
+        "<bg=blue;fg=white>                                                         </>",
+        "<bg=blue;fg=white>  Congratulations, you’ve installed the Drupal codebase  </>",
+        "<bg=blue;fg=white>  from the drupal/recommended-project template!          </>",
+        "<bg=blue;fg=white>                                                         </>",
+        "",
+        "<bg=yellow;fg=black>Next steps</>:",
+        "  * Install the site: https://www.drupal.org/docs/8/install",
+        "  * Read the user guide: https://www.drupal.org/docs/user_guide/en/index.html",
+        "  * Get support: https://www.drupal.org/support",
+        "  * Get involved with the Drupal community:",
+        "      https://www.drupal.org/getting-involved",
+        "  * Remove the plugin that prints this message:",
+        "      composer remove drupal/core-project-message"
+      ]
+    },
+    "enable-patching": true,
+    "composer-exit-on-patch-failure": true
+  },
+  "require-dev": {
+    "drupal/core-dev": "^9.5",
+    "phpspec/prophecy-phpunit": "^2"
+  }
 }

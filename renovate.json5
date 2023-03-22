@@ -1,0 +1,87 @@
+{
+  "extends": [":ignoreModulesAndTests", "helpers:disableTypesNodeMajor"],
+
+  "ignorePaths": [
+    // We want full control on the Dockerfiles.
+    ".lagoon/**"
+  ],
+
+  // This changes the behaviour of "stabilityDays"
+  // - from the standard "create PR and add a stabilityDays check to it"
+  // - to "create PR, but do not include updates for packages which did not pass
+  //   the stabilityDays check"
+  "internalChecksFilter": "strict",
+
+  "dependencyDashboard": true,
+
+  "branchPrefix": "renovate/",
+
+  // All updates, except for the major, wait for a manual approval.
+  "dependencyDashboardApproval": true,
+
+  // Pin dependencies by default.
+  "rangeStrategy": "pin",
+
+  "packageRules": [
+    // Use "bump" range strategy for resolutions.
+    {
+      "matchPaths": ["package.json"],
+      "matchDepTypes": ["resolutions"],
+      "rangeStrategy": "bump"
+    },
+    // Use "bump" range strategy for special dependency types.
+    {
+      "matchPaths": ["**/package.json"],
+      "matchDepTypes": [
+        "peerDependencies",
+        "bundledDependencies",
+        "optionalDependencies"
+      ],
+      "rangeStrategy": "bump"
+    },
+
+    // Standard rules.
+    {
+      "matchUpdateTypes": ["major"],
+      "groupName": "all-major",
+      // Give major updates a month to stabilize.
+      "stabilityDays": 30,
+      "automerge": false,
+      // We need to automate PR creation in order to make the stabilityDays
+      // option work.
+      "dependencyDashboardApproval": false,
+      // Drupal's security release window: Wednesdays, from 16:00 UTC to 22:00 UTC
+      // https://www.drupal.org/drupal-security-team/security-release-numbers-and-release-timing#s-release-timing
+      "schedule": ["before 3am on thursday"]
+    },
+    {
+      "matchUpdateTypes": ["minor", "patch", "digest"],
+      "groupName": "all-non-major",
+      "automerge": false
+    },
+    {
+      // Do not update "engines" field in package.json files.
+      "matchDepTypes": ["engines"],
+      "enabled": false
+    },
+
+    // Package-specific rules.
+    {
+      "paths": ["apps/cms/composer.json"],
+      "packageNames": [
+        // Lagoon's drupal_integrations module does not support Drush 11 yet. So
+        // we stay on Drush 10 for now.
+        // TODO: Remove once https://github.com/amazeeio/drupal-integrations/issues/7 is resolved.
+        "drush/drush"
+      ],
+      "updateTypes": ["major"],
+      "enabled": false
+    }
+  ],
+
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": ["at any time"],
+    "automerge": false
+  }
+}

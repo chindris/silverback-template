@@ -2,7 +2,7 @@
 /**
  * Implements hook_requirements().
  */
-function custom_default_content_requirements($phase) {
+function test_content_requirements($phase) {
   return [
     'module' => [
       'title' => 'custom_default_content module should never be enabled',

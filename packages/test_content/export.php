@@ -13,4 +13,4 @@ $excluded = [
   'content_moderation_state'
 ];
 
-Export::run('custom_default_content', $excluded);
+Export::run('test_content', $excluded);

@@ -1,5 +1,12 @@
 node_modules
-.turbo
-
+.idea/inspectionProfiles
+build-storybook.log
+storybook-static
+coverage
+build
+dts
 # Local Netlify folder
 .netlify
+apps/website/.env
+.DS_Store
+.turbo

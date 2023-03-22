@@ -1,10 +1,11 @@
 {
-  "name": "@PROJECT_MACHINE_NAME/cms",
+  "name": "@custom/cms",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
   "private": true,
-  "description": "Content management system for PROJECT_NAME",
+  "description": "Drupal based content management system.",
+  "sideEffects": false,
   "scripts": {
     "build": "./prepare.sh 2>&1",
     "drush": "SB_ENVIRONMENT=1 SIMPLETEST_DB=sqlite://localhost/sites/default/files/.sqlite DRUSH_OPTIONS_URI=http://127.0.0.1:8888 vendor/bin/drush",
@@ -18,8 +19,8 @@
     "snapshot-create": "pnpm silverback snapshot-create test -y",
     "snapshot-restore": "pnpm silverback snapshot-restore test && pnpm drush php-eval 'node_access_rebuild();'",
     "login": "pnpm drush uli",
-    "content:export": "pnpm drush php-script web/modules/contrib/custom_default_content/export.php",
-    "content:import": "pnpm drush php-script web/modules/contrib/custom_default_content/import.php",
+    "content:export": "pnpm drush php-script web/modules/contrib/test_content/export.php",
+    "content:import": "pnpm drush php-script web/modules/contrib/test_content/import.php",
     "config:export": "pnpm drush cex -y",
     "config:import": "pnpm drush -y cim",
     "schema:export": "pnpm drush silverback-gatsby:schema-export",
@@ -29,7 +30,7 @@
     "import-translations": "pnpm drush scr scripts/translations-import.php"
   },
   "dependencies": {
-    "@custom-cms/custom_default_content": "workspace:*"
+    "@custom/test_content": "workspace:*"
   },
   "optionalDependencies": {
     "@amazeelabs/graphql-schema-test": "^1.1.9",
