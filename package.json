@@ -6,8 +6,9 @@
   "scripts": {
     "postinstall": "husky install || true",
     "commit": "git-cz",
-    "build": "pnpm turbo build",
-    "test": "pnpm turbo test:integration"
+    "build": "turbo build",
+    "deploy": "turbo deploy",
+    "test": "turbo test:integration"
   },
   "private": true,
   "optionalDependencies": {

@@ -1,0 +1,21 @@
+{
+  "name": "@custom/website",
+  "private": true,
+  "dependencies": {
+    "@custom/ui": "workspace:*",
+    "gatsby": "^5.7.0",
+    "gatsby-plugin-manifest": "^5.7.0",
+    "gatsby-plugin-pnpm": "^1.2.10",
+    "react": "experimental",
+    "react-dom": "experimental"
+  },
+  "optionalDependencies": {
+    "netlify-cli": "^13.0.0"
+  },
+  "scripts": {
+    "deploy": "rm -f styles.css && cp node_modules/@custom/ui/build/styles.css styles.css && gatsby build",
+    "serve": "netlify dev --dir=public --port=8000",
+    "dev": "gatsby develop",
+    "clean": "gatsby clean"
+  }
+}
