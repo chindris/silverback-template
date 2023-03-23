@@ -1,0 +1,36 @@
+name: Test
+on:
+  pull_request:
+    branches:
+      - dev
+  push:
+    branches:
+      - dev
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup
+        uses: ./.github/actions/setup
+
+      - name: Install Playwright browsers
+        run: pnpm exec playwright install chrome
+
+      - name: Test
+        run: pnpm test
+
+      # TODO: make this only run when necessary
+#      - name: Publish to Chromatic
+#        uses: chromaui/action@v1
+#        # Chromatic GitHub Action options
+#        with:
+#          token: ${{ secrets.GITHUB_TOKEN }}
+#          # 👇 Chromatic projectToken, refer to the manage page to obtain it.
+#          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+#          storybookBuildDir: packages/ui/storybook-static
