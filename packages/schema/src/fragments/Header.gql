@@ -1,0 +1,6 @@
+fragment Header on Query {
+  mainNavigation {
+    ...NavigationItem
+  }
+}
+

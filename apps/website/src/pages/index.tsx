@@ -1,7 +1,7 @@
-import { IntlProvider } from '@custom/ui/intl';
-import { Frame } from '@custom/ui/routes/Frame';
 import { Page } from '@custom/ui/routes/Page';
 import React from 'react';
+
+import { Wrapper } from '../utils/wrapper';
 
 export function Head() {
   return <meta title="Home" />;
@@ -9,10 +9,8 @@ export function Head() {
 
 export default function Index() {
   return (
-    <IntlProvider locale={'en'}>
-      <Frame mainNavigation={[]} metaNavigation={[]} footerNavigation={[]}>
-        <Page page={{ title: 'Home page' }} />
-      </Frame>
-    </IntlProvider>
+    <Wrapper>
+      <Page page={{ title: 'Home page' }} />
+    </Wrapper>
   );
 }

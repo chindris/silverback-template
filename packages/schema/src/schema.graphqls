@@ -15,7 +15,7 @@ the consumer should use the `parent` field to traverse the tree.
 """
 type NavigationItem {
   id: ID!
-  parent: ID!
+  parent: ID
   locale: Locale!
   title: String!
   target: Url!
@@ -34,7 +34,6 @@ type Page {
 type Query {
   allPages: [Page!]!
   page(id: ID!, locale: Locale!): Page
-  metaNavigation: [NavigationItem!]!
   mainNavigation: [NavigationItem!]!
   footerNavigation: [NavigationItem!]!
 }

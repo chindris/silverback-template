@@ -27,7 +27,3 @@ export function useIntl(): IntlShape {
   }
   return intl;
 }
-
-export function useLocale() {
-  return useIntl().locale as 'de' | 'en';
-}

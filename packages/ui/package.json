@@ -14,10 +14,10 @@
   "typesVersions": {
     "*": {
       "routes/*": [
-        "build/components/routes/*"
+        "build/components/routes/*.d.ts"
       ],
       "intl": [
-        "build/utils/intl"
+        "build/utils/intl/index.d.ts"
       ]
     }
   },

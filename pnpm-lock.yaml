@@ -55,6 +55,8 @@ importers:
 
   apps/website:
     specifiers:
+      '@amazeelabs/scalars': ^1.1.0
+      '@custom/schema': workspace:*
       '@custom/ui': workspace:*
       gatsby: ^5.7.0
       gatsby-plugin-manifest: ^5.7.0
@@ -63,6 +65,8 @@ importers:
       react: experimental
       react-dom: experimental
     dependencies:
+      '@amazeelabs/scalars': 1.1.1_xor756nx3ban6uhqc2cykibgvq
+      '@custom/schema': link:../../packages/schema
       '@custom/ui': link:../../packages/ui
       gatsby: 5.7.0_cvt7sppwvwkms3nm6a3gayw2vm
       gatsby-plugin-manifest: 5.7.0_gatsby@5.7.0
@@ -190,6 +194,30 @@ packages:
     resolution: {integrity: sha512-mxbtxL7Xo4kRIU1HMxttIbs/F+DUeM2EOhExwwsfdv1dKfEvHXdZxe2X3ehgMLcMH1MZYkFvU4eMZMcSoMqHyw==}
     peerDependencies:
       react: ^18.2.0
+    optionalDependencies:
+      '@types/react': 18.0.28
+      typescript: 4.9.5
+      vitest: 0.27.3
+    transitivePeerDependencies:
+      - '@edge-runtime/vm'
+      - '@vitest/browser'
+      - '@vitest/ui'
+      - happy-dom
+      - jsdom
+      - less
+      - sass
+      - stylus
+      - sugarss
+      - supports-color
+      - terser
+    dev: false
+
+  /@amazeelabs/bridge/1.1.1_xor756nx3ban6uhqc2cykibgvq:
+    resolution: {integrity: sha512-aHGTyz5W9wsGWPmi+LK3M//S/j/8pzinPqqAC4jVwpmpeiUz8zbFOUqRAjx/v9MdZNU2sj0lxztcMuiehTPSzA==}
+    peerDependencies:
+      react: ^18.2.0
+    dependencies:
+      react: 0.0.0-experimental-8e17bfd14-20230322
     optionalDependencies:
       '@types/react': 18.0.28
       typescript: 4.9.5
@@ -373,6 +401,46 @@ packages:
       unified: 10.1.2
     optionalDependencies:
       '@amazeelabs/eslint-config': 1.4.42_rcjd7piubcbw55ejomgq65yqim
+      '@amazeelabs/prettier-config': 1.1.2_prettier@2.8.4
+      '@types/hast': 2.3.4
+      '@types/react': 18.0.28
+      eslint: 8.36.0
+      prettier: 2.8.4
+      typescript: 4.9.5
+      vitest: 0.27.3
+    transitivePeerDependencies:
+      - '@edge-runtime/vm'
+      - '@vitest/browser'
+      - '@vitest/ui'
+      - eslint-import-resolver-typescript
+      - eslint-import-resolver-webpack
+      - happy-dom
+      - jsdom
+      - less
+      - sass
+      - stylus
+      - sugarss
+      - supports-color
+      - tailwindcss
+      - terser
+    dev: false
+
+  /@amazeelabs/scalars/1.1.1_xor756nx3ban6uhqc2cykibgvq:
+    resolution: {integrity: sha512-fmFaI6Q58HtBd/zQ6tm1dC5ziLcoe/rqCz/PVF4T+zv/fu05VyGNX+ewUGjzgSVEcinB3t9LwwJTexE7eR4O0Q==}
+    peerDependencies:
+      react: ^18.2.0
+    dependencies:
+      '@amazeelabs/bridge': 1.1.1_xor756nx3ban6uhqc2cykibgvq
+      hast-util-select: 5.0.5
+      query-string: 8.1.0
+      react: 0.0.0-experimental-8e17bfd14-20230322
+      rehype-parse: 8.0.4
+      rehype-react: 7.1.2_@types+react@18.0.28
+      rehype-slug: 5.1.0
+      remeda: 1.9.1
+      unified: 10.1.2
+    optionalDependencies:
+      '@amazeelabs/eslint-config': 1.4.42_vgl77cfdswitgr47lm5swmv43m
       '@amazeelabs/prettier-config': 1.1.2_prettier@2.8.4
       '@types/hast': 2.3.4
       '@types/react': 18.0.28

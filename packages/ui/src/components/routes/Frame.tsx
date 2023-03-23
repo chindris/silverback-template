@@ -7,10 +7,7 @@ import Header from '../organisms/Header';
 export function Frame(props: PropsWithChildren<NavigationQuery>) {
   return (
     <div>
-      <Header
-        mainNavigation={props.mainNavigation}
-        metaNavigation={props.metaNavigation}
-      />
+      <Header mainNavigation={props.mainNavigation} />
       {props.children}
       <Footer footerNavigation={props.footerNavigation} />
     </div>

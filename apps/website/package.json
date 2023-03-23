@@ -3,11 +3,13 @@
   "private": true,
   "dependencies": {
     "@custom/ui": "workspace:*",
+    "@custom/schema": "workspace:*",
     "gatsby": "^5.7.0",
     "gatsby-plugin-manifest": "^5.7.0",
     "gatsby-plugin-pnpm": "^1.2.10",
     "react": "experimental",
-    "react-dom": "experimental"
+    "react-dom": "experimental",
+    "@amazeelabs/scalars": "^1.1.0"
   },
   "optionalDependencies": {
     "netlify-cli": "^13.0.0"
