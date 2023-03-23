@@ -1,10 +1,10 @@
-import { NavigationFragment } from '@custom/schema';
+import type { NavigationQuery } from '@custom/schema';
 import React, { PropsWithChildren } from 'react';
 
-import { Footer } from '../components/organisms/Footer';
-import Header from '../components/organisms/Header';
+import { Footer } from '../organisms/Footer';
+import Header from '../organisms/Header';
 
-export function Frame(props: PropsWithChildren<NavigationFragment>) {
+export function Frame(props: PropsWithChildren<NavigationQuery>) {
   return (
     <div>
       <Header

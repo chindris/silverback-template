@@ -1,6 +1,8 @@
 import type { PropsWithChildren } from 'react';
 import React from 'react';
+// eslint-disable-next-line no-restricted-imports
 import type { IntlConfig, IntlShape } from 'react-intl';
+// eslint-disable-next-line no-restricted-imports
 import { createIntl } from 'react-intl';
 
 import { ClientIntlProvider } from './client';

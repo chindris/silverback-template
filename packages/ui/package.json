@@ -8,13 +8,13 @@
       "./build/utils/intl/index.js"
     ],
     "./routes/*": [
-      "./build/routes/*.js"
+      "./build/components/routes/*.js"
     ]
   },
   "typesVersions": {
     "*": {
       "routes/*": [
-        "build/routes/*"
+        "build/components/routes/*"
       ],
       "intl": [
         "build/utils/intl"
@@ -27,9 +27,13 @@
     "build:styles": "NODE_ENV=production pnpm postcss tailwind.css -o build/styles.css",
     "build:i18n": "formatjs extract 'src/**/*.ts*' --ignore='**/*.d.ts' --ignore='**/*.stories.ts*' --out-file build/translatables.json --id-interpolation-pattern '[sha512:contenthash:base64:6]'\n",
     "dev": "storybook dev -p 6006",
+    "serve": "serve storybook-static -p 6006",
     "build-storybook": "storybook build",
     "test:static": "tsc --noEmit && eslint \"**/*.{ts,tsx,js,jsx}\" --ignore-path=\"./.gitignore\" --fix",
-    "test:unit": "vitest run --passWithNoTests"
+    "test:unit": "vitest run --passWithNoTests",
+    "test:storybook": "test-storybook --coverage",
+    "test:integration": "storybook build && start-test serve http://localhost:6006 test:storybook && pnpm report",
+    "report": "nyc report --reporter=lcov -t coverage/storybook --report-dir coverage/storybook"
   },
   "dependencies": {
     "@custom/schema": "workspace:*",
@@ -66,6 +70,10 @@
     "@storybook/react": "next",
     "@storybook/react-vite": "next",
     "@storybook/testing-library": "next",
+    "@storybook/test-runner": "next",
+    "@storybook/addon-coverage": "^0.0.8",
+    "serve": "^14.2.0",
+    "start-server-and-test": "^2.0.0",
     "storybook": "next",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
@@ -75,6 +83,7 @@
     "vite": "^4.1.0",
     "eslint-plugin-tailwindcss": "^3.10.1",
     "eslint-plugin-formatjs": "^4.9.0",
-    "eslint-plugin-storybook": "^0.6.11"
+    "eslint-plugin-storybook": "^0.6.11",
+    "nyc": "^15.1.0"
   }
 }
