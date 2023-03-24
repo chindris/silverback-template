@@ -14,9 +14,6 @@ jobs:
       - name: Setup
         uses: ./.github/actions/setup
 
-      - name: Install Playwright browsers
-        run: pnpm exec playwright install chrome
-
       - name: Test
         run: pnpm test
 
