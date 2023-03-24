@@ -1,8 +1,8 @@
 import { Link } from '@amazeelabs/scalars';
-import { NavigationQuery } from '@custom/schema';
+import { FooterFragment } from '@custom/schema';
 import React from 'react';
 
-export function Footer(props: Pick<NavigationQuery, 'footerNavigation'>) {
+export function Footer(props: Pick<FooterFragment, 'footerNavigation'>) {
   return (
     <footer className="bg-white">
       <div className="mx-auto max-w-7xl overflow-hidden py-20 px-6 sm:py-24 lg:px-8">
