@@ -8,6 +8,12 @@ import { Default as PageStory } from './components/routes/Page.stories';
 
 export default {
   title: 'Pages',
+  parameters: {
+    chromatic: {
+      // We don't want to snapshot page examples, that just causes a lot of noise.
+      disableSnapshot: true,
+    },
+  },
 } satisfies Meta;
 
 export const ContentPage = (() => (
