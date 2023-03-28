@@ -1,4 +1,4 @@
-import { Url } from '@amazeelabs/scalars';
+import { Url } from '@custom/schema';
 import { describe, expect, it } from 'vitest';
 
 import { buildNavigationTree } from './navigation';

@@ -1,0 +1,5 @@
+fragment BlockImage on BlockImage {
+  source
+  alt
+  caption
+}

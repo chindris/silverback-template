@@ -1,0 +1,3 @@
+fragment BlockText on BlockText {
+  markup
+}

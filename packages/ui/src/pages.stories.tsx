@@ -1,10 +1,10 @@
 import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 
-import { Frame } from './components/routes/Frame';
-import { Default as FrameStory } from './components/routes/Frame.stories';
-import { Page } from './components/routes/Page';
-import { Default as PageStory } from './components/routes/Page.stories';
+import { Frame } from './components/Routes/Frame';
+import { Default as FrameStory } from './components/Routes/Frame.stories';
+import { Page } from './components/Routes/Page';
+import { Default as PageStory } from './components/Routes/Page.stories';
 
 export default {
   title: 'Pages',

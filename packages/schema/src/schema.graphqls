@@ -29,6 +29,19 @@ type Page {
   locale: Locale!
   path: String!
   title: String!
+  content: [PageContent!]!
+}
+
+union PageContent = BlockText | BlockImage
+
+type BlockText {
+  markup: Markup!
+}
+
+type BlockImage {
+  source: ImageSource!
+  alt: String!
+  caption: Markup
 }
 
 type Query {
