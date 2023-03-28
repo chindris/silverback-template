@@ -67,7 +67,7 @@
   },
   "optionalDependencies": {
     "@types/hast": "^2.3.4",
-    "@amazeelabs/cloudinary-responsive-image": "^1.1.0",
+    "@amazeelabs/cloudinary-responsive-image": "^1.2.0",
     "@storybook/addon-essentials": "next",
     "@storybook/addon-actions": "next",
     "@storybook/addon-interactions": "next",

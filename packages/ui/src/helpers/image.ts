@@ -7,9 +7,9 @@ export function image(
 ) {
   return buildResponsiveImage(
     {
-      cloudname: 'debug',
-      key: 'foo',
-      secret: 'bar',
+      cloudname: 'test',
+      key: 'c7d2fe',
+      secret: '4e46e5',
     },
     url,
     config,
