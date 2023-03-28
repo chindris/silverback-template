@@ -29,7 +29,7 @@
     "dev": "storybook dev -p 6006",
     "serve": "serve storybook-static -p 6006",
     "build-storybook": "storybook build",
-    "test:static": "tsc --noEmit && eslint \"**/*.{ts,tsx,js,jsx}\" --ignore-path=\"./.gitignore\" --fix",
+    "test:static": "tsc --noEmit && eslint \"**/*.{ts,tsx,js,jsx}\" --ignore-path=\"./.eslintignore\" --fix",
     "test:unit": "vitest run --passWithNoTests",
     "test:storybook": "test-storybook --coverage",
     "test:integration": "storybook build && start-test serve http://localhost:6006 test:storybook && pnpm report",
