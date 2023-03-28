@@ -16,8 +16,14 @@ runs:
     - uses: pnpm/action-setup@v2.2.4
       name: Install pnpm
       with:
-        version: 7
+        version: 8
         run_install: false
+
+    - name: Get pnpm store directory
+      id: pnpm-cache
+      shell: bash
+      run: |
+        echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
 
 #    - name: Install Playwright browsers
 #      run: pnpx playwright install
