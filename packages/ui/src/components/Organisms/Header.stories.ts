@@ -1,5 +1,4 @@
-import { Url } from '@amazeelabs/scalars';
-import { Locale, NavigationItemFragment } from '@custom/schema';
+import { Locale, NavigationItemFragment, Url } from '@custom/schema';
 import { Meta, StoryObj } from '@storybook/react';
 
 import Header from './Header';

@@ -1,5 +1,4 @@
-import { Link } from '@amazeelabs/scalars';
-import { FooterFragment } from '@custom/schema';
+import { FooterFragment, Link } from '@custom/schema';
 import React from 'react';
 
 export function Footer(props: Pick<FooterFragment, 'footerNavigation'>) {

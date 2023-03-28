@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react';
 
-import { Default as Footer } from '../organisms/Footer.stories';
-import { Default as Header } from '../organisms/Header.stories';
+import { Default as Footer } from '../Organisms/Footer.stories';
+import { Default as Header } from '../Organisms/Header.stories';
 import { Frame } from './Frame';
 
 export default {

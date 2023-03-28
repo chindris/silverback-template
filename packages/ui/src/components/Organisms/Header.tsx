@@ -1,6 +1,5 @@
 'use client';
-import { Link } from '@amazeelabs/scalars';
-import { HeaderFragment } from '@custom/schema';
+import { HeaderFragment, Link } from '@custom/schema';
 import { Dialog, Disclosure, Popover, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';

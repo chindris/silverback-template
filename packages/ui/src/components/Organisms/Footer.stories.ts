@@ -1,5 +1,4 @@
-import { Url } from '@amazeelabs/scalars';
-import { Locale } from '@custom/schema';
+import { Locale, Url } from '@custom/schema';
 import { Meta, StoryObj } from '@storybook/react';
 
 import { Footer } from './Footer';
