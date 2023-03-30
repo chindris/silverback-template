@@ -28,5 +28,6 @@ jobs:
           # 👇 Chromatic projectToken, refer to the manage page to obtain it.
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           storybookBuildDir: packages/ui/storybook-static
+          storybookBaseDir: packages/ui
           onlyChanged: true
           exitOnceUploaded: true
