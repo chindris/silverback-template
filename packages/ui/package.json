@@ -91,6 +91,7 @@
     "eslint-plugin-formatjs": "^4.9.0",
     "eslint-plugin-storybook": "^0.6.11",
     "nyc": "^15.1.0",
-    "vite-plugin-turbosnap": "^1.0.1"
+    "vite-plugin-turbosnap": "^1.0.1",
+    "chromatic": "^6.17.2"
   }
 }
