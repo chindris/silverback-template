@@ -105,7 +105,7 @@ export default function Header(props: HeaderFragment) {
               <span className="sr-only">Your Company</span>
               <img
                 className="h-8 w-auto"
-                src="https://tailwindui.com/img/logos/mark.svg?color=green&shade=600"
+                src="https://tailwindui.com/img/logos/mark.svg?color=red&shade=600"
                 alt=""
               />
             </a>
