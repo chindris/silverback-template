@@ -46,8 +46,8 @@
     "custom/test_content": "*",
     "composer/installers": "^2.2",
     "drupal/admin_toolbar": "^3.3",
-    "drupal/core-composer-scaffold": "^9.5",
-    "drupal/core-recommended": "^9.5",
+    "drupal/core-composer-scaffold": "^10.0",
+    "drupal/core-recommended": "^10.0",
     "drupal/dropzonejs": "^2.8",
     "drupal/entity_usage": "^2.0@beta",
     "drupal/environment_indicator": "^4.0",
@@ -149,7 +149,7 @@
     "composer-exit-on-patch-failure": true
   },
   "require-dev": {
-    "drupal/core-dev": "^9.5",
+    "drupal/core-dev": "^10.0",
     "phpspec/prophecy-phpunit": "^2"
   }
 }
