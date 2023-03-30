@@ -32,9 +32,9 @@ runs:
         restore-keys: |
           ${{ runner.os }}-pnpm-store-
 
-#    - name: Install Playwright browsers
-#      run: pnpx playwright install
-#      shell: bash
+    - name: Install Playwright browsers
+      run: pnpx playwright install
+      shell: bash
 
     - name: Install dependencies
       shell: bash
