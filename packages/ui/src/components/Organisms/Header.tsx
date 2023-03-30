@@ -128,14 +128,14 @@ export default function Header(props: HeaderFragment) {
                       href={item.target}
                       className="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                     >
-                      Marketplace
+                      {item.title}
                     </Link>
                   ) : (
                     <Disclosure as="div" className="-mx-3" key={item.title}>
                       {({ open }) => (
                         <>
                           <Disclosure.Button className="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 hover:bg-gray-50">
-                            Company
+                            {item.title}
                             <ChevronDownIcon
                               className={clsx('h-5 w-5 flex-none', {
                                 'rotate-180': open,

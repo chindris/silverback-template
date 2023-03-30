@@ -1,5 +1,6 @@
 import { Locale, NavigationItemFragment, Url } from '@custom/schema';
 import { Meta, StoryObj } from '@storybook/react';
+import { userEvent, within } from '@storybook/testing-library';
 
 import Header from './Header';
 
@@ -56,3 +57,32 @@ export const Default = {
     mainNavigation: MainMenuItems,
   },
 } satisfies StoryObj<typeof Header>;
+
+// Explicit annotation is necessary here because of typing issue in storybook.
+// https://github.com/storybookjs/storybook/issues/20922
+export const Expanded: StoryObj<typeof Header> = {
+  ...Default,
+  play: async ({ canvasElement }) => {
+    console.log();
+    const canvas = within(canvasElement);
+    const navigation = within(
+      await canvas.findByRole('navigation', { name: 'Global' }),
+    );
+    const mobileMenuButton = await navigation.queryByRole('button', {
+      name: 'Open main menu',
+    });
+    if (mobileMenuButton) {
+      userEvent.click(mobileMenuButton);
+      const dialog = within(
+        await within(canvasElement.parentElement!).findByRole('dialog'),
+      );
+      userEvent.click(await dialog.findByRole('button', { name: 'Products' }));
+      await dialog.findByRole('link', { name: 'Drupal' });
+    } else {
+      userEvent.click(
+        await navigation.findByRole('button', { name: 'Products' }),
+      );
+      await navigation.findByRole('link', { name: 'Drupal' });
+    }
+  },
+};
