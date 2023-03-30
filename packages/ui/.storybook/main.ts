@@ -7,7 +7,11 @@ const config: StorybookConfig = {
     mergeConfig(config, {
       plugins: [pluginTurbosnap({ rootDir: config.root ?? process.cwd() })],
     }),
-  staticDirs: ['../static/public', '../static/stories'],
+  staticDirs: [
+    '../static/public',
+    '../static/stories',
+    '../node_modules/@amazeelabs/cloudinary-responsive-image/worker/iife',
+  ],
   stories: ['../src/**/*.stories.@(ts|tsx)'],
   addons: [
     '@storybook/addon-links',
