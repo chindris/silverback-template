@@ -10,4 +10,8 @@ const IntlDecorator: Decorator = (Story) => (
   </IntlProvider>
 );
 
+export const parameters = {
+  chromatic: { viewports: [320, 840, 1440] },
+};
+
 export const decorators = [IntlDecorator];
