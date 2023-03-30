@@ -10,8 +10,6 @@ pnpm install && pnpm build
 
 This should install all the needed files and a fully working Drupal CMS.
 
-TEST
-
 ## CMS run
 
 Navigate to the `apps/cms` folder (in case the enviroment variables were not
