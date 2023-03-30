@@ -6,7 +6,7 @@ runs:
     - name: Setup Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: 16
+        node-version: 18
 
     - name: Setup PHP
       uses: shivammathur/setup-php@v2
@@ -22,7 +22,7 @@ runs:
     - name: Get pnpm store directory
       id: pnpm-cache
       shell: bash
-      run: echo "STORE_PATH=\"$(pnpm store path)\"" >> $GITHUB_OUTPUT
+      run: echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
 
     - uses: actions/cache@v3
       name: Setup pnpm cache
