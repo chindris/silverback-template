@@ -5,10 +5,7 @@ import { mergeConfig } from 'vite';
 const config: StorybookConfig = {
   viteFinal: (config, { configType }) =>
     mergeConfig(config, {
-      plugins:
-        configType === 'PRODUCTION'
-          ? [pluginTurbosnap({ rootDir: config.root ?? process.cwd() })]
-          : [],
+      plugins: [pluginTurbosnap({ rootDir: config.root ?? process.cwd() })],
     }),
   staticDirs: ['../static/public', '../static/stories'],
   stories: ['../src/**/*.stories.@(ts|tsx)'],
