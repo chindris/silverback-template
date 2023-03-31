@@ -1,8 +1,6 @@
 name: Test
 on:
   push:
-permissions:
-  actions: read
 jobs:
   test:
     name: Test
@@ -15,6 +13,8 @@ jobs:
 
       - name: Setup
         uses: ./.github/actions/setup
+        secrets:
+          SECRET_1: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Test
         run: pnpm test
