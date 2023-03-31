@@ -13,8 +13,11 @@ jobs:
 
       - name: Setup
         uses: ./.github/actions/setup
-        secrets:
-          SECRET_1: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: TurboRepo local server
+        uses: felixmosh/turborepo-gh-artifacts@v2
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Test
         run: pnpm test
