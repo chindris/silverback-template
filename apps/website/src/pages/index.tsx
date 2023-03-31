@@ -10,7 +10,7 @@ export function Head() {
 export default function Index() {
   return (
     <Wrapper>
-      <Page page={{ title: 'Home page' }} />
+      <Page page={{ title: 'Home page', content: [] }} />
     </Wrapper>
   );
 }

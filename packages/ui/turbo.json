@@ -2,8 +2,43 @@
   "$schema": "https://turborepo.org/schema.json",
   "extends": ["//"],
   "pipeline": {
-    "test:integration": {
+    "build:scripts": {
+      "dependsOn": ["^build"],
+      "inputs": ["src/**/*.ts", "src/**/*.tsx", ".swcrc", "tsconfig.json"],
+      "outputs": ["build/**/*.js", "build/**/*.d.ts"]
+    },
+    "build:styles": {
+      "inputs": [
+        "postcss.config.cjs",
+        "tailwind.config.cjs",
+        "tailwind.css",
+        "src/**/*.css",
+        "src/components/**/*tsx"
+      ],
+      "outputs": ["build/styles.css"]
+    },
+    "build:i18n": {
+      "inputs": ["src/components/**/*.tsx"],
+      "outputs": ["build/translatables.json"]
+    },
+    "build": {
+      "dependsOn": ["build:scripts", "build:styles", "build:i18n"]
+    },
+    "build:storybook": {
+      "inputs": [
+        ".storybook/**",
+        "postcss.config.cjs",
+        "tailwind.config.cjs",
+        "tailwind.css",
+        "src/**/*.css",
+        "src/**/*.tsx",
+        "src/**/*.ts"
+      ],
       "outputs": ["storybook-static/**"]
+    },
+    "test:integration": {
+      "dependsOn": ["build:storybook"],
+      "outputs": ["coverage/**"]
     }
   }
 }
