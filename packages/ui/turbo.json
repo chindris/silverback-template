@@ -4,7 +4,13 @@
   "pipeline": {
     "build:scripts": {
       "dependsOn": ["^build"],
-      "inputs": ["src/**/*.ts", "src/**/*.tsx", ".swcrc", "tsconfig.json"],
+      "inputs": [
+        "src/**/*.ts",
+        "src/**/*.tsx",
+        ".swcrc",
+        "tsconfig.json",
+        "static/public/**"
+      ],
       "outputs": ["build/**/*.js", "build/**/*.d.ts"]
     },
     "build:styles": {
@@ -32,7 +38,8 @@
         "tailwind.css",
         "src/**/*.css",
         "src/**/*.tsx",
-        "src/**/*.ts"
+        "src/**/*.ts",
+        "static/**"
       ],
       "outputs": ["storybook-static/**"]
     },
