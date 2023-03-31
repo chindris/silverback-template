@@ -22,7 +22,7 @@ runs:
     - name: Get pnpm store directory
       id: pnpm-cache
       shell: bash
-      run: echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+      run: echo "STORE_PATH=$(pnpm store path | xargs)" >> $GITHUB_OUTPUT
 
     - uses: actions/cache@v3
       name: Setup pnpm cache
@@ -36,8 +36,7 @@ runs:
       uses: actions/cache@v3
       id: playwright-cache
       with:
-        path: |
-          ~/.cache/ms-playwright
+        path: ~/.cache/ms-playwright
         key: ${{ runner.os }}-playwright-${{ env.PLAYWRIGHT_VERSION }}
 
     - name: Install Playwright browsers
