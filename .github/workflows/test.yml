@@ -17,14 +17,14 @@ jobs:
       - name: TurboRepo local server
         uses: felixmosh/turborepo-gh-artifacts@v2
         with:
-          server-token: ${{ secrets.GITHUB_TOKEN }}
+          server-token: "foo"
           repo-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Test
         run: pnpm test
         env:
           TURBO_API: 'http://127.0.0.1:9080'
-          TURBO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TURBO_TOKEN: "foo"
           TURBO_TEAM: 'foo'
 
       - name: Publish to Chromatic
