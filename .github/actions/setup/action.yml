@@ -3,11 +3,6 @@ description: 'Common setup steps for GitHub Actions'
 runs:
   using: 'composite'
   steps:
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: 18
-
     - name: Setup PHP
       uses: shivammathur/setup-php@v2
       with:
