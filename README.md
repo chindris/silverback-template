@@ -1,5 +1,3 @@
-Test 2
-
 # Silverback Template
 
 ## Installation

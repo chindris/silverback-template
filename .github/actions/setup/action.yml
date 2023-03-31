@@ -49,9 +49,7 @@ runs:
       shell: bash
       run: pnpm install
 
-    - name: Cache Turborepo results
-      uses: actions/cache@v3
-      id: turborepo-cache
+    - name: TurboRepo local server
+      uses: felixmosh/turborepo-gh-artifacts@v2
       with:
-        path: node_modules/.cache/turbo
-        key: turborepo
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
