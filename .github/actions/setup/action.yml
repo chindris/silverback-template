@@ -40,14 +40,6 @@ runs:
           ~/.cache/ms-playwright
         key: ${{ runner.os }}-playwright-${{ env.PLAYWRIGHT_VERSION }}
 
-    - name: Cache Turborepo results
-      uses: actions/cache@v3
-      id: turborepo-cache
-      with:
-        path: |
-          node_modules/.cache/turbo
-        key: turborepo
-
     - name: Install Playwright browsers
       run: pnpx playwright install
       shell: bash
@@ -56,3 +48,10 @@ runs:
     - name: Install dependencies
       shell: bash
       run: pnpm install
+
+    - name: Cache Turborepo results
+      uses: actions/cache@v3
+      id: turborepo-cache
+      with:
+        path: node_modules/.cache/turbo
+        key: turborepo
