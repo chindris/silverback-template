@@ -8,11 +8,10 @@ runs:
       with:
         php-version: '8.1'
 
-    - uses: pnpm/action-setup@v2.2.4
+    - uses: pnpm/action-setup@v2
       name: Install pnpm
       with:
         version: 8
-        run_install: false
 
     - name: Get pnpm store directory
       id: pnpm-cache
