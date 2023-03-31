@@ -22,17 +22,17 @@
     }
   },
   "scripts": {
-    "build": "rm -rf build && pnpm build:scripts && pnpm build:styles && pnpm build:i18n",
+    "build": "exit 0",
     "build:scripts": "swc ./src -d ./build && tsc --emitDeclarationOnly",
     "build:styles": "NODE_ENV=production pnpm postcss tailwind.css -o build/styles.css",
     "build:i18n": "formatjs extract 'src/**/*.ts*' --ignore='**/*.d.ts' --ignore='**/*.stories.ts*' --out-file build/translatables.json --id-interpolation-pattern '[sha512:contenthash:base64:6]'\n",
+    "build:storybook": "storybook build",
     "dev": "storybook dev -p 6006",
-    "serve": "serve storybook-static -p 6006",
-    "build-storybook": "storybook build",
+    "serve": "serve storybook-static -p 6006 > /dev/null 2>&1",
     "test:static": "tsc --noEmit && eslint \"**/*.{ts,tsx,js,jsx}\" --ignore-path=\"./.eslintignore\" --fix",
     "test:unit": "vitest run --passWithNoTests",
     "test:storybook": "test-storybook --coverage",
-    "test:integration": "storybook build && start-test serve http://localhost:6006 test:storybook && pnpm report",
+    "test:integration": "start-test serve http://localhost:6006 test:storybook && pnpm report",
     "report": "nyc report --reporter=lcov -t coverage/storybook --report-dir coverage/storybook"
   },
   "dependencies": {

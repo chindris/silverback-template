@@ -14,8 +14,18 @@ jobs:
       - name: Setup
         uses: ./.github/actions/setup
 
+      - name: TurboRepo local server
+        uses: felixmosh/turborepo-gh-artifacts@v2
+        with:
+          server-token: "local"
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Test
         run: pnpm test
+        env:
+          TURBO_API: 'http://127.0.0.1:9080'
+          TURBO_TOKEN: "local"
+          TURBO_TEAM: 'local'
 
       - name: Publish to Chromatic
         uses: chromaui/action@v1

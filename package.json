@@ -8,7 +8,7 @@
     "commit": "git-cz",
     "build": "turbo build",
     "deploy": "turbo deploy",
-    "test": "turbo test:integration"
+    "test": "turbo test:integration --output-logs=new-only"
   },
   "private": true,
   "optionalDependencies": {

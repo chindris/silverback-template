@@ -10,7 +10,7 @@ export function Head() {
 export default function Index() {
   return (
     <Wrapper>
-      <Page page={{ title: 'Not found!' }} />
+      <Page page={{ title: 'Not found!', content: [] }} />
     </Wrapper>
   );
 }

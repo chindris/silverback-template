@@ -10,10 +10,15 @@
     "react": "experimental",
     "react-dom": "experimental"
   },
+  "devDependencies": {
+    "@types/react": "^18.0.31",
+    "@types/react-dom": "^18.0.11"
+  },
   "optionalDependencies": {
     "netlify-cli": "^13.0.0"
   },
   "scripts": {
+    "test:static": "tsc --noEmit && eslint \"**/*.{ts,tsx,js,jsx}\" --ignore-path=\"./.eslintignore\" --fix",
     "deploy": "rm -f styles.css && cp node_modules/@custom/ui/build/styles.css styles.css && gatsby build",
     "serve": "netlify dev --dir=public --port=8000",
     "dev": "gatsby develop",
