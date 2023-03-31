@@ -17,6 +17,7 @@ jobs:
       - name: TurboRepo local server
         uses: felixmosh/turborepo-gh-artifacts@v2
         with:
+          server-token: ${{ secrets.GITHUB_TOKEN }}
           repo-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Test
