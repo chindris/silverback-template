@@ -1,0 +1,12 @@
+{
+  "extends": ["//"],
+  "pipeline": {
+    "build": {
+      "inputs": ["composer.json", "composer.lock", "scaffold/**", "config/**"],
+      "outputs": ["web/**", "vendor/**"]
+    },
+    "start": {
+      "dependsOn": ["build"]
+    }
+  }
+}

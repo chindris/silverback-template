@@ -1,0 +1,16 @@
+{
+  "name": "@custom-tests/cms",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "scripts": {
+    "test:integration": "playwright test",
+    "dev": "playwright test --ui"
+  },
+  "optionalDependencies": {
+    "@playwright/test": "^1.32.1",
+    "@types/node": "^18.15.11"
+  }
+}
