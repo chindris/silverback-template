@@ -37,6 +37,7 @@
   },
   "dependencies": {
     "@custom/schema": "workspace:*",
+    "@amazeelabs/react-intl-rsc": "^1.1.6",
     "clsx": "^1.2.1",
     "react-intl": "^6.3.2",
     "@heroicons/react": "^2.0.16",

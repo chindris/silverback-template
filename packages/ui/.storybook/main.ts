@@ -10,7 +10,7 @@ const config: StorybookConfig = {
   staticDirs: [
     '../static/public',
     '../static/stories',
-    '../node_modules/@amazeelabs/cloudinary-responsive-image/worker/iife',
+    '../../../node_modules/@amazeelabs/cloudinary-responsive-image/worker/iife',
   ],
   stories: ['../src/**/*.stories.@(ts|tsx)'],
   addons: [
