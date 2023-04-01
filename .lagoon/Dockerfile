@@ -19,7 +19,7 @@ RUN --mount=type=cache,target=/tmp/cache pnpm install --no-optional --frozen-loc
 RUN pnpm build
 
 # === CMS DEPLOY ===
-RUN --mount=type=cache,target=/tmp/cache pnpm deploy --filter "@PROJECT_MACHINE_NAME/cms" .deploy/cms --prod
+RUN --mount=type=cache,target=/tmp/cache pnpm deploy --filter "@custom/cms" .deploy/cms --prod
 
 # ====================================================================================================
 # CLI IMAGE

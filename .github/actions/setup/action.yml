@@ -21,7 +21,7 @@ runs:
       # If there is an .npmrc, pnpm caches don't work.
     - name: Remove .npmrc
       shell: bash
-      run: rm -f .npmrc
+      run: rm -f .npmrc && echo "node-linker=hoisted" > .npmrc
 
     - name: Get pnpm store directory
       id: pnpm-cache
