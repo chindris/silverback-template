@@ -1,6 +1,13 @@
 {
   "$schema": "https://turborepo.org/schema.json",
   "pipeline": {
+    "start": {
+      "cache": false,
+      "dependsOn": ["deploy"]
+    },
+    "dev": {
+      "dependsOn": ["^build"]
+    },
     "deploy": {
       // An apps "deploy" task depends on its own build step.
       "dependsOn": ["build"]
@@ -14,7 +21,6 @@
       // By default, the build task will produce a "build" folder
       // in the packages directory.
       "outputs": ["build/**"],
-      // Builds should only re-run when files in src change.
       "inputs": ["src/**"]
     },
     "test:static": {
@@ -22,9 +28,6 @@
       // require dependencies to be built, since these might contain
       // type definitions.
       "dependsOn": ["^build"],
-      "outputs": [],
-      // Static tests only have to be re-run when something in the "src"
-      // folder changes.
       "inputs": ["src/**"]
     },
     "test:unit": {

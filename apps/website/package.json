@@ -20,7 +20,7 @@
     "test:static": "tsc --noEmit && eslint \"**/*.{ts,tsx,js,jsx}\" --ignore-path=\"./.eslintignore\" --fix",
     "test:integration": "pnpm run deploy",
     "deploy": "rm -f styles.css && cp node_modules/@custom/ui/build/styles.css styles.css && gatsby build",
-    "serve": "netlify dev --dir=public --port=8000",
+    "start": "netlify dev --dir=public --port=8000",
     "dev": "gatsby develop",
     "clean": "gatsby clean"
   }
