@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "license": "MIT",
   "author": "Amazee Labs <development@amazeelabs.com>",
+  "engines": {
+    "node": "18",
+    "pnpm": "8"
+  },
   "scripts": {
     "postinstall": "husky install || true",
     "commit": "git-cz",
