@@ -1,7 +1,0 @@
-{
-  "name": "custom/test_content",
-  "type": "drupal-module",
-  "require": {
-    "amazeelabs/default-content": "^1.1"
-  }
-}

@@ -10,10 +10,6 @@
   },
   "repositories": [
     {
-      "type": "path",
-      "url": "node_modules/@custom/*"
-    },
-    {
       "type": "composer",
       "url": "https://packages.drupal.org/8"
     },
@@ -32,6 +28,7 @@
   ],
   "require": {
     "amazeeio/drupal_integrations": "^0.3.7",
+    "amazeelabs/default-content": "^1.2",
     "amazeelabs/graphql_directives": "^2.0",
     "amazeelabs/proxy-drupal-core": "^1.1",
     "amazeelabs/proxy-graphql": "^1.1",
@@ -43,7 +40,6 @@
     "amazeelabs/silverback_graphql_persisted": "^1.1",
     "amazeelabs/silverback_gutenberg": "^2.1",
     "amazeelabs/silverback_translations": "^1.0",
-    "custom/test_content": "*",
     "composer/installers": "^2.2",
     "drupal/admin_toolbar": "^3.3",
     "drupal/core-composer-scaffold": "^9.5",
