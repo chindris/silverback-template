@@ -7,17 +7,17 @@
       "cache": false,
       "dependsOn": ["integrate"]
     },
-    "integrate": {
-      // An apps "integrate" task depends on its own build step.
-      // Brings a package into a state to be "start"ed.
-      "dependsOn": ["build"]
-    },
     "build": {
-      // A package's `build` script depends on that package's
+      // An apps "build" task depends on its own build step.
+      // Brings a package into a state to be "start"ed.
+      "dependsOn": ["prep"]
+    },
+    "prep": {
+      // A package's `prep` script depends on that package's
       // dependencies and devDependencies
-      // `build` tasks  being completed first
+      // `prep` tasks  being completed first
       // (the `^` symbol signifies `upstream`).
-      "dependsOn": ["^build"],
+      "dependsOn": ["^prep"],
       // By default, the build task will produce a "build" folder
       // in the packages directory.
       "outputs": ["build/**"],
@@ -27,7 +27,7 @@
       // Static tests don't require a build of the package, but they
       // require dependencies to be built, since these might contain
       // type definitions.
-      "dependsOn": ["^build"],
+      "dependsOn": ["^prep"],
       "inputs": ["src/**"]
     },
     "test:unit": {
@@ -35,7 +35,7 @@
       // tools build packages on the fly. Dependencies need to be built though.
       // Also unit tests should not even run without static tests passing or
       // dependencies unit tests failing.
-      "dependsOn": ["^build", "test:static", "^test:unit"],
+      "dependsOn": ["^prep", "test:static", "^test:unit"],
       "outputs": [],
       // Unit tests only have to be re-run when something in the "src"
       // folder changes.
@@ -44,7 +44,7 @@
     "test:integration": {
       // Integration tests run the full system and require the package to be
       // built and unit tested.
-      "dependsOn": ["integrate", "test:unit"],
+      "dependsOn": ["build", "test:unit"],
       "outputs": [],
       // Integration tests only have to be re-run when something in the "src"
       // folder changes.

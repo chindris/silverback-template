@@ -6,9 +6,8 @@
   "scripts": {
     "postinstall": "husky install || true",
     "commit": "git-cz",
-    "build": "turbo build",
-    "deploy": "turbo deploy",
-    "test": "turbo test:integration --output-logs=new-only"
+    "test": "turbo test:integration --output-logs=new-only",
+    "prepare": "turbo prep --output-logs=new-only"
   },
   "private": true,
   "optionalDependencies": {
