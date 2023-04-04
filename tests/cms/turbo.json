@@ -2,7 +2,7 @@
   "extends": ["//"],
   "pipeline": {
     "test:integration": {
-      "dependsOn": ["@custom/cms#integrate"]
+      "dependsOn": ["@custom/cms#build"]
     }
   }
 }

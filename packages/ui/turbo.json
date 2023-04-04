@@ -3,7 +3,7 @@
   "extends": ["//"],
   "pipeline": {
     "build:scripts": {
-      "dependsOn": ["^build"],
+      "dependsOn": ["^prep"],
       "inputs": [
         "src/**/*.ts",
         "src/**/*.tsx",
@@ -27,10 +27,10 @@
       "inputs": ["src/components/**/*.tsx"],
       "outputs": ["build/translatables.json"]
     },
-    "build": {
+    "prep": {
       "dependsOn": ["build:scripts", "build:styles", "build:i18n"]
     },
-    "integrate": {
+    "build": {
       "inputs": [
         ".storybook/**",
         "postcss.config.cjs",
