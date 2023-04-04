@@ -2,14 +2,14 @@
   "$schema": "https://turborepo.org/schema.json",
   "pipeline": {
     "start": {
+      // Start the package or application locally. Has to be integrated
+      // first. Pre-requisite for integration tests.
       "cache": false,
-      "dependsOn": ["deploy"]
+      "dependsOn": ["integrate"]
     },
-    "dev": {
-      "dependsOn": ["^build"]
-    },
-    "deploy": {
-      // An apps "deploy" task depends on its own build step.
+    "integrate": {
+      // An apps "integrate" task depends on its own build step.
+      // Brings a package into a state to be "start"ed.
       "dependsOn": ["build"]
     },
     "build": {
@@ -44,7 +44,7 @@
     "test:integration": {
       // Integration tests run the full system and require the package to be
       // built and unit tested.
-      "dependsOn": ["build", "test:unit"],
+      "dependsOn": ["integrate", "test:unit"],
       "outputs": [],
       // Integration tests only have to be re-run when something in the "src"
       // folder changes.

@@ -1,9 +1,13 @@
 {
   "extends": ["//"],
   "pipeline": {
+    "integrate": {
+      "inputs": ["config/**"],
+      "outputs": ["web/sites/default/files"]
+    },
     "build": {
-      "inputs": ["composer.json", "composer.lock", "scaffold/**", "config/**"],
-      "outputs": ["web/**", "vendor/**"]
+      "inputs": ["composer.json", "composer.lock", "scaffold/**"],
+      "outputs": ["web/**", "^web/sites/default/files", "vendor/**", "^**/.git"]
     },
     "start": {
       "dependsOn": ["build"]
