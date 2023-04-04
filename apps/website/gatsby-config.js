@@ -5,4 +5,5 @@ module.exports = {
   flags: {
     PARTIAL_HYDRATION: true,
   },
+  plugins: ['gatsby-plugin-pnpm'],
 };
