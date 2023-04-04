@@ -1,7 +1,7 @@
 {
   "extends": ["//"],
   "pipeline": {
-    "build": {
+    "integrate": {
       "inputs": ["gatsby-browser.js", "gatsby-config.js", "src/**"],
       "outputs": ["public/**", ".cache/**"]
     }
