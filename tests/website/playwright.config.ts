@@ -12,7 +12,7 @@ import { defineConfig, devices } from '@playwright/test';
 export default defineConfig({
   testDir: './specs',
   webServer: {
-    command: 'pnpm run --filter "@custom/website" start',
+    command: 'pnpm run --filter "@custom/website" serve',
     port: 8000,
   },
   /* Run tests in files in parallel */
