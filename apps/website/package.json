@@ -7,7 +7,8 @@
     "gatsby": "^5.7.0",
     "gatsby-plugin-manifest": "^5.7.0",
     "react": "experimental",
-    "react-dom": "experimental"
+    "react-dom": "experimental",
+    "@amazeelabs/publisher": "^2.1.10"
   },
   "devDependencies": {
     "@types/react": "^18.0.31",
@@ -19,7 +20,8 @@
   "scripts": {
     "test:static": "tsc --noEmit && eslint \"**/*.{ts,tsx,js,jsx}\" --ignore-path=\"./.eslintignore\" --fix",
     "build": "rm -f styles.css && cp node_modules/@custom/ui/build/styles.css styles.css && gatsby build",
-    "start": "netlify dev --dir=public --port=8000",
+    "start": "publisher",
+    "serve": "netlify dev --dir=public --port=8000",
     "dev": "gatsby develop",
     "clean": "gatsby clean"
   }

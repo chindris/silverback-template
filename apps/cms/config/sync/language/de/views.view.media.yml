@@ -12,6 +12,7 @@ display:
           label: Miniaturbild
           separator: ', '
         name:
+          label: Medienname
           separator: ', '
         bundle:
           label: Typ
@@ -52,6 +53,9 @@ display:
         area_text_custom:
           content: 'Keine Medien verfügbar.'
       filters:
+        name:
+          expose:
+            label: Medienname
         bundle:
           expose:
             label: Typ
