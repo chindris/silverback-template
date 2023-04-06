@@ -23,7 +23,6 @@ module:
   field_ui: 0
   file: 0
   filter: 0
-  gatsby_build_monitor: 0
   graphql: 0
   graphql_directives: 0
   gutenberg: 0
@@ -49,6 +48,7 @@ module:
   silverback_gatsby: 0
   silverback_graphql_persisted: 0
   silverback_gutenberg: 0
+  silverback_publisher_monitor: 0
   silverback_translations: 0
   sqlite: 0
   stage_file_proxy: 0
