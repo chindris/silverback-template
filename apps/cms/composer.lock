@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6330cf426f41579779f53393acbfe2c0",
+    "content-hash": "a2b5ffe4fc263df2e0d0804f243e3dba",
     "packages": [
         {
             "name": "amazeeio/drupal_integrations",
@@ -482,6 +482,33 @@
                 "source": "https://github.com/AmazeeLabs/silverback_gutenberg/tree/2.1.3"
             },
             "time": "2023-03-18T12:28:44+00:00"
+        },
+        {
+            "name": "amazeelabs/silverback_publisher_monitor",
+            "version": "2.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/AmazeeLabs/silverback_publisher_monitor.git",
+                "reference": "20fc208a17dda8984d92c9b71ab3cdd19281a5f4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AmazeeLabs/silverback_publisher_monitor/zipball/20fc208a17dda8984d92c9b71ab3cdd19281a5f4",
+                "reference": "20fc208a17dda8984d92c9b71ab3cdd19281a5f4",
+                "shasum": ""
+            },
+            "type": "drupal-module",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "description": "Publisher status indicator for drupal.",
+            "homepage": "https://silverback.netlify.app",
+            "support": {
+                "issues": "https://github.com/AmazeeLabs/silverback_publisher_monitor/issues",
+                "source": "https://github.com/AmazeeLabs/silverback_publisher_monitor/tree/2.2.1"
+            },
+            "time": "2023-04-06T05:12:22+00:00"
         },
         {
             "name": "amazeelabs/silverback_translations",
@@ -2597,55 +2624,6 @@
             }
         },
         {
-            "name": "drupal/gatsby_build_monitor",
-            "version": "1.4.7",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupalcode.org/project/gatsby_build_monitor.git",
-                "reference": "1.4.7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/gatsby_build_monitor-1.4.7.zip",
-                "reference": "1.4.7",
-                "shasum": "035190420e2db05d8cff91ebcb662a946e761625"
-            },
-            "require": {
-                "drupal/core": "^8.8.0 || ^9.0",
-                "justinrainbow/json-schema": "^5.2.10"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "drupal": {
-                    "version": "1.4.7",
-                    "datestamp": "1638428831",
-                    "security-coverage": {
-                        "status": "not-covered",
-                        "message": "Project has not opted into security advisory coverage!"
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "Leksat",
-                    "homepage": "https://www.drupal.org/user/390336"
-                },
-                {
-                    "name": "pmelab",
-                    "homepage": "https://www.drupal.org/user/555322"
-                }
-            ],
-            "description": "Gatsby build monitor for the Toolbar",
-            "homepage": "https://www.drupal.org/project/gatsby_build_monitor",
-            "support": {
-                "source": "https://git.drupalcode.org/project/gatsby_build_monitor"
-            }
-        },
-        {
             "name": "drupal/graphql",
             "version": "4.4.0",
             "source": {
@@ -3936,76 +3914,6 @@
                 }
             ],
             "time": "2022-06-20T21:43:03+00:00"
-        },
-        {
-            "name": "justinrainbow/json-schema",
-            "version": "5.2.12",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/justinrainbow/json-schema.git",
-                "reference": "ad87d5a5ca981228e0e205c2bc7dfb8e24559b60"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/justinrainbow/json-schema/zipball/ad87d5a5ca981228e0e205c2bc7dfb8e24559b60",
-                "reference": "ad87d5a5ca981228e0e205c2bc7dfb8e24559b60",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3"
-            },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "~2.2.20||~2.15.1",
-                "json-schema/json-schema-test-suite": "1.2.0",
-                "phpunit/phpunit": "^4.8.35"
-            },
-            "bin": [
-                "bin/validate-json"
-            ],
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "5.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "JsonSchema\\": "src/JsonSchema/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Bruno Prieto Reis",
-                    "email": "bruno.p.reis@gmail.com"
-                },
-                {
-                    "name": "Justin Rainbow",
-                    "email": "justin.rainbow@gmail.com"
-                },
-                {
-                    "name": "Igor Wiedler",
-                    "email": "igor@wiedler.ch"
-                },
-                {
-                    "name": "Robert Schönthal",
-                    "email": "seroscho@googlemail.com"
-                }
-            ],
-            "description": "A library to validate a json schema.",
-            "homepage": "https://github.com/justinrainbow/json-schema",
-            "keywords": [
-                "json",
-                "schema"
-            ],
-            "support": {
-                "issues": "https://github.com/justinrainbow/json-schema/issues",
-                "source": "https://github.com/justinrainbow/json-schema/tree/5.2.12"
-            },
-            "time": "2022-04-13T08:02:27+00:00"
         },
         {
             "name": "laminas/laminas-diactoros",
@@ -9416,6 +9324,76 @@
                 "source": "https://github.com/instaclick/php-webdriver/tree/1.4.16"
             },
             "time": "2022-10-28T13:30:35+00:00"
+        },
+        {
+            "name": "justinrainbow/json-schema",
+            "version": "5.2.12",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/justinrainbow/json-schema.git",
+                "reference": "ad87d5a5ca981228e0e205c2bc7dfb8e24559b60"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/justinrainbow/json-schema/zipball/ad87d5a5ca981228e0e205c2bc7dfb8e24559b60",
+                "reference": "ad87d5a5ca981228e0e205c2bc7dfb8e24559b60",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "~2.2.20||~2.15.1",
+                "json-schema/json-schema-test-suite": "1.2.0",
+                "phpunit/phpunit": "^4.8.35"
+            },
+            "bin": [
+                "bin/validate-json"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "5.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "JsonSchema\\": "src/JsonSchema/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Bruno Prieto Reis",
+                    "email": "bruno.p.reis@gmail.com"
+                },
+                {
+                    "name": "Justin Rainbow",
+                    "email": "justin.rainbow@gmail.com"
+                },
+                {
+                    "name": "Igor Wiedler",
+                    "email": "igor@wiedler.ch"
+                },
+                {
+                    "name": "Robert Schönthal",
+                    "email": "seroscho@googlemail.com"
+                }
+            ],
+            "description": "A library to validate a json schema.",
+            "homepage": "https://github.com/justinrainbow/json-schema",
+            "keywords": [
+                "json",
+                "schema"
+            ],
+            "support": {
+                "issues": "https://github.com/justinrainbow/json-schema/issues",
+                "source": "https://github.com/justinrainbow/json-schema/tree/5.2.12"
+            },
+            "time": "2022-04-13T08:02:27+00:00"
         },
         {
             "name": "mikey179/vfsstream",
