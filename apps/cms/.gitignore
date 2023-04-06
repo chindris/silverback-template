@@ -11,7 +11,6 @@
 /web/themes/*
 !/web/modules/custom
 !/web/themes/custom
-!/web/test.php
 
 # Lagoon integrations
 /drush

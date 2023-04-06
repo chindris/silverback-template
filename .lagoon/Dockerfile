@@ -44,7 +44,6 @@ WORKDIR /app/apps/cms
 RUN --mount=type=cache,target=/tmp/cache composer install --no-dev
 
 COPY --from=builder /app/.deploy/cms/full /app
-RUN rm /app/apps/cms/web/index.php && mv /app/apps/cms/web/test.php /app/apps/cms/web/index.php
 
 ENV WEBROOT=/app/apps/cms/web
 
