@@ -57,8 +57,8 @@ RUN apk add --no-cache imagemagick qpdf icu-dev && \
 
 COPY --from=cli /app /app
 
-WORKDIR /app
-ENV WEBROOT=apps/cms/web
+WORKDIR /app/apps/cms
+ENV WEBROOT=web
 
 # ====================================================================================================
 # NGINX IMAGE
