@@ -21,7 +21,7 @@ user which has the credentials: `admin/admin`.
 
 The application is tailored to run locally out of the box. In a production or
 hosting environment, you will need to override some of the environment
-variables. On lagoon for example, this should happen in `.lagoon.env` files.
+variables.
 
 - **DRUPAL_HASH_SALT**: Drupal's hash salt. Should be different per environment
   for security reasons.
@@ -32,3 +32,10 @@ variables. On lagoon for example, this should happen in `.lagoon.env` files.
   - NETLIFY_SITE_ID
   - NETLIFY_AUTH_TOKEN
   - NETLIFY_URL
+
+On lagoon for example, this should happen in `.lagoon.env` files, or directly as
+lagoon runtime configuration.
+
+```shell
+lagoon add variable -p [project name] -e dev -N NETLIFY_SITE_ID -V [netlify site id]
+```
