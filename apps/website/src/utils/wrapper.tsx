@@ -63,7 +63,10 @@ const FooterMenuItems = [
 export function Wrapper({ children }: PropsWithChildren<{}>) {
   return (
     <IntlProvider locale={'en'}>
-      <Frame mainNavigation={MainMenuItems} footerNavigation={FooterMenuItems}>
+      <Frame
+        mainNavigation={{ items: MainMenuItems }}
+        footerNavigation={{ items: FooterMenuItems }}
+      >
         {children}
       </Frame>
     </IntlProvider>

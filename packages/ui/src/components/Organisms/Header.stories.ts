@@ -54,7 +54,9 @@ const MainMenuItems: Array<NavigationItemFragment> = [
 
 export const Default = {
   args: {
-    mainNavigation: MainMenuItems,
+    mainNavigation: {
+      items: MainMenuItems,
+    },
   },
 } satisfies StoryObj<typeof Header>;
 

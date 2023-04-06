@@ -1,10 +1,10 @@
-scalar Url
-scalar Markup
-scalar ImageSource
+scalar Url @default @value(json: "\"\"")
+scalar Markup @default @value(json: "\"\"")
+scalar ImageSource @default @value(json: "\"\"")
 
-enum Locale {
-  EN
-  DE
+enum Locale @default @value(json: "\"en\"") {
+  en
+  de
 }
 
 """
@@ -14,39 +14,68 @@ in the GraphQL schema since it does not allow recursive fragments. Instead
 the consumer should use the `parent` field to traverse the tree.
 """
 type NavigationItem {
-  id: ID!
-  parent: ID
-  locale: Locale!
-  title: String!
-  target: Url!
+  id: ID! @resolveMenuItemId
+  parent: ID @resolveMenuItemParentId
+  locale: Locale! # TODO: Either remove it or find a way to get it.
+  title: String! @resolveMenuItemLabel
+  target: Url! @resolveMenuItemUrl
 }
 
 """
 A generic page.
 """
-type Page {
-  id: ID!
-  locale: Locale!
-  path: String!
-  title: String!
-  content: [PageContent!]!
+type Page @entity(type: "node", bundle: "page") {
+  locale: Locale! @resolveEntityLanguage
+  path: String! @resolveEntityPath @isPath
+  title: String! @resolveProperty(path: "title.value")
+  content: [PageContent]!
+    @resolveEditorBlocks(
+      path: "body.value"
+      aggregated: ["core/paragraph", "core/list"]
+      ignored: ["core/group"]
+    )
 }
 
-union PageContent = BlockText | BlockImage
+union PageContent @resolveEditorBlockType = BlockText | BlockImage
 
-type BlockText {
-  markup: Markup!
+type BlockText @type(id: "core/paragraph") {
+  markup: Markup! @resolveEditorBlockMarkup
 }
 
-type BlockImage {
+type BlockImage @type(id: "drupalmedia/drupal-media-entity") {
   source: ImageSource!
+    @value(json: "{ \"src\": \"https://picsum.photos/200\" }") # TODO: Implement a real thing.
   alt: String!
-  caption: Markup
+    @resolveEditorBlockMedia
+    @resolveProperty(path: "field_media_image.alt")
+  caption: Markup @resolveEditorBlockAttribute(key: "caption")
+}
+
+type MainNavigation
+  @default
+  @value(json: "{\"items\": []}")
+  @menu(menu_id: "main") {
+  items: [NavigationItem]! @lang @resolveMenuItems
+}
+
+type FooterNavigation
+  @default
+  @value(json: "{\"items\": []}")
+  @menu(menu_id: "footer") {
+  items: [NavigationItem]! @lang @resolveMenuItems
 }
 
 type Query {
-  allPages: [Page!]!
+  # TODO: If we need this field working, we need a directive to load all entities.
+  allPages: [Page]!
+
   page(id: ID!, locale: Locale!): Page
-  mainNavigation: [NavigationItem!]!
-  footerNavigation: [NavigationItem!]!
+    @loadEntity(type: "node", id: "$id")
+    @resolveEntityTranslation(lang: "$locale")
+
+  # TODO: If we need these fields really working, we need to find a way how to translate them.
+  mainNavigation: MainNavigation!
+    @loadEntity(type: "menu", id: "main", operation: "view label")
+  footerNavigation: FooterNavigation!
+    @loadEntity(type: "menu", id: "footer", operation: "view label")
 }

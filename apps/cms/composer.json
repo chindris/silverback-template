@@ -49,6 +49,7 @@
     "drupal/entity_usage": "^2.0@beta",
     "drupal/environment_indicator": "^4.0",
     "drupal/field_group": "^3.4",
+    "drupal/key_auth": "^2.1",
     "drupal/linkit": "^6.0@beta",
     "drupal/pathauto": "^1.11",
     "drupal/redirect": "^1.7",

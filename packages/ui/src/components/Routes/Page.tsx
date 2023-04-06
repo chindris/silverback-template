@@ -10,7 +10,7 @@ export function Page(props: PageQuery) {
       <div className="mx-auto max-w-3xl text-base leading-7 text-gray-700">
         <div className="mt-10">
           {props.page?.content.map((block, index) => {
-            switch (block.__typename) {
+            switch (block?.__typename) {
               case 'BlockImage':
                 return <BlockImage key={index} {...block} />;
               case 'BlockText':

@@ -32,6 +32,8 @@ variables.
   - NETLIFY_SITE_ID
   - NETLIFY_AUTH_TOKEN
   - NETLIFY_URL
+- **[key_auth](apps/website/gatsby-config.js)** and
+  **[api_key](packages/drupal/test_content/content/user/f20d961b-ba45-4820-b2cc-166e5ce56815.yml)**
 
 On lagoon for example, this should happen in `.lagoon.env` files, or directly as
 lagoon runtime configuration.

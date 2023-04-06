@@ -6,12 +6,16 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
 import React, { Fragment, useState } from 'react';
 
+import { isTruthy } from '../../utils/isTruthy';
 import { useLocale } from '../../utils/locale';
 import { buildNavigationTree } from '../../utils/navigation';
 
 export default function Header(props: HeaderFragment) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const items = buildNavigationTree(props.mainNavigation, useLocale());
+  const items = buildNavigationTree(
+    props.mainNavigation.items.filter(isTruthy),
+    useLocale(),
+  );
 
   return (
     <header className="bg-white">

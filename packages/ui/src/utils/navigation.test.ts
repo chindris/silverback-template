@@ -5,7 +5,7 @@ import { buildNavigationTree } from './navigation';
 
 describe('buildNavigationTree', () => {
   it('should not break on an empty array', () => {
-    expect(buildNavigationTree([], 'EN')).toEqual([]);
+    expect(buildNavigationTree([], 'en')).toEqual([]);
   });
   it('adds an empty list of children', () => {
     expect(
@@ -14,18 +14,18 @@ describe('buildNavigationTree', () => {
           {
             id: '1',
             parent: undefined,
-            locale: 'EN',
+            locale: 'en',
             target: '/en' as Url,
             title: 'English',
           },
         ],
-        'EN',
+        'en',
       ),
     ).toEqual([
       {
         id: '1',
         parent: undefined,
-        locale: 'EN',
+        locale: 'en',
         target: '/en' as Url,
         title: 'English',
         children: [],
@@ -39,25 +39,25 @@ describe('buildNavigationTree', () => {
           {
             id: '1',
             parent: undefined,
-            locale: 'EN',
+            locale: 'en',
             target: '/en' as Url,
             title: 'English',
           },
           {
             id: '2',
             parent: undefined,
-            locale: 'DE',
+            locale: 'de',
             target: '/de' as Url,
             title: 'Deutsch',
           },
         ],
-        'EN',
+        'en',
       ),
     ).toEqual([
       {
         id: '1',
         parent: undefined,
-        locale: 'EN',
+        locale: 'en',
         target: '/en' as Url,
         title: 'English',
         children: [],
@@ -72,60 +72,60 @@ describe('buildNavigationTree', () => {
           {
             id: '1',
             parent: undefined,
-            locale: 'EN',
+            locale: 'en',
             target: '/A' as Url,
             title: 'A',
           },
           {
             id: '2',
             parent: '1',
-            locale: 'EN',
+            locale: 'en',
             target: '/B' as Url,
             title: 'B',
           },
           {
             id: '3',
             parent: '2',
-            locale: 'EN',
+            locale: 'en',
             target: '/C' as Url,
             title: 'C',
           },
           {
             id: '4',
             parent: '2',
-            locale: 'EN',
+            locale: 'en',
             target: '/D' as Url,
             title: 'D',
           },
           {
             id: '5',
             parent: undefined,
-            locale: 'EN',
+            locale: 'en',
             target: '/E' as Url,
             title: 'E',
           },
         ],
-        'EN',
+        'en',
       ),
     ).toEqual([
       {
         id: '1',
         parent: undefined,
-        locale: 'EN',
+        locale: 'en',
         target: '/A' as Url,
         title: 'A',
         children: [
           {
             id: '2',
             parent: '1',
-            locale: 'EN',
+            locale: 'en',
             target: '/B' as Url,
             title: 'B',
             children: [
               {
                 id: '3',
                 parent: '2',
-                locale: 'EN',
+                locale: 'en',
                 target: '/C' as Url,
                 title: 'C',
                 children: [],
@@ -133,7 +133,7 @@ describe('buildNavigationTree', () => {
               {
                 id: '4',
                 parent: '2',
-                locale: 'EN',
+                locale: 'en',
                 target: '/D' as Url,
                 title: 'D',
                 children: [],
@@ -145,7 +145,7 @@ describe('buildNavigationTree', () => {
       {
         id: '5',
         parent: undefined,
-        locale: 'EN',
+        locale: 'en',
         target: '/E' as Url,
         title: 'E',
         children: [],
