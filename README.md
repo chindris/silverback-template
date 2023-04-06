@@ -8,7 +8,7 @@ Just run:
 pnpm install && pnpm build
 ```
 
-This should install all the needed files and a fully working Drupal CMS.
+This should install all the needed files and a fully working application.
 
 ## CMS run
 
@@ -17,27 +17,18 @@ loaded, just run `direnv allow`) and then run `drush serve` or `pnpm dev`. This
 should start Drupal at `localhost:8888`. The Drupal instance comes with an admin
 user which has the credentials: `admin/admin`.
 
-## Further settings
+## Environment overrides
 
-Inside the template, there are a few places where you will need to replace some
-placeholder strings with the actual values for the project:
+The application is tailored to run locally out of the box. In a production or
+hosting environment, you will need to override some of the environment
+variables. On lagoon for example, this should happen in `.lagoon.env` files.
 
-- **DRUPAL_HASH_SALT**: replace this in
-  `apps/cms/scaffold/settings.php.append.txt`
-- **PROJECT_MACHINE_NAME**: replace this in `apps/cms/composer.json`,
-  `.lagoon/Dockerfile`, `apps/cms/scaffold/settings.php.append.txt`,
-  `apps/cms/package.json` and `package.json`
-- **PROJECT_NAME**: replace this in `apps/cms/package.json` and
-  `packages/@custom-cms/custom_default_content/custom_default_content.info.yml`
-- **PROD_FE_BASE_URL**: replace this in
-  `apps/cms/scaffold/settings.php.append.txt`
-- **PROD_FE_NETLIFY_PASSWORD**: replace this in
-  `apps/cms/scaffold/settings.php.append.txt`
-- **STAGE_FE_BASE_URL**: replace this in
-  `apps/cms/scaffold/settings.php.append.txt`
-- **STAGE_FE_NETLIFY_PASSWORD**: replace this in
-  `apps/cms/scaffold/settings.php.append.txt`
-- **DEV_FE_BASE_URL**: replace this in
-  `apps/cms/scaffold/settings.php.append.txt`
-- **DEV_FE_NETLIFY_PASSWORD**: replace this in
-  `apps/cms/scaffold/settings.php.append.txt`
+- **DRUPAL_HASH_SALT**: Drupal's hash salt. Should be different per environment
+  for security reasons.
+- **PUBLISHER_URL**: If publisher is set to a custom domain, this variable has
+  to be defined.
+- **NETLIFY**: To publish the project to netlify, provide the following
+  environment variables:
+  - NETLIFY_SITE_ID
+  - NETLIFY_AUTH_TOKEN
+  - NETLIFY_URL
