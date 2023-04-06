@@ -6,6 +6,11 @@
       <sourceFolder url="file://$MODULE_DIR$/apps/cms/web/core/lib" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/apps/cms/web/core/tests" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/apps/cms/web/modules/custom" />
+      <excludeFolder url="file://$MODULE_DIR$/apps/cms/generated/graphql" />
+      <excludeFolder url="file://$MODULE_DIR$/apps/website/.cache" />
+      <excludeFolder url="file://$MODULE_DIR$/apps/website/public" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/schema/build" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/ui/build" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

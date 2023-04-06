@@ -1,0 +1,20 @@
+uuid: f31854e4-2c2b-4687-9553-9f2d1f87028c
+langcode: en
+status: true
+dependencies: {  }
+name: main
+label: Main
+endpoint: /graphql
+debug_flag: 0
+schema: directable
+caching: true
+batching: true
+disable_introspection: false
+query_depth: null
+query_complexity: null
+schema_configuration:
+  directable:
+    schema_definition: ../generated/graphql/schema.graphqls
+    extensions:
+      silverback_gatsby: silverback_gatsby
+persisted_queries_settings: {  }

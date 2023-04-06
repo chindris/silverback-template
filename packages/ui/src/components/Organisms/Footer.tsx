@@ -1,6 +1,8 @@
 import { FooterFragment, Link } from '@custom/schema';
 import React from 'react';
 
+import { isTruthy } from '../../utils/isTruthy';
+
 export function Footer(props: Pick<FooterFragment, 'footerNavigation'>) {
   return (
     <footer className="bg-white">
@@ -9,7 +11,7 @@ export function Footer(props: Pick<FooterFragment, 'footerNavigation'>) {
           className="-mb-6 columns-2 sm:flex sm:justify-center sm:space-x-12"
           aria-label="Footer"
         >
-          {props.footerNavigation.map((item) => (
+          {props.footerNavigation.items.filter(isTruthy).map((item) => (
             <div key={item.title} className="pb-6">
               <Link
                 href={item.target}

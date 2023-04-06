@@ -1,0 +1,14 @@
+uuid: 5ab000fd-78f8-43e5-9680-fd791638f270
+langcode: en
+status: true
+dependencies:
+  module:
+    - graphql
+    - key_auth
+id: gatsby_build
+label: 'Gatsby Build'
+weight: 3
+is_admin: null
+permissions:
+  - 'execute main arbitrary graphql requests'
+  - 'use key authentication'

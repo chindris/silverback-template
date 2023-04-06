@@ -1,6 +1,7 @@
 fragment Header on Query {
   mainNavigation {
-    ...NavigationItem
+    items {
+      ...NavigationItem
+    }
   }
 }
-

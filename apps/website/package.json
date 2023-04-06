@@ -2,13 +2,14 @@
   "name": "@custom/website",
   "private": true,
   "dependencies": {
-    "@custom/ui": "workspace:*",
+    "@amazeelabs/gatsby-source-silverback": "^1.10.2",
+    "@amazeelabs/publisher": "^2.1.10",
     "@custom/schema": "workspace:*",
+    "@custom/ui": "workspace:*",
     "gatsby": "^5.7.0",
     "gatsby-plugin-manifest": "^5.7.0",
     "react": "experimental",
-    "react-dom": "experimental",
-    "@amazeelabs/publisher": "^2.1.10"
+    "react-dom": "experimental"
   },
   "devDependencies": {
     "@types/react": "^18.0.31",
@@ -22,7 +23,7 @@
     "build": "rm -f styles.css && cp node_modules/@custom/ui/build/styles.css styles.css && gatsby build",
     "start": "publisher",
     "serve": "netlify dev --dir=public --port=8000",
-    "dev": "gatsby develop",
+    "dev": "rm -f styles.css && cp node_modules/@custom/ui/build/styles.css styles.css && gatsby develop",
     "clean": "gatsby clean"
   }
 }

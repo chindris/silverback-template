@@ -27,6 +27,7 @@ module:
   graphql_directives: 0
   gutenberg: 0
   image: 0
+  key_auth: 0
   language: 0
   link: 0
   linkit: 0
