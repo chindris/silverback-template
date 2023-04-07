@@ -21,7 +21,10 @@
   },
   "scripts": {
     "test:static": "tsc --noEmit && eslint \"**/*.{ts,tsx,js,jsx}\" --ignore-path=\"./.eslintignore\" --fix",
-    "build:gatsby": "rm -f styles.css && cp node_modules/@custom/ui/build/styles.css styles.css && gatsby build",
+    "prep": "pnpm run prep:styles && pnpm run prep:fragments",
+    "prep:styles": "rm -f styles.css && cp node_modules/@custom/ui/build/styles.css styles.css",
+    "prep:fragments": "rm -rf src/gatsby-fragments.js && cp node_modules/@custom/schema/build/gatsby-fragments.js src/gatsby-fragments.js",
+    "build:gatsby": "gatsby build",
     "start:cms": "pnpm run --filter @custom/cms start",
     "build": "start-test start:cms 8888 build:gatsby",
     "start": "publisher",
