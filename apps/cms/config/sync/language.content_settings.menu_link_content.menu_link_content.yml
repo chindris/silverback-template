@@ -1,18 +1,17 @@
-uuid: 3c3bc0ee-90f4-4ade-be40-49ae0cc4bdc6
+uuid: 47a6fba6-a7e8-4dda-9ad8-20e141e35064
 langcode: en
 status: true
 dependencies:
-  config:
-    - media.type.video
   module:
     - content_translation
+    - menu_link_content
 third_party_settings:
   content_translation:
     enabled: true
     bundle_settings:
       untranslatable_fields_hide: '0'
-id: media.video
-target_entity_type_id: media
-target_bundle: video
-default_langcode: current_interface
+id: menu_link_content.menu_link_content
+target_entity_type_id: menu_link_content
+target_bundle: menu_link_content
+default_langcode: site_default
 language_alterable: true
