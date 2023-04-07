@@ -11,9 +11,6 @@
     },
     "start": {
       "dependsOn": ["build"]
-    },
-    "start:bg": {
-      "dependsOn": ["build"]
     }
   }
 }
