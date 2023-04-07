@@ -1,9 +1,0 @@
-query Page($id: ID!, $locale: Locale!) {
-  page(id: $id, locale: $locale) {
-    title
-    content {
-      ...BlockText
-      ...BlockImage
-    }
-  }
-}

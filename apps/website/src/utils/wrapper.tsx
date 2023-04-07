@@ -37,7 +37,7 @@ function useFrameQuery() {
 export function Wrapper({
   children,
   locale = 'en',
-}: PropsWithChildren<{ locale: Locale }>) {
+}: PropsWithChildren<{ locale?: Locale }>) {
   const data = useFrameQuery();
   const main = locale === 'de' ? data.main_de : data.main_en;
   const footer = locale === 'de' ? data.footer_de : data.footer_en;

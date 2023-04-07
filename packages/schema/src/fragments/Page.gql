@@ -1,0 +1,8 @@
+fragment Page on Page {
+  title
+  content {
+    __typename
+    ...BlockText
+    ...BlockImage
+  }
+}
