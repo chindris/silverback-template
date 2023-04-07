@@ -45,6 +45,8 @@ RUN --mount=type=cache,target=/tmp/cache composer install --no-dev
 
 COPY --from=builder /app/.deploy/cms/full /app
 
+RUN cd web/modules && rm -rf custom && ln -s ../../../../packages/drupal custom
+
 ENV WEBROOT=/app/apps/cms/web
 
 # ====================================================================================================
