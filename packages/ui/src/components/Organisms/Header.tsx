@@ -72,13 +72,13 @@ export default function Header(props: { mainNavigation: NavigationFragment }) {
                 >
                   <Popover.Panel className="absolute -left-8 top-full z-10 mt-3 w-56 rounded-xl bg-white p-2 shadow-lg ring-1 ring-gray-900/5">
                     {item.children.map((child) => (
-                      <a
+                      <Link
                         key={child.target}
                         href={child.target}
                         className="block rounded-lg py-2 px-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-50"
                       >
                         {child.title}
-                      </a>
+                      </Link>
                     ))}
                   </Popover.Panel>
                 </Transition>
