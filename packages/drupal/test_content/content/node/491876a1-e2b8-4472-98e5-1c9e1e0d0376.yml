@@ -1,0 +1,55 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 491876a1-e2b8-4472-98e5-1c9e1e0d0376
+  bundle: page
+  default_langcode: en
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: Gatsby
+  created:
+    -
+      value: 1680856285
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /gatsby
+      langcode: en
+      pathauto: 1
+  external_preview_link:
+    -
+      uri: 'http://localhost:8000/__preview/page?nid=7&rid=27&lang=en'
+      title: 'Preview Gatsby'
+      options: {  }
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  body:
+    -
+      value: "<!-- wp:paragraph -->\r\n<p>Gatsby</p>\r\n<!-- /wp:paragraph -->"
+      format: gutenberg
+      summary: ''

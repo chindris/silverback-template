@@ -1,0 +1,51 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: 2f5320ac-44ec-406a-83f4-66092c47f570
+  bundle: menu_link_content
+  default_langcode: en
+  depends:
+    fc595197-9c7c-4f9d-871f-6d5e32085590: menu_link_content
+    f1f827c9-ed06-4e7d-b89d-a169e70a459c: node
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: Drupal
+  menu_name:
+    -
+      value: main
+  link:
+    -
+      target_uuid: f1f827c9-ed06-4e7d-b89d-a169e70a459c
+      title: ''
+      options: {  }
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: false
+  weight:
+    -
+      value: 0
+  expanded:
+    -
+      value: false
+  parent:
+    -
+      value: 'menu_link_content:fc595197-9c7c-4f9d-871f-6d5e32085590'
+  revision_translation_affected:
+    -
+      value: true
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  content_translation_status:
+    -
+      value: true

@@ -1,0 +1,76 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: 6f653fcf-e5e1-4544-9929-2ba8f24a32b7
+  bundle: menu_link_content
+  default_langcode: de
+  depends:
+    c14dccc3-bc3f-40dc-88b7-d349249311a8: node
+translations:
+  en:
+    title:
+      -
+        value: Imprint
+    revision_translation_affected:
+      -
+        value: true
+    content_translation_source:
+      -
+        value: und
+    content_translation_outdated:
+      -
+        value: false
+    content_translation_uid:
+      -
+        target_id: 1
+    content_translation_status:
+      -
+        value: true
+    content_translation_created:
+      -
+        value: 1680856782
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: Impressum
+  menu_name:
+    -
+      value: footer
+  link:
+    -
+      target_uuid: c14dccc3-bc3f-40dc-88b7-d349249311a8
+      title: ''
+      options: {  }
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: false
+  weight:
+    -
+      value: 0
+  expanded:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  content_translation_uid:
+    -
+      target_id: 1
+  content_translation_status:
+    -
+      value: true
+  content_translation_created:
+    -
+      value: 1680856782

@@ -1,0 +1,55 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: f1f827c9-ed06-4e7d-b89d-a169e70a459c
+  bundle: page
+  default_langcode: en
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: Drupal
+  created:
+    -
+      value: 1680856269
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /drupal
+      langcode: en
+      pathauto: 1
+  external_preview_link:
+    -
+      uri: 'http://localhost:8000/__preview/page?nid=6&rid=32&lang=en'
+      title: 'Preview Drupal'
+      options: {  }
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  body:
+    -
+      value: "<!-- wp:paragraph -->\r\n<p>Drupal</p>\r\n<!-- /wp:paragraph -->"
+      format: gutenberg
+      summary: ''

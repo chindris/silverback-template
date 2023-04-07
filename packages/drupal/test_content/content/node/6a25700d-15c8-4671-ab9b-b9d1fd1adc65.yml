@@ -1,0 +1,55 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 6a25700d-15c8-4671-ab9b-b9d1fd1adc65
+  bundle: page
+  default_langcode: en
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: React
+  created:
+    -
+      value: 1680856192
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /react
+      langcode: en
+      pathauto: 1
+  external_preview_link:
+    -
+      uri: 'http://localhost:8000/__preview/page?nid=4&rid=30&lang=en'
+      title: 'Preview React'
+      options: {  }
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  body:
+    -
+      value: "<!-- wp:paragraph -->\r\n<p>React</p>\r\n<!-- /wp:paragraph -->"
+      format: gutenberg
+      summary: ''
