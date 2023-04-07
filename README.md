@@ -34,6 +34,10 @@ variables.
   - NETLIFY_URL
 - **[key_auth](apps/website/gatsby-config.js)** and
   **[api_key](packages/drupal/test_content/content/user/f20d961b-ba45-4820-b2cc-166e5ce56815.yml)**
+- **DRUPAL_INTERNAL_URL**: The internal URL of the Drupal instance. This is used
+  for the GraphQL build queries.
+- **DRUPAL_EXTERNAL_URL**: The external URL of the Drupal instance. This is used
+  for the GraphQL client queries.
 
 On lagoon for example, this should happen in `.lagoon.env` files, or directly as
 lagoon runtime configuration.
