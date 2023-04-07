@@ -63,7 +63,7 @@ type BlockImage @type(id: "drupalmedia/drupal-media-entity") {
 }
 
 type Query {
-  page(id: ID!, locale: Locale!): Page
+  previewPage(id: ID!, locale: Locale!): Page
     @loadEntity(type: "node", id: "$id")
     @resolveEntityTranslation(lang: "$locale")
 }

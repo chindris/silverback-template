@@ -1,10 +1,10 @@
-import { PageQuery } from '@custom/schema';
+import { PageFragment } from '@custom/schema';
 import React from 'react';
 
 import { BlockImage } from '../Organisms/PageContent/BlockImage';
 import { BlockText } from '../Organisms/PageContent/BlockText';
 
-export function Page(props: PageQuery) {
+export function Page(props: { page: PageFragment }) {
   return (
     <div className="bg-white py-12 px-6 lg:px-8">
       <div className="mx-auto max-w-3xl text-base leading-7 text-gray-700">

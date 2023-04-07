@@ -1,0 +1,5 @@
+query PreviewPage($id: ID!, $locale: Locale!) {
+  previewPage(id: $id, locale: $locale) {
+    ...Page
+  }
+}
