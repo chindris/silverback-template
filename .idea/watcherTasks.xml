@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ProjectTasksOptions">
-    <TaskOptions isEnabled="false">
+    <TaskOptions isEnabled="true">
       <option name="arguments" value="prep" />
       <option name="checkSyntaxErrors" value="true" />
       <option name="description" />
@@ -9,7 +9,7 @@
       <option name="fileExtension" value="*" />
       <option name="immediateSync" value="true" />
       <option name="name" value="GraphQL Codegen" />
-      <option name="output" value="$Projectpath$/build" />
+      <option name="output" value="$PROJECT_DIR$/packages/schema/build" />
       <option name="outputFilters">
         <array />
       </option>
@@ -18,7 +18,7 @@
       <option name="runOnExternalChanges" value="true" />
       <option name="scopeName" value="GraphQL Schema Inputs" />
       <option name="trackOnlyRoot" value="false" />
-      <option name="workingDir" value="$Projectpath$" />
+      <option name="workingDir" value="$PROJECT_DIR$/packages/schema" />
       <envs />
     </TaskOptions>
   </component>
