@@ -4,6 +4,7 @@ page_template_lock: none
 page_allowed_blocks:
   core/paragraph: core/paragraph
   core/list: core/list
+  core/group: core/group
   core/all: 0
   core/image: 0
   core/heading: 0
