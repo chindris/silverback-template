@@ -13,7 +13,7 @@ export default {
 
 export const Default = {
   args: {
-    ...Header.args,
-    ...Footer.args,
+    header: Header.args,
+    footer: Footer.args,
   },
 } satisfies StoryObj<typeof Frame>;

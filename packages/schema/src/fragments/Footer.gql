@@ -1,7 +1,0 @@
-fragment Footer on Query {
-  footerNavigation {
-    items {
-      ...NavigationItem
-    }
-  }
-}

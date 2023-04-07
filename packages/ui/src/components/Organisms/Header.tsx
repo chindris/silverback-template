@@ -1,5 +1,5 @@
 'use client';
-import { HeaderFragment, Link } from '@custom/schema';
+import { Link, NavigationFragment } from '@custom/schema';
 import { Dialog, Disclosure, Popover, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
@@ -7,14 +7,12 @@ import clsx from 'clsx';
 import React, { Fragment, useState } from 'react';
 
 import { isTruthy } from '../../utils/isTruthy';
-import { useLocale } from '../../utils/locale';
 import { buildNavigationTree } from '../../utils/navigation';
 
-export default function Header(props: HeaderFragment) {
+export default function Header(props: { mainNavigation: NavigationFragment }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const items = buildNavigationTree(
     props.mainNavigation.items.filter(isTruthy),
-    useLocale(),
   );
 
   return (
