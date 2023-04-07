@@ -7,7 +7,7 @@ const isLagoon = !!process.env.LAGOON;
 export default defineConfig({
   commands: {
     build: {
-      command: 'pnpm build',
+      command: 'pnpm build:gatsby',
       outputTimeout: 1000 * 60 * 10,
     },
     clean: 'pnpm clean',

@@ -2,7 +2,7 @@
   "extends": ["//"],
   "pipeline": {
     "build": {
-      "dependsOn": ["@custom/cms#start:bg"],
+      "dependsOn": ["@custom/cms#build", "prep", "^build"],
       "inputs": ["gatsby-browser.js", "gatsby-config.js", "src/**"],
       "outputs": ["public/**", ".cache/**"]
     }

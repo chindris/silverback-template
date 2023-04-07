@@ -16,11 +16,14 @@
     "@types/react-dom": "^18.0.11"
   },
   "optionalDependencies": {
-    "netlify-cli": "^13.0.0"
+    "netlify-cli": "^13.0.0",
+    "start-server-and-test": "^2.0.0"
   },
   "scripts": {
     "test:static": "tsc --noEmit && eslint \"**/*.{ts,tsx,js,jsx}\" --ignore-path=\"./.eslintignore\" --fix",
-    "build": "rm -f styles.css && cp node_modules/@custom/ui/build/styles.css styles.css && gatsby build",
+    "build:gatsby": "rm -f styles.css && cp node_modules/@custom/ui/build/styles.css styles.css && gatsby build",
+    "start:cms": "pnpm run --filter @custom/cms start",
+    "build": "start-test start:cms 8888 build:gatsby",
     "start": "publisher",
     "serve": "netlify dev --dir=public --port=8000",
     "dev": "rm -f styles.css && cp node_modules/@custom/ui/build/styles.css styles.css && gatsby develop",
