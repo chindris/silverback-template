@@ -11,8 +11,9 @@ $config['silverback_external_preview.settings'] = [
   'live_host' => $netlifyUrl,
 ];
 
-$config['graphql.graphql_servers.build']['schema_configuration']['website']['build_webhook'] = $publisherUrl . '/___status/build';
-$config['graphql.graphql_servers.build']['schema_configuration']['website']['update_webhook'] = $publisherUrl . '/___status/update';
+$config['graphql.graphql_servers.main']['schema_configuration']['directable']['build_webhook'] = $publisherUrl . '/___status/build';
+$config['graphql.graphql_servers.main']['schema_configuration']['directable']['update_webhook'] = $publisherUrl . '/___status/update';
+$config['graphql.graphql_servers.main']['schema_configuration']['directable']['build_url'] = $publisherUrl;
 
 // Environment indicator.
 $config['environment_indicator.indicator']['name'] = 'Local Silverback';
