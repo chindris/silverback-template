@@ -1,4 +1,4 @@
-import { Locale, NavigationItemFragment } from '@custom/schema';
+import { NavigationItemFragment } from '@custom/schema';
 
 type NavigationTreeElement = NavigationItemFragment & {
   children: Array<NavigationTreeElement>;
@@ -6,9 +6,8 @@ type NavigationTreeElement = NavigationItemFragment & {
 
 export function buildNavigationTree(
   items: Array<NavigationItemFragment>,
-  locale: Locale,
 ): NavigationTreeElement[] {
-  const localeItems = items.filter((item) => item.locale === locale);
+  const localeItems = items;
   function buildTree(
     parent: NavigationItemFragment,
     items: Array<NavigationItemFragment>,

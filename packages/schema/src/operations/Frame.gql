@@ -1,5 +1,0 @@
-# The main static query, fetching all navigational items.
-query Frame {
-  ...Header
-  ...Footer
-}

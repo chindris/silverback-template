@@ -1,7 +1,6 @@
 fragment NavigationItem on NavigationItem {
   id
   parent
-  locale
   title
   target
 }

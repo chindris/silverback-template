@@ -1,7 +1,0 @@
-fragment Header on Query {
-  mainNavigation {
-    items {
-      ...NavigationItem
-    }
-  }
-}

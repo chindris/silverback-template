@@ -16,9 +16,20 @@ the consumer should use the `parent` field to traverse the tree.
 type NavigationItem {
   id: ID! @resolveMenuItemId
   parent: ID @resolveMenuItemParentId
-  locale: Locale! # TODO: Either remove it or find a way to get it.
   title: String! @resolveMenuItemLabel
   target: Url! @resolveMenuItemUrl
+}
+
+interface Navigation {
+  items: [NavigationItem]!
+}
+
+type MainNavigation implements Navigation @menu(menu_id: "main") {
+  items: [NavigationItem]! @lang @resolveMenuItems
+}
+
+type FooterNavigation implements Navigation @menu(menu_id: "footer") {
+  items: [NavigationItem]! @lang @resolveMenuItems
 }
 
 """
@@ -51,31 +62,8 @@ type BlockImage @type(id: "drupalmedia/drupal-media-entity") {
   caption: Markup @resolveEditorBlockAttribute(key: "caption")
 }
 
-type MainNavigation
-  @default
-  @value(json: "{\"items\": []}")
-  @menu(menu_id: "main") {
-  items: [NavigationItem]! @lang @resolveMenuItems
-}
-
-type FooterNavigation
-  @default
-  @value(json: "{\"items\": []}")
-  @menu(menu_id: "footer") {
-  items: [NavigationItem]! @lang @resolveMenuItems
-}
-
 type Query {
-  # TODO: If we need this field working, we need a directive to load all entities.
-  allPages: [Page]!
-
   page(id: ID!, locale: Locale!): Page
     @loadEntity(type: "node", id: "$id")
     @resolveEntityTranslation(lang: "$locale")
-
-  # TODO: If we need these fields really working, we need to find a way how to translate them.
-  mainNavigation: MainNavigation!
-    @loadEntity(type: "menu", id: "main", operation: "view label")
-  footerNavigation: FooterNavigation!
-    @loadEntity(type: "menu", id: "footer", operation: "view label")
 }

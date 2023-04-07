@@ -1,9 +1,9 @@
-import { FooterFragment, Link } from '@custom/schema';
+import { Link, NavigationFragment } from '@custom/schema';
 import React from 'react';
 
 import { isTruthy } from '../../utils/isTruthy';
 
-export function Footer(props: Pick<FooterFragment, 'footerNavigation'>) {
+export function Footer(props: { footerNavigation: NavigationFragment }) {
   return (
     <footer className="bg-white">
       <div className="mx-auto max-w-7xl overflow-hidden py-20 px-6 sm:py-24 lg:px-8">

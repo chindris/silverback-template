@@ -1,0 +1,5 @@
+fragment Navigation on Navigation {
+  items {
+    ...NavigationItem
+  }
+}
