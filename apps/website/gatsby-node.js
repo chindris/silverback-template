@@ -1,4 +1,5 @@
 const { readFileSync } = require('fs');
+const path = require('path');
 
 /**
  * @type {import('gatsby').GatsbyNode['createSchemaCustomization']}
@@ -13,6 +14,20 @@ const createSchemaCustomization = (args) => {
   args.actions.createTypes(schema);
 };
 
+/**
+ * @type {import('gatsby').GatsbyNode['onCreateWebpackConfig']}
+ */
+const onCreateWebpackConfig = ({ actions }) => {
+  actions.setWebpackConfig({
+    resolve: {
+      alias: {
+        '@amazeelabs/bridge': path.resolve(__dirname, '/src/bridge/'),
+      },
+    },
+  });
+};
+
 module.exports = {
   createSchemaCustomization,
+  onCreateWebpackConfig,
 };
