@@ -1,0 +1,51 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: e11597b6-1cf4-4efa-ba07-89ab157b8897
+  bundle: menu_link_content
+  default_langcode: en
+  depends:
+    1419f565-c610-406d-af5f-64a835e55ae9: menu_link_content
+    6a25700d-15c8-4671-ab9b-b9d1fd1adc65: node
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: React
+  menu_name:
+    -
+      value: main
+  link:
+    -
+      target_uuid: 6a25700d-15c8-4671-ab9b-b9d1fd1adc65
+      title: ''
+      options: {  }
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: false
+  weight:
+    -
+      value: 0
+  expanded:
+    -
+      value: false
+  parent:
+    -
+      value: 'menu_link_content:1419f565-c610-406d-af5f-64a835e55ae9'
+  revision_translation_affected:
+    -
+      value: true
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  content_translation_status:
+    -
+      value: true

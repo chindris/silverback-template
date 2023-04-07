@@ -1,0 +1,51 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: 809abec6-e8cf-4f50-b622-63d658d762ef
+  bundle: menu_link_content
+  default_langcode: en
+  depends:
+    fc595197-9c7c-4f9d-871f-6d5e32085590: menu_link_content
+    491876a1-e2b8-4472-98e5-1c9e1e0d0376: node
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: Gatsby
+  menu_name:
+    -
+      value: main
+  link:
+    -
+      target_uuid: 491876a1-e2b8-4472-98e5-1c9e1e0d0376
+      title: ''
+      options: {  }
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: false
+  weight:
+    -
+      value: 0
+  expanded:
+    -
+      value: false
+  parent:
+    -
+      value: 'menu_link_content:fc595197-9c7c-4f9d-871f-6d5e32085590'
+  revision_translation_affected:
+    -
+      value: true
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  content_translation_status:
+    -
+      value: true

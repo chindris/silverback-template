@@ -1,0 +1,99 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: c14dccc3-bc3f-40dc-88b7-d349249311a8
+  bundle: page
+  default_langcode: de
+translations:
+  en:
+    status:
+      -
+        value: true
+    uid:
+      -
+        target_id: 1
+    title:
+      -
+        value: Imprint
+    created:
+      -
+        value: 1680856802
+    promote:
+      -
+        value: false
+    sticky:
+      -
+        value: false
+    moderation_state:
+      -
+        value: published
+    path:
+      -
+        alias: /imprint
+        langcode: en
+        pathauto: 1
+    external_preview_link:
+      -
+        uri: 'http://localhost:8000/__preview/page?nid=9&rid=24&lang=en'
+        title: 'Preview Imprint'
+        options: {  }
+    content_translation_source:
+      -
+        value: de
+    content_translation_outdated:
+      -
+        value: false
+    body:
+      -
+        value: "<!-- wp:paragraph -->\r\n<p>Imprint</p>\r\n<!-- /wp:paragraph -->"
+        format: gutenberg
+        summary: ''
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: Impressum
+  created:
+    -
+      value: 1680856760
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /impressum
+      langcode: de
+      pathauto: 1
+  external_preview_link:
+    -
+      uri: 'http://localhost:8000/__preview/page?nid=9&rid=24&lang=de'
+      title: 'Preview Impressum'
+      options: {  }
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  body:
+    -
+      value: "<!-- wp:paragraph -->\r\n<p>Impressum</p>\r\n<!-- /wp:paragraph -->"
+      format: gutenberg
+      summary: ''
