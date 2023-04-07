@@ -28,7 +28,8 @@
     "import-translations": "pnpm drush scr scripts/translations-import.php"
   },
   "dependencies": {
-    "@custom/test_content": "workspace:*"
+    "@custom/test_content": "workspace:*",
+    "@custom/schema": "workspace:*"
   },
   "optionalDependencies": {
     "@amazeelabs/graphql-schema-test": "^1.1.9",

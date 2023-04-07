@@ -14,7 +14,7 @@ query_depth: null
 query_complexity: null
 schema_configuration:
   directable:
-    schema_definition: ../generated/graphql/schema.graphqls
+    schema_definition: ../../../packages/schema/src/schema.graphqls
     extensions:
       silverback_gatsby: silverback_gatsby
 persisted_queries_settings: {  }
