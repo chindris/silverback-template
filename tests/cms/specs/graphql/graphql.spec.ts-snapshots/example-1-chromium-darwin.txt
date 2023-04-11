@@ -1,0 +1,1 @@
+{"data":{"loadPage":{"title":"Architecture"}}}
