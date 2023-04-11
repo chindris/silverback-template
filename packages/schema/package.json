@@ -18,6 +18,6 @@
     "typescript": "^4.9.3"
   },
   "dependencies": {
-    "@amazeelabs/scalars": "^1.1.5"
+    "@amazeelabs/scalars": "^1.1.7"
   }
 }
