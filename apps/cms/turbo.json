@@ -3,7 +3,7 @@
   "pipeline": {
     "build": {
       "inputs": ["config/**"],
-      "outputs": ["web/sites/default/files"]
+      "outputs": ["web/sites/default/files/**"]
     },
     "prep": {
       "inputs": ["composer.json", "composer.lock", "scaffold/**"],
