@@ -36,7 +36,7 @@
     "report": "nyc report --reporter=lcov -t coverage/storybook --report-dir coverage/storybook"
   },
   "dependencies": {
-    "@amazeelabs/react-intl-rsc": "^1.1.6",
+    "@amazeelabs/react-intl-rsc": "^1.1.7",
     "@custom/schema": "workspace:*",
     "@headlessui/react": "^1.7.13",
     "@heroicons/react": "^2.0.16",
