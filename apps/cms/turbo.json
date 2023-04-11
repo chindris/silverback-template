@@ -7,7 +7,12 @@
     },
     "prep": {
       "inputs": ["composer.json", "composer.lock", "scaffold/**"],
-      "outputs": ["web/**", "!web/sites/default/files", "vendor/**", "!**/.git"]
+      "outputs": [
+        "web/**",
+        "!web/sites/default/files/**",
+        "vendor/**",
+        "!**/.git"
+      ]
     },
     "start": {
       "dependsOn": ["build"]
