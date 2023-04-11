@@ -1,9 +1,11 @@
 import { Link, NavigationFragment } from '@custom/schema';
 import React from 'react';
 
+import { useIntl } from '../../utils/intl';
 import { isTruthy } from '../../utils/isTruthy';
 
 export function Footer(props: { footerNavigation: NavigationFragment }) {
+  const intl = useIntl();
   return (
     <footer className="bg-white">
       <div className="mx-auto max-w-7xl overflow-hidden py-20 px-6 sm:py-24 lg:px-8">
@@ -23,7 +25,17 @@ export function Footer(props: { footerNavigation: NavigationFragment }) {
           ))}
         </nav>
         <p className="mt-10 text-center text-xs leading-5 text-gray-500">
-          &copy; 2020 Your Company, Inc. All rights reserved.
+          {intl.formatMessage(
+            {
+              defaultMessage:
+                '&copy; {year} {company_name}. All rights reserved.',
+              id: 'H3UnZS',
+            },
+            {
+              year: 2020,
+              company_name: 'Company name, Inc',
+            },
+          )}
         </p>
       </div>
     </footer>

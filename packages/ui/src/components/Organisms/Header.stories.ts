@@ -65,7 +65,7 @@ export const Expanded: StoryObj<typeof Header> = {
       await canvas.findByRole('navigation', { name: 'Global' }),
     );
     const mobileMenuButton = await navigation.queryByRole('button', {
-      name: 'Open main menu',
+      name: 'Open main navigation',
     });
     if (mobileMenuButton) {
       userEvent.click(mobileMenuButton);

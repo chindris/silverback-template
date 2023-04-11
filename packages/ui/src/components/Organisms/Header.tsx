@@ -6,10 +6,12 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
 import React, { Fragment, useState } from 'react';
 
+import { useIntl } from '../../utils/intl';
 import { isTruthy } from '../../utils/isTruthy';
 import { buildNavigationTree } from '../../utils/navigation';
 
 export default function Header(props: { mainNavigation: NavigationFragment }) {
+  const intl = useIntl();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const items = buildNavigationTree(
     props.mainNavigation.items.filter(isTruthy),
@@ -23,7 +25,12 @@ export default function Header(props: { mainNavigation: NavigationFragment }) {
       >
         <div className="flex lg:flex-1">
           <a href="#" className="-m-1.5 p-1.5">
-            <span className="sr-only">Your Company</span>
+            <span className="sr-only">
+              {intl.formatMessage({
+                defaultMessage: 'Company name',
+                id: 'FPGwAt',
+              })}
+            </span>
             <img
               className="h-8 w-auto"
               src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
@@ -37,7 +44,12 @@ export default function Header(props: { mainNavigation: NavigationFragment }) {
             className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
             onClick={() => setMobileMenuOpen(true)}
           >
-            <span className="sr-only">Open main menu</span>
+            <span className="sr-only">
+              {intl.formatMessage({
+                defaultMessage: 'Open main navigation!!!',
+                id: 'yA+Qep',
+              })}
+            </span>
             <Bars3Icon className="h-6 w-6" aria-hidden="true" />
           </button>
         </div>
@@ -104,7 +116,12 @@ export default function Header(props: { mainNavigation: NavigationFragment }) {
         <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white p-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
             <a href="#" className="-m-1.5 p-1.5">
-              <span className="sr-only">Your Company</span>
+              <span className="sr-only">
+                {intl.formatMessage({
+                  defaultMessage: 'Company name',
+                  id: 'FPGwAt',
+                })}
+              </span>
               <img
                 className="h-8 w-auto"
                 src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
@@ -116,7 +133,12 @@ export default function Header(props: { mainNavigation: NavigationFragment }) {
               className="-m-2.5 rounded-md p-2.5 text-gray-700"
               onClick={() => setMobileMenuOpen(false)}
             >
-              <span className="sr-only">Close menu</span>
+              <span className="sr-only">
+                {intl.formatMessage({
+                  defaultMessage: 'Close navigation',
+                  id: 'SRsuWF',
+                })}
+              </span>
               <XMarkIcon className="h-6 w-6" aria-hidden="true" />
             </button>
           </div>
