@@ -46,8 +46,8 @@ export default function Header(props: { mainNavigation: NavigationFragment }) {
           >
             <span className="sr-only">
               {intl.formatMessage({
-                defaultMessage: 'Open main navigation!!!',
-                id: 'yA+Qep',
+                defaultMessage: 'Open main navigation',
+                id: 'e7yFQY',
               })}
             </span>
             <Bars3Icon className="h-6 w-6" aria-hidden="true" />
