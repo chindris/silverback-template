@@ -20,6 +20,9 @@ jobs:
           server-token: "local"
           repo-token: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Prepare packages
+        run: pnpm prep
+
       - name: Test
         run: pnpm test
         env:

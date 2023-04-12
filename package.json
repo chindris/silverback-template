@@ -12,7 +12,7 @@
     "commit": "git-cz",
     "test": "turbo test:integration --output-logs=new-only --concurrency=1",
     "test:quick": "turbo test:static --output-logs=errors-only && turbo test:unit --output-logs=errors-only",
-    "prepare": "turbo prep --output-logs=new-only"
+    "prep": "turbo prep --output-logs=new-only"
   },
   "private": true,
   "optionalDependencies": {

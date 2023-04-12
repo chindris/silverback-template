@@ -5,10 +5,10 @@
 Just run:
 
 ```
-pnpm install && pnpm build
+pnpm i && pnpm prep
 ```
 
-This should install all the needed files and a fully working application.
+This should install all the needed files and prepare applications and packages.
 
 ## CMS run
 
