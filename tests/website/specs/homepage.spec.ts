@@ -6,5 +6,5 @@ test('has a logo', async ({ page }) => {
   const visible = await page
     .getByRole('link', { name: 'Company name' })
     .isVisible();
-  expect(visible).toBe(false);
+  expect(visible).toBe(true);
 });
