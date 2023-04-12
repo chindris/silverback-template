@@ -36,14 +36,13 @@
     "report": "nyc report --reporter=lcov -t coverage/storybook --report-dir coverage/storybook"
   },
   "dependencies": {
-    "@amazeelabs/react-intl-rsc": "^1.1.7",
+    "@amazeelabs/react-intl-rsc": "^1.1.8",
     "@custom/schema": "workspace:*",
     "@headlessui/react": "^1.7.13",
     "@heroicons/react": "^2.0.16",
     "clsx": "^1.2.1",
     "hast-util-is-element": "^2.1.3",
     "hast-util-select": "^5.0.5",
-    "react-intl": "^6.3.2",
     "unified": "^10.1.2"
   },
   "peerDependencies": {
