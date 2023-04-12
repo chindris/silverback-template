@@ -25,11 +25,11 @@ export function Footer(props: { footerNavigation: NavigationFragment }) {
           ))}
         </nav>
         <p className="mt-10 text-center text-xs leading-5 text-gray-500">
+          &copy;{' '}
           {intl.formatMessage(
             {
-              defaultMessage:
-                '&copy; {year} {company_name}. All rights reserved.',
-              id: 'H3UnZS',
+              defaultMessage: '{year} {company_name}. All rights reserved.',
+              id: 'qA8qQH',
             },
             {
               year: 2020,
