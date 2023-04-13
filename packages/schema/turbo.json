@@ -6,10 +6,6 @@
       // Dedicated inputs for this package.
       "inputs": ["src/**", "codegen.ts", ".graphqlconfig", "tsconfig.json"],
       "outputs": ["build/**"]
-    },
-    "test:static": {
-      // The static tests depends on the build step because it includes its own result typescript.
-      "dependsOn": ["prep"]
     }
   }
 }

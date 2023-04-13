@@ -4,9 +4,12 @@
     "prep": {
       "outputs": ["src/gatsby-fragments.js", "styles.css"]
     },
+    "test:static": {
+      "inputs": ["src/**", "!src/gatsby-fragments.js"]
+    },
     "build": {
       "dependsOn": ["@custom/cms#build", "prep", "^build"],
-      "inputs": ["gatsby-browser.js", "gatsby-config.js", "src/**"],
+      "inputs": ["gatsby-browser.js", "gatsby-config.js"],
       "outputs": ["public/**", ".cache/**"]
     }
   }
