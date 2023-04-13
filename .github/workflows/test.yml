@@ -20,13 +20,6 @@ jobs:
           server-token: "local"
           repo-token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Prepare packages
-        run: pnpm prep
-        env:
-          TURBO_API: 'http://127.0.0.1:9080'
-          TURBO_TOKEN: "local"
-          TURBO_TEAM: 'local'
-
       - name: Test
         run: pnpm test
         env:
