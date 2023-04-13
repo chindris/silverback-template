@@ -5,8 +5,7 @@
   "types": "src/index.ts",
   "private": true,
   "scripts": {
-    "prep": "graphql-codegen --verbose",
-    "test:static": "tsc && eslint \"**/*.{ts,tsx,js,jsx}\" --fix"
+    "prep": "graphql-codegen --verbose"
   },
   "devDependencies": {
     "@amazeelabs/codegen-gatsby-fragments": "^1.1.0",

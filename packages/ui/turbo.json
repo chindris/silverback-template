@@ -2,7 +2,7 @@
   "$schema": "https://turborepo.org/schema.json",
   "extends": ["//"],
   "pipeline": {
-    "build:scripts": {
+    "prep:scripts": {
       "dependsOn": ["^prep"],
       "inputs": [
         "src/**/*.ts",
@@ -13,7 +13,7 @@
       ],
       "outputs": ["build/**/*.js", "build/**/*.d.ts"]
     },
-    "build:styles": {
+    "prep:styles": {
       "inputs": [
         "postcss.config.cjs",
         "tailwind.config.cjs",
@@ -23,12 +23,12 @@
       ],
       "outputs": ["build/styles.css"]
     },
-    "build:i18n": {
+    "prep:i18n": {
       "inputs": ["src/components/**/*.tsx"],
       "outputs": ["build/translatables.json"]
     },
     "prep": {
-      "dependsOn": ["build:scripts", "build:styles", "build:i18n"]
+      "dependsOn": ["prep:scripts", "prep:styles", "prep:i18n"]
     },
     "build": {
       "inputs": [
