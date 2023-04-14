@@ -31,6 +31,7 @@
   },
   "dependencies": {
     "@custom/test_content": "workspace:*",
+    "@custom/gutenberg_blocks": "workspace:*",
     "@custom/schema": "workspace:*",
     "@custom/custom": "workspace:*"
   },

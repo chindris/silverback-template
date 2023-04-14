@@ -1,0 +1,15 @@
+<?php
+
+/**
+* Implements hook_library_info_alter().
+*/
+function gutenberg_blocks_library_info_alter(&$libraries, $extension) {
+  if ($extension === 'gutenberg') {
+    $libraries['edit-node']['dependencies'][] = 'gutenberg_blocks/customisations';
+    // The Gutenberg module upgrade (2.2 to 2.4) brought Gutenberg library
+    // upgrade (8.4.0 to 10.7.0) and a new CSS file which broke the editor
+    // styling.
+    // Remove this file.
+    unset($libraries['block-library']['css']['base']['vendor/gutenberg/block-library/reset.css']);
+  }
+}
