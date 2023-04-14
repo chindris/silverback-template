@@ -1,0 +1,55 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: e6da1407-5e59-4f2b-86ca-88938800e1ff
+  bundle: page
+  default_langcode: en
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Test Gutenberg'
+  created:
+    -
+      value: 1681402619
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /test-gutenberg
+      langcode: en
+      pathauto: 1
+  external_preview_link:
+    -
+      uri: 'http://localhost:8000/__preview/page?nid=1&rid=15&lang=en'
+      title: 'Preview Test Gutenberg'
+      options: {  }
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  body:
+    -
+      value: "<!-- wp:custom/cover {\"headline\":\"Test Gutenberg\",\"lead\":\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\"} /-->\r\n\r\n<!-- wp:custom/content -->\r\n<!-- wp:custom/heading {\"text\":\"\\u003cstrong\\u003eHeading 2\\u003c/strong\\u003e\"} -->\r\n<h2 class=\"wp-block-custom-heading\"><strong>Heading 2</strong></h2>\r\n<!-- /wp:custom/heading -->\r\n\r\n<!-- wp:paragraph -->\r\n<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<!-- /wp:paragraph -->\r\n\r\n<!-- wp:content/quote {\"quote\":\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\"} /-->\r\n\r\n<!-- wp:paragraph -->\r\n<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<!-- /wp:paragraph -->\r\n\r\n<!-- wp:custom/heading {\"level\":3,\"text\":\"\\u003cstrong\\u003eHeading 3\\u003c/strong\\u003e\"} -->\r\n<h3 class=\"wp-block-custom-heading\"><strong>Heading 3</strong></h3>\r\n<!-- /wp:custom/heading -->\r\n\r\n<!-- wp:paragraph -->\r\n<p><meta charset=\"utf-8\" />tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<!-- /wp:paragraph -->\r\n\r\n<!-- wp:list -->\r\n<ul><li>Test</li><li>Test 2</li><li>Test 3</li></ul><!-- /wp:list --><!-- wp:custom/heading {\"level\":4,\"text\":\"\\u003cstrong\\u003eHeading 4\\u003c/strong\\u003e\"} --><h4 class=\"wp-block-custom-heading\"><strong>Heading 4</strong></h4>\r\n<!-- /wp:custom/heading -->\r\n\r\n<!-- wp:paragraph -->\r\n<p><meta charset=\"utf-8\" />tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>\r\n<!-- /wp:paragraph -->\r\n\r\n<!-- wp:list {\"ordered\":true} -->\r\n<ol id=\"block-fe578ab1-2a67-4268-bb5c-09e8cf0ad933\"><li>Test</li><li>Test 2</li><li>Test 3</li></ol><!-- /wp:list --><!-- wp:custom/heading {\"level\":4,\"text\":\"\\u003cstrong\\u003eHeading 4\\u003c/strong\\u003e\"} --><h4 class=\"wp-block-custom-heading\"><strong>Heading 4</strong></h4>\r\n<!-- /wp:custom/heading -->\r\n\r\n<!-- wp:paragraph -->\r\n<p>tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<!-- /wp:paragraph -->\r\n<!-- /wp:custom/content -->"
+      format: gutenberg
+      summary: ''

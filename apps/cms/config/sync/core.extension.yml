@@ -28,6 +28,7 @@ module:
   graphql: 0
   graphql_directives: 0
   gutenberg: 0
+  gutenberg_blocks: 0
   image: 0
   key_auth: 0
   language: 0

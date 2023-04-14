@@ -1,0 +1,13 @@
+/* We can put any editor specific styling in here */
+.gutenberg__editor .editor-styles-wrapper {
+  font-family:inherit;
+}
+
+.gutenberg__editor blockquote {
+  margin:0;
+}
+
+.gutenberg__editor blockquote::before,
+.gutenberg__editor blockquote::after {
+  content: '';
+}

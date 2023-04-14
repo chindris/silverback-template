@@ -1,12 +1,13 @@
 page_enable_full: 1
-page_template: ''
-page_template_lock: none
+page_template: "[\r\n  [\"custom/hero\", {}],\r\n  [\"custom/content\", {}]\r\n]"
+page_template_lock: all
 page_allowed_blocks:
   core/paragraph: core/paragraph
+  core/image: core/image
   core/list: core/list
-  core/group: core/group
+  core/table: core/table
+  core/video: core/video
   core/all: 0
-  core/image: 0
   core/heading: 0
   core/gallery: 0
   core/quote: 0
@@ -28,10 +29,8 @@ page_allowed_blocks:
   core/block: 0
   core/spacer: 0
   core/subhead: 0
-  core/table: 0
   core/text-columns: 0
   core/verse: 0
-  core/video: 0
   core-embed/all: 0
   core-embed/twitter: 0
   core-embed/youtube: 0
@@ -70,22 +69,24 @@ page_allowed_blocks:
   core-embed/videopress: 0
   core-embed/wordpress-tv: 0
 page_allowed_drupal_blocks:
+  drupalblock/all_benutzer: 0
+  drupalblock/all_config_pages: 0
+  config_pages_block: 0
   drupalblock/all_core: 0
   page_title_block: 0
-  drupalblock/all_forms: 0
+  drupalblock/all_formulare: 0
   user_login_block: 0
-  drupalblock/all_lists_views_: 0
+  drupalblock/all_listen_ansichten_: 0
   'views_block:content_recent-block_1': 0
   'views_block:who_s_online-who_s_online_block': 0
-  drupalblock/all_menus: 0
+  drupalblock/all_men_s: 0
+  'system_menu_block:account': 0
   'system_menu_block:footer': 0
   'system_menu_block:main': 0
-  'system_menu_block:account': 0
   drupalblock/all_system: 0
-  system_breadcrumb_block: 0
-  'language_block:language_interface': 0
-  system_messages_block: 0
   system_powered_by_block: 0
+  system_messages_block: 0
   system_branding_block: 0
   node_syndicate_block: 0
-  drupalblock/all_user: 0
+  system_breadcrumb_block: 0
+  'language_block:language_interface': 0

@@ -1,0 +1,6 @@
+theme-support:
+  __experimentalFeatures:
+    typography:
+      dropCap: false
+libraries-edit:
+  - gutenberg_blocks/edit
