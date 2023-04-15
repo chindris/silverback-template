@@ -1,0 +1,21 @@
+_meta:
+  version: '1.0'
+  entity_type: config_pages
+  uuid: 1efc98ca-5548-425e-a3a1-42f8fc193956
+  bundle: website_settings
+  depends:
+    60a95f4f-75a6-4de2-ae3e-ba81522d6237: node
+    f815e611-b92d-4ad7-878f-22d0dce1cec8: node
+default:
+  label:
+    -
+      value: 'Website settings'
+  context:
+    -
+      value: 'a:0:{}'
+  field_404_page:
+    -
+      entity: 60a95f4f-75a6-4de2-ae3e-ba81522d6237
+  field_home_page:
+    -
+      entity: f815e611-b92d-4ad7-878f-22d0dce1cec8

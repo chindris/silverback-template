@@ -1,0 +1,29 @@
+uuid: 7ec86fed-29b2-4314-948e-56ae14a6cff9
+langcode: en
+status: true
+dependencies:
+  config:
+    - config_pages.type.website_settings
+    - field.storage.config_pages.field_home_page
+    - node.type.page
+id: config_pages.website_settings.field_home_page
+field_name: field_home_page
+entity_type: config_pages
+bundle: website_settings
+label: 'Home page'
+description: 'The home page of the website.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      page: page
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference
