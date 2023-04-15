@@ -1,0 +1,99 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 60a95f4f-75a6-4de2-ae3e-ba81522d6237
+  bundle: page
+  default_langcode: en
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: '404 - Not found'
+  created:
+    -
+      value: 1681574839
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /404-not-found
+      langcode: en
+      pathauto: 1
+  external_preview_link:
+    -
+      uri: 'http://localhost:8000/__preview/page?nid=2&rid=14&lang=en'
+      title: 'Preview 404 - Not found'
+      options: {  }
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  body:
+    -
+      value: "<!-- wp:paragraph -->\r\n<p>This page was not found.</p>\r\n<!-- /wp:paragraph -->"
+      format: gutenberg
+      summary: ''
+translations:
+  de:
+    status:
+      -
+        value: true
+    uid:
+      -
+        target_id: 1
+    title:
+      -
+        value: '404 - Nicht gefunden'
+    created:
+      -
+        value: 1681670586
+    promote:
+      -
+        value: false
+    sticky:
+      -
+        value: false
+    revision_translation_affected:
+      -
+        value: true
+    moderation_state:
+      -
+        value: published
+    path:
+      -
+        alias: /404-nicht-gefunden
+        langcode: de
+        pathauto: 1
+    external_preview_link:
+      -
+        uri: 'http://localhost:8000/__preview/page?nid=2&rid=14&lang=de'
+        title: 'Preview 404 - Nicht gefunden'
+        options: {  }
+    content_translation_source:
+      -
+        value: en
+    content_translation_outdated:
+      -
+        value: false
+    body:
+      -
+        value: "<!-- wp:paragraph -->\r\n<p>Diese Seite wurde nicht gefunden.</p>\r\n<!-- /wp:paragraph -->"
+        format: gutenberg
+        summary: ''
