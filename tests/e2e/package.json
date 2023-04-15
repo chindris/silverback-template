@@ -1,5 +1,5 @@
 {
-  "name": "@custom-tests/cms",
+  "name": "@custom-tests/e2e",
   "version": "1.0.0",
   "description": "",
   "keywords": [],
@@ -7,6 +7,7 @@
   "license": "ISC",
   "scripts": {
     "test:integration": "playwright test",
+    "test:headed": "playwright test --headed",
     "dev": "playwright test --ui"
   },
   "optionalDependencies": {
