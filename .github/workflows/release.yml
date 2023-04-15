@@ -1,0 +1,19 @@
+name: Release
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '15 14 * * *'
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Merge dev to stage
+        uses: devmasx/merge-branch@1.4.0
+        with:
+          type: now
+          target_branch: stage
+          github_token: ${{ github.token }}
