@@ -1,5 +1,5 @@
-query PreviewPage($id: ID!, $locale: Locale!) {
-  previewPage(id: $id, locale: $locale) {
+query PreviewPage($id: ID!, $rid: ID!, $locale: String!) {
+  previewPage(id: $id, rid: $rid, locale: $locale) {
     ...Page
   }
 }
