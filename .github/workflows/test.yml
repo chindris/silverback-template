@@ -36,6 +36,14 @@ jobs:
           TURBO_TOKEN: "local"
           TURBO_TEAM: 'local'
 
+      - name: Upload Playwright report
+        uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: playwright-report
+          path: tests/e2e/playwright-report/
+          retention-days: 3
+
       - name: Publish to Chromatic
         uses: chromaui/action@v1
         # Chromatic GitHub Action options
