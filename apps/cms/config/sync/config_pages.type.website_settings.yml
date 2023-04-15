@@ -1,0 +1,17 @@
+uuid: 0fceb033-1401-4090-834a-14c6b49f5297
+langcode: en
+status: true
+dependencies: {  }
+id: website_settings
+label: 'Website settings'
+token: false
+context:
+  show_warning: true
+  group:
+    language: false
+  fallback:
+    language: ''
+menu:
+  path: /admin/config/website-settings
+  weight: 0
+  description: 'Global website settings, like front and 404 pages.'

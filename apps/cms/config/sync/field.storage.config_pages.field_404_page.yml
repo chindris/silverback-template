@@ -1,0 +1,20 @@
+uuid: f0bcc085-11b0-4ac7-bc32-9d8279cf582e
+langcode: en
+status: true
+dependencies:
+  module:
+    - config_pages
+    - node
+id: config_pages.field_404_page
+field_name: field_404_page
+entity_type: config_pages
+type: entity_reference
+settings:
+  target_type: node
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

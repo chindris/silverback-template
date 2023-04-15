@@ -1,0 +1,35 @@
+uuid: b357517b-ab84-491c-be93-054b53e74656
+langcode: en
+status: true
+dependencies:
+  config:
+    - config_pages.type.website_settings
+    - field.field.config_pages.website_settings.field_404_page
+    - field.field.config_pages.website_settings.field_home_page
+id: config_pages.website_settings.default
+targetEntityType: config_pages
+bundle: website_settings
+mode: default
+content:
+  field_404_page:
+    type: entity_reference_autocomplete
+    weight: 1
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_home_page:
+    type: entity_reference_autocomplete
+    weight: 2
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  label: true
