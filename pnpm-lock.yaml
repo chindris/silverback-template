@@ -123,6 +123,9 @@ importers:
       '@amazeelabs/scalars':
         specifier: ^1.1.7
         version: 1.1.7(react@18.2.0)(tailwindcss@3.2.7)
+      swr:
+        specifier: ^2.1.2
+        version: 2.1.2(react@18.2.0)
     devDependencies:
       '@amazeelabs/codegen-gatsby-fragments':
         specifier: ^1.1.0
@@ -24342,6 +24345,15 @@ packages:
     dependencies:
       tslib: 2.5.0
 
+  /swr@2.1.2(react@18.2.0):
+    resolution: {integrity: sha512-ocfaD2rnYZKqTDplCEX2bH5Z1++n2JSej9oYi7hVfXXWYm+0RP+H6fVrogWB0mtMclv1guk9kEnAzNLygOy9Hw==}
+    peerDependencies:
+      react: ^16.11.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      react: 18.2.0
+      use-sync-external-store: 1.2.0(react@18.2.0)
+    dev: false
+
   /symbol-observable@1.2.0:
     resolution: {integrity: sha512-e900nM8RRtGhlV36KGEU9k65K3mPb1WV70OdjfxlG2EAuM1noi/E/BaW/uMhL7bPEssK8QV57vN3esixjUvcXQ==}
     engines: {node: '>=0.10.0'}
@@ -25550,6 +25562,14 @@ packages:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
       react: 0.0.0-experimental-39a3b72c6-20230414
+    dev: false
+
+  /use-sync-external-store@1.2.0(react@18.2.0):
+    resolution: {integrity: sha512-eEgnFxGQ1Ife9bzYs6VLi8/4X6CObHMw9Qr9tPY43iKwsPw8xE8+EFsf/2cFZ5S3esXgpWgtSCtLNS41F+sKPA==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /use@3.1.1:
