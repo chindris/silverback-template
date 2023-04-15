@@ -54,10 +54,6 @@ jobs:
           onlyChanged: true
           exitOnceUploaded: true
 
-      - name: debug
-        run: echo ${{ github.ref }}
-      - name: storybook id
-        run: echo ${{ vars.NETLIFY_STORYBOOK_ID }}
       - name: Deploy storybook to netlify
         run: npx netlify-cli deploy --prod --dir=packages/ui/storybook-static
         env:
