@@ -33,7 +33,7 @@ jobs:
         run: pnpm test
         env:
           TURBO_API: 'http://127.0.0.1:9080'
-          TURBO_TOKEN: "local"
+          TURBO_TOKEN: 'local'
           TURBO_TEAM: 'local'
 
       - name: Upload Playwright report
@@ -46,12 +46,17 @@ jobs:
 
       - name: Publish to Chromatic
         uses: chromaui/action@v1
-        # Chromatic GitHub Action options
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          # 👇 Chromatic projectToken, refer to the manage page to obtain it.
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           storybookBuildDir: packages/ui/storybook-static
           storybookBaseDir: packages/ui
           onlyChanged: true
           exitOnceUploaded: true
+
+      - name: Deploy storybook to netlify
+        run: npx netlify-cli deploy --prod --dir=packages/ui/storybook-static
+        env:
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_STORYBOOK_ID }}
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+        if: ${{ github.ref  == 'refs/heads/dev' && secrets.NETLIFY_STORYBOOK_ID != '' && secrets.NETLIFY_AUTH_TOKEN != '' }}
