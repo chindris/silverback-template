@@ -2,7 +2,8 @@
   "extends": ["//"],
   "pipeline": {
     "test:integration": {
-      "inputs": ["specs/**"],
+      "env": ["PLAYWRIGHT_WEBSITE_URL", "PLAYWRIGHT_CMS_URL"],
+      "inputs": ["specs/**", "setup.spec.ts"],
       "dependsOn": ["@custom/website#build"]
     }
   }
