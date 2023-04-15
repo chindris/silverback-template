@@ -43,6 +43,7 @@
     "amazeelabs/silverback_translations": "^1.0",
     "composer/installers": "^2.2",
     "drupal/admin_toolbar": "^3.3",
+    "drupal/config_pages": "^2.14",
     "drupal/core-composer-scaffold": "^9.5",
     "drupal/core-recommended": "^9.5",
     "drupal/dropzonejs": "^2.8",
