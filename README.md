@@ -45,3 +45,24 @@ lagoon runtime configuration.
 ```shell
 lagoon add variable -p [project name] -e dev -N NETLIFY_SITE_ID -V [netlify site id]
 ```
+
+## Lagoon environments
+
+In a standard project we use three fixed Lagoon environments: `dev`, `stage` and
+`prod`.
+
+- `dev`: Purely for development and integration testing. Content stored here is
+  not guaranteed to be kept.
+- `stage`: Used for user acceptance testing. Content is regularly synced from
+  `prod`.
+- `prod`: The production environment. Do not touch.
+
+Lagoon should also be configured to create automatic environments for feature
+branches that are prefixed with `lagoon/`. Those will be filled with test
+content.
+
+To configure this, execute the following command using the Lagoon CLI:
+
+```shell
+lagoon update project -p silverback-template -b "^lagoon\/|^(dev/stage/prod)$"
+```
