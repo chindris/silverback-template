@@ -15,6 +15,8 @@ $config['graphql.graphql_servers.main']['schema_configuration']['directable']['b
 $config['graphql.graphql_servers.main']['schema_configuration']['directable']['update_webhook'] = $publisherUrl . '/___status/update';
 $config['graphql.graphql_servers.main']['schema_configuration']['directable']['build_url'] = $publisherUrl;
 
+$settings['silverback_graphql_persisted_map'] = '../../../packages/schema/build/operations.json';
+
 // Environment indicator.
 $config['environment_indicator.indicator']['name'] = 'Local Silverback';
 $config['environment_indicator.indicator']['bg_color'] = '#42a877';

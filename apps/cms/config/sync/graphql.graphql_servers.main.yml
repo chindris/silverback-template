@@ -17,4 +17,6 @@ schema_configuration:
     schema_definition: ../../../packages/schema/src/schema.graphqls
     extensions:
       silverback_gatsby: silverback_gatsby
-persisted_queries_settings: {  }
+persisted_queries_settings:
+  silverback_graphql_persisted:
+    weight: 0
