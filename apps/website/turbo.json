@@ -10,7 +10,13 @@
     "build": {
       "env": ["DRUPAL_INTERNAL_URL", "DRUPAL_EXTERNAL_URL"],
       "dependsOn": ["@custom/cms#build", "prep", "^build"],
-      "inputs": ["gatsby-browser.js", "gatsby-config.js"],
+      "inputs": [
+        "gatsby-browser.js",
+        "gatsby-config.js",
+        "gatsby-node.ts",
+        "netlify/**",
+        "netlify.toml"
+      ],
       "outputs": ["public/**", ".cache/**"]
     }
   }

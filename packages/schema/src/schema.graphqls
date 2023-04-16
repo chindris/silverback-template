@@ -7,6 +7,14 @@ enum Locale @default @value(json: "\"en\"") {
   de
 }
 
+type WebsiteSettings
+  @entity(type: "config_pages", bundle: "website_settings", access: false) {
+  homePage: Page @resolveEntityReference(field: "field_home_page") @seek(pos: 0)
+  notFoundPage: Page
+    @resolveEntityReference(field: "field_404_page")
+    @seek(pos: 0)
+}
+
 """
 A single navigation item. Can be available in multiple languages
 and nested into a tree structure. The tree structure is not modeled
