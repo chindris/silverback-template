@@ -108,7 +108,7 @@ RUN apk add --no-cache --virtual=.build-dependencies wget ca-certificates && \
 
 RUN apk add --no-cache sqlite curl
 
-RUN npm install -g pnpm@7
+RUN npm install -g pnpm@8
 ENV DENO_INSTALL="/home/.deno"
 RUN curl -fsSL https://deno.land/x/install/install.sh | sh
 RUN ln -s /home/.deno/bin/deno /usr/local/bin/deno
