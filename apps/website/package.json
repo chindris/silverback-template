@@ -8,6 +8,7 @@
     "@custom/ui": "workspace:*",
     "gatsby": "^5.7.0",
     "gatsby-plugin-manifest": "^5.7.0",
+    "gatsby-plugin-netlify": "^5.1.0",
     "react": "experimental",
     "react-dom": "experimental"
   },

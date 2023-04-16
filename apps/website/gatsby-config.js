@@ -18,5 +18,11 @@ module.exports = {
         type_prefix: '',
       },
     },
+    {
+      resolve: 'gatsby-plugin-netlify',
+      options: {
+        mergeSecurityHeaders: false,
+      },
+    },
   ],
 };
