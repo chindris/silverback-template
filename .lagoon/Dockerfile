@@ -106,13 +106,12 @@ RUN apk add --no-cache --virtual=.build-dependencies wget ca-certificates && \
     apk del .build-dependencies && \
     rm "$ALPINE_GLIBC_BASE_PACKAGE_FILENAME" "$ALPINE_GLIBC_BIN_PACKAGE_FILENAME" "$ALPINE_GLIBC_I18N_PACKAGE_FILENAME" \
 
+RUN apk add --no-cache sqlite curl
+
+RUN npm install -g pnpm@7
 ENV DENO_INSTALL="/home/.deno"
 RUN curl -fsSL https://deno.land/x/install/install.sh | sh
 RUN ln -s /home/.deno/bin/deno /usr/local/bin/deno
-
-RUN apk add --no-cache sqlite curl
-
-RUN npm install -g pnpm@8
 
 COPY --from=builder /app/.deploy/website/json /app
 RUN --mount=type=cache,target=/tmp/cache pnpm install --prod --ignore-scripts
