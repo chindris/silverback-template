@@ -12,7 +12,7 @@ export function Frame(
   return (
     <div>
       <Header {...props.header} />
-      {props.children}
+      <main>{props.children}</main>
       <Footer {...props.footer} />
     </div>
   );
