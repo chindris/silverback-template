@@ -118,7 +118,7 @@ RUN --mount=type=cache,target=/tmp/cache pnpm install --prod --ignore-scripts
 RUN npm rebuild sqlite3
 COPY --from=builder /app/.deploy/website/full /app
 
-RUN mkdir -p /home/.cache/deno/gen && chown -R user:root /home/.cache/deno
+RUN mkdir -p /home/.cache/deno/gen && chmod -R 777 /home/.cache/deno
 
 WORKDIR /app/apps/website
 CMD pnpm publisher
