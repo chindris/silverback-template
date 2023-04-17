@@ -10,7 +10,10 @@ export function useCurrentLanguagePrefix(defaultLanguage = 'en') {
   const [language, setLanguage] = React.useState<string>(defaultLanguage);
   useEffect(() => {
     const prefix = window.location.pathname.split('/')[1];
-    if (prefix !== language) {
+    if (
+      prefix !== language &&
+      Object.values(Locale).includes(prefix as Locale)
+    ) {
       setLanguage(prefix);
     }
   });

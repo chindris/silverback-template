@@ -21,7 +21,7 @@ const config: CodegenConfig = {
       plugins: [
         {
           typescript: {
-            enumsAsTypes: true,
+            enumsAsConst: true,
           },
         },
         `typescript-operations`,
