@@ -104,7 +104,7 @@ RUN apk add --no-cache --virtual=.build-dependencies wget ca-certificates && \
     echo "export LANG=$LANG" > /etc/profile.d/locale.sh && \
     apk del glibc-i18n && \
     apk del .build-dependencies && \
-    rm "$ALPINE_GLIBC_BASE_PACKAGE_FILENAME" "$ALPINE_GLIBC_BIN_PACKAGE_FILENAME" "$ALPINE_GLIBC_I18N_PACKAGE_FILENAME" \
+    rm "$ALPINE_GLIBC_BASE_PACKAGE_FILENAME" "$ALPINE_GLIBC_BIN_PACKAGE_FILENAME" "$ALPINE_GLIBC_I18N_PACKAGE_FILENAME"
 
 RUN apk add --no-cache sqlite curl
 
