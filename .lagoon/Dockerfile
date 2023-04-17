@@ -110,7 +110,6 @@ RUN apk add --no-cache sqlite curl
 
 RUN npm install -g pnpm@8
 ENV DENO_INSTALL="/home/.deno"
-ENV DENO_DIR="/tmp/deno"
 RUN curl -fsSL https://deno.land/x/install/install.sh | sh
 RUN ln -s /home/.deno/bin/deno /usr/local/bin/deno
 
@@ -118,6 +117,8 @@ COPY --from=builder /app/.deploy/website/json /app
 RUN --mount=type=cache,target=/tmp/cache pnpm install --prod --ignore-scripts
 RUN npm rebuild sqlite3
 COPY --from=builder /app/.deploy/website/full /app
+
+RUN mkdir -p /home/.cache/deno/gen && chown -R user:user /home/.cache/deno
 
 WORKDIR /app/apps/website
 CMD pnpm publisher
