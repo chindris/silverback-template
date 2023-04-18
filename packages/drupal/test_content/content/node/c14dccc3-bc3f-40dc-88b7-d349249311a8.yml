@@ -24,6 +24,9 @@ translations:
     sticky:
       -
         value: false
+    revision_translation_affected:
+      -
+        value: true
     moderation_state:
       -
         value: published
@@ -31,12 +34,7 @@ translations:
       -
         alias: /imprint
         langcode: en
-        pathauto: 1
-    external_preview_link:
-      -
-        uri: 'http://localhost:8000/__preview/page?nid=9&rid=24&lang=en'
-        title: 'Preview Imprint'
-        options: {  }
+        pathauto: 0
     content_translation_source:
       -
         value: de
@@ -80,12 +78,7 @@ default:
     -
       alias: /impressum
       langcode: de
-      pathauto: 1
-  external_preview_link:
-    -
-      uri: 'http://localhost:8000/__preview/page?nid=9&rid=24&lang=de'
-      title: 'Preview Impressum'
-      options: {  }
+      pathauto: 0
   content_translation_source:
     -
       value: und

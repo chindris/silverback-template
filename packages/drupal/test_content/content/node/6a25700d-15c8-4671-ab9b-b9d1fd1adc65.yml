@@ -36,12 +36,7 @@ default:
     -
       alias: /react
       langcode: en
-      pathauto: 1
-  external_preview_link:
-    -
-      uri: 'http://localhost:8000/__preview/page?nid=4&rid=30&lang=en'
-      title: 'Preview React'
-      options: {  }
+      pathauto: 0
   content_translation_source:
     -
       value: und

@@ -34,14 +34,9 @@ default:
       value: published
   path:
     -
-      alias: /graphql
+      alias: /graphql-page
       langcode: en
-      pathauto: 1
-  external_preview_link:
-    -
-      uri: 'http://localhost:8000/__preview/page?nid=3&rid=36&lang=en'
-      title: 'Preview GraphQL'
-      options: {  }
+      pathauto: 0
   content_translation_source:
     -
       value: und

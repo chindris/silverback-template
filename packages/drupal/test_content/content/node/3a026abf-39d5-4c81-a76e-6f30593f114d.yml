@@ -36,12 +36,7 @@ default:
     -
       alias: /technologies
       langcode: en
-      pathauto: 1
-  external_preview_link:
-    -
-      uri: 'http://localhost:8000/__preview/page?nid=2&rid=31&lang=en'
-      title: 'Preview Technologies'
-      options: {  }
+      pathauto: 0
   content_translation_source:
     -
       value: und

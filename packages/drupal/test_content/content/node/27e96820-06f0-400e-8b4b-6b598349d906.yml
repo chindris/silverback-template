@@ -36,12 +36,7 @@ default:
     -
       alias: /frameworks
       langcode: en
-      pathauto: 1
-  external_preview_link:
-    -
-      uri: 'http://localhost:8000/__preview/page?nid=5&rid=28&lang=en'
-      title: 'Preview Frameworks'
-      options: {  }
+      pathauto: 0
   content_translation_source:
     -
       value: und

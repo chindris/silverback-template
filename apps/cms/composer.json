@@ -73,6 +73,11 @@
     }
   },
   "extra": {
+    "patches": {
+      "drupal/default_content": {
+        "#3181075 Allow to alter exported fields": "https://www.drupal.org/files/issues/2022-11-07/default_content_hook_exported_fields-3181075-7.patch"
+      }
+    },
     "patchLevel": {
       "drupal/core": "-p2"
     },

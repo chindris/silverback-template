@@ -1,0 +1,22 @@
+<?php
+
+use Drupal\Core\Entity\ContentEntityInterface;
+
+/**
+ * Implements hook_default_content_exported_fields_alter().
+ */
+function custom_default_content_exported_fields_alter(array &$fields, ContentEntityInterface $entity) {
+
+  // These change randomly and bring no value.
+  unset(
+    $fields['metatag'],
+    $fields['external_preview_link'],
+  );
+
+  // If pathauto is enabled, content export may lose the path aliases.
+  if (isset($fields['path'])) {
+    if ($fields['path']->pathauto == 1) {
+      $fields['path']->pathauto = 0;
+    }
+  }
+}
