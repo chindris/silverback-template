@@ -1,13 +1,12 @@
-import { Page } from '@custom/ui/routes/Page';
-import React from 'react';
-
 import { PageFragment } from '@custom/schema';
+import { Page } from '@custom/ui/routes/Page';
+import { graphql, PageProps } from 'gatsby';
+import React from 'react';
 
 import {
   LanguageNegotiator,
   LanguageNegotiatorContent,
 } from '../utils/language-negotiator';
-import { graphql, PageProps } from 'gatsby';
 import { Wrapper } from '../utils/wrapper';
 
 export const query = graphql`

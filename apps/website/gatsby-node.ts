@@ -1,7 +1,7 @@
-import { readFileSync } from 'fs';
-import { resolve } from 'path';
-import { GatsbyNode } from 'gatsby';
 import type { SilverbackPageContext } from '@amazeelabs/gatsby-source-silverback';
+import { readFileSync } from 'fs';
+import { GatsbyNode } from 'gatsby';
+import { resolve } from 'path';
 
 export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] =
   (args) => {

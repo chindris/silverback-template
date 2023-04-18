@@ -1,3 +1,5 @@
+node_modules
+gatsby-fragments.js
 # Local Netlify folder
 .netlify
 .cache

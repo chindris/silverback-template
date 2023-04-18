@@ -1,8 +1,7 @@
 'use client';
 
-import React, { useEffect } from 'react';
-import { PropsWithChildren } from 'react';
 import { Locale } from '@custom/schema';
+import React, { PropsWithChildren, useEffect } from 'react';
 
 const NegotiatorContext = React.createContext<string | undefined>(undefined);
 
