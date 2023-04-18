@@ -10,7 +10,8 @@ $excluded = [
   // Path aliases are created automatically on the node creation. They cause
   // troubles if exported to the default content.
   'path_alias',
-  'content_moderation_state'
+  'content_moderation_state',
+  'redirect',
 ];
 
 Export::run('test_content', $excluded);
