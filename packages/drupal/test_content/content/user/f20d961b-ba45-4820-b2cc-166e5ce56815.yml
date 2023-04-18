@@ -27,9 +27,6 @@ default:
   created:
     -
       value: 1680792052
-  access:
-    -
-      value: 0
   login:
     -
       value: 0
