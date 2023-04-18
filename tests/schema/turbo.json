@@ -1,0 +1,11 @@
+{
+  "extends": ["//"],
+  "pipeline": {
+    "test:integration": {
+      "dependsOn": ["@custom/cms#build"]
+    },
+    "dev": {
+      "persistent": true
+    }
+  }
+}
