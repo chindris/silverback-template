@@ -30,7 +30,8 @@
     "build": "start-test start:cms 8888 build:gatsby",
     "start": "publisher",
     "serve": "netlify dev --dir=public --port=8000",
-    "dev": "rm -f styles.css && cp node_modules/@custom/ui/build/styles.css styles.css && gatsby develop",
+    "dev:start": "rm -f styles.css && cp node_modules/@custom/ui/build/styles.css styles.css && gatsby develop --open",
+    "dev": "start-test start:cms 8888 'pnpm turbo dev:start --output-logs=new-only'",
     "clean": "gatsby clean"
   }
 }
