@@ -26,6 +26,9 @@ default:
   sticky:
     -
       value: false
+  revision_translation_affected:
+    -
+      value: true
   moderation_state:
     -
       value: published
@@ -33,12 +36,7 @@ default:
     -
       alias: /404-not-found
       langcode: en
-      pathauto: 1
-  external_preview_link:
-    -
-      uri: 'http://localhost:8000/__preview/page?nid=2&rid=14&lang=en'
-      title: 'Preview 404 - Not found'
-      options: {  }
+      pathauto: 0
   content_translation_source:
     -
       value: und
@@ -80,12 +78,7 @@ translations:
       -
         alias: /404-nicht-gefunden
         langcode: de
-        pathauto: 1
-    external_preview_link:
-      -
-        uri: 'http://localhost:8000/__preview/page?nid=2&rid=14&lang=de'
-        title: 'Preview 404 - Nicht gefunden'
-        options: {  }
+        pathauto: 0
     content_translation_source:
       -
         value: en

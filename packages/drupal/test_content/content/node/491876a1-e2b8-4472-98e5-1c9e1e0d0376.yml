@@ -36,12 +36,7 @@ default:
     -
       alias: /gatsby
       langcode: en
-      pathauto: 1
-  external_preview_link:
-    -
-      uri: 'http://localhost:8000/__preview/page?nid=7&rid=27&lang=en'
-      title: 'Preview Gatsby'
-      options: {  }
+      pathauto: 0
   content_translation_source:
     -
       value: und
