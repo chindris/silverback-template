@@ -11,8 +11,7 @@
     "postinstall": "husky install || true",
     "commit": "git-cz",
     "test": "turbo test:integration --output-logs=new-only --concurrency=1",
-    "test:quick": "turbo test:static --output-logs=errors-only && turbo test:unit --output-logs=errors-only",
-    "prep": "turbo prep --output-logs=new-only"
+    "test:quick": "turbo test:static --output-logs=errors-only && turbo test:unit --output-logs=errors-only"
   },
   "private": true,
   "optionalDependencies": {

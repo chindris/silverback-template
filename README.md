@@ -13,20 +13,24 @@ production deployment.
 
 ## Installation
 
-Just run:
-
 ```
-pnpm i && pnpm prep
+pnpm i
 ```
 
-This should install all the needed files and prepare applications and packages.
+## Working with apps and packages
 
-## CMS run
+Navigate to an app or package folder and run `pnpm dev`. This will use Turborepo
+to run required tasks.
 
-Navigate to the `apps/cms` folder (in case the enviroment variables were not
-loaded, just run `direnv allow`) and then run `drush serve` or `pnpm dev`. This
-should start Drupal at `localhost:8888`. The Drupal instance comes with an admin
-user which has the credentials: `admin/admin`.
+### Drupal
+
+Please note that the Drupal database can be reset on
+
+- running some scripts in `apps/website`
+- re-running `pnpm dev` in `apps/cms`
+
+If you have some unsaved work in the Drupal database, don't run `pnpm dev` but
+use `pnpm start` instead.
 
 ## Environment overrides
 

@@ -1,17 +1,23 @@
 {
   "extends": ["//"],
   "pipeline": {
+    "dev:start": {
+      "persistent": true,
+      "dependsOn": ["build", "^build"]
+    },
     "build": {
-      "inputs": ["config/**"],
+      "inputs": ["config/**", "web/modules/custom/**", "web/themes/custom/**"],
       "outputs": ["web/sites/default/files/**"]
     },
     "prep": {
       "inputs": ["composer.json", "composer.lock", "scaffold/**"],
       "outputs": [
-        "web/**",
-        "!web/sites/default/files/**",
         "vendor/**",
-        "!**/.git"
+        "!**/.git/**",
+        "web/**",
+        "!web/modules/custom/**",
+        "!web/themes/custom/**",
+        "!web/sites/default/files/**"
       ]
     }
   }

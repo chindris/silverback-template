@@ -1,6 +1,10 @@
 {
   "extends": ["//"],
   "pipeline": {
+    "dev:start": {
+      "persistent": true,
+      "dependsOn": ["@custom/cms#build", "prep", "^build"]
+    },
     "prep": {
       "outputs": ["src/gatsby-fragments.js", "styles.css"]
     },
