@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 2ff0216f-2738-4a32-b9ce-68678e8189a9
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: decoupled-architecture.png
+  uri:
+    -
+      value: 'public://2023-04/decoupled-architecture.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 1155170
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1681724884
