@@ -10,20 +10,30 @@ export default {
 
 export const Landscape = {
   args: {
-    source: image('/landscape.jpg', {
-      width: 768,
-      height: 512,
-    }),
+    image: {
+      source: image(
+        { src: '/landscape.jpg', width: 1000, height: 1000 },
+        {
+          width: 768,
+          height: 512,
+        },
+      ),
+    },
     alt: 'Landscape',
   },
 } satisfies StoryObj<typeof BlockImage>;
 
 export const Portrait = {
   args: {
-    source: image('/portrait.jpg', {
-      width: 768,
-      height: 1024,
-    }),
+    image: {
+      source: image(
+        { src: '/portrait.jpg', width: 1000, height: 1000 },
+        {
+          width: 768,
+          height: 1024,
+        },
+      ),
+    },
     alt: 'Portrait',
   },
 } satisfies StoryObj<typeof BlockImage>;
