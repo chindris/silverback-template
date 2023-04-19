@@ -11,7 +11,9 @@ test.describe('the homepage', () => {
   test('exists in german', async ({ page }) => {
     await page.goto(websiteUrl('/de'));
     const content = await page.getByRole('main');
-    await expect(content.getByText('Architektur')).toBeVisible();
+    await expect(
+      content.getByText('Architektur', { exact: true }),
+    ).toBeVisible();
   });
 
   test('redirects to root path on direct access', async ({ page }) => {
@@ -30,7 +32,9 @@ test.describe('the homepage', () => {
     test('redirects to german ', async ({ page }) => {
       await page.goto(websiteUrl('/'));
       const content = await page.getByRole('main');
-      await expect(content.getByText('Architektur')).toBeVisible();
+      await expect(
+        content.getByText('Architektur', { exact: true }),
+      ).toBeVisible();
     });
   });
 });
