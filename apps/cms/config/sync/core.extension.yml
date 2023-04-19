@@ -47,6 +47,7 @@ module:
   redirect: 0
   shortcut: 0
   silverback_cdn_redirect: 0
+  silverback_cloudinary: 0
   silverback_external_preview: 0
   silverback_gatsby: 0
   silverback_graphql_persisted: 0
