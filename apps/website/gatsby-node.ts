@@ -30,6 +30,13 @@ export const createPages: GatsbyNode['createPages'] = async ({
   actions,
   graphql,
 }) => {
+  // Rewrite file requests to Drupal.
+  actions.createRedirect({
+    fromPath: '/sites/default/files/*',
+    toPath: `${process.env.GATSBY_DRUPAL_URL}/sites/default/files/:splat`,
+    statusCode: 200,
+  });
+
   const settings = await graphql<{
     websiteSettings?: {
       homePage?: {
