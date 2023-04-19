@@ -1,5 +1,7 @@
 fragment BlockImage on BlockImage {
-  source
+  image {
+    source
+  }
   alt
   caption
 }
