@@ -2,7 +2,9 @@
   "name": "@custom/website",
   "private": true,
   "dependencies": {
+    "@amazeelabs/gatsby-silverback-cloudinary": "^1.0.17",
     "@amazeelabs/gatsby-source-silverback": "^1.10.2",
+    "@amazeelabs/cloudinary-responsive-image": "^1.2.4",
     "@amazeelabs/publisher": "^2.1.10",
     "@custom/schema": "workspace:*",
     "@custom/ui": "workspace:*",
