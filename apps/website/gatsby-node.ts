@@ -94,7 +94,7 @@ export const createPages: GatsbyNode['createPages'] = async ({
 
         actions.createRedirect({
           fromPath: path,
-          toPath: `/${locale}`,
+          toPath: `/${locale}/`,
           isPermanent: true,
           force: true,
         });
