@@ -42,3 +42,10 @@ if (getenv('LAGOON')) {
 // Gatsby builds act like a reverse proxies for images, so always-enable it.
 $settings['reverse_proxy'] = TRUE;
 $settings['reverse_proxy_addresses'] = [$_SERVER['REMOTE_ADDR']];
+
+// Cloudinary API environment variables.
+$cloudinaryApiKey = getenv('CLOUDINARY_API_KEY') ?: 'test';
+$cloudinaryApiSecret = getenv('CLOUDINARY_API_SECRET') ?: 'test';
+$cloudinaryCloudName = getenv('CLOUDINARY_CLOUDNAME') ?: 'demo';
+
+putenv("CLOUDINARY_URL=cloudinary://$cloudinaryApiKey:$cloudinaryApiSecret@$cloudinaryCloudName");
