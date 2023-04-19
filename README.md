@@ -49,6 +49,12 @@ variables.
   - **NETLIFY_URL** (lagoon): The URL of the netlify project.
   - **NETLIFY_STORYBOOK_ID** (github): If this is set, the UI packages storybook
     build will be published to netlify.
+- **CLOUDINARY**: To use cloudinary for image processing, provide the following
+  environment variables:
+  - **CLOUDINARY_CLOUDNAME** (lagoon): The cloud name of the cloudinary project.
+  - **CLOUDINARY_API_KEY** (lagoon): The API key of the cloudinary project.
+  - **CLOUDINARY_API_SECRET** (lagoon): The API secret of the cloudinary
+    project.
 - **[key_auth](apps/website/gatsby-config.js)** and
   **[api_key](packages/drupal/test_content/content/user/f20d961b-ba45-4820-b2cc-166e5ce56815.yml)**
   (lagoon)
