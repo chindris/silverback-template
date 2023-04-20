@@ -22,9 +22,6 @@ default:
   created:
     -
       value: 1681724802
-  revision_translation_affected:
-    -
-      value: true
   path:
     -
       alias: ''
@@ -43,3 +40,38 @@ default:
       title: ''
       width: 2000
       height: 1098
+translations:
+  de:
+    status:
+      -
+        value: true
+    uid:
+      -
+        target_id: 1
+    name:
+      -
+        value: 'Example Image'
+    created:
+      -
+        value: 1681996356
+    revision_translation_affected:
+      -
+        value: true
+    path:
+      -
+        alias: ''
+        langcode: de
+        pathauto: 0
+    content_translation_source:
+      -
+        value: en
+    content_translation_outdated:
+      -
+        value: false
+    field_media_image:
+      -
+        entity: 2ff0216f-2738-4a32-b9ce-68678e8189a9
+        alt: 'Skizze der entkoppelten Architektur'
+        title: ''
+        width: 2000
+        height: 1098

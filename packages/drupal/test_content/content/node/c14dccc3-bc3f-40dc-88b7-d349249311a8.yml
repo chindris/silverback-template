@@ -43,7 +43,7 @@ translations:
         value: false
     body:
       -
-        value: "<!-- wp:paragraph -->\r\n<p>Imprint</p>\r\n<!-- /wp:paragraph -->"
+        value: "<!-- wp:custom/hero {\"headline\":\"Imprint\",\"lead\":\"We are legally obliged to have this page.\"} /-->\r\n\r\n<!-- wp:custom/content -->\r\n<!-- wp:paragraph -->\r\n<p></p>\r\n<!-- /wp:paragraph -->\r\n<!-- /wp:custom/content -->"
         format: gutenberg
         summary: ''
 default:
@@ -68,9 +68,6 @@ default:
   sticky:
     -
       value: false
-  revision_translation_affected:
-    -
-      value: true
   moderation_state:
     -
       value: published
@@ -87,6 +84,6 @@ default:
       value: false
   body:
     -
-      value: "<!-- wp:paragraph -->\r\n<p>Impressum</p>\r\n<!-- /wp:paragraph -->"
+      value: "<!-- wp:custom/hero {\"headline\":\"Impressum\",\"lead\":\"Wir sind rechtlich verpflichtet diese Seite zu haben.\"} /-->\r\n\r\n<!-- wp:custom/content -->\r\n<!-- wp:paragraph -->\r\n<p></p>\r\n<!-- /wp:paragraph -->\r\n<!-- /wp:custom/content -->"
       format: gutenberg
       summary: ''
