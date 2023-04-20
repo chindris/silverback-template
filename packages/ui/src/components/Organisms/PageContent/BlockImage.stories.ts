@@ -18,8 +18,8 @@ export const Landscape = {
           height: 512,
         },
       ),
+      alt: 'Landscape',
     },
-    alt: 'Landscape',
   },
 } satisfies StoryObj<typeof BlockImage>;
 
@@ -33,8 +33,8 @@ export const Portrait = {
           height: 1024,
         },
       ),
+      alt: 'Portrait',
     },
-    alt: 'Portrait',
   },
 } satisfies StoryObj<typeof BlockImage>;
 

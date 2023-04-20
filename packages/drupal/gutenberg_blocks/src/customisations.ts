@@ -21,8 +21,6 @@ drupalSettings.gutenberg._listeners.init.push(
   // Allow common blocks to be placed only in the Content block.
   function () {
     const disable = [
-      // We have the custom/image for this, which allows embedding only images.
-      'drupalmedia/drupal-media-entity',
       // Don't need this currently, so remove to avoid confusion
       'core/group',
     ];

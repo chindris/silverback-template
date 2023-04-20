@@ -96,6 +96,7 @@ registerBlockType('custom/hero', {
         <div>
           <div>
             <DrupalMediaEntity
+              classname={'w-full'}
               attributes={{
                 ...props.attributes,
                 lockViewMode: true,
