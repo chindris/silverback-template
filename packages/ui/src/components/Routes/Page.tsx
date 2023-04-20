@@ -1,4 +1,4 @@
-import { PageFragment, Image } from '@custom/schema';
+import { Image, PageFragment } from '@custom/schema';
 import React from 'react';
 
 import { BlockImage } from '../Organisms/PageContent/BlockImage';

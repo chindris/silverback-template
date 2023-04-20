@@ -1,9 +1,9 @@
 import { Meta, StoryObj } from '@storybook/react';
 
+import { image } from '../../helpers/image';
 import { WithCaption } from '../Organisms/PageContent/BlockImage.stories';
 import { Mixed, Paragraph } from '../Organisms/PageContent/BlockText.stories';
 import { Page } from './Page';
-import { image } from '../../helpers/image';
 
 export default {
   component: Page,
