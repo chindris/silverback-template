@@ -5,14 +5,16 @@ test.describe('the homepage', () => {
   test('exists in english', async ({ page }) => {
     await page.goto(websiteUrl('/en'));
     const content = await page.getByRole('main');
-    await expect(content.getByText('Architecture')).toBeVisible();
+    await expect(
+      content.getByRole('heading', { name: 'Architecture' }),
+    ).toBeVisible();
   });
 
   test('exists in german', async ({ page }) => {
     await page.goto(websiteUrl('/de'));
     const content = await page.getByRole('main');
     await expect(
-      content.getByText('Architektur', { exact: true }),
+      content.getByRole('heading', { name: 'Architektur' }),
     ).toBeVisible();
   });
 
@@ -24,7 +26,9 @@ test.describe('the homepage', () => {
   test('it redirects to english by default', async ({ page }) => {
     await page.goto(websiteUrl('/'));
     const content = await page.getByRole('main');
-    await expect(content.getByText('Architecture')).toBeVisible();
+    await expect(
+      content.getByRole('heading', { name: 'Architecture' }),
+    ).toBeVisible();
   });
 
   test.describe('if german is the preferred language', () => {
@@ -39,8 +43,7 @@ test.describe('the homepage', () => {
   });
 
   test('it displays an image', async ({ page }) => {
-    await page.goto(websiteUrl('/de/'));
-    await page.waitForLoadState('networkidle');
+    await page.goto(websiteUrl('/en/'));
     const image = page.getByAltText('Decoupled architecture sketch');
     await expect(image).toBeVisible();
   });
