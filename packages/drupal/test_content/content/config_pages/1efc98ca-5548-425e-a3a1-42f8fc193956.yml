@@ -5,6 +5,7 @@ _meta:
   bundle: website_settings
   depends:
     60a95f4f-75a6-4de2-ae3e-ba81522d6237: node
+    0b45a665-286a-414e-a091-c13fa4e20eb2: node
 default:
   label:
     -
@@ -17,4 +18,4 @@ default:
       entity: 60a95f4f-75a6-4de2-ae3e-ba81522d6237
   field_home_page:
     -
-      target_id: 12
+      entity: 0b45a665-286a-414e-a091-c13fa4e20eb2

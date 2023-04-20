@@ -1,0 +1,76 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: 0ce5ad04-008b-415e-96f5-e246e5111c82
+  bundle: menu_link_content
+  default_langcode: de
+  depends:
+    0b45a665-286a-414e-a091-c13fa4e20eb2: node
+translations:
+  en:
+    title:
+      -
+        value: Architecture
+    revision_translation_affected:
+      -
+        value: true
+    content_translation_source:
+      -
+        value: und
+    content_translation_outdated:
+      -
+        value: false
+    content_translation_uid:
+      -
+        target_id: 1
+    content_translation_status:
+      -
+        value: true
+    content_translation_created:
+      -
+        value: 1682001687
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: Architektur
+  menu_name:
+    -
+      value: main
+  link:
+    -
+      target_uuid: 0b45a665-286a-414e-a091-c13fa4e20eb2
+      title: ''
+      options: {  }
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: false
+  weight:
+    -
+      value: 0
+  expanded:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  content_translation_uid:
+    -
+      target_id: 1
+  content_translation_status:
+    -
+      value: true
+  content_translation_created:
+    -
+      value: 1682001687

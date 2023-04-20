@@ -61,7 +61,7 @@ translations:
         target_id: 1
     title:
       -
-        value: Architecture
+        value: Architektur
     created:
       -
         value: 1681996212
@@ -76,7 +76,7 @@ translations:
         value: published
     path:
       -
-        alias: /architecture
+        alias: /architektur
         langcode: de
         pathauto: 1
     content_translation_source:
