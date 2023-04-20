@@ -8,7 +8,7 @@ export function BlockImage(props: BlockImageFragment) {
         <Image
           className="aspect-video rounded-xl object-cover w-full"
           source={props.image.source}
-          alt={props.alt}
+          alt={props.image.alt}
         />
       ) : null}
       {props.caption ? (

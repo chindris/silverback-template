@@ -3,11 +3,10 @@ page_template: "[\r\n  [\"custom/hero\", {}],\r\n  [\"custom/content\", {}]\r\n]
 page_template_lock: all
 page_allowed_blocks:
   core/paragraph: core/paragraph
-  core/image: core/image
   core/list: core/list
   core/table: core/table
-  core/video: core/video
   core/all: 0
+  core/image: 0
   core/heading: 0
   core/gallery: 0
   core/quote: 0
@@ -15,6 +14,7 @@ page_allowed_blocks:
   core/button: 0
   core/buttons: 0
   core/code: 0
+  core/group: 0
   core/columns: 0
   core/column: 0
   core/cover: 0
@@ -31,6 +31,7 @@ page_allowed_blocks:
   core/subhead: 0
   core/text-columns: 0
   core/verse: 0
+  core/video: 0
   core-embed/all: 0
   core-embed/twitter: 0
   core-embed/youtube: 0

@@ -6,6 +6,7 @@ _meta:
   default_langcode: en
   depends:
     3a0fe860-a6d6-428a-9474-365bd57509aa: media
+    72187a1f-3e48-4b45-a9b7-189c6fd7ee26: media
 default:
   revision_uid:
     -
@@ -47,7 +48,7 @@ default:
       value: false
   body:
     -
-      value: "<!-- wp:custom/hero {\"mediaEntityIds\":[\"3a0fe860-a6d6-428a-9474-365bd57509aa\"],\"headline\":\"Architecture\",\"lead\":\"Our decoupled website architecture.\"} /-->\r\n\r\n<!-- wp:custom/content -->\r\n<!-- wp:image {\"id\":1,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"mediaAttrs\":{\"data-entity-type\":\"file\",\"data-entity-uuid\":\"2ff0216f-2738-4a32-b9ce-68678e8189a9\",\"data-image-style\":\"original\"}} -->\r\n<figure class=\"wp-block-image size-large\"><img src=\"/sites/default/files/styles/large/public/2023-04/decoupled-architecture.png?itok=7fgg_4W6\" alt=\"Decoupled architecture sketch\" class=\"wp-image-1\" data-entity-type=\"file\" data-entity-uuid=\"2ff0216f-2738-4a32-b9ce-68678e8189a9\" data-image-style=\"original\" /><figcaption>A caption!</figcaption></figure><!-- /wp:image --><!-- /wp:custom/content -->"
+      value: "<!-- wp:custom/hero {\"mediaEntityIds\":[\"3a0fe860-a6d6-428a-9474-365bd57509aa\"],\"headline\":\"Architecture\",\"lead\":\"Our decoupled website architecture.\"} /-->\r\n\r\n<!-- wp:custom/content -->\r\n<!-- wp:drupalmedia/drupal-media-entity {\"mediaEntityIds\":[\"72187a1f-3e48-4b45-a9b7-189c6fd7ee26\"],\"caption\":\"Decoupled architecture sketch\"} /-->\r\n<!-- /wp:custom/content -->"
       format: gutenberg
       summary: ''
 translations:
@@ -86,6 +87,6 @@ translations:
         value: false
     body:
       -
-        value: "<!-- wp:custom/hero {\"mediaEntityIds\":[\"3a0fe860-a6d6-428a-9474-365bd57509aa\"],\"headline\":\"Architektur\",\"lead\":\"Unsere Architektur f\\u00fcr entkoppelte Websites\"} /-->\r\n\r\n<!-- wp:custom/content -->\r\n<!-- wp:image {\"id\":1,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"mediaAttrs\":{\"data-entity-type\":\"file\",\"data-entity-uuid\":\"2ff0216f-2738-4a32-b9ce-68678e8189a9\",\"data-image-style\":\"original\"}} -->\r\n<figure class=\"wp-block-image size-large\"><img src=\"/sites/default/files/styles/large/public/2023-04/decoupled-architecture.png?itok=7fgg_4W6\" alt=\"Decoupled architecture sketch\" class=\"wp-image-1\" data-entity-type=\"file\" data-entity-uuid=\"2ff0216f-2738-4a32-b9ce-68678e8189a9\" data-image-style=\"original\" /><figcaption>A caption!</figcaption></figure><!-- /wp:image --><!-- /wp:custom/content -->"
+        value: "<!-- wp:custom/hero {\"mediaEntityIds\":[\"3a0fe860-a6d6-428a-9474-365bd57509aa\"],\"headline\":\"Architektur\",\"lead\":\"Unsere Architektur f\\u00fcr entkoppelte Websites\"} /-->\r\n\r\n<!-- wp:custom/content -->\r\n<!-- wp:drupalmedia/drupal-media-entity {\"mediaEntityIds\":[\"72187a1f-3e48-4b45-a9b7-189c6fd7ee26\"],\"caption\":\"Skizze der entkoppelten Architektur\"} /-->\r\n<!-- /wp:custom/content -->"
         format: gutenberg
         summary: ''
