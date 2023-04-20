@@ -31,7 +31,8 @@
   },
   "dependencies": {
     "@custom/test_content": "workspace:*",
-    "@custom/schema": "workspace:*"
+    "@custom/schema": "workspace:*",
+    "@custom/custom": "workspace:*"
   },
   "optionalDependencies": {
     "@amazeelabs/graphql-schema-test": "^1.1.9",

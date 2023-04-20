@@ -58,6 +58,9 @@ importers:
 
   apps/cms:
     dependencies:
+      '@custom/custom':
+        specifier: workspace:*
+        version: link:../../packages/drupal/custom
       '@custom/schema':
         specifier: workspace:*
         version: link:../../packages/schema
@@ -124,6 +127,8 @@ importers:
       '@types/react-dom':
         specifier: ^18.0.11
         version: 18.0.11
+
+  packages/drupal/custom: {}
 
   packages/drupal/test_content: {}
 
