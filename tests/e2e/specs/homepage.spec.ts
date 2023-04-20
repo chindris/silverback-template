@@ -37,4 +37,11 @@ test.describe('the homepage', () => {
       ).toBeVisible();
     });
   });
+
+  test('it displays an image', async ({ page }) => {
+    await page.goto(websiteUrl('/de/'));
+    await page.waitForLoadState('networkidle');
+    const image = page.getByAltText('Decoupled architecture sketch');
+    await expect(image).toBeVisible();
+  });
 });

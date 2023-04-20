@@ -54,12 +54,9 @@ export const Default = {
   },
 } satisfies StoryObj<typeof Header>;
 
-// Explicit annotation is necessary here because of typing issue in storybook.
-// https://github.com/storybookjs/storybook/issues/20922
-export const Expanded: StoryObj<typeof Header> = {
+export const Expanded = {
   ...Default,
   play: async ({ canvasElement }) => {
-    console.log();
     const canvas = within(canvasElement);
     const navigation = within(
       await canvas.findByRole('navigation', { name: 'Global' }),
@@ -81,4 +78,4 @@ export const Expanded: StoryObj<typeof Header> = {
       await navigation.findByRole('link', { name: 'Drupal' });
     }
   },
-};
+} satisfies StoryObj<typeof Header>;
