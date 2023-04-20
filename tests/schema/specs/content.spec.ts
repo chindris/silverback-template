@@ -3,86 +3,14 @@ import { expect, test } from 'vitest';
 
 import { fetch } from './lib';
 
-test('Page minimal', async () => {
+test('Home page', async () => {
   const result = await fetch(gql`
     {
-      loadPage(id: "d5f4a2cc-68c2-4899-998d-cd37432f5070") {
+      loadPage(id: "0b45a665-286a-414e-a091-c13fa4e20eb2") {
         ...Page
       }
     }
     ${Page}
-  `);
-  expect(result).toMatchInlineSnapshot(`
-    {
-      "data": {
-        "loadPage": {
-          "content": [],
-          "locale": "en",
-          "path": "/en/page-minimal",
-          "title": "Page minimal",
-          "translations": [
-            {
-              "content": [],
-              "locale": "en",
-              "path": "/en/page-minimal",
-              "title": "Page minimal",
-            },
-          ],
-        },
-      },
-    }
-  `);
-});
-
-test('Page translated', async () => {
-  const result = await fetch(gql`
-    {
-      loadPage(id: "3f0ae3c2-6540-4190-921b-ee873a02f1cc") {
-        ...Page
-      }
-    }
-    ${Page}
-  `);
-  expect(result).toMatchInlineSnapshot(`
-    {
-      "data": {
-        "loadPage": {
-          "content": [],
-          "locale": "en",
-          "path": "/en/page-translations-en",
-          "title": "Page with translations EN",
-          "translations": [
-            {
-              "content": [],
-              "locale": "en",
-              "path": "/en/page-translations-en",
-              "title": "Page with translations EN",
-            },
-            {
-              "content": [],
-              "locale": "de",
-              "path": "/de/page-translations-de",
-              "title": "Page with translations DE",
-            },
-          ],
-        },
-      },
-    }
-  `);
-});
-
-test('BlockText', async () => {
-  const result = await fetch(gql`
-    {
-      loadPage(id: "a3534bc5-f576-40ce-bbee-7756a96a5435") {
-        content {
-          __typename
-          ... on BlockText {
-            markup
-          }
-        }
-      }
-    }
   `);
   expect(result).toMatchInlineSnapshot(`
     {
@@ -90,12 +18,40 @@ test('BlockText', async () => {
         "loadPage": {
           "content": [
             {
-              "__typename": "BlockText",
-              "markup": "
-    <p>Some text goes <strong>here</strong>.</p>
-
-    <p>And <em>there</em>.</p>
-    ",
+              "__typename": "BlockImage",
+            },
+          ],
+          "hero": {
+            "headline": "Architecture",
+            "image": {
+              "alt": "A beautiful landscape.",
+              "source": "{\\"src\\":\\"http:\\\\/\\\\/127.0.0.1:8888\\\\/sites\\\\/default\\\\/files\\\\/2023-04\\\\/landscape.jpg\\",\\"width\\":2200,\\"height\\":1414}",
+            },
+            "lead": "Our decoupled website architecture.",
+          },
+          "locale": "en",
+          "path": "/en/architecture",
+          "title": "Architecture",
+          "translations": [
+            {
+              "content": [
+                {
+                  "__typename": "BlockImage",
+                },
+              ],
+              "locale": "en",
+              "path": "/en/architecture",
+              "title": "Architecture",
+            },
+            {
+              "content": [
+                {
+                  "__typename": "BlockImage",
+                },
+              ],
+              "locale": "de",
+              "path": "/de/architektur",
+              "title": "Architektur",
             },
           ],
         },
@@ -104,55 +60,19 @@ test('BlockText', async () => {
   `);
 });
 
-// TODO: Implement after images are integrated.
-// test('BlockImage', async () => {
-//   const result = await fetch(gql`
-//     {
-//       loadPage(id: "e741c3ba-9a69-49e7-a4db-f060841e2993") {
-//         content {
-//           __typename
-//           ... on BlockImage {
-//             source
-//             alt
-//             caption
-//           }
-//         }
-//       }
-//     }
-//   `);
-//   expect(result).toMatchInlineSnapshot(`
-//     {
-//       "data": {
-//         "loadPage": {
-//           "content": [
-//             {
-//               "__typename": "BlockImage",
-//               "alt": "Kitten!",
-//               "caption": "Caption with <strong><em>HTML</em></strong>!",
-//               "source": {
-//                 "src": "https://picsum.photos/200",
-//               },
-//             },
-//             {
-//               "__typename": "BlockImage",
-//               "alt": "Kitten!",
-//               "caption": null,
-//               "source": {
-//                 "src": "https://picsum.photos/200",
-//               },
-//             },
-//           ],
-//         },
-//       },
-//     }
-//   `);
-// });
-
 const Page = gql`
   fragment Page on Page {
     title
     path
     locale
+    hero {
+      headline
+      lead
+      image {
+        source
+        alt
+      }
+    }
     translations {
       title
       path
