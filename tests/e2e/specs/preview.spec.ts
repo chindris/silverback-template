@@ -10,14 +10,17 @@ test.describe('instant preview', () => {
       .getByLabel('Title', { exact: true })
       .fill('Instant preview test');
     await page
-      .getByText('Add text or type / to add content')
+      .locator('#editor-edit-body-0-value h1 span')
+      .first()
       .fill('This is visible instantly.');
     await page.locator('#edit-submit').click();
     await expect(
       page.getByRole('heading', { name: 'Instant preview test', exact: true }),
     ).toBeVisible();
     await expect(
-      page.frameLocator('iframe').getByText('This is visible instantly.'),
+      page
+        .frameLocator('iframe')
+        .getByRole('heading', { name: 'This is visible instantly.' }),
     ).toBeVisible();
 
     await page.getByRole('link', { name: 'Delete' }).click();
