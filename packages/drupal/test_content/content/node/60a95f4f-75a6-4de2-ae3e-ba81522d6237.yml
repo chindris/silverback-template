@@ -45,7 +45,7 @@ default:
       value: false
   body:
     -
-      value: "<!-- wp:paragraph -->\r\n<p>This page was not found.</p>\r\n<!-- /wp:paragraph -->"
+      value: "<!-- wp:custom/hero {\"headline\":\"404 - Page not found\",\"lead\":\"The requested page is currently in the bathroom.\"} /-->\r\n\r\n<!-- wp:custom/content -->\r\n<!-- wp:paragraph -->\r\n<p></p>\r\n<!-- /wp:paragraph -->\r\n<!-- /wp:custom/content -->"
       format: gutenberg
       summary: ''
 translations:
@@ -68,9 +68,6 @@ translations:
     sticky:
       -
         value: false
-    revision_translation_affected:
-      -
-        value: true
     moderation_state:
       -
         value: published
@@ -87,6 +84,6 @@ translations:
         value: false
     body:
       -
-        value: "<!-- wp:paragraph -->\r\n<p>Diese Seite wurde nicht gefunden.</p>\r\n<!-- /wp:paragraph -->"
+        value: "<!-- wp:custom/hero {\"headline\":\"404 - Nicht gefunden\",\"lead\":\"Die Seite die sie gerne h\\u00e4tten is grade nicht da.\"} /-->\r\n\r\n<!-- wp:custom/content -->\r\n<!-- wp:paragraph -->\r\n<p></p>\r\n<!-- /wp:paragraph -->\r\n<!-- /wp:custom/content -->"
         format: gutenberg
         summary: ''

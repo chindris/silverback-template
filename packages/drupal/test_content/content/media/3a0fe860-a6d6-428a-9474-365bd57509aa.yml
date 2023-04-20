@@ -1,0 +1,42 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 3a0fe860-a6d6-428a-9474-365bd57509aa
+  bundle: image
+  default_langcode: de
+  depends:
+    bbf1a994-9ff6-44a6-8842-6481bc83dad6: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: landscape.jpg
+  created:
+    -
+      value: 1681996307
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: ''
+      langcode: de
+      pathauto: 0
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_media_image:
+    -
+      entity: bbf1a994-9ff6-44a6-8842-6481bc83dad6
+      alt: 'A beautiful landscape.'
+      title: ''
+      width: 2200
+      height: 1414

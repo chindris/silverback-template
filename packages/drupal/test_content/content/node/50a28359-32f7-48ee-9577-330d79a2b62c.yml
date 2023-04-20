@@ -45,7 +45,7 @@ default:
       value: false
   body:
     -
-      value: "<!-- wp:paragraph -->\r\n<p>Privacy</p>\r\n<!-- /wp:paragraph -->"
+      value: "<!-- wp:custom/hero {\"headline\":\"Privacy\",\"lead\":\"... or lack thereof.\"} /-->\r\n\r\n<!-- wp:custom/content -->\r\n<!-- wp:paragraph -->\r\n<p></p>\r\n<!-- /wp:paragraph -->\r\n<!-- /wp:custom/content -->"
       format: gutenberg
       summary: ''
 translations:
@@ -68,9 +68,6 @@ translations:
     sticky:
       -
         value: false
-    revision_translation_affected:
-      -
-        value: true
     moderation_state:
       -
         value: published
@@ -87,6 +84,6 @@ translations:
         value: false
     body:
       -
-        value: "<!-- wp:paragraph -->\r\n<p>Privatsphäre</p>\r\n<!-- /wp:paragraph -->"
+        value: "<!-- wp:custom/hero {\"headline\":\"Privatsph\\u00e4re\",\"lead\":\"... oder das Fehlen davon.\"} /-->\r\n\r\n<!-- wp:custom/content -->\r\n<!-- wp:paragraph -->\r\n<p></p>\r\n<!-- /wp:paragraph -->\r\n<!-- /wp:custom/content -->"
         format: gutenberg
         summary: ''

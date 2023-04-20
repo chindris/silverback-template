@@ -1,0 +1,91 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 0b45a665-286a-414e-a091-c13fa4e20eb2
+  bundle: page
+  default_langcode: en
+  depends:
+    3a0fe860-a6d6-428a-9474-365bd57509aa: media
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: Architecture
+  created:
+    -
+      value: 1681996161
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /architecture
+      langcode: en
+      pathauto: 0
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  body:
+    -
+      value: "<!-- wp:custom/hero {\"mediaEntityIds\":[\"3a0fe860-a6d6-428a-9474-365bd57509aa\"],\"headline\":\"Architecture\",\"lead\":\"Our decoupled website architecture.\"} /-->\r\n\r\n<!-- wp:custom/content -->\r\n<!-- wp:image {\"id\":1,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"mediaAttrs\":{\"data-entity-type\":\"file\",\"data-entity-uuid\":\"2ff0216f-2738-4a32-b9ce-68678e8189a9\",\"data-image-style\":\"original\"}} -->\r\n<figure class=\"wp-block-image size-large\"><img src=\"/sites/default/files/styles/large/public/2023-04/decoupled-architecture.png?itok=7fgg_4W6\" alt=\"Decoupled architecture sketch\" class=\"wp-image-1\" data-entity-type=\"file\" data-entity-uuid=\"2ff0216f-2738-4a32-b9ce-68678e8189a9\" data-image-style=\"original\" /><figcaption>A caption!</figcaption></figure><!-- /wp:image --><!-- /wp:custom/content -->"
+      format: gutenberg
+      summary: ''
+translations:
+  de:
+    status:
+      -
+        value: true
+    uid:
+      -
+        target_id: 1
+    title:
+      -
+        value: Architecture
+    created:
+      -
+        value: 1681996212
+    promote:
+      -
+        value: false
+    sticky:
+      -
+        value: false
+    moderation_state:
+      -
+        value: published
+    path:
+      -
+        alias: /architecture
+        langcode: de
+        pathauto: 1
+    content_translation_source:
+      -
+        value: en
+    content_translation_outdated:
+      -
+        value: false
+    body:
+      -
+        value: "<!-- wp:custom/hero {\"mediaEntityIds\":[\"3a0fe860-a6d6-428a-9474-365bd57509aa\"],\"headline\":\"Architektur\",\"lead\":\"Unsere Architektur f\\u00fcr entkoppelte Websites\"} /-->\r\n\r\n<!-- wp:custom/content -->\r\n<!-- wp:image {\"id\":1,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"mediaAttrs\":{\"data-entity-type\":\"file\",\"data-entity-uuid\":\"2ff0216f-2738-4a32-b9ce-68678e8189a9\",\"data-image-style\":\"original\"}} -->\r\n<figure class=\"wp-block-image size-large\"><img src=\"/sites/default/files/styles/large/public/2023-04/decoupled-architecture.png?itok=7fgg_4W6\" alt=\"Decoupled architecture sketch\" class=\"wp-image-1\" data-entity-type=\"file\" data-entity-uuid=\"2ff0216f-2738-4a32-b9ce-68678e8189a9\" data-image-style=\"original\" /><figcaption>A caption!</figcaption></figure><!-- /wp:image --><!-- /wp:custom/content -->"
+        format: gutenberg
+        summary: ''

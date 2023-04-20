@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: bbf1a994-9ff6-44a6-8842-6481bc83dad6
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: landscape.jpg
+  uri:
+    -
+      value: 'public://2023-04/landscape.jpg'
+  filemime:
+    -
+      value: image/jpeg
+  filesize:
+    -
+      value: 841823
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1681996307

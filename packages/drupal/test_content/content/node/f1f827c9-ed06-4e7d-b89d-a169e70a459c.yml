@@ -45,6 +45,6 @@ default:
       value: false
   body:
     -
-      value: "<!-- wp:paragraph -->\r\n<p>Drupal</p>\r\n<!-- /wp:paragraph -->"
+      value: "<!-- wp:custom/hero {\"headline\":\"Drupal\",\"lead\":\"Not dead yet, not anytime soon.\"} /-->\r\n\r\n<!-- wp:custom/content -->\r\n<!-- wp:paragraph -->\r\n<p></p>\r\n<!-- /wp:paragraph -->\r\n<!-- /wp:custom/content -->"
       format: gutenberg
       summary: ''

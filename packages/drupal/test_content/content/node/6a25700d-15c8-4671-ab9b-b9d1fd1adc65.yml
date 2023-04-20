@@ -45,6 +45,6 @@ default:
       value: false
   body:
     -
-      value: "<!-- wp:paragraph -->\r\n<p>React</p>\r\n<!-- /wp:paragraph -->"
+      value: "<!-- wp:custom/hero {\"headline\":\"React\",\"lead\":\"So much javascript.\"} /-->\r\n\r\n<!-- wp:custom/content -->\r\n<!-- wp:paragraph -->\r\n<p></p>\r\n<!-- /wp:paragraph -->\r\n<!-- /wp:custom/content -->"
       format: gutenberg
       summary: ''
