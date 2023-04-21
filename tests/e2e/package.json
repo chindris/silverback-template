@@ -6,7 +6,7 @@
   "author": "",
   "license": "ISC",
   "scripts": {
-    "test:integration": "playwright test --reporter list",
+    "test:integration": "playwright test",
     "test:headed": "playwright test --headed",
     "dev": "playwright test --ui"
   },
