@@ -24,7 +24,9 @@ environments:
   dev:
     routes:
       - nginx:
-          - cms-silverback-template.ch4.amazee.io
+          - example.cms.amazeelabs.dev
+      - build:
+          - example.build.amazeelabs.dev
     cronjobs:
       - name: drush cron
         schedule: '*/15 * * * *'
