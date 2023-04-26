@@ -16,7 +16,7 @@ module.exports = {
     url: process.env.DRUPAL_EXTERNAL_URL || 'http://localhost:8888',
   },
   flags: {
-    PARTIAL_HYDRATION: true,
+    PARTIAL_HYDRATION: false,
   },
   plugins: [
     {
