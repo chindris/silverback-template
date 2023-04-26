@@ -21,10 +21,6 @@ export default defineConfig({
       ? 'pnpm netlify deploy --dir=public --prod'
       : 'echo "Fake deployment done"',
   },
-  persistentBuilds: {
-    buildPaths: ['.cache', 'public'],
-    saveTo: 'persisted-store/saved-builds',
-  },
   databaseUrl: 'persisted-store/publisher.sqlite',
   publisherPort: isLagoon ? 3000 : 8000,
 });

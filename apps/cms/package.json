@@ -30,14 +30,9 @@
     "import-translations": "pnpm drush scr scripts/translations-import.php"
   },
   "dependencies": {
-    "@custom/test_content": "workspace:*",
+    "@custom/custom": "workspace:*",
     "@custom/gutenberg_blocks": "workspace:*",
     "@custom/schema": "workspace:*",
-    "@custom/custom": "workspace:*"
-  },
-  "optionalDependencies": {
-    "@amazeelabs/graphql-schema-test": "^1.1.9",
-    "jest": "^27.5.1",
-    "start-server-and-test": "^1.14.0"
+    "@custom/test_content": "workspace:*"
   }
 }
