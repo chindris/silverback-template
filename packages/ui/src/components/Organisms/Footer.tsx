@@ -3,9 +3,13 @@ import React from 'react';
 
 import { useIntl } from '../../utils/intl';
 import { isTruthy } from '../../utils/isTruthy';
+import { buildNavigationTree } from '../../utils/navigation';
 
 export function Footer(props: { footerNavigation: NavigationFragment }) {
   const intl = useIntl();
+  const items = buildNavigationTree(
+    props.footerNavigation.items.filter(isTruthy),
+  );
   return (
     <footer className="bg-white">
       <div className="mx-auto max-w-7xl overflow-hidden py-20 px-6 sm:py-24 lg:px-8">
@@ -13,7 +17,7 @@ export function Footer(props: { footerNavigation: NavigationFragment }) {
           className="-mb-6 columns-2 sm:flex sm:justify-center sm:space-x-12"
           aria-label="Footer"
         >
-          {props.footerNavigation.items.filter(isTruthy).map((item) => (
+          {items.filter(isTruthy).map((item) => (
             <div key={item.title} className="pb-6">
               <Link
                 href={item.target}

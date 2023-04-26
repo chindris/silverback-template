@@ -29,6 +29,7 @@
     "prep:fragments": "rm -rf src/gatsby-fragments.js && cp node_modules/@custom/schema/build/gatsby-fragments.js src/gatsby-fragments.js",
     "prep:cloudinary": "rm -f static/mock-cloudinary-worker.js && rm -f static/mock-cloudinary-register.js && cp ../../node_modules/@amazeelabs/cloudinary-responsive-image/worker/iife/* static/",
     "build:gatsby": "gatsby build",
+    "rebuild": "gatsby build",
     "start:cms": "pnpm run --filter @custom/cms start",
     "build": "start-test start:cms 8888 build:gatsby",
     "start": "publisher",
