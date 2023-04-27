@@ -1,0 +1,15 @@
+diff --git a/dist/utils/webpack/plugins/partial-hydration.js b/dist/utils/webpack/plugins/partial-hydration.js
+index d898548ae06e79e1f3b8aa9c60c36221726d0072..b2db172c24bf577869e7b53804e620e72da1e2b8 100644
+--- a/dist/utils/webpack/plugins/partial-hydration.js
++++ b/dist/utils/webpack/plugins/partial-hydration.js
+@@ -206,7 +206,9 @@ class PartialHydrationPlugin {
+     if (!asyncRequires) {
+       throw new Error(`couldn't find async-requires module`);
+     }
+-    const clientSSRLoader = `gatsby/dist/utils/webpack/loaders/client-components-requires-writer-loader?modules=${clientModules.map(module => `./` + path.relative(compilation.options.context, module.userRequest)).join(`,`)}!`;
++    const clientSSRLoader = `gatsby/dist/utils/webpack/loaders/client-components-requires-writer-loader?${JSON.stringify({
++      modules: clientModules.map(module => `./` + path.relative(compilation.options.context, module.userRequest)).join(`,`)
++    })}!`;
+     const clientComponentEntryDep = _webpack.default.EntryPlugin.createDependency(clientSSRLoader, {
+       name: `app`
+     });

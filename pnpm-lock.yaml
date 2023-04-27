@@ -1,5 +1,10 @@
 lockfileVersion: '6.0'
 
+patchedDependencies:
+  gatsby@5.9.0:
+    hash: ccio6t4d6ydqz55f7tt4vaiyd4
+    path: patches/gatsby@5.9.0.patch
+
 importers:
 
   .:
@@ -93,7 +98,7 @@ importers:
         version: link:../../packages/ui
       gatsby:
         specifier: ^5.9.0
-        version: 5.9.0(babel-eslint@10.1.0)(react-dom@0.0.0-experimental-6eadbe0c4-20230425)(react@0.0.0-experimental-6eadbe0c4-20230425)(typescript@4.9.5)
+        version: 5.9.0(patch_hash=ccio6t4d6ydqz55f7tt4vaiyd4)(babel-eslint@10.1.0)(react-dom@0.0.0-experimental-6eadbe0c4-20230425)(react@0.0.0-experimental-6eadbe0c4-20230425)(typescript@4.9.5)
       gatsby-plugin-manifest:
         specifier: ^5.9.0
         version: 5.9.0(gatsby@5.9.0)(graphql@16.6.0)
@@ -9539,7 +9544,7 @@ packages:
       '@babel/core': 7.21.4
       '@babel/runtime': 7.21.0
       '@babel/types': 7.21.4
-      gatsby: 5.9.0(babel-eslint@10.1.0)(react-dom@0.0.0-experimental-6eadbe0c4-20230425)(react@0.0.0-experimental-6eadbe0c4-20230425)(typescript@4.9.5)
+      gatsby: 5.9.0(patch_hash=ccio6t4d6ydqz55f7tt4vaiyd4)(babel-eslint@10.1.0)(react-dom@0.0.0-experimental-6eadbe0c4-20230425)(react@0.0.0-experimental-6eadbe0c4-20230425)(typescript@4.9.5)
       gatsby-core-utils: 4.9.0
     dev: false
 
@@ -14660,7 +14665,7 @@ packages:
     dependencies:
       '@types/node-fetch': 2.6.3
       fs-extra: 9.1.0
-      gatsby: 5.9.0(babel-eslint@10.1.0)(react-dom@0.0.0-experimental-6eadbe0c4-20230425)(react@0.0.0-experimental-6eadbe0c4-20230425)(typescript@4.9.5)
+      gatsby: 5.9.0(patch_hash=ccio6t4d6ydqz55f7tt4vaiyd4)(babel-eslint@10.1.0)(react-dom@0.0.0-experimental-6eadbe0c4-20230425)(react@0.0.0-experimental-6eadbe0c4-20230425)(typescript@4.9.5)
       lodash: 4.17.21
       node-fetch: 2.6.9
       p-queue: 6.6.2
@@ -14733,7 +14738,7 @@ packages:
       gatsby: ^5.0.0-next
     dependencies:
       '@babel/runtime': 7.21.0
-      gatsby: 5.9.0(babel-eslint@10.1.0)(react-dom@0.0.0-experimental-6eadbe0c4-20230425)(react@0.0.0-experimental-6eadbe0c4-20230425)(typescript@4.9.5)
+      gatsby: 5.9.0(patch_hash=ccio6t4d6ydqz55f7tt4vaiyd4)(babel-eslint@10.1.0)(react-dom@0.0.0-experimental-6eadbe0c4-20230425)(react@0.0.0-experimental-6eadbe0c4-20230425)(typescript@4.9.5)
       gatsby-core-utils: 4.9.0
       gatsby-plugin-utils: 4.9.0(gatsby@5.9.0)(graphql@16.6.0)
       semver: 7.5.0
@@ -14750,7 +14755,7 @@ packages:
     dependencies:
       '@babel/runtime': 7.21.0
       fs-extra: 10.1.0
-      gatsby: 5.9.0(babel-eslint@10.1.0)(react-dom@0.0.0-experimental-6eadbe0c4-20230425)(react@0.0.0-experimental-6eadbe0c4-20230425)(typescript@4.9.5)
+      gatsby: 5.9.0(patch_hash=ccio6t4d6ydqz55f7tt4vaiyd4)(babel-eslint@10.1.0)(react-dom@0.0.0-experimental-6eadbe0c4-20230425)(react@0.0.0-experimental-6eadbe0c4-20230425)(typescript@4.9.5)
       gatsby-core-utils: 4.9.0
       kebab-hash: 0.1.2
       lodash.mergewith: 4.6.2
@@ -14771,7 +14776,7 @@ packages:
       chokidar: 3.5.3
       fs-exists-cached: 1.0.0
       fs-extra: 11.1.1
-      gatsby: 5.9.0(babel-eslint@10.1.0)(react-dom@0.0.0-experimental-6eadbe0c4-20230425)(react@0.0.0-experimental-6eadbe0c4-20230425)(typescript@4.9.5)
+      gatsby: 5.9.0(patch_hash=ccio6t4d6ydqz55f7tt4vaiyd4)(babel-eslint@10.1.0)(react-dom@0.0.0-experimental-6eadbe0c4-20230425)(react@0.0.0-experimental-6eadbe0c4-20230425)(typescript@4.9.5)
       gatsby-core-utils: 4.9.0
       gatsby-page-utils: 3.9.0
       gatsby-plugin-utils: 4.9.0(gatsby@5.9.0)(graphql@16.6.0)
@@ -14789,7 +14794,7 @@ packages:
     peerDependencies:
       gatsby: ~2.x.x || ~3.x.x || ~4.x.x
     dependencies:
-      gatsby: 5.9.0(babel-eslint@10.1.0)(react-dom@0.0.0-experimental-6eadbe0c4-20230425)(react@0.0.0-experimental-6eadbe0c4-20230425)(typescript@4.9.5)
+      gatsby: 5.9.0(patch_hash=ccio6t4d6ydqz55f7tt4vaiyd4)(babel-eslint@10.1.0)(react-dom@0.0.0-experimental-6eadbe0c4-20230425)(react@0.0.0-experimental-6eadbe0c4-20230425)(typescript@4.9.5)
       lodash.get: 4.4.2
       lodash.uniq: 4.5.0
     dev: false
@@ -14807,7 +14812,7 @@ packages:
       '@babel/preset-typescript': 7.21.4(@babel/core@7.21.4)
       '@babel/runtime': 7.21.0
       babel-plugin-remove-graphql-queries: 5.9.0(@babel/core@7.21.4)(gatsby@5.9.0)
-      gatsby: 5.9.0(babel-eslint@10.1.0)(react-dom@0.0.0-experimental-6eadbe0c4-20230425)(react@0.0.0-experimental-6eadbe0c4-20230425)(typescript@4.9.5)
+      gatsby: 5.9.0(patch_hash=ccio6t4d6ydqz55f7tt4vaiyd4)(babel-eslint@10.1.0)(react-dom@0.0.0-experimental-6eadbe0c4-20230425)(react@0.0.0-experimental-6eadbe0c4-20230425)(typescript@4.9.5)
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -14822,7 +14827,7 @@ packages:
       '@babel/runtime': 7.21.0
       fastq: 1.15.0
       fs-extra: 11.1.1
-      gatsby: 5.9.0(babel-eslint@10.1.0)(react-dom@0.0.0-experimental-6eadbe0c4-20230425)(react@0.0.0-experimental-6eadbe0c4-20230425)(typescript@4.9.5)
+      gatsby: 5.9.0(patch_hash=ccio6t4d6ydqz55f7tt4vaiyd4)(babel-eslint@10.1.0)(react-dom@0.0.0-experimental-6eadbe0c4-20230425)(react@0.0.0-experimental-6eadbe0c4-20230425)(typescript@4.9.5)
       gatsby-core-utils: 4.9.0
       gatsby-sharp: 1.9.0
       graphql: 16.6.0
@@ -14901,7 +14906,7 @@ packages:
       - supports-color
     dev: false
 
-  /gatsby@5.9.0(babel-eslint@10.1.0)(react-dom@0.0.0-experimental-6eadbe0c4-20230425)(react@0.0.0-experimental-6eadbe0c4-20230425)(typescript@4.9.5):
+  /gatsby@5.9.0(patch_hash=ccio6t4d6ydqz55f7tt4vaiyd4)(babel-eslint@10.1.0)(react-dom@0.0.0-experimental-6eadbe0c4-20230425)(react@0.0.0-experimental-6eadbe0c4-20230425)(typescript@4.9.5):
     resolution: {integrity: sha512-XjKwjlscSgOZqqXCY1+Y3VX9+AyMBZMGer2xt6BxpXAz+uEHomdiVpToncka5BlrxgDYkDmx83yIBZKN9uAwiw==}
     engines: {node: '>=18.0.0'}
     hasBin: true
@@ -15102,6 +15107,7 @@ packages:
       - webpack-hot-middleware
       - webpack-plugin-serve
     dev: false
+    patched: true
 
   /gauge@3.0.2:
     resolution: {integrity: sha512-+5J6MS/5XksCuXq++uFRsnUd7Ovu1XenbeuIuNRJxYWjgQbPuFhT14lAvsWfqfAmnwluf1OwMjz39HjfLPci0Q==}
