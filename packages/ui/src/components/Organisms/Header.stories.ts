@@ -54,7 +54,7 @@ export const Default = {
   },
 } satisfies StoryObj<typeof Header>;
 
-export const Expanded = {
+export const Expanded: StoryObj<typeof Header> = {
   ...Default,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -78,4 +78,4 @@ export const Expanded = {
       await navigation.findByRole('link', { name: 'Drupal' });
     }
   },
-} satisfies StoryObj<typeof Header>;
+};

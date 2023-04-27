@@ -11,6 +11,7 @@
     "gatsby": "^5.9.0",
     "gatsby-plugin-manifest": "^5.9.0",
     "gatsby-plugin-netlify": "^5.1.0",
+    "gatsby-plugin-pnpm": "^1.2.10",
     "react": "experimental",
     "react-dom": "experimental"
   },
@@ -27,7 +28,7 @@
     "prep": "pnpm run prep:styles && pnpm run prep:fragments && pnpm run prep:cloudinary",
     "prep:styles": "rm -f styles.css && cp node_modules/@custom/ui/build/styles.css styles.css",
     "prep:fragments": "rm -rf src/gatsby-fragments.js && cp node_modules/@custom/schema/build/gatsby-fragments.js src/gatsby-fragments.js",
-    "prep:cloudinary": "rm -f static/mock-cloudinary-worker.js && rm -f static/mock-cloudinary-register.js && cp ../../node_modules/@amazeelabs/cloudinary-responsive-image/worker/iife/* static/",
+    "prep:cloudinary": "rm -f static/mock-cloudinary-worker.js && rm -f static/mock-cloudinary-register.js && cp ./node_modules/@amazeelabs/cloudinary-responsive-image/worker/iife/* static/",
     "build:gatsby": "gatsby build",
     "rebuild": "gatsby build",
     "start:cms": "pnpm run --filter @custom/cms start",

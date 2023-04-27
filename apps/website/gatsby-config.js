@@ -19,6 +19,7 @@ module.exports = {
     PARTIAL_HYDRATION: true,
   },
   plugins: [
+    'gatsby-plugin-pnpm',
     {
       resolve: '@amazeelabs/gatsby-source-silverback',
       options: {
