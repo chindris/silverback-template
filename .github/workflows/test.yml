@@ -30,7 +30,7 @@ jobs:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Test
-        run: pnpm test
+        run: pnpm turbo:test
         env:
           TURBO_API: 'http://127.0.0.1:9080'
           TURBO_TOKEN: 'local'

@@ -1,7 +1,7 @@
 {
   "extends": ["//"],
   "pipeline": {
-    "dev:start": {
+    "dev": {
       "persistent": true,
       "dependsOn": ["build", "^build"]
     },
