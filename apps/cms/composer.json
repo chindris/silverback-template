@@ -27,6 +27,7 @@
     }
   ],
   "require": {
+    "php": "^8.1 <8.2",
     "amazeeio/drupal_integrations": "^0.3.7",
     "amazeelabs/default-content": "^1.2",
     "amazeelabs/graphql_directives": "^2.1",
