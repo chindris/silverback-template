@@ -37,9 +37,6 @@ default:
   parent:
     -
       value: 'menu_link_content:fc595197-9c7c-4f9d-871f-6d5e32085590'
-  revision_translation_affected:
-    -
-      value: true
   content_translation_source:
     -
       value: und

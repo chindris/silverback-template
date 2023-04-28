@@ -12,12 +12,19 @@ function custom_default_content_exported_fields_alter(array &$fields, ContentEnt
     $fields['metatag'],
     $fields['external_preview_link'],
     $fields['access'],
+    $fields['revision_translation_affected'],
   );
 
   // If pathauto is enabled, content export may lose the path aliases.
   if (isset($fields['path'])) {
     if ($fields['path']->pathauto == 1) {
       $fields['path']->pathauto = 0;
+    }
+    foreach ($entity->getTranslationLanguages(FALSE) as $langcode => $_) {
+      $translation = $entity->getTranslation($langcode);
+      if ($translation->get('path')->pathauto == 1) {
+        $translation->get('path')->pathauto = 0;
+      }
     }
   }
 }

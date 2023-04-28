@@ -50,7 +50,7 @@ test('Home page', async () => {
                 },
               ],
               "locale": "de",
-              "path": "/de/node/10",
+              "path": "/de/architektur",
               "title": "Architektur",
             },
           ],
