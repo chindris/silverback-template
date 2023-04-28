@@ -19,18 +19,39 @@ pnpm i
 
 ## Working with apps and packages
 
-Navigate to an app or package folder and run `pnpm dev`. This will use Turborepo
-to run required tasks.
+Navigate to an app or package folder and run `pnpm turbo:dev`. Turborepo will
+make sure to run all required tasks and cache as much as it can.
+
+### Turborepo setup
+
+We try to follow common rules in all apps and packages.
+
+Usually, the following scripts can be found in `package.json`:
+
+- `prep`: Prepare everything related to code. For example, compile code,
+  generate types, download additional dependencies, etc.
+- `build`: Build the app or package. For example, setup Drupal, build Gatsby,
+  build Storybook, etc.
+
+If there is a `turbo:` prefixed script, it will run the non prefixed script and
+additionally
+
+- Run all required scripts in this or other packages
+- Cache the results if possible
+
+For example, running `pnpm turbo:dev` in `apps/website` will prepare all
+dependencies, setup and start Drupal, start Publisher and open the Publisher's
+status URL in the browser.
 
 ### Drupal
 
-Please note that the Drupal database can be reset on
+Considering the above, please note that the Drupal database can be reset on
 
-- running some scripts in `apps/website`
-- re-running `pnpm dev` in `apps/cms`
+- re-running `pnpm turbo:dev` in `apps/cms`
+- running some `turbo:` prefixed scripts in `apps/website`
 
-If you have some unsaved work in the Drupal database, don't run `pnpm dev` but
-use `pnpm start` instead.
+If you have some unsaved work in the Drupal database, don't start Drupal with
+`pnpm turbo:dev` but use `pnpm dev` instead.
 
 ## Environment overrides
 
