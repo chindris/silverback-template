@@ -1,0 +1,10 @@
+<?php
+
+// This update hook updates "name" property in "system.site" drupal configuration just to test if our forgotten_config_changes workflow works.
+function custom_update_8001() {
+  $config = \Drupal::configFactory()->getEditable('system.site');
+  $config->set('name', 'New site name');
+  $config->save();
+}
+
+// I wrote the comment and Copilot wrote the rest 😁
