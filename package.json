@@ -10,10 +10,10 @@
   "scripts": {
     "postinstall": "husky install || true",
     "commit": "git-cz",
-    "test": "pnpm test:quick && CI=true turbo test:integration --output-logs=new-only --concurrency=1",
-    "test:quick": "turbo test:static --output-logs=errors-only && turbo test:unit --output-logs=errors-only",
-    "prep": "turbo prep --output-logs=new-only",
-    "build:website": "turbo rebuild --filter=\"@custom/website\" --output-logs=new-only"
+    "turbo:test": "pnpm turbo:test:quick && CI=true turbo test:integration --output-logs=new-only --concurrency=1",
+    "turbo:test:quick": "turbo test:static --output-logs=errors-only && turbo test:unit --output-logs=errors-only",
+    "turbo:prep": "turbo prep --output-logs=new-only",
+    "turbo:build:website": "turbo rebuild --filter=\"@custom/website\" --output-logs=new-only"
   },
   "private": true,
   "optionalDependencies": {
