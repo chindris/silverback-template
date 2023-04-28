@@ -6,6 +6,7 @@
       "dependsOn": ["build", "^build"]
     },
     "build": {
+      "dependsOn": ["prep"],
       "inputs": ["config/**", "web/modules/custom/**", "web/themes/custom/**"],
       "outputs": ["web/sites/default/files/**"]
     },
