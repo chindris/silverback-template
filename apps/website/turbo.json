@@ -3,7 +3,7 @@
   "pipeline": {
     "dev": {
       "persistent": true,
-      "dependsOn": ["@custom/cms#build", "prep", "^build"]
+      "dependsOn": ["@custom/cms#build", "prep", "^prep"]
     },
     "prep": {
       "outputs": ["src/gatsby-fragments.js", "styles.css"]
