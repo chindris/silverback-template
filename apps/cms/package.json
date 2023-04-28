@@ -8,7 +8,9 @@
   "sideEffects": false,
   "scripts": {
     "prep": "if command -v composer; then composer install; else echo 'Skipping composer install.'; fi",
+    "turbo:prep": "pnpm prep --output-logs=new-only",
     "build": "pnpm drupal-install && rm -rf install-cache.zip && pnpm content:import && pnpm build:directives && pnpm export:schema && pnpm fix-premissions && pnpm ensure-working-db",
+    "turbo:build": "pnpm build --output-logs=new-only",
     "build:directives": "pnpm --silent drush graphql:directives > ../../packages/schema/src/generated/directives.graphqls",
     "export:schema": "pnpm drush silverback-gatsby:schema-export ../../../tests/schema",
     "fix-premissions": "chmod +w web/sites/default/files/.htaccess && chmod +w web/sites/default/files/private/.htaccess",
