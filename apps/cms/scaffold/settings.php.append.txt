@@ -3,8 +3,8 @@ $settings['hash_salt'] = getenv('HASH_SALT') ?: 'banana123';
 $settings['config_sync_directory'] = '../config/sync';
 $settings['file_private_path'] = $app_root . '/sites/default/files/private';
 
-$publisherUrl = getenv('PUBLISHER_URL') ?: 'http://localhost:8000';
-$netlifyUrl = getenv('NETLIFY_URL') ?: 'http://localhost:8000';
+$publisherUrl = getenv('PUBLISHER_URL') ?: 'http://127.0.0.1:8000';
+$netlifyUrl = getenv('NETLIFY_URL') ?: 'http://127.0.0.1:8000';
 
 $config['silverback_external_preview.settings'] = [
   'preview_host' => $netlifyUrl,
