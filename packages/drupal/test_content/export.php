@@ -15,3 +15,14 @@ $excluded = [
 ];
 
 Export::run('test_content', $excluded);
+
+// AXXX
+foreach (glob(__DIR__ . '/content/file/*.yml') as $file) {
+  $content = file_get_contents($file);
+  if (str_contains($content, 'public://media-icons/generic')) {
+    unlink($file);
+  }
+}
+foreach (glob(__DIR__ . '/content/file/generic*.png') as $file) {
+  unlink($file);
+}
