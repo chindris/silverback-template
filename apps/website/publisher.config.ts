@@ -7,7 +7,13 @@ const isLagoon = !!process.env.LAGOON;
 export default defineConfig({
   commands: {
     build: {
-      command: 'pnpm build:gatsby',
+      command:
+        // Bug: The first incremental build rewrites compilation hashes. This
+        // causes all files to be re-uploaded to Netlify.
+        // The bug cannot be reproduced on a clean Gatsby install, so we cannot
+        // report it.
+        // Workaround: Do a double build on the first build.
+        'if test -d public; then echo "Single build" && pnpm build:gatsby; else echo "Double build" && pnpm build:gatsby && pnpm build:gatsby; fi',
       outputTimeout: 1000 * 60 * 10,
     },
     clean: 'pnpm clean',
