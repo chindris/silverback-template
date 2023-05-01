@@ -8,6 +8,7 @@ RUN npm install -g pnpm@8 turbo && pnpm config set store-dir /tmp/cache/pnpm
 COPY .npmrc /etc/npmrc
 # Copy pnpm lockfile and install only dependencies required for building.
 COPY pnpm-lock.yaml /app/
+COPY patches /app/patches
 
 # Install dependencies with a cached pnpm store.
 RUN --mount=type=cache,target=/tmp/cache pnpm fetch
