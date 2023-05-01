@@ -11,6 +11,7 @@ process.env.CLOUDINARY_CLOUDNAME = process.env.CLOUDINARY_CLOUDNAME || 'demo';
  * @type {import('gatsby').GatsbyConfig}
  */
 module.exports = {
+  trailingSlash: 'ignore',
   proxy: {
     prefix: '/sites/default/files',
     url: process.env.DRUPAL_EXTERNAL_URL || 'http://127.0.0.1:8888',

@@ -1,0 +1,40 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: b998ae5e-8b56-40ca-8f80-fd4404e7e716
+  bundle: document
+  default_langcode: en
+  depends:
+    57968e5c-a810-4485-a598-4e4e8c691734: file
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Example DOCX document'
+  created:
+    -
+      value: 1682695337
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_media_file:
+    -
+      entity: 57968e5c-a810-4485-a598-4e4e8c691734
+      display: true
+      description: ''

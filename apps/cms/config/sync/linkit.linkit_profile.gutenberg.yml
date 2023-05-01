@@ -1,0 +1,33 @@
+uuid: 4e8b59c1-5cb2-4385-a6ef-865568f14fb7
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+    - node
+label: Gutenberg
+id: gutenberg
+description: 'Used in Gutenberg editor.'
+matchers:
+  8629d3b1-c0a6-4506-b406-10e39c2eada9:
+    id: 'silverback:entity:node'
+    uuid: 8629d3b1-c0a6-4506-b406-10e39c2eada9
+    settings:
+      include_unpublished: 0
+      metadata: ''
+      bundles: {  }
+      group_by_bundle: 0
+      substitution_type: canonical
+      limit: '100'
+    weight: -10
+  19685250-db07-48d7-9861-59fcb4805387:
+    id: 'silverback:entity:media'
+    uuid: 19685250-db07-48d7-9861-59fcb4805387
+    settings:
+      metadata: ''
+      bundles:
+        document: document
+      group_by_bundle: 0
+      substitution_type: null
+      limit: '100'
+    weight: -9

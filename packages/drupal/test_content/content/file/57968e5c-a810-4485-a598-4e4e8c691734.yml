@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 57968e5c-a810-4485-a598-4e4e8c691734
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: document_docx.docx
+  uri:
+    -
+      value: 'public://2023-04/document_docx.docx'
+  filemime:
+    -
+      value: application/vnd.openxmlformats-officedocument.wordprocessingml.document
+  filesize:
+    -
+      value: 7357
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1682695564

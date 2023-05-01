@@ -1,4 +1,5 @@
-import { test, expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
+
 import { websiteUrl } from '../helpers/url';
 
 test.describe('the homepage', () => {
@@ -20,7 +21,7 @@ test.describe('the homepage', () => {
 
   test('redirects to root path on direct access', async ({ page }) => {
     await page.goto(websiteUrl('/en/architecture'));
-    await expect(page.url()).toBe(websiteUrl('/en/'));
+    await expect(page.url()).toBe(websiteUrl('/en'));
   });
 
   test('it redirects to english by default', async ({ page }) => {
@@ -43,7 +44,7 @@ test.describe('the homepage', () => {
   });
 
   test('it displays an image', async ({ page }) => {
-    await page.goto(websiteUrl('/en/'));
+    await page.goto(websiteUrl('/en'));
     const image = page.getByAltText('Decoupled architecture sketch');
     await expect(image).toBeVisible();
   });
