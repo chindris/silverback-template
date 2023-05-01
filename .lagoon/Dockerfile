@@ -19,7 +19,7 @@ COPY . /app
 # - Avoid installing optional dependencies. Currently its necessary tue to swc
 # - Find a cleaner solution to delete all node_modules folders
 RUN --mount=type=cache,target=/tmp/cache pnpm install --frozen-lockfile --prefer-offline && \
-    pnpm prep && \
+    pnpm turbo:prep && \
     rm -rf node_modules apps/*/node_modules packages/*/node_modules packages/*/*/node_modules
 
 # === CMS DEPLOY ===
