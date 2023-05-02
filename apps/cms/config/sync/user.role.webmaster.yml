@@ -13,6 +13,7 @@ dependencies:
     - media
     - menu_admin_per_menu
     - node
+    - silverback_external_preview
     - system
     - toolbar
 id: webmaster
@@ -37,6 +38,7 @@ permissions:
   - 'use basic transition archive'
   - 'use basic transition create_new_draft'
   - 'use basic transition publish'
+  - 'use external preview'
   - 'use gutenberg'
   - 'use text format gutenberg'
   - 'view all media revisions'
