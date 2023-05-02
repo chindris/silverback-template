@@ -49,3 +49,9 @@ $cloudinaryApiSecret = getenv('CLOUDINARY_API_SECRET') ?: 'test';
 $cloudinaryCloudName = getenv('CLOUDINARY_CLOUDNAME') ?: 'demo';
 
 putenv("CLOUDINARY_URL=cloudinary://$cloudinaryApiKey:$cloudinaryApiSecret@$cloudinaryCloudName");
+
+// Email reroute.
+if (getenv('LAGOON_ENVIRONMENT') !== 'prod') {
+  $config['reroute_email.settings']['enable'] = true;
+  $config['reroute_email.settings']['address'] = 'development+silverback-template@amazeelabs.com';
+}

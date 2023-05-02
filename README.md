@@ -78,7 +78,7 @@ variables.
     project.
 - **[key_auth](apps/website/gatsby-config.js)** and
   **[api_key](packages/drupal/test_content/content/user/f20d961b-ba45-4820-b2cc-166e5ce56815.yml)**
-  (lagoon)
+- **[$config['reroute_email.settings']['address']](apps/cms/scaffold/settings.php.append.txt)**
 - **DRUPAL_INTERNAL_URL** (lagoon): The internal URL of the Drupal instance.
   This is used for the GraphQL build queries.
 - **DRUPAL_EXTERNAL_URL** (lagoon): The external URL of the Drupal instance.
