@@ -9,7 +9,9 @@ export default defineConfig({
     build: {
       command:
         // Bug: The first incremental build rewrites compilation hashes. This
-        // causes all files to be re-uploaded to Netlify.
+        // causes all files to be re-uploaded to Netlify two times:
+        // - on the initial build
+        // - on the first incremental build
         // The bug cannot be reproduced on a clean Gatsby install, so we cannot
         // report it.
         // Workaround: Do a double build on the first build.
