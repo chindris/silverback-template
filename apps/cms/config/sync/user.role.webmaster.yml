@@ -1,0 +1,44 @@
+uuid: ad40bbf0-416b-433c-a242-c328cecc2c0f
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.gutenberg
+    - workflows.workflow.basic
+  module:
+    - content_moderation
+    - content_translation
+    - filter
+    - gutenberg
+    - media
+    - menu_admin_per_menu
+    - node
+    - system
+    - toolbar
+id: webmaster
+label: Webmaster
+weight: 4
+is_admin: null
+permissions:
+  - 'access administration pages'
+  - 'access content overview'
+  - 'access media overview'
+  - 'access toolbar'
+  - 'administer footer menu items'
+  - 'administer main menu items'
+  - 'administer nodes'
+  - 'administer users'
+  - 'bypass node access'
+  - 'create media'
+  - 'delete any media'
+  - 'delete media'
+  - 'translate editable entities'
+  - 'update any media'
+  - 'use basic transition archive'
+  - 'use basic transition create_new_draft'
+  - 'use basic transition publish'
+  - 'use gutenberg'
+  - 'use text format gutenberg'
+  - 'view all media revisions'
+  - 'view any unpublished content'
+  - 'view latest version'
