@@ -16,7 +16,7 @@ $excluded = [
 
 Export::run('test_content', $excluded);
 
-// AXXX
+// Get rid of generic icons. Drupal creates them on demand.
 foreach (glob(__DIR__ . '/content/file/*.yml') as $file) {
   $content = file_get_contents($file);
   if (str_contains($content, 'public://media-icons/generic')) {
