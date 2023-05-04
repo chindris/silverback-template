@@ -1,0 +1,5 @@
+name: Custom Heavy
+description: 'Helps maintain the correct execution order of custom alter hooks.'
+type: module
+package: Custom
+core_version_requirement: ^8 || ^9 || ^10

@@ -1,0 +1,12 @@
+<?php
+
+/**
+ * Implements hook_module_implements_alter().
+ */
+function custom_heavy_module_implements_alter(&$implementations, $hook) {
+  if ($hook == 'form_alter') {
+    $group = $implementations['custom'];
+    unset($implementations['custom']);
+    $implementations['custom'] = $group;
+  }
+}

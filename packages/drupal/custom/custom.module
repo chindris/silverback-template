@@ -1,7 +1,9 @@
 <?php
 
 use Drupal\Core\Entity\ContentEntityInterface;
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Language\LanguageInterface;
+use Drupal\Core\Render\Element;
 use Drupal\Core\Render\RenderContext;
 use Drupal\Core\Utility\Error as ErrorUtil;
 use Drupal\file\Entity\File;
@@ -80,5 +82,40 @@ function custom_silverback_gutenberg_link_processor_outbound_url_alter(
         }
       }
     );
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ *
+ * Executed at the very late stage.
+ * @see custom_heavy_module_implements_alter
+ */
+function custom_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $gutenbergModeratedForms = ['node_page_form', 'node_page_edit_form'];
+  if (in_array($form_id, $gutenbergModeratedForms) && array_key_exists('moderation_state', $form)) {
+
+    // Move the moderation state widget on pages into the gutenberg sidebar.
+    $form['moderation_state']['#group'] = 'meta';
+
+    // If the "More settings" fieldset is empty, remove it completely.
+    $metaboxHasFields = FALSE;
+    foreach (Element::children($form) as $key) {
+      if (($form[$key]['#group'] ?? '') === 'metabox_fields') {
+        $metaboxHasFields = TRUE;
+        break;
+      }
+    }
+    if (!$metaboxHasFields && isset($form['#fieldgroups'])) {
+      foreach ($form['#fieldgroups'] as $group) {
+        if (($group->parent_name ?? '') === 'metabox_fields') {
+          $metaboxHasFields = TRUE;
+          break;
+        }
+      }
+    }
+    if (!$metaboxHasFields) {
+      unset($form['metabox_fields']);
+    }
   }
 }

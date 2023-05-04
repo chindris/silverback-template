@@ -66,6 +66,9 @@ importers:
       '@custom/custom':
         specifier: workspace:*
         version: link:../../packages/drupal/custom
+      '@custom/custom_heavy':
+        specifier: workspace:*
+        version: link:../../packages/drupal/custom_heavy
       '@custom/gutenberg_blocks':
         specifier: workspace:*
         version: link:../../packages/drupal/gutenberg_blocks
@@ -130,6 +133,8 @@ importers:
         version: 18.2.1
 
   packages/drupal/custom: {}
+
+  packages/drupal/custom_heavy: {}
 
   packages/drupal/gutenberg_blocks:
     dependencies:

@@ -33,6 +33,7 @@
   },
   "dependencies": {
     "@custom/custom": "workspace:*",
+    "@custom/custom_heavy": "workspace:*",
     "@custom/gutenberg_blocks": "workspace:*",
     "@custom/schema": "workspace:*",
     "@custom/test_content": "workspace:*"
