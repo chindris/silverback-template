@@ -7,7 +7,7 @@ dependencies:
     - key_auth
 id: gatsby_build
 label: 'Gatsby Build'
-weight: 3
+weight: -6
 is_admin: null
 permissions:
   - 'execute main arbitrary graphql requests'

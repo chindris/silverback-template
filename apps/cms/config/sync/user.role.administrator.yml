@@ -1,9 +1,46 @@
 uuid: d55aa99b-e026-4967-9b75-acd2a4fa306d
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  config:
+    - filter.format.gutenberg
+    - workflows.workflow.basic
+  module:
+    - content_moderation
+    - content_translation
+    - filter
+    - gutenberg
+    - media
+    - menu_admin_per_menu
+    - node
+    - silverback_external_preview
+    - system
+    - toolbar
 id: administrator
 label: Administrator
-weight: 2
-is_admin: true
-permissions: {  }
+weight: -7
+is_admin: null
+permissions:
+  - 'access administration pages'
+  - 'access content overview'
+  - 'access media overview'
+  - 'access toolbar'
+  - 'administer footer menu items'
+  - 'administer main menu items'
+  - 'administer nodes'
+  - 'administer users'
+  - 'bypass node access'
+  - 'create media'
+  - 'delete any media'
+  - 'delete media'
+  - 'translate editable entities'
+  - 'update any media'
+  - 'use basic transition archive'
+  - 'use basic transition create_new_draft'
+  - 'use basic transition publish'
+  - 'use external preview'
+  - 'use gutenberg'
+  - 'use text format gutenberg'
+  - 'view all media revisions'
+  - 'view any unpublished content'
+  - 'view latest version'
