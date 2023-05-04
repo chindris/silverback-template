@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d1edb2857e0fdde564f87088ac7e877b",
+    "content-hash": "1d1e8b4a2e5acbd3acc159f5651d97a4",
     "packages": [
         {
             "name": "amazeeio/drupal_integrations",
@@ -3361,6 +3361,56 @@
             }
         },
         {
+            "name": "drupal/role_delegation",
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/role_delegation.git",
+                "reference": "8.x-1.2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/role_delegation-8.x-1.2.zip",
+                "reference": "8.x-1.2",
+                "shasum": "08095bada0f492e70d32fcf357a8c01825ca81fc"
+            },
+            "require": {
+                "drupal/core": "^9.2 || ^10"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-1.2",
+                    "datestamp": "1644487627",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Jeroen Tubex",
+                    "homepage": "https://www.drupal.org/u/jeroent",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "benjy",
+                    "homepage": "https://www.drupal.org/user/1852732"
+                }
+            ],
+            "description": "Allows site administrators to grant some roles the authority to assign selected roles to users.",
+            "homepage": "http://drupal.org/project/role_delegation",
+            "support": {
+                "source": "https://git.drupalcode.org/project/role_delegation",
+                "issues": "http://drupal.org/project/role_delegation"
+            }
+        },
+        {
             "name": "drupal/stage_file_proxy",
             "version": "2.0.2",
             "source": {
@@ -3565,6 +3615,62 @@
             "support": {
                 "source": "https://git.drupalcode.org/project/typed_data",
                 "issues": "https://www.drupal.org/project/issues/typed_data"
+            }
+        },
+        {
+            "name": "drupal/userprotect",
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/userprotect.git",
+                "reference": "8.x-1.2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/userprotect-8.x-1.2.zip",
+                "reference": "8.x-1.2",
+                "shasum": "f3246af48c60b85bb8f240cd98c286e5b38eb33c"
+            },
+            "require": {
+                "drupal/core": "^8 || ^9 || ^10"
+            },
+            "require-dev": {
+                "drupal/role_delegation": "^1.0"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-1.2",
+                    "datestamp": "1670669515",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "karschsp",
+                    "homepage": "https://www.drupal.org/user/138216"
+                },
+                {
+                    "name": "MegaChriz",
+                    "homepage": "https://www.drupal.org/user/654114"
+                }
+            ],
+            "description": "Allows admins to protect users from being edited or cancelled, on a per-user basis.",
+            "homepage": "https://www.drupal.org/project/userprotect",
+            "keywords": [
+                "Drupal",
+                "User Management"
+            ],
+            "support": {
+                "source": "http://cgit.drupalcode.org/userprotect",
+                "issues": "https://www.drupal.org/project/issues/userprotect"
             }
         },
         {

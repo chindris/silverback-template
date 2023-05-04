@@ -1,0 +1,41 @@
+uuid: 0e3757c7-13e3-4780-be08-28d9849345c9
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.super_admin
+  module:
+    - user
+name: super_admins
+label: 'Super Admins'
+protectedEntityTypeId: user_role
+protectedEntityId: super_admin
+protections:
+  user_delete:
+    id: user_delete
+    provider: userprotect
+    status: true
+  user_edit:
+    id: user_edit
+    provider: userprotect
+    status: true
+  user_roles:
+    id: user_roles
+    provider: userprotect
+    status: true
+  user_mail:
+    id: user_mail
+    provider: userprotect
+    status: true
+  user_name:
+    id: user_name
+    provider: userprotect
+    status: true
+  user_pass:
+    id: user_pass
+    provider: userprotect
+    status: true
+  user_status:
+    id: user_status
+    provider: userprotect
+    status: true

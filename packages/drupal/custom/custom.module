@@ -1,5 +1,6 @@
 <?php
 
+use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Language\LanguageInterface;
@@ -9,6 +10,8 @@ use Drupal\Core\Utility\Error as ErrorUtil;
 use Drupal\file\Entity\File;
 use Drupal\media\Entity\Media;
 use Drupal\silverback_gutenberg\LinkProcessor;
+use Drupal\user\Entity\Role;
+use Drupal\user\UserInterface;
 
 /**
  * Implements hook_default_content_exported_fields_alter().
@@ -21,6 +24,7 @@ function custom_default_content_exported_fields_alter(array &$fields, ContentEnt
     $fields['external_preview_link'],
     $fields['access'],
     $fields['revision_translation_affected'],
+    $fields['role_change'],
   );
 
   // If pathauto is enabled, content export may lose the path aliases.
@@ -118,4 +122,30 @@ function custom_form_alter(&$form, FormStateInterface $form_state, $form_id) {
       unset($form['metabox_fields']);
     }
   }
+}
+
+/**
+ * Custom access check for key_auth.user_key_auth_form route.
+ *
+ * We can possibly remove this if #3261708 is solved.
+ * https://www.drupal.org/project/key_auth/issues/3261708#comment-15035737
+ */
+function _custom_key_auth_form_access(UserInterface $user): AccessResult {
+  $access = AccessResult::forbidden();
+  if (\Drupal::currentUser()->id() == 1) {
+    $access = AccessResult::allowed();
+  } else {
+    $roleIds = \Drupal::currentUser()->getRoles();
+    if ($roleIds) {
+      foreach (Role::loadMultiple($roleIds) as $role) {
+        if ($role->isAdmin()) {
+          $access = AccessResult::allowed();
+          break;
+        }
+      }
+    }
+  }
+  $access->addCacheContexts(['user.permissions']);
+  $access->addCacheableDependency($user);
+  return $access;
 }

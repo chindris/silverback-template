@@ -1,0 +1,41 @@
+uuid: 4f3adb94-3093-47f4-852d-5116cacef7b6
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.gatsby_build
+  module:
+    - user
+name: gatsby
+label: Gatsby
+protectedEntityTypeId: user_role
+protectedEntityId: gatsby_build
+protections:
+  user_roles:
+    id: user_roles
+    provider: userprotect
+    status: true
+  user_mail:
+    id: user_mail
+    provider: userprotect
+    status: true
+  user_name:
+    id: user_name
+    provider: userprotect
+    status: true
+  user_pass:
+    id: user_pass
+    provider: userprotect
+    status: true
+  user_status:
+    id: user_status
+    provider: userprotect
+    status: true
+  user_delete:
+    id: user_delete
+    provider: userprotect
+    status: true
+  user_edit:
+    id: user_edit
+    provider: userprotect
+    status: true

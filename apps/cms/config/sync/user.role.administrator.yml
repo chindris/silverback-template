@@ -13,6 +13,7 @@ dependencies:
     - media
     - menu_admin_per_menu
     - node
+    - role_delegation
     - silverback_external_preview
     - system
     - toolbar
@@ -29,6 +30,7 @@ permissions:
   - 'administer main menu items'
   - 'administer nodes'
   - 'administer users'
+  - 'assign administrator role'
   - 'bypass node access'
   - 'create media'
   - 'delete any media'
