@@ -1,5 +1,16 @@
 # Silverback Template
 
+## Create a new project from this template
+
+- https://github.com/AmazeeLabs/silverback-template => `Use this template` =>
+  `Create a new repository`
+- Clone the newly create repo
+- Run `pnpx @amazeelabs/mzx run INIT.md` from the project root
+- Answer its questions
+- Do what it asks you to do
+- Review the changes in the repo
+- Commit and push
+
 ## Release and deployment
 
 Development happens in pull requests against the `dev` branch. There is a github
@@ -112,9 +123,3 @@ In a standard project we use three fixed Lagoon environments: `dev`, `stage` and
 Lagoon should also be configured to create automatic environments for feature
 branches that are prefixed with `lagoon/`. Those will be filled with test
 content.
-
-To configure this, execute the following command using the Lagoon CLI:
-
-```shell
-lagoon update project -p silverback-template -b "^lagoon\/|^(dev/stage/prod)$"
-```
