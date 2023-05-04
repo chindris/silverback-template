@@ -3,7 +3,7 @@ _core:
 langcode: en
 uuid: 2b8898a1-04b5-4eb7-a24e-295cdbfa48cc
 name: 'Silverback Drupal Template'
-mail: admin@example.com
+mail: development+silverback-template@amazeelabs.com
 slogan: ''
 page:
   403: ''
