@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="CMS Turbo Dev" type="js.build_tools.npm">
+  <configuration default="false" name="CMS Turbo Dev" type="js.build_tools.npm" folderName="CMS">
     <package-json value="$PROJECT_DIR$/apps/cms/package.json" />
     <command value="run" />
     <scripts>

@@ -1,9 +1,9 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Storybook" type="js.build_tools.npm">
-    <package-json value="$PROJECT_DIR$/packages/ui/package.json" />
+  <configuration default="false" name="Turbo Test" type="js.build_tools.npm" folderName="Root">
+    <package-json value="$PROJECT_DIR$/package.json" />
     <command value="run" />
     <scripts>
-      <script value="dev" />
+      <script value="turbo:test" />
     </scripts>
     <node-interpreter value="project" />
     <envs />

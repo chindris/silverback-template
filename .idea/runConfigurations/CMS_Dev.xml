@@ -1,9 +1,9 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Website Turbo Build" type="js.build_tools.npm">
-    <package-json value="$PROJECT_DIR$/package.json" />
+  <configuration default="false" name="CMS Dev" type="js.build_tools.npm" folderName="CMS">
+    <package-json value="$PROJECT_DIR$/apps/cms/package.json" />
     <command value="run" />
     <scripts>
-      <script value="turbo:build:website" />
+      <script value="dev" />
     </scripts>
     <node-interpreter value="project" />
     <envs />
