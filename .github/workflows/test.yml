@@ -10,7 +10,9 @@ env:
   NETLIFY_URL: 'http://127.0.0.1:8000'
   PLAYWRIGHT_WEBSITE_URL: 'http://127.0.0.1:8000'
   PLAYWRIGHT_CMS_URL: 'http://127.0.0.1:8888'
+
 jobs:
+
   test:
     name: Test
     runs-on: ubuntu-20.04
@@ -60,3 +62,24 @@ jobs:
           NETLIFY_SITE_ID: ${{ vars.NETLIFY_STORYBOOK_ID }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
         if: ${{ github.ref  == 'refs/heads/dev' && vars.NETLIFY_STORYBOOK_ID != '' }}
+
+  docker_build:
+    name: Docker Build
+    if: startsWith(github.head_ref, 'test-all/')
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2
+          bundler-cache: true
+      - name: Install Pygmy
+        run: gem install pygmy
+      - name: Start Pygmy
+        run: pygmy up
+      - name: Docker Build
+        run: DOCKER_BUILDKIT=1 docker-compose build
