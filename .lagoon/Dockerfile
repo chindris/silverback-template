@@ -45,7 +45,7 @@ RUN --mount=type=cache,target=/tmp/cache composer install --no-dev
 COPY --from=builder /tmp/.deploy/cms /app
 
 WORKDIR /app
-ENV WEBROOT=/app/web
+ENV WEBROOT=web
 
 # ====================================================================================================
 # PHP IMAGE
@@ -58,7 +58,7 @@ RUN apk add --no-cache imagemagick qpdf icu-dev && \
 COPY --from=cli /app /app
 
 WORKDIR /app
-ENV WEBROOT=/app/web
+ENV WEBROOT=web
 
 # ====================================================================================================
 # NGINX IMAGE
@@ -69,7 +69,7 @@ COPY --from=cli /app /app
 COPY .lagoon/nginx-conf/redirects-map.conf /etc/nginx/redirects-map.conf
 
 WORKDIR /app
-ENV WEBROOT=/app/web
+ENV WEBROOT=web
 
 # ====================================================================================================
 # PUBLISHER IMAGE
