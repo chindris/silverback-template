@@ -34,18 +34,15 @@ RUN apk add --no-cache git qpdf imagemagick icu-dev && \
   docker-php-ext-enable intl
 RUN composer config --global github-protocols https
 
-COPY --from=builder /tmp/.deploy/cms/composer.json /app/apps/cms/composer.json
-COPY --from=builder /tmp/.deploy/cms/composer.lock /app/apps/cms/composer.lock
-COPY --from=builder /tmp/.deploy/cms/scaffold /app/apps/cms/scaffold
+COPY --from=builder /tmp/.deploy/cms/composer.json /app/composer.json
+COPY --from=builder /tmp/.deploy/cms/composer.lock /app/composer.lock
+COPY --from=builder /tmp/.deploy/cms/scaffold /app/scaffold
 # Enable this when patches exist.
-#COPY --from=builder /app/.deploy/cms/patches /app/apps/cms/patches
+#COPY --from=builder /app/.deploy/cms/patches /app/patches
 ENV COMPOSER_HOME=/tmp/cache/composer
-WORKDIR /app/apps/cms
 RUN --mount=type=cache,target=/tmp/cache composer install --no-dev
 
 COPY --from=builder /tmp/.deploy/cms /app
-
-ENV WEBROOT=/app/apps/cms/web
 
 # ====================================================================================================
 # PHP IMAGE
@@ -57,9 +54,6 @@ RUN apk add --no-cache imagemagick qpdf icu-dev && \
 
 COPY --from=cli /app /app
 
-WORKDIR /app/apps/cms
-ENV WEBROOT=web
-
 # ====================================================================================================
 # NGINX IMAGE
 # ====================================================================================================
@@ -67,8 +61,6 @@ FROM amazeeio/nginx-drupal as nginx
 
 COPY --from=cli /app /app
 COPY .lagoon/nginx-conf/redirects-map.conf /etc/nginx/redirects-map.conf
-
-ENV WEBROOT=apps/cms/web
 
 # ====================================================================================================
 # PUBLISHER IMAGE
@@ -114,5 +106,4 @@ COPY --from=builder /tmp/.deploy/website /app
 
 RUN mkdir -p /home/.cache/deno/gen && chmod -R 777 /home/.cache/deno
 
-WORKDIR /app/apps/website
 CMD pnpm publisher
