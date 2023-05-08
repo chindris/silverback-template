@@ -17,9 +17,7 @@
   },
   "devDependencies": {
     "@types/react": "^18.2.0",
-    "@types/react-dom": "^18.2.1"
-  },
-  "optionalDependencies": {
+    "@types/react-dom": "^18.2.1",
     "netlify-cli": "^14.3.0",
     "start-server-and-test": "^2.0.0"
   },
