@@ -3,28 +3,26 @@
 # ====================================================================================================
 FROM uselagoon/node-18-builder as builder
 
-# Install pnpm
-RUN npm install -g pnpm@8 turbo && pnpm config set store-dir /tmp/cache/pnpm
-COPY .npmrc /etc/npmrc
-# Copy pnpm lockfile and install only dependencies required for building.
-COPY pnpm-lock.yaml /app/
-COPY patches /app/patches
+ENV PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1
 
-# Install dependencies with a cached pnpm store.
+# Install pnpm
+RUN npm install -g pnpm@8 && pnpm config set store-dir /tmp/cache/pnpm
+
+# Copy pnpm lockfile and install dependencies.
+COPY pnpm-lock.yaml .npmrc /app/
+COPY patches /app/patches
 RUN --mount=type=cache,target=/tmp/cache pnpm fetch
 
-# Copy the all package sources, install dev packages from local storage and prepare them.
+# Copy the all package sources, install and prepare them.
 COPY . /app
-# TODO:
-# - Avoid installing optional dependencies. Currently its necessary tue to swc
-# - Find a cleaner solution to delete all node_modules folders
-RUN --mount=type=cache,target=/tmp/cache pnpm install --frozen-lockfile --prefer-offline && \
+RUN --mount=type=cache,target=/tmp/cache pnpm i && \
     pnpm turbo:prep && \
-    rm -rf node_modules apps/*/node_modules packages/*/node_modules packages/*/*/node_modules
+    # Remove all node_modules to reduce the size of the image.
+    find . -name 'node_modules' -type d -prune -exec rm -rf '{}' +
 
-# === CMS DEPLOY ===
-RUN turbo prune --scope "@custom/cms" --docker --out-dir .deploy/cms
-RUN turbo prune --scope "@custom/website" --docker --out-dir .deploy/website
+# Deploy apps.
+RUN --mount=type=cache,target=/tmp/cache pnpm deploy --filter "@custom/cms" /tmp/.deploy/cms --prod
+RUN --mount=type=cache,target=/tmp/cache pnpm deploy --filter "@custom/website" /tmp/.deploy/website --prod
 
 # ====================================================================================================
 # CLI IMAGE
@@ -36,18 +34,16 @@ RUN apk add --no-cache git qpdf imagemagick icu-dev && \
   docker-php-ext-enable intl
 RUN composer config --global github-protocols https
 
-COPY --from=builder /app/.deploy/cms/full/apps/cms/composer.json /app/apps/cms/composer.json
-COPY --from=builder /app/.deploy/cms/full/apps/cms/composer.lock /app/apps/cms/composer.lock
-COPY --from=builder /app/.deploy/cms/full/apps/cms/scaffold /app/apps/cms/scaffold
+COPY --from=builder /tmp/.deploy/cms/composer.json /app/apps/cms/composer.json
+COPY --from=builder /tmp/.deploy/cms/composer.lock /app/apps/cms/composer.lock
+COPY --from=builder /tmp/.deploy/cms/scaffold /app/apps/cms/scaffold
 # Enable this when patches exist.
-#COPY --from=builder /app/.deploy/cms/full/apps/cms/patches /app/apps/cms/patches
+#COPY --from=builder /app/.deploy/cms/patches /app/apps/cms/patches
 ENV COMPOSER_HOME=/tmp/cache/composer
 WORKDIR /app/apps/cms
 RUN --mount=type=cache,target=/tmp/cache composer install --no-dev
 
-COPY --from=builder /app/.deploy/cms/full /app
-
-RUN cd web/modules && rm -rf custom && ln -s ../../../../packages/drupal custom
+COPY --from=builder /tmp/.deploy/cms /app
 
 ENV WEBROOT=/app/apps/cms/web
 
@@ -114,10 +110,7 @@ ENV DENO_INSTALL="/home/.deno"
 RUN curl -fsSL https://deno.land/x/install/install.sh | sh
 RUN ln -s /home/.deno/bin/deno /usr/local/bin/deno
 
-COPY --from=builder /app/.deploy/website/json /app
-RUN --mount=type=cache,target=/tmp/cache pnpm install --prod --ignore-scripts
-RUN npm rebuild sqlite3
-COPY --from=builder /app/.deploy/website/full /app
+COPY --from=builder /tmp/.deploy/website /app
 
 RUN mkdir -p /home/.cache/deno/gen && chmod -R 777 /home/.cache/deno
 
