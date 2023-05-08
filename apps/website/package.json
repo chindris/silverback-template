@@ -12,13 +12,13 @@
     "gatsby-plugin-manifest": "^5.9.0",
     "gatsby-plugin-netlify": "^5.1.0",
     "gatsby-plugin-pnpm": "^1.2.10",
+    "netlify-cli": "^14.3.0",
     "react": "experimental",
     "react-dom": "experimental"
   },
   "devDependencies": {
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.1",
-    "netlify-cli": "^14.3.0",
     "start-server-and-test": "^2.0.0"
   },
   "scripts": {
