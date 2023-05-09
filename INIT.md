@@ -56,6 +56,22 @@ replace(
 );
 ```
 
+Update the auth key for Gatsby user.
+
+```ts
+const authKey = randomString(32);
+replace(
+  'apps/website/gatsby-config.js',
+  "auth_key: 'cfdb0555111c0f8924cecab028b53474'",
+  `auth_key: '${authKey}'`,
+);
+replace(
+  'packages/drupal/test_content/content/user/f20d961b-ba45-4820-b2cc-166e5ce56815.yml',
+  'value: cfdb0555111c0f8924cecab028b53474',
+  `value: ${authKey}`,
+);
+```
+
 Cleanup the readme.
 
 ```ts
@@ -83,6 +99,7 @@ Remove the init script.
 fs.unlinkSync('INIT.md');
 ```
 
+<hr />
 Here go some helpers.
 
 ```ts
@@ -98,5 +115,17 @@ function replace(path, from, to) {
     }
     fs.writeFileSync(path, contents.replaceAll(from, to), 'utf8');
   }
+}
+
+function randomString(length) {
+  let result = '';
+  const characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+  const charactersLength = characters.length;
+  let counter = 0;
+  while (counter < length) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    counter += 1;
+  }
+  return result;
 }
 ```

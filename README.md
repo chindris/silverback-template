@@ -10,6 +10,7 @@
 - Do what it asks you to do
 - Review the changes in the repo
 - Commit and push
+- Check the [Environment overrides](#environment-overrides) section below
 
 ## Release and deployment
 
@@ -87,9 +88,6 @@ variables.
   - **CLOUDINARY_API_KEY** (lagoon): The API key of the cloudinary project.
   - **CLOUDINARY_API_SECRET** (lagoon): The API secret of the cloudinary
     project.
-- **[key_auth](apps/website/gatsby-config.js)** and
-  **[api_key](packages/drupal/test_content/content/user/f20d961b-ba45-4820-b2cc-166e5ce56815.yml)**
-- **[$config['reroute_email.settings']['address']](apps/cms/scaffold/settings.php.append.txt)**
 - **DRUPAL_INTERNAL_URL** (lagoon): The internal URL of the Drupal instance.
   This is used for the GraphQL build queries.
 - **DRUPAL_EXTERNAL_URL** (lagoon): The external URL of the Drupal instance.
