@@ -72,6 +72,16 @@ replace(
 );
 ```
 
+Update the default hash salt.
+
+```ts
+replace(
+  'apps/cms/scaffold/settings.php.append.txt',
+  'banana123',
+  randomString(32),
+);
+```
+
 Cleanup the readme.
 
 ```ts
