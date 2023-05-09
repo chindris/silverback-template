@@ -1,5 +1,9 @@
 Run this file with `pnpx @amazeelabs/mzx run INIT.md` from the project root.
 
+What it does:
+
+Adjust project name in the repo.
+
 ```ts
 await prompt('PROJECT_NAME_HUMAN', {
   type: 'text',
@@ -21,7 +25,11 @@ replace(
   'Silverback Drupal Template',
   process.env.PROJECT_NAME_HUMAN,
 );
+```
 
+Adjust project machine name in the repo.
+
+```ts
 await prompt('PROJECT_NAME_MACHINE', {
   type: 'text',
   message: 'Project name for machines:',
@@ -46,22 +54,38 @@ replace(
   '@amazeelabs/silverback-template',
   process.env.PROJECT_NAME_MACHINE,
 );
+```
 
+Cleanup the readme.
+
+```ts
 replace(
   'README.md',
   /## Create a new project from this template.+?## /gs,
   '## ',
 );
+```
 
+Write some final instructions.
+
+```ts
 console.log(`
 ⚠️  ⬇️  ️Please read the following to finish the project setup ⬇️  ⚠️
 
 When the lagoon project is ready, execute this to setup environments according to README.md:
   lagoon update project -p ${process.env.PROJECT_NAME_MACHINE} -b "^lagoon\\/|^(dev/stage/prod)$" 
 `);
+```
 
+Remove the init script.
+
+```ts
 fs.unlinkSync('INIT.md');
+```
 
+Here go some helpers.
+
+```ts
 function replace(path, from, to) {
   const paths = Array.isArray(path) ? path : [path];
   for (const path of paths) {
