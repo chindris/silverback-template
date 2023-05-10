@@ -27,7 +27,7 @@ export default function PageTemplate({
   pageContext,
 }: PageProps<PageTemplateQuery, SilverbackPageContext>) {
   return (
-    <Wrapper locale={(pageContext.locale || 'en') as Locale}>
+    <Wrapper locale={(pageContext?.locale || 'en') as Locale}>
       <Page page={data.page} />
     </Wrapper>
   );
