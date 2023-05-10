@@ -1,0 +1,46 @@
+tasks:
+  - name: Setup
+    init: pnpm install && pnpm turbo build && gp sync-done setup
+    command: |
+      export NETLIFY_URL='http://localhost:8000'
+      export DRUPAL_EXTERNAL_URL="http://localhost:8888"
+      export PUBLISHER_¨URL="http://localhost:8000"
+  - name: Storybook
+    init: gp sync-await setup
+    command: pnpm run --filter @custom/ui dev
+  - name: Drupal
+    init: gp sync-await setup
+    command: pnpm run --filter @custom/cms dev
+  - name: Gatsby
+    init: gp sync-await setup
+    command: pnpm run --filter @custom/website start
+
+image:
+  file: .gitpod.Dockerfile
+
+vscode:
+  extensions:
+    - "esbenp.prettier-vscode"
+    - "ZixuanChen.vitest-explorer"
+    - "GraphQL.vscode-graphql"
+    - "GraphQL.vscode-graphql-syntax"
+    - "eamodio.gitlens"
+    - "GitHub.vscode-pull-request-github"
+    - "GitHub.copilot"
+    - "dbaeumer.vscode-eslint"
+    - "ms-azuretools.vscode-docker"
+    - "ms-playwright.playwright"
+    - "denoland.vscode-deno"
+    - "bradlc.vscode-tailwindcss"
+    - "felixfbecker.php-debug"
+
+ports:
+  - port: 8000
+    name: Gatsby
+    onOpen: notify
+  - port: 6006
+    name: Storybook Dev
+    onOpen: notify
+  - port: 8888
+    name: Drupal Dev
+    onOpen: notify
