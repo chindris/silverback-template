@@ -15,7 +15,7 @@ export function useCurrentLanguagePrefix(defaultLanguage = 'en') {
     ) {
       setLanguage(prefix);
     }
-  });
+  }, [language]);
   return language as Locale;
 }
 
