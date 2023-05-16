@@ -121,3 +121,31 @@ In a standard project we use three fixed Lagoon environments: `dev`, `stage` and
 Lagoon should also be configured to create automatic environments for feature
 branches that are prefixed with `lagoon/`. Those will be filled with test
 content.
+
+## "Strangling" legacy systems
+
+The template includes a Netlify Edge Function
+(`apps/website/netlify/edge-functions/strangler.ts`) that allows to proxy
+unknown requests selectively to other systems. This can be used to replace only
+specific pages of a legacy system or incorporate existing business logic.
+
+At the top of `strangler.ts`, you will find an array definition of `LegacyHost`
+objects. These have the following properties:
+
+- **`url`**: The base url of the legacy system.
+- **`urlFilter`** (optional): A function that inspects a given `URL` object and
+  determines if it should be processed with this edge function or not.
+- **`responseFilter`** (optional): A function that inspects a given response and
+  decides if it should be ahnded back to the client.
+
+The "strangler" will first check if a given path is already present in the
+Netlify build. If thats the case, the Netlify site takes precedence and no
+proxying happens. Otherwise, it will iterate through the defined legacy systems,
+and the response of the first system where `urlFilter` and `responseFilter` both
+are undefined or return `true` will be returned to the client. If no legacy
+system was able to handle the request, the standard `404` page will be returned.
+
+By default, the application includes one legacy system, which is Drupal. All
+unknown requests are proxied to Drupal, but only `301` and `302` responses are
+taken into account. That way, redirects can be handled by Drupal, but no other
+routes are exposed via Netlify.
