@@ -88,8 +88,8 @@ importers:
         specifier: ^1.0.18
         version: 1.0.18
       '@amazeelabs/gatsby-source-silverback':
-        specifier: ^1.10.3
-        version: 1.10.3(gatsby@5.9.0)
+        specifier: ^1.10.5
+        version: 1.10.5(gatsby@5.9.0)
       '@amazeelabs/publisher':
         specifier: ^2.1.17
         version: 2.1.17(react@0.0.0-experimental-4cd706566-20230512)(typescript@4.9.5)
@@ -517,8 +517,8 @@ packages:
     resolution: {integrity: sha512-+gWVKURU4fFtSgN7k9LAxclWs80HqVWOVlqhambC/cgg00O0wIAMGkh6SHcGh6ilTpRlPFH+AlwS/b/vZg+uPA==}
     dev: false
 
-  /@amazeelabs/gatsby-source-silverback@1.10.3(gatsby@5.9.0):
-    resolution: {integrity: sha512-8I9hjiUV6hyJ6jWT9veGYom9OvCQSxfaXlITLbhjUnXj5dua3EG1BKEQafAEcZH7bHwqNuPkKX+RnFZJB7tDNQ==}
+  /@amazeelabs/gatsby-source-silverback@1.10.5(gatsby@5.9.0):
+    resolution: {integrity: sha512-jg27O/CUPDuw1kzOZnSE08uIh2omTK+KS8xJf3mjgWmJHFNNBmU8wE0qysqYU0VJGxeEEwMTHsmyD7H41jQg9Q==}
     dependencies:
       fetch-retry-ts: 1.1.25
       gatsby-graphql-source-toolkit: 2.0.4(gatsby@5.9.0)
