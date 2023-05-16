@@ -33,6 +33,8 @@ vscode:
     - "denoland.vscode-deno"
     - "bradlc.vscode-tailwindcss"
     - "felixfbecker.php-debug"
+    - "humao.rest-client"
+    - "DEVSENSE.phptools-vscode"
 
 ports:
   - port: 8000
