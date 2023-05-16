@@ -1,0 +1,12 @@
+{
+  "version": "0.2.0",
+  "configurations":[{
+  "name": "Listen for Xdebug",
+  "type": "php",
+  "request": "launch",
+  "port": 9003,
+  "pathMappings": {
+    "/workspace/silverback-template/apps/cms/vendor": "${workspaceFolder}/apps/cms/vendor",
+    "/workspace/silverback-template/apps/cms/web": "${workspaceFolder}/apps/cms/web"
+  },
+}]}
