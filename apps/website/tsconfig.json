@@ -15,4 +15,5 @@
     "isolatedModules": true,
     "jsx": "react"
   },
+  "exclude": ["netlify"]
 }
