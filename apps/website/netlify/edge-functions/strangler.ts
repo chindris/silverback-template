@@ -16,6 +16,8 @@ type LegacyHost = {
   process?: (response: Response) => Response | Promise<Response> | undefined;
 };
 
+console.log('[strangler]: starting', Deno.env.get('DRUPAL_EXTERNAL_URL'));
+
 /**
  * List of legacy system that should be proxied.
  *
