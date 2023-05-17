@@ -19,8 +19,6 @@ type LegacyHost = {
   process?: (response: Response) => Response | Promise<Response> | undefined;
 };
 
-console.log('[strangler]: starting', Deno.env.get('DRUPAL_EXTERNAL_URL'));
-
 /**
  * List of legacy system that should be proxied.
  *
@@ -41,7 +39,6 @@ export default async function strangler(
   originalRequest: Request,
   context: Context,
 ) {
-  console.log('[strangler]: invoked', originalRequest.url);
   // Test if netlify can handle the request.
   // Clone the request, or the invocation of next() will consume the body.
   const netlifyResult = await context.next(originalRequest.clone(), {
@@ -51,8 +48,6 @@ export default async function strangler(
   if (netlifyResult.status !== 404) {
     return netlifyResult;
   }
-
-  console.log('[strangler]: handling', originalRequest.url);
 
   // Otherwise, pass the request to the legacy applications.
   for (const legacySystem of legacySystems) {
@@ -82,8 +77,6 @@ export default async function strangler(
       body: request.body || undefined,
     });
 
-    console.log('[strangler]: responding', url.toString(), result.status);
-
     // Process the response if the legacy system wants to, otherwise return
     // it as is.
     return legacySystem.process ? legacySystem.process(result) : result;
@@ -102,6 +95,8 @@ export const config = {
     '/page-data/*',
     '/static/*',
     '/*.js',
+    '/*.js.map',
+    '/favicon.ico',
     '/sites/default/files/*',
     // TODO: add more paths that we know are served statically for sure or are not legacy.
   ],
