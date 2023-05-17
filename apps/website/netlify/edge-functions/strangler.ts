@@ -41,6 +41,7 @@ export default async function strangler(
   originalRequest: Request,
   context: Context,
 ) {
+  console.log('[strangler]: invoked', originalRequest.url);
   // Test if netlify can handle the request.
   // Clone the request, or the invocation of next() will consume the body.
   const netlifyResult = await context.next(originalRequest.clone(), {
