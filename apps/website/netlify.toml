@@ -3,3 +3,7 @@
 [[edge_functions]]
   path = "/"
   function = "homepage-redirect"
+
+[[edge_functions]]
+  path = "/*"
+  function = "strangler"

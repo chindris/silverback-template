@@ -46,6 +46,8 @@ export default async function strangler(
     return netlifyResult;
   }
 
+  console.log('[strangler]: handling', originalRequest.url);
+
   // Otherwise, pass the request to the legacy applications.
   for (const legacySystem of legacySystems) {
     const request = originalRequest.clone();
@@ -73,7 +75,8 @@ export default async function strangler(
       method: request.method,
       body: request.body || undefined,
     });
-    console.log(legacySystem.url, result.status);
+
+    console.log('[strangler]: responding', url.toString(), result.status);
 
     // Process the response if the legacy system wants to, otherwise return
     // it as is.
