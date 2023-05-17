@@ -1,17 +1,34 @@
 import { Config, Context } from 'https://edge.netlify.com';
 
 type LegacyHost = {
+  /**
+   * The base url of the legacy system.
+   */
   url: string;
-  urlFilter?: (url: URL) => boolean;
-  responseFilter?: (response: Response) => boolean;
+  /**
+   * Check if a given URL applies to this legacy system.
+   */
+  applies?: (url: URL) => boolean;
+  /**
+   * Alter the legacy system response. If this function returns undefined, the
+   * response will be ignored.
+   */
+  process?: (response: Response) => Response | Promise<Response> | undefined;
 };
 
+/**
+ * List of legacy system that should be proxied.
+ *
+ * For each URL, systems are checked in order. The first system that returns a valid
+ * result will be used. Otherwise the 404 page response will be returned.
+ */
 const legacySystems: Array<LegacyHost> = [
   {
     // For Standard drupal redirects, we are interested in any
     // url (therefore no urlFilter) and only in redirects (301, 302).
     url: Deno.env.get('DRUPAL_EXTERNAL_URL') || 'http://localhost:8888',
-    responseFilter: (response) => [301, 302].includes(response.status),
+    process: (response) =>
+      [301, 302].includes(response.status) ? response : undefined,
   },
 ];
 
@@ -30,13 +47,12 @@ export default async function strangler(
   }
 
   // Otherwise, pass the request to the legacy applications.
-  for (const legacyUrl of legacySystems) {
+  for (const legacySystem of legacySystems) {
     const request = originalRequest.clone();
-    const targetUrl = new URL(legacyUrl.url);
+    const targetUrl = new URL(legacySystem.url);
     // Check if we even want to proxy this request.
     // Skip if the urlFilter exists and returns false.
-    if (legacyUrl.urlFilter && !legacyUrl.urlFilter(targetUrl)) {
-      console.log('Skipping', legacyUrl.url);
+    if (legacySystem.applies && !legacySystem.applies(targetUrl)) {
       continue;
     }
     const url = new URL(request.url);
@@ -57,14 +73,11 @@ export default async function strangler(
       method: request.method,
       body: request.body || undefined,
     });
-    console.log(legacyUrl.url, result.status);
+    console.log(legacySystem.url, result.status);
 
-    // Check if we want to return this response.
-    // Either if there is no response filter, or it returns true.
-    // Otherwise continue with the next legacy system.
-    if (!legacyUrl.responseFilter || legacyUrl.responseFilter(result)) {
-      return result;
-    }
+    // Process the response if the legacy system wants to, otherwise return
+    // it as is.
+    return legacySystem.process ? legacySystem.process(result) : result;
   }
 
   // If none of the legacy systems returned a response, return the inital 404
@@ -80,6 +93,7 @@ export const config = {
     '/page-data/*',
     '/static/*',
     '/*.js',
+    '/sites/default/files/*',
     // TODO: add more paths that we know are served statically for sure or are not legacy.
   ],
 } satisfies Config;
