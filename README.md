@@ -129,23 +129,8 @@ The template includes a Netlify Edge Function
 unknown requests selectively to other systems. This can be used to replace only
 specific pages of a legacy system or incorporate existing business logic.
 
-At the top of `strangler.ts`, you will find an array definition of `LegacyHost`
-objects. These have the following properties:
-
-- **`url`**: The base url of the legacy system.
-- **`urlFilter`** (optional): A function that inspects a given `URL` object and
-  determines if it should be processed with this edge function or not.
-- **`responseFilter`** (optional): A function that inspects a given response and
-  decides if it should be ahnded back to the client.
-
-The "strangler" will first check if a given path is already present in the
-Netlify build. If thats the case, the Netlify site takes precedence and no
-proxying happens. Otherwise, it will iterate through the defined legacy systems,
-and the response of the first system where `urlFilter` and `responseFilter` both
-are undefined or return `true` will be returned to the client. If no legacy
-system was able to handle the request, the standard `404` page will be returned.
-
-By default, the application includes one legacy system, which is Drupal. All
-unknown requests are proxied to Drupal, but only `301` and `302` responses are
-taken into account. That way, redirects can be handled by Drupal, but no other
-routes are exposed via Netlify.
+Refer to the
+[Strangler Pattern](https://www.martinfowler.com/bliki/StranglerFigApplication.html)
+blog post if you wonder where the name comes from, to
+[Edge functions documentation](https://docs.netlify.com/edge-functions/overview/)
+for technical details and to `strangler.ts` for how to add new legacy systems.
