@@ -2,16 +2,19 @@ import { Config, Context } from 'https://edge.netlify.com';
 
 type LegacyHost = {
   /**
-   * The base url of the legacy system.
+   * The base url of the legacy system. The request will be forwarded to the
+   * base url if Netlify does not have a page for the requested path.
    */
   url: string;
   /**
-   * Check if a given URL applies to this legacy system.
+   * Check if a given URL applies to this legacy system. If not defined, the
+   * legacy system will be used for all requests.
    */
   applies?: (url: URL) => boolean;
   /**
    * Alter the legacy system response. If this function returns undefined, the
-   * response will be ignored.
+   * response will be ignored. If the function is not defined, the response will
+   * always be returned as is.
    */
   process?: (response: Response) => Response | Promise<Response> | undefined;
 };
