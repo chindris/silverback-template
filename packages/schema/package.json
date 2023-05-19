@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@amazeelabs/scalars": "^1.2.0",
+    "@amazeelabs/bridge": "^1.2.0",
     "swr": "^2.1.5"
   }
 }
