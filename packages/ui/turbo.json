@@ -28,7 +28,7 @@
       "outputs": ["build/translatables.json"]
     },
     "prep": {
-      "dependsOn": ["prep:scripts", "prep:styles", "prep:i18n"]
+      "dependsOn": ["prep:types", "prep:scripts", "prep:styles", "prep:i18n"]
     },
     "build": {
       "inputs": [

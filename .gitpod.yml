@@ -14,6 +14,9 @@ tasks:
   - name: Gatsby
     init: gp sync-await setup
     command: pnpm run --filter @custom/website start
+  - name: Codegen
+    init: gp sync-await setup
+    command: pnpm --filter @custom/schema run watch
 
 image:
   file: .gitpod.Dockerfile

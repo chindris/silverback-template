@@ -6,6 +6,7 @@
   "private": true,
   "sideEffects": false,
   "scripts": {
+    "watch": "graphql-codegen --verbose --watch",
     "prep": "graphql-codegen --verbose"
   },
   "devDependencies": {

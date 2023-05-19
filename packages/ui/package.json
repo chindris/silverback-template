@@ -23,7 +23,8 @@
     }
   },
   "scripts": {
-    "prep:scripts": "swc ./src -d ./build && tsc --emitDeclarationOnly",
+    "prep:types": "tsc --emitDeclarationOnly",
+    "prep:scripts": "swc ./src -d ./build",
     "prep:styles": "NODE_ENV=production pnpm postcss tailwind.css -o build/styles.css",
     "prep:i18n": "formatjs extract 'src/**/*.ts*' --ignore='**/*.d.ts' --ignore='**/*.stories.ts*' --out-file build/translatables.json --id-interpolation-pattern '[sha512:contenthash:base64:6]'\n",
     "build": "storybook build",
