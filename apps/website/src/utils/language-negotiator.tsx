@@ -1,5 +1,4 @@
 'use client';
-
 import { Locale } from '@custom/schema';
 import React, { PropsWithChildren, useEffect } from 'react';
 
