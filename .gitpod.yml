@@ -13,7 +13,7 @@ tasks:
     command: pnpm run --filter @custom/cms dev
   - name: Gatsby
     init: gp sync-await setup
-    command: pnpm run --filter @custom/website start
+    command: pnpm run --filter @custom/website serve
   - name: Codegen
     init: gp sync-await setup
     command: pnpm --filter @custom/schema run watch
