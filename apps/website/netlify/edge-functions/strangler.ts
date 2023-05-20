@@ -53,12 +53,12 @@ export default async function strangler(
   for (const legacySystem of legacySystems) {
     const request = originalRequest.clone();
     const targetUrl = new URL(legacySystem.url);
+    const url = new URL(request.url);
     // Check if we even want to proxy this request.
     // Skip if the urlFilter exists and returns false.
-    if (legacySystem.applies && !legacySystem.applies(targetUrl)) {
+    if (legacySystem.applies && !legacySystem.applies(url)) {
       continue;
     }
-    const url = new URL(request.url);
     const reqHeaders = new Headers(request.headers);
     // Add the silverback proxy header to the request.
     reqHeaders.set(
