@@ -28,12 +28,28 @@
       ],
       "outputs": ["build/styles.css"]
     },
+    "prep:gutenberg": {
+      "inputs": [
+        "postcss.config.cjs",
+        "tailwind.config.cjs",
+        "tailwind.css",
+        "src/**/*.css",
+        "src/components/**/*tsx"
+      ],
+      "outputs": ["build/gutenberg.css"]
+    },
     "prep:i18n": {
       "inputs": ["src/components/**/*.tsx"],
       "outputs": ["build/translatables.json"]
     },
     "prep": {
-      "dependsOn": ["prep:types", "prep:scripts", "prep:styles", "prep:i18n"]
+      "dependsOn": [
+        "prep:types",
+        "prep:scripts",
+        "prep:styles",
+        "prep:gutenberg",
+        "prep:i18n"
+      ]
     },
     "build": {
       "inputs": [

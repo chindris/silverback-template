@@ -370,6 +370,9 @@ importers:
       postcss-import-ext-glob:
         specifier: ^2.1.1
         version: 2.1.1(postcss@8.4.23)
+      postcss-prefix-selector:
+        specifier: ^1.16.0
+        version: 1.16.0(postcss@8.4.23)
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -20615,6 +20618,14 @@ packages:
       cssnano-utils: 4.0.0(postcss@8.4.23)
       postcss: 8.4.23
       postcss-value-parser: 4.2.0
+    dev: true
+
+  /postcss-prefix-selector@1.16.0(postcss@8.4.23):
+    resolution: {integrity: sha512-rdVMIi7Q4B0XbXqNUEI+Z4E+pueiu/CS5E6vRCQommzdQ/sgsS4dK42U7GX8oJR+TJOtT+Qv3GkNo6iijUMp3Q==}
+    peerDependencies:
+      postcss: '>4 <9'
+    dependencies:
+      postcss: 8.4.23
     dev: true
 
   /postcss-reduce-initial@5.1.2(postcss@8.4.23):
