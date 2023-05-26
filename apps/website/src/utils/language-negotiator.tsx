@@ -1,5 +1,4 @@
 'use client';
-
 import { Locale } from '@custom/schema';
 import React, { PropsWithChildren, useEffect } from 'react';
 
@@ -15,7 +14,7 @@ export function useCurrentLanguagePrefix(defaultLanguage = 'en') {
     ) {
       setLanguage(prefix);
     }
-  });
+  }, [language]);
   return language as Locale;
 }
 

@@ -1,3 +1,7 @@
+// Its fine to ignore missing types, since they are overridden by the type
+// definition of `@amazeelabs/bridge` anyway.
+// @ts-ignore
+import { useLocation as gatsbyUseLocation } from '@reach/router';
 import { Link as GatsbyLink, navigate as gatsbyNavigate } from 'gatsby';
 import React, { AnchorHTMLAttributes, DetailedHTMLProps } from 'react';
 
@@ -14,4 +18,8 @@ export function Link({
 
 export function navigate(to: string) {
   return gatsbyNavigate(to);
+}
+
+export function useLocation() {
+  return gatsbyUseLocation();
 }

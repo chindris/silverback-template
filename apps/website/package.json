@@ -4,7 +4,7 @@
   "dependencies": {
     "@amazeelabs/cloudinary-responsive-image": "^1.2.5",
     "@amazeelabs/gatsby-silverback-cloudinary": "^1.0.18",
-    "@amazeelabs/gatsby-source-silverback": "^1.10.3",
+    "@amazeelabs/gatsby-source-silverback": "^1.10.5",
     "@amazeelabs/publisher": "^2.1.17",
     "@custom/schema": "workspace:*",
     "@custom/ui": "workspace:*",
@@ -13,13 +13,16 @@
     "gatsby-plugin-netlify": "^5.1.0",
     "gatsby-plugin-pnpm": "^1.2.10",
     "netlify-cli": "^14.3.0",
-    "react": "experimental",
-    "react-dom": "experimental"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.1",
-    "start-server-and-test": "^2.0.0"
+    "start-server-and-test": "^2.0.0",
+    "vitest": "^0.31.1",
+    "@testing-library/react": "^14.0.0",
+    "happy-dom": "^9.19.2"
   },
   "scripts": {
     "test:static": "tsc --noEmit && eslint '**/*.{ts,tsx,js,jsx}' --ignore-path='./.gitignore'",

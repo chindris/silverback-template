@@ -7,6 +7,7 @@
   "license": "ISC",
   "scripts": {
     "test:integration": "playwright test",
+    "turbo:test:integration": "CI=true turbo test:integration --output-logs=new-only",
     "test:headed": "playwright test --headed",
     "dev": "playwright test --ui"
   },

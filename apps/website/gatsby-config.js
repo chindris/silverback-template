@@ -17,7 +17,7 @@ module.exports = {
     url: process.env.DRUPAL_EXTERNAL_URL || 'http://127.0.0.1:8888',
   },
   flags: {
-    PARTIAL_HYDRATION: true,
+    PARTIAL_HYDRATION: false,
   },
   plugins: [
     'gatsby-plugin-pnpm',

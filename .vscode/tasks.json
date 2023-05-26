@@ -1,0 +1,10 @@
+{
+  "version": "2.0.0",
+  "tasks": [{
+    "label": "Rebuild website",
+    "command": "pnpm",
+    "args": ["run", "turbo:build:website"],
+    "type": "shell",
+    "problemMatcher": []
+  }]
+}

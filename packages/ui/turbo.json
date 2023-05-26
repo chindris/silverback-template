@@ -11,7 +11,12 @@
         "tsconfig.json",
         "static/public/**"
       ],
-      "outputs": ["build/**", "!build/translatables.json"]
+      "outputs": ["build/**/*.js"]
+    },
+    "prep:types": {
+      "dependsOn": ["^prep"],
+      "inputs": ["src/**/*.ts", "src/**/*.tsx", "tsconfig.json"],
+      "outputs": ["build/**/*.d.ts"]
     },
     "prep:styles": {
       "inputs": [
@@ -28,7 +33,7 @@
       "outputs": ["build/translatables.json"]
     },
     "prep": {
-      "dependsOn": ["prep:scripts", "prep:styles", "prep:i18n"]
+      "dependsOn": ["prep:types", "prep:scripts", "prep:styles", "prep:i18n"]
     },
     "build": {
       "inputs": [

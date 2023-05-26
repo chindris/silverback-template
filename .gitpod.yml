@@ -1,0 +1,68 @@
+tasks:
+  - name: Setup
+    init: pnpm install && pnpm turbo build && gp sync-done setup
+    command: |
+      export NETLIFY_URL='http://localhost:8000'
+      export DRUPAL_EXTERNAL_URL="http://localhost:8888"
+      export PUBLISHER_¨URL="http://localhost:8000"
+  - name: Storybook
+    init: gp sync-await setup
+    command: pnpm run --filter @custom/ui dev
+  - name: Drupal
+    init: gp sync-await setup
+    command: pnpm run --filter @custom/cms dev
+  - name: Gatsby
+    init: gp sync-await setup
+    command: pnpm run --filter @custom/website serve
+  - name: Codegen
+    init: gp sync-await setup
+    command: pnpm --filter @custom/schema run watch
+
+image:
+  file: .gitpod.Dockerfile
+
+github:
+  prebuilds:
+    # enable for the default branch (defaults to true)
+    master: true
+    # enable for all branches in this repo (defaults to false)
+    branches: false
+    # enable for pull requests coming from this repo (defaults to true)
+    pullRequests: true
+    # enable for pull requests coming from forks (defaults to false)
+    pullRequestsFromForks: false
+    # add a check to pull requests (defaults to true)
+    addCheck: true
+    # add a "Review in Gitpod" button as a comment to pull requests (defaults to false)
+    addComment: false
+    # add a "Review in Gitpod" button to the pull request's description (defaults to false)
+    addBadge: false
+
+vscode:
+  extensions:
+    - "esbenp.prettier-vscode"
+    - "ZixuanChen.vitest-explorer"
+    - "GraphQL.vscode-graphql"
+    - "GraphQL.vscode-graphql-syntax"
+    - "eamodio.gitlens"
+    - "GitHub.vscode-pull-request-github"
+    - "GitHub.copilot"
+    - "dbaeumer.vscode-eslint"
+    - "ms-azuretools.vscode-docker"
+    - "ms-playwright.playwright"
+    - "denoland.vscode-deno"
+    - "bradlc.vscode-tailwindcss"
+    - "felixfbecker.php-debug"
+    - "humao.rest-client"
+    - "DEVSENSE.phptools-vscode"
+
+ports:
+  - port: 8000
+    name: Gatsby
+    onOpen: notify
+  - port: 6006
+    name: Storybook Dev
+    onOpen: notify
+  - port: 8888
+    name: Drupal Dev
+    onOpen: notify

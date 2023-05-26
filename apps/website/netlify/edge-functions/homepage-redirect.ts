@@ -1,13 +1,12 @@
-// @ts-ignore
-import Negotiator from 'https://deno.land/x/negotiator/mod.ts';
+import Negotiator from 'https://deno.land/x/negotiator@1.0.1/mod.ts';
+import { Config } from 'https://edge.netlify.com';
 
 // Configure the available languages and the default language.
 // TODO: Infer this automatically from the available locales.
 const availableLanguages = ['en', 'de'];
 const defaultLanguage = 'en';
 
-// @ts-ignore
-export default (request) => {
+export default (request: Request) => {
   const preferredLanguage =
     new Negotiator(request.headers).language(availableLanguages) ||
     defaultLanguage;
@@ -19,4 +18,4 @@ export default (request) => {
   });
 };
 
-export const config = { path: '/' };
+export const config = { path: '/' } satisfies Config;

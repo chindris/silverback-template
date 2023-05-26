@@ -1,0 +1,31 @@
+{
+  "npm.packageManager": "pnpm",
+  "eslint.format.enable": true,
+  "eslint.codeActionsOnSave.rules": null,
+  "editor.formatOnSave": true,
+  "rest-client.followredirect": false,
+  "deno.enable": true,
+  "deno.unstable": true,
+  "deno.enablePaths": ["./apps/website/netlify/edge-functions"],
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.tabSize": 2,
+  "vitest.include": [
+    "**/src/**/*.test.{ts,tsx}"
+  ],
+  "vitest.enable": true,
+  "vitest.changeBackgroundColor": true
+}

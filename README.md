@@ -121,3 +121,16 @@ In a standard project we use three fixed Lagoon environments: `dev`, `stage` and
 Lagoon should also be configured to create automatic environments for feature
 branches that are prefixed with `lagoon/`. Those will be filled with test
 content.
+
+## "Strangling" legacy systems
+
+The template includes a Netlify Edge Function
+(`apps/website/netlify/edge-functions/strangler.ts`) that allows to proxy
+unknown requests selectively to other systems. This can be used to replace only
+specific pages of a legacy system or incorporate existing business logic.
+
+Refer to the
+[Strangler Pattern](https://www.martinfowler.com/bliki/StranglerFigApplication.html)
+blog post if you wonder where the name comes from, to
+[Edge functions documentation](https://docs.netlify.com/edge-functions/overview/)
+for technical details and to `strangler.ts` for how to add new legacy systems.

@@ -23,7 +23,8 @@
     }
   },
   "scripts": {
-    "prep:scripts": "swc ./src -d ./build && tsc --emitDeclarationOnly",
+    "prep:types": "tsc --emitDeclarationOnly",
+    "prep:scripts": "swc ./src -d ./build",
     "prep:styles": "NODE_ENV=production pnpm postcss tailwind.css -o build/styles.css",
     "prep:i18n": "formatjs extract 'src/**/*.ts*' --ignore='**/*.d.ts' --ignore='**/*.stories.ts*' --out-file build/translatables.json --id-interpolation-pattern '[sha512:contenthash:base64:6]'\n",
     "build": "storybook build",
@@ -47,8 +48,8 @@
     "framer-motion": "^10.12.4"
   },
   "peerDependencies": {
-    "react": "experimental",
-    "react-dom": "experimental"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@amazeelabs/cloudinary-responsive-image": "^1.2.5",
@@ -85,14 +86,17 @@
     "postcss-cli": "^10.1.0",
     "postcss-import": "^15.1.0",
     "postcss-import-ext-glob": "^2.1.1",
-    "react": "experimental",
-    "react-dom": "experimental",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "serve": "^14.2.0",
     "start-server-and-test": "^2.0.0",
     "storybook": "^7.0.7",
     "tailwindcss": "^3.3.2",
     "typescript": "^5.0.4",
     "vite": "^4.3.2",
-    "vite-plugin-turbosnap": "^1.0.2"
+    "vite-plugin-turbosnap": "^1.0.2",
+    "vitest": "^0.31.1",
+    "@testing-library/react": "^14.0.0",
+    "happy-dom": "^9.19.2"
   }
 }
