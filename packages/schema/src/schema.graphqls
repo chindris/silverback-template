@@ -90,6 +90,19 @@ type BlockImage @type(id: "drupalmedia/drupal-media-entity") {
   caption: Markup @resolveEditorBlockAttribute(key: "caption")
 }
 
+################################################################################
+# String translations
+################################################################################
+"""
+Translations of strings, sourced from Drupal interface translations.
+Fetched and processed by a custom query field in `apps/website/gatsby-node.ts`
+and consumed by the `useTranslations` hook, which feeds it into an `react-intl`
+provider.
+"""
+type GatsbyStringTranslation @stringTranslation(contextPrefix: "gatsby") {
+  dummy: String
+}
+
 type Query {
   previewPage(id: ID!, rid: ID, locale: String!): Page
     @fetchEntity(type: "node", id: "$id", rid: "$rid", language: "$locale")

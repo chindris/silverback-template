@@ -4,6 +4,8 @@ import { Frame } from '@custom/ui/routes/Frame';
 import { graphql, useStaticQuery } from 'gatsby';
 import React, { PropsWithChildren } from 'react';
 
+import { useTranslations } from './i18n';
+
 function useFrameQuery() {
   return useStaticQuery<{
     main_de: NavigationFragment;
@@ -41,8 +43,9 @@ export function Wrapper({
   const data = useFrameQuery();
   const main = locale === 'de' ? data.main_de : data.main_en;
   const footer = locale === 'de' ? data.footer_de : data.footer_en;
+  const messages = useTranslations(locale);
   return (
-    <IntlProvider locale={locale}>
+    <IntlProvider {...messages} >
       <Frame
         header={{ mainNavigation: main }}
         footer={{ footerNavigation: footer }}

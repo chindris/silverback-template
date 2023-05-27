@@ -25,6 +25,3 @@
 
 # GraphQL persisted operation map
 generated/operations.json
-
-# Translations from the FE
-generated/translations.json
