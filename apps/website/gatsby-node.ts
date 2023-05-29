@@ -12,6 +12,30 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       'utf8',
     ).toString();
     args.actions.createTypes(schema);
+    [
+      'fetchEntity',
+      'imageProps',
+      'isPath',
+      'lang',
+      'resolveEditorBlockAttribute',
+      'resolveEditorBlockChildren',
+      'resolveEditorBlockMarkup',
+      'resolveEditorBlockMedia',
+      'resolveEditorBlocks',
+      'resolveEntityLanguage',
+      'resolveEntityPath',
+      'resolveEntityReference',
+      'resolveMenuItemId',
+      'resolveMenuItemLabel',
+      'resolveMenuItemParentId',
+      'resolveMenuItemUrl',
+      'resolveMenuItems',
+      'resolveProperty',
+      'responsiveImage',
+      'seek',
+    ].forEach((name) => {
+      args.actions.createFieldExtension({ name });
+    });
   };
 
 export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({
