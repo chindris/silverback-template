@@ -36,7 +36,8 @@
     "build": "start-test start:cms 8888 build:gatsby",
     "start": "publisher",
     "serve": "netlify dev --dir=public --port=8000",
-    "dev": "open http://127.0.0.1:8000/___status/ && publisher",
+    "dev": "publisher",
+    "open": "open http://127.0.0.1:8000/___status/",
     "turbo:dev": "start-test start:cms 8888 'pnpm turbo dev --output-logs=new-only'",
     "clean": "gatsby clean"
   }
