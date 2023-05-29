@@ -11,6 +11,18 @@
       <excludeFolder url="file://$MODULE_DIR$/apps/website/public" />
       <excludeFolder url="file://$MODULE_DIR$/packages/schema/build" />
       <excludeFolder url="file://$MODULE_DIR$/packages/ui/build" />
+      <excludeFolder url="file://$MODULE_DIR$/_local" />
+      <excludeFolder url="file://$MODULE_DIR$/apps/cms/.turbo" />
+      <excludeFolder url="file://$MODULE_DIR$/apps/website/.turbo" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/drupal/gutenberg_blocks/.turbo" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/schema/.turbo" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/ui/.turbo" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/ui/coverage" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/ui/storybook-static" />
+      <excludeFolder url="file://$MODULE_DIR$/tests/e2e/.auth" />
+      <excludeFolder url="file://$MODULE_DIR$/tests/e2e/.turbo" />
+      <excludeFolder url="file://$MODULE_DIR$/tests/e2e/playwright-report" />
+      <excludeFolder url="file://$MODULE_DIR$/tests/schema/.turbo" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
