@@ -80,21 +80,30 @@ export const createPages: GatsbyNode['createPages'] = async ({
 
     settings.data?.websiteSettings?.homePage.translations.forEach(
       ({ locale, typeName, id, remoteId, path }) => {
+        // Create a page at the "front" path.
+        const frontPath =
+          frontPageLocalizations.length > 1 ? `/${locale}` : '/';
         actions.createPage({
-          path: `/${locale}`,
+          path: frontPath,
           component: resolve(`./src/templates/page.tsx`),
           context: {
             typeName,
             id,
             remoteId,
             locale,
-            localizations: frontPageLocalizations,
+            localizations:
+              frontPageLocalizations.length > 1 ? frontPageLocalizations : [],
           } satisfies SilverbackPageContext,
         });
-
+        // Delete the page at the original path.
+        actions.deletePage({
+          path,
+          component: resolve(`./src/templates/page.tsx`),
+        });
+        // Create a redirect from the original path to the "front" path.
         actions.createRedirect({
           fromPath: path,
-          toPath: `/${locale}`,
+          toPath: frontPath,
           isPermanent: true,
           force: true,
         });
