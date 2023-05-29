@@ -4,12 +4,16 @@
 
 - https://github.com/AmazeeLabs/silverback-template => `Use this template` =>
   `Create a new repository`
+- In the newly created repo `Settings > Collaborators and teams`
+  - add `Tech Team` with `Admin` role
+  - remove yourself
 - Clone the newly create repo
 - Run `pnpx @amazeelabs/mzx run INIT.md` from the project root
 - Answer its questions
-- Do what it asks you to do
 - Review the changes in the repo
 - Commit and push
+- [Create a new Lagoon project](https://amazeelabs.atlassian.net/wiki/spaces/ALU/pages/368115717/Create+a+new+Lagoon+project)
+- [Create a new Netlify project](https://amazeelabs.atlassian.net/wiki/spaces/ALU/pages/368017428/Create+a+new+Netlify+project)
 - Check the [Environment overrides](#environment-overrides) section below
 
 ## Release and deployment

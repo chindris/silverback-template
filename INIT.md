@@ -97,17 +97,6 @@ replace(
 );
 ```
 
-Write some final instructions.
-
-```ts
-console.log(`
-⚠️  ⬇️  ️Please read the following to finish the project setup ⬇️  ⚠️
-
-When the lagoon project is ready, execute this to setup environments according to README.md:
-  lagoon update project -p ${process.env.PROJECT_NAME_MACHINE} -b "^lagoon\\/|^(dev/stage/prod)$" 
-`);
-```
-
 Remove the init script.
 
 ```ts
