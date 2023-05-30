@@ -4,9 +4,13 @@
 
 - https://github.com/AmazeeLabs/silverback-template => `Use this template` =>
   `Create a new repository`
-- In the newly created repo `Settings > Collaborators and teams`
-  - add `Tech Team` with `Admin` role
-  - remove yourself
+- In the newly created repo
+  - Settings > Manage access > Collaborators and teams
+    - add `Tech Team` with `Admin` role
+    - remove yourself
+  - Settings > General > Pull Requests
+    - Disable `Allow merge commits`
+    - Enable `Automatically delete head branches`
 - Clone the newly create repo
 - Run `pnpx @amazeelabs/mzx run INIT.md` from the project root
 - Answer its questions
