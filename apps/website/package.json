@@ -2,12 +2,12 @@
   "name": "@custom/website",
   "private": true,
   "dependencies": {
+    "@amazeelabs/bridge-gatsby": "^1.1.1",
     "@amazeelabs/cloudinary-responsive-image": "^1.2.11",
     "@amazeelabs/gatsby-silverback-cloudinary": "^1.0.18",
     "@amazeelabs/gatsby-source-silverback": "^1.10.5",
     "@amazeelabs/publisher": "^2.1.17",
     "@custom/schema": "workspace:*",
-    "@amazeelabs/bridge-gatsby": "^1.1.1",
     "@custom/ui": "workspace:*",
     "gatsby": "^5.9.0",
     "gatsby-plugin-manifest": "^5.9.0",
@@ -18,12 +18,12 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@types/react": "^18.2.0",
-    "@types/react-dom": "^18.2.0",
-    "start-server-and-test": "^2.0.0",
-    "vitest": "^0.31.1",
     "@testing-library/react": "^14.0.0",
-    "happy-dom": "^9.19.2"
+    "@types/react": "^18.2.7",
+    "@types/react-dom": "^18.2.4",
+    "happy-dom": "^9.19.2",
+    "start-server-and-test": "^2.0.0",
+    "vitest": "^0.31.1"
   },
   "scripts": {
     "test:static": "tsc --noEmit && eslint '**/*.{ts,tsx,js,jsx}' --ignore-path='./.gitignore'",
