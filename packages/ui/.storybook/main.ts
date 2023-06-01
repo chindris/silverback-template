@@ -1,11 +1,17 @@
 import type { StorybookConfig } from '@storybook/react-vite';
 import pluginTurbosnap from 'vite-plugin-turbosnap';
-import { mergeConfig } from 'vite';
+import { mergeConfig, UserConfig } from 'vite';
 
 const config: StorybookConfig = {
   viteFinal: (config, { configType }) =>
     mergeConfig(config, {
+      resolve: {
+        alias: {
+          '@amazeelabs/bridge': '@amazeelabs/bridge-storybook',
+        },
+      },
       plugins: [pluginTurbosnap({ rootDir: config.root ?? process.cwd() })],
+    } satisfies UserConfig),
   staticDirs: ['../static/public', '../static/stories'],
   stories: ['../src/**/*.stories.@(ts|tsx)'],
   addons: [

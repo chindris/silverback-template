@@ -44,7 +44,7 @@ export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({
   actions.setWebpackConfig({
     resolve: {
       alias: {
-        '@amazeelabs/bridge': resolve(__dirname, '/src/bridge/'),
+        '@amazeelabs/bridge': '@amazeelabs/bridge-gatsby',
       },
     },
   });

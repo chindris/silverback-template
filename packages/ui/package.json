@@ -55,6 +55,7 @@
   },
   "devDependencies": {
     "@amazeelabs/cloudinary-responsive-image": "^1.2.11",
+    "@amazeelabs/bridge-storybook": "^1.1.1",
     "@formatjs/cli": "^6.1.0",
     "@storybook/addon-actions": "^7.0.17",
     "@storybook/addon-coverage": "^0.0.8",
