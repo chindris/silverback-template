@@ -29,6 +29,9 @@ class CustomSessionConfiguration extends SessionConfiguration {
     $options = parent::getOptions($request);
     if ($request->isSecure()) {
       $options['cookie_samesite'] = 'None';
+      if ($cookie_domain = getenv('COOKIE_DOMAIN')) {
+        $options['cookie_domain'] = $cookie_domain;
+      }
     }
     return $options;
   }
