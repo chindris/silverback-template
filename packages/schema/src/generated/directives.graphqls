@@ -95,6 +95,13 @@ Implemented in "Drupal\silverback_gatsby\Plugin\GraphQL\Directive\EntityFetch".
 """
 directive @fetchEntity(type: String, id: String, rid: String, language: String, operation: String) repeatable on FIELD_DEFINITION | SCALAR | UNION | ENUM | INTERFACE | OBJECT
 """
+List content by title, with pagination.
+
+Provided by the "custom" module.
+Implemented in "Drupal\custom\Plugin\GraphQL\Directive\ContentHub".
+"""
+directive @contentHub repeatable on FIELD_DEFINITION | SCALAR | UNION | ENUM | INTERFACE | OBJECT
+"""
 Load a given entity by it's path or type and id or uuid
 
 Provided by the "graphql_directives" module.
