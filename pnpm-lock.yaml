@@ -131,7 +131,7 @@ importers:
         specifier: ^18.2.0
         version: 18.2.0
       '@types/react-dom':
-        specifier: ^18.2.1
+        specifier: ^18.2.0
         version: 18.2.1
       happy-dom:
         specifier: ^9.19.2
@@ -347,7 +347,7 @@ importers:
         specifier: ^1.1.7
         version: 1.1.7
       '@types/react-dom':
-        specifier: ^18.2.1
+        specifier: ^18.2.0
         version: 18.2.1
       '@vitejs/plugin-react-swc':
         specifier: ^3.3.0
