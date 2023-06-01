@@ -1,0 +1,8 @@
+query ContentHub($query: String, $pagination: PaginationInput!) {
+  contentHub(query: $query, pagination: $pagination) {
+    total
+    items {
+      ...ContentHubResultItem
+    }
+  }
+}
