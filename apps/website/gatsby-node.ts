@@ -61,6 +61,12 @@ export const createPages: GatsbyNode['createPages'] = async ({
     statusCode: 200,
   });
 
+  actions.createRedirect({
+    fromPath: '/graphql',
+    toPath: `${process.env.GATSBY_DRUPAL_URL}/graphql`,
+    statusCode: 200,
+  });
+
   const settings = await graphql<{
     websiteSettings?: {
       homePage?: {

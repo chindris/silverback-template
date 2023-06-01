@@ -90,6 +90,7 @@ export default async function strangler(
 export const config = {
   path: '/*',
   excludedPath: [
+    '/graphql',
     '/__preview/*',
     '/_gatsby/*',
     '/page-data/*',
