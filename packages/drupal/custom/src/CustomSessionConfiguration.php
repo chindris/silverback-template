@@ -10,30 +10,11 @@ use Symfony\Component\HttpFoundation\Request;
  * Decorator for the core session configuration service.
  */
 class CustomSessionConfiguration extends SessionConfiguration {
-
-  /* @var \Drupal\Core\Session\SessionConfigurationInterface */
-  protected $sessionConfigurationInner;
-
-  /**
-   * Creates a CaritasSessionConfiguration object.
-   */
-  public function __construct(SessionConfigurationInterface $session_configuration_inner, $options = []) {
-    $this->sessionConfigurationInner = $session_configuration_inner;
-    parent::__construct($options);
+  protected function getUnprefixedName(Request $request) {
+    $cleaned = clone $request;
+    $cleaned->headers->remove('X-Forwarded-Proto');
+    $cleaned->headers->remove('X-Forwarded-Host');
+    $cleaned->headers->remove('X-Forwarded-Port');
+    return parent::getUnprefixedName($cleaned);
   }
-
-  /**
-   * {@inheritDoc}
-   */
-  public function getOptions(Request $request) {
-    $options = parent::getOptions($request);
-    if ($request->isSecure()) {
-      $options['cookie_samesite'] = 'None';
-      if ($cookie_domain = getenv('COOKIE_DOMAIN')) {
-        $options['cookie_domain'] = $cookie_domain;
-      }
-    }
-    return $options;
-  }
-
 }

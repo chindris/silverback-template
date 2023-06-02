@@ -20,9 +20,9 @@ export function useOperation<TOperation extends AnyOperationId>(
           return fetch(url, {
             credentials: 'include',
             headers: {
-              // 'SLB-Forwarded-Proto': window.location.protocol.slice(0, -1),
-              // 'SLB-Forwarded-Host': window.location.hostname,
-              // 'SLB-Forwarded-Port': window.location.port,
+              'SLB-Forwarded-Proto': window.location.protocol.slice(0, -1),
+              'SLB-Forwarded-Host': window.location.hostname,
+              'SLB-Forwarded-Port': window.location.port,
             },
           }).then((r) => r.json());
         }

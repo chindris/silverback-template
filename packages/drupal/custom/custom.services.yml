@@ -3,9 +3,3 @@ services:
     class: Drupal\custom\Routing\RouteSubscriber
     tags:
       - { name: event_subscriber }
-
-  # custom.session_configuration_decorator:
-  #   class: Drupal\custom\CustomSessionConfiguration
-  #   decorates: session_configuration
-  #   public: false
-  #   arguments: [ '@custom.session_configuration_decorator.inner', '%session.storage.options%' ]
