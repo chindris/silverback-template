@@ -4,6 +4,7 @@ tasks:
     env:
       NETLIFY_URL: http://localhost:8000
       DRUPAL_EXTERNAL_URL: http://localhost:8888
+      DRUPAL_INTERNAL_URL: http://127.0.0.1:8888
       PUBLISHER_URL: http://localhost:8000
   - name: Storybook
     init: gp sync-await setup
@@ -14,6 +15,7 @@ tasks:
     env:
       NETLIFY_URL: http://localhost:8000
       DRUPAL_EXTERNAL_URL: http://localhost:8888
+      DRUPAL_INTERNAL_URL: http://127.0.0.1:8888
       PUBLISHER_URL: http://localhost:8000
   - name: Gatsby
     init: gp sync-await setup
@@ -21,6 +23,7 @@ tasks:
     env:
       NETLIFY_URL: http://localhost:8000
       DRUPAL_EXTERNAL_URL: http://localhost:8888
+      DRUPAL_INTERNAL_URL: http://127.0.0.1:8888
       PUBLISHER_URL: http://localhost:8000
   - name: Codegen
     init: gp sync-await setup
