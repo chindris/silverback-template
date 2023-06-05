@@ -140,4 +140,13 @@ export const createPages: GatsbyNode['createPages'] = async ({
       },
     );
   }
+
+  // Any unhandled requests are handed to strangler, which will try to pass
+  // them to all registered legacy systems and return 404 if none of them
+  // respond.
+  actions.createRedirect({
+    fromPath: '/*',
+    toPath: `/.netlify/functions/strangler`,
+    statusCode: 200,
+  });
 };
