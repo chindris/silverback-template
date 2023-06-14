@@ -1,0 +1,89 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: ef80e284-154b-41fd-9317-154b0a175299
+  bundle: page
+  default_langcode: en
+  depends:
+    3a0fe860-a6d6-428a-9474-365bd57509aa: media
+    72187a1f-3e48-4b45-a9b7-189c6fd7ee26: media
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Page: complete'
+  created:
+    -
+      value: 1686759007
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /page-complete
+      langcode: en
+      pathauto: 0
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  body:
+    -
+      value: "<!-- wp:custom/hero {\"mediaEntityIds\":[\"3a0fe860-a6d6-428a-9474-365bd57509aa\"],\"headline\":\"Headline\",\"lead\":\"Lead text\"} /-->\r\n\r\n<!-- wp:custom/content -->\r\n<!-- wp:paragraph -->\r\n<p>Paragraph</p>\r\n<!-- /wp:paragraph -->\r\n\r\n<!-- wp:drupalmedia/drupal-media-entity {\"mediaEntityIds\":[\"72187a1f-3e48-4b45-a9b7-189c6fd7ee26\"],\"caption\":\"Image caption\"} /-->\r\n<!-- /wp:custom/content -->"
+      format: gutenberg
+      summary: ''
+translations:
+  de:
+    status:
+      -
+        value: true
+    uid:
+      -
+        target_id: 1
+    title:
+      -
+        value: 'Page: complete DE'
+    created:
+      -
+        value: 1686759294
+    promote:
+      -
+        value: false
+    sticky:
+      -
+        value: false
+    moderation_state:
+      -
+        value: published
+    path:
+      -
+        alias: /page-complete-de
+        langcode: de
+        pathauto: 0
+    content_translation_source:
+      -
+        value: en
+    content_translation_outdated:
+      -
+        value: false
+    body:
+      -
+        value: "<!-- wp:custom/hero {\"mediaEntityIds\":[\"3a0fe860-a6d6-428a-9474-365bd57509aa\"],\"headline\":\"Headline\",\"lead\":\"Lead text\"} /-->\r\n\r\n<!-- wp:custom/content -->\r\n<!-- wp:paragraph -->\r\n<p>Paragraph</p>\r\n<!-- /wp:paragraph -->\r\n\r\n<!-- wp:drupalmedia/drupal-media-entity {\"mediaEntityIds\":[\"72187a1f-3e48-4b45-a9b7-189c6fd7ee26\"],\"caption\":\"Image caption\"} /-->\r\n<!-- /wp:custom/content -->"
+        format: gutenberg
+        summary: ''
