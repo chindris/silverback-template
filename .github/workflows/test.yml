@@ -1,15 +1,6 @@
 name: Test
 on:
   push:
-env:
-  # On Github Actions, use 127.0.0.1 instead of localhost, since this
-  # works more reliably there.
-  DRUPAL_INTERNAL_URL: 'http://127.0.0.1:8888'
-  DRUPAL_EXTERNAL_URL: 'http://127.0.0.1:8888'
-  PUBLISHER_URL: 'http://127.0.0.1:8000'
-  NETLIFY_URL: 'http://127.0.0.1:8000'
-  PLAYWRIGHT_WEBSITE_URL: 'http://127.0.0.1:8000'
-  PLAYWRIGHT_CMS_URL: 'http://127.0.0.1:8888'
 
 jobs:
 

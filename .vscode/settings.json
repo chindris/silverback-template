@@ -27,5 +27,10 @@
     "**/src/**/*.test.{ts,tsx}"
   ],
   "vitest.enable": true,
-  "vitest.changeBackgroundColor": true
+  "vitest.changeBackgroundColor": true,
+  "files.associations": {
+    "*.module": "php",
+    "*.install": "php",
+    "*.profile": "php"
+  }
 }

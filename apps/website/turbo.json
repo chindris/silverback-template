@@ -32,7 +32,7 @@
         "netlify/**",
         "netlify.toml"
       ],
-      "outputs": ["public/**", ".cache/**"]
+      "outputs": ["public/**", ".cache/**", ".env"]
     }
   }
 }

@@ -8,6 +8,7 @@ dependencies:
   module:
     - content_moderation
     - content_translation
+    - dropzonejs
     - filter
     - gutenberg
     - media
@@ -35,6 +36,7 @@ permissions:
   - 'create media'
   - 'delete any media'
   - 'delete media'
+  - 'dropzone upload files'
   - 'translate editable entities'
   - 'update any media'
   - 'use basic transition archive'

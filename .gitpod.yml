@@ -1,19 +1,30 @@
 tasks:
   - name: Setup
     init: pnpm install && pnpm turbo build && gp sync-done setup
-    command: |
-      export NETLIFY_URL='http://localhost:8000'
-      export DRUPAL_EXTERNAL_URL="http://localhost:8888"
-      export PUBLISHER_¨URL="http://localhost:8000"
+    env:
+      NETLIFY_URL: http://localhost:8000
+      DRUPAL_EXTERNAL_URL: http://localhost:8888
+      DRUPAL_INTERNAL_URL: http://127.0.0.1:8888
+      PUBLISHER_URL: http://localhost:8000
   - name: Storybook
     init: gp sync-await setup
     command: pnpm run --filter @custom/ui dev
   - name: Drupal
     init: gp sync-await setup
     command: pnpm run --filter @custom/cms dev
+    env:
+      NETLIFY_URL: http://localhost:8000
+      DRUPAL_EXTERNAL_URL: http://localhost:8888
+      DRUPAL_INTERNAL_URL: http://127.0.0.1:8888
+      PUBLISHER_URL: http://localhost:8000
   - name: Gatsby
     init: gp sync-await setup
     command: pnpm run --filter @custom/website serve
+    env:
+      NETLIFY_URL: http://localhost:8000
+      DRUPAL_EXTERNAL_URL: http://localhost:8888
+      DRUPAL_INTERNAL_URL: http://127.0.0.1:8888
+      PUBLISHER_URL: http://localhost:8000
   - name: Codegen
     init: gp sync-await setup
     command: pnpm --filter @custom/schema run watch

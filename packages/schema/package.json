@@ -19,8 +19,7 @@
     "typescript": "^5.0.4"
   },
   "dependencies": {
-    "@amazeelabs/scalars": "^1.2.0",
-    "@amazeelabs/bridge": "^1.2.0",
+    "@amazeelabs/scalars": "^1.2.11",
     "swr": "^2.1.5"
   }
 }

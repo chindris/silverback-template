@@ -26,8 +26,11 @@ export default defineConfig({
       port: 7999,
     },
     deploy: isNetlifyEnabled
-      ? 'pnpm netlify deploy --dir=public --prod && pnpm netlify env:set DRUPAL_EXTERNAL_URL ' +
-        process.env.DRUPAL_EXTERNAL_URL
+      ? [
+          `pnpm netlify env:set AWS_LAMBDA_JS_RUNTIME nodejs18.x`,
+          `pnpm netlify env:set DRUPAL_EXTERNAL_URL ${process.env.DRUPAL_EXTERNAL_URL}`,
+          `pnpm netlify deploy --dir=public --prod`,
+        ].join(' && ')
       : 'echo "Fake deployment done"',
   },
   databaseUrl: 'persisted-store/publisher.sqlite',
