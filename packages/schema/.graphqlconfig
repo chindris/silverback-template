@@ -1,4 +1,4 @@
 {
   "name": "Custom GraphQL schema",
-  "schemaPath": "schema.graphql"
+  "schemaPath": "**/*.graphqls"
 }
