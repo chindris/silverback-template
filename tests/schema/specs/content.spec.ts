@@ -3,55 +3,77 @@ import { expect, test } from 'vitest';
 
 import { fetch } from './lib';
 
-test('Home page', async () => {
+test('Page', async () => {
   const result = await fetch(gql`
+    fragment Page on Page {
+      title
+      path
+      locale
+      hero {
+        __typename
+      }
+      content {
+        __typename
+      }
+      translations {
+        __typename
+        locale
+      }
+    }
     {
-      loadPage(id: "0b45a665-286a-414e-a091-c13fa4e20eb2") {
+      complete: loadPage(id: "ef80e284-154b-41fd-9317-154b0a175299") {
+        ...Page
+      }
+      minimal: loadPage(id: "17626bb4-557f-48fc-b869-ae566f4ceae6") {
         ...Page
       }
     }
-    ${Page}
   `);
   expect(result).toMatchInlineSnapshot(`
     {
       "data": {
-        "loadPage": {
+        "complete": {
           "content": [
+            {
+              "__typename": "BlockText",
+            },
             {
               "__typename": "BlockImage",
             },
           ],
           "hero": {
-            "headline": "Architecture",
-            "image": {
-              "alt": "A beautiful landscape.",
-              "source": "{\\"src\\":\\"http:\\\\/\\\\/127.0.0.1:8888\\\\/sites\\\\/default\\\\/files\\\\/2023-04\\\\/landscape.jpg\\",\\"width\\":2200,\\"height\\":1414}",
-            },
-            "lead": "Our decoupled website architecture.",
+            "__typename": "Hero",
           },
           "locale": "en",
-          "path": "/en/architecture",
-          "title": "Architecture",
+          "path": "/en/page-complete",
+          "title": "Page: complete",
           "translations": [
             {
-              "content": [
-                {
-                  "__typename": "BlockImage",
-                },
-              ],
+              "__typename": "Page",
               "locale": "en",
-              "path": "/en/architecture",
-              "title": "Architecture",
             },
             {
-              "content": [
-                {
-                  "__typename": "BlockImage",
-                },
-              ],
+              "__typename": "Page",
               "locale": "de",
-              "path": "/de/architektur",
-              "title": "Architektur",
+            },
+          ],
+        },
+        "minimal": {
+          "content": [
+            {
+              "__typename": "BlockText",
+            },
+          ],
+          "hero": {
+            "__typename": "Hero",
+          },
+          "locale": "en",
+          "path": "/en/page-minimal",
+          "title": "Page: minimal",
+          "translations": [
+            {
+              "__typename": "Page",
+              "locale": "en",
             },
           ],
         },
@@ -59,30 +81,3 @@ test('Home page', async () => {
     }
   `);
 });
-
-const Page = gql`
-  fragment Page on Page {
-    title
-    path
-    locale
-    hero {
-      headline
-      lead
-      image {
-        source
-        alt
-      }
-    }
-    translations {
-      title
-      path
-      locale
-      content {
-        __typename
-      }
-    }
-    content {
-      __typename
-    }
-  }
-`;

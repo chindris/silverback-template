@@ -37,6 +37,11 @@ production deployment.
 pnpm i
 ```
 
+Additionally, you can run `pnpm turbo:test`. This will serve two purposes:
+
+- It will make sure that your system is fully compatible with the project
+- It will generate code that is required for IDE autocompletion
+
 ## Working with apps and packages
 
 Navigate to an app or package folder and run `pnpm turbo:dev`. Turborepo will

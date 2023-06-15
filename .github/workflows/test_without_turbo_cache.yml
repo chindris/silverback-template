@@ -1,0 +1,28 @@
+name: Test without Turbo cache
+on:
+  workflow_dispatch:
+
+jobs:
+
+  test:
+    name: Test
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup
+        uses: ./.github/actions/setup
+
+      - name: Test
+        run: pnpm turbo:test
+
+      - name: Upload Playwright report
+        uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: playwright-report
+          path: tests/e2e/playwright-report/
+          retention-days: 3
