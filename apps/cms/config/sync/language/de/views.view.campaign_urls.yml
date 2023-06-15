@@ -1,0 +1,54 @@
+display:
+  default:
+    display_title: Standard
+    display_options:
+      fields:
+        campaign_url_bulk_form:
+          label: Massenaktualisierung
+          action_title: Aktion
+        campaign_url_source:
+          label: Quelle
+          separator: ', '
+        campaign_url_destination:
+          label: Ziel
+          separator: ', '
+        status_code:
+          label: Statuscode
+          separator: ', '
+        force:
+          separator: ', '
+        created:
+          label: Erstellt
+          separator: ', '
+        changed:
+          label: Aktualisiert
+          separator: ', '
+        operations:
+          label: Aktionen
+      pager:
+        options:
+          tags:
+            next: ››
+            previous: ‹‹
+            first: '« Anfang'
+            last: 'Ende »'
+          expose:
+            items_per_page_label: 'Elemente pro Seite'
+            items_per_page_options_all_label: '- Alle -'
+            offset_label: Versatz
+      exposed_form:
+        options:
+          submit_button: Anwenden
+          reset_button_label: Zurücksetzen
+          exposed_sorts_label: 'Sortieren nach'
+          sort_asc_label: Aufsteigend
+          sort_desc_label: Absteigend
+      filters:
+        campaign_url_source:
+          expose:
+            label: Quelle
+        campaign_url_destination:
+          expose:
+            label: Ziel
+  page_campaign_urls:
+    display_title: Seite

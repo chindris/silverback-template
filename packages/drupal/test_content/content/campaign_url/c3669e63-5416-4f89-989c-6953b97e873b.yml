@@ -1,0 +1,26 @@
+_meta:
+  version: '1.0'
+  entity_type: campaign_url
+  uuid: c3669e63-5416-4f89-989c-6953b97e873b
+default:
+  campaign_url_source:
+    -
+      value: /prvtsphaere
+  campaign_url_destination:
+    -
+      value: /de/privatsphaere
+  status_code:
+    -
+      value: 301
+  force:
+    -
+      value: true
+  author:
+    -
+      target_id: 1
+  edited_by:
+    -
+      target_id: 1
+  created:
+    -
+      value: 1686801911

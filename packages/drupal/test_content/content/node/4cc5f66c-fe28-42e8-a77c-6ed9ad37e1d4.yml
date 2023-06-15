@@ -1,0 +1,47 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 4cc5f66c-fe28-42e8-a77c-6ed9ad37e1d4
+  bundle: page
+  default_langcode: en
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Maple tree'
+  created:
+    -
+      value: 1686808947
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /tree/maple
+      langcode: en
+      pathauto: 0
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  body:
+    -
+      value: "<!-- wp:custom/hero {\"headline\":\"Maple tree\"} /-->\r\n\r\n<!-- wp:custom/content -->\r\n<!-- wp:paragraph -->\r\n<p></p>\r\n<!-- /wp:paragraph -->\r\n<!-- /wp:custom/content -->"
+      format: gutenberg
+      summary: ''

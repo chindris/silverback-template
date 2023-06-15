@@ -1,0 +1,26 @@
+_meta:
+  version: '1.0'
+  entity_type: campaign_url
+  uuid: 809f5da6-f204-402e-9bd0-7c1e14c1bc42
+default:
+  campaign_url_source:
+    -
+      value: /php_redirect
+  campaign_url_destination:
+    -
+      value: /en/php
+  status_code:
+    -
+      value: 301
+  force:
+    -
+      value: true
+  author:
+    -
+      target_id: 1
+  edited_by:
+    -
+      target_id: 1
+  created:
+    -
+      value: 1686801727

@@ -1,0 +1,47 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: fef0d57f-5a13-4009-8740-bb7a62935906
+  bundle: page
+  default_langcode: en
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: Oak
+  created:
+    -
+      value: 1686808864
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /tree/oak
+      langcode: en
+      pathauto: 0
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  body:
+    -
+      value: "<!-- wp:custom/hero {\"headline\":\"Oak\"} /-->\r\n\r\n<!-- wp:custom/content -->\r\n<!-- wp:paragraph -->\r\n<p></p>\r\n<!-- /wp:paragraph -->\r\n<!-- /wp:custom/content -->"
+      format: gutenberg
+      summary: ''
