@@ -1,0 +1,26 @@
+_meta:
+  version: '1.0'
+  entity_type: campaign_url
+  uuid: 3112b6c4-acae-4092-9a71-ff7ef4307f05
+default:
+  campaign_url_source:
+    -
+      value: '/old_tree/*'
+  campaign_url_destination:
+    -
+      value: '/en/tree/:splat'
+  status_code:
+    -
+      value: 301
+  force:
+    -
+      value: false
+  author:
+    -
+      target_id: 1
+  edited_by:
+    -
+      target_id: 1
+  created:
+    -
+      value: 1686806418

@@ -16,6 +16,7 @@ schema_configuration:
   directable:
     schema_definition: ../generated/graphql/schema.graphqls
     extensions:
+      silverback_campaign_urls: silverback_campaign_urls
       silverback_gatsby: silverback_gatsby
 persisted_queries_settings:
   silverback_graphql_persisted:

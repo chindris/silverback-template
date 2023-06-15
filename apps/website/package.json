@@ -5,7 +5,7 @@
     "@amazeelabs/bridge-gatsby": "^1.1.1",
     "@amazeelabs/cloudinary-responsive-image": "^1.2.11",
     "@amazeelabs/gatsby-silverback-cloudinary": "^1.0.18",
-    "@amazeelabs/gatsby-source-silverback": "^1.10.5",
+    "@amazeelabs/gatsby-source-silverback": "^1.10.6",
     "@amazeelabs/publisher": "^2.1.17",
     "@amazeelabs/strangler-netlify": "^1.1.0",
     "@custom/schema": "workspace:*",

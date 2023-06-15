@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9c948c8cc10cf97d6ec4351730bf633a",
+    "content-hash": "d174f84f43d9a6cc925214a7bfce5bfa",
     "packages": [
         {
             "name": "amazeeio/drupal_integrations",
@@ -338,6 +338,32 @@
                 "source": "https://github.com/AmazeeLabs/silverback-cli/tree/2.9.4"
             },
             "time": "2023-04-21T15:54:41+00:00"
+        },
+        {
+            "name": "amazeelabs/silverback_campaign_urls",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/AmazeeLabs/silverback_campaign_urls.git",
+                "reference": "6ac1438fb592764b6cb9a3d4778c545d7ad6e3c0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AmazeeLabs/silverback_campaign_urls/zipball/6ac1438fb592764b6cb9a3d4778c545d7ad6e3c0",
+                "reference": "6ac1438fb592764b6cb9a3d4778c545d7ad6e3c0",
+                "shasum": ""
+            },
+            "type": "drupal-module",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "description": "Allows creating campaign url entities that can be afterwards exposed via graphql, as redirects.",
+            "homepage": "https://github.com/AmazeeLabs/silverback-mono/tree/development/packages/composer/amazeelabs/silverback_campaign_urls#readme",
+            "support": {
+                "source": "https://github.com/AmazeeLabs/silverback_campaign_urls/tree/1.0.2"
+            },
+            "time": "2023-06-15T03:58:06+00:00"
         },
         {
             "name": "amazeelabs/silverback_cdn_redirect",

@@ -1,0 +1,16 @@
+uuid: 5fce9548-06c9-45fd-9808-3b58e1d191a5
+langcode: en
+status: true
+dependencies:
+  module:
+    - silverback_campaign_urls
+  enforced:
+    module:
+      - silverback_campaign_urls
+_core:
+  default_config_hash: VjM-PhdpNCDdqPqTRtEaTUsylOI66eGdTsgmfa9fKPU
+id: campaign_url_delete_action
+label: 'Delete campaign url'
+type: campaign_url
+plugin: campaign_url_delete_action
+configuration: {  }
