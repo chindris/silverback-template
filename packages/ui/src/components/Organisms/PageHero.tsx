@@ -10,6 +10,7 @@ export function PageHero(props: NonNullable<PageFragment['hero']>) {
           source={props.image.source}
           priority={true}
           className="absolute inset-0 -z-10 h-full w-full object-cover"
+          data-test-id={'hero-image'}
         />
       ) : null}
       <div
