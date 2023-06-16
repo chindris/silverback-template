@@ -6,7 +6,7 @@ FROM uselagoon/node-18-builder as builder
 ENV PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1
 
 # Install pnpm
-RUN npm install -g pnpm@8 && pnpm config set store-dir /tmp/cache/pnpm
+RUN npm install -g pnpm@8.6.0 && pnpm config set store-dir /tmp/cache/pnpm
 
 # Copy pnpm lockfile and install dependencies.
 COPY pnpm-lock.yaml .npmrc /app/
@@ -110,7 +110,7 @@ RUN apk add --no-cache --virtual=.build-dependencies wget ca-certificates && \
 
 RUN apk add --no-cache sqlite curl
 
-RUN npm install -g pnpm@8
+RUN npm install -g pnpm@8.6.0
 ENV DENO_INSTALL="/home/.deno"
 RUN curl -fsSL https://deno.land/x/install/install.sh | sh
 RUN ln -s /home/.deno/bin/deno /usr/local/bin/deno
