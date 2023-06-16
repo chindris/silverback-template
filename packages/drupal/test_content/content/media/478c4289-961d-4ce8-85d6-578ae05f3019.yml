@@ -1,0 +1,37 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 478c4289-961d-4ce8-85d6-578ae05f3019
+  bundle: video
+  default_langcode: en
+  depends:
+    216ea791-6694-495e-83dd-61f5a5105911: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: video_mp4_belt.mp4
+  created:
+    -
+      value: 1686759528
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_media_video_file:
+    -
+      entity: 216ea791-6694-495e-83dd-61f5a5105911
+      display: false
+      description: ''

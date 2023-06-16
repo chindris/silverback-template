@@ -1,7 +1,0 @@
-fragment BlockImage on BlockImage {
-  image {
-    source(width: 1536, sizes: [[768, 768], [1536, 1536]])
-    alt
-  }
-  caption
-}

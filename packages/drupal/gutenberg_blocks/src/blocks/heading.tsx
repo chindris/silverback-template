@@ -1,6 +1,6 @@
-import { BlockControls,RichText } from 'wordpress__block-editor';
-import { createBlock,registerBlockType } from 'wordpress__blocks';
-import { Path,SVG, ToolbarGroup } from 'wordpress__components';
+import { BlockControls, RichText } from 'wordpress__block-editor';
+import { createBlock, registerBlockType } from 'wordpress__blocks';
+import { Path, SVG, ToolbarGroup } from 'wordpress__components';
 import { compose, withState } from 'wordpress__compose';
 
 import { cleanUpText } from '../utils/clean-up-text';
@@ -106,6 +106,8 @@ registerBlockType('custom/heading', {
     );
   }),
 
+  // Provide the actual `save` method to be able to aggregate the heading with
+  // other HTML blocks.
   save: (props) => {
     const TagName = `h${props.attributes.level}`;
     return (

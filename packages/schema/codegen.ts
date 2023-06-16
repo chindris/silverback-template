@@ -36,6 +36,9 @@ const config: CodegenConfig = {
           ImageSource: '@amazeelabs/scalars#ImageSource',
         },
         withObjectType: true,
+        // Only add __typename to types if it is explicitly specified in the
+        // query.
+        skipTypename: true,
       },
     },
   },

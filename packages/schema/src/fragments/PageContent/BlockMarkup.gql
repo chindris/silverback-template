@@ -1,0 +1,3 @@
+fragment BlockMarkup on BlockMarkup {
+  markup
+}

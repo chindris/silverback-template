@@ -1,0 +1,125 @@
+import gql from 'noop-tag';
+import { expect, test } from 'vitest';
+
+import { fetch } from './lib';
+
+test('Blocks', async () => {
+  const result = await fetch(gql`
+    fragment Blocks on Page {
+      hero {
+        __typename
+        headline
+        lead
+        image {
+          __typename
+        }
+      }
+      content {
+        __typename
+        ... on BlockMarkup {
+          markup
+        }
+        ... on BlockMedia {
+          caption
+          media {
+            __typename
+            ... on MediaImage {
+              __typename
+            }
+            ... on MediaVideo {
+              __typename
+            }
+          }
+        }
+      }
+    }
+    {
+      complete: loadPage(id: "a397ca48-8fad-411e-8901-0eba2feb989c") {
+        ...Blocks
+      }
+      minimal: loadPage(id: "ceb9b2a7-4c4c-4084-ada9-d5f6505d466b") {
+        ...Blocks
+      }
+    }
+  `);
+
+  const firstParagraph = result.data.complete.content[0];
+  firstParagraph.markup = firstParagraph.markup.replace(
+    /data-id="\d+"/,
+    'data-id="[numeric]"',
+  );
+
+  expect(result).toMatchInlineSnapshot(`
+    {
+      "data": {
+        "complete": {
+          "content": [
+            {
+              "__typename": "BlockMarkup",
+              "markup": "
+    <p>A standalone paragraph with <strong><em>markup</em></strong> and <a href=\\"/en/architecture\\" data-type=\\"Content: Basic page\\" data-id=\\"[numeric]\\">link</a></p>
+    ",
+            },
+            {
+              "__typename": "BlockMedia",
+              "caption": "Media image",
+              "media": {
+                "__typename": "MediaImage",
+              },
+            },
+            {
+              "__typename": "BlockMedia",
+              "caption": "Media video",
+              "media": {
+                "__typename": "MediaVideo",
+              },
+            },
+            {
+              "__typename": "BlockMarkup",
+              "markup": "
+    <p>Starting from this paragraph, all the following blocks should be aggregated, as they are just HTML</p>
+
+    <figure class=\\"wp-block-table\\"><table><tbody><tr><td>1</td><td>2</td></tr><tr><td>3</td><td>4 with <strong>markup</strong></td></tr></tbody></table><figcaption>Table caption</figcaption></figure><ul><li>list 1</li><li>list 2<ol><li>list 2.2</li></ol></li></ul><h3 class=\\"wp-block-custom-heading\\">Heading 3</h3>
+
+    <blockquote class=\\"wp-block-quote\\"><p>Quote</p><cite>Citation</cite></blockquote>
+
+    <p></p>
+    ",
+            },
+          ],
+          "hero": {
+            "__typename": "Hero",
+            "headline": "All kinds of blocks with maximum data",
+            "image": {
+              "__typename": "MediaImage",
+            },
+            "lead": "Lead text",
+          },
+        },
+        "minimal": {
+          "content": [
+            {
+              "__typename": "BlockMedia",
+              "caption": null,
+              "media": null,
+            },
+            {
+              "__typename": "BlockMarkup",
+              "markup": "
+    <ul><li></li></ul><figure class=\\"wp-block-table\\"><table><tbody><tr><td></td><td></td></tr><tr><td></td><td></td></tr></tbody></table></figure><blockquote class=\\"wp-block-quote\\"><p></p></blockquote>
+
+    <h2 class=\\"wp-block-custom-heading\\"></h2>
+    ",
+            },
+          ],
+          "hero": {
+            "__typename": "Hero",
+            "headline": "All kinds of blocks with minimum data",
+            "image": null,
+            "lead": null,
+          },
+        },
+      },
+    }
+  `);
+});

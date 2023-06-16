@@ -6,18 +6,17 @@ import { fetch } from './lib';
 test('Page', async () => {
   const result = await fetch(gql`
     fragment Page on Page {
-      title
-      path
       locale
+      path
+      title
+      teaserImage {
+        __typename
+      }
       hero {
         __typename
       }
       content {
         __typename
-      }
-      translations {
-        __typename
-        locale
       }
     }
     {
@@ -35,10 +34,10 @@ test('Page', async () => {
         "complete": {
           "content": [
             {
-              "__typename": "BlockText",
+              "__typename": "BlockMarkup",
             },
             {
-              "__typename": "BlockImage",
+              "__typename": "BlockMedia",
             },
           ],
           "hero": {
@@ -46,22 +45,15 @@ test('Page', async () => {
           },
           "locale": "en",
           "path": "/en/page-complete",
+          "teaserImage": {
+            "__typename": "MediaImage",
+          },
           "title": "Page: complete",
-          "translations": [
-            {
-              "__typename": "Page",
-              "locale": "en",
-            },
-            {
-              "__typename": "Page",
-              "locale": "de",
-            },
-          ],
         },
         "minimal": {
           "content": [
             {
-              "__typename": "BlockText",
+              "__typename": "BlockMarkup",
             },
           ],
           "hero": {
@@ -69,13 +61,8 @@ test('Page', async () => {
           },
           "locale": "en",
           "path": "/en/page-minimal",
+          "teaserImage": null,
           "title": "Page: minimal",
-          "translations": [
-            {
-              "__typename": "Page",
-              "locale": "en",
-            },
-          ],
         },
       },
     }

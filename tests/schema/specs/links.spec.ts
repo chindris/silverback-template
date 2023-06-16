@@ -9,7 +9,7 @@ test('Links', async () => {
       loadPage(id: "25086be7-ca5f-4ff8-9695-b9c71a676d4e") {
         content {
           __typename
-          ... on BlockText {
+          ... on BlockMarkup {
             markup
           }
         }
@@ -27,7 +27,7 @@ test('Links', async () => {
         "loadPage": {
           "content": [
             {
-              "__typename": "BlockText",
+              "__typename": "BlockMarkup",
               "markup": "
     <p><a href=\\"/sites/default/files/2023-04/document_docx.docx\\" data-type=\\"Media: Document\\" data-id=\\"[id]\\">link to file</a></p>
 
