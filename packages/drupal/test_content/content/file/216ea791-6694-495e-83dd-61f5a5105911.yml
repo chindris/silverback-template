@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 216ea791-6694-495e-83dd-61f5a5105911
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: video_mp4_belt.mp4
+  uri:
+    -
+      value: 'public://2023-06/video_mp4_belt.mp4'
+  filemime:
+    -
+      value: video/mp4
+  filesize:
+    -
+      value: 2013488
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1686759528

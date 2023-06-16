@@ -1,6 +1,7 @@
 import {
   // @ts-ignore
   __experimentalLinkControl as LinkControl,
+  InnerBlocks,
   InspectorControls,
   RichText,
 } from 'wordpress__block-editor';
@@ -101,7 +102,7 @@ registerBlockType('custom/hero', {
                 ...props.attributes,
                 lockViewMode: true,
                 viewMode: 'gutenberg_header',
-                allowedTypes: ['image', 'video'],
+                allowedTypes: ['image'],
               }}
               setAttributes={props.setAttributes}
               isMediaLibraryEnabled={true}
@@ -173,7 +174,5 @@ registerBlockType('custom/hero', {
       </>
     );
   }),
-  save: () => {
-    return null;
-  },
+  save: () => <InnerBlocks.Content />,
 });

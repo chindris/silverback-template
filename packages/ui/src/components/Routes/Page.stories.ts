@@ -1,8 +1,8 @@
 import { Meta, StoryObj } from '@storybook/react';
 
 import { image } from '../../helpers/image';
-import { WithCaption } from '../Organisms/PageContent/BlockImage.stories';
-import { Mixed, Paragraph } from '../Organisms/PageContent/BlockText.stories';
+import { Mixed, Paragraph } from '../Organisms/PageContent/BlockMarkup.stories';
+import { WithCaption } from '../Organisms/PageContent/BlockMedia.stories';
 import { Page } from './Page';
 
 export default {
@@ -18,15 +18,15 @@ export const Default = {
       },
       content: [
         {
-          __typename: 'BlockText',
+          __typename: 'BlockMarkup',
           ...Mixed.args,
         },
         {
-          __typename: 'BlockImage',
+          __typename: 'BlockMedia',
           ...WithCaption.args,
         },
         {
-          __typename: 'BlockText',
+          __typename: 'BlockMarkup',
           ...Paragraph.args,
         },
       ],
@@ -51,15 +51,15 @@ export const FullHero = {
       },
       content: [
         {
-          __typename: 'BlockText',
+          __typename: 'BlockMarkup',
           ...Mixed.args,
         },
         {
-          __typename: 'BlockImage',
+          __typename: 'BlockMedia',
           ...WithCaption.args,
         },
         {
-          __typename: 'BlockText',
+          __typename: 'BlockMarkup',
           ...Paragraph.args,
         },
       ],

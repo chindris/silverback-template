@@ -1,4 +1,4 @@
-import { BlockTextFragment, Html } from '@custom/schema';
+import { BlockMarkupFragment, Html } from '@custom/schema';
 import { ArrowRightCircleIcon } from '@heroicons/react/20/solid';
 import clsx from 'clsx';
 import type { Element } from 'hast';
@@ -12,7 +12,7 @@ const unorderedItems: Plugin<[], Element> = () => (tree) => {
   });
 };
 
-export function BlockText(props: BlockTextFragment) {
+export function BlockMarkup(props: BlockMarkupFragment) {
   return (
     <div
       className={clsx([

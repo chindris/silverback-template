@@ -1,25 +1,25 @@
 import { Markup } from '@custom/schema';
 import { Meta, StoryObj } from '@storybook/react';
 
-import { BlockText } from './BlockText';
+import { BlockMarkup } from './BlockMarkup';
 
 export default {
-  component: BlockText,
-} satisfies Meta<typeof BlockText>;
+  component: BlockMarkup,
+} satisfies Meta<typeof BlockMarkup>;
 
 export const Paragraph = {
   args: {
     markup:
       `<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>` as Markup,
   },
-} satisfies StoryObj<typeof BlockText>;
+} satisfies StoryObj<typeof BlockMarkup>;
 
 export const InlineStyles = {
   args: {
     markup:
       `<p>Lorem <em>ipsum</em> dolor <strong>sit</strong> amet, consectetur <a href="/">adipiscing</a> elit, sed <sup>do</sup> eiusmod <sub>tempor</sub> incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>` as Markup,
   },
-} satisfies StoryObj<typeof BlockText>;
+} satisfies StoryObj<typeof BlockMarkup>;
 
 export const Headings = {
   args: {
@@ -32,7 +32,7 @@ export const Headings = {
       <h6>Heading 6</h6>
     ` as Markup,
   },
-} satisfies StoryObj<typeof BlockText>;
+} satisfies StoryObj<typeof BlockMarkup>;
 
 export const Quote = {
   args: {
@@ -54,7 +54,7 @@ export const OrderedList = {
       </ol>
     ` as Markup,
   },
-} satisfies StoryObj<typeof BlockText>;
+} satisfies StoryObj<typeof BlockMarkup>;
 
 export const UnorderedList = {
   args: {
@@ -66,7 +66,7 @@ export const UnorderedList = {
       </ul>
     ` as Markup,
   },
-} satisfies StoryObj<typeof BlockText>;
+} satisfies StoryObj<typeof BlockMarkup>;
 
 export const Mixed = {
   args: {
@@ -95,4 +95,4 @@ export const Mixed = {
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
     ` as Markup,
   },
-} satisfies StoryObj<typeof BlockText>;
+} satisfies StoryObj<typeof BlockMarkup>;

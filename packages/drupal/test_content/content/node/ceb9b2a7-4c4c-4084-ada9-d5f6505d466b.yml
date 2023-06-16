@@ -1,0 +1,47 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: ceb9b2a7-4c4c-4084-ada9-d5f6505d466b
+  bundle: page
+  default_langcode: en
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Blocks: minimal'
+  created:
+    -
+      value: 1686759406
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /blocks-minimal
+      langcode: en
+      pathauto: 0
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  body:
+    -
+      value: "<!-- wp:custom/hero {\"headline\":\"All kinds of blocks with minimum data\"} /-->\r\n\r\n<!-- wp:custom/content -->\r\n<!-- wp:drupalmedia/drupal-media-entity /-->\r\n\r\n<!-- wp:list -->\r\n<ul><li></li></ul><!-- /wp:list --><!-- wp:table --><figure class=\"wp-block-table\"><table><tbody><tr><td></td><td></td></tr><tr><td></td><td></td></tr></tbody></table></figure><!-- /wp:table --><!-- wp:quote --><blockquote class=\"wp-block-quote\"><p></p></blockquote>\r\n<!-- /wp:quote -->\r\n\r\n<!-- wp:custom/heading -->\r\n<h2 class=\"wp-block-custom-heading\"></h2>\r\n<!-- /wp:custom/heading -->\r\n<!-- /wp:custom/content -->"
+      format: gutenberg
+      summary: ''
