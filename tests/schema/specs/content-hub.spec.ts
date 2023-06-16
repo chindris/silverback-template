@@ -1,7 +1,7 @@
 import gql from 'noop-tag';
 import { describe, expect, it } from 'vitest';
 
-import { fetch } from './lib';
+import { fetch } from '../lib';
 
 describe('content hub', () => {
   it('returns limited results', async () => {

@@ -1,7 +1,7 @@
 import gql from 'noop-tag';
 import { expect, test } from 'vitest';
 
-import { fetch } from './lib';
+import { fetch } from '../lib';
 
 test('Image', async () => {
   const result = await fetch(gql`
