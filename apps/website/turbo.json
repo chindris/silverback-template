@@ -5,6 +5,11 @@
       "persistent": true,
       "dependsOn": ["@custom/cms#build", "prep", "^prep"]
     },
+    "dev:light": {
+      "notes": "Same as dev, but does not build the CMS",
+      "persistent": true,
+      "dependsOn": ["prep", "^prep"]
+    },
     "prep": {
       "outputs": ["src/gatsby-fragments.js", "styles.css"]
     },
