@@ -17,6 +17,7 @@ dependencies:
     - role_delegation
     - silverback_external_preview
     - system
+    - taxonomy
     - toolbar
 id: administrator
 label: Administrator
@@ -26,6 +27,7 @@ permissions:
   - 'access administration pages'
   - 'access content overview'
   - 'access media overview'
+  - 'access taxonomy overview'
   - 'access toolbar'
   - 'administer footer menu items'
   - 'administer main menu items'
