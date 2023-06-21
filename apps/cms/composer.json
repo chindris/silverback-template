@@ -60,6 +60,7 @@
     "drupal/field_group": "^3.4",
     "drupal/honeypot": "^2.1",
     "drupal/key_auth": "^2.1",
+    "drupal/lagoon_logs": "^2.1",
     "drupal/linkit": "^6.0@beta",
     "drupal/menu_admin_per_menu": "^1.5",
     "drupal/pathauto": "^1.11",

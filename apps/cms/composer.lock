@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e52b760ea97dbeb313374a3d65f7fcbd",
+    "content-hash": "7ad6d95659dbb18b9bf3df5149b773ea",
     "packages": [
         {
             "name": "amazeeio/drupal_integrations",
@@ -3370,6 +3370,64 @@
             "support": {
                 "source": "https://git.drupalcode.org/project/key_auth",
                 "issues": "https://www.drupal.org/project/issues/key_auth"
+            }
+        },
+        {
+            "name": "drupal/lagoon_logs",
+            "version": "2.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/lagoon_logs.git",
+                "reference": "2.1.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/lagoon_logs-2.1.1.zip",
+                "reference": "2.1.1",
+                "shasum": "272d5db455de168c4db2a77735796499cccc8127"
+            },
+            "require": {
+                "drupal/core": "^8 || ^9 || ^10",
+                "monolog/monolog": "^2.3"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "2.1.1",
+                    "datestamp": "1666752514",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Blaize Kaye",
+                    "homepage": "https://www.drupal.org/u/bomoko",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "fjgarlin",
+                    "homepage": "https://www.drupal.org/user/2495842"
+                },
+                {
+                    "name": "tim.clifford",
+                    "homepage": "https://www.drupal.org/user/3460013"
+                },
+                {
+                    "name": "tobybellwood",
+                    "homepage": "https://www.drupal.org/user/3529537"
+                }
+            ],
+            "description": "Simple monolog wrapper for Lagoon",
+            "homepage": "https://www.drupal.org/project/lagoon_logs",
+            "support": {
+                "source": "https://git.drupalcode.org/project/lagoon_logs"
             }
         },
         {
