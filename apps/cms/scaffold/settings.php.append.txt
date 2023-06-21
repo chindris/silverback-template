@@ -55,3 +55,8 @@ if (getenv('LAGOON_ENVIRONMENT') !== 'prod') {
   $config['reroute_email.settings']['enable'] = true;
   $config['reroute_email.settings']['address'] = 'development+silverback-template@amazeelabs.com';
 }
+
+// Slack settings.
+if (getenv('LAGOON_ENVIRONMENT') !== 'prod') {
+  $config['slack.settings']['slack_webhook_url'] = '';
+}

@@ -1,0 +1,9 @@
+_core:
+  default_config_hash: vCJ-85AGAgA07nN5Skv432TCc19rbXDZfr3KXBImHdg
+slack_webhook_url: ''
+slack_channel: '#silverback-template-notify'
+slack_username: 'Silverback Template Bot'
+slack_icon_type: none
+slack_icon_emoji: ''
+slack_icon_url: ''
+slack_link_names: false

@@ -1,0 +1,9 @@
+cron: 1
+daily: 1
+slack: 1
+email: 0
+email_to: ''
+list_changes: 1
+list_changes_limit: '0'
+add_host: 1
+custom_host_value: ''

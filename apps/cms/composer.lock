@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a6e0217b40d0e168629cce2c2fa09a9d",
+    "content-hash": "8f76866848593cdb1abf9156da1e50df",
     "packages": [
         {
             "name": "amazeeio/drupal_integrations",
@@ -2247,6 +2247,52 @@
             }
         },
         {
+            "name": "drupal/config_notify",
+            "version": "1.10.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/config_notify.git",
+                "reference": "8.x-1.10"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/config_notify-8.x-1.10.zip",
+                "reference": "8.x-1.10",
+                "shasum": "7daf22df772e890dd0c3cf3484c93142af557d6f"
+            },
+            "require": {
+                "drupal/core": "^8.8 || ^9 || ^10"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-1.10",
+                    "datestamp": "1675936852",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Fran Garcia (fjgarlin)",
+                    "homepage": "https://www.drupal.org/user/2495842",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "Send different notifications based on the status of the configuration.",
+            "homepage": "https://drupal.org/project/config_notify",
+            "support": {
+                "source": "http://cgit.drupalcode.org/config_notify",
+                "issues": "https://www.drupal.org/project/issues/config_notify"
+            }
+        },
+        {
             "name": "drupal/config_pages",
             "version": "2.14.0",
             "source": {
@@ -3615,6 +3661,67 @@
             "support": {
                 "source": "https://git.drupalcode.org/project/role_delegation",
                 "issues": "http://drupal.org/project/role_delegation"
+            }
+        },
+        {
+            "name": "drupal/slack",
+            "version": "1.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/slack.git",
+                "reference": "8.x-1.4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/slack-8.x-1.4.zip",
+                "reference": "8.x-1.4",
+                "shasum": "7c3873ae6875d6693659ee2317d621e599eb47b9"
+            },
+            "require": {
+                "drupal/core": "^9 || ^10"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-1.4",
+                    "datestamp": "1674691575",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Serge_Konst",
+                    "homepage": "https://www.drupal.org/u/serge_konst",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "Evgeny Leonov",
+                    "homepage": "https://www.drupal.org/u/hxdef",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "adci_contributor",
+                    "homepage": "https://www.drupal.org/u/adci_contributor",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "Stephen Mustgrave (smustgrave)",
+                    "homepage": "https://www.drupal.org/u/smustgrave",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "Integration with Slack.com service.",
+            "homepage": "https://www.drupal.org/project/slack",
+            "support": {
+                "source": "https://git.drupalcode.org/project/slack",
+                "issues": "https://www.drupal.org/project/issues/slack"
             }
         },
         {

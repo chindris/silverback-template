@@ -25,6 +25,11 @@ replace(
   'Silverback Drupal Template',
   process.env.PROJECT_NAME_HUMAN,
 );
+replace(
+  'apps/cms/config/sync/slack.settings.yml',
+  'Silverback Template Bot',
+  process.env.PROJECT_NAME_HUMAN + ' Bot',
+);
 ```
 
 Adjust project machine name in the repo.
@@ -44,6 +49,7 @@ replace(
     '.lagoon.yml',
     'README.md',
     'apps/cms/config/sync/system.site.yml',
+    'apps/cms/config/sync/slack.settings.yml',
     'apps/cms/scaffold/settings.php.append.txt',
   ],
   'silverback-template',

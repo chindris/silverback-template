@@ -10,6 +10,7 @@ module:
   config: 0
   config_filter: 0
   config_ignore: 0
+  config_notify: 0
   config_pages: 0
   config_translation: 0
   content_moderation: 0
@@ -62,6 +63,7 @@ module:
   silverback_iframe: 0
   silverback_publisher_monitor: 0
   silverback_translations: 0
+  slack: 0
   sqlite: 0
   stage_file_proxy: 0
   system: 0
