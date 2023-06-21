@@ -1,0 +1,35 @@
+_meta:
+  version: '1.0'
+  entity_type: user
+  uuid: fdd65784-7480-4b2e-9df5-31adbc038d0c
+  default_langcode: en
+default:
+  preferred_langcode:
+    -
+      value: en
+  preferred_admin_langcode:
+    -
+      value: en
+  name:
+    -
+      value: administrator
+  pass:
+    -
+      value: $S$EIZBkHnGDMer03csnkLGYbRzeh6gsw6g1spLekAb1BJFETQbjEzV
+      existing: ''
+      pre_hashed: true
+  timezone:
+    -
+      value: UTC
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1687353595
+  login:
+    -
+      value: 0
+  roles:
+    -
+      target_id: administrator
