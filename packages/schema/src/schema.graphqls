@@ -69,6 +69,7 @@ type Page implements ContentHubResultItem
     @resolveEditorBlockMedia
   hero: Hero @resolveEditorBlocks(path: "body.value") @seek(pos: 0)
   content: [PageContent]
+    @lang
     @resolveEditorBlocks(
       path: "body.value"
       aggregated: [
@@ -90,7 +91,11 @@ type Hero {
   image: MediaImage @resolveEditorBlockMedia
 }
 
-union PageContent @resolveEditorBlockType = BlockMarkup | BlockMedia
+union PageContent @resolveEditorBlockType = BlockMarkup | BlockMedia | BlockForm
+
+type BlockForm @type(id: "custom/form") {
+  url: Url @resolveEditorBlockAttribute(key: "formId") @webformIdToUrl
+}
 
 type BlockMarkup @type(id: "core/paragraph") {
   markup: Markup! @resolveEditorBlockMarkup
