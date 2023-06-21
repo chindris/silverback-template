@@ -77,7 +77,7 @@ replace(
   `value: ${authKey}`,
 );
 replace(
-  'tests/schema/specs/lib.ts',
+  'tests/schema/lib.ts',
   "'api-key': 'cfdb0555111c0f8924cecab028b53474'",
   `'api-key': '${authKey}'`,
 );
