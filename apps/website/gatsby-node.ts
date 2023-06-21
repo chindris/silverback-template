@@ -3,6 +3,9 @@ import { readFileSync } from 'fs';
 import { GatsbyNode } from 'gatsby';
 import { resolve } from 'path';
 
+// @ts-ignore
+import { Locale } from './schema-compiled.js';
+
 export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] =
   (args) => {
     // TODO: This is still necessary, because graphql-source-toolkit won't import
@@ -137,6 +140,24 @@ export const createPages: GatsbyNode['createPages'] = async ({
     fromPath: '/page-data/*',
     toPath: '/404',
     statusCode: 404,
+  });
+
+  // Proxy Drupal webforms.
+  Object.values(Locale).forEach((locale) => {
+    actions.createRedirect({
+      fromPath: `/${locale}/form/*`,
+      toPath: `${process.env.GATSBY_DRUPAL_URL}/${locale}/form/:splat`,
+      statusCode: 200,
+    });
+  });
+  // Additionally proxy themes and modules as they can have additional
+  // non-aggregated assets.
+  ['themes', 'modules'].forEach((path) => {
+    actions.createRedirect({
+      fromPath: `/${path}/*`,
+      toPath: `${process.env.GATSBY_DRUPAL_URL}/${path}/:splat`,
+      statusCode: 200,
+    });
   });
 
   // Any unhandled requests are handed to strangler, which will try to pass
