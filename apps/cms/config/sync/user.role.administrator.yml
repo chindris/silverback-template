@@ -6,6 +6,7 @@ dependencies:
     - filter.format.gutenberg
     - workflows.workflow.basic
   module:
+    - config_pages
     - content_moderation
     - content_translation
     - dropzonejs
@@ -39,6 +40,7 @@ permissions:
   - 'delete any media'
   - 'delete media'
   - 'dropzone upload files'
+  - 'edit config_pages entity'
   - 'translate editable entities'
   - 'update any media'
   - 'use basic transition archive'
@@ -49,4 +51,5 @@ permissions:
   - 'use text format gutenberg'
   - 'view all media revisions'
   - 'view any unpublished content'
+  - 'view config_pages entity'
   - 'view latest version'
