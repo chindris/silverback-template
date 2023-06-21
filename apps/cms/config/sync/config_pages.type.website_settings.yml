@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies: {  }
 id: website_settings
-label: 'Website settings'
+label: Basic
 token: false
 context:
   show_warning: true
@@ -12,6 +12,6 @@ context:
   fallback:
     language: ''
 menu:
-  path: /admin/config/website-settings
+  path: /admin/config/website-settings/basic
   weight: 0
   description: 'Global website settings, like front and 404 pages.'

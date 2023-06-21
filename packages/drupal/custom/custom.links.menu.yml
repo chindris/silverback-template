@@ -1,0 +1,6 @@
+custom.website_settings:
+  title: Website settings
+  parent: system.admin_config
+  description: 'Website settings.'
+  route_name: custom.website_settings
+  weight: -100
