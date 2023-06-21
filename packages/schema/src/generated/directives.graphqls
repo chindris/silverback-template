@@ -243,3 +243,10 @@ Provided by the "graphql_directives" module.
 Implemented in "Drupal\graphql_directives\Plugin\GraphQL\Directive\Seek".
 """
 directive @seek(pos: Int!) repeatable on FIELD_DEFINITION | SCALAR | UNION | ENUM | INTERFACE | OBJECT
+"""
+Takes webform ID. Returns webform Url.
+
+Provided by the "custom" module.
+Implemented in "Drupal\custom\Plugin\GraphQL\Directive\WebformIdToUrl".
+"""
+directive @webformIdToUrl repeatable on FIELD_DEFINITION | SCALAR | UNION | ENUM | INTERFACE | OBJECT

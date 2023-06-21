@@ -21,5 +21,6 @@ fragment Page on Page {
     __typename
     ...BlockMarkup
     ...BlockMedia
+    ...BlockForm
   }
 }

@@ -1,0 +1,22 @@
+uuid: 9487e45b-2771-41df-890f-7bb3049d0a8c
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - silverback_iframe_theme
+_core:
+  default_config_hash: a0Yyx1GeyKarZ4T_yXQBR_ZFKnXiFLtxAb6gWLd8nr0
+id: silverback_iframe_theme_content
+theme: silverback_iframe_theme
+region: content
+weight: -1
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Main page content'
+  label_display: '0'
+  provider: system
+visibility: {  }
