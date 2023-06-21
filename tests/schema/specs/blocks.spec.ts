@@ -31,6 +31,9 @@ test('Blocks', async () => {
             }
           }
         }
+        ... on BlockForm {
+          url
+        }
       }
     }
     {
@@ -75,6 +78,10 @@ test('Blocks', async () => {
               },
             },
             {
+              "__typename": "BlockForm",
+              "url": "http://127.0.0.1:8888/en/form/contact",
+            },
+            {
               "__typename": "BlockMarkup",
               "markup": "
     <p>Starting from this paragraph, all the following blocks should be aggregated, as they are just HTML</p>
@@ -104,6 +111,10 @@ test('Blocks', async () => {
               "media": null,
             },
             {
+              "__typename": "BlockForm",
+              "url": null,
+            },
+            {
               "__typename": "BlockMarkup",
               "markup": "
     <ul><li></li></ul><figure class=\\"wp-block-table\\"><table><tbody><tr><td></td><td></td></tr><tr><td></td><td></td></tr></tbody></table></figure><blockquote class=\\"wp-block-quote\\"><p></p></blockquote>
@@ -122,4 +133,21 @@ test('Blocks', async () => {
       },
     }
   `);
+
+  const german = await fetch(gql`
+    {
+      loadPage(id: "a397ca48-8fad-411e-8901-0eba2feb989c:de") {
+        content {
+          __typename
+          ... on BlockForm {
+            url
+          }
+        }
+      }
+    }
+  `);
+  const germanForm = german.data.loadPage.content.find(
+    (it: any) => it.__typename === 'BlockForm',
+  );
+  expect(germanForm.url).toBe('http://127.0.0.1:8888/de/form/contact');
 });

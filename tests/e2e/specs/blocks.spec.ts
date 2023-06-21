@@ -56,4 +56,10 @@ test('All blocks are rendered', async ({ page }) => {
   await expect(page.locator('blockquote > cite:text("Citation")')).toHaveCount(
     1,
   );
+
+  // Form
+  await expect(page.locator('.silverback-iframe iframe')).toHaveAttribute(
+    'src',
+    'http://127.0.0.1:8000/en/form/contact?iframe=true',
+  );
 });
