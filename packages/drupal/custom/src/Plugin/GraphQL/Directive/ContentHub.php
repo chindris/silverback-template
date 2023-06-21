@@ -6,7 +6,6 @@ use Drupal\Core\Plugin\PluginBase;
 use Drupal\graphql\GraphQL\ResolverBuilder;
 use Drupal\graphql_directives\DirectiveInterface;
 use Drupal\graphql\GraphQL\Resolver\ResolverInterface;
-use Drupal\graphql_directives\Plugin\GraphQL\Directive\ArgumentTrait;
 use Drupal\node\Entity\Node;
 
 /**
@@ -18,6 +17,8 @@ use Drupal\node\Entity\Node;
 class ContentHub extends PluginBase implements DirectiveInterface {
 
   public function buildResolver(ResolverBuilder $builder, array $arguments): ResolverInterface {
+    // TODO: Convert to a data producer to be schema-cache-ready.
+    //  https://github.com/drupal-graphql/graphql/issues/948#issuecomment-558715765
     return $builder->callback(function ($parent, $args) {
       // TODO: Switch this to views.
       $offset = $args['pagination']['offset'];

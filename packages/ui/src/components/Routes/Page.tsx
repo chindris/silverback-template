@@ -3,6 +3,7 @@ import React from 'react';
 
 import { isTruthy } from '../../utils/isTruthy';
 import { UnreachableCaseError } from '../../utils/unreachable-case-error';
+import { BlockForm } from '../Organisms/PageContent/BlockForm';
 import { BlockMarkup } from '../Organisms/PageContent/BlockMarkup';
 import { BlockMedia } from '../Organisms/PageContent/BlockMedia';
 import { PageHero } from '../Organisms/PageHero';
@@ -20,6 +21,8 @@ export function Page(props: { page: PageFragment }) {
                   return <BlockMedia key={index} {...block} />;
                 case 'BlockMarkup':
                   return <BlockMarkup key={index} {...block} />;
+                case 'BlockForm':
+                  return <BlockForm key={index} {...block} />;
                 default:
                   throw new UnreachableCaseError(block);
               }
