@@ -1,8 +1,7 @@
 custom.website_settings:
   path: '/admin/config/website-settings'
   defaults:
-    _controller: '\Drupal\custom\Controller\MiscController::websiteSettingsOverview'
-    link_id: 'custom.website_settings'
+    _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
     _title: 'Website settings'
   requirements:
     _permission: 'access administration pages'
