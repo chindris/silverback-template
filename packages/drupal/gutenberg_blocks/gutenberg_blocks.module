@@ -1,5 +1,10 @@
 <?php
 
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Language\LanguageInterface;
+use Drupal\silverback_gutenberg\Utils;
+use Drupal\webform\Entity\Webform;
+
 /**
 * Implements hook_library_info_alter().
 */
@@ -11,5 +16,30 @@ function gutenberg_blocks_library_info_alter(&$libraries, $extension) {
     // styling.
     // Remove this file.
     unset($libraries['block-library']['css']['base']['vendor/gutenberg/block-library/reset.css']);
+  }
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ */
+function gutenberg_blocks_form_node_form_alter(&$form, FormStateInterface $form_state) {
+  /** @var \Drupal\node\NodeInterface $node */
+  $node = $form_state->getFormObject()->getEntity();
+  if (Utils::getGutenbergFields($node)) {
+
+    // Load all open webforms and populate them into drupalSettings.
+    $languageManager = \Drupal::languageManager();
+    $originalLanguage = $languageManager->getConfigOverrideLanguage();
+    $language = $languageManager->getCurrentLanguage(LanguageInterface::TYPE_CONTENT);
+    $languageManager->setConfigOverrideLanguage($language);
+    $webforms = array_filter(Webform::loadMultiple(), fn($form) => $form->isOpen());
+    uasort($webforms, fn($a, $b) => strnatcmp($a->label(), $b->label()));
+    $languageManager->setConfigOverrideLanguage($originalLanguage);
+    $forms = array_map(fn($form) => [
+      'id' => $form->id(),
+      'url' => $form->toUrl()->setAbsolute()->toString(),
+      'label' => $form->label(),
+    ], $webforms);
+    $form['#attached']['drupalSettings']['customGutenbergBlocks']['forms'] = array_values($forms);
   }
 }
