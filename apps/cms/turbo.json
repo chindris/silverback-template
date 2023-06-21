@@ -5,6 +5,11 @@
       "persistent": true,
       "dependsOn": ["build", "^build"]
     },
+    "dev:light": {
+      "notes": "Same as dev, but does not build the CMS, just clears caches",
+      "persistent": true,
+      "dependsOn": ["^build"]
+    },
     "build": {
       "dependsOn": ["prep"],
       "inputs": ["config/**", "web/modules/custom/**", "web/themes/custom/**"],
