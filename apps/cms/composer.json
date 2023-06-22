@@ -62,6 +62,7 @@
     "drupal/key_auth": "^2.1",
     "drupal/lagoon_logs": "^2.1",
     "drupal/linkit": "^6.0@beta",
+    "drupal/masquerade": "^2.0@RC",
     "drupal/menu_admin_per_menu": "^1.5",
     "drupal/pathauto": "^1.11",
     "drupal/redirect": "^1.7",
@@ -90,6 +91,9 @@
   },
   "extra": {
     "patches": {
+      "drupal/masquerade": {
+        "#915756 Add masquerade to admin menu": "https://www.drupal.org/files/issues/2023-06-22/915756-15.patch"
+      },
       "drupal/config_ignore": {
         "#2857247 Do not export ignored config": "https://www.drupal.org/files/issues/2021-08-18/config_ignore_2857247-75.patch"
       },
