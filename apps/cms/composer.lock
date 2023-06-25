@@ -341,16 +341,16 @@
         },
         {
             "name": "amazeelabs/silverback_campaign_urls",
-            "version": "1.0.2",
+            "version": "1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/AmazeeLabs/silverback_campaign_urls.git",
-                "reference": "6ac1438fb592764b6cb9a3d4778c545d7ad6e3c0"
+                "reference": "82e7e3462e00d3ab0bcd706057d492c6370df04b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AmazeeLabs/silverback_campaign_urls/zipball/6ac1438fb592764b6cb9a3d4778c545d7ad6e3c0",
-                "reference": "6ac1438fb592764b6cb9a3d4778c545d7ad6e3c0",
+                "url": "https://api.github.com/repos/AmazeeLabs/silverback_campaign_urls/zipball/82e7e3462e00d3ab0bcd706057d492c6370df04b",
+                "reference": "82e7e3462e00d3ab0bcd706057d492c6370df04b",
                 "shasum": ""
             },
             "type": "drupal-module",
@@ -361,9 +361,9 @@
             "description": "Allows creating campaign url entities that can be afterwards exposed via graphql, as redirects.",
             "homepage": "https://github.com/AmazeeLabs/silverback-mono/tree/development/packages/composer/amazeelabs/silverback_campaign_urls#readme",
             "support": {
-                "source": "https://github.com/AmazeeLabs/silverback_campaign_urls/tree/1.0.2"
+                "source": "https://github.com/AmazeeLabs/silverback_campaign_urls/tree/1.0.3"
             },
-            "time": "2023-06-15T03:58:06+00:00"
+            "time": "2023-06-21T14:36:59+00:00"
         },
         {
             "name": "amazeelabs/silverback_cdn_redirect",
@@ -13426,7 +13426,8 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "drupal/entity_usage": 10,
-        "drupal/linkit": 10
+        "drupal/linkit": 10,
+        "drupal/masquerade": 5
     },
     "prefer-stable": true,
     "prefer-lowest": false,
