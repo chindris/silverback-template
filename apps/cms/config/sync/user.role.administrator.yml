@@ -17,6 +17,7 @@ dependencies:
     - node
     - role_delegation
     - silverback_external_preview
+    - silverback_gatsby
     - system
     - taxonomy
     - toolbar
@@ -28,6 +29,7 @@ permissions:
   - 'access administration pages'
   - 'access content overview'
   - 'access media overview'
+  - 'access publisher'
   - 'access taxonomy overview'
   - 'access toolbar'
   - 'administer footer menu items'
@@ -42,6 +44,7 @@ permissions:
   - 'dropzone upload files'
   - 'edit config_pages entity'
   - 'translate editable entities'
+  - 'trigger a gatsby build'
   - 'update any media'
   - 'use basic transition archive'
   - 'use basic transition create_new_draft'
