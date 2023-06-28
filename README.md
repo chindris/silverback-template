@@ -113,6 +113,49 @@ lagoon runtime configuration.
 lagoon add variable -p [project name] -e dev -N NETLIFY_SITE_ID -V [netlify site id]
 ```
 
+### Publisher authentication with Drupal
+
+Publisher access can require to authenticate with Drupal with OAuth2.
+To fully skip it, set this environment variable.
+
+```
+PUBLISHER_SKIP_AUTHENTICATION=true
+```
+
+#### Drupal configuration
+
+##### Check the hash salt
+
+It must be at least 32 chars long. See `DRUPAL_HASH_SALT` environment variable.
+
+##### Create Certificates
+
+- Go to `/admin/config/people/simple_oauth`
+- Generate keys, set the directory to `../keys` 
+- Possibly gitignore keys but then needs to be part of the deployment process
+
+##### Create Consumers
+
+Per environment, as Consumers are content entities.
+
+- Go to `/admin/config/services/consumer`
+- Delete the default Consumer
+- Create a Consumer 
+  - Label: `Publisher`
+  - Client ID: `publisher`
+  - Secret: a random string
+  - Redirect URI: `[publisher-url]/oauth/callback`
+  - Scope: `Publisher`
+
+##### Set the Access Publisher permission
+
+Add this permission to relevant roles.
+
+#### Publisher configuration
+
+Configure [website environment variables](./apps/website/.lagoon.env) based
+on Drupal configuration.
+
 ## Storybook
 
 If a `CHROMATIC_PROJECT_TOKEN` environment variable is set, the Storybook build
