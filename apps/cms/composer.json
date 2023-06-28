@@ -68,6 +68,7 @@
     "drupal/redirect": "^1.7",
     "drupal/reroute_email": "^2.2",
     "drupal/role_delegation": "^1.2",
+    "drupal/simple_oauth": "^5.2",
     "drupal/slack": "^1.4",
     "drupal/stage_file_proxy": "^2.0",
     "drupal/userprotect": "^1.2",
