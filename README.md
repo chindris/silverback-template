@@ -130,9 +130,11 @@ It must be at least 32 chars long. See `DRUPAL_HASH_SALT` environment variable.
 
 ##### Create Certificates
 
+Per environment.
+
 - Go to `/admin/config/people/simple_oauth`
 - Generate keys, set the directory to `../keys` 
-- Possibly gitignore keys but then needs to be part of the deployment process
+- Keys are gitignored
 
 ##### Create Consumers
 
