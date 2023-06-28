@@ -92,6 +92,9 @@
   },
   "extra": {
     "patches": {
+      "drupal/core": {
+        "#2706241 AccessAwareRouter does not respect HTTP method": "https://www.drupal.org/files/issues/2023-03-17/2706241-74.patch"
+      },
       "drupal/masquerade": {
         "#915756 Add masquerade to admin menu": "https://www.drupal.org/files/issues/2023-06-22/915756-15.patch"
       },
