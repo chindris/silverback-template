@@ -36,4 +36,15 @@ export default defineConfig({
   },
   databaseUrl: 'persisted-store/publisher.sqlite',
   publisherPort: isLagoon ? 3000 : 8000,
+  oAuth2: {
+    clientId: process.env.PUBLISHER_OAUTH2_CLIENT_ID || 'publisher',
+    clientSecret: process.env.PUBLISHER_OAUTH2_CLIENT_SECRET || 'publisher',
+    sessionSecret: process.env.PUBLISHER_OAUTH2_SESSION_SECRET || 'banana',
+    tokenHost: process.env.PUBLISHER_OAUTH2_TOKEN_HOST || 'http://localhost:8888',
+    environmentType: process.env.PUBLISHER_OAUTH2_ENVIRONMENT_TYPE || 'development',
+    scope: 'publisher',
+    tokenPath: '/oauth/token',
+    authorizePath: '/oauth/authorize?response_type=code',
+    grantType: 0,
+  },
 });
