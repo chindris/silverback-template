@@ -60,3 +60,7 @@ if (getenv('LAGOON_ENVIRONMENT') !== 'prod') {
 if (getenv('LAGOON_ENVIRONMENT') !== 'prod') {
   $config['slack.settings']['slack_webhook_url'] = '';
 }
+
+// Disable key permissions check for Simple OAuth.
+// https://www.drupal.org/project/simple_oauth/issues/3021054
+$settings['simple_oauth.key_permissions_check'] = FALSE;
