@@ -1,6 +1,7 @@
 {
   "name": "@custom-tests/schema",
   "version": "1.0.0",
+  "type": "module",
   "scripts": {
     "start": "pnpm run --filter @custom/cms start",
     "test:static": "tsc --noEmit && eslint '**/*.{ts,tsx,js,jsx}' --ignore-path='./.gitignore'",
@@ -8,11 +9,11 @@
     "dev": "vitest --ui # for non phpstorm users"
   },
   "optionalDependencies": {
-    "@types/node": "^18.16.1",
-    "@vitest/ui": "^0.30.1",
-    "got": "^12.6.0",
+    "@types/node": "^18.16.18",
+    "@vitest/ui": "^0.32.2",
+    "got": "^13.0.0",
     "noop-tag": "^2.0.0",
     "start-server-and-test": "^2.0.0",
-    "vitest": "^0.30.1"
+    "vitest": "^0.32.2"
   }
 }
