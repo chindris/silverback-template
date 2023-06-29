@@ -1,5 +1,6 @@
 .turbo
 build
+.nyc_output
 coverage
 node_modules
 storybook-static

@@ -10,7 +10,7 @@ RUN npm install -g pnpm@8.6.0 && pnpm config set store-dir /tmp/cache/pnpm
 
 # Copy pnpm lockfile and install dependencies.
 COPY pnpm-lock.yaml .npmrc /app/
-COPY patches /app/patches
+#COPY patches /app/patches
 RUN --mount=type=cache,target=/tmp/cache pnpm fetch && \
     # There is a bug in pnpm: `pnpm fetch` creates _some_ node_modules folders
     # with _some_ packages. This can lead to an incomplete package installation.

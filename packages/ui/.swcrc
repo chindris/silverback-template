@@ -8,5 +8,5 @@
   "module": {
     "type": "es6"
   },
-  "exclude": ["\\.stories\\.tsx?$", "src/samples", "src/helpers"],
+  "exclude": ["src/samples", "src/helpers"],
 }
