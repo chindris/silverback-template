@@ -88,7 +88,7 @@ Update the default hash salt.
 ```ts
 replace(
   'apps/cms/scaffold/settings.php.append.txt',
-  'banana123',
+  'time-flies-like-an-arrow-fruit-flies-like-a-banana',
   randomString(32),
 );
 ```
