@@ -19,6 +19,9 @@ module.exports = {
   flags: {
     PARTIAL_HYDRATION: false,
   },
+  siteMetadata: {
+    siteUrl: process.env.NETLIFY_URL, // For gatsby-plugin-sitemap
+  },
   plugins: [
     'gatsby-plugin-pnpm',
     {
@@ -43,6 +46,12 @@ module.exports = {
       resolve: 'gatsby-plugin-netlify',
       options: {
         mergeSecurityHeaders: false,
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-sitemap',
+      options: {
+        excludes: ['/__preview/**'],
       },
     },
   ],
