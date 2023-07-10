@@ -23,4 +23,14 @@ fragment Page on Page {
     ...BlockMedia
     ...BlockForm
   }
+  metaTags {
+    tag
+    attributes {
+      name
+      content
+      property
+      rel
+      href
+    }
+  }
 }

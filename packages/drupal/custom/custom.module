@@ -101,6 +101,10 @@ function custom_form_alter(&$form, FormStateInterface $form_state, $form_id) {
 
     // Move the moderation state widget on pages into the gutenberg sidebar.
     $form['moderation_state']['#group'] = 'meta';
+    // For some reason the above method does not work for regular fields.
+    // But we need to move metatags into the sidebar as well.
+    $form['meta']['field_metatags'] = $form['field_metatags'];
+    unset($form['field_metatags']);
 
     // If the "More settings" fieldset is empty, remove it completely.
     $metaboxHasFields = FALSE;
