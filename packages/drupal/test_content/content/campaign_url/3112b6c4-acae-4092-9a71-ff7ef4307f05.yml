@@ -2,6 +2,7 @@ _meta:
   version: '1.0'
   entity_type: campaign_url
   uuid: 3112b6c4-acae-4092-9a71-ff7ef4307f05
+  bundle: campaign_url
 default:
   campaign_url_source:
     -
