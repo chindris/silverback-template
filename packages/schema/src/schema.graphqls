@@ -83,6 +83,7 @@ type Page implements ContentHubResultItem
     )
     @seek(pos: 1)
     @resolveEditorBlockChildren
+  metaTags: [MetaTag] @resolveProperty(path: "metatag")
 }
 
 type Hero {
@@ -130,4 +131,17 @@ type Query {
     @fetchEntity(type: "node", id: "$id", rid: "$rid", language: "$locale")
   contentHub(query: String, pagination: PaginationInput!): ContentHubResult!
     @contentHub
+}
+
+type MetaTag {
+  tag: String!
+  attributes: MetaTagAttributes!
+}
+
+type MetaTagAttributes @default @value(json: "{}") {
+  name: String
+  content: String
+  property: String
+  rel: String
+  href: String
 }

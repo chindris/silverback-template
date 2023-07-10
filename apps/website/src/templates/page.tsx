@@ -19,7 +19,31 @@ type PageTemplateQuery = {
 };
 
 export function Head({ data }: HeadProps<PageTemplateQuery>) {
-  return <meta title={data.page.title} />;
+  return (
+    <>
+      <meta title={data.page.title} />
+      {data.page.metaTags?.map((metaTag, index) => {
+        if (metaTag?.tag === 'meta') {
+          return (
+            <meta
+              key={`meta-${index}`}
+              name={metaTag.attributes?.name || metaTag.attributes?.property}
+              content={metaTag.attributes?.content}
+            />
+          );
+        } else if (metaTag?.tag === 'link') {
+          return (
+            <link
+              key={`link-${index}`}
+              rel={metaTag.attributes?.rel}
+              href={metaTag.attributes?.href}
+            />
+          );
+        }
+        return null;
+      }) || null}
+    </>
+  );
 }
 
 export default function PageTemplate({
