@@ -79,7 +79,7 @@ test('Blocks', async () => {
             },
             {
               "__typename": "BlockForm",
-              "url": "http://127.0.0.1:8888/en/form/contact",
+              "url": "http://127.0.0.1:8000/en/form/contact",
             },
             {
               "__typename": "BlockMarkup",
@@ -149,5 +149,5 @@ test('Blocks', async () => {
   const germanForm = german.data.loadPage.content.find(
     (it: any) => it.__typename === 'BlockForm',
   );
-  expect(germanForm.url).toBe('http://127.0.0.1:8888/de/form/contact');
+  expect(germanForm.url).toBe('http://127.0.0.1:8000/de/form/contact');
 });
