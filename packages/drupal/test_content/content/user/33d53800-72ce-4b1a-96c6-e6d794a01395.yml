@@ -1,0 +1,35 @@
+_meta:
+  version: '1.0'
+  entity_type: user
+  uuid: 33d53800-72ce-4b1a-96c6-e6d794a01395
+  default_langcode: en
+default:
+  preferred_langcode:
+    -
+      value: en
+  preferred_admin_langcode:
+    -
+      value: en
+  name:
+    -
+      value: editor
+  pass:
+    -
+      value: $S$Ef1d0GeO019CxYLG/2jFXL0Sh7U8PQ1UGw0piGXyzQozaLew525A
+      existing: ''
+      pre_hashed: true
+  timezone:
+    -
+      value: UTC
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1689584432
+  login:
+    -
+      value: 0
+  roles:
+    -
+      target_id: editor

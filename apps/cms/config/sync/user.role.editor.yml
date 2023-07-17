@@ -1,34 +1,30 @@
-uuid: d55aa99b-e026-4967-9b75-acd2a4fa306d
+uuid: 4d764b46-af36-4f98-8916-f3d6ed972c38
 langcode: en
 status: true
 dependencies:
   config:
     - filter.format.gutenberg
+    - node.type.page
     - workflows.workflow.basic
   module:
-    - config_pages
     - content_moderation
     - content_translation
     - dropzonejs
     - filter
     - gutenberg
-    - locale
     - media
-    - menu_admin_per_menu
     - node
     - path
-    - role_delegation
     - shortcut
-    - silverback_campaign_urls
     - silverback_external_preview
     - silverback_gatsby
     - system
     - taxonomy
     - toolbar
     - webform
-id: administrator
-label: Administrator
-weight: -7
+id: editor
+label: Editor
+weight: -5
 is_admin: null
 permissions:
   - 'access administration pages'
@@ -39,34 +35,25 @@ permissions:
   - 'access taxonomy overview'
   - 'access toolbar'
   - 'access webform overview'
-  - 'access webform submission user'
-  - 'administer campaign urls'
-  - 'administer footer menu items'
-  - 'administer main menu items'
-  - 'administer nodes'
-  - 'administer users'
-  - 'administer webform submission'
-  - 'assign administrator role'
-  - 'assign editor role'
-  - 'bypass node access'
+  - 'change own username'
   - 'create media'
+  - 'create page content'
   - 'create url aliases'
   - 'create webform'
   - 'customize shortcut links'
   - 'delete any media'
-  - 'delete any webform'
-  - 'delete any webform submission'
+  - 'delete any page content'
   - 'delete media'
+  - 'delete own page content'
   - 'delete own webform'
-  - 'delete own webform submission'
+  - 'delete page revisions'
   - 'dropzone upload files'
+  - 'edit any page content'
   - 'edit any webform'
-  - 'edit any webform submission'
-  - 'edit config_pages entity'
+  - 'edit own page content'
   - 'edit own webform'
-  - 'edit own webform submission'
+  - 'revert page revisions'
   - 'translate editable entities'
-  - 'translate interface'
   - 'trigger a gatsby build'
   - 'update any media'
   - 'use basic transition archive'
@@ -77,7 +64,6 @@ permissions:
   - 'use text format gutenberg'
   - 'view all media revisions'
   - 'view any unpublished content'
-  - 'view any webform submission'
-  - 'view config_pages entity'
   - 'view latest version'
-  - 'view own webform submission'
+  - 'view own unpublished content'
+  - 'view page revisions'
