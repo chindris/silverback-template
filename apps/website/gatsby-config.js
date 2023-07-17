@@ -20,7 +20,8 @@ module.exports = {
     PARTIAL_HYDRATION: false,
   },
   siteMetadata: {
-    siteUrl: process.env.NETLIFY_URL, // For gatsby-plugin-sitemap
+    // For gatsby-plugin-sitemap and gatsby-plugin-robots-txt.
+    siteUrl: process.env.NETLIFY_URL,
   },
   plugins: [
     'gatsby-plugin-pnpm',
@@ -52,6 +53,12 @@ module.exports = {
       resolve: 'gatsby-plugin-sitemap',
       options: {
         excludes: ['/__preview/**'],
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-robots-txt',
+      options: {
+        policy: [{ userAgent: '*', allow: '/', disallow: [] }],
       },
     },
   ],
