@@ -12,12 +12,16 @@ dependencies:
     - dropzonejs
     - filter
     - gutenberg
+    - locale
     - media
     - menu_admin_per_menu
     - node
     - path
     - role_delegation
+    - shortcut
+    - silverback_campaign_urls
     - silverback_external_preview
+    - silverback_gatsby
     - system
     - taxonomy
     - toolbar
@@ -30,10 +34,13 @@ permissions:
   - 'access administration pages'
   - 'access content overview'
   - 'access media overview'
+  - 'access publisher'
+  - 'access shortcuts'
   - 'access taxonomy overview'
   - 'access toolbar'
   - 'access webform overview'
   - 'access webform submission user'
+  - 'administer campaign urls'
   - 'administer footer menu items'
   - 'administer main menu items'
   - 'administer nodes'
@@ -44,6 +51,7 @@ permissions:
   - 'create media'
   - 'create url aliases'
   - 'create webform'
+  - 'customize shortcut links'
   - 'delete any media'
   - 'delete any webform'
   - 'delete any webform submission'
@@ -57,6 +65,8 @@ permissions:
   - 'edit own webform'
   - 'edit own webform submission'
   - 'translate editable entities'
+  - 'translate interface'
+  - 'trigger a gatsby build'
   - 'update any media'
   - 'use basic transition archive'
   - 'use basic transition create_new_draft'
