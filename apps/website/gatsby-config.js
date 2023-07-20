@@ -46,6 +46,8 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-netlify',
       options: {
+        // To avoid "X-Frame-Options: DENY" and let it work in the preview
+        // iframe.
         mergeSecurityHeaders: false,
       },
     },
