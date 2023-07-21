@@ -28,7 +28,6 @@ module:
   field_ui: 0
   file: 0
   filter: 0
-  gin_toolbar: 0
   graphql: 0
   graphql_directives: 0
   gutenberg: 0
@@ -93,5 +92,4 @@ module:
 theme:
   claro: 0
   silverback_iframe_theme: 0
-  gin: 0
 profile: minimal
