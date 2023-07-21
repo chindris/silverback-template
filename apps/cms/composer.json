@@ -58,8 +58,6 @@
     "drupal/entity_usage": "^2.0@beta",
     "drupal/environment_indicator": "^4.0.14",
     "drupal/field_group": "^3.4",
-    "drupal/gin": "^3.0@RC",
-    "drupal/gin_toolbar": "^1.0@RC",
     "drupal/honeypot": "^2.1.2",
     "drupal/key_auth": "^2.1",
     "drupal/lagoon_logs": "^2.1.1",
