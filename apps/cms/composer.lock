@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "beaaca278418e5682fe09bc64d09a78b",
+    "content-hash": "9d5c9a8e366e06a2886390f3ada5e702",
     "packages": [
         {
             "name": "amazeeio/drupal_integrations",
@@ -602,16 +602,16 @@
         },
         {
             "name": "amazeelabs/silverback_publisher_monitor",
-            "version": "2.3.1",
+            "version": "2.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/AmazeeLabs/silverback_publisher_monitor.git",
-                "reference": "a73a5b702052954ec93bc24662ca0e3dc2032fa2"
+                "reference": "2d99f8c680b3d749d460ca69e1d32b28a5b26d0b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AmazeeLabs/silverback_publisher_monitor/zipball/a73a5b702052954ec93bc24662ca0e3dc2032fa2",
-                "reference": "a73a5b702052954ec93bc24662ca0e3dc2032fa2",
+                "url": "https://api.github.com/repos/AmazeeLabs/silverback_publisher_monitor/zipball/2d99f8c680b3d749d460ca69e1d32b28a5b26d0b",
+                "reference": "2d99f8c680b3d749d460ca69e1d32b28a5b26d0b",
                 "shasum": ""
             },
             "type": "drupal-module",
@@ -623,9 +623,9 @@
             "homepage": "https://silverback.netlify.app",
             "support": {
                 "issues": "https://github.com/AmazeeLabs/silverback_publisher_monitor/issues",
-                "source": "https://github.com/AmazeeLabs/silverback_publisher_monitor/tree/2.3.1"
+                "source": "https://github.com/AmazeeLabs/silverback_publisher_monitor/tree/2.3.2"
             },
-            "time": "2023-06-27T20:29:29+00:00"
+            "time": "2023-07-24T11:17:09+00:00"
         },
         {
             "name": "amazeelabs/silverback_translations",
@@ -13489,7 +13489,8 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "drupal/entity_usage": 10,
-        "drupal/linkit": 10
+        "drupal/linkit": 10,
+        "drupal/masquerade": 5
     },
     "prefer-stable": true,
     "prefer-lowest": false,

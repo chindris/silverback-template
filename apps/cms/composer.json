@@ -44,7 +44,7 @@
     "amazeelabs/silverback_gutenberg": "^2.4.8",
     "amazeelabs/silverback_iframe": "^1.3.3",
     "amazeelabs/silverback_iframe_theme": "^1.2.3",
-    "amazeelabs/silverback_publisher_monitor": "^2.3.1",
+    "amazeelabs/silverback_publisher_monitor": "^2.3.2",
     "amazeelabs/silverback_translations": "^1.0.4",
     "asm89/stack-cors": "2.0.5 as 1.3.0",
     "composer/installers": "^2.2",
