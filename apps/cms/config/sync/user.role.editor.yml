@@ -32,7 +32,6 @@ permissions:
   - 'access content overview'
   - 'access environment indicator'
   - 'access media overview'
-  - 'access publisher'
   - 'access shortcuts'
   - 'access taxonomy overview'
   - 'access toolbar'
