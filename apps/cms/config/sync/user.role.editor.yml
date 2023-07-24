@@ -15,6 +15,7 @@ dependencies:
     - media
     - node
     - path
+    - redirect
     - shortcut
     - silverback_external_preview
     - silverback_gatsby
@@ -33,6 +34,7 @@ permissions:
   - 'access shortcuts'
   - 'access taxonomy overview'
   - 'access toolbar'
+  - 'administer redirects'
   - 'change own username'
   - 'create media'
   - 'create page content'

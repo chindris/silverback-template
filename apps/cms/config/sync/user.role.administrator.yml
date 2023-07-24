@@ -17,6 +17,7 @@ dependencies:
     - menu_admin_per_menu
     - node
     - path
+    - redirect
     - role_delegation
     - shortcut
     - silverback_campaign_urls
@@ -44,6 +45,7 @@ permissions:
   - 'administer footer menu items'
   - 'administer main menu items'
   - 'administer nodes'
+  - 'administer redirects'
   - 'administer users'
   - 'administer webform submission'
   - 'assign administrator role'
