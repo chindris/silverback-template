@@ -55,6 +55,7 @@ permissions:
   - 'use basic transition archive'
   - 'use basic transition create_new_draft'
   - 'use basic transition publish'
+  - 'use basic transition unpublish'
   - 'use external preview'
   - 'use gutenberg'
   - 'use text format gutenberg'
