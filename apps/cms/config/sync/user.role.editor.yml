@@ -10,6 +10,7 @@ dependencies:
     - content_moderation
     - content_translation
     - dropzonejs
+    - environment_indicator
     - filter
     - gutenberg
     - media
@@ -29,6 +30,7 @@ is_admin: null
 permissions:
   - 'access administration pages'
   - 'access content overview'
+  - 'access environment indicator'
   - 'access media overview'
   - 'access publisher'
   - 'access shortcuts'
