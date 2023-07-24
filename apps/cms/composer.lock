@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4c716a0403a5a9cdfe06826d70c8e2df",
+    "content-hash": "beaaca278418e5682fe09bc64d09a78b",
     "packages": [
         {
             "name": "amazeeio/drupal_integrations",
@@ -13489,8 +13489,7 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "drupal/entity_usage": 10,
-        "drupal/linkit": 10,
-        "drupal/masquerade": 5
+        "drupal/linkit": 10
     },
     "prefer-stable": true,
     "prefer-lowest": false,

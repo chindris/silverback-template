@@ -92,9 +92,6 @@
   },
   "extra": {
     "patches": {
-      "drupal/masquerade": {
-        "#915756 Add masquerade to admin menu": "https://www.drupal.org/files/issues/2023-06-22/915756-15.patch"
-      },
       "drupal/config_ignore": {
         "#2857247 Do not export ignored config": "https://www.drupal.org/files/issues/2021-08-18/config_ignore_2857247-75.patch"
       },
