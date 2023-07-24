@@ -129,6 +129,33 @@ function custom_form_alter(&$form, FormStateInterface $form_state, $form_id) {
 }
 
 /**
+ * Implements hook_field_widget_WIDGET_TYPE_form_alter().
+ */
+function custom_field_widget_language_select_form_alter(&$element, FormStateInterface $form_state, $context) {
+  // We don't want to include locked languages such as "Not specified" and
+  // "Not applicable".
+  /* @see \Drupal\Core\Field\Plugin\Field\FieldWidget\LanguageSelectWidget::formElement */
+  $element['value']['#languages'] = LanguageInterface::STATE_CONFIGURABLE;
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function custom_form_views_exposed_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  // Remove all the confusing options from the language list.
+  unset(
+    // Site's default language
+    $form['langcode']['#options']['***LANGUAGE_site_default***'],
+    // Interface text language selected for page
+    $form['langcode']['#options']['***LANGUAGE_language_interface***'],
+    // Not specified
+    $form['langcode']['#options']['und'],
+    // Not applicable
+    $form['langcode']['#options']['zxx'],
+  );
+}
+
+/**
  * Custom access check for key_auth.user_key_auth_form route.
  *
  * We can possibly remove this if #3261708 is solved.

@@ -692,11 +692,7 @@ display:
           entity_field: langcode
           plugin_id: language
           operator: in
-          value:
-            en: en
-            de: de
-            und: und
-            zxx: zxx
+          value: {  }
           group: 1
           exposed: true
           expose:
@@ -718,7 +714,7 @@ display:
               administrator: '0'
               gatsby_build: '0'
               editor: '0'
-            reduce: true
+            reduce: false
           is_grouped: false
           group_info:
             label: ''
