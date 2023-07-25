@@ -1,3 +1,11 @@
+// Please keep this file as JavaScript.
+// Gatsby supports both JS and TS config files, but the TS support is poor and
+// can lead to crazy errors.
+// If it's really needed to use TS (e.g. to import code from other TS files),
+// use rollup to compile it to JS first. Please keep in mind that the original
+// TS file name should be different from gastby-config.ts, otherwise Gatsby will
+// pick it up instead of the JS file.
+
 process.env.GATSBY_DRUPAL_URL =
   process.env.DRUPAL_EXTERNAL_URL || 'http://127.0.0.1:8888';
 
