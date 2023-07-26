@@ -30,7 +30,7 @@
     "prep:gutenberg": "NODE_ENV=production PREFIX=gutenberg pnpm postcss tailwind.css -o build/gutenberg.css",
     "prep:i18n": "formatjs extract 'src/**/*.ts*' --ignore='**/*.d.ts' --ignore='**/*.stories.ts*' --out-file build/translatables.json --id-interpolation-pattern '[sha512:contenthash:base64:6]'\n",
     "build": "storybook build",
-    "dev": "storybook dev -p 6006",
+    "dev": "storybook dev -p 6006 --no-open",
     "start": "serve storybook-static -p 6006 > /dev/null 2>&1",
     "test:static": "tsc --noEmit && eslint \"**/*.{ts,tsx,js,jsx}\" --ignore-path=\"./.eslintignore\"",
     "test:unit": "vitest run --passWithNoTests",
