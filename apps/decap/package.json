@@ -1,0 +1,27 @@
+{
+  "name": "@custom/decap",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "prep": "vite build",
+    "test:static": "tsc --noEmit && eslint \"**/*.{ts,tsx,js,jsx}\" --ignore-path=\"./.eslintignore\"",
+    "test:unit": "vitest run --passWithNoTests"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "@custom/schema": "workspace:*",
+    "netlify-cms-app": "^2.15.72"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.15",
+    "@types/react-dom": "^18.2.7",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "@vitejs/plugin-react-swc": "^3.3.2",
+    "typescript": "^5.0.2",
+    "vite": "^4.4.5"
+  }
+}

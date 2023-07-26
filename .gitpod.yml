@@ -28,6 +28,9 @@ tasks:
   - name: Codegen
     init: gp sync-await setup
     command: pnpm --filter @custom/schema run watch
+  - name: Decap
+    init: gp sync-await setup
+    command: pnpm run --filter @custom/decap dev
 
 image:
   file: .gitpod.Dockerfile
