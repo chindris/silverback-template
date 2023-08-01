@@ -81,3 +81,6 @@ ports:
   - port: 8888
     name: Drupal Dev
     onOpen: notify
+  - port: 5173
+    name: Decap Dev
+    onOpen: notify
