@@ -3,6 +3,7 @@ import React from 'react';
 
 import { isTruthy } from '../../utils/isTruthy';
 import { UnreachableCaseError } from '../../utils/unreachable-case-error';
+import { ContactList } from '../Organisms/ContactList';
 import { BlockForm } from '../Organisms/PageContent/BlockForm';
 import { BlockMarkup } from '../Organisms/PageContent/BlockMarkup';
 import { BlockMedia } from '../Organisms/PageContent/BlockMedia';
@@ -27,6 +28,11 @@ export function Page(props: { page: PageFragment }) {
                   throw new UnreachableCaseError(block);
               }
             })}
+          </div>
+          <div className="mt-10">
+            {props.page.contacts ? (
+              <ContactList contacts={props.page.contacts} />
+            ) : null}
           </div>
         </div>
       </div>

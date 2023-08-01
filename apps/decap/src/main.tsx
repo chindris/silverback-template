@@ -1,5 +1,9 @@
 import CMS from 'netlify-cms-app';
-import { CmsCollection } from 'netlify-cms-core';
+import { CmsCollection, CmsField } from 'netlify-cms-core';
+
+import { UuidWidget } from './uuid';
+
+CMS.registerWidget('uuid', UuidWidget);
 
 CMS.init({
   config: {
@@ -44,16 +48,40 @@ CMS.init({
         summary: '{{name}}',
         fields: [
           {
+            label: 'ID',
+            name: 'id',
+            widget: 'uuid',
+          } as CmsField,
+          {
             label: 'Name',
             name: 'name',
             widget: 'string',
+            required: true,
           },
-          // {
-          //   label: 'Portrait',
-          //   name: 'portrait',
-          //   widget: 'image',
-          //   required: false,
-          // },
+          {
+            label: 'Position',
+            name: 'position',
+            widget: 'string',
+            required: true,
+          },
+          {
+            label: 'E-Mail',
+            name: 'email',
+            widget: 'string',
+            required: true,
+          },
+          {
+            label: 'Phone',
+            name: 'phone',
+            widget: 'string',
+            required: false,
+          },
+          {
+            label: 'Portrait',
+            name: 'portrait',
+            widget: 'image',
+            required: false,
+          },
         ],
       } satisfies CmsCollection,
     ],

@@ -1,6 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react';
 
 import { image } from '../../helpers/image';
+import { Filled } from '../Organisms/ContactList.stories';
 import { Mixed, Paragraph } from '../Organisms/PageContent/BlockMarkup.stories';
 import { WithCaption } from '../Organisms/PageContent/BlockMedia.stories';
 import { Page } from './Page';
@@ -30,6 +31,7 @@ export const Default = {
           ...Paragraph.args,
         },
       ],
+      contacts: Filled.args.contacts,
     },
   },
 } satisfies StoryObj<typeof Page>;

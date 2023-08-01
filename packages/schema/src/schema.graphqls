@@ -55,6 +55,18 @@ type FooterNavigation implements Navigation @menu(menu_id: "footer") {
 }
 
 """
+Contact items.
+"""
+type Contact {
+  id: ID!
+  name: String!
+  role: String!
+  email: String!
+  phone: String
+  portrait: ImageSource
+}
+
+"""
 A generic page.
 """
 type Page implements ContentHubResultItem
@@ -84,6 +96,7 @@ type Page implements ContentHubResultItem
     @seek(pos: 1)
     @resolveEditorBlockChildren
   metaTags: [MetaTag] @resolveProperty(path: "metatag")
+  contacts: [Contact]
 }
 
 type Hero {

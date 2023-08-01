@@ -1,0 +1,7 @@
+fragment Contact on Contact {
+  name
+  role
+  email
+  phone
+  portrait
+}
