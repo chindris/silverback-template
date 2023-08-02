@@ -26,12 +26,36 @@
 	// "features": {},
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	"forwardPorts": [
+		8000,
 		8888,
 		6006,
 		5173
 	],
 	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "pnpm install && pnpm turbo build"
+	"postCreateCommand": "pnpm install && pnpm turbo build",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-vscode-remote.remote-containers",
+				"esbenp.prettier-vscode",
+				"ZixuanChen.vitest-explorer",
+				"GraphQL.vscode-graphql",
+				"GraphQL.vscode-graphql-syntax",
+				"eamodio.gitlens",
+				"GitHub.vscode-pull-request-github",
+				"GitHub.copilot",
+				"dbaeumer.vscode-eslint",
+				"ms-azuretools.vscode-docker",
+				"ms-playwright.playwright",
+				"denoland.vscode-deno",
+				"bradlc.vscode-tailwindcss",
+				"felixfbecker.php-debug",
+				"humao.rest-client",
+				"DEVSENSE.phptools-vscode",
+				"GitHub.vscode-github-actions"
+			]
+		}
+	}
 	// Configure tool-specific properties.
 	// "customizations": {},
 	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
