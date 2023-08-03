@@ -13,6 +13,11 @@ CMS.init({
       ? {
           name: 'test-repo',
         }
+      : window.location.hostname === 'localhost'
+      ? {
+          name: 'proxy',
+          proxy_url: 'http://localhost:8081/api/v1',
+        }
       : {
           name: 'git-gateway',
           branch: 'dev',

@@ -78,8 +78,6 @@ Considering the above, please note that the Drupal database can be reset on
 If you have some unsaved work in the Drupal database, don't start Drupal with
 `pnpm turbo:dev` but use `pnpm dev` instead.
 
-### Decap
-
 ## Environment overrides
 
 The application is tailored to run locally out of the box. In a production or
@@ -149,3 +147,20 @@ Refer to the
 blog post if you wonder where the name comes from, to
 [Edge functions documentation](https://docs.netlify.com/edge-functions/overview/)
 for technical details and to `strangler.ts` for how to add new legacy systems.
+
+## Decap CMS
+
+The template repository contains an instance of
+[Decap CMS](https://decapcms.org/) that can be used for smaller aounts of
+content that is not updated that frequently and by a small amount of editors. It
+requires [Netlify Identity](https://docs.netlify.com/visitor-access/identity/)
+to be enabled and configured.
+
+The `decap` app has different modes to start in development:
+
+- `dev`: Starts the vite development server. In this case the system uses the
+  "test" backend, which keeps data only in memory. This mode will auto-reload
+  when sources change.
+- `start:decap`: Serves the build produced by `prep` and requires `start:proxy`
+  to already be running. This mode will not auto-reload, but allow to actually
+  write changes to the filesystem.
