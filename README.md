@@ -78,6 +78,8 @@ Considering the above, please note that the Drupal database can be reset on
 If you have some unsaved work in the Drupal database, don't start Drupal with
 `pnpm turbo:dev` but use `pnpm dev` instead.
 
+### Decap
+
 ## Environment overrides
 
 The application is tailored to run locally out of the box. In a production or
