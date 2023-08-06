@@ -63,7 +63,9 @@ type Contact {
   role: String!
   email: String!
   phone: String
-  portrait: ImageSource
+  portrait(width: Int, height: Int, sizes: [[Int!]!]): ImageSource
+    @imageProps
+    @responsiveImage(height: "$height", width: "$width", sizes: "$sizes")
 }
 
 """

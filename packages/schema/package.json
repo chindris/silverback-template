@@ -5,6 +5,14 @@
   "types": "src/index.ts",
   "private": true,
   "sideEffects": false,
+  "exports": {
+    ".": [
+      "./src/index.ts"
+    ],
+    "./source": [
+      "./build/source.ts"
+    ]
+  },
   "scripts": {
     "watch": "graphql-codegen --verbose --watch",
     "prep": "graphql-codegen --verbose && pnpm compile-js",

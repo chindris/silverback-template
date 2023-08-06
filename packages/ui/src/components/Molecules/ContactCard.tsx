@@ -7,7 +7,7 @@ import { useIntl } from '../../utils/intl';
 export function ContactCard(contact: ContactFragment) {
   const intl = useIntl();
   return (
-    <li
+    <div
       key={contact.email}
       className="col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white text-center shadow"
     >
@@ -71,6 +71,6 @@ export function ContactCard(contact: ContactFragment) {
           </div>
         </div>
       </div>
-    </li>
+    </div>
   );
 }

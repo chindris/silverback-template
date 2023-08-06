@@ -1,9 +1,13 @@
 import { nanoid } from 'nanoid';
 import { CmsWidgetControlProps } from 'netlify-cms-core';
-import { useEffect } from 'react';
+import { forwardRef, useEffect } from 'react';
 
 // TODO: extract to shared package?
-export function UuidWidget({ value, onChange, forID }: CmsWidgetControlProps) {
+export const UuidWidget = forwardRef(function UuidWidget({
+  value,
+  onChange,
+  forID,
+}: CmsWidgetControlProps) {
   useEffect(() => {
     if (!value) {
       onChange(nanoid());
@@ -14,4 +18,4 @@ export function UuidWidget({ value, onChange, forID }: CmsWidgetControlProps) {
       {value}
     </span>
   );
-}
+});
