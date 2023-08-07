@@ -41,8 +41,7 @@ RUN composer config --global github-protocols https
 COPY --from=builder /tmp/.deploy/cms/composer.json /app/composer.json
 COPY --from=builder /tmp/.deploy/cms/composer.lock /app/composer.lock
 COPY --from=builder /tmp/.deploy/cms/scaffold /app/scaffold
-# Enable this when patches exist.
-#COPY --from=builder /app/.deploy/cms/patches /app/patches
+COPY --from=builder /tmp/.deploy/cms/patches /app/patches
 ENV COMPOSER_HOME=/tmp/cache/composer
 RUN --mount=type=cache,target=/tmp/cache composer install --no-dev
 
