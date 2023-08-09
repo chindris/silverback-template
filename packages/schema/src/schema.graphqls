@@ -55,25 +55,12 @@ type FooterNavigation implements Navigation @menu(menu_id: "footer") {
 }
 
 """
-Contact items.
-"""
-type Contact {
-  id: ID!
-  name: String!
-  role: String!
-  email: String!
-  phone: String
-  portrait(width: Int, height: Int, sizes: [[Int!]!]): ImageSource
-    @imageProps
-    @responsiveImage(height: "$height", width: "$width", sizes: "$sizes")
-}
-
-"""
 A generic page.
 """
 type Page implements ContentHubResultItem
   @entity(type: "node", bundle: "page")
   @type(id: "page") {
+  id: ID! @resolveEntityId
   locale: Locale! @resolveEntityLanguage
   path: Url! @resolveEntityPath @isPath
   title: String! @resolveProperty(path: "title.value")
@@ -98,7 +85,6 @@ type Page implements ContentHubResultItem
     @seek(pos: 1)
     @resolveEditorBlockChildren
   metaTags: [MetaTag] @resolveProperty(path: "metatag")
-  contacts: [Contact]
 }
 
 type Hero {

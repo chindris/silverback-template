@@ -1,11 +1,11 @@
 import { buildResponsiveImage } from '@amazeelabs/cloudinary-responsive-image';
 import {
   ImageSource,
+  Markup,
   OperationId,
   OperationResult,
   OperationVariables,
 } from '@custom/schema';
-import { ContactSource } from '@custom/schema/source';
 import { buildSchema, graphql, GraphQLFieldResolver } from 'graphql';
 import { useEffect, useState } from 'react';
 
@@ -27,31 +27,40 @@ type DecapContext = {
   getAssetUrl: (path: string) => string;
 };
 
-// TODO: build resolvers from directives.
+const resolveImage = (async (
+  source,
+  { width, height, sizes },
+  { getAssetUrl },
+  { fieldName },
+) => {
+  if (source[fieldName]) {
+    const src = getAssetUrl(source[fieldName]);
+    const { width: oWidth, height: oHeight } = await createImageBitmap(
+      await (await fetch(src)).blob(),
+    );
+    return buildResponsiveImage(
+      {
+        cloudname: 'demo',
+        key: 'demo',
+        secret: 'demo',
+      },
+      { src, width: oWidth, height: oHeight },
+      { width: width || oWidth, height, sizes },
+    );
+  }
+}) as GraphQLFieldResolver<
+  any,
+  DecapContext,
+  { width?: number; height?: number; sizes?: [[number]] },
+  Promise<ImageSource | undefined>
+>;
+
 const resolvers = {
-  Contact: {
-    portrait: (async (source, { width, height, sizes }, { getAssetUrl }) => {
-      if (source.portrait) {
-        const src = getAssetUrl(source.portrait);
-        const { width: oWidth, height: oHeight } = await createImageBitmap(
-          await (await fetch(src)).blob(),
-        );
-        return buildResponsiveImage(
-          {
-            cloudname: 'demo',
-            key: 'demo',
-            secret: 'demo',
-          },
-          { src, width: oWidth, height: oHeight },
-          { width: width || oWidth, height, sizes },
-        );
-      }
-    }) as GraphQLFieldResolver<
-      ContactSource,
-      DecapContext,
-      { width?: number; height?: number; sizes?: [[number]] },
-      Promise<ImageSource | undefined>
-    >,
+  Page: {
+    teaserImage: resolveImage,
+  },
+  MediaImage: {
+    source: resolveImage,
   },
 } as Record<string, Record<string, GraphQLFieldResolver<any, any>>>;
 
@@ -67,9 +76,9 @@ export async function query<TOperation extends OperationId<any, any>>(
     rootValue,
     contextValue: { getAssetUrl },
     variableValues: variables,
-    fieldResolver: (source, args, context, info) => {
+    fieldResolver: async (source, args, context, info) => {
       return resolvers[info.parentType.name]?.[info.fieldName]
-        ? resolvers[info.parentType.name][info.fieldName](
+        ? await resolvers[info.parentType.name][info.fieldName](
             source,
             args,
             context,

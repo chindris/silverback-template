@@ -33,7 +33,4 @@ fragment Page on Page {
       href
     }
   }
-  contacts {
-    ...Contact
-  }
 }
