@@ -1,8 +1,21 @@
-import { ContactFragment, Image } from '@custom/schema';
+import { ContactFragment } from '@custom/schema';
 import { EnvelopeIcon, PhoneIcon, UserIcon } from '@heroicons/react/20/solid';
 import React from 'react';
 
 import { useIntl } from '../../utils/intl';
+
+function Image({ source, alt, className, width, height }: any) {
+  return (
+    <img
+      className={className}
+      src={'/landscape.jpg'}
+      style={{ objectFit: 'cover' }}
+      alt={alt}
+      width={width}
+      height={height}
+    />
+  );
+}
 
 export function ContactCard(contact: ContactFragment) {
   const intl = useIntl();
@@ -14,7 +27,7 @@ export function ContactCard(contact: ContactFragment) {
       <div className="flex flex-1 flex-col p-8">
         {contact.portrait ? (
           <Image
-            className="mx-auto h-32 w-32 flex-shrink-0 rounded-full"
+            className="mx-auto h-16 w-32 flex-shrink-0 rounded-full object-"
             source={contact.portrait}
             alt={contact.name}
           />

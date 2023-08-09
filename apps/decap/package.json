@@ -5,17 +5,15 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host",
-    "prep": "pnpm prep:msw && pnpm prep:vite",
+    "prep": "pnpm prep:vite",
     "prep:vite": "vite build",
-    "prep:msw": "pnpm msw init public --save",
     "start:proxy": "GIT_REPO_DIRECTORY=../../ pnpm netlify-cms-proxy-server",
     "start:decap": "pnpm serve -p 8889",
     "test:static": "tsc --noEmit && eslint \"**/*.{ts,tsx,js,jsx}\" --ignore-path=\"./.eslintignore\"",
     "test:unit": "vitest run --passWithNoTests"
   },
   "dependencies": {
-    "@amazeelabs/cloudinary-responsive-image": "^1.3.2",
-    "msw": "^1.2.3",
+    "@amazeelabs/cloudinary-responsive-image": "^1.3.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "@custom/schema": "workspace:*",

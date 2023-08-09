@@ -1,7 +1,4 @@
-import {
-  buildResponsiveImage,
-  mockCloudinaryImage,
-} from '@amazeelabs/cloudinary-responsive-image';
+import { buildResponsiveImage } from '@amazeelabs/cloudinary-responsive-image';
 import {
   ImageSource,
   OperationId,
@@ -10,7 +7,6 @@ import {
 } from '@custom/schema';
 import { ContactSource } from '@custom/schema/source';
 import { buildSchema, graphql, GraphQLFieldResolver } from 'graphql';
-import { rest, setupWorker } from 'msw';
 import { useEffect, useState } from 'react';
 
 import operations from '../node_modules/@custom/schema/build/operations.json';
@@ -19,17 +15,6 @@ TODO: Generalize schema concatenation for other use cases (e.g. Drupal or Gatsby
 Either using codegen or by reading .graphqlconfig.
 */
 import rawSchema from '../node_modules/@custom/schema/src/schema.graphqls?raw';
-
-setupWorker(
-  rest.get('https://res.cloudinary.com/demo/*', async (req, res, context) => {
-    return res(
-      context.set('Content-Type', 'image/jpg'),
-      context.body((await mockCloudinaryImage(req.url.toString())) || ''),
-    );
-  }),
-).start({
-  onUnhandledRequest: 'bypass',
-});
 
 const rawDirectives = import.meta.glob(
   '../node_modules/@custom/schema/src/generated/**/*.graphqls',

@@ -7,5 +7,3 @@ styles.css
 persisted-store
 
 src/gatsby-fragments.js
-
-static/mockServiceWorker.js

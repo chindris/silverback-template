@@ -60,7 +60,7 @@
   },
   "devDependencies": {
     "@amazeelabs/bridge-storybook": "^1.1.2",
-    "@amazeelabs/cloudinary-responsive-image": "^1.3.1",
+    "@amazeelabs/cloudinary-responsive-image": "^1.3.3",
     "@formatjs/cli": "^6.1.3",
     "@storybook/addon-actions": "^7.0.24",
     "@storybook/addon-coverage": "^0.0.8",
