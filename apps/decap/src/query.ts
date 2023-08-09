@@ -27,7 +27,9 @@ setupWorker(
       context.body((await mockCloudinaryImage(req.url.toString())) || ''),
     );
   }),
-).start();
+).start({
+  onUnhandledRequest: 'bypass',
+});
 
 const rawDirectives = import.meta.glob(
   '../node_modules/@custom/schema/src/generated/**/*.graphqls',

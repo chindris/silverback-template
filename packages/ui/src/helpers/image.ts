@@ -8,7 +8,7 @@ export function image(
 ) {
   return buildResponsiveImage(
     {
-      cloudname: isChromatic() ? 'test' : 'debug',
+      cloudname: isChromatic() ? 'test' : 'demo',
       key: 'c7d2fe',
       secret: '4e46e5',
     },

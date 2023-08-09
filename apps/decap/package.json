@@ -7,7 +7,7 @@
     "dev": "vite --host",
     "prep": "pnpm prep:msw && pnpm prep:vite",
     "prep:vite": "vite build",
-    "prep:msw": "pnpm msw init public",
+    "prep:msw": "pnpm msw init public --save",
     "start:proxy": "GIT_REPO_DIRECTORY=../../ pnpm netlify-cms-proxy-server",
     "start:decap": "pnpm serve -p 8889",
     "test:static": "tsc --noEmit && eslint \"**/*.{ts,tsx,js,jsx}\" --ignore-path=\"./.eslintignore\"",

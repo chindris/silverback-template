@@ -18,7 +18,8 @@
     "gatsby-plugin-sitemap": "^6.11.0",
     "netlify-cli": "^15.7.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "msw": "^1.2.3"
   },
   "devDependencies": {
     "@testing-library/react": "^14.0.0",
@@ -30,10 +31,10 @@
   },
   "scripts": {
     "test:static": "tsc --noEmit && eslint '**/*.{ts,tsx,js,jsx}' --ignore-path='./.gitignore'",
-    "prep": "pnpm run prep:styles && pnpm run prep:fragments && pnpm run prep:cloudinary",
+    "prep": "pnpm run prep:styles && pnpm run prep:fragments && pnpm run prep:msw",
     "prep:styles": "rm -f styles.css && cp node_modules/@custom/ui/build/styles.css styles.css",
     "prep:fragments": "rm -rf src/gatsby-fragments.js && cp node_modules/@custom/schema/build/gatsby-fragments.js src/gatsby-fragments.js",
-    "prep:cloudinary": "rm -f static/mock-cloudinary-worker.js && rm -f static/mock-cloudinary-register.js && cp ./node_modules/@amazeelabs/cloudinary-responsive-image/worker/iife/* static/",
+    "prep:msw": "pnpm msw init static --save",
     "build:gatsby": "pnpm build:dotenv && gatsby build",
     "build:dotenv": "rm -rf .env && echo \"DRUPAL_EXTERNAL_URL='$DRUPAL_EXTERNAL_URL'\nDRUPAL_INTERNAL_URL='$DRUPAL_INTERNAL_URL'\" >> .env",
     "rebuild": "gatsby build",
@@ -47,5 +48,8 @@
     "turbo:dev": "start-test start:cms 8888 'pnpm turbo dev --output-logs=new-only'",
     "turbo:dev:light": "start-test start:cms 8888 'pnpm turbo dev:light --output-logs=new-only'",
     "clean": "gatsby clean"
+  },
+  "msw": {
+    "workerDirectory": "static"
   }
 }
