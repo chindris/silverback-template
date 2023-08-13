@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9d5c9a8e366e06a2886390f3ada5e702",
+    "content-hash": "bc473cdb597af1e9aa1f8fb6cc8af83d",
     "packages": [
         {
             "name": "amazeeio/drupal_integrations",
@@ -364,33 +364,6 @@
                 "source": "https://github.com/AmazeeLabs/silverback_campaign_urls/tree/1.0.5"
             },
             "time": "2023-06-29T06:29:18+00:00"
-        },
-        {
-            "name": "amazeelabs/silverback_cdn_redirect",
-            "version": "2.2.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/AmazeeLabs/silverback_cdn_redirect.git",
-                "reference": "f3d4f349c93619101b9447e3ddfffd0f8dc4da82"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/AmazeeLabs/silverback_cdn_redirect/zipball/f3d4f349c93619101b9447e3ddfffd0f8dc4da82",
-                "reference": "f3d4f349c93619101b9447e3ddfffd0f8dc4da82",
-                "shasum": ""
-            },
-            "type": "drupal-module",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0+"
-            ],
-            "description": "Provide redirect information to CDNs.",
-            "homepage": "https://github.com/AmazeeLabs/silverback-mono/tree/development/packages/composer/amazeelabs/silverback_cdn_redirect#readme",
-            "support": {
-                "issues": "https://github.com/AmazeeLabs/silverback_cdn_redirect/issues",
-                "source": "https://github.com/AmazeeLabs/silverback_cdn_redirect/tree/2.2.4"
-            },
-            "time": "2023-03-23T11:12:22+00:00"
         },
         {
             "name": "amazeelabs/silverback_cloudinary",
