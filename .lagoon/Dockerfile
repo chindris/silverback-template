@@ -111,8 +111,8 @@ RUN apk add --no-cache sqlite curl
 
 RUN npm install -g pnpm@8.6.0
 ENV DENO_INSTALL="/home/.deno"
-RUN curl -fsSL https://deno.land/x/install/install.sh | sh
-RUN ln -s /home/.deno/bin/deno /usr/local/bin/deno
+RUN if [ "$(uname -m)" != "aarch64" ]; then curl -fsSL https://deno.land/x/install/install.sh | sh; else echo "Skipping Deno installation"; fi
+RUN if [ "$(uname -m)" != "aarch64" ]; then ln -s /home/.deno/bin/deno /usr/local/bin/deno; fi
 
 COPY --from=builder /tmp/.deploy/website /app
 
