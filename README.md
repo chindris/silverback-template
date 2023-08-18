@@ -133,7 +133,7 @@ drush simple-oauth:generate-keys ./keys
 Or via the UI
 
 - Go to `/admin/config/people/simple_oauth`
-- Set the directory to `../keys` then click on "Generate keys"
+- Click on "Generate keys", the directory should be set to `../keys`
 
 ##### Create the Publisher Consumer
 
