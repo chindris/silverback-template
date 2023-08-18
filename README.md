@@ -122,7 +122,7 @@ Only used on Lagoon environments.
 
 ##### Create keys
 
-Per environment, certificates are gitignored.
+Per environment, keys are gitignored.
 
 Via Drush
 
@@ -133,27 +133,26 @@ drush simple-oauth:generate-keys ./keys
 Or via the UI
 
 - Go to `/admin/config/people/simple_oauth`
-- Generate keys, set the directory to `../keys`
+- Set the directory to `../keys` then click on "Generate keys"
 
 ##### Create the Publisher Consumer
 
 Per environment, Consumers are content entities.
 
 - Go to `/admin/config/services/consumer`
-- Delete the default Consumer
 - Create a Consumer 
   - Label: `Publisher`
   - Client ID: `publisher`
-  - Secret: [a random string]
+  - Secret: a random string
   - Redirect URI: `[publisher-url]/oauth/callback`
   - Scope: `Publisher`
+- Optional: the default Consumer can be safely deleted
 
-Note: make sure that the `DRUPAL_HASH_SALT` environment variable is >= 32 chars.
+Troubleshoot: make sure that the `DRUPAL_HASH_SALT` environment variable is >= 32 chars.
 
-#### Publisher configuration
+#### Publisher authentication
 
-Configure [website environment variables](./apps/website/.lagoon.env) based
-on the Drupal configuration.
+Edit [website environment variables](./apps/website/.lagoon.env)
 
 ```
 PUBLISHER_SKIP_AUTHENTICATION=false
@@ -161,7 +160,7 @@ PUBLISHER_OAUTH2_CLIENT_SECRET="[secret used in the Drupal Consumer]"
 PUBLISHER_OAUTH2_SESSION_SECRET="[another random string]"
 ```
 
-##### Set the Access Publisher permission
+##### Set the 'Access Publisher' permission
 
 Optional: add this permission to relevant roles.
 
