@@ -66,6 +66,7 @@ vscode:
     - "felixfbecker.php-debug"
     - "humao.rest-client"
     - "DEVSENSE.phptools-vscode"
+    - "GitHub.vscode-github-actions"
 
 ports:
   - port: 8000

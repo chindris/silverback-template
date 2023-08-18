@@ -47,6 +47,7 @@ module:
   media_library: 0
   menu_link_content: 0
   menu_ui: 0
+  metatag: 0
   mysql: 0
   node: 0
   options: 0
@@ -59,7 +60,6 @@ module:
   serialization: 0
   shortcut: 0
   silverback_campaign_urls: 0
-  silverback_cdn_redirect: 0
   silverback_cloudinary: 0
   silverback_external_preview: 0
   silverback_gatsby: 0
@@ -93,7 +93,6 @@ module:
   minimal: 1000
   custom_heavy: 9999
 theme:
-  stark: 0
   claro: 0
   silverback_iframe_theme: 0
 profile: minimal

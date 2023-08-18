@@ -10,7 +10,7 @@ RUN npm install -g pnpm@8.6.0 && pnpm config set store-dir /tmp/cache/pnpm
 
 # Copy pnpm lockfile and install dependencies.
 COPY pnpm-lock.yaml .npmrc /app/
-COPY patches /app/patches
+#COPY patches /app/patches
 RUN --mount=type=cache,target=/tmp/cache pnpm fetch && \
     # There is a bug in pnpm: `pnpm fetch` creates _some_ node_modules folders
     # with _some_ packages. This can lead to an incomplete package installation.
@@ -41,8 +41,7 @@ RUN composer config --global github-protocols https
 COPY --from=builder /tmp/.deploy/cms/composer.json /app/composer.json
 COPY --from=builder /tmp/.deploy/cms/composer.lock /app/composer.lock
 COPY --from=builder /tmp/.deploy/cms/scaffold /app/scaffold
-# Enable this when patches exist.
-#COPY --from=builder /app/.deploy/cms/patches /app/patches
+COPY --from=builder /tmp/.deploy/cms/patches /app/patches
 ENV COMPOSER_HOME=/tmp/cache/composer
 RUN --mount=type=cache,target=/tmp/cache composer install --no-dev
 
@@ -112,8 +111,8 @@ RUN apk add --no-cache sqlite curl
 
 RUN npm install -g pnpm@8.6.0
 ENV DENO_INSTALL="/home/.deno"
-RUN curl -fsSL https://deno.land/x/install/install.sh | sh
-RUN ln -s /home/.deno/bin/deno /usr/local/bin/deno
+RUN if [ "$(uname -m)" != "aarch64" ]; then curl -fsSL https://deno.land/x/install/install.sh | sh; else echo "Skipping Deno installation"; fi
+RUN if [ "$(uname -m)" != "aarch64" ]; then ln -s /home/.deno/bin/deno /usr/local/bin/deno; fi
 
 COPY --from=builder /tmp/.deploy/website /app
 

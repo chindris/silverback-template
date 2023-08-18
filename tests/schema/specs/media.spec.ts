@@ -1,7 +1,7 @@
 import gql from 'noop-tag';
 import { expect, test } from 'vitest';
 
-import { fetch } from '../lib';
+import { fetch } from '../lib.js';
 
 test('Image', async () => {
   const result = await fetch(gql`
@@ -17,7 +17,7 @@ test('Image', async () => {
       "data": {
         "loadMediaImage": {
           "alt": "A beautiful landscape.",
-          "source": "{\\"src\\":\\"http:\\\\/\\\\/127.0.0.1:8888\\\\/sites\\\\/default\\\\/files\\\\/2023-04\\\\/landscape.jpg\\",\\"width\\":2200,\\"height\\":1414}",
+          "source": "{\\"src\\":\\"http:\\\\/\\\\/127.0.0.1:8000\\\\/sites\\\\/default\\\\/files\\\\/2023-04\\\\/landscape.jpg\\",\\"width\\":2200,\\"height\\":1414}",
         },
       },
     }
@@ -36,7 +36,7 @@ test('Video', async () => {
     {
       "data": {
         "loadMediaVideo": {
-          "url": "http://127.0.0.1:8888/sites/default/files/2023-06/video_mp4_belt.mp4",
+          "url": "http://127.0.0.1:8000/sites/default/files/2023-06/video_mp4_belt.mp4",
         },
       },
     }

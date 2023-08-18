@@ -5,6 +5,7 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.page.body
+    - field.field.node.page.field_metatags
     - node.type.page
   module:
     - silverback_external_preview
@@ -23,6 +24,11 @@ content:
     third_party_settings: {  }
     weight: 101
     region: content
+  content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: -20
+    region: content
   external_preview_link:
     type: external_preview_iframe_formatter
     label: hidden
@@ -39,4 +45,5 @@ content:
     weight: 100
     region: content
 hidden:
+  field_metatags: true
   langcode: true

@@ -12,6 +12,7 @@ $excluded = [
   'path_alias',
   'content_moderation_state',
   'redirect',
+  'webform_submission',
 ];
 
 Export::run('test_content', $excluded);

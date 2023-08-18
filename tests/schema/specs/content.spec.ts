@@ -1,7 +1,7 @@
 import gql from 'noop-tag';
 import { expect, test } from 'vitest';
 
-import { fetch } from '../lib';
+import { fetch } from '../lib.js';
 
 test('Page', async () => {
   const result = await fetch(gql`
@@ -17,6 +17,16 @@ test('Page', async () => {
       }
       content {
         __typename
+      }
+      metaTags {
+        tag
+        attributes {
+          name
+          content
+          property
+          rel
+          href
+        }
       }
     }
     {
@@ -44,6 +54,38 @@ test('Page', async () => {
             "__typename": "Hero",
           },
           "locale": "en",
+          "metaTags": [
+            {
+              "attributes": {
+                "content": "Page: complete | Silverback Drupal Template",
+                "href": null,
+                "name": "title",
+                "property": null,
+                "rel": null,
+              },
+              "tag": "meta",
+            },
+            {
+              "attributes": {
+                "content": "Paragraph",
+                "href": null,
+                "name": "description",
+                "property": null,
+                "rel": null,
+              },
+              "tag": "meta",
+            },
+            {
+              "attributes": {
+                "content": null,
+                "href": "http://127.0.0.1:8000/en/page-complete",
+                "name": null,
+                "property": null,
+                "rel": "canonical",
+              },
+              "tag": "link",
+            },
+          ],
           "path": "/en/page-complete",
           "teaserImage": {
             "__typename": "MediaImage",
@@ -60,6 +102,38 @@ test('Page', async () => {
             "__typename": "Hero",
           },
           "locale": "en",
+          "metaTags": [
+            {
+              "attributes": {
+                "content": "Page: minimal | Silverback Drupal Template",
+                "href": null,
+                "name": "title",
+                "property": null,
+                "rel": null,
+              },
+              "tag": "meta",
+            },
+            {
+              "attributes": {
+                "content": "",
+                "href": null,
+                "name": "description",
+                "property": null,
+                "rel": null,
+              },
+              "tag": "meta",
+            },
+            {
+              "attributes": {
+                "content": null,
+                "href": "http://127.0.0.1:8000/en/page-minimal",
+                "name": null,
+                "property": null,
+                "rel": "canonical",
+              },
+              "tag": "link",
+            },
+          ],
           "path": "/en/page-minimal",
           "teaserImage": null,
           "title": "Page: minimal",

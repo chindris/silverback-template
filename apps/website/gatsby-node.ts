@@ -70,6 +70,11 @@ export const createPages: GatsbyNode['createPages'] = async ({
           remoteId: string;
         }>;
       };
+      notFoundPage?: {
+        translations: Array<{
+          path: string;
+        }>;
+      };
     };
   }>(`
     query IndexPages {
@@ -80,6 +85,11 @@ export const createPages: GatsbyNode['createPages'] = async ({
             locale
             id
             remoteId
+            path
+          }
+        }
+        notFoundPage {
+          translations {
             path
           }
         }
@@ -132,6 +142,16 @@ export const createPages: GatsbyNode['createPages'] = async ({
       },
     );
   }
+
+  // Remove 404 pages. We handle them in src/pages/404.tsx
+  settings.data?.websiteSettings?.notFoundPage?.translations.forEach(
+    ({ path }) => {
+      actions.deletePage({
+        path,
+        component: resolve(`./src/templates/page.tsx`),
+      });
+    },
+  );
 
   // Broken Gatsby links will attempt to load page-data.json files, which don't exist
   // and also should not be piped into the strangler function. Thats why they

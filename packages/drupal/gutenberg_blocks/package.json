@@ -14,8 +14,8 @@
   },
   "devDependencies": {
     "@custom/ui": "workspace:*",
-    "@types/react": "^18.2.7",
-    "@types/react-dom": "^18.2.4",
+    "@types/react": "^18.2.14",
+    "@types/react-dom": "^18.2.6",
     "@types/wordpress__block-editor": "11.5.0",
     "@types/wordpress__blocks": "12.5.0",
     "@types/wordpress__components": "23.0.1",
@@ -23,8 +23,8 @@
     "@types/wordpress__core-data": "2.4.5",
     "@types/wordpress__data": "6.0.2",
     "@types/wordpress__editor": "13.0.0",
-    "@vitejs/plugin-react": "4.0.0",
-    "typescript": "^5.0.4",
-    "vite": "^4.3.2"
+    "@vitejs/plugin-react": "4.0.1",
+    "typescript": "^5.1.6",
+    "vite": "^4.3.9"
   }
 }
