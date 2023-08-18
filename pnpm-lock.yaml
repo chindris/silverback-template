@@ -25735,6 +25735,7 @@ packages:
       - sugarss
       - supports-color
       - terser
+    dev: false
     optional: true
 
   /vitest@0.32.2(happy-dom@9.20.3):
