@@ -115,48 +115,55 @@ lagoon add variable -p [project name] -e dev -N NETLIFY_SITE_ID -V [netlify site
 
 ### Publisher authentication with Drupal
 
-Publisher access can require to authenticate with Drupal with OAuth2.
-To fully skip it, set this environment variable.
-
-```
-PUBLISHER_SKIP_AUTHENTICATION=true
-```
+Publisher can require to authenticate with Drupal based on OAuth2.
+Only used on Lagoon environments.
 
 #### Drupal configuration
 
-##### Check the hash salt
+##### Create keys
 
-It must be at least 32 chars long. See `DRUPAL_HASH_SALT` environment variable.
+Per environment, certificates are gitignored.
 
-##### Create Certificates
+Via Drush
 
-Per environment.
+```bash
+drush simple-oauth:generate-keys ./keys
+```
+
+Or via the UI
 
 - Go to `/admin/config/people/simple_oauth`
-- Generate keys, set the directory to `../keys` 
-- Keys are gitignored
+- Generate keys, set the directory to `../keys`
 
-##### Create Consumers
+##### Create the Publisher Consumer
 
-Per environment, as Consumers are content entities.
+Per environment, Consumers are content entities.
 
 - Go to `/admin/config/services/consumer`
 - Delete the default Consumer
 - Create a Consumer 
   - Label: `Publisher`
   - Client ID: `publisher`
-  - Secret: a random string
+  - Secret: [a random string]
   - Redirect URI: `[publisher-url]/oauth/callback`
   - Scope: `Publisher`
 
-##### Set the Access Publisher permission
-
-Add this permission to relevant roles.
+Note: make sure that the `DRUPAL_HASH_SALT` environment variable is >= 32 chars.
 
 #### Publisher configuration
 
 Configure [website environment variables](./apps/website/.lagoon.env) based
-on Drupal configuration.
+on the Drupal configuration.
+
+```
+PUBLISHER_SKIP_AUTHENTICATION=false
+PUBLISHER_OAUTH2_CLIENT_SECRET="[secret used in the Drupal Consumer]"
+PUBLISHER_OAUTH2_SESSION_SECRET="[another random string]"
+```
+
+##### Set the Access Publisher permission
+
+Optional: add this permission to relevant roles.
 
 ## Storybook
 
