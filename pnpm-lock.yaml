@@ -93,8 +93,8 @@ importers:
         specifier: ^1.10.7
         version: 1.10.7(gatsby@5.11.0)
       '@amazeelabs/publisher':
-        specifier: ^2.2.1
-        version: 2.2.1(react@18.2.0)(typescript@4.9.5)
+        specifier: ^2.4.1
+        version: 2.4.1(react@18.2.0)(typescript@4.9.5)
       '@amazeelabs/strangler-netlify':
         specifier: ^1.1.2
         version: 1.1.2(happy-dom@9.20.3)(react@18.2.0)
@@ -682,8 +682,8 @@ packages:
     resolution: {integrity: sha512-JoADWbP8AESGsSOTtA0EG6XbxB9s0JSN+w4W+uazwm508lnIvDQ0fz4A4eKD80BuuZ81keLGQ7EdZd978qMatg==}
     dev: false
 
-  /@amazeelabs/publisher@2.2.1(react@18.2.0)(typescript@4.9.5):
-    resolution: {integrity: sha512-a5kQR33gXxXd/K8KxeV6iLx25cYhiqlS04njJORPvA/tZqmFtgDzAlSPyy48AjS0z52d+fWjm8NC7knRIFFseA==}
+  /@amazeelabs/publisher@2.4.1(react@18.2.0)(typescript@4.9.5):
+    resolution: {integrity: sha512-A5HTfoHhNs7KdlojL5VwunWyEVdVvgvfW0W6wV45zzG1LA92yVn3Kx2sYPBPMxiF1QGnZKCB0o/3MWdECfFAxg==}
     engines: {node: '>=16'}
     hasBin: true
     dependencies:
@@ -25735,7 +25735,6 @@ packages:
       - sugarss
       - supports-color
       - terser
-    dev: false
     optional: true
 
   /vitest@0.32.2(happy-dom@9.20.3):
