@@ -1,13 +1,36 @@
-import type { SilverbackPageContext } from '@amazeelabs/gatsby-source-silverback';
-import { GatsbyNode } from 'gatsby';
+import { Locale } from '@custom/schema';
+import operations from '@custom/schema/operations' assert { type: 'json' };
+import { readFileSync } from 'fs';
 import { resolve } from 'path';
 
-// @ts-ignore
-import { Locale } from './schema-compiled.js';
+/**
+ * @type {import('gatsby').GatsbyNode['createSchemaCustomization']}
+ */
+export const createSchemaCustomization = (args) => {
+  const schema = readFileSync(
+    `./node_modules/@custom/schema/src/schema.graphqls`,
+    'utf8',
+  ).toString();
+  args.actions.createTypes(schema);
 
-export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({
-  actions,
-}) => {
+  // Create field extensions for all directives that could confuse Gatsby.
+  const directives = schema.matchAll(/ @[a-zA-Z][a-zA-Z0-9]*/gm);
+  const directiveNames = new Set();
+  // "default" is a gatsby internal directive and should not be added again.
+  directiveNames.add('default');
+  for (const directive of directives) {
+    const name = directive[0].substring(2);
+    if (!directiveNames.has(name)) {
+      directiveNames.add(name);
+      args.actions.createFieldExtension({ name });
+    }
+  }
+};
+
+/**
+ * @type {import('gatsby').GatsbyNode['onCreateWebpackConfig']}
+ */
+export const onCreateWebpackConfig = ({ actions }) => {
   actions.setWebpackConfig({
     resolve: {
       alias: {
@@ -17,10 +40,35 @@ export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({
   });
 };
 
-export const createPages: GatsbyNode['createPages'] = async ({
-  actions,
-  graphql,
+/**
+ * @type {import('gatsby').GatsbyNode['sourceNodes']}
+ */
+export const sourceNodes = async ({
+  createNodeId,
+  createContentDigest,
+  actions: { createNode },
 }) => {
+  const items = (await import('@custom/decap'))['getPages']();
+  items.forEach((item) => {
+    createNode(
+      Object.assign({}, item, {
+        id: createNodeId(item.id),
+        parent: null,
+        children: [],
+        internal: {
+          type: 'DecapPageNode',
+          content: JSON.stringify(item),
+          contentDigest: createContentDigest(item),
+        },
+      }),
+    );
+  });
+};
+
+/**
+ * @type {import('gatsby').GatsbyNode['createPages']}
+ */
+export const createPages = async ({ actions, graphql }) => {
   // Rewrite file requests to Drupal.
   actions.createRedirect({
     fromPath: '/sites/default/files/*',
@@ -34,24 +82,7 @@ export const createPages: GatsbyNode['createPages'] = async ({
     statusCode: 200,
   });
 
-  const settings = await graphql<{
-    websiteSettings?: {
-      homePage?: {
-        translations: Array<{
-          typeName: string;
-          path: string;
-          locale: string;
-          id: string;
-          remoteId: string;
-        }>;
-      };
-      notFoundPage?: {
-        translations: Array<{
-          path: string;
-        }>;
-      };
-    };
-  }>(`
+  const settings = await graphql(`
     query IndexPages {
       websiteSettings {
         homePage {
@@ -83,7 +114,7 @@ export const createPages: GatsbyNode['createPages'] = async ({
           path: `/${locale}`,
           locale,
         }),
-      ) satisfies SilverbackPageContext['localizations'];
+      );
 
     settings.data?.websiteSettings?.homePage.translations.forEach(
       ({ locale, typeName, id, remoteId, path }) => {
@@ -100,7 +131,7 @@ export const createPages: GatsbyNode['createPages'] = async ({
             locale,
             localizations:
               frontPageLocalizations.length > 1 ? frontPageLocalizations : [],
-          } satisfies SilverbackPageContext,
+          },
         });
         // Delete the page at the original path.
         actions.deletePage({
@@ -162,5 +193,43 @@ export const createPages: GatsbyNode['createPages'] = async ({
     fromPath: '/*',
     toPath: `/.netlify/functions/strangler`,
     statusCode: 200,
+  });
+
+  // Generate decap pages.
+  console.log(operations);
+};
+
+/**
+ * @type {import('gatsby').GatsbyNode['createResolvers']}
+ */
+export const createResolvers = (args) => {
+  args.createResolvers({
+    Query: {
+      listDecapPages: {
+        resolve: async (source, args, context) => {
+          return (
+            await context.nodeModel.findAll({
+              type: 'DecapPage',
+            })
+          ).entries;
+        },
+      },
+      fetchDecapPage: {
+        resolve: async (source, args, context) => {
+          return (
+            await context.nodeModel.findOne({
+              type: 'DecapPage',
+              query: {
+                filter: {
+                  id: {
+                    eq: args.id,
+                  },
+                },
+              },
+            })
+          ).entries;
+        },
+      },
+    },
   });
 };

@@ -4,6 +4,10 @@
     "strict": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "noEmit": true
-  }
+    "declaration": true,
+    "declarationDir": "build",
+    "outDir": "build",
+    "module": "NodeNext"
+  },
+  "include": ["src"]
 }

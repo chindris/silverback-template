@@ -60,7 +60,6 @@ A generic page.
 type Page implements ContentHubResultItem
   @entity(type: "node", bundle: "page")
   @type(id: "page") {
-  id: ID! @resolveEntityId
   locale: Locale! @resolveEntityLanguage
   path: Url! @resolveEntityPath @isPath
   title: String! @resolveProperty(path: "title.value")
@@ -139,7 +138,7 @@ input PaginationInput {
 }
 
 type Query {
-  listDecapPages: [DecapPage]
+  listDecapPages: [DecapPage]!
   fetchDecapPage(id: ID!): DecapPage
   previewPage(id: ID!, rid: ID, locale: String!): Page
     @fetchEntity(type: "node", id: "$id", rid: "$rid", language: "$locale")

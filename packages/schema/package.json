@@ -2,13 +2,13 @@
   "name": "@custom/schema",
   "description": "GraphQL schema and operation definitions.",
   "type": "module",
-  "main": "src/index.ts",
-  "types": "src/index.ts",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
   "private": true,
   "sideEffects": false,
   "exports": {
     ".": [
-      "./src/index.ts"
+      "./build/index.js"
     ],
     "./source": [
       "./build/source.ts"
@@ -19,8 +19,9 @@
   },
   "scripts": {
     "watch": "graphql-codegen --verbose --watch",
-    "prep": "graphql-codegen --verbose && pnpm compile-js",
-    "compile-js": "swc --out-file=build/schema-compiled.js ./build/index.ts"
+    "prep": "pnpm prep:codegen && pnpm prep:scripts",
+    "prep:codegen": "graphql-codegen --verbose",
+    "prep:scripts": "tsc"
   },
   "devDependencies": {
     "@amazeelabs/codegen-gatsby-fragments": "^1.1.8",
