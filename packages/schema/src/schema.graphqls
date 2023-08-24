@@ -87,6 +87,17 @@ type Page implements ContentHubResultItem
   metaTags: [MetaTag] @resolveProperty(path: "metatag")
 }
 
+type DecapPage implements ContentHubResultItem {
+  id: ID!
+  locale: Locale!
+  path: Url!
+  title: String!
+  teaserImage: MediaImage
+  hero: Hero
+  content: [PageContent]
+  metaTags: [MetaTag]
+}
+
 type Hero {
   headline: String! @resolveEditorBlockAttribute(key: "headline")
   lead: String @resolveEditorBlockAttribute(key: "lead")
@@ -128,6 +139,8 @@ input PaginationInput {
 }
 
 type Query {
+  listDecapPages: [DecapPage]
+  fetchDecapPage(id: ID!): DecapPage
   previewPage(id: ID!, rid: ID, locale: String!): Page
     @fetchEntity(type: "node", id: "$id", rid: "$rid", language: "$locale")
   contentHub(query: String, pagination: PaginationInput!): ContentHubResult!

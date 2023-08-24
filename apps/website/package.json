@@ -10,6 +10,7 @@
     "@amazeelabs/strangler-netlify": "^1.1.2",
     "@custom/schema": "workspace:*",
     "@custom/ui": "workspace:*",
+    "@custom/decap": "workspace:*",
     "gatsby": "^5.11.0",
     "gatsby-plugin-manifest": "^5.11.0",
     "gatsby-plugin-netlify": "^5.1.0",

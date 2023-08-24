@@ -45,6 +45,7 @@ module.exports = {
         type_prefix: '',
       },
     },
+    'gatsby-source-any',
     {
       resolve: '@amazeelabs/gatsby-silverback-cloudinary',
       options: {

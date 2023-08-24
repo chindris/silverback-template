@@ -1,7 +1,6 @@
 import { buildResponsiveImage } from '@amazeelabs/cloudinary-responsive-image';
 import {
   ImageSource,
-  Markup,
   OperationId,
   OperationResult,
   OperationVariables,

@@ -76,6 +76,7 @@ vscode:
     - "humao.rest-client"
     - "DEVSENSE.phptools-vscode"
     - "GitHub.vscode-github-actions"
+    - "Graphite.gti-vscode"
 
 ports:
   - port: 8000

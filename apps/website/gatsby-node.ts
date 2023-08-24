@@ -1,34 +1,9 @@
 import type { SilverbackPageContext } from '@amazeelabs/gatsby-source-silverback';
-import { readFileSync } from 'fs';
 import { GatsbyNode } from 'gatsby';
 import { resolve } from 'path';
 
 // @ts-ignore
 import { Locale } from './schema-compiled.js';
-
-export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] =
-  (args) => {
-    // TODO: This is still necessary, because graphql-source-toolkit won't import
-    //       interface relations.
-    const schema = readFileSync(
-      `./node_modules/@custom/schema/src/schema.graphqls`,
-      'utf8',
-    ).toString();
-    args.actions.createTypes(schema);
-
-    // Create field extensions for all directives that could confuse Gatsby.
-    const directives = schema.matchAll(/ @[a-zA-Z][a-zA-Z0-9]*/gm);
-    const directiveNames = new Set<string>();
-    // "default" is a gatsby internal directive and should not be added again.
-    directiveNames.add('default');
-    for (const directive of directives) {
-      const name = directive[0].substring(2);
-      if (!directiveNames.has(name)) {
-        directiveNames.add(name);
-        args.actions.createFieldExtension({ name });
-      }
-    }
-  };
 
 export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({
   actions,

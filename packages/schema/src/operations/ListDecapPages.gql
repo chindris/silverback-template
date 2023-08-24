@@ -1,0 +1,7 @@
+query ListDecapPages {
+  listDecapPages @createPages(import: "@custom/ui#Page") {
+    id
+    locale
+    path
+  }
+}

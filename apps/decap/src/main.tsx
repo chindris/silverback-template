@@ -1,26 +1,14 @@
-import { ImageSource, Markup, PreviewPageQuery, Url } from '@custom/schema';
-import {
-  BlockMarkupSource,
-  BlockMediaSource,
-  LocaleSource,
-  MediaImageSource,
-  NavigationItemSource,
-  PageSource,
-} from '@custom/schema/source';
+import { PreviewPageQuery, Url } from '@custom/schema';
+import { NavigationItemSource } from '@custom/schema/source';
 import { IntlProvider } from '@custom/ui/intl';
 import { Frame } from '@custom/ui/routes/Frame';
 import { Page as PageComponent } from '@custom/ui/routes/Page';
 import CMS from 'netlify-cms-app';
 import { CmsCollection, CmsField } from 'netlify-cms-core';
-import rehypeSanitize from 'rehype-sanitize';
-import rehypeStringify from 'rehype-stringify';
-import remarkParse from 'remark-parse';
-import remarkRehype from 'remark-rehype';
-import { unified } from 'unified';
-import { z, ZodType, ZodTypeDef } from 'zod';
 
 import css from '../node_modules/@custom/ui/build/styles.css?raw';
 import { useQuery } from './query';
+import { pageTransformer } from './schema';
 import { UuidWidget } from './uuid';
 
 CMS.registerPreviewStyle(css, { raw: true });
@@ -67,7 +55,6 @@ CMS.init({
         label: 'Settings',
         description: 'Global settings that might appear on every page.',
         name: 'settings',
-        i18n: true,
         files: [
           {
             label: 'Site',
@@ -137,6 +124,7 @@ CMS.init({
             name: 'hero',
             widget: 'object',
             collapsed: false,
+            i18n: true,
             fields: [
               {
                 label: 'Headline',
@@ -209,93 +197,6 @@ CMS.init({
     ],
   },
 });
-
-function createTransformer<T extends any>(
-  schema: ZodType<T, ZodTypeDef, unknown>,
-) {
-  return function (input: any, fallback: T) {
-    const result = schema.safeParse(input);
-    if (result.success) {
-      return result.data;
-    } else {
-      console.debug(result);
-      return fallback;
-    }
-  };
-}
-
-const transformMarkdown = z
-  .string()
-  .optional()
-  .transform(
-    (t) =>
-      unified()
-        .use(remarkParse)
-        .use(remarkRehype)
-        .use(rehypeSanitize)
-        .use(rehypeStringify)
-        .processSync(t)
-        .toString() as Markup,
-  );
-
-const BlockMarkupSchema: ZodType<BlockMarkupSource, ZodTypeDef, unknown> = z
-  .object({
-    type: z.literal('text'),
-    text: transformMarkdown,
-  })
-  .transform(({ text }) => {
-    return {
-      __typename: 'BlockMarkup',
-      markup: text,
-    };
-  });
-
-const BlockMediaImageSchema: ZodType<BlockMediaSource, ZodTypeDef, unknown> = z
-  .object({
-    type: z.literal('image'),
-    alt: z.string(),
-    image: z.string(),
-    caption: transformMarkdown,
-  })
-  .transform(({ image, alt, caption }) => {
-    return {
-      __typename: 'BlockMedia',
-      media: {
-        __typename: 'MediaImage',
-        source: image as ImageSource,
-        alt,
-      },
-      caption: caption,
-    };
-  });
-
-const pageSchema = z.object({
-  __typename: z.literal('Page').optional().default('Page'),
-  id: z.string(),
-  title: z.string(),
-  locale: z.string().transform((l) => l as LocaleSource),
-  path: z.string().transform((p) => p as Url),
-  hero: z.object({
-    __typename: z.literal('Hero').optional().default('Hero'),
-    headline: z.string(),
-    lead: z.string().optional(),
-    image: z
-      .string()
-      .optional()
-      .transform((s) => s as ImageSource)
-      .transform(
-        (source) =>
-          ({
-            __typename: 'MediaImage',
-            source,
-            alt: '',
-          } satisfies MediaImageSource),
-      ),
-  }),
-  content: z.array(z.union([BlockMarkupSchema, BlockMediaImageSchema])),
-});
-
-const pageTransformer = createTransformer<PageSource>(pageSchema);
 
 CMS.registerPreviewTemplate('page', ({ entry, getAsset }) => {
   const input = entry.toJS().data;
