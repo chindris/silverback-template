@@ -3,10 +3,8 @@ import '../tailwind.css';
 import { Decorator } from '@storybook/react';
 import { IntlProvider } from '../src/utils/intl';
 import { LocationProvider } from '@custom/schema';
-import React, { PropsWithChildren, useEffect, useState } from 'react';
-import { initialize, mswDecorator } from 'msw-storybook-addon';
-import { rest } from 'msw';
-import { mockCloudinaryImage } from '@amazeelabs/cloudinary-responsive-image';
+import React from 'react';
+import { initialize, mswLoader } from 'msw-storybook-addon';
 
 // Every story is wrapped in an IntlProvider by default.
 const IntlDecorator: Decorator = (Story) => (
@@ -43,4 +41,6 @@ initialize({
   onUnhandledRequest: 'bypass',
 });
 
-export const decorators = [LocationDecorator, IntlDecorator, mswDecorator];
+export const loaders = [mswLoader];
+
+export const decorators = [LocationDecorator, IntlDecorator];
