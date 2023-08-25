@@ -23,18 +23,6 @@ const LocationDecorator: Decorator = (Story, ctx) => {
 
 export const parameters = {
   chromatic: { viewports: [320, 840, 1440] },
-  msw: {
-    handlers: {
-      cloudinary: [
-        rest.get('https://res.cloudinary.com/*', async (req, res, context) => {
-          return res(
-            context.set('Content-Type', 'image/jpg'),
-            context.body((await mockCloudinaryImage(req.url.toString())) || ''),
-          );
-        }),
-      ],
-    },
-  },
 };
 
 initialize({
