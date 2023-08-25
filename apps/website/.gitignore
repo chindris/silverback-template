@@ -7,6 +7,3 @@ styles.css
 persisted-store
 
 src/gatsby-fragments.js
-
-static/mock-cloudinary-worker.js
-static/mock-cloudinary-register.js
