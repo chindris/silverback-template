@@ -1,3 +1,4 @@
+import Landscape from '@stories/landscape.jpg?as=metadata';
 import { Meta, StoryObj } from '@storybook/react';
 
 import { image } from '../../helpers/image';
@@ -42,10 +43,7 @@ export const FullHero = {
         headline: 'Page Hero Headline',
         lead: 'A longer lead text that even might break into multiple lines.',
         image: {
-          source: image(
-            { src: '/landscape.jpg', width: 1000, height: 1000 },
-            { width: 2000 },
-          ),
+          source: image(Landscape, { width: 2000 }),
           alt: 'Stock photo landscape hero.',
         },
       },

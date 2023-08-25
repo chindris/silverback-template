@@ -3,6 +3,8 @@ import {
   ContentHubResultItemFragment,
   Url,
 } from '@custom/schema';
+import Landscape from '@stories/landscape.jpg?as=metadata';
+import Portrait from '@stories/portrait.jpg?as=metadata';
 import { Meta, StoryObj } from '@storybook/react';
 import { rest } from 'msw';
 
@@ -52,20 +54,10 @@ export const WithResults = {
                       ? undefined
                       : {
                           alt: `Image for item #${i + 1}`,
-                          source: image(
-                            {
-                              src:
-                                i % 2 === 0
-                                  ? '/landscape.jpg'
-                                  : '/portrait.jpg',
-                              width: 1000,
-                              height: 1000,
-                            },
-                            {
-                              width: 400,
-                              height: 300,
-                            },
-                          ),
+                          source: image(i % 2 === 0 ? Landscape : Portrait, {
+                            width: 400,
+                            height: 300,
+                          }),
                         },
                 } satisfies ContentHubResultItemFragment),
             );
