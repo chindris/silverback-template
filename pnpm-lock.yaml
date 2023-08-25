@@ -81,11 +81,11 @@ importers:
   apps/website:
     dependencies:
       '@amazeelabs/bridge-gatsby':
-        specifier: ^1.1.3
-        version: 1.1.3(gatsby@5.11.0)(happy-dom@9.20.3)(react@18.2.0)
+        specifier: ^1.2.0
+        version: 1.2.0(gatsby@5.11.0)(happy-dom@9.20.3)(react@18.2.0)
       '@amazeelabs/cloudinary-responsive-image':
-        specifier: ^1.3.1
-        version: 1.3.1
+        specifier: ^1.4.3
+        version: 1.4.3
       '@amazeelabs/gatsby-silverback-cloudinary':
         specifier: ^1.0.26
         version: 1.0.26
@@ -212,8 +212,8 @@ importers:
   packages/schema:
     dependencies:
       '@amazeelabs/scalars':
-        specifier: ^1.3.1
-        version: 1.3.1(react@18.2.0)(tailwindcss@3.3.2)
+        specifier: ^1.5.2
+        version: 1.5.2(react@18.2.0)(tailwindcss@3.3.2)
       swr:
         specifier: ^2.2.0
         version: 2.2.0(react@18.2.0)
@@ -292,11 +292,11 @@ importers:
         version: 4.3.8(react@18.2.0)
     devDependencies:
       '@amazeelabs/bridge-storybook':
-        specifier: ^1.1.2
-        version: 1.1.2(@storybook/addon-actions@7.0.24)(happy-dom@9.20.3)(react@18.2.0)
+        specifier: ^1.2.1
+        version: 1.2.1(@storybook/addon-actions@7.3.2)(happy-dom@9.20.3)(react@18.2.0)
       '@amazeelabs/cloudinary-responsive-image':
-        specifier: ^1.3.1
-        version: 1.3.1
+        specifier: ^1.4.3
+        version: 1.4.3
       '@formatjs/cli':
         specifier: ^6.1.3
         version: 6.1.3
@@ -489,8 +489,8 @@ packages:
     resolution: {integrity: sha512-UrcABB+4bUrFABwbluTIBErXwvbsU/V7TZWfmbgJfbkwiBuziS9gxdODUyuiecfdGQ85jglMW6juS3+z5TsKLw==}
     engines: {node: '>=10'}
 
-  /@amazeelabs/bridge-gatsby@1.1.3(gatsby@5.11.0)(happy-dom@9.20.3)(react@18.2.0):
-    resolution: {integrity: sha512-4ot16wHbTzn9HNRuDnYkr5D52BP2cw21zTW8yqF66+t4EgBj2DygRp/RBx/NzXWgzRKNNMV/Ghq7jdEq+xFsUQ==}
+  /@amazeelabs/bridge-gatsby@1.2.0(gatsby@5.11.0)(happy-dom@9.20.3)(react@18.2.0):
+    resolution: {integrity: sha512-TTOvJgeiqPMWoxBAwrhjFfvzvUtFNg5rRREuqaaV0mzwGNq6BR+OB21kixvn4JX3fFaC5rJ6QFmWwa/aaVC1yA==}
     peerDependencies:
       gatsby: '>=5.10.0'
       react: '>=18.2.0'
@@ -518,8 +518,8 @@ packages:
       - webdriverio
     dev: false
 
-  /@amazeelabs/bridge-storybook@1.1.2(@storybook/addon-actions@7.0.24)(happy-dom@9.20.3)(react@18.2.0):
-    resolution: {integrity: sha512-pepUgQYfIOOsg6axmrHK1InTGFOUwR7yylKIhvUtbbwccJ/rPyJSi5rlbexoY4LDdtRkpAp82YZQEQ2nGxE2Sg==}
+  /@amazeelabs/bridge-storybook@1.2.1(@storybook/addon-actions@7.3.2)(happy-dom@9.20.3)(react@18.2.0):
+    resolution: {integrity: sha512-Cuer/o53EMWmr+lWHTljXVMabbwaEwtogmZn6jIQKT0Xj+gS0TPDSt6KGdasrz0QILLnZRRp03xa+Y7zMyF2eA==}
     peerDependencies:
       '@storybook/addon-actions': '>=7.0.20'
       react: '>=18.2.0'
@@ -547,8 +547,8 @@ packages:
       - webdriverio
     dev: true
 
-  /@amazeelabs/bridge@1.4.1(react@18.2.0):
-    resolution: {integrity: sha512-JEKQaTOkF7WHKr81FyUNk8pgL6dmlgN5JchH26Vn3hLMfnnUEEcCpkVYz3mmBN+xKFx2IoNsPYW/g0SxUI3xGw==}
+  /@amazeelabs/bridge@1.5.1(react@18.2.0):
+    resolution: {integrity: sha512-WadnuvBXx1/6QzxVDP70FY+EXX8Dq5EUwfX40iDhid57WxV0afIfSmJE/I5CONPcZ/s+D2pXLMQuZtVdxXcjJg==}
     peerDependencies:
       react: ^18.2.0
     dependencies:
@@ -574,8 +574,15 @@ packages:
       - webdriverio
     dev: false
 
-  /@amazeelabs/cloudinary-responsive-image@1.3.1:
-    resolution: {integrity: sha512-XaUdaOlS9HY9v1O8PEDG0N0FEmIkJL3E1eq0DhOTTtqOapMdpXvktuDfAqV36RS1Nvzk40FxoAHtb6SZIbp5WA==}
+  /@amazeelabs/cloudinary-responsive-image@1.4.1:
+    resolution: {integrity: sha512-nDZAhnkg46DV4Dn901awgli5LZmymCLfWivMpC+PORc8wYdl1rKG3axJLwxB2lR3GVdJiubQTOkaY2CUlp+FNg==}
+    dependencies:
+      '@cloudinary/url-gen': 1.10.1
+      crypto-js: 4.1.1
+    dev: false
+
+  /@amazeelabs/cloudinary-responsive-image@1.4.3:
+    resolution: {integrity: sha512-K0QAMmwx4nywRLsUQwV5tEajiCiiRCBGyCgwY7qhQc8HrYSYWw7GhfsyYv+Z1mQDyaUmza6Fuvd4qtskYiKfAg==}
     dependencies:
       '@cloudinary/url-gen': 1.10.1
       crypto-js: 4.1.1
@@ -744,12 +751,13 @@ packages:
       typescript: 5.1.6
     dev: false
 
-  /@amazeelabs/scalars@1.3.1(react@18.2.0)(tailwindcss@3.3.2):
-    resolution: {integrity: sha512-CMsHvFRCHp4yQcixS8rqw1F+CUSTgm4yG1wE50AYW+KWH35A6ZyqgwVkHi2rwGOZOw6NyQ3aVA1GUUWYI4ZIPQ==}
+  /@amazeelabs/scalars@1.5.2(react@18.2.0)(tailwindcss@3.3.2):
+    resolution: {integrity: sha512-2rG0GUH+FjnNpoP045F87zLHdYXBky0ovE5UwJ6Vr9LqvEGXcmx0z2U/VIXmM1ny/hOf8vYB2CTZywtFz5ZtpA==}
     peerDependencies:
       react: ^18.2.0
     dependencies:
-      '@amazeelabs/bridge': 1.4.1(react@18.2.0)
+      '@amazeelabs/bridge': 1.5.1(react@18.2.0)
+      '@amazeelabs/cloudinary-responsive-image': 1.4.1
       hast-util-select: 5.0.5
       query-string: 8.1.0
       react: 18.2.0
@@ -25735,7 +25743,6 @@ packages:
       - sugarss
       - supports-color
       - terser
-    dev: false
     optional: true
 
   /vitest@0.32.2(happy-dom@9.20.3):
