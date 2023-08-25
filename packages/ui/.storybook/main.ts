@@ -2,6 +2,7 @@ import type { StorybookConfig } from '@storybook/react-vite';
 import pluginTurbosnap from 'vite-plugin-turbosnap';
 import { mergeConfig, UserConfig } from 'vite';
 import { imagetools } from 'vite-imagetools';
+import { resolve, dirname } from 'path';
 
 const config: StorybookConfig = {
   viteFinal: (config, { configType }) =>
@@ -9,6 +10,10 @@ const config: StorybookConfig = {
       resolve: {
         alias: {
           '@amazeelabs/bridge': '@amazeelabs/bridge-storybook',
+          '@stories': resolve(
+            dirname(new URL(import.meta.url).pathname),
+            '../static/stories',
+          ),
         },
       },
       plugins: [
