@@ -1,6 +1,5 @@
 import { buildResponsiveImage } from '@amazeelabs/cloudinary-responsive-image';
 import { ImageSource } from '@custom/schema';
-import isChromatic from 'chromatic/isChromatic';
 
 export function image(
   props: Parameters<typeof buildResponsiveImage>[1],
@@ -8,7 +7,7 @@ export function image(
 ) {
   return buildResponsiveImage(
     {
-      cloudname: isChromatic() ? 'test' : 'debug',
+      cloudname: 'demo',
       key: 'c7d2fe',
       secret: '4e46e5',
     },
