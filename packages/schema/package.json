@@ -3,12 +3,33 @@
   "description": "GraphQL schema and operation definitions.",
   "type": "module",
   "main": "build/index.js",
-  "types": "src/index.ts",
+  "types": "build/index.d.ts",
   "private": true,
   "sideEffects": false,
+  "exports": {
+    ".": [
+      "./build/index.js"
+    ],
+    "./source": [
+      "./build/generated/source.js"
+    ],
+    "./operations": [
+      "./build/operations.json"
+    ]
+  },
+  "typesVersions": {
+    "*": {
+      ".": [
+        "build/index.d.ts"
+      ],
+      "/source": [
+        "build/generated/source.d.ts"
+      ]
+    }
+  },
   "scripts": {
     "watch": "graphql-codegen --verbose --watch",
-    "prep": "graphql-codegen --verbose && swc ./src -d ./build"
+    "prep": "graphql-codegen --verbose && swc ./src -d ./build && tsc --emitDeclarationOnly"
   },
   "devDependencies": {
     "@amazeelabs/codegen-gatsby-fragments": "^1.1.8",

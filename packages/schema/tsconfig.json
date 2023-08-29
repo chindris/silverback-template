@@ -4,6 +4,9 @@
     "strict": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "noEmit": true
-  }
+    "declaration": true,
+    "declarationDir": "build",
+    "outDir": "build"
+  },
+  "include": ["src"]
 }
