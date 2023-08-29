@@ -5,9 +5,9 @@ export function image(
   { src, width, height }: Parameters<typeof buildResponsiveImage>[1],
   config?: Parameters<typeof buildResponsiveImage>[2],
 ) {
-  return buildResponsiveImage(
+  const img = buildResponsiveImage(
     {
-      cloudname: 'demo',
+      cloudname: import.meta.env.VITE_CLOUDINARY_CLOUDNAME || 'placeholder',
       key: 'c7d2fe',
       secret: '4e46e5',
     },
@@ -20,4 +20,5 @@ export function image(
         (config?.width ? config.width * (height / width) : height),
     },
   ) as ImageSource;
+  return img;
 }
