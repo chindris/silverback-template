@@ -1,8 +1,12 @@
 import useSwr from 'swr';
 
-import { AnyOperationId, OperationResult, OperationVariables } from '../build';
+import {
+  AnyOperationId,
+  OperationResult,
+  OperationVariables,
+} from './generated/index.js';
 
-export * from '../build';
+export * from './generated/index.js';
 export * from '@amazeelabs/scalars';
 
 export function useOperation<TOperation extends AnyOperationId>(

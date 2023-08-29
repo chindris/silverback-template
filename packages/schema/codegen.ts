@@ -17,7 +17,7 @@ const config: CodegenConfig = {
     // - All operation types
     // - All fragment types
     // - All operations as typed id's
-    'build/index.ts': {
+    'src/generated/index.ts': {
       plugins: [
         {
           typescript: {
