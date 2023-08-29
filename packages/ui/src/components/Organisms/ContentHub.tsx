@@ -34,7 +34,7 @@ export function ContentHub({ pageSize = 10 }: { pageSize: number }) {
               <li key={item.path}>
                 <Link href={item.path}>
                   {item.teaserImage ? (
-                    <Image {...item.teaserImage} />
+                    <Image {...item.teaserImage} className="w-full" />
                   ) : (
                     <div className="aspect-[4/3] bg-indigo-200" />
                   )}
