@@ -12,5 +12,12 @@ export function image(
       secret: '4e46e5',
     },
     { src, width, height },
+    {
+      ...config,
+      width: config?.width || width,
+      height:
+        config?.height ||
+        (config?.width ? config.width * (height / width) : height),
+    },
   ) as ImageSource;
 }
