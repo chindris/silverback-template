@@ -1,0 +1,18 @@
+en:
+  id: BTPzQnq79fWNOF1dFmESP
+  path: /decap-example
+  title: Decap example
+  teaserImage: /apps/decap/media/landscape.jpg
+  hero:
+    headline: Decap
+    lead: This page was created with Decap CMS
+    image: /apps/decap/media/landscape.jpg
+  content:
+    - type: text
+      text: All content of this page is stored in a **JSON** file.
+    - type: image
+      caption: Here is an ***image***, for good measure.
+      alt: Some architecture.
+      image: /apps/decap/media/portrait.jpg
+de:
+  id: LFdYu4b6OsjTROxTsYep7
