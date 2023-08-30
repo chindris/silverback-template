@@ -28,6 +28,15 @@ tasks:
   - name: Codegen
     init: gp sync-await setup
     command: pnpm --filter @custom/schema run watch
+  - name: Decap Dev
+    init: gp sync-await setup
+    command: pnpm run --filter @custom/decap dev
+  - name: Decap Proxy
+    init: gp sync-await setup
+    command: pnpm run --filter @custom/decap start:proxy
+  - name: Decap
+    init: gp sync-await setup
+    command: pnpm run --filter @custom/decap start:decap
 
 image:
   file: .gitpod.Dockerfile
@@ -51,23 +60,23 @@ github:
 
 vscode:
   extensions:
-    - "esbenp.prettier-vscode"
-    - "ZixuanChen.vitest-explorer"
-    - "GraphQL.vscode-graphql"
-    - "GraphQL.vscode-graphql-syntax"
-    - "eamodio.gitlens"
-    - "GitHub.vscode-pull-request-github"
-    - "GitHub.copilot"
-    - "dbaeumer.vscode-eslint"
-    - "ms-azuretools.vscode-docker"
-    - "ms-playwright.playwright"
-    - "denoland.vscode-deno"
-    - "bradlc.vscode-tailwindcss"
-    - "felixfbecker.php-debug"
-    - "humao.rest-client"
-    - "DEVSENSE.phptools-vscode"
-    - "GitHub.vscode-github-actions"
-    - "Graphite.gti-vscode"
+    - 'esbenp.prettier-vscode'
+    - 'ZixuanChen.vitest-explorer'
+    - 'GraphQL.vscode-graphql'
+    - 'GraphQL.vscode-graphql-syntax'
+    - 'eamodio.gitlens'
+    - 'GitHub.vscode-pull-request-github'
+    - 'GitHub.copilot'
+    - 'dbaeumer.vscode-eslint'
+    - 'ms-azuretools.vscode-docker'
+    - 'ms-playwright.playwright'
+    - 'denoland.vscode-deno'
+    - 'bradlc.vscode-tailwindcss'
+    - 'felixfbecker.php-debug'
+    - 'humao.rest-client'
+    - 'DEVSENSE.phptools-vscode'
+    - 'GitHub.vscode-github-actions'
+    - 'Graphite.gti-vscode'
 
 ports:
   - port: 8000
@@ -78,4 +87,13 @@ ports:
     onOpen: notify
   - port: 8888
     name: Drupal Dev
+    onOpen: notify
+  - port: 5173
+    name: Decap Dev
+    onOpen: notify
+  - port: 8889
+    name: Decap
+    onOpen: notify
+  - port: 8081
+    name: Decap Proxy
     onOpen: notify
