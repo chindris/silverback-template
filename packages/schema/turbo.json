@@ -5,7 +5,7 @@
     "prep": {
       // Dedicated inputs for this package.
       "inputs": ["src/**", "codegen.ts", ".graphqlconfig", "tsconfig.json"],
-      "outputs": ["build/**"]
+      "outputs": ["build/**", "src/generated/index.ts"]
     }
   }
 }
