@@ -31,18 +31,18 @@ runs:
         restore-keys: |
           ${{ runner.os }}-pnpm-store-
 
+    - name: Install dependencies
+      shell: bash
+      run: PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 pnpm i
+
     - name: Cache playwright binaries
       uses: actions/cache@v3
       id: playwright-cache
       with:
         path: ~/.cache/ms-playwright
-        key: ${{ runner.os }}-playwright-${{ env.PLAYWRIGHT_VERSION }}
+        key: ${{ runner.os }}-playwright-${{ hashFiles('**/pnpm-lock.yaml') }}
 
     - name: Install Playwright browsers
-      run: pnpx playwright install
+      run: pnpm --filter "@custom-tests/e2e" download-browsers
       shell: bash
       if: steps.playwright-cache.outputs.cache-hit != 'true'
-
-    - name: Install dependencies
-      shell: bash
-      run: pnpm i
