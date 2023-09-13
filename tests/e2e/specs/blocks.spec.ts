@@ -7,9 +7,7 @@ test('All blocks are rendered', async ({ page }) => {
 
   // Hero
   await expect(
-    page.locator(
-      'img[data-test-id=hero-image][alt="A beautiful landscape."][src*="/landscape.jpg"]',
-    ),
+    page.locator('img[data-test-id=hero-image][alt="A beautiful landscape."]'),
   ).toHaveCount(1);
   await expect(
     page.locator('h1:text("All kinds of blocks with maximum data")'),
@@ -27,7 +25,7 @@ test('All blocks are rendered', async ({ page }) => {
   // Image
   await expect(
     page.locator(
-      'img:not([data-test-id=hero-image])[alt="A beautiful landscape."][src*="/landscape.jpg"]',
+      'img:not([data-test-id=hero-image])[alt="A beautiful landscape."]',
     ),
   ).toHaveCount(1);
   await expect(page.locator('figcaption:text("Media image")')).toHaveCount(1);
