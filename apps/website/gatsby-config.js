@@ -11,11 +11,9 @@ process.env.GATSBY_DRUPAL_URL =
 
 process.env.NETLIFY_URL = process.env.NETLIFY_URL || 'http://127.0.0.1:8000';
 
-process.env.CLOUDINARY_API_KEY = process.env.CLOUDINARY_API_KEY || 'c7d2fe';
-process.env.CLOUDINARY_API_SECRET =
-  process.env.CLOUDINARY_API_SECRET || '4e46e5';
-process.env.CLOUDINARY_CLOUDNAME =
-  process.env.CLOUDINARY_CLOUDNAME || 'placeholder';
+process.env.CLOUDINARY_API_KEY = process.env.CLOUDINARY_API_KEY || 'test';
+process.env.CLOUDINARY_API_SECRET = process.env.CLOUDINARY_API_SECRET || 'test';
+process.env.CLOUDINARY_CLOUDNAME = process.env.CLOUDINARY_CLOUDNAME || 'demo';
 
 /**
  * @type {import('gatsby').GatsbyConfig}
