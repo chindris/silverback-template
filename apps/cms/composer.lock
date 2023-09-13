@@ -367,16 +367,16 @@
         },
         {
             "name": "amazeelabs/silverback_cloudinary",
-            "version": "1.3.0",
+            "version": "1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/AmazeeLabs/silverback_cloudinary.git",
-                "reference": "7926fc57ed93ebe7d4b6ff5abedf248e38e3bbd9"
+                "reference": "7cf40615b8d333d2a6038ec83ee88a7e3552e6e9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AmazeeLabs/silverback_cloudinary/zipball/7926fc57ed93ebe7d4b6ff5abedf248e38e3bbd9",
-                "reference": "7926fc57ed93ebe7d4b6ff5abedf248e38e3bbd9",
+                "url": "https://api.github.com/repos/AmazeeLabs/silverback_cloudinary/zipball/7cf40615b8d333d2a6038ec83ee88a7e3552e6e9",
+                "reference": "7cf40615b8d333d2a6038ec83ee88a7e3552e6e9",
                 "shasum": ""
             },
             "require": {
@@ -398,9 +398,9 @@
             "homepage": "https://silverback.netlify.app",
             "support": {
                 "issues": "https://github.com/AmazeeLabs/silverback_cloudinary/issues",
-                "source": "https://github.com/AmazeeLabs/silverback_cloudinary/tree/1.3.0"
+                "source": "https://github.com/AmazeeLabs/silverback_cloudinary/tree/1.4.0"
             },
-            "time": "2023-06-09T07:52:11+00:00"
+            "time": "2023-09-08T05:33:06+00:00"
         },
         {
             "name": "amazeelabs/silverback_external_preview",
