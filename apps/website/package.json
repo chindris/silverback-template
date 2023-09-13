@@ -3,9 +3,9 @@
   "private": true,
   "dependencies": {
     "@amazeelabs/bridge-gatsby": "^1.2.0",
-    "@amazeelabs/cloudinary-responsive-image": "^1.4.3",
-    "@amazeelabs/gatsby-silverback-cloudinary": "^1.0.26",
-    "@amazeelabs/gatsby-source-silverback": "^1.10.7",
+    "@amazeelabs/cloudinary-responsive-image": "^1.6.7",
+    "@amazeelabs/gatsby-silverback-cloudinary": "^1.0.47",
+    "@amazeelabs/gatsby-source-silverback": "^1.10.9",
     "@amazeelabs/publisher": "^2.2.1",
     "@amazeelabs/strangler-netlify": "^1.1.2",
     "@custom/schema": "workspace:*",
