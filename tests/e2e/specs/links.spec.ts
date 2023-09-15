@@ -9,10 +9,12 @@ test.describe('links', () => {
     await page.getByRole('link', { name: 'link to page' }).click();
     await page.waitForURL(websiteUrl('/en/privacy'));
 
-    await page.goBack();
+    await page.goto(websiteUrl('/en/page-links'));
 
     const downloadPromise = page.waitForEvent('download');
-    await page.getByRole('link', { name: 'link to file' }).click();
+    await page
+      .getByRole('link', { name: 'link to file', includeHidden: true })
+      .click();
     const download = await downloadPromise;
     expect(download.url()).toBe(
       websiteUrl('/sites/default/files/2023-04/document_docx.docx'),
