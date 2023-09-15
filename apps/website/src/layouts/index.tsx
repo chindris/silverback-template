@@ -1,7 +1,8 @@
-import { Locale, NavigationFragment } from '@custom/schema';
+import { SilverbackPageContext } from '@amazeelabs/gatsby-source-silverback';
+import { NavigationFragment } from '@custom/schema';
 import { IntlProvider } from '@custom/ui/intl';
 import { Frame } from '@custom/ui/routes/Frame';
-import { graphql, useStaticQuery } from 'gatsby';
+import { graphql, useStaticQuery, WrapPageElementNodeArgs } from 'gatsby';
 import React, { PropsWithChildren } from 'react';
 
 function useFrameQuery() {
@@ -34,15 +35,17 @@ function useFrameQuery() {
   `);
 }
 
-export function Wrapper({
+export default function Layout({
   children,
-  locale = 'en',
-}: PropsWithChildren<{ locale?: Locale }>) {
+  pageContext: { locale },
+}: PropsWithChildren<
+  WrapPageElementNodeArgs<any, SilverbackPageContext>['props']
+>) {
   const data = useFrameQuery();
   const main = locale === 'de' ? data.main_de : data.main_en;
   const footer = locale === 'de' ? data.footer_de : data.footer_en;
   return (
-    <IntlProvider locale={locale}>
+    <IntlProvider locale={locale || 'en'}>
       <Frame
         header={{ mainNavigation: main }}
         footer={{ footerNavigation: footer }}

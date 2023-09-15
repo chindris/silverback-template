@@ -33,6 +33,7 @@ module.exports = {
   },
   plugins: [
     'gatsby-plugin-pnpm',
+    'gatsby-plugin-layout',
     {
       resolve: '@amazeelabs/gatsby-source-silverback',
       options: {
