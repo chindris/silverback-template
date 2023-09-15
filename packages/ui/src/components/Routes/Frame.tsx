@@ -1,6 +1,6 @@
-import React, { ComponentProps, PropsWithChildren, useEffect } from 'react';
+import { AnimatePresence, useReducedMotion } from 'framer-motion';
+import React, { ComponentProps, PropsWithChildren } from 'react';
 
-import { Messages, readMessages } from '../Molecules/Messages';
 import { Footer } from '../Organisms/Footer';
 import Header from '../Organisms/Header';
 
@@ -10,16 +10,17 @@ export function Frame(
     footer: ComponentProps<typeof Footer>;
   }>,
 ) {
-  const [messages, setMessages] = React.useState<Array<string>>([]);
-  useEffect(() => {
-    setMessages(readMessages());
-  }, []);
   return (
     <div>
       <Header {...props.header} />
       <main>
-        <Messages messages={messages} />
-        {props.children}
+        {useReducedMotion() ? (
+          <>{props.children}</>
+        ) : (
+          <AnimatePresence mode="wait" initial={false}>
+            {props.children}
+          </AnimatePresence>
+        )}
       </main>
       <Footer {...props.footer} />
     </div>
