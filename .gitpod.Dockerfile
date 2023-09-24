@@ -12,8 +12,8 @@ RUN /home/gitpod/.deno/bin/deno completions bash > /home/gitpod/.bashrc.d/90-den
     echo 'export PATH="$DENO_INSTALL/bin:$PATH"' >> /home/gitpod/.bashrc.d/90-deno
 
 # Install neovim and helpers
-RUN sudo add-apt-repository ppa:neovim-ppa/unstable -y && sudo apt update
-RUN sudo apt -y install neovim fd-find
+RUN sudo add-apt-repository ppa:neovim-ppa/unstable -y && sudo apt-get update
+RUN sudo apt-get install -y neovim fd-find
 RUN npm install -g neovim
 
 RUN curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_0.40.2_Linux_x86_64.tar.gz" \
