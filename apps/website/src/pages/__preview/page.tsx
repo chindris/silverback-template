@@ -3,7 +3,7 @@ import React from 'react';
 import PagePreview from '../../preview/page';
 
 export function Head() {
-  return <meta title="Page preview" />;
+  return <title>Page preview</title>;
 }
 
 export default function PagePreviewTemplate() {

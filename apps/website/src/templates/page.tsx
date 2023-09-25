@@ -19,7 +19,7 @@ type PageTemplateQuery = {
 export function Head({ data }: HeadProps<PageTemplateQuery>) {
   return (
     <>
-      <meta title={data.page.title} />
+      <title>{data.page.title}</title>
       {data.page.metaTags?.map((metaTag, index) => {
         if (metaTag?.tag === 'meta') {
           return (
