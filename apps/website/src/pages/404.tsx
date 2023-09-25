@@ -33,10 +33,6 @@ type NotFoundPageQuery = {
   };
 };
 
-export function Head() {
-  return <meta title="Page not found" />;
-}
-
 export default function Index({ data }: PageProps<NotFoundPageQuery>) {
   return (
     <LanguageNegotiator defaultLanguage={'en'}>
