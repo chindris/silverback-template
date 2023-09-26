@@ -178,8 +178,8 @@ importers:
         specifier: ^1.10.9
         version: 1.10.9(gatsby@5.11.0)
       '@amazeelabs/publisher':
-        specifier: ^2.2.1
-        version: 2.2.1(react@18.2.0)(typescript@4.9.5)
+        specifier: ^2.4.2
+        version: 2.4.2(react@18.2.0)(typescript@4.9.5)
       '@amazeelabs/strangler-netlify':
         specifier: ^1.1.2
         version: 1.1.2(happy-dom@9.20.3)(react@18.2.0)
@@ -780,18 +780,18 @@ packages:
     resolution: {integrity: sha512-LF97Op+mojs1+ENIRe6lyR5f5ZSObiHCsrikjeD0bJhxNZ9D1JOns7nta35DvmOYFXkJ8+ruXugMjGO5N/B3vA==}
     dev: false
 
-  /@amazeelabs/publisher-ui@2.1.0:
-    resolution: {integrity: sha512-JoADWbP8AESGsSOTtA0EG6XbxB9s0JSN+w4W+uazwm508lnIvDQ0fz4A4eKD80BuuZ81keLGQ7EdZd978qMatg==}
+  /@amazeelabs/publisher-ui@2.2.0:
+    resolution: {integrity: sha512-OEERNAJ75HT4sALfPnQm2IhmbW9SBXP8gQ3VphS24jRYgiYqXZkYzn4LGE4PT0zcM/qetf0jRPIklGGXra4tyg==}
     dev: false
 
-  /@amazeelabs/publisher@2.2.1(react@18.2.0)(typescript@4.9.5):
-    resolution: {integrity: sha512-a5kQR33gXxXd/K8KxeV6iLx25cYhiqlS04njJORPvA/tZqmFtgDzAlSPyy48AjS0z52d+fWjm8NC7knRIFFseA==}
+  /@amazeelabs/publisher@2.4.2(react@18.2.0)(typescript@4.9.5):
+    resolution: {integrity: sha512-6M8/BcpASd86e0z8htvtwMD4ov1xb+4sYn48a+DvBWmNUpS1DUlS6o83s02Z8zzf3ej9UvF4f84pFQJXVmf6Fg==}
     engines: {node: '>=16'}
     hasBin: true
     dependencies:
       '@amazeelabs/publisher-elements': 2.0.15
       '@amazeelabs/publisher-shared': 2.0.11
-      '@amazeelabs/publisher-ui': 2.1.0
+      '@amazeelabs/publisher-ui': 2.2.0
       '@slack/webhook': 6.1.0
       cookie-parser: 1.4.6
       cors: 2.8.5
