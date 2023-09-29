@@ -1,7 +1,6 @@
 {
   "npm.packageManager": "pnpm",
   "eslint.format.enable": true,
-  "eslint.codeActionsOnSave.rules": null,
   "editor.formatOnSave": true,
   "rest-client.followredirect": false,
   "deno.enable": true,
