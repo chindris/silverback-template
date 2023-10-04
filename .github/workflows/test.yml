@@ -63,8 +63,9 @@ jobs:
         if: ${{ github.repository == 'AmazeeLabs/silverback-template' && github.ref  == 'refs/heads/release'}}
         with:
           type: now
+          from_branch: release
           target_branch: prod
-          github_token: ${{ github.token }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 
   docker_build:
     name: Docker Build
