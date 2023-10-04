@@ -38,9 +38,6 @@ RUN apk add --no-cache git qpdf imagemagick icu-dev && \
   docker-php-ext-enable intl
 RUN composer config --global github-protocols https
 
-# Install pnpm. In case we need to run some scripts.
-RUN npm install -g pnpm@8.6.12
-
 COPY --from=builder /tmp/.deploy/cms/composer.json /app/composer.json
 COPY --from=builder /tmp/.deploy/cms/composer.lock /app/composer.lock
 COPY --from=builder /tmp/.deploy/cms/scaffold /app/scaffold
