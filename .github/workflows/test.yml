@@ -63,6 +63,7 @@ jobs:
         if: ${{ github.repository == 'AmazeeLabs/silverback-template' && github.ref  == 'refs/heads/release'}}
         with:
           type: now
+          from_branch: release
           target_branch: prod
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
