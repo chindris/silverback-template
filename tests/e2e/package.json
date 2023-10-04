@@ -11,7 +11,7 @@
     "turbo:test:integration": "CI=true turbo test:integration --output-logs=new-only",
     "test:headed": "playwright test --headed",
     "dev": "playwright test --ui",
-    "download-browsers": "playwright install chrome"
+    "download-browsers": "playwright install chromium"
   },
   "optionalDependencies": {
     "@playwright/test": "^1.35.1",
