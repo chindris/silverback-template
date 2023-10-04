@@ -64,7 +64,7 @@ jobs:
         with:
           type: now
           target_branch: prod
-          github_token: ${{ github.token }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 
   docker_build:
     name: Docker Build
