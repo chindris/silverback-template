@@ -21,12 +21,34 @@ tasks:
         command: drush scr scripts/translations-import.php
         service: cli
 environments:
-  dev:
+  prod:
     routes:
       - nginx:
           - example.cms.amazeelabs.dev
       - build:
           - example.build.amazeelabs.dev
+    cronjobs:
+      - name: drush cron
+        schedule: '*/15 * * * *'
+        command: drush cron
+        service: cli
+  stage:
+    routes:
+      - nginx:
+          - stage-example.cms.amazeelabs.dev
+      - build:
+          - stage-example.build.amazeelabs.dev
+    cronjobs:
+      - name: drush cron
+        schedule: '*/15 * * * *'
+        command: drush cron
+        service: cli
+  dev:
+    routes:
+      - nginx:
+          - dev-example.cms.amazeelabs.dev
+      - build:
+          - dev-example.build.amazeelabs.dev
     cronjobs:
       - name: drush cron
         schedule: '*/15 * * * *'

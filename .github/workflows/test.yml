@@ -58,6 +58,14 @@ jobs:
           ${{ github.ref  == 'refs/heads/dev' && vars.NETLIFY_STORYBOOK_ID != ''
           }}
 
+      - name: Merge release to prod (silverback-template only)
+        uses: devmasx/merge-branch@1.4.0
+        if: ${{ github.repository == 'AmazeeLabs/silverback-template' && github.ref  == 'refs/heads/release'}}
+        with:
+          type: now
+          target_branch: prod
+          github_token: ${{ github.token }}
+
   docker_build:
     name: Docker Build
     if: startsWith(github.ref_name, 'test-all/')

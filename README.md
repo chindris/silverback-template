@@ -20,16 +20,62 @@
 - [Create a new Netlify project](https://amazeelabs.atlassian.net/wiki/spaces/ALU/pages/368017428/Create+a+new+Netlify+project)
 - Check the [Environment overrides](#environment-overrides) section below
 
-## Release and deployment
+## Branches and environments
 
-Development happens in pull requests against the `dev` branch. There is a github
-"Release" workflow that will merge the current state of `dev` into the `stage`.
-This workflow can be triggered from the github UI and will run automatically
-once a day.
+<table>
+<thead>
+  <tr>
+    <th rowspan="2">Branch name</th>
+    <th rowspan="2">Connected environment</th>
+    <th colspan="2">Purpose </th>
+  </tr>
+  <tr>
+    <th>Pre Go Live</th>
+    <th>Post Go Live</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td><code>release</code></td>
+    <td>(none)</td>
+    <td colspan="2">Contains everything that is approved for PROD deployment</td>
+  </tr>
+  <tr>
+    <td><code>prod</code></td>
+    <td>PROD</td>
+    <td colspan="2">The production environment</td>
+  </tr>
+  <tr>
+    <td><code>dev</code></td>
+    <td>DEV</td>
+    <td>Sandbox/playground, no client data, anyone can merge anything</td>
+    <td>Sandbox/playground, with client data, main testing environment</td>
+  </tr>
+  <tr>
+    <td><code>stage</code></td>
+    <td>STAGE</td>
+    <td>Second sandbox with client data and automated merge from <code>dev</code> to <code>stage</code>, regular data sync</td>
+    <td>Second sandbox for bigger features that need a clean set up or would prevent other normal tasks from being performed while working on it. With client data. No automated merges from <code>dev</code>.</td>
+  </tr>
+  <tr>
+    <td><code>lagoon-*</code></td>
+    <td>(same as branch name)</td>
+    <td colspan="2">Can be created for big, long-term feature developments. Use wisely<br>  as it creates additional costs.</td>
+  </tr>
+</tbody>
+</table>
 
-The "Deploy" workflow has to be triggered manually from the github UI, and will
-merge the current state of `stage` into `prod` and therefore trigger a
-production deployment.
+## Development workflow
+
+- Create a new branch from `release` and commit your work in
+- Create a PR against `release`
+- Merge your branch to `dev` for testing
+- Testing feedback is committed to the branch and merged back to `dev` for
+  retesting
+- When the PR is approved and Jira ticket gets to the Deploy state, the branch
+  is merged to `release`
+  - Please note, this does not trigger an actual PROD deployment
+- PROD deployment can be done by merging `release` branch into `prod`
 
 ## Installation
 
@@ -225,21 +271,6 @@ when:
 
 These Cloudinary approximations are not real images and will fail integration
 tests. Therefore they are not used in regular development and testing scenarios.
-
-## Lagoon environments
-
-In a standard project we use three fixed Lagoon environments: `dev`, `stage` and
-`prod`.
-
-- `dev`: Purely for development and integration testing. Content stored here is
-  not guaranteed to be kept.
-- `stage`: Used for user acceptance testing. Content is regularly synced from
-  `prod`.
-- `prod`: The production environment. Do not touch.
-
-Lagoon should also be configured to create automatic environments for feature
-branches that are prefixed with `lagoon/`. Those will be filled with test
-content.
 
 ## "Strangling" legacy systems
 

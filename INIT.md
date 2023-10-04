@@ -37,7 +37,8 @@ Adjust project machine name in the repo.
 ```ts
 await prompt('PROJECT_NAME_MACHINE', {
   type: 'text',
-  message: 'Project name for machines:',
+  message:
+    'Project name for machines (usually a lowercase version of Jira project code):',
   validate: (name) =>
     !/^[a-z][a-z\d_]*$/.test(name)
       ? 'Must start with a lowercase letter and contain lowercase letters, numbers and underscores only.'
@@ -59,6 +60,23 @@ replace(
   'package.json',
   '@amazeelabs/silverback-template',
   process.env.PROJECT_NAME_MACHINE,
+);
+replace(
+  ['apps/cms/.lagoon.env', 'apps/website/.lagoon.env'],
+  'PROJECT_NAME=example',
+  'PROJECT_NAME=' + process.env.PROJECT_NAME_MACHINE,
+);
+// Template's prod domain is special.
+replace(
+  '.lagoon.yml',
+  '- example.',
+  '- prod-' + process.env.PROJECT_NAME_MACHINE + '.',
+);
+// The rest of domains are standard.
+replace(
+  '.lagoon.yml',
+  '-example.',
+  '-' + process.env.PROJECT_NAME_MACHINE + '.',
 );
 ```
 
