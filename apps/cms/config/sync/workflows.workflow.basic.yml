@@ -46,6 +46,7 @@ type_settings:
       label: Unpublish
       from:
         - draft
+        - not_published
         - published
       to: not_published
       weight: 4
