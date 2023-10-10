@@ -2,7 +2,9 @@
 
 ## Create a new project from this template
 
-- https://github.com/AmazeeLabs/silverback-template => `Use this template` =>
+Minimum steps
+
+- https://github.com/AmazeeLabs/silverback-template > `Use this template` >
   `Create a new repository`
 - In the newly created repo
   - Settings > Manage access > Collaborators and teams
@@ -16,9 +18,13 @@
 - Answer its questions
 - Review the changes in the repo
 - Commit and push
+
+Other steps
+
 - [Create a new Lagoon project](https://amazeelabs.atlassian.net/wiki/spaces/ALU/pages/368115717/Create+a+new+Lagoon+project)
 - [Create a new Netlify project](https://amazeelabs.atlassian.net/wiki/spaces/ALU/pages/368017428/Create+a+new+Netlify+project)
 - Check the [Environment overrides](#environment-overrides) section below
+- Create `dev` and `prod` branches (and optionally `stage`) from `release`
 
 ## Branches and environments
 
