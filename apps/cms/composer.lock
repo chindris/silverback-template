@@ -431,16 +431,16 @@
         },
         {
             "name": "amazeelabs/silverback_gatsby",
-            "version": "2.3.9",
+            "version": "2.3.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/AmazeeLabs/silverback_gatsby.git",
-                "reference": "3f26295470ac0c7a55aa54370996d519844b09cf"
+                "reference": "8a183f4a2a2fb7b7619912447153cff24195f9db"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AmazeeLabs/silverback_gatsby/zipball/3f26295470ac0c7a55aa54370996d519844b09cf",
-                "reference": "3f26295470ac0c7a55aa54370996d519844b09cf",
+                "url": "https://api.github.com/repos/AmazeeLabs/silverback_gatsby/zipball/8a183f4a2a2fb7b7619912447153cff24195f9db",
+                "reference": "8a183f4a2a2fb7b7619912447153cff24195f9db",
                 "shasum": ""
             },
             "type": "drupal-module",
@@ -459,9 +459,9 @@
             "homepage": "https://silverback.netlify.app",
             "support": {
                 "issues": "https://github.com/AmazeeLabs/silverback_gatsby/issues",
-                "source": "https://github.com/AmazeeLabs/silverback_gatsby/tree/2.3.9"
+                "source": "https://github.com/AmazeeLabs/silverback_gatsby/tree/2.3.11"
             },
-            "time": "2023-10-09T07:31:55+00:00"
+            "time": "2023-10-10T22:27:50+00:00"
         },
         {
             "name": "amazeelabs/silverback_graphql_persisted",
