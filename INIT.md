@@ -121,6 +121,12 @@ replace(
 );
 ```
 
+Remove the init script check.
+
+```ts
+replace('.github/workflows/test.yml', /      - name: Init check.*?\n\n/gs, '');
+```
+
 Remove the init script.
 
 ```ts
