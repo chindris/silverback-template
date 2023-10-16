@@ -20,6 +20,12 @@ tasks:
         name: import translations from the ui
         command: drush scr scripts/translations-import.php
         service: cli
+    - run:
+        name: Create Keys for Simple OAuth if necessary
+        command: |
+          if [[ ! -f /app/keys/private.key || ! -f /app/keys/public.key ]]; then
+            drush simple-oauth:generate-keys /app/keys
+          fi
 environments:
   prod:
     routes:
