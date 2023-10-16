@@ -1,16 +1,11 @@
 import { ContentHub } from '@custom/ui/routes/ContentHub';
 import React from 'react';
 
-import { Wrapper } from '../utils/wrapper';
-
 export function Head() {
-  return <meta title="Page not found" />;
+  // TODO: Add title once content hub is language aware.
+  return null;
 }
 
 export default function ContentHubPage() {
-  return (
-    <Wrapper>
-      <ContentHub pageSize={6} />
-    </Wrapper>
-  );
+  return <ContentHub pageSize={6} />;
 }

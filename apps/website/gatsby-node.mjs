@@ -1,38 +1,42 @@
-import type { SilverbackPageContext } from '@amazeelabs/gatsby-source-silverback';
+// @ts-check
+import { Locale } from '@custom/schema';
 import { readFileSync } from 'fs';
-import { GatsbyNode } from 'gatsby';
 import { resolve } from 'path';
 
-// @ts-ignore
-import { Locale } from './schema-compiled.js';
+/**
+ *
+ * @type {import('gatsby').GatsbyNode['createSchemaCustomization']}
+ */
+export const createSchemaCustomization = (args) => {
+  // TODO: This is still necessary, because graphql-source-toolkit won't import
+  //       interface relations.
+  const schema = readFileSync(
+    `./node_modules/@custom/schema/src/schema.graphqls`,
+    'utf8',
+  ).toString();
+  args.actions.createTypes(schema);
 
-export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] =
-  (args) => {
-    // TODO: This is still necessary, because graphql-source-toolkit won't import
-    //       interface relations.
-    const schema = readFileSync(
-      `./node_modules/@custom/schema/src/schema.graphqls`,
-      'utf8',
-    ).toString();
-    args.actions.createTypes(schema);
-
-    // Create field extensions for all directives that could confuse Gatsby.
-    const directives = schema.matchAll(/ @[a-zA-Z][a-zA-Z0-9]*/gm);
-    const directiveNames = new Set<string>();
-    // "default" is a gatsby internal directive and should not be added again.
-    directiveNames.add('default');
-    for (const directive of directives) {
-      const name = directive[0].substring(2);
-      if (!directiveNames.has(name)) {
-        directiveNames.add(name);
-        args.actions.createFieldExtension({ name });
-      }
+  // Create field extensions for all directives that could confuse Gatsby.
+  const directives = schema.matchAll(/ @[a-zA-Z][a-zA-Z0-9]*/gm);
+  /**
+   * @type {Set<string>}
+   */
+  const directiveNames = new Set();
+  // "default" is a gatsby internal directive and should not be added again.
+  directiveNames.add('default');
+  for (const directive of directives) {
+    const name = directive[0].substring(2);
+    if (!directiveNames.has(name)) {
+      directiveNames.add(name);
+      args.actions.createFieldExtension({ name });
     }
-  };
+  }
+};
 
-export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({
-  actions,
-}) => {
+/**
+ * @type {import('gatsby').GatsbyNode['onCreateWebpackConfig']}
+ */
+export const onCreateWebpackConfig = ({ actions }) => {
   actions.setWebpackConfig({
     resolve: {
       alias: {
@@ -42,10 +46,11 @@ export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({
   });
 };
 
-export const createPages: GatsbyNode['createPages'] = async ({
-  actions,
-  graphql,
-}) => {
+/**
+ *
+ * @type {import('gatsby').GatsbyNode['createPages']}
+ */
+export const createPages = async ({ actions, graphql }) => {
   // Rewrite file requests to Drupal.
   actions.createRedirect({
     fromPath: '/sites/default/files/*',
@@ -59,24 +64,30 @@ export const createPages: GatsbyNode['createPages'] = async ({
     statusCode: 200,
   });
 
-  const settings = await graphql<{
-    websiteSettings?: {
-      homePage?: {
-        translations: Array<{
-          typeName: string;
-          path: string;
-          locale: string;
-          id: string;
-          remoteId: string;
-        }>;
-      };
-      notFoundPage?: {
-        translations: Array<{
-          path: string;
-        }>;
-      };
-    };
-  }>(`
+  /**
+   * @type {{
+   *   data?: {
+   *     websiteSettings?: {
+   *       homePage?: {
+   *         translations: Array<{
+   *           typeName: string;
+   *           path: string;
+   *           locale: string;
+   *           id: string;
+   *           remoteId: string;
+   *         }>;
+   *       };
+   *       notFoundPage?: {
+   *         translations: Array<{
+   *           path: string;
+   *         }>;
+   *       };
+   *     };
+   *   };
+   *   errors?: any[];
+   * }}
+   */
+  const settings = await graphql(`
     query IndexPages {
       websiteSettings {
         homePage {
@@ -98,34 +109,42 @@ export const createPages: GatsbyNode['createPages'] = async ({
   `);
 
   if (settings.errors) {
+    settings.errors.map((e) => console.error(e));
     throw settings.errors;
   }
 
   if (settings.data?.websiteSettings?.homePage) {
+    /**
+     * @type {import('@amazeelabs/gatsby-source-silverback').SilverbackPageContext['localizations']}
+     */
     const frontPageLocalizations =
       settings.data?.websiteSettings?.homePage.translations.map(
         ({ locale }) => ({
           path: `/${locale}`,
           locale,
         }),
-      ) satisfies SilverbackPageContext['localizations'];
+      );
 
     settings.data?.websiteSettings?.homePage.translations.forEach(
       ({ locale, typeName, id, remoteId, path }) => {
         // Create a page at the "front" path.
         const frontPath =
           frontPageLocalizations.length > 1 ? `/${locale}` : '/';
+        /**
+         * @type {import('@amazeelabs/gatsby-source-silverback').SilverbackPageContext}
+         */
+        const context = {
+          typeName,
+          id,
+          remoteId,
+          locale,
+          localizations:
+            frontPageLocalizations.length > 1 ? frontPageLocalizations : [],
+        };
         actions.createPage({
           path: frontPath,
           component: resolve(`./src/templates/page.tsx`),
-          context: {
-            typeName,
-            id,
-            remoteId,
-            locale,
-            localizations:
-              frontPageLocalizations.length > 1 ? frontPageLocalizations : [],
-          } satisfies SilverbackPageContext,
+          context,
         });
         // Delete the page at the original path.
         actions.deletePage({

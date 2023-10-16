@@ -2,11 +2,11 @@
   "name": "@custom/website",
   "private": true,
   "dependencies": {
-    "@amazeelabs/bridge-gatsby": "^1.1.3",
-    "@amazeelabs/cloudinary-responsive-image": "^1.3.1",
-    "@amazeelabs/gatsby-silverback-cloudinary": "^1.0.26",
-    "@amazeelabs/gatsby-source-silverback": "^1.10.7",
-    "@amazeelabs/publisher": "^2.4.1",
+    "@amazeelabs/bridge-gatsby": "^1.2.0",
+    "@amazeelabs/cloudinary-responsive-image": "^1.6.7",
+    "@amazeelabs/gatsby-silverback-cloudinary": "^1.0.47",
+    "@amazeelabs/gatsby-source-silverback": "^1.10.9",
+    "@amazeelabs/publisher": "^2.4.3",
     "@amazeelabs/strangler-netlify": "^1.1.2",
     "@custom/schema": "workspace:*",
     "@custom/ui": "workspace:*",
@@ -16,6 +16,7 @@
     "gatsby-plugin-pnpm": "^1.2.10",
     "gatsby-plugin-robots-txt": "^1.8.0",
     "gatsby-plugin-sitemap": "^6.11.0",
+    "gatsby-plugin-layout": "^4.12.0",
     "netlify-cli": "^15.7.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
@@ -30,15 +31,14 @@
   },
   "scripts": {
     "test:static": "tsc --noEmit && eslint '**/*.{ts,tsx,js,jsx}' --ignore-path='./.gitignore'",
-    "prep": "pnpm run prep:styles && pnpm run prep:fragments && pnpm run prep:cloudinary",
+    "prep": "pnpm run prep:styles && pnpm run prep:fragments",
     "prep:styles": "rm -f styles.css && cp node_modules/@custom/ui/build/styles.css styles.css",
     "prep:fragments": "rm -rf src/gatsby-fragments.js && cp node_modules/@custom/schema/build/gatsby-fragments.js src/gatsby-fragments.js",
-    "prep:cloudinary": "rm -f static/mock-cloudinary-worker.js && rm -f static/mock-cloudinary-register.js && cp ./node_modules/@amazeelabs/cloudinary-responsive-image/worker/iife/* static/",
     "build:gatsby": "pnpm build:dotenv && gatsby build",
     "build:dotenv": "rm -rf .env && echo \"DRUPAL_EXTERNAL_URL='$DRUPAL_EXTERNAL_URL'\nDRUPAL_INTERNAL_URL='$DRUPAL_INTERNAL_URL'\" >> .env",
     "rebuild": "gatsby build",
     "start:cms": "pnpm run --filter @custom/cms start",
-    "build": "start-test start:cms 8888 build:gatsby",
+    "build": "CLOUDINARY_CLOUDNAME=test start-test start:cms 8888 build:gatsby",
     "start": "publisher",
     "serve": "netlify dev --dir=public --port=8000",
     "dev": "pnpm clean && publisher",
@@ -46,6 +46,8 @@
     "open": "open http://127.0.0.1:8000/___status/",
     "turbo:dev": "start-test start:cms 8888 'pnpm turbo dev --output-logs=new-only'",
     "turbo:dev:light": "start-test start:cms 8888 'pnpm turbo dev:light --output-logs=new-only'",
+    "gatsby:develop": "ENABLE_GATSBY_REFRESH_ENDPOINT=true pnpm gatsby develop",
+    "gatsby:refresh": "curl -X POST http://localhost:8000/__refresh",
     "clean": "gatsby clean"
   }
 }

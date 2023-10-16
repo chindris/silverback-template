@@ -6,7 +6,7 @@ FROM uselagoon/node-18-builder as builder
 ENV PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1
 
 # Install pnpm
-RUN npm install -g pnpm@8.6.0 && pnpm config set store-dir /tmp/cache/pnpm
+RUN npm install -g pnpm@8.6.12 && pnpm config set store-dir /tmp/cache/pnpm
 
 # Copy pnpm lockfile and install dependencies.
 COPY pnpm-lock.yaml .npmrc /app/

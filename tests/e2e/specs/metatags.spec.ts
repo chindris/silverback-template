@@ -18,3 +18,15 @@ test('Metatags on Basic page', async ({ page }) => {
     pageUrl,
   );
 });
+
+test('HTML lang attribute', async ({ page }) => {
+  await page.goto(websiteUrl('/en'));
+  await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+  await page.goto(websiteUrl('/de'));
+  await expect(page.locator('html')).toHaveAttribute('lang', 'de');
+
+  await page.goto(websiteUrl('/en/imprint'));
+  await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+  await page.goto(websiteUrl('/de/impressum'));
+  await expect(page.locator('html')).toHaveAttribute('lang', 'de');
+});

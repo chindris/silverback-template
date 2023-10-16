@@ -3,11 +3,14 @@ on:
   push:
 
 jobs:
-
   test:
     name: Test
     runs-on: ubuntu-20.04
     steps:
+      - name: Init check
+        if: ${{ github.repository != 'AmazeeLabs/silverback-template'}}
+        run: echo 'Please run the INIT script. See the root README.md for instructions.' && false
+
       - name: Checkout
         uses: actions/checkout@v3
         with:
@@ -19,7 +22,7 @@ jobs:
       - name: TurboRepo local server
         uses: felixmosh/turborepo-gh-artifacts@v2
         with:
-          server-token: "local"
+          server-token: 'local'
           repo-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Test
@@ -48,11 +51,25 @@ jobs:
           exitOnceUploaded: true
 
       - name: Deploy storybook to netlify
-        run: npx netlify-cli deploy --prod --filter @custom/ui --dir=packages/ui/storybook-static
+        run:
+          pnpm run --filter=@custom/ui build && npx netlify-cli deploy --prod
+          --filter @custom/ui --dir=packages/ui/storybook-static
         env:
+          VITEST_CLOUDINARY_CLOUDNAME: local
           NETLIFY_SITE_ID: ${{ vars.NETLIFY_STORYBOOK_ID }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-        if: ${{ github.ref  == 'refs/heads/dev' && vars.NETLIFY_STORYBOOK_ID != '' }}
+        if:
+          ${{ github.ref  == 'refs/heads/dev' && vars.NETLIFY_STORYBOOK_ID != ''
+          }}
+
+      - name: Merge release to prod (silverback-template only)
+        uses: devmasx/merge-branch@1.4.0
+        if: ${{ github.repository == 'AmazeeLabs/silverback-template' && github.ref  == 'refs/heads/release'}}
+        with:
+          type: now
+          from_branch: release
+          target_branch: prod
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 
   docker_build:
     name: Docker Build

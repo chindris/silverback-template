@@ -1,10 +1,8 @@
 import { SilverbackPageContext } from '@amazeelabs/gatsby-source-silverback';
-import { Locale, PageFragment } from '@custom/schema';
+import { PageFragment } from '@custom/schema';
 import { Page } from '@custom/ui/routes/Page';
 import { graphql, HeadProps, PageProps } from 'gatsby';
 import React from 'react';
-
-import { Wrapper } from '../utils/wrapper';
 
 export const query = graphql`
   query PageTemplate($remoteId: String!) {
@@ -21,7 +19,7 @@ type PageTemplateQuery = {
 export function Head({ data }: HeadProps<PageTemplateQuery>) {
   return (
     <>
-      <meta title={data.page.title} />
+      <title>{data.page.title}</title>
       {data.page.metaTags?.map((metaTag, index) => {
         if (metaTag?.tag === 'meta') {
           return (
@@ -48,11 +46,6 @@ export function Head({ data }: HeadProps<PageTemplateQuery>) {
 
 export default function PageTemplate({
   data,
-  pageContext,
 }: PageProps<PageTemplateQuery, SilverbackPageContext>) {
-  return (
-    <Wrapper locale={(pageContext.locale || 'en') as Locale}>
-      <Page page={data.page} />
-    </Wrapper>
-  );
+  return <Page page={data.page} />;
 }

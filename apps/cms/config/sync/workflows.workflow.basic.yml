@@ -11,11 +11,6 @@ label: Basic
 type: content_moderation
 type_settings:
   states:
-    archived:
-      label: Archived
-      weight: 2
-      published: false
-      default_revision: true
     draft:
       label: Draft
       weight: 0
@@ -32,14 +27,6 @@ type_settings:
       published: true
       default_revision: true
   transitions:
-    archive:
-      label: Archive
-      from:
-        - archived
-        - draft
-        - published
-      to: archived
-      weight: 2
     create_new_draft:
       label: 'Create New Draft'
       from:
@@ -50,18 +37,19 @@ type_settings:
     publish:
       label: Publish
       from:
-        - archived
         - draft
         - not_published
         - published
       to: published
       weight: 1
     unpublish:
-      label: 'Not published'
+      label: Unpublish
       from:
+        - draft
         - not_published
+        - published
       to: not_published
-      weight: 3
+      weight: 4
   entity_types:
     node:
       - page

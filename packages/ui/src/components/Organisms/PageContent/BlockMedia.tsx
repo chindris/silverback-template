@@ -27,7 +27,7 @@ function Media(props: Required<BlockMediaFragment>['media']) {
     case 'MediaImage':
       return (
         <Image
-          className="aspect-video rounded-xl object-cover w-full"
+          className="rounded-xl max-w-full mx-auto"
           source={props.source}
           alt={props.alt}
         />

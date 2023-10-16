@@ -1,1 +1,0 @@
-../../packages/schema/build/schema-compiled.js
