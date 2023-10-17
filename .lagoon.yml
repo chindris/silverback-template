@@ -26,6 +26,7 @@ tasks:
           if [[ ! -f /app/keys/private.key || ! -f /app/keys/public.key ]]; then
             drush simple-oauth:generate-keys /app/keys
           fi
+        service: cli
 environments:
   prod:
     routes:
