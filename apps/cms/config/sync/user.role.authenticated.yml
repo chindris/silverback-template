@@ -5,6 +5,7 @@ dependencies:
   module:
     - graphql
     - media
+    - simple_oauth
     - system
     - userprotect
 _core:
@@ -16,6 +17,7 @@ is_admin: false
 permissions:
   - 'access content'
   - 'execute main persisted graphql requests'
+  - 'grant simple_oauth codes'
   - userprotect.account.edit
   - userprotect.mail.edit
   - userprotect.pass.edit

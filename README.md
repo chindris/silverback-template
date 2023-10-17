@@ -2,7 +2,9 @@
 
 ## Create a new project from this template
 
-- https://github.com/AmazeeLabs/silverback-template => `Use this template` =>
+Minimum steps
+
+- https://github.com/AmazeeLabs/silverback-template > `Use this template` >
   `Create a new repository`
 - In the newly created repo
   - Settings > Manage access > Collaborators and teams
@@ -16,9 +18,13 @@
 - Answer its questions
 - Review the changes in the repo
 - Commit and push
+
+Other steps
+
 - [Create a new Lagoon project](https://amazeelabs.atlassian.net/wiki/spaces/ALU/pages/368115717/Create+a+new+Lagoon+project)
 - [Create a new Netlify project](https://amazeelabs.atlassian.net/wiki/spaces/ALU/pages/368017428/Create+a+new+Netlify+project)
 - Check the [Environment overrides](#environment-overrides) section below
+- Create `dev` and `prod` branches (and optionally `stage`) from `release`
 
 ## Branches and environments
 
@@ -158,6 +164,57 @@ lagoon runtime configuration.
 ```shell
 lagoon add variable -p [project name] -e dev -N NETLIFY_SITE_ID -V [netlify site id]
 ```
+
+### Publisher authentication with Drupal
+
+Publisher can require to authenticate with Drupal based on OAuth2.
+Only used on Lagoon environments.
+
+#### Drupal configuration
+
+##### Create keys
+
+Per environment, keys are gitignored.
+
+Via Drush
+
+```bash
+drush simple-oauth:generate-keys ./keys
+```
+
+Or via the UI
+
+- Go to `/admin/config/people/simple_oauth`
+- Click on "Generate keys", the directory should be set to `../keys`
+
+##### Create the Publisher Consumer
+
+Per environment, Consumers are content entities.
+
+- Go to `/admin/config/services/consumer`
+- Create a Consumer 
+  - Label: `Publisher`
+  - Client ID: `publisher`
+  - Secret: a random string
+  - Redirect URI: `[publisher-url]/oauth/callback`
+  - Scope: `Publisher`
+- Optional: the default Consumer can be safely deleted
+
+Troubleshoot: make sure that the `DRUPAL_HASH_SALT` environment variable is >= 32 chars.
+
+#### Publisher authentication
+
+Edit [website environment variables](./apps/website/.lagoon.env)
+
+```
+PUBLISHER_SKIP_AUTHENTICATION=false
+PUBLISHER_OAUTH2_CLIENT_SECRET="[secret used in the Drupal Consumer]"
+PUBLISHER_OAUTH2_SESSION_SECRET="[another random string]"
+```
+
+##### Set the 'Access Publisher' permission
+
+Optional: add this permission to relevant roles.
 
 ## Storybook
 

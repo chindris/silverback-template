@@ -46,6 +46,8 @@
     "open": "open http://127.0.0.1:8000/___status/",
     "turbo:dev": "start-test start:cms 8888 'pnpm turbo dev --output-logs=new-only'",
     "turbo:dev:light": "start-test start:cms 8888 'pnpm turbo dev:light --output-logs=new-only'",
+    "gatsby:develop": "ENABLE_GATSBY_REFRESH_ENDPOINT=true pnpm gatsby develop",
+    "gatsby:refresh": "curl -X POST http://localhost:8000/__refresh",
     "clean": "gatsby clean"
   }
 }

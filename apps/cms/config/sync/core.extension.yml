@@ -13,6 +13,7 @@ module:
   config_notify: 0
   config_pages: 0
   config_translation: 0
+  consumers: 0
   content_moderation: 0
   custom: 0
   datetime: 0
@@ -56,16 +57,19 @@ module:
   redirect: 0
   reroute_email: 0
   role_delegation: 0
+  serialization: 0
   shortcut: 0
   silverback_campaign_urls: 0
   silverback_cloudinary: 0
   silverback_external_preview: 0
   silverback_gatsby: 0
+  silverback_gatsby_oauth: 0
   silverback_graphql_persisted: 0
   silverback_gutenberg: 0
   silverback_iframe: 0
   silverback_publisher_monitor: 0
   silverback_translations: 0
+  simple_oauth: 0
   slack: 0
   sqlite: 0
   stage_file_proxy: 0
