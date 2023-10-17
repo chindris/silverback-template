@@ -63,6 +63,7 @@ module:
   silverback_cloudinary: 0
   silverback_external_preview: 0
   silverback_gatsby: 0
+  silverback_gatsby_oauth: 0
   silverback_graphql_persisted: 0
   silverback_gutenberg: 0
   silverback_iframe: 0
