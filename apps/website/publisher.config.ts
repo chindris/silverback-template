@@ -40,7 +40,7 @@ export default defineConfig({
     clientId: process.env.PUBLISHER_OAUTH2_CLIENT_ID || 'publisher',
     clientSecret: process.env.PUBLISHER_OAUTH2_CLIENT_SECRET || 'publisher',
     sessionSecret: process.env.PUBLISHER_OAUTH2_SESSION_SECRET || 'banana',
-    tokenHost: process.env.PUBLISHER_OAUTH2_TOKEN_HOST || 'http://localhost:8888',
+    tokenHost: process.env.PUBLISHER_OAUTH2_TOKEN_HOST || 'http://127.0.0.1:8888',
     environmentType: process.env.PUBLISHER_OAUTH2_ENVIRONMENT_TYPE || 'development',
     scope: 'publisher',
     tokenPath: '/oauth/token',
