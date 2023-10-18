@@ -228,7 +228,7 @@ It is only used on Lagoon environments.
 <details>
   <summary>How to disable it</summary>
   
-  In website `.lagoon.env` set `PUBLISHER_SKIP_AUTHENTICATION=false`
+  In website `.lagoon.env` set `PUBLISHER_SKIP_AUTHENTICATION=true`
 </details>
 
 ## Storybook
