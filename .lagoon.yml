@@ -4,11 +4,6 @@ project: 'silverback-template'
 
 tasks:
   post-rollout:
-    # https://github.com/uselagoon/lagoon/issues/574
-    - run:
-        name: Source to make env vars available
-        command: source /home/.bashrc
-        service: cli
     - run:
         name: Install Drupal if necessary
         command: |
@@ -19,7 +14,7 @@ tasks:
         service: cli
     - run:
         name: Run Drupal deploy tasks
-        command: drush -y deploy
+        command: source /home/.bashrc && drush -y deploy
         service: cli
     - run:
         name: import translations from the ui
