@@ -28,6 +28,3 @@ generated/operations.json
 
 # Translations from the FE
 generated/translations.json
-
-# OAuth2
-/keys
