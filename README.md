@@ -168,53 +168,68 @@ lagoon add variable -p [project name] -e dev -N NETLIFY_SITE_ID -V [netlify site
 ### Publisher authentication with Drupal
 
 Publisher can require to authenticate with Drupal based on OAuth2.
-Only used on Lagoon environments.
+It is only used on Lagoon environments.
 
-#### Drupal configuration
+<details>
+  <summary>How it works</summary>
+  
+  #### Drupal configuration
+  
+  ##### Create keys
+  
+  Per environment, keys are gitignored and are auto-generated via a Lagoon post-rollout task.
+  
+  To generate keys manually
+  
+  via Drush: cd in the cms directory then
+  
+  ```bash
+  drush simple-oauth:generate-keys ./keys
+  ```
+  
+  or via the UI
+  
+  - Go to `/admin/config/people/simple_oauth`
+  - Click on "Generate keys", the directory should be set to `../keys`
+  
+  ##### Create the Publisher Consumer
+  
+  Per environment, Consumers are content entities.
+  
+  - Go to `/admin/config/services/consumer`
+    - Create a Consumer
+      - Label: `Publisher`
+      - Client ID: `publisher`
+      - Secret: a random string
+      - Redirect URI: `[publisher-url]/oauth/callback`
+      - Scope: `Publisher`
+    - Optional: the default Consumer can be safely deleted
+  
+  Troubleshooting:
+  - make sure that the `DRUPAL_HASH_SALT` environment variable is >= 32 chars.
+  - if enabled on local development, use `127.0.0.1:8888` for the cms and `127.0.0.1:8000` for Publisher
+  
+  #### Publisher authentication
+  
+  Edit [website environment variables](./apps/website/.lagoon.env)
+  
+  ```
+  PUBLISHER_SKIP_AUTHENTICATION=false
+  PUBLISHER_OAUTH2_CLIENT_SECRET="[secret used in the Drupal Consumer]"
+  PUBLISHER_OAUTH2_SESSION_SECRET="[another random string]"
+  ```
+  
+  ##### Set the 'Access Publisher' permission
+  
+  Optional: add this permission to relevant roles.
 
-##### Create keys
+</details>
 
-Per environment, keys are gitignored.
-
-Via Drush
-
-```bash
-drush simple-oauth:generate-keys ./keys
-```
-
-Or via the UI
-
-- Go to `/admin/config/people/simple_oauth`
-- Click on "Generate keys", the directory should be set to `../keys`
-
-##### Create the Publisher Consumer
-
-Per environment, Consumers are content entities.
-
-- Go to `/admin/config/services/consumer`
-- Create a Consumer 
-  - Label: `Publisher`
-  - Client ID: `publisher`
-  - Secret: a random string
-  - Redirect URI: `[publisher-url]/oauth/callback`
-  - Scope: `Publisher`
-- Optional: the default Consumer can be safely deleted
-
-Troubleshoot: make sure that the `DRUPAL_HASH_SALT` environment variable is >= 32 chars.
-
-#### Publisher authentication
-
-Edit [website environment variables](./apps/website/.lagoon.env)
-
-```
-PUBLISHER_SKIP_AUTHENTICATION=false
-PUBLISHER_OAUTH2_CLIENT_SECRET="[secret used in the Drupal Consumer]"
-PUBLISHER_OAUTH2_SESSION_SECRET="[another random string]"
-```
-
-##### Set the 'Access Publisher' permission
-
-Optional: add this permission to relevant roles.
+<details>
+  <summary>How to disable it</summary>
+  
+  In website `.lagoon.env` set `PUBLISHER_SKIP_AUTHENTICATION=false`
+</details>
 
 ## Storybook
 
