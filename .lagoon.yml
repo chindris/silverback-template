@@ -14,7 +14,8 @@ tasks:
         service: cli
     - run:
         name: Run Drupal deploy tasks
-        command: drush -y deploy
+        # Source before https://github.com/uselagoon/lagoon/issues/574
+        command: source /home/.bashrc && drush -y deploy
         service: cli
     - run:
         name: import translations from the ui
