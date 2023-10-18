@@ -30,4 +30,4 @@ generated/operations.json
 generated/translations.json
 
 # OAuth2
-/keys
+#/keys
