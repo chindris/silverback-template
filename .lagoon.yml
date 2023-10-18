@@ -20,6 +20,11 @@ tasks:
         name: import translations from the ui
         command: drush scr scripts/translations-import.php
         service: cli
+    # https://github.com/uselagoon/lagoon/issues/574
+    - run:
+        name: Source to make env vars available
+        command: source /home/.bashrc
+        service: cli
     - run:
         name: Create Keys for Simple OAuth if necessary
         command: |
