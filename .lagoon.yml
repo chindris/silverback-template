@@ -23,8 +23,9 @@ tasks:
     - run:
         name: Create Keys for Simple OAuth if necessary
         command: |
-          if [[ ! -f /app/keys/private.key || ! -f /app/keys/public.key ]]; then
-            drush simple-oauth:generate-keys /app/keys
+          if [[ ! -f /app/web/sites/default/files/private/keys/private.key || ! -f /app/web/sites/default/files/private/keys/public.key ]]; then
+            mkdir -p /app/web/sites/default/files/private/keys
+            drush simple-oauth:generate-keys /app/web/sites/default/files/private/keys
           fi
         service: cli
 environments:
