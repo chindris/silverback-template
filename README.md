@@ -190,7 +190,7 @@ It is only used on Lagoon environments.
   or via the UI
   
   - Go to `/admin/config/people/simple_oauth`
-  - Click on "Generate keys", the directory should be set to `../keys`
+  - Click on "Generate keys", the directory should be set to `./sites/default/files/private/keys`
   
   ##### Create the Publisher Consumer
   
