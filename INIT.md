@@ -66,6 +66,18 @@ replace(
   'PROJECT_NAME=example',
   'PROJECT_NAME=' + process.env.PROJECT_NAME_MACHINE,
 );
+const clientSecret = randomString(32);
+replace(
+  ['apps/cms/.lagoon.env', 'apps/website/.lagoon.env'],
+  'PUBLISHER_OAUTH2_CLIENT_SECRET=REPLACE_ME',
+  'PUBLISHER_OAUTH2_CLIENT_SECRET=' + clientSecret,
+);
+const sessionSecret = randomString(32);
+replace(
+  ['apps/website/.lagoon.env'],
+  'PUBLISHER_OAUTH2_SESSION_SECRET=REPLACE_ME',
+  'PUBLISHER_OAUTH2_SESSION_SECRET=' + sessionSecret,
+);
 // Template's prod domain is special.
 replace(
   '.lagoon.yml',
@@ -106,7 +118,7 @@ Update the default hash salt.
 ```ts
 replace(
   'apps/cms/scaffold/settings.php.append.txt',
-  'banana123',
+  'time-flies-like-an-arrow-fruit-flies-like-a-banana',
   randomString(32),
 );
 ```
