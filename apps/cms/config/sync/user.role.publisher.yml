@@ -1,9 +1,0 @@
-uuid: a6375354-2d5f-4632-b53e-619040dec631
-langcode: en
-status: true
-dependencies: {  }
-id: publisher
-label: Publisher
-weight: -5
-is_admin: null
-permissions: {  }
