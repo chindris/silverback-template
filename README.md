@@ -202,7 +202,6 @@ It is only used on Lagoon environments.
       - Client ID: `publisher`
       - Secret: a random string
       - Redirect URI: `[publisher-url]/oauth/callback`
-      - Scope: `Publisher`
     - Optional: the default Consumer can be safely deleted
   
   Troubleshooting:
