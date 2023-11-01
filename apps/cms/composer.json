@@ -68,6 +68,7 @@
     "drupal/redirect": "^1.8",
     "drupal/reroute_email": "^2.2",
     "drupal/role_delegation": "^1.2",
+    "drupal/simple_oauth": "^5.2",
     "drupal/slack": "^1.4",
     "drupal/stage_file_proxy": "^2.0.2",
     "drupal/userprotect": "^1.2",
@@ -91,6 +92,9 @@
   },
   "extra": {
     "patches": {
+      "drupal/core": {
+        "#2706241 AccessAwareRouter does not respect HTTP method": "https://www.drupal.org/files/issues/2023-03-17/2706241-74.patch"
+      },
       "drupal/config_ignore": {
         "#2857247 Do not export ignored config": "https://www.drupal.org/files/issues/2021-08-18/config_ignore_2857247-75.patch"
       },

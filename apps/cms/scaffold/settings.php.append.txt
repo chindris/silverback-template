@@ -1,5 +1,5 @@
 // Basic settings
-$settings['hash_salt'] = getenv('DRUPAL_HASH_SALT') ?: 'banana123';
+$settings['hash_salt'] = getenv('DRUPAL_HASH_SALT') ?: 'time-flies-like-an-arrow-fruit-flies-like-a-banana';
 $settings['config_sync_directory'] = '../config/sync';
 $settings['file_private_path'] = $app_root . '/sites/default/files/private';
 
@@ -60,3 +60,7 @@ if (getenv('LAGOON_ENVIRONMENT') !== 'prod') {
 if (getenv('LAGOON_ENVIRONMENT') !== 'prod') {
   $config['slack.settings']['slack_webhook_url'] = '';
 }
+
+// Disable key permissions check for Simple OAuth.
+// https://www.drupal.org/project/simple_oauth/issues/3021054
+$settings['simple_oauth.key_permissions_check'] = FALSE;
