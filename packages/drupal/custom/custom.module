@@ -12,6 +12,7 @@ use Drupal\media\Entity\Media;
 use Drupal\silverback_gutenberg\LinkProcessor;
 use Drupal\user\Entity\Role;
 use Drupal\user\UserInterface;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 /**
  * Implements hook_default_content_exported_fields_alter().
@@ -179,4 +180,15 @@ function _custom_key_auth_form_access(UserInterface $user): AccessResult {
   $access->addCacheContexts(['user.permissions']);
   $access->addCacheableDependency($user);
   return $access;
+}
+
+/**
+ * Implements hook_file_download().
+ *
+ * Prevent any access to keys.
+ */
+function custom_file_download($uri) {
+  if (str_starts_with($uri, 'private://') && str_ends_with($uri, '.key')) {
+    throw new AccessDeniedHttpException();
+  }
 }
