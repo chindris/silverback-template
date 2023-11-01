@@ -178,8 +178,8 @@ importers:
         specifier: ^1.10.9
         version: 1.10.9(gatsby@5.11.0)
       '@amazeelabs/publisher':
-        specifier: ^2.4.11
-        version: 2.4.11(@types/react@18.2.14)(react@18.2.0)(typescript@4.9.5)
+        specifier: ^2.4.12
+        version: 2.4.12(@types/react@18.2.14)(react@18.2.0)(typescript@4.9.5)
       '@amazeelabs/strangler-netlify':
         specifier: ^1.1.2
         version: 1.1.2(happy-dom@9.20.3)(react@18.2.0)
@@ -784,8 +784,8 @@ packages:
     resolution: {integrity: sha512-YqY6SZOPbFtnxuVhg6zktpE720LN8m8Ipzh6p5GWuyOiWX4FmWvb+rV/8bjVVWDZ65gJfGIzVSm3LopX/4HcbQ==}
     dev: false
 
-  /@amazeelabs/publisher@2.4.11(@types/react@18.2.14)(react@18.2.0)(typescript@4.9.5):
-    resolution: {integrity: sha512-ULuabN+WFg5i/FSW47vONvDul/I7b7p9uNIiXmSsEAsx3TJkxnhdXta2NUnc3O0Vtocjv0BeEkOdWHOoB92dUA==}
+  /@amazeelabs/publisher@2.4.12(@types/react@18.2.14)(react@18.2.0)(typescript@4.9.5):
+    resolution: {integrity: sha512-Tiphm3Ox+mGdCEM2FgJEhdpu31+mPaa5Nt+jagA1Wp0gDeADJCJP+VuF3WaQcriYZdvLf5OES7TjKz63m9TAsQ==}
     engines: {node: '>=16'}
     hasBin: true
     dependencies:
