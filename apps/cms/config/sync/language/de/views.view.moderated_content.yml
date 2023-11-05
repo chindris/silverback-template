@@ -51,6 +51,9 @@ display:
         type:
           expose:
             label: Inhaltstyp
+        moderation_state:
+          expose:
+            label: Moderationsstatus
         langcode:
           expose:
             label: Sprache
