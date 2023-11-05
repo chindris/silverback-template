@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   module:
+    - file
     - graphql
     - key_auth
 id: gatsby_build
@@ -10,5 +11,6 @@ label: 'Gatsby Build'
 weight: -6
 is_admin: null
 permissions:
+  - 'delete own files'
   - 'execute main arbitrary graphql requests'
   - 'use key authentication'

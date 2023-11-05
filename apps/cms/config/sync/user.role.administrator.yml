@@ -11,6 +11,7 @@ dependencies:
     - content_translation
     - dropzonejs
     - environment_indicator
+    - file
     - filter
     - gutenberg
     - locale
@@ -61,6 +62,7 @@ permissions:
   - 'delete any webform'
   - 'delete any webform submission'
   - 'delete media'
+  - 'delete own files'
   - 'delete own webform'
   - 'delete own webform submission'
   - 'dropzone upload files'

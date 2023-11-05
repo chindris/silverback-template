@@ -11,6 +11,7 @@ dependencies:
     - content_translation
     - dropzonejs
     - environment_indicator
+    - file
     - filter
     - gutenberg
     - media
@@ -44,6 +45,7 @@ permissions:
   - 'delete any media'
   - 'delete any page content'
   - 'delete media'
+  - 'delete own files'
   - 'delete own page content'
   - 'delete page revisions'
   - 'dropzone upload files'
