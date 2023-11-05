@@ -30,7 +30,7 @@ class ContentHub extends PluginBase implements DirectiveInterface {
       if (!empty($args['query'])) {
         $countQuery->condition('title', $args['query'], 'CONTAINS');
       }
-      $count = $countQuery->count()->execute();
+      $count = $countQuery->count()->accessCheck(TRUE)->execute();
 
       $query = \Drupal::entityQuery('node');
       $query->condition('type', 'page');
@@ -40,6 +40,7 @@ class ContentHub extends PluginBase implements DirectiveInterface {
       }
       $pageIds = $query->range($offset, $limit)
         ->sort('title', 'ASC')
+        ->accessCheck(TRUE)
         ->execute();
       $posts = $pageIds ? Node::loadMultiple($pageIds) : [];
       return [
