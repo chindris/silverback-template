@@ -1,11 +1,11 @@
 FROM gitpod/workspace-full
-RUN sudo update-alternatives --set php $(which php8.1)
-RUN sudo install-packages php8.1-gd php8.1-mbstring php8.1-curl php8.1-sqlite3 php8.1-zip php8.1-xdebug php8.1-imagick
+RUN sudo update-alternatives --set php $(which php8.2)
+RUN sudo install-packages php8.2-gd php8.2-mbstring php8.2-curl php8.2-sqlite3 php8.2-zip php8.2-xdebug php8.2-imagick
 RUN pnpx playwright@1.32.3 install-deps
 RUN pnpx playwright@1.32.3 install
 RUN npm install -g pnpm@8.6.12 @withgraphite/graphite-cli
 
-COPY .gitpod/xdebug.ini /etc/php/8.1/mods-available/xdebug.ini
+COPY .gitpod/xdebug.ini /etc/php/8.2/mods-available/xdebug.ini
 RUN curl -fsSL https://deno.land/x/install/install.sh | sh
 RUN /home/gitpod/.deno/bin/deno completions bash > /home/gitpod/.bashrc.d/90-deno && \
     echo 'export DENO_INSTALL="/home/gitpod/.deno"' >> /home/gitpod/.bashrc.d/90-deno && \
