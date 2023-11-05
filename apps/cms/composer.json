@@ -95,6 +95,9 @@
       "drupal/config_ignore": {
         "#2857247 Do not export ignored config": "https://www.drupal.org/files/issues/2021-08-18/config_ignore_2857247-75.patch"
       },
+      "drupal/userprotect": {
+        "Fix site install": "https://www.drupal.org/files/issues/2023-07-28/3349663-8.patch"
+      },
       "drupal/default_content": {
         "#3181075 Allow to alter exported fields": "https://www.drupal.org/files/issues/2022-11-07/default_content_hook_exported_fields-3181075-7.patch"
       }
