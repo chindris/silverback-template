@@ -73,7 +73,6 @@ permissions:
   - 'translate interface'
   - 'trigger a gatsby build'
   - 'update any media'
-  - 'use basic transition archive'
   - 'use basic transition create_new_draft'
   - 'use basic transition publish'
   - 'use basic transition unpublish'
