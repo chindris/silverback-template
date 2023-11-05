@@ -73,7 +73,7 @@ jobs:
 
   docker_build:
     name: Docker Build
-    if: startsWith(github.head_ref, 'test-all/')
+    if: startsWith(github.ref_name, 'test-all/')
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
