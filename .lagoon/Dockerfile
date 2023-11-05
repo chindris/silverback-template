@@ -31,7 +31,7 @@ RUN --mount=type=cache,target=/tmp/cache pnpm deploy --filter "@custom/website" 
 # ====================================================================================================
 # CLI IMAGE
 # ====================================================================================================
-FROM uselagoon/php-8.1-cli-drupal as cli
+FROM uselagoon/php-8.2-cli-drupal as cli
 
 RUN apk add --no-cache git qpdf imagemagick icu-dev && \
   docker-php-ext-install intl && \
@@ -53,7 +53,7 @@ ENV WEBROOT=web
 # ====================================================================================================
 # PHP IMAGE
 # ====================================================================================================
-FROM uselagoon/php-8.1-fpm as php
+FROM uselagoon/php-8.2-fpm as php
 RUN apk add --no-cache imagemagick qpdf icu-dev && \
   docker-php-ext-install intl && \
   docker-php-ext-enable intl

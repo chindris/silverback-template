@@ -2,8 +2,7 @@ name: Gutenberg Blocks
 type: module
 description: 'Add custom blocks to the Gutenberg editor.'
 package: Custom
-core: 8.x
-core_version_requirement: ^8 || ^9
+core_version_requirement: ^9 || ^10
 dependencies:
   - gutenberg:gutenberg
   - silverback_gutenberg:silverback_gutenberg

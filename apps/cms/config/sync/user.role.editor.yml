@@ -11,6 +11,7 @@ dependencies:
     - content_translation
     - dropzonejs
     - environment_indicator
+    - file
     - filter
     - gutenberg
     - media
@@ -44,6 +45,7 @@ permissions:
   - 'delete any media'
   - 'delete any page content'
   - 'delete media'
+  - 'delete own files'
   - 'delete own page content'
   - 'delete page revisions'
   - 'dropzone upload files'
@@ -53,7 +55,6 @@ permissions:
   - 'translate editable entities'
   - 'trigger a gatsby build'
   - 'update any media'
-  - 'use basic transition archive'
   - 'use basic transition create_new_draft'
   - 'use basic transition publish'
   - 'use basic transition unpublish'
