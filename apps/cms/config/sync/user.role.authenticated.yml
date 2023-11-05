@@ -2,7 +2,10 @@ uuid: 266dea66-fc38-460a-80eb-8c3ae174b1bb
 langcode: en
 status: true
 dependencies:
+  config:
+    - filter.format.webform_default
   module:
+    - filter
     - graphql
     - media
     - simple_oauth
@@ -18,6 +21,7 @@ permissions:
   - 'access content'
   - 'execute main persisted graphql requests'
   - 'grant simple_oauth codes'
+  - 'use text format webform_default'
   - userprotect.account.edit
   - userprotect.mail.edit
   - userprotect.pass.edit

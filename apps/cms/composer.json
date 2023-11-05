@@ -73,7 +73,7 @@
     "drupal/stage_file_proxy": "^2.0.2",
     "drupal/userprotect": "^1.2",
     "drupal/webform": "^6.1.5",
-    "drush/drush": "^10.6.2",
+    "drush/drush": "^11",
     "enyo/dropzone": "^5.7.1"
   },
   "conflict": {
