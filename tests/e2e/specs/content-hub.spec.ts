@@ -3,6 +3,9 @@ import { expect, test } from '@playwright/test';
 import { websiteUrl } from '../helpers/url';
 
 test.describe('content hub', () => {
+  test.beforeEach(async ({ page }) => {
+    page.emulateMedia({ reducedMotion: 'reduce' });
+  });
   test('lists pages in alphabetic order', async ({ page }) => {
     await page.goto(websiteUrl('/content-hub'));
     const content = await page.getByRole('main');
