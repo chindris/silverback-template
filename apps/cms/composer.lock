@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5f848e52127e22a7b6d9e64906c93d84",
+    "content-hash": "46db2f85a376187589fca68f02ac1acd",
     "packages": [
         {
             "name": "amazeeio/drupal_integrations",
@@ -434,16 +434,16 @@
         },
         {
             "name": "amazeelabs/silverback_gatsby",
-            "version": "2.4.3",
+            "version": "3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/AmazeeLabs/silverback_gatsby.git",
-                "reference": "4cf68d4bab512310ede1136444da79c4b1b2b95a"
+                "reference": "a06f411306d7378e79f9f56c115cf0b6b345340e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AmazeeLabs/silverback_gatsby/zipball/4cf68d4bab512310ede1136444da79c4b1b2b95a",
-                "reference": "4cf68d4bab512310ede1136444da79c4b1b2b95a",
+                "url": "https://api.github.com/repos/AmazeeLabs/silverback_gatsby/zipball/a06f411306d7378e79f9f56c115cf0b6b345340e",
+                "reference": "a06f411306d7378e79f9f56c115cf0b6b345340e",
                 "shasum": ""
             },
             "type": "drupal-module",
@@ -462,9 +462,9 @@
             "homepage": "https://silverback.netlify.app",
             "support": {
                 "issues": "https://github.com/AmazeeLabs/silverback_gatsby/issues",
-                "source": "https://github.com/AmazeeLabs/silverback_gatsby/tree/2.4.3"
+                "source": "https://github.com/AmazeeLabs/silverback_gatsby/tree/3.0.0"
             },
-            "time": "2023-11-01T14:00:06+00:00"
+            "time": "2023-11-08T16:48:10+00:00"
         },
         {
             "name": "amazeelabs/silverback_graphql_persisted",

@@ -91,16 +91,16 @@ export const createPages = async ({ actions, graphql }) => {
     query IndexPages {
       websiteSettings {
         homePage {
-          translations {
+          translations: _translations {
             typeName: __typename
             locale
-            id
-            remoteId
+            id: _id
+            remoteId: _id
             path
           }
         }
         notFoundPage {
-          translations {
+          translations: _translations {
             path
           }
         }
