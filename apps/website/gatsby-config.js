@@ -34,6 +34,8 @@ module.exports = {
   plugins: [
     'gatsby-plugin-pnpm',
     'gatsby-plugin-layout',
+    // 'gatsby-source-filesystem',
+    'gatsby-plugin-sharp',
     {
       resolve: '@amazeelabs/gatsby-source-silverback',
       options: {

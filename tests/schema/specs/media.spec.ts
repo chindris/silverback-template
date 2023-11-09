@@ -6,7 +6,7 @@ import { fetch } from '../lib.js';
 test('Image', async () => {
   const result = await fetch(gql`
     {
-      loadMediaImage(id: "3a0fe860-a6d6-428a-9474-365bd57509aa") {
+      _loadMediaImage(id: "3a0fe860-a6d6-428a-9474-365bd57509aa") {
         source
         alt
       }
@@ -15,7 +15,7 @@ test('Image', async () => {
   expect(result).toMatchInlineSnapshot(`
     {
       "data": {
-        "loadMediaImage": {
+        "_loadMediaImage": {
           "alt": "A beautiful landscape.",
           "source": "{\\"src\\":\\"http:\\\\/\\\\/127.0.0.1:8000\\\\/sites\\\\/default\\\\/files\\\\/2023-04\\\\/landscape.jpg\\",\\"width\\":2200,\\"height\\":1414,\\"originalSrc\\":\\"http:\\\\/\\\\/127.0.0.1:8000\\\\/sites\\\\/default\\\\/files\\\\/2023-04\\\\/landscape.jpg\\"}",
         },
@@ -27,7 +27,7 @@ test('Image', async () => {
 test('Video', async () => {
   const result = await fetch(gql`
     {
-      loadMediaVideo(id: "478c4289-961d-4ce8-85d6-578ae05f3019") {
+      _loadMediaVideo(id: "478c4289-961d-4ce8-85d6-578ae05f3019") {
         url
       }
     }
@@ -35,7 +35,7 @@ test('Video', async () => {
   expect(result).toMatchInlineSnapshot(`
     {
       "data": {
-        "loadMediaVideo": {
+        "_loadMediaVideo": {
           "url": "http://127.0.0.1:8000/sites/default/files/2023-06/video_mp4_belt.mp4",
         },
       },

@@ -12,7 +12,7 @@ export const query = graphql`
   query NotFoundPage {
     websiteSettings {
       notFoundPage {
-        translations {
+        translations: _translations {
           locale
           ...Page
         }

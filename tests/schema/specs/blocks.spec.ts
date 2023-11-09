@@ -37,10 +37,10 @@ test('Blocks', async () => {
       }
     }
     {
-      complete: loadPage(id: "a397ca48-8fad-411e-8901-0eba2feb989c") {
+      complete: _loadPage(id: "a397ca48-8fad-411e-8901-0eba2feb989c") {
         ...Blocks
       }
-      minimal: loadPage(id: "ceb9b2a7-4c4c-4084-ada9-d5f6505d466b") {
+      minimal: _loadPage(id: "ceb9b2a7-4c4c-4084-ada9-d5f6505d466b") {
         ...Blocks
       }
     }
@@ -136,7 +136,7 @@ test('Blocks', async () => {
 
   const german = await fetch(gql`
     {
-      loadPage(id: "a397ca48-8fad-411e-8901-0eba2feb989c:de") {
+      _loadPage(id: "a397ca48-8fad-411e-8901-0eba2feb989c:de") {
         content {
           __typename
           ... on BlockForm {
@@ -146,7 +146,7 @@ test('Blocks', async () => {
       }
     }
   `);
-  const germanForm = german.data.loadPage.content.find(
+  const germanForm = german.data._loadPage.content.find(
     (it: any) => it.__typename === 'BlockForm',
   );
   expect(germanForm.url).toBe('http://127.0.0.1:8000/de/form/contact');

@@ -13,20 +13,20 @@ function useFrameQuery() {
     footer_en: NavigationFragment;
   }>(graphql`
     query Frame {
-      main_de: mainNavigation(langcode: { eq: "de" }) {
+      main_de: mainNavigation(_langcode: { eq: "de" }) {
         ...Navigation
       }
-      main_en: mainNavigation(langcode: { eq: "en" }) {
+      main_en: mainNavigation(_langcode: { eq: "en" }) {
         items {
           ...NavigationItem
         }
       }
-      footer_de: footerNavigation(langcode: { eq: "de" }) {
+      footer_de: footerNavigation(_langcode: { eq: "de" }) {
         items {
           ...NavigationItem
         }
       }
-      footer_en: footerNavigation(langcode: { eq: "en" }) {
+      footer_en: footerNavigation(_langcode: { eq: "en" }) {
         items {
           ...NavigationItem
         }
