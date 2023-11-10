@@ -1,0 +1,2 @@
+directive @contentHub on FIELD_DEFINITION
+directive @webformIdToUrl on FIELD_DEFINITION

@@ -1,0 +1,10 @@
+{
+  "$schema": "https://unpkg.com/graphql-config@5.0.3/config-schema.json",
+  "schema": [
+    "../../apps/website/node_modules/@amazeelabs/*/directives.graphql",
+    "../../apps/cms/web/modules/contrib/*/directives.graphql",
+    "../../apps/cms/web/modules/custom/*/directives.graphql",
+    "src/schema.graphql"
+  ],
+  "documents": ["src/**/*.gql"]
+}

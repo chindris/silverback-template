@@ -14,7 +14,7 @@ query_depth: null
 query_complexity: null
 schema_configuration:
   directable:
-    schema_definition: ../generated/graphql/schema.graphqls
+    schema_definition: ../node_modules/@custom/schema/build/schema.graphql
     extensions:
       silverback_campaign_urls: silverback_campaign_urls
       silverback_gatsby: silverback_gatsby
