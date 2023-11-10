@@ -13,7 +13,7 @@ import { useEffect, useState } from 'react';
 TODO: Generalize schema concatenation for other use cases (e.g. Drupal or Gatsby).
 Either using codegen or by reading .graphqlconfig.
 */
-import rawSchema from '../../node_modules/@custom/schema/src/schema.graphqls?raw';
+import rawSchema from '../../node_modules/@custom/schema/build/schema.graphql?raw';
 
 const rawDirectives = import.meta.glob(
   '../../node_modules/@custom/schema/src/generated/**/*.graphqls',

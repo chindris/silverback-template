@@ -28,3 +28,6 @@ generated/operations.json
 
 # Translations from the FE
 generated/translations.json
+
+# GraphQL autoload registry
+generated/autoload.json
