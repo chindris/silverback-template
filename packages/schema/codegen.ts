@@ -1,5 +1,9 @@
 import type { CodegenConfig } from '@graphql-codegen/cli';
 
+// Load schema and document paths from .graphqlrc.json, so it's shared
+// with IDE plugins.
+import graphqlrc from './.graphqlrc.json';
+
 const common = {
   enumsAsConst: true,
   maybeValue: 'T | undefined',
@@ -13,9 +17,14 @@ const common = {
 };
 
 const config: CodegenConfig = {
-  schema: 'src/schema.graphqls',
-  documents: ['src/fragments/**/*.gql', 'src/operations/**/*.gql'],
+  ...graphqlrc,
   generates: {
+    'build/schema.graphql': {
+      plugins: ['schema-ast'],
+      config: {
+        includeDirectives: true,
+      },
+    },
     // Persisted query ids to be consumed by Drupal.
     'build/operations.json': {
       plugins: ['@amazeelabs/codegen-operation-ids'],
@@ -23,6 +32,22 @@ const config: CodegenConfig = {
     // All fragments collected into one javascript file for Gatsby.
     'build/gatsby-fragments.js': {
       plugins: ['@amazeelabs/codegen-gatsby-fragments'],
+    },
+    // Directive autoloader for Gatsby.
+    '../../apps/website/autoload.mjs': {
+      plugins: ['@amazeelabs/codegen-autoloader'],
+      config: {
+        mode: 'js',
+        context: ['gatsby'],
+      },
+    },
+    // Directive autoloader for Drupla.
+    '../../apps/cms/autoload.json': {
+      plugins: ['@amazeelabs/codegen-autoloader'],
+      config: {
+        mode: 'drupal',
+        context: ['drupal'],
+      },
     },
     // The main entry point. Contains:
     // - All types generated from the schema.

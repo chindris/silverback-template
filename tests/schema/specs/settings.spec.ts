@@ -6,7 +6,7 @@ import { fetch } from '../lib.js';
 test('Page', async () => {
   const result = await fetch(gql`
     {
-      loadWebsiteSettings(id: "1efc98ca-5548-425e-a3a1-42f8fc193956") {
+      _loadWebsiteSettings(id: "1efc98ca-5548-425e-a3a1-42f8fc193956") {
         homePage {
           __typename
         }
@@ -19,7 +19,7 @@ test('Page', async () => {
   expect(result).toMatchInlineSnapshot(`
     {
       "data": {
-        "loadWebsiteSettings": {
+        "_loadWebsiteSettings": {
           "homePage": {
             "__typename": "Page",
           },

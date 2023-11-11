@@ -3,9 +3,21 @@
   "extends": ["//"],
   "pipeline": {
     "prep": {
-      // Dedicated inputs for this package.
-      "inputs": ["src/**", "codegen.ts", ".graphqlconfig", "tsconfig.json"],
-      "outputs": ["build/**", "src/generated/index.ts"]
+      "dependsOn": ["@custom/cms#prep"],
+      "inputs": [
+        "../../apps/website/node_modules/@amazeelabs/*/directives.graphql",
+        "../../apps/cms/web/modules/contrib/*/directives.graphql",
+        "../../apps/cms/web/modules/custom/*/directives.graphql",
+        "src/**",
+        "codegen.ts",
+        ".graphqlrc.json",
+        "tsconfig.json"
+      ],
+      "outputs": [
+        "build/**",
+        "../../apps/website/autoload.mjs",
+        "../../apps/cms/autoload.json"
+      ]
     }
   }
 }

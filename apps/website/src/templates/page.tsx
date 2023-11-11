@@ -6,7 +6,7 @@ import React from 'react';
 
 export const query = graphql`
   query PageTemplate($remoteId: String!) {
-    page(remoteId: { eq: $remoteId }) {
+    page(_id: { eq: $remoteId }) {
       ...Page
     }
   }
