@@ -16,6 +16,7 @@
       "outputs": ["web/sites/default/files/**"]
     },
     "prep": {
+      "dependsOn": [],
       "inputs": ["composer.json", "composer.lock", "scaffold/**"],
       "outputs": [
         "vendor/**",
