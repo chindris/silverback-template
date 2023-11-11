@@ -30,4 +30,4 @@ generated/operations.json
 generated/translations.json
 
 # GraphQL autoload registry
-generated/autoload.json
+autoload.json
