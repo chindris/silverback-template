@@ -95,7 +95,7 @@ type Hero {
 union PageContent @resolveEditorBlockType = BlockMarkup | BlockMedia | BlockForm
 
 type BlockForm @type(id: "custom/form") {
-  url: Url @resolveEditorBlockAttribute(key: "formId") @webformIdToUrl
+  url: Url @resolveEditorBlockAttribute(key: "formId") @webformIdToUrl(id: "$")
 }
 
 type BlockMarkup @type(id: "core/paragraph") {
@@ -130,7 +130,7 @@ type Query {
   previewPage(id: ID!, rid: ID, locale: String!): Page
     @fetchEntity(type: "node", id: "$id", rid: "$rid", language: "$locale")
   contentHub(query: String, pagination: PaginationInput!): ContentHubResult!
-    @contentHub
+    @contentHub(query: "$query", pagination: "$pagination")
 }
 
 type MetaTag {
