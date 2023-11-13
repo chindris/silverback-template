@@ -15,6 +15,7 @@ query_complexity: null
 schema_configuration:
   directable:
     schema_definition: ../node_modules/@custom/schema/build/schema.graphql
+    autoload_registry: ../autoload.json
     extensions:
       silverback_campaign_urls: silverback_campaign_urls
       silverback_gatsby: silverback_gatsby

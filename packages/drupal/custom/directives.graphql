@@ -1,2 +1,9 @@
-directive @contentHub on FIELD_DEFINITION
-directive @webformIdToUrl on FIELD_DEFINITION
+"""
+implementation(drupal): custom.content_hub::query
+"""
+directive @contentHub(pagination: String, query: String) on FIELD_DEFINITION
+
+"""
+implementation(drupal): custom.webform::url
+"""
+directive @webformIdToUrl(id: String!) on FIELD_DEFINITION
