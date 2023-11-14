@@ -1,2 +1,0 @@
-schema: "packages/schema/src/**/*.graphqls"
-documents: "packages/schema/src/**/*.gql"
