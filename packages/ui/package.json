@@ -23,7 +23,6 @@
     }
   },
   "scripts": {
-    "turbo:prep": "pnpm turbo prep",
     "prep:types": "tsc --emitDeclarationOnly",
     "prep:scripts": "swc ./src -d ./build",
     "prep:styles": "NODE_ENV=production pnpm postcss tailwind.css -o build/styles.css",

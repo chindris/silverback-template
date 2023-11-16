@@ -8,21 +8,12 @@
       "dependsOn": ["test:static"]
     },
     "test:static": {
-      // Static tests don't require a build of the package, but they
-      // require dependencies to be built, since these might contain
-      // type definitions.
       "dependsOn": ["^prep"]
     },
     "test:unit": {
-      // Unit tests also don't require the package to be built since test
-      // tools build packages on the fly. Dependencies need to be built though.
-      // Also unit tests should not even run without static tests passing or
-      // dependencies unit tests failing.
-      "dependsOn": ["^prep", "test:static", "^test:unit"]
+      "dependsOn": ["test:static"]
     },
     "test:integration": {
-      // Integration tests run the full system and require the package to be
-      // built and unit tested.
       "dependsOn": ["build", "test:unit"]
     }
   }

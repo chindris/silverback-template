@@ -8,7 +8,6 @@
   "scripts": {
     "test:static": "tsc --noEmit && eslint '**/*.{ts,tsx,js,jsx}' --ignore-path='./.gitignore'",
     "test:integration": "playwright test",
-    "turbo:test:integration": "CI=true turbo test:integration --output-logs=new-only",
     "test:headed": "playwright test --headed",
     "dev": "playwright test --ui",
     "download-browsers": "playwright install chromium"
