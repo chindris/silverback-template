@@ -5,7 +5,7 @@
   "scripts": {
     "start": "pnpm run --filter @custom/cms start",
     "test:static": "tsc --noEmit && eslint '**/*.{ts,tsx,js,jsx}' --ignore-path='./.gitignore'",
-    "test:integration": "start-server-and-test 8888 vitest",
+    "test:integration": "CI=true start-server-and-test 8888 vitest",
     "dev": "vitest --ui # for non phpstorm users"
   },
   "optionalDependencies": {

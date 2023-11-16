@@ -1,24 +1,28 @@
 {
   "extends": ["//"],
   "pipeline": {
-    "dev": {
-      "persistent": true,
-      "dependsOn": ["build", "^build"]
-    },
-    "dev:light": {
-      "notes": "Same as dev, but does not build the CMS, just clears caches",
-      "persistent": true,
-      "dependsOn": ["^build"]
-    },
-    "build": {
-      "dependsOn": ["prep"],
-      "inputs": ["config/**", "web/modules/custom/**", "web/themes/custom/**"],
-      "outputs": ["web/sites/default/files/**"]
-    },
     "prep": {
-      "dependsOn": [],
-      "inputs": ["composer.json", "composer.lock", "scaffold/**"],
+      "dependsOn": ["prep:schema"]
+    },
+    "prep:schema": {
+      "dependsOn": ["prep:database"]
+    },
+    "prep:database": {
+      "dependsOn": ["prep:composer"],
+      "inputs": [
+        "turbo-seed.txt",
+        "prep-database.sh",
+        "config/**",
+        "web/modules/custom/**",
+        "web/themes/custom/**"
+      ],
+      "outputs": ["web/sites/default/files/**"],
+      "env": ["CI", "LAGOON"]
+    },
+    "prep:composer": {
+      "inputs": ["composer.json", "composer.lock", "scaffold/**", "patches/**"],
       "outputs": [
+        "drush/**",
         "vendor/**",
         "!**/.git/**",
         "web/**",

@@ -1,2 +1,1 @@
-Before running tests, start Drupal from `apps/cms` with either `pnpm turbo:dev`
-or `pnpm dev`
+Before running tests, start Drupal from `apps/cms` with `pnpm dev`

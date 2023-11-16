@@ -87,48 +87,26 @@ Other steps
 
 ```
 pnpm i
+pnpm turbo:prep
 ```
 
-Additionally, you can run `pnpm turbo:test`. This will serve two purposes:
-
-- It will make sure that your system is fully compatible with the project
-- It will generate code that is required for IDE autocompletion
+Additionally, you can run `pnpm turbo:test` to make sure that your system is
+fully compatible with the project.
 
 ## Working with apps and packages
 
-Navigate to an app or package folder and run `pnpm turbo:dev`. Turborepo will
-make sure to run all required tasks and cache as much as it can.
+Navigate to an app/package folder and run `pnpm dev`.
 
-### Turborepo setup
-
-We try to follow common rules in all apps and packages.
-
-Usually, the following scripts can be found in `package.json`:
-
-- `prep`: Prepare everything related to code. For example, compile code,
-  generate types, download additional dependencies, etc.
-- `build`: Build the app or package. For example, setup Drupal, build Gatsby,
-  build Storybook, etc.
-
-If there is a `turbo:` prefixed script, it will run the non prefixed script and
-additionally
-
-- Run all required scripts in this or other packages
-- Cache the results if possible
-
-For example, running `pnpm turbo:dev` in `apps/website` will prepare all
-dependencies, setup and start Drupal, start Publisher and open the Publisher's
-status URL in the browser.
+When working on integration tasks, it may be required to re-run
+`pnpm turbo:prep` from the repo root.
 
 ### Drupal
 
-Considering the above, please note that the Drupal database can be reset on
+Running `pnpm turbo:prep` works conditionally for Drupal. If database exists, it
+clears Drupal cache. Otherwise, it re-installs Drupal completely.
 
-- re-running `pnpm turbo:dev` in `apps/cms`
-- running some `turbo:` prefixed scripts in `apps/website`
-
-If you have some unsaved work in the Drupal database, don't start Drupal with
-`pnpm turbo:dev` but use `pnpm dev` instead.
+If you wish `pnpm turbo:prep` to re-install Drupal, delete
+`apps/cms/web/sites/default/files/.sqlite` first.
 
 ## Environment overrides
 
@@ -167,8 +145,8 @@ lagoon add variable -p [project name] -e dev -N NETLIFY_SITE_ID -V [netlify site
 
 ### Publisher authentication with Drupal
 
-Publisher can require to authenticate with Drupal based on OAuth2.
-It is only used on Lagoon environments.
+Publisher can require to authenticate with Drupal based on OAuth2. It is only
+used on Lagoon environments.
 
 <details>
   <summary>How it works</summary>
