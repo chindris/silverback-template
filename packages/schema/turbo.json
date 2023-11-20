@@ -3,7 +3,7 @@
   "extends": ["//"],
   "pipeline": {
     "prep": {
-      "dependsOn": ["@custom/cms#prep"],
+      "dependsOn": ["@custom/cms#prep:composer"],
       "inputs": [
         "../../apps/website/node_modules/@amazeelabs/*/directives.graphql",
         "../../apps/cms/web/modules/contrib/*/directives.graphql",

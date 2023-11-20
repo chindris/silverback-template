@@ -31,3 +31,6 @@ generated/translations.json
 
 # GraphQL autoload registry
 autoload.json
+
+# A workaround to avoid turbo caching locally.
+turbo-seed.txt

@@ -3,11 +3,6 @@
   "pipeline": {
     "dev": {
       "persistent": true,
-      "dependsOn": ["@custom/cms#build", "prep", "^prep"]
-    },
-    "dev:light": {
-      "notes": "Same as dev, but does not build the CMS",
-      "persistent": true,
       "dependsOn": ["prep", "^prep"]
     },
     "prep": {
@@ -16,20 +11,9 @@
     "test:static": {
       "inputs": ["src/**", "!src/gatsby-fragments.js"]
     },
-    "rebuild": {
-      "cache": false,
-      "dependsOn": ["prep", "^prep"],
-      "inputs": [
-        "gatsby-browser.js",
-        "gatsby-config.js",
-        "gatsby-node.ts",
-        "netlify/**",
-        "netlify.toml"
-      ]
-    },
     "build": {
       "env": ["DRUPAL_INTERNAL_URL", "DRUPAL_EXTERNAL_URL"],
-      "dependsOn": ["@custom/cms#build", "prep", "^build"],
+      "dependsOn": ["@custom/cms#prep", "prep", "^prep"],
       "inputs": [
         "gatsby-browser.js",
         "gatsby-config.js",
