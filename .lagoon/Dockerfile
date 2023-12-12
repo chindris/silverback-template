@@ -1,7 +1,12 @@
 # ====================================================================================================
 # BUILDER IMAGE
 # ====================================================================================================
+FROM uselagoon/node-18-builder as node
 FROM uselagoon/php-8.2-cli-drupal as builder
+
+COPY --from=node /usr/local/lib/node_modules /usr/local/lib/node_modules
+COPY --from=node /usr/local/bin/node /usr/local/bin/node
+RUN ln -s /usr/local/lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm
 
 ENV PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1
 
