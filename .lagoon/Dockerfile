@@ -1,7 +1,12 @@
 # ====================================================================================================
 # BUILDER IMAGE
 # ====================================================================================================
-FROM uselagoon/node-18-builder as builder
+FROM uselagoon/node-18-builder as node
+FROM uselagoon/php-8.2-cli-drupal as builder
+
+COPY --from=node /usr/local/lib/node_modules /usr/local/lib/node_modules
+COPY --from=node /usr/local/bin/node /usr/local/bin/node
+RUN ln -s /usr/local/lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm
 
 ENV PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1
 
@@ -16,6 +21,21 @@ RUN --mount=type=cache,target=/tmp/cache pnpm fetch && \
     # with _some_ packages. This can lead to an incomplete package installation.
     # So we remove them now.
     find . -name 'node_modules' -type d -prune -exec rm -rf '{}' +
+
+# Install composer dependencies.
+# They may contain directive definitions required by prep scripts.
+WORKDIR /app/apps/cms
+RUN apk add --no-cache git qpdf imagemagick icu-dev && \
+  docker-php-ext-install intl && \
+  docker-php-ext-enable intl
+RUN composer config --global github-protocols https
+COPY apps/cms/composer.* /app/apps/cms/
+COPY apps/cms/patches /app/apps/cms/patches
+COPY apps/cms/scaffold /app/apps/cms/scaffold
+ENV COMPOSER_HOME=/tmp/cache/composer
+RUN --mount=type=cache,target=/tmp/cache composer install --no-dev
+
+WORKDIR /app
 
 # Copy the all package sources, install and prepare them.
 COPY . /app
@@ -36,14 +56,6 @@ FROM uselagoon/php-8.2-cli-drupal as cli
 RUN apk add --no-cache git qpdf imagemagick icu-dev && \
   docker-php-ext-install intl && \
   docker-php-ext-enable intl
-RUN composer config --global github-protocols https
-
-COPY --from=builder /tmp/.deploy/cms/composer.json /app/composer.json
-COPY --from=builder /tmp/.deploy/cms/composer.lock /app/composer.lock
-COPY --from=builder /tmp/.deploy/cms/scaffold /app/scaffold
-COPY --from=builder /tmp/.deploy/cms/patches /app/patches
-ENV COMPOSER_HOME=/tmp/cache/composer
-RUN --mount=type=cache,target=/tmp/cache composer install --no-dev
 
 COPY --from=builder /tmp/.deploy/cms /app
 
