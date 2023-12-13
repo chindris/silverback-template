@@ -1,7 +1,10 @@
+import { PreviewPageQuery } from '@custom/schema';
+import { Page } from '@custom/ui/routes/Page';
 import CMS from 'netlify-cms-app';
 
 import css from '../node_modules/@custom/ui/build/styles.css?raw';
-import { PageCollection, PagePreview } from './collections/page';
+import { PageCollection, pageSchema } from './collections/page';
+import { createPreview } from './helpers/preview';
 import { UuidWidget } from './helpers/uuid';
 
 CMS.registerPreviewStyle(css, { raw: true });
@@ -57,4 +60,12 @@ CMS.init({
   },
 });
 
-CMS.registerPreviewTemplate('page', PagePreview);
+CMS.registerPreviewTemplate(
+  'page',
+  createPreview(
+    PreviewPageQuery,
+    pageSchema,
+    ({ preview }) => <Page page={preview} />,
+    'previewPage',
+  ),
+);
