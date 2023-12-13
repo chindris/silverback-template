@@ -44,20 +44,9 @@ CMS.init({
             file: 'apps/decap/data/site.yml',
             fields: [
               {
-                label: 'Homepage',
-                name: 'homePage',
-                widget: 'relation',
-                collection: 'page',
-                search_fields: ['title'],
-                value_field: 'path',
-              },
-              {
-                label: '404 Page',
-                name: 'notFoundPage',
-                widget: 'relation',
-                collection: 'page',
-                search_fields: ['title'],
-                value_field: 'path',
+                label: 'Contact e-Mail',
+                name: 'email',
+                widget: 'string',
               },
             ],
           },
