@@ -4,15 +4,17 @@ import type { CodegenConfig } from '@graphql-codegen/cli';
 // with IDE plugins.
 import graphqlrc from './.graphqlrc.json';
 
+const scalars = {
+  Markup: '@amazeelabs/scalars#Markup',
+  Url: '@amazeelabs/scalars#Url',
+  ImageSource: '@amazeelabs/scalars#ImageSource',
+};
+
 const common = {
   enumsAsConst: true,
   maybeValue: 'T | undefined',
   strictScalars: true,
-  scalars: {
-    Markup: '@amazeelabs/scalars#Markup',
-    Url: '@amazeelabs/scalars#Url',
-    ImageSource: '@amazeelabs/scalars#ImageSource',
-  },
+  scalars,
   withObjectType: true,
 };
 
@@ -74,6 +76,9 @@ const config: CodegenConfig = {
       plugins: [`typescript`],
       config: {
         ...common,
+        scalars: Object.fromEntries(
+          Object.keys(scalars).map((key) => [key, 'string']),
+        ),
         typesSuffix: 'Source',
         // In source types we always want an enforced __typename, so unions and
         // interfaces can be resolved automatically.
