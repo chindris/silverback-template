@@ -20,5 +20,5 @@ export default function PagePreview() {
         }
       : undefined,
   );
-  return data?.previewPage ? <Page page={data.previewPage} /> : <Loading />;
+  return data?.preview ? <Page page={data.preview} /> : <Loading />;
 }
