@@ -141,6 +141,51 @@ export const createPages = async ({ actions, graphql }) => {
     },
   );
 
+  /**
+   * @type {{
+   *   data?: {
+   *     allDecapPage: {
+   *       nodes: Array<{
+   *         id: string;
+   *         path: string;
+   *         locale: string;
+   *       }>
+   *     }
+   *   },
+   *   errors?: any[];
+   * }}
+   */
+  const decapPages = await graphql(`
+    query DecapPages {
+      allDecapPage {
+        nodes {
+          id
+          path
+          locale
+        }
+      }
+    }
+  `);
+
+  decapPages.data?.allDecapPage.nodes.forEach(({ id, path, locale }) => {
+    /**
+     * @type {import('@amazeelabs/gatsby-source-silverback').SilverbackPageContext}
+     */
+    const context = {
+      typeName: 'DecapPage',
+      id,
+      remoteId: id,
+      locale,
+      // TODO: Handle decap localizations.
+      localizations: [],
+    };
+    actions.createPage({
+      path: path,
+      component: resolve(`./src/templates/decap-page.tsx`),
+      context,
+    });
+  });
+
   // Broken Gatsby links will attempt to load page-data.json files, which don't exist
   // and also should not be piped into the strangler function. Thats why they
   // are caught right here.

@@ -6,7 +6,12 @@
 // TS file name should be different from gastby-config.ts, otherwise Gatsby will
 // pick it up instead of the JS file.
 
+import { getPages } from '@custom/decap';
+import { resolve } from 'path';
+
 import autoload from './autoload.mjs';
+
+const dir = resolve('node_modules/@custom/decap/data/page');
 
 process.env.GATSBY_DRUPAL_URL =
   process.env.DRUPAL_EXTERNAL_URL || 'http://127.0.0.1:8888';
@@ -49,6 +54,7 @@ export default {
         type_prefix: '',
         schema_configuration: './graphqlrc.yml',
         directives: autoload,
+        sources: { getPages: getPages(dir) },
       },
     },
     '@amazeelabs/gatsby-silverback-cloudinary',
