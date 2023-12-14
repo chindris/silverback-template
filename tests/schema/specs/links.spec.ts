@@ -6,7 +6,7 @@ import { fetch } from '../lib.js';
 test('Links', async () => {
   const result = await fetch(gql`
     {
-      _loadPage(id: "25086be7-ca5f-4ff8-9695-b9c71a676d4e") {
+      page: _loadDrupalPage(id: "25086be7-ca5f-4ff8-9695-b9c71a676d4e") {
         content {
           __typename
           ... on BlockMarkup {
@@ -16,15 +16,15 @@ test('Links', async () => {
       }
     }
   `);
-  result.data._loadPage.content[0].markup =
-    result.data._loadPage.content[0].markup.replaceAll(
+  result.data.page.content[0].markup =
+    result.data.page.content[0].markup.replaceAll(
       /data-id="[^"]*"/g,
       'data-id="[id]"',
     );
   expect(result).toMatchInlineSnapshot(`
     {
       "data": {
-        "_loadPage": {
+        "page": {
           "content": [
             {
               "__typename": "BlockMarkup",
