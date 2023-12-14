@@ -1,6 +1,8 @@
 // @ts-check
 import { Locale } from '@custom/schema';
+import { cpSync } from 'fs';
 import { resolve } from 'path';
+import serve from 'serve-static';
 
 /**
  * @type {import('gatsby').GatsbyNode['onCreateWebpackConfig']}
@@ -220,5 +222,35 @@ export const createPages = async ({ actions, graphql }) => {
     fromPath: '/*',
     toPath: `/.netlify/functions/strangler`,
     statusCode: 200,
+  });
+};
+
+// TODO: Move to shared package.
+/**
+ * @type Record<string, string>
+ */
+const staticDirectories = {
+  'node_modules/@custom/ui/static/public': '/',
+  'node_modules/@custom/decap/dist': '/admin',
+  'node_modules/@custom/decap/media': '/media',
+};
+
+/**
+ * @type {import('gatsby').GatsbyNode['onPostBuild']}
+ */
+export const onPostBuild = () => {
+  Object.keys(staticDirectories).forEach((src) => {
+    const dest = staticDirectories[src];
+    cpSync(src, `public${dest}`, { force: true, recursive: true });
+  });
+};
+
+/**
+ * @type {import('gatsby').GatsbyNode['onCreateDevServer']}
+ */
+export const onCreateDevServer = ({ app }) => {
+  Object.keys(staticDirectories).forEach((src) => {
+    const dest = staticDirectories[src];
+    app.use(dest, serve(src));
   });
 };
