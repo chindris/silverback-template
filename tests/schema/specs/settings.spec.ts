@@ -21,10 +21,10 @@ test('Page', async () => {
       "data": {
         "_loadWebsiteSettings": {
           "homePage": {
-            "__typename": "Page",
+            "__typename": "DrupalPage",
           },
           "notFoundPage": {
-            "__typename": "Page",
+            "__typename": "DrupalPage",
           },
         },
       },
