@@ -112,13 +112,13 @@ export const createPages = async ({ actions, graphql }) => {
         };
         actions.createPage({
           path: frontPath,
-          component: resolve(`./src/templates/page.tsx`),
+          component: resolve(`./src/templates/drupal-page.tsx`),
           context,
         });
         // Delete the page at the original path.
         actions.deletePage({
           path,
-          component: resolve(`./src/templates/page.tsx`),
+          component: resolve(`./src/templates/drupal-page.tsx`),
         });
         // Create a redirect from the original path to the "front" path.
         actions.createRedirect({
@@ -136,7 +136,7 @@ export const createPages = async ({ actions, graphql }) => {
     ({ path }) => {
       actions.deletePage({
         path,
-        component: resolve(`./src/templates/page.tsx`),
+        component: resolve(`./src/templates/drupal-page.tsx`),
       });
     },
   );
