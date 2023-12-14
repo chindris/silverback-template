@@ -28,7 +28,7 @@ CMS.init({
       : // Otherwise, its production. Use the Git Gateway backend.
         {
           name: 'git-gateway',
-          branch: 'dev',
+          branch: 'release',
         },
     i18n: {
       structure: 'single_file',
