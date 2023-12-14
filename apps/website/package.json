@@ -8,6 +8,7 @@
     "@amazeelabs/gatsby-source-silverback": "^1.13.2",
     "@amazeelabs/publisher": "^2.4.12",
     "@amazeelabs/strangler-netlify": "^1.1.2",
+    "@custom/decap": "workspace:*",
     "@custom/schema": "workspace:*",
     "@custom/ui": "workspace:*",
     "gatsby": "^5.11.0",

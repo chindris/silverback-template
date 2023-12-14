@@ -40,7 +40,8 @@ const config: CodegenConfig = {
       plugins: ['@amazeelabs/codegen-autoloader'],
       config: {
         mode: 'js',
-        context: ['gatsby'],
+        // TODO: make responsiveImageSharp work with everything and remove 'cloudinary'
+        context: ['gatsby', 'cloudinary'],
       },
     },
     // Directive autoloader for Drupla.
