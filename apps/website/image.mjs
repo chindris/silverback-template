@@ -10,7 +10,6 @@ export function imageProps(source) {
     const relativeSource = source.substring(`/apps/decap`.length);
     const dimensions = sizeOf(`node_modules/@custom/decap/${relativeSource}`);
 
-    console.log('process.env.GATSBY_PUBLIC_URL', process.env.GATSBY_PUBLIC_URL);
     return JSON.stringify({
       src: `${
         process.env.GATSBY_PUBLIC_URL || 'http://localhost:8000'
