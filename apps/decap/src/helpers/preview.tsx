@@ -144,11 +144,7 @@ export function createPreview<
       {
         [rootField]: previewSourceData,
       },
-      {
-        id: '',
-        rid: '',
-        locale: '',
-      },
+      {},
       (src) => getAsset(src).url,
     );
 

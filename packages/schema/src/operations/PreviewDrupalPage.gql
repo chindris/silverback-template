@@ -1,0 +1,5 @@
+query PreviewDrupalPage($id: ID!, $rid: ID, $locale: String!) {
+  preview: previewDrupalPage(id: $id, rid: $rid, locale: $locale) {
+    ...Page
+  }
+}
