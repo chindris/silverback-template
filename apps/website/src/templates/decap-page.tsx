@@ -44,7 +44,7 @@ export function Head({ data }: HeadProps<PageTemplateQuery>) {
   );
 }
 
-export default function DrupalPageTemplate({
+export default function DecapPageTemplate({
   data,
 }: PageProps<PageTemplateQuery, SilverbackPageContext>) {
   return <Page page={data.page} />;
