@@ -18,6 +18,7 @@
         "gatsby-browser.js",
         "gatsby-config.js",
         "gatsby-node.ts",
+        "image.mjs",
         "netlify/**",
         "netlify.toml"
       ],
