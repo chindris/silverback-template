@@ -1,4 +1,4 @@
-import { PreviewPageQuery } from '@custom/schema';
+import { PreviewDecapPageQuery } from '@custom/schema';
 import { Page } from '@custom/ui/routes/Page';
 import CMS from 'netlify-cms-app';
 
@@ -63,9 +63,9 @@ CMS.init({
 CMS.registerPreviewTemplate(
   'page',
   createPreview(
-    PreviewPageQuery,
+    PreviewDecapPageQuery,
     pageSchema,
     ({ preview }) => <Page page={preview} />,
-    'previewPage',
+    'previewDecapPage',
   ),
 );
