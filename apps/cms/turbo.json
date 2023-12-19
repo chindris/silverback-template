@@ -8,7 +8,7 @@
       "dependsOn": ["prep:database"]
     },
     "prep:database": {
-      "dependsOn": ["prep:composer"],
+      "dependsOn": ["prep:composer", "^prep"],
       "inputs": [
         "turbo-seed.txt",
         "prep-database.sh",

@@ -4,15 +4,17 @@ import type { CodegenConfig } from '@graphql-codegen/cli';
 // with IDE plugins.
 import graphqlrc from './.graphqlrc.json';
 
+const scalars = {
+  Markup: '@amazeelabs/scalars#Markup',
+  Url: '@amazeelabs/scalars#Url',
+  ImageSource: '@amazeelabs/scalars#ImageSource',
+};
+
 const common = {
   enumsAsConst: true,
   maybeValue: 'T | undefined',
   strictScalars: true,
-  scalars: {
-    Markup: '@amazeelabs/scalars#Markup',
-    Url: '@amazeelabs/scalars#Url',
-    ImageSource: '@amazeelabs/scalars#ImageSource',
-  },
+  scalars,
   withObjectType: true,
 };
 
@@ -38,7 +40,8 @@ const config: CodegenConfig = {
       plugins: ['@amazeelabs/codegen-autoloader'],
       config: {
         mode: 'js',
-        context: ['gatsby'],
+        // TODO: make responsiveImageSharp work with everything and remove 'cloudinary'
+        context: ['gatsby', 'cloudinary'],
       },
     },
     // Directive autoloader for Drupla.
@@ -74,6 +77,9 @@ const config: CodegenConfig = {
       plugins: [`typescript`],
       config: {
         ...common,
+        scalars: Object.fromEntries(
+          Object.keys(scalars).map((key) => [key, 'string']),
+        ),
         typesSuffix: 'Source',
         // In source types we always want an enforced __typename, so unions and
         // interfaces can be resolved automatically.

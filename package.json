@@ -36,7 +36,8 @@
     "vitest": "^0.32.2"
   },
   "resolutions": {
-    "eslint": "7"
+    "eslint": "7",
+    "graphql": "16.8.1"
   },
   "pnpm": {
     "patchedDependencies": {}

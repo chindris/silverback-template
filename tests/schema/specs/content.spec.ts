@@ -30,10 +30,10 @@ test('Page', async () => {
       }
     }
     {
-      complete: _loadPage(id: "ef80e284-154b-41fd-9317-154b0a175299") {
+      complete: _loadDrupalPage(id: "ef80e284-154b-41fd-9317-154b0a175299") {
         ...Page
       }
-      minimal: _loadPage(id: "17626bb4-557f-48fc-b869-ae566f4ceae6") {
+      minimal: _loadDrupalPage(id: "17626bb4-557f-48fc-b869-ae566f4ceae6") {
         ...Page
       }
     }

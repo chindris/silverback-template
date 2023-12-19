@@ -1,22 +1,17 @@
-import { ImageSource, PreviewPageQuery, Url } from '@custom/schema';
+import { SilverbackSource } from '@amazeelabs/gatsby-source-silverback';
 import {
   BlockMarkupSource,
   BlockMediaSource,
+  DecapPageSource,
   LocaleSource,
   MediaImageSource,
-  PageSource,
 } from '@custom/schema/source';
-import { Page } from '@custom/ui/routes/Page';
-import {
-  CmsCollection,
-  CmsField,
-  PreviewTemplateComponentProps,
-} from 'netlify-cms-core';
-import { z, ZodType, ZodTypeDef } from 'zod';
+import fs from 'fs';
+import type { CmsCollection, CmsField } from 'netlify-cms-core';
+import yaml from 'yaml';
+import { z } from 'zod';
 
-import { PreviewFrame } from '../helpers/frame';
 import { transformMarkdown } from '../helpers/markdown';
-import { useQuery } from '../helpers/query';
 
 // =============================================================================
 // Decap CMS collection definition.
@@ -139,112 +134,87 @@ export const PageCollection: CmsCollection = {
 // Transformation schema definitions.
 // =============================================================================
 
-const BlockMarkupSchema: ZodType<BlockMarkupSource, ZodTypeDef, unknown> = z
+const BlockMarkupSchema = z
   .object({
     type: z.literal('text'),
     text: transformMarkdown,
   })
-  .transform(({ text }) => {
+  .transform(({ text }): BlockMarkupSource => {
     return {
       __typename: 'BlockMarkup',
       markup: text,
     };
   });
 
-const BlockMediaImageSchema: ZodType<BlockMediaSource, ZodTypeDef, unknown> = z
+const BlockMediaImageSchema = z
   .object({
     type: z.literal('image'),
     alt: z.string(),
     image: z.string(),
     caption: transformMarkdown,
   })
-  .transform(({ image, alt, caption }) => {
+  .transform(({ image, alt, caption }): BlockMediaSource => {
     return {
       __typename: 'BlockMedia',
       media: {
         __typename: 'MediaImage',
-        source: image as ImageSource,
+        source: image,
         alt,
       },
       caption: caption,
     };
   });
 
-export const pageSchema: ZodType<PageSource, ZodTypeDef, unknown> = z
-  .object({
-    __typename: z.literal('Page').optional().default('Page'),
-    id: z.string(),
-    title: z.string(),
-    locale: z.string().transform((l) => l as LocaleSource),
-    path: z.string().transform((p) => p as Url),
-    hero: z.object({
-      __typename: z.literal('Hero').optional().default('Hero'),
-      headline: z.string(),
-      lead: z.string().optional(),
-      image: z
-        .string()
-        .optional()
-        .transform((s) => s as ImageSource)
-        .transform(
-          (source) =>
-            ({
+export const pageSchema = z.object({
+  __typename: z.literal('DecapPage').optional().default('DecapPage'),
+  id: z.string(),
+  title: z.string(),
+  locale: z.string().transform((l) => l as LocaleSource),
+  path: z.string(),
+  hero: z.object({
+    __typename: z.literal('Hero').optional().default('Hero'),
+    headline: z.string(),
+    lead: z.string().optional(),
+    image: z
+      .string()
+      .optional()
+      .transform((source): MediaImageSource | undefined =>
+        source
+          ? {
               __typename: 'MediaImage',
               source,
               alt: '',
-            } satisfies MediaImageSource),
-        ),
-    }),
-    content: z.array(z.union([BlockMarkupSchema, BlockMediaImageSchema])),
-  })
-  .transform((page) => ({
-    ...page,
-    id: `${page.id}:${page.locale}`,
-  }));
+            }
+          : undefined,
+      ),
+  }),
+  content: z.array(z.union([BlockMarkupSchema, BlockMediaImageSchema])),
+});
 
-// =============================================================================
-// Decap CMS preview component.
-// =============================================================================
-export function PagePreview({
-  entry,
-  getAsset,
-}: PreviewTemplateComponentProps) {
-  // Extract data from Decap input.
-  const input = entry.toJS().data;
-
-  // Parse that input and transform it to a GraphQL Source input.
-  const parsed = pageSchema.safeParse({ ...input, locale: 'en' });
-  if (!parsed.success) {
-    console.error(parsed.error);
-  }
-
-  const previewSourceData = parsed.success
-    ? parsed.data
-    : ({
-        __typename: 'Page',
-        title: '[Missing title]',
-        path: '/preview' as Url,
-        locale: 'en',
-      } satisfies PageSource);
-
-  // Execute the "Preview" query on that source input to transform
-  // data into the exact shape of the query result expected by the
-  // route.
-  const data = useQuery(
-    PreviewPageQuery,
-    {
-      previewPage: previewSourceData,
-    } satisfies PreviewPageQuery,
-    {
-      id: '',
-      rid: '',
-      locale: '',
-    },
-    (src) => getAsset(src).url,
-  );
-
-  return (
-    <PreviewFrame>
-      {data?.previewPage ? <Page page={data.previewPage} /> : null}
-    </PreviewFrame>
-  );
-}
+export const getPages: (dir: string) => SilverbackSource<DecapPageSource> =
+  (dir: string) => () => {
+    const pages: Array<[string, DecapPageSource]> = [];
+    fs.readdirSync(dir)
+      .filter((file) => file.endsWith('.yml'))
+      .forEach((file) => {
+        const content = yaml.parse(fs.readFileSync(`${dir}/${file}`, 'utf-8'));
+        Object.keys(content).forEach((lang) => {
+          if (Object.keys(content[lang]).length < 2) {
+            return;
+          }
+          const input = {
+            ...content[lang],
+            locale: lang,
+          };
+          const page = pageSchema.safeParse(input);
+          if (page.success) {
+            pages.push([page.data.id, page.data]);
+          } else {
+            console.warn(`Error parsing ${file} (${lang}):`);
+            console.warn(page.error.message);
+            console.warn('Input:', content[lang]);
+          }
+        });
+      });
+    return pages;
+  };

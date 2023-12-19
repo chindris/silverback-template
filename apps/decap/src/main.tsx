@@ -1,7 +1,10 @@
+import { PreviewDecapPageQuery } from '@custom/schema';
+import { Page } from '@custom/ui/routes/Page';
 import CMS from 'netlify-cms-app';
 
 import css from '../node_modules/@custom/ui/build/styles.css?raw';
-import { PageCollection, PagePreview } from './collections/page';
+import { PageCollection, pageSchema } from './collections/page';
+import { createPreview } from './helpers/preview';
 import { UuidWidget } from './helpers/uuid';
 
 CMS.registerPreviewStyle(css, { raw: true });
@@ -25,7 +28,7 @@ CMS.init({
       : // Otherwise, its production. Use the Git Gateway backend.
         {
           name: 'git-gateway',
-          branch: 'dev',
+          branch: 'release',
         },
     i18n: {
       structure: 'single_file',
@@ -44,20 +47,9 @@ CMS.init({
             file: 'apps/decap/data/site.yml',
             fields: [
               {
-                label: 'Homepage',
-                name: 'homePage',
-                widget: 'relation',
-                collection: 'page',
-                search_fields: ['title'],
-                value_field: 'path',
-              },
-              {
-                label: '404 Page',
-                name: 'notFoundPage',
-                widget: 'relation',
-                collection: 'page',
-                search_fields: ['title'],
-                value_field: 'path',
+                label: 'Contact e-Mail',
+                name: 'email',
+                widget: 'string',
               },
             ],
           },
@@ -68,4 +60,12 @@ CMS.init({
   },
 });
 
-CMS.registerPreviewTemplate('page', PagePreview);
+CMS.registerPreviewTemplate(
+  'page',
+  createPreview(
+    PreviewDecapPageQuery,
+    pageSchema,
+    ({ preview }) => <Page page={preview} />,
+    'previewDecapPage',
+  ),
+);

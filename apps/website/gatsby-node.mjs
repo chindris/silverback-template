@@ -1,6 +1,8 @@
 // @ts-check
 import { Locale } from '@custom/schema';
+import { cpSync } from 'fs';
 import { resolve } from 'path';
+import serve from 'serve-static';
 
 /**
  * @type {import('gatsby').GatsbyNode['onCreateWebpackConfig']}
@@ -112,13 +114,13 @@ export const createPages = async ({ actions, graphql }) => {
         };
         actions.createPage({
           path: frontPath,
-          component: resolve(`./src/templates/page.tsx`),
+          component: resolve(`./src/templates/drupal-page.tsx`),
           context,
         });
         // Delete the page at the original path.
         actions.deletePage({
           path,
-          component: resolve(`./src/templates/page.tsx`),
+          component: resolve(`./src/templates/drupal-page.tsx`),
         });
         // Create a redirect from the original path to the "front" path.
         actions.createRedirect({
@@ -136,10 +138,55 @@ export const createPages = async ({ actions, graphql }) => {
     ({ path }) => {
       actions.deletePage({
         path,
-        component: resolve(`./src/templates/page.tsx`),
+        component: resolve(`./src/templates/drupal-page.tsx`),
       });
     },
   );
+
+  /**
+   * @type {{
+   *   data?: {
+   *     allDecapPage: {
+   *       nodes: Array<{
+   *         id: string;
+   *         path: string;
+   *         locale: string;
+   *       }>
+   *     }
+   *   },
+   *   errors?: any[];
+   * }}
+   */
+  const decapPages = await graphql(`
+    query DecapPages {
+      allDecapPage {
+        nodes {
+          id
+          path
+          locale
+        }
+      }
+    }
+  `);
+
+  decapPages.data?.allDecapPage.nodes.forEach(({ id, path, locale }) => {
+    /**
+     * @type {import('@amazeelabs/gatsby-source-silverback').SilverbackPageContext}
+     */
+    const context = {
+      typeName: 'DecapPage',
+      id,
+      remoteId: id,
+      locale,
+      // TODO: Handle decap localizations.
+      localizations: [],
+    };
+    actions.createPage({
+      path: path,
+      component: resolve(`./src/templates/decap-page.tsx`),
+      context,
+    });
+  });
 
   // Broken Gatsby links will attempt to load page-data.json files, which don't exist
   // and also should not be piped into the strangler function. Thats why they
@@ -175,5 +222,35 @@ export const createPages = async ({ actions, graphql }) => {
     fromPath: '/*',
     toPath: `/.netlify/functions/strangler`,
     statusCode: 200,
+  });
+};
+
+// TODO: Move to shared package.
+/**
+ * @type Record<string, string>
+ */
+const staticDirectories = {
+  'node_modules/@custom/ui/static/public': '/',
+  'node_modules/@custom/decap/dist': '/admin',
+  'node_modules/@custom/decap/media': '/media',
+};
+
+/**
+ * @type {import('gatsby').GatsbyNode['onPostBuild']}
+ */
+export const onPostBuild = () => {
+  Object.keys(staticDirectories).forEach((src) => {
+    const dest = staticDirectories[src];
+    cpSync(src, `public${dest}`, { force: true, recursive: true });
+  });
+};
+
+/**
+ * @type {import('gatsby').GatsbyNode['onCreateDevServer']}
+ */
+export const onCreateDevServer = ({ app }) => {
+  Object.keys(staticDirectories).forEach((src) => {
+    const dest = staticDirectories[src];
+    app.use(dest, serve(src));
   });
 };

@@ -1,0 +1,5 @@
+query PreviewDecapPage {
+  preview: previewDecapPage {
+    ...Page
+  }
+}

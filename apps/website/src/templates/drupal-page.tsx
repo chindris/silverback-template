@@ -5,8 +5,8 @@ import { graphql, HeadProps, PageProps } from 'gatsby';
 import React from 'react';
 
 export const query = graphql`
-  query PageTemplate($remoteId: String!) {
-    page(_id: { eq: $remoteId }) {
+  query DrupalPageTemplate($remoteId: String!) {
+    page: drupalPage(_id: { eq: $remoteId }) {
       ...Page
     }
   }
@@ -44,7 +44,7 @@ export function Head({ data }: HeadProps<PageTemplateQuery>) {
   );
 }
 
-export default function PageTemplate({
+export default function DrupalPageTemplate({
   data,
 }: PageProps<PageTemplateQuery, SilverbackPageContext>) {
   return <Page page={data.page} />;

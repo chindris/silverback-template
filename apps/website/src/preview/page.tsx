@@ -1,6 +1,6 @@
 'use client';
 
-import { PreviewPageQuery, useOperation } from '@custom/schema';
+import { PreviewDrupalPageQuery, useOperation } from '@custom/schema';
 import { Loading } from '@custom/ui/routes/Loading';
 import { Page } from '@custom/ui/routes/Page';
 import React from 'react';
@@ -11,7 +11,7 @@ export default function PagePreview() {
   const { nid, rid, lang } = usePreviewParameters();
   const data = useOperation(
     `${process.env.GATSBY_DRUPAL_URL}/graphql`,
-    PreviewPageQuery,
+    PreviewDrupalPageQuery,
     nid && rid && lang
       ? {
           id: nid,
@@ -20,5 +20,5 @@ export default function PagePreview() {
         }
       : undefined,
   );
-  return data?.previewPage ? <Page page={data.previewPage} /> : <Loading />;
+  return data?.preview ? <Page page={data.preview} /> : <Loading />;
 }

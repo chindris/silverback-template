@@ -2,6 +2,14 @@ scalar Url @default @value(json: "\"\"")
 scalar Markup @default @value(json: "\"\"")
 scalar ImageSource @default @value(json: "\"\"")
 
+"""
+Retrieve the properties of an image.
+TODO: Move to a shared "image" package.
+
+implementation(gatsby): ./image.mjs#imageProps
+"""
+directive @imageProps repeatable on FIELD_DEFINITION | SCALAR | UNION | ENUM | INTERFACE | OBJECT
+
 enum Locale @default @value(json: "\"en\"") {
   en
   de
@@ -23,8 +31,10 @@ type ContentHubResult @default @value(json: "{\"total\": 0, \"items\": []}") {
 
 type WebsiteSettings
   @entity(type: "config_pages", bundle: "website_settings", access: false) {
-  homePage: Page @resolveEntityReference(field: "field_home_page") @seek(pos: 0)
-  notFoundPage: Page
+  homePage: DrupalPage
+    @resolveEntityReference(field: "field_home_page")
+    @seek(pos: 0)
+  notFoundPage: DrupalPage
     @resolveEntityReference(field: "field_404_page")
     @seek(pos: 0)
 }
@@ -54,12 +64,36 @@ type FooterNavigation implements Navigation @menu(menu_id: "footer") {
   items: [NavigationItem]! @lang @resolveMenuItems
 }
 
+interface Page implements ContentHubResultItem {
+  id: ID!
+  locale: Locale!
+  path: Url!
+  title: String!
+  teaserImage: MediaImage
+  hero: Hero
+  content: [PageContent]
+  metaTags: [MetaTag]
+}
+
+type DecapPage implements ContentHubResultItem & Page
+  @sourceFrom(fn: "getPages") {
+  id: ID!
+  locale: Locale!
+  path: Url!
+  title: String!
+  teaserImage: MediaImage
+  hero: Hero
+  content: [PageContent]
+  metaTags: [MetaTag]
+}
+
 """
 A generic page.
 """
-type Page implements ContentHubResultItem
+type DrupalPage implements ContentHubResultItem & Page
   @entity(type: "node", bundle: "page")
   @type(id: "page") {
+  id: ID! @resolveEntityUuid
   locale: Locale! @resolveEntityLanguage
   path: Url! @resolveEntityPath @isPath
   title: String! @resolveProperty(path: "title.value")
@@ -127,7 +161,8 @@ input PaginationInput {
 }
 
 type Query {
-  previewPage(id: ID!, rid: ID, locale: String!): Page
+  previewDecapPage: Page
+  previewDrupalPage(id: ID!, rid: ID, locale: String!): Page
     @fetchEntity(type: "node", id: "$id", rid: "$rid", language: "$locale")
   contentHub(query: String, pagination: PaginationInput!): ContentHubResult!
     @contentHub(query: "$query", pagination: "$pagination")
