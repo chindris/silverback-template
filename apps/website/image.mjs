@@ -9,11 +9,13 @@ export function imageProps(source) {
   if (source.startsWith('/apps/decap')) {
     const relativeSource = source.substring(`/apps/decap`.length);
     const dimensions = sizeOf(`node_modules/@custom/decap/${relativeSource}`);
+    const imageSrc = `${
+      process.env.GATSBY_PUBLIC_URL || 'http://localhost:8000'
+    }${relativeSource}`;
 
     return JSON.stringify({
-      src: `${
-        process.env.GATSBY_PUBLIC_URL || 'http://localhost:8000'
-      }${relativeSource}`,
+      src: imageSrc,
+      originalSrc: imageSrc,
       width: dimensions.width || 0,
       height: dimensions.height || 0,
       mime: mime.lookup(relativeSource) || 'application/octet-stream',
