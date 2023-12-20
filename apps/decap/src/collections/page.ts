@@ -6,8 +6,8 @@ import {
   LocaleSource,
   MediaImageSource,
 } from '@custom/schema/source';
+import type { CmsCollection, CmsField } from 'decap-cms-core';
 import fs from 'fs';
-import type { CmsCollection, CmsField } from 'netlify-cms-core';
 import yaml from 'yaml';
 import { z } from 'zod';
 

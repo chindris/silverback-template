@@ -1,6 +1,6 @@
 import { PreviewDecapPageQuery } from '@custom/schema';
 import { Page } from '@custom/ui/routes/Page';
-import CMS from 'netlify-cms-app';
+import CMS from 'decap-cms-app';
 
 import css from '../node_modules/@custom/ui/build/styles.css?raw';
 import { PageCollection, pageSchema } from './collections/page';
