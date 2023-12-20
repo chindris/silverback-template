@@ -1,5 +1,5 @@
+import { CmsWidgetControlProps } from 'decap-cms-core';
 import { nanoid } from 'nanoid';
-import { CmsWidgetControlProps } from 'netlify-cms-core';
 import React from 'react';
 
 // Reusable UUID widget for Decap CMS.
