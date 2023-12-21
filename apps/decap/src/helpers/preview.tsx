@@ -7,8 +7,8 @@ import {
   OperationVariables,
 } from '@custom/schema';
 import operations from '@custom/schema/operations';
+import { PreviewTemplateComponentProps } from 'decap-cms-core';
 import { buildSchema, graphql, GraphQLFieldResolver } from 'graphql';
-import { PreviewTemplateComponentProps } from 'netlify-cms-core';
 import { useEffect, useState } from 'react';
 import { ZodType, ZodTypeDef } from 'zod';
 
