@@ -1,9 +1,10 @@
 import { SilverbackPageContext } from '@amazeelabs/gatsby-source-silverback';
-import { PageFragment } from '@custom/schema';
+import { Locale, registerExecutor, ViewPageQuery } from '@custom/schema';
 import { Page } from '@custom/ui/routes/Page';
 import { graphql, HeadProps, PageProps } from 'gatsby';
 import React from 'react';
 
+// TODO: Remove duplication of queries here.
 export const query = graphql`
   query DecapPageTemplate($id: String!) {
     page: decapPage(id: { eq: $id }) {
@@ -12,12 +13,8 @@ export const query = graphql`
   }
 `;
 
-type PageTemplateQuery = {
-  page: PageFragment;
-};
-
-export function Head({ data }: HeadProps<PageTemplateQuery>) {
-  return (
+export function Head({ data }: HeadProps<ViewPageQuery>) {
+  return data.page ? (
     <>
       <title>{data.page.title}</title>
       {data.page.metaTags?.map((metaTag, index) => {
@@ -41,11 +38,25 @@ export function Head({ data }: HeadProps<PageTemplateQuery>) {
         return null;
       }) || null}
     </>
-  );
+  ) : null;
 }
 
 export default function DecapPageTemplate({
   data,
-}: PageProps<PageTemplateQuery, SilverbackPageContext>) {
-  return <Page page={data.page} />;
+  pageContext,
+}: PageProps<ViewPageQuery, SilverbackPageContext>) {
+  registerExecutor(
+    ViewPageQuery,
+    {
+      id: pageContext.id,
+      locale: pageContext.locale,
+    },
+    data,
+  );
+  return (
+    <Page
+      id={pageContext.id}
+      locale={(pageContext.locale as Locale) || Locale.En}
+    />
+  );
 }

@@ -1,0 +1,11 @@
+query NotFoundPage {
+  websiteSettings {
+    notFoundPage {
+      translations {
+        id
+        locale
+        ...Page
+      }
+    }
+  }
+}
