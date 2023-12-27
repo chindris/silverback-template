@@ -2,9 +2,9 @@ import '../tailwind.css';
 
 import { Decorator } from '@storybook/react';
 import { IntlProvider } from '../src/utils/intl';
-import { LocationProvider } from '@custom/schema';
+import { clearRegistry, LocationProvider } from '@custom/schema';
 import React from 'react';
-import { initialize, mswLoader } from 'msw-storybook-addon';
+import { SWRConfig, useSWRConfig } from 'swr';
 
 // Every story is wrapped in an IntlProvider by default.
 const IntlDecorator: Decorator = (Story) => (
@@ -12,6 +12,11 @@ const IntlDecorator: Decorator = (Story) => (
     <Story />
   </IntlProvider>
 );
+
+const OperatorDecorator: Decorator = (Story) => {
+  clearRegistry();
+  return <Story />;
+};
 
 const LocationDecorator: Decorator = (Story, ctx) => {
   return (
@@ -21,14 +26,48 @@ const LocationDecorator: Decorator = (Story, ctx) => {
   );
 };
 
+declare global {
+  interface Window {
+    __STORYBOOK_PREVIEW__: {
+      currentRender: {
+        id: string;
+      };
+    };
+  }
+}
+
+const SWRCacheDecorator: Decorator = (Story) => {
+  const { cache } = useSWRConfig();
+  for (const key of cache.keys()) {
+    cache.delete(key);
+  }
+  return (
+    <SWRConfig
+      value={{
+        use: [
+          (useSWR) => (key, fetcher, config) => {
+            return useSWR(
+              // Make sure SWR caches are unique per story.
+              [key, window.__STORYBOOK_PREVIEW__.currentRender.id],
+              fetcher,
+              config,
+            );
+          },
+        ],
+      }}
+    >
+      <Story />
+    </SWRConfig>
+  );
+};
+
 export const parameters = {
   chromatic: { viewports: [320, 840, 1440] },
 };
 
-initialize({
-  onUnhandledRequest: 'bypass',
-});
-
-export const loaders = [mswLoader];
-
-export const decorators = [LocationDecorator, IntlDecorator];
+export const decorators = [
+  LocationDecorator,
+  IntlDecorator,
+  OperatorDecorator,
+  SWRCacheDecorator,
+];
