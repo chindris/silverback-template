@@ -170,10 +170,13 @@ type Query {
     @fetchEntity(type: "node", id: "$id", rid: "$rid", language: "$locale")
   mainNavigations: [MainNavigation] @gatsbyNodes(type: "MainNavigation")
   footerNavigations: [FooterNavigation] @gatsbyNodes(type: "FooterNavigation")
+
   allPages: [Page] @gatsbyNodes(type: "Page")
+  websiteSettings: WebsiteSettings
   page(id: ID!, rid: ID, locale: String!): Page
     @fetchEntity(type: "node", id: "$id", rid: "$rid", language: "$locale")
     @gatsbyNode(type: "Page", id: "$id")
+
   contentHub(query: String, pagination: PaginationInput!): ContentHubResult!
     @contentHub(query: "$query", pagination: "$pagination")
 }

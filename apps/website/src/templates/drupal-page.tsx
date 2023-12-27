@@ -1,5 +1,10 @@
 import { SilverbackPageContext } from '@amazeelabs/gatsby-source-silverback';
-import { PageFragment } from '@custom/schema';
+import {
+  Locale,
+  PageFragment,
+  registerExecutor,
+  ViewPageQuery,
+} from '@custom/schema';
 import { Page } from '@custom/ui/routes/Page';
 import { graphql, HeadProps, PageProps } from 'gatsby';
 import React from 'react';
@@ -46,6 +51,17 @@ export function Head({ data }: HeadProps<PageTemplateQuery>) {
 
 export default function DrupalPageTemplate({
   data,
+  pageContext,
 }: PageProps<PageTemplateQuery, SilverbackPageContext>) {
-  return <Page page={data.page} />;
+  registerExecutor(
+    ViewPageQuery,
+    {
+      id: pageContext.id,
+      locale: pageContext.locale,
+    },
+    data,
+  );
+  return (
+    <Page id={pageContext.id} locale={(pageContext.locale || 'en') as Locale} />
+  );
 }
