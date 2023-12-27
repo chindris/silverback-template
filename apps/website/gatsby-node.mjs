@@ -1,4 +1,4 @@
-// @ts-check
+// TODO: re-add @ts-check when the issue with the type definitions is resolved.
 import { Locale } from '@custom/schema';
 import { cpSync } from 'fs';
 import { resolve } from 'path';
@@ -35,29 +35,11 @@ export const createPages = async ({ actions, graphql }) => {
     statusCode: 200,
   });
 
+  // TODO: Remove duplication of queries and fix typing.
   /**
-   * @type {{
-   *   data?: {
-   *     websiteSettings?: {
-   *       homePage?: {
-   *         translations: Array<{
-   *           typeName: string;
-   *           path: string;
-   *           locale: string;
-   *           id: string;
-   *           remoteId: string;
-   *         }>;
-   *       };
-   *       notFoundPage?: {
-   *         translations: Array<{
-   *           path: string;
-   *         }>;
-   *       };
-   *     };
-   *   };
-   *   errors?: any[];
-   * }}
+   * @type {{data: import('@custom/schema')['IndexPagesQuery'], errors?: [string]}}
    */
+  // @ts-ignore
   const settings = await graphql(`
     query IndexPages {
       websiteSettings {
