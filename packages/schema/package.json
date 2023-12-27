@@ -19,7 +19,7 @@
   },
   "typesVersions": {
     "*": {
-      ".": [
+      "": [
         "build/index.d.ts"
       ],
       "/source": [
