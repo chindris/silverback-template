@@ -1,0 +1,10 @@
+fragment PageListEntry on Page {
+  id
+  locale
+}
+
+query ListPages {
+  allPages {
+    ...PageListEntry
+  }
+}
