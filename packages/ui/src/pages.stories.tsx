@@ -1,3 +1,4 @@
+import { FrameQuery, registerExecutor, ViewPageQuery } from '@custom/schema';
 import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 
@@ -16,8 +17,12 @@ export default {
   },
 } satisfies Meta;
 
-export const ContentPage = (() => (
-  <Frame {...FrameStory.args}>
-    <Page {...PageStory.args} />
-  </Frame>
-)) satisfies StoryFn;
+export const ContentPage = (() => {
+  registerExecutor(FrameQuery, () => FrameStory.args);
+  registerExecutor(ViewPageQuery, () => PageStory.args);
+  return (
+    <Frame>
+      <Page id="1" locale="en" />
+    </Frame>
+  );
+}) satisfies StoryFn;
