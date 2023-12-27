@@ -1,10 +1,11 @@
-import { Link, NavigationFragment } from '@custom/schema';
+import { FrameQuery, Link } from '@custom/schema';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import React from 'react';
 
 import { useIntl } from '../../utils/intl';
 import { isTruthy } from '../../utils/isTruthy';
 import { buildNavigationTree } from '../../utils/navigation';
+import { useOperation } from '../../utils/operation';
 import { DesktopMenu, DesktopMenuDropDown } from '../Client/DesktopMenu';
 import {
   MobileMenu,
@@ -14,11 +15,18 @@ import {
   MobileMenuProvider,
 } from '../Client/MobileMenu';
 
-export default function Header(props: { mainNavigation: NavigationFragment }) {
-  const intl = useIntl();
-  const items = buildNavigationTree(
-    props.mainNavigation.items.filter(isTruthy),
+function useHeaderNavigation(lang: string = 'en') {
+  return (
+    useOperation(FrameQuery)
+      .data?.mainNavigation?.filter((nav) => nav?.locale === lang)
+      .pop()
+      ?.items.filter(isTruthy) || []
   );
+}
+
+export function Header() {
+  const intl = useIntl();
+  const items = buildNavigationTree(useHeaderNavigation(intl.locale));
 
   return (
     <MobileMenuProvider>

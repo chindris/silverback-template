@@ -1,4 +1,4 @@
-import { Url } from '@custom/schema';
+import { FrameQuery, Locale, registerExecutor, Url } from '@custom/schema';
 import { NavigationItemSource } from '@custom/schema/source';
 import { IntlProvider } from '@custom/ui/intl';
 import { Frame } from '@custom/ui/routes/Frame';
@@ -16,22 +16,23 @@ const menuItems = (amount: number) =>
   );
 
 export function PreviewFrame({ children }: PropsWithChildren) {
+  registerExecutor(FrameQuery, () => ({
+    mainNavigation: [
+      {
+        locale: Locale.En,
+        items: menuItems(4),
+      },
+    ],
+    footerNavigation: [
+      {
+        locale: Locale.En,
+        items: menuItems(4),
+      },
+    ],
+  }));
   return (
     <IntlProvider locale={'en'}>
-      <Frame
-        header={{
-          mainNavigation: {
-            items: menuItems(4),
-          },
-        }}
-        footer={{
-          footerNavigation: {
-            items: menuItems(4),
-          },
-        }}
-      >
-        {children}
-      </Frame>
+      <Frame>{children}</Frame>
     </IntlProvider>
   );
 }

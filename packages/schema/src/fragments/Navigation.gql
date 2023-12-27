@@ -1,4 +1,5 @@
 fragment Navigation on Navigation {
+  locale
   items {
     ...NavigationItem
   }
