@@ -1,0 +1,8 @@
+query Frame {
+  mainNavigation: mainNavigations {
+    ...Navigation
+  }
+  footerNavigation: mainNavigations {
+    ...Navigation
+  }
+}

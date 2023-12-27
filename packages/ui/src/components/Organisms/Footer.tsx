@@ -1,15 +1,23 @@
-import { Link, NavigationFragment } from '@custom/schema';
+import { FrameQuery, Link } from '@custom/schema';
 import React from 'react';
 
 import { useIntl } from '../../utils/intl';
 import { isTruthy } from '../../utils/isTruthy';
 import { buildNavigationTree } from '../../utils/navigation';
+import { useOperation } from '../../utils/operation';
 
-export function Footer(props: { footerNavigation: NavigationFragment }) {
-  const intl = useIntl();
-  const items = buildNavigationTree(
-    props.footerNavigation.items.filter(isTruthy),
+function useFooterNavigation(lang: string = 'en') {
+  return (
+    useOperation(FrameQuery)
+      .data?.footerNavigation?.filter((nav) => nav?.locale === lang)
+      .pop()
+      ?.items.filter(isTruthy) || []
   );
+}
+
+export function Footer() {
+  const intl = useIntl();
+  const items = buildNavigationTree(useFooterNavigation(intl.locale));
   return (
     <footer className="bg-white">
       <div className="mx-auto max-w-7xl overflow-hidden py-20 px-6 sm:py-24 lg:px-8">
