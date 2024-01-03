@@ -362,8 +362,8 @@ importers:
   packages/schema:
     dependencies:
       '@amazeelabs/executors':
-        specifier: workspace:*
-        version: link:../executors
+        specifier: ^1.1.0
+        version: 1.1.0
       '@amazeelabs/scalars':
         specifier: ^1.6.2
         version: 1.6.2(react@18.2.0)(tailwindcss@3.3.2)
@@ -800,7 +800,7 @@ packages:
       eslint: ^8.36.0
     dependencies:
       '@typescript-eslint/eslint-plugin': 5.60.1(@typescript-eslint/parser@5.60.1)(eslint@7.32.0)(typescript@5.3.3)
-      '@typescript-eslint/parser': 5.60.1(eslint@7.32.0)(typescript@5.3.3)
+      '@typescript-eslint/parser': 5.60.1(eslint@7.32.0)(typescript@5.1.6)
       eslint: 7.32.0
       eslint-config-prettier: 8.8.0(eslint@7.32.0)
       eslint-plugin-import: 2.27.5(@typescript-eslint/parser@5.60.1)(eslint@7.32.0)
@@ -816,6 +816,12 @@ packages:
       - supports-color
       - tailwindcss
       - typescript
+
+  /@amazeelabs/executors@1.1.0:
+    resolution: {integrity: sha512-W7Q1JV0zyraAcHdv3cUDFNNonflq/WuTtqtS0zT1VrZAyInNDPT5nSgTiJ4V9RqD+3lVhBk6jMlSsQkCPa3B8A==}
+    dependencies:
+      lodash-es: 4.17.21
+    dev: false
 
   /@amazeelabs/gatsby-silverback-cloudinary@1.2.5:
     resolution: {integrity: sha512-EwaakDLR0TAcYiYcf3ntu5MqbNrCZVjh9Qq215jofmvoFK91qFzD8+rnUiGvTMfyWsCsI+tIXRpK81R0Lt4wjA==}
@@ -10628,7 +10634,7 @@ packages:
         optional: true
     dependencies:
       '@eslint-community/regexpp': 4.5.1
-      '@typescript-eslint/parser': 5.60.1(eslint@7.32.0)(typescript@5.3.3)
+      '@typescript-eslint/parser': 5.60.1(eslint@7.32.0)(typescript@5.1.6)
       '@typescript-eslint/scope-manager': 5.60.1
       '@typescript-eslint/type-utils': 5.60.1(eslint@7.32.0)(typescript@5.3.3)
       '@typescript-eslint/utils': 5.60.1(eslint@7.32.0)(typescript@5.3.3)
@@ -10712,26 +10718,6 @@ packages:
       debug: 4.3.4
       eslint: 7.32.0
       typescript: 5.1.6
-    transitivePeerDependencies:
-      - supports-color
-
-  /@typescript-eslint/parser@5.60.1(eslint@7.32.0)(typescript@5.3.3):
-    resolution: {integrity: sha512-pHWlc3alg2oSMGwsU/Is8hbm3XFbcrb6P5wIxcQW9NsYBfnrubl/GhVVD/Jm/t8HXhA2WncoIRfBtnCgRGV96Q==}
-    engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
-    requiresBuild: true
-    peerDependencies:
-      eslint: ^6.0.0 || ^7.0.0 || ^8.0.0
-      typescript: '*'
-    peerDependenciesMeta:
-      typescript:
-        optional: true
-    dependencies:
-      '@typescript-eslint/scope-manager': 5.60.1
-      '@typescript-eslint/types': 5.60.1
-      '@typescript-eslint/typescript-estree': 5.60.1(typescript@5.3.3)
-      debug: 4.3.4
-      eslint: 7.32.0
-      typescript: 5.3.3
     transitivePeerDependencies:
       - supports-color
 
@@ -31902,6 +31888,7 @@ packages:
     resolution: {integrity: sha512-hU8GNNuQfwuQmqTLfiKcqEhZY72Zxb7nnN07koCUNmntNxbKQnVbeIS6sqUgR3eXSlbOpit8+/gr1KpqoMgWCQ==}
     engines: {node: '>=v14.18.0'}
     hasBin: true
+    requiresBuild: true
     peerDependencies:
       '@edge-runtime/vm': '*'
       '@vitest/browser': '*'
