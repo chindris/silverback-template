@@ -53,14 +53,17 @@ type NavigationItem {
 }
 
 interface Navigation {
+  locale: Locale!
   items: [NavigationItem]!
 }
 
 type MainNavigation implements Navigation @menu(menu_id: "main") {
+  locale: Locale! @resolveEntityLanguage
   items: [NavigationItem]! @lang @resolveMenuItems
 }
 
 type FooterNavigation implements Navigation @menu(menu_id: "footer") {
+  locale: Locale! @resolveEntityLanguage
   items: [NavigationItem]! @lang @resolveMenuItems
 }
 
@@ -95,6 +98,7 @@ type DrupalPage implements ContentHubResultItem & Page
   @type(id: "page") {
   id: ID! @resolveEntityUuid
   locale: Locale! @resolveEntityLanguage
+  translations: [DrupalPage] @resolveEntityTranslations
   path: Url! @resolveEntityPath @isPath
   title: String! @resolveProperty(path: "title.value")
   teaserImage: MediaImage
@@ -161,9 +165,18 @@ input PaginationInput {
 }
 
 type Query {
-  previewDecapPage: Page
-  previewDrupalPage(id: ID!, rid: ID, locale: String!): Page
+  previewDecapPage: DecapPage
+  previewDrupalPage(id: ID!, rid: ID, locale: String!): DrupalPage
     @fetchEntity(type: "node", id: "$id", rid: "$rid", language: "$locale")
+  mainNavigations: [MainNavigation] @gatsbyNodes(type: "MainNavigation")
+  footerNavigations: [FooterNavigation] @gatsbyNodes(type: "FooterNavigation")
+
+  allPages: [Page] @gatsbyNodes(type: "Page")
+  websiteSettings: WebsiteSettings
+  page(id: ID!, rid: ID, locale: String!): Page
+    @fetchEntity(type: "node", id: "$id", rid: "$rid", language: "$locale")
+    @gatsbyNode(type: "Page", id: "$id")
+
   contentHub(query: String, pagination: PaginationInput!): ContentHubResult!
     @contentHub(query: "$query", pagination: "$pagination")
 }

@@ -1,5 +1,7 @@
+import { registerExecutor, ViewPageQuery } from '@custom/schema';
 import Landscape from '@stories/landscape.jpg?as=metadata';
 import { Meta, StoryObj } from '@storybook/react';
+import React from 'react';
 
 import { image } from '../../helpers/image';
 import { Mixed, Paragraph } from '../Organisms/PageContent/BlockMarkup.stories';
@@ -11,6 +13,10 @@ export default {
 } satisfies Meta<typeof Page>;
 
 export const Default = {
+  render: (args) => {
+    registerExecutor(ViewPageQuery, () => args);
+    return <Page id="1" locale="en" />;
+  },
   args: {
     page: {
       title: 'Page Title',
@@ -30,15 +36,17 @@ export const Default = {
           __typename: 'BlockMarkup',
           ...Paragraph.args,
         },
-      ],
+      ] as Exclude<ViewPageQuery['page'], undefined>['content'],
     },
   },
-} satisfies StoryObj<typeof Page>;
+} satisfies StoryObj<ViewPageQuery>;
 
 export const FullHero = {
+  ...Default,
   args: {
+    ...Default.args,
     page: {
-      title: 'Page Title',
+      ...Default.args.page,
       hero: {
         headline: 'Page Hero Headline',
         lead: 'A longer lead text that even might break into multiple lines.',
@@ -47,20 +55,6 @@ export const FullHero = {
           alt: 'Stock photo landscape hero.',
         },
       },
-      content: [
-        {
-          __typename: 'BlockMarkup',
-          ...Mixed.args,
-        },
-        {
-          __typename: 'BlockMedia',
-          ...WithCaption.args,
-        },
-        {
-          __typename: 'BlockMarkup',
-          ...Paragraph.args,
-        },
-      ],
     },
   },
-} satisfies StoryObj<typeof Page>;
+} satisfies StoryObj<ViewPageQuery>;

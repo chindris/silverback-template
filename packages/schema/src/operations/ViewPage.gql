@@ -1,0 +1,5 @@
+query ViewPage($id: ID!, $rid: ID, $locale: String!) {
+  page(id: $id, rid: $rid, locale: $locale) {
+    ...Page
+  }
+}

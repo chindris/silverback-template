@@ -1,0 +1,17 @@
+query IndexPages {
+  websiteSettings {
+    homePage {
+      translations {
+        __typename
+        locale
+        id
+        path
+      }
+    }
+    notFoundPage {
+      translations {
+        path
+      }
+    }
+  }
+}

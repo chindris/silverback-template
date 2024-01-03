@@ -1,24 +1,31 @@
-'use client';
-
-import { PreviewDrupalPageQuery, useOperation } from '@custom/schema';
-import { Loading } from '@custom/ui/routes/Loading';
+import {
+  PreviewDrupalPageQuery,
+  registerExecutor,
+  ViewPageQuery,
+} from '@custom/schema';
 import { Page } from '@custom/ui/routes/Page';
 import React from 'react';
 
+import { drupalExecutor } from '../utils/drupal-executor';
 import { usePreviewParameters } from '../utils/preview';
+
+const previewExecutor = drupalExecutor(
+  `${process.env.GATSBY_DRUPAL_URL}/graphql`,
+  false,
+);
 
 export default function PagePreview() {
   const { nid, rid, lang } = usePreviewParameters();
-  const data = useOperation(
-    `${process.env.GATSBY_DRUPAL_URL}/graphql`,
-    PreviewDrupalPageQuery,
-    nid && rid && lang
-      ? {
-          id: nid,
-          rid: rid,
-          locale: lang,
-        }
-      : undefined,
-  );
-  return data?.preview ? <Page page={data.preview} /> : <Loading />;
+  if (nid && rid && lang) {
+    registerExecutor(ViewPageQuery, async () => {
+      const data = await previewExecutor(PreviewDrupalPageQuery, {
+        id: nid,
+        locale: lang,
+        rid,
+      });
+      return { page: data.preview };
+    });
+    return <Page id="preview" locale="en" />;
+  }
+  return null;
 }

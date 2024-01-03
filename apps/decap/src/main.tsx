@@ -1,4 +1,8 @@
-import { PreviewDecapPageQuery } from '@custom/schema';
+import {
+  PreviewDecapPageQuery,
+  registerExecutor,
+  ViewPageQuery,
+} from '@custom/schema';
 import { Page } from '@custom/ui/routes/Page';
 import CMS from 'decap-cms-app';
 
@@ -65,7 +69,10 @@ CMS.registerPreviewTemplate(
   createPreview(
     PreviewDecapPageQuery,
     pageSchema,
-    ({ preview }) => <Page page={preview} />,
+    (data) => {
+      registerExecutor(ViewPageQuery, { page: data.preview });
+      return <Page id="preview" locale="en" />;
+    },
     'previewDecapPage',
   ),
 );

@@ -1,18 +1,13 @@
 import { AnimatePresence, useReducedMotion } from 'framer-motion';
-import React, { ComponentProps, PropsWithChildren } from 'react';
+import React, { PropsWithChildren } from 'react';
 
 import { Footer } from '../Organisms/Footer';
-import Header from '../Organisms/Header';
+import { Header } from '../Organisms/Header';
 
-export function Frame(
-  props: PropsWithChildren<{
-    header: ComponentProps<typeof Header>;
-    footer: ComponentProps<typeof Footer>;
-  }>,
-) {
+export function Frame(props: PropsWithChildren<{}>) {
   return (
     <div>
-      <Header {...props.header} />
+      <Header />
       <main>
         {useReducedMotion() ? (
           <>{props.children}</>
@@ -22,7 +17,7 @@ export function Frame(
           </AnimatePresence>
         )}
       </main>
-      <Footer {...props.footer} />
+      <Footer />
     </div>
   );
 }

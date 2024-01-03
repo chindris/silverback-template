@@ -1,39 +1,54 @@
-import useSwr from 'swr';
-
 import {
+  createExecutor as untypedCreateExecutor,
+  registerExecutor as untypedRegisterExecutor,
+} from '@amazeelabs/executors';
+
+import type {
   AnyOperationId,
   OperationResult,
   OperationVariables,
 } from './generated/index.js';
 
+export { clearRegistry } from '@amazeelabs/executors';
+
 export * from './generated/index.js';
 export * from '@amazeelabs/scalars';
 
-export function useOperation<TOperation extends AnyOperationId>(
-  endpoint: string,
-  operation: TOperation,
-  variables?: OperationVariables<TOperation>,
-): OperationResult<TOperation> | undefined {
-  const result = useSwr<OperationResult<TOperation>>(
-    [operation, variables],
-    variables
-      ? () => {
-          const url = new URL(endpoint, window.location.origin);
-          url.searchParams.set('queryId', operation);
-          url.searchParams.set('variables', JSON.stringify(variables));
-          return fetch(url, {
-            credentials: 'include',
-            headers: {
-              'SLB-Forwarded-Proto': window.location.protocol.slice(0, -1),
-              'SLB-Forwarded-Host': window.location.hostname,
-              'SLB-Forwarded-Port': window.location.port,
-            },
-          }).then((r) => r.json());
-        }
-      : null,
-    {
-      suspense: false,
-    },
-  );
-  return result.data?.data;
+type Executor<OperationId extends AnyOperationId> =
+  | OperationResult<OperationId>
+  | ((
+      id: OperationId,
+      variables: OperationVariables<OperationId>,
+    ) => OperationResult<OperationId> | Promise<OperationResult<OperationId>>);
+
+type VariablesMatcher<OperationId extends AnyOperationId> =
+  | Partial<OperationVariables<OperationId>>
+  | ((vars: OperationVariables<OperationId>) => boolean);
+
+export function registerExecutor<OperationId extends AnyOperationId>(
+  executor: Executor<OperationId>,
+): void;
+
+export function registerExecutor<OperationId extends AnyOperationId>(
+  id: OperationId,
+  executor: Executor<OperationId>,
+): void;
+
+export function registerExecutor<OperationId extends AnyOperationId>(
+  id: OperationId,
+  variables: VariablesMatcher<OperationVariables<OperationId>>,
+  executor: Executor<OperationId>,
+): void;
+
+export function registerExecutor(...args: [unknown]) {
+  return untypedRegisterExecutor(...args);
+}
+
+export function createExecutor<OperationId extends AnyOperationId>(
+  id: OperationId,
+  variables?: OperationVariables<OperationId>,
+):
+  | OperationResult<OperationId>
+  | (() => Promise<OperationResult<OperationId>>) {
+  return untypedCreateExecutor(id, variables);
 }
