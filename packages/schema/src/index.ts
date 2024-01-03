@@ -47,6 +47,8 @@ export function registerExecutor(...args: [unknown]) {
 export function createExecutor<OperationId extends AnyOperationId>(
   id: OperationId,
   variables?: OperationVariables<OperationId>,
-) {
+):
+  | OperationResult<OperationId>
+  | (() => Promise<OperationResult<OperationId>>) {
   return untypedCreateExecutor(id, variables);
 }
