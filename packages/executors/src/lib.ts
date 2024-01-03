@@ -30,7 +30,7 @@ export function registerExecutor(
   executor: Executor,
 ): void;
 
-export function registerExecutor(...args: unknown[]) {
+export function registerExecutor(...args: unknown[]): void {
   registry.push({
     id: isString(args[0]) ? args[0] : undefined,
     executor: args[args.length - 1],
@@ -89,7 +89,10 @@ class ExecutorRegistryError extends Error {
  * @param variables
  *   A dictionary of variables to be passed to the operation.
  */
-export function createExecutor(id: string, variables?: Record<string, any>) {
+export function createExecutor(
+  id: string,
+  variables?: Record<string, any>,
+): () => any | any {
   const op = getCandidates(id)
     .filter((entry) => matchVariables(entry.variables, variables))
     .pop();
