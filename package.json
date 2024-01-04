@@ -11,10 +11,10 @@
     "postinstall": "husky install || true",
     "commit": "git-cz",
     "turbo:local": "if [ -z $CI ]; then echo $(date)$RANDOM > apps/cms/turbo-seed.txt; fi",
-    "turbo:test": "pnpm turbo:local && turbo test:unit --output-logs=new-only && turbo test:integration --output-logs=new-only --concurrency=1",
-    "turbo:test:quick": "pnpm turbo:local && turbo test:unit --output-logs=new-only",
-    "turbo:prep": "pnpm turbo:local && turbo prep --output-logs=new-only",
-    "turbo:prep:force": "turbo prep --force"
+    "turbo:test": "pnpm turbo:local && turbo test:unit --no-daemon --go-fallback --output-logs=new-only && turbo test:integration --no-daemon --go-fallback --output-logs=new-only --concurrency=1",
+    "turbo:test:quick": "pnpm turbo:local && turbo test:unit --no-daemon --go-fallback --output-logs=new-only",
+    "turbo:prep": "pnpm turbo:local && turbo prep --no-daemon --go-fallback --output-logs=new-only",
+    "turbo:prep:force": "turbo prep --no-daemon --go-fallback --force"
   },
   "private": true,
   "devDependencies": {
