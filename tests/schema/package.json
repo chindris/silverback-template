@@ -6,14 +6,15 @@
     "start": "pnpm run --filter @custom/cms start",
     "test:static": "tsc --noEmit && eslint '**/*.{ts,tsx,js,jsx}' --ignore-path='./.gitignore'",
     "test:integration": "CI=true start-server-and-test 8888 vitest",
+    "test:integration:update": "CI=true start-server-and-test 8888 'vitest -u'",
     "dev": "vitest --ui # for non phpstorm users"
   },
-  "optionalDependencies": {
-    "@types/node": "^18.16.18",
-    "@vitest/ui": "^0.32.2",
-    "got": "^13.0.0",
+  "devDependencies": {
+    "@types/node": "^18",
+    "@vitest/ui": "^1.1.1",
+    "got": "^14.0.0",
     "noop-tag": "^2.0.0",
-    "start-server-and-test": "^2.0.0",
-    "vitest": "^0.32.2"
+    "start-server-and-test": "^2.0.3",
+    "vitest": "^1.1.1"
   }
 }

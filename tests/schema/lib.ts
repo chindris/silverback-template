@@ -4,6 +4,7 @@ export const fetch = (query: string): Promise<any> =>
   got
     .post('http://127.0.0.1:8888/graphql', {
       headers: {
+        'Content-Type': 'application/json',
         'api-key': 'cfdb0555111c0f8924cecab028b53474',
         // Pass the same headers as @amazeelabs/gatsby-source-silverback does.
         // See getForwardedHeaders function in the mentioned package.

@@ -21,7 +21,7 @@ export default defineConfig({
     },
     clean: 'pnpm clean',
     serve: {
-      command: 'pnpm netlify dev --dir=public --port=7999',
+      command: 'pnpm netlify dev --cwd=. --dir=public --port=7999',
       readyPattern: 'Server now ready',
       readyTimeout: 1000 * 60,
       port: 7999,
@@ -30,21 +30,25 @@ export default defineConfig({
       ? [
           `pnpm netlify env:set AWS_LAMBDA_JS_RUNTIME nodejs18.x`,
           `pnpm netlify env:set DRUPAL_EXTERNAL_URL ${process.env.DRUPAL_EXTERNAL_URL}`,
-          `pnpm netlify deploy --dir=public --prod`,
+          `pnpm netlify deploy --cwd=. --dir=public --prod`,
         ].join(' && ')
       : 'echo "Fake deployment done"',
   },
   databaseUrl: 'persisted-store/publisher.sqlite',
   publisherPort: isLagoon ? 3000 : 8000,
-  oAuth2: isLagoon ? {
-    clientId: process.env.PUBLISHER_OAUTH2_CLIENT_ID || 'publisher',
-    clientSecret: process.env.PUBLISHER_OAUTH2_CLIENT_SECRET || 'publisher',
-    sessionSecret: process.env.PUBLISHER_OAUTH2_SESSION_SECRET || 'banana',
-    tokenHost: process.env.PUBLISHER_OAUTH2_TOKEN_HOST || 'http://127.0.0.1:8888',
-    environmentType: process.env.PUBLISHER_OAUTH2_ENVIRONMENT_TYPE || 'development',
-    scope: 'publisher',
-    tokenPath: '/oauth/token',
-    authorizePath: '/oauth/authorize?response_type=code',
-    grantType: 0,
-  } : undefined,
+  oAuth2: isLagoon
+    ? {
+        clientId: process.env.PUBLISHER_OAUTH2_CLIENT_ID || 'publisher',
+        clientSecret: process.env.PUBLISHER_OAUTH2_CLIENT_SECRET || 'publisher',
+        sessionSecret: process.env.PUBLISHER_OAUTH2_SESSION_SECRET || 'banana',
+        tokenHost:
+          process.env.PUBLISHER_OAUTH2_TOKEN_HOST || 'http://127.0.0.1:8888',
+        environmentType:
+          process.env.PUBLISHER_OAUTH2_ENVIRONMENT_TYPE || 'development',
+        scope: 'publisher',
+        tokenPath: '/oauth/token',
+        authorizePath: '/oauth/authorize?response_type=code',
+        grantType: 0,
+      }
+    : undefined,
 });
