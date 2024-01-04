@@ -29,9 +29,9 @@ test('Links', async () => {
             {
               "__typename": "BlockMarkup",
               "markup": "
-    <p><a href=\\"/sites/default/files/2023-04/document_docx.docx\\" data-type=\\"Media: Document\\" data-id=\\"[id]\\">link to file</a></p>
+    <p><a href="/sites/default/files/2023-04/document_docx.docx" data-type="Media: Document" data-id="[id]">link to file</a></p>
 
-    <p><a href=\\"/en/privacy\\" data-type=\\"Content: Basic page\\" data-id=\\"[id]\\">link to page</a></p>
+    <p><a href="/en/privacy" data-type="Content: Basic page" data-id="[id]">link to page</a></p>
     ",
             },
           ],

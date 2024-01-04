@@ -58,7 +58,7 @@ export function Pagination(props: { total: number; pageSize: number }) {
       </div>
       <div className="-mt-px flex w-0 flex-1 justify-end">
         <Link
-          href={location!}
+          href={location}
           search={{
             page: Math.min(currentPage + 1, totalPages),
           }}
