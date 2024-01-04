@@ -24,6 +24,7 @@ display:
             offset_label: Versatz
       fields:
         sid:
+          label: '#'
           separator: ', '
         in_draft:
           label: Entwurf
@@ -55,11 +56,13 @@ display:
   embed_administer:
     display_title: 'Eingebettet: Administrator'
     display_options:
+      display_description: 'Webformular-Eingaben verwalten'
       fields:
         webform_submission_bulk_form:
           label: 'Massenverarbeitungsformular für Webformular-Eingaben'
           action_title: Aktion
         sid:
+          label: '#'
           separator: ', '
         in_draft:
           label: Entwurf
@@ -100,6 +103,7 @@ display:
           label: 'Massenverarbeitungsformular für Webformular-Eingaben'
           action_title: Aktion
         sid:
+          label: '#'
           separator: ', '
         in_draft:
           label: Entwurf
@@ -141,6 +145,7 @@ display:
       display_description: 'Webformular-Eingaben überprüfen'
       fields:
         sid:
+          label: '#'
           separator: ', '
         in_draft:
           label: Entwurf

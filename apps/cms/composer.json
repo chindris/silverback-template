@@ -72,7 +72,7 @@
     "drupal/stage_file_proxy": "^2.0.2",
     "drupal/userprotect": "^1.2",
     "drupal/webform": "^6.1.5",
-    "drush/drush": "^11",
+    "drush/drush": "^12",
     "enyo/dropzone": "^5.7.1"
   },
   "conflict": {
@@ -87,7 +87,8 @@
       "cweagans/composer-patches": true,
       "drupal/core-composer-scaffold": true,
       "dealerdirect/phpcodesniffer-composer-installer": true,
-      "phpstan/extension-installer": true
+      "phpstan/extension-installer": true,
+      "php-http/discovery": true
     }
   },
   "extra": {
