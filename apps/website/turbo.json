@@ -18,21 +18,16 @@
         "netlify/**",
         "src/**",
         "static/**",
+        "autoload.mjs",
         "gatsby-browser.ts",
         "gatsby-config.mjs",
         "gatsby-node.mjs",
         "gatsby-ssr.ts",
         "image.mjs",
-        "netlify.toml"
-      ],
-      "outputs": [
-        ".cache/**",
-        ".netlify/**",
-        "public/**",
-        ".env",
-        "autoload.mjs",
+        "netlify.toml",
         "styles.css"
-      ]
+      ],
+      "outputs": [".cache/**", ".netlify/**", "public/**", ".env"]
     }
   }
 }
