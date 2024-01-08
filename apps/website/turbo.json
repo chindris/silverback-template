@@ -15,14 +15,24 @@
       "env": ["DRUPAL_INTERNAL_URL", "DRUPAL_EXTERNAL_URL"],
       "dependsOn": ["@custom/cms#prep", "prep", "^prep"],
       "inputs": [
-        "gatsby-browser.js",
-        "gatsby-config.js",
-        "gatsby-node.ts",
-        "image.mjs",
         "netlify/**",
+        "src/**",
+        "static/**",
+        "gatsby-browser.ts",
+        "gatsby-config.mjs",
+        "gatsby-node.mjs",
+        "gatsby-ssr.ts",
+        "image.mjs",
         "netlify.toml"
       ],
-      "outputs": ["public/**", ".cache/**", ".env"]
+      "outputs": [
+        ".cache/**",
+        ".netlify/**",
+        "public/**",
+        ".env",
+        "autoload.mjs",
+        "styles.css"
+      ]
     }
   }
 }
