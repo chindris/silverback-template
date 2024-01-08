@@ -42,6 +42,21 @@ default:
       value: false
   body:
     -
-      value: "<!-- wp:custom/hero {\"headline\":\"All kinds of blocks with minimum data\"} /-->\r\n\r\n<!-- wp:custom/content -->\r\n<!-- wp:drupalmedia/drupal-media-entity /-->\r\n\r\n<!-- wp:custom/form /-->\r\n\r\n<!-- wp:list -->\r\n<ul><li></li></ul><!-- /wp:list --><!-- wp:table --><figure class=\"wp-block-table\"><table><tbody><tr><td></td><td></td></tr><tr><td></td><td></td></tr></tbody></table></figure><!-- /wp:table --><!-- wp:quote --><blockquote class=\"wp-block-quote\"><p></p></blockquote>\r\n<!-- /wp:quote -->\r\n\r\n<!-- wp:custom/heading -->\r\n<h2 class=\"wp-block-custom-heading\"></h2>\r\n<!-- /wp:custom/heading -->\r\n<!-- /wp:custom/content -->"
+      value: |-
+        <!-- wp:custom/hero {"headline":"All kinds of blocks with minimum data"} /-->
+
+        <!-- wp:custom/content -->
+        <!-- wp:drupalmedia/drupal-media-entity /-->
+
+        <!-- wp:custom/form /-->
+
+        <!-- wp:list -->
+        <ul><li></li></ul><!-- /wp:list --><!-- wp:table --><figure class="wp-block-table"><table><tbody><tr><td></td><td></td></tr><tr><td></td><td></td></tr></tbody></table></figure><!-- /wp:table --><!-- wp:quote --><blockquote class="wp-block-quote"><p></p></blockquote>
+        <!-- /wp:quote -->
+
+        <!-- wp:custom/heading -->
+        <h2 class="wp-block-custom-heading"></h2>
+        <!-- /wp:custom/heading -->
+        <!-- /wp:custom/content -->
       format: gutenberg
       summary: ''
