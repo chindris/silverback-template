@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - 'prod'
+  workflow_dispatch:
 
 jobs:
   tag:
@@ -12,7 +13,7 @@ jobs:
     steps:
       - name: Get current date
         id: date
-        run: echo "::set-output name=date::$(date +'%Y-%m-%dT%H:%M:%S')"
+        run: echo "::set-output name=date::$(date +'%Y-%m-%d/%H/%M/%S')"
       - name: Checkout branch "prod"
         uses: actions/checkout@v2
         with:

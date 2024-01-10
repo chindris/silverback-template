@@ -93,6 +93,8 @@ pnpm turbo:prep
 Additionally, you can run `pnpm turbo:test` to make sure that your system is
 fully compatible with the project.
 
+Tip: Run `pnpm turbo:prep:force` after switching branches to avoid issues.
+
 ## Working with apps and packages
 
 Navigate to an app/package folder and run `pnpm dev`.
@@ -100,13 +102,74 @@ Navigate to an app/package folder and run `pnpm dev`.
 When working on integration tasks, it may be required to re-run
 `pnpm turbo:prep` from the repo root.
 
+### Turborepo
+
+<details>
+  <summary>How it works in general</summary>
+
+Turborepo allows to cache results for scripts from `package.json` files.
+
+Minimal example:
+
+- The `build` script compiles files from `src` folder and puts the result into
+  `dist` folder
+- We can setup a Turborepo pipeline
+  ```json
+  "build": {
+    "inputs": ["src/**"],
+    "outputs": ["dist/**"]
+  }
+  ```
+- On the first `turbo build` run Turborepo will
+  - calculate hashes for files from `src` folder, and save them into cache,
+  - save `dist` folder into cache.
+- On the second `turbo build` run Turborepo will compare `src` hashes with cash.
+  If hashes do match, it will restore `dist` folder from the cache without
+  running the `build` script.
+
+More in docs: https://turbo.build/repo/docs/core-concepts/caching
+
+</details>
+
+<details>
+  <summary>Turborepo setup: local vs CI</summary>
+
+Locally, Turborepo stores caches under `node_modules/.cache/turbo` folder.
+
+In CI, the caches are saved in Github artifacts.
+
+</details>
+
+<details>
+  <summary>Debug Turborepo issues in CI</summary>
+
+It can happen that some script fails in CI because of a misconfigured Turborepo
+pipeline. The following can be used in order to debug this locally:
+
+- Setup https://github.com/ducktors/turborepo-remote-cache locally
+- Run `turborepo-remote-cache` with `TURBO_TOKEN=local pnpm dev`
+- Run tests in the target repo with
+
+  ```shell
+  # Clean the repo
+  rm -rf node_modules && git clean -dxff -e '/.turbo' -e '_local' -e '/.idea' && find . -type d -empty -delete && \
+    # Install dependencies
+    pnpm i && \
+    # Run tests with
+    # - local Turborepo server
+    # - Turborepo debug info
+    # - simulated CI
+    TURBO_API=http://0.0.0.0:3000 TURBO_TOKEN=local TURBO_TEAM=local TURBO_RUN_SUMMARY=true CI=true pnpm turbo:test
+  ```
+
+</details>
+
 ### Drupal
 
 Running `pnpm turbo:prep` works conditionally for Drupal. If database exists, it
 clears Drupal cache. Otherwise, it re-installs Drupal completely.
 
-If you wish `pnpm turbo:prep` to re-install Drupal, delete
-`apps/cms/web/sites/default/files/.sqlite` first.
+If you wish Drupal to be re-installed, run `pnpm turbo:prep:force`.
 
 ## Environment overrides
 
