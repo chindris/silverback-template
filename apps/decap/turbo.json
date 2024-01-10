@@ -2,7 +2,7 @@
   "extends": ["//"],
   "pipeline": {
     "prep": {
-      "outputs": ["dist", "build"]
+      "outputs": ["dist/**", "build/**"]
     }
   }
 }
