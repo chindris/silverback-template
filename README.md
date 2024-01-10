@@ -123,9 +123,9 @@ Minimal example:
 - On the first `turbo build` run Turborepo will
   - calculate hashes for files from `src` folder, and save them into cache,
   - save `dist` folder into cache.
-- On the second `turbo build` run Turborepo will compare `src` hashes with cash.
-  If hashes do match, it will restore `dist` folder from the cache without
-  running the `build` script.
+- On the second `turbo build` run Turborepo will compare `src` hashes with
+  cache. If hashes do match, it will restore `dist` folder from the cache
+  without running the `build` script.
 
 More in docs: https://turbo.build/repo/docs/core-concepts/caching
 
