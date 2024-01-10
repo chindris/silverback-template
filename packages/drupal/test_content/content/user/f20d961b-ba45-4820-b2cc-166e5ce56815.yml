@@ -36,3 +36,8 @@ default:
   api_key:
     -
       value: cfdb0555111c0f8924cecab028b53474
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0

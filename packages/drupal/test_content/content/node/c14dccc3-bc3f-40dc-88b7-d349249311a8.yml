@@ -81,6 +81,13 @@ default:
       value: false
   body:
     -
-      value: "<!-- wp:custom/hero {\"headline\":\"Impressum\",\"lead\":\"Wir sind rechtlich verpflichtet diese Seite zu haben.\"} /-->\r\n\r\n<!-- wp:custom/content -->\r\n<!-- wp:paragraph -->\r\n<p></p>\r\n<!-- /wp:paragraph -->\r\n<!-- /wp:custom/content -->"
+      value: |-
+        <!-- wp:custom/hero {"headline":"Impressum","lead":"Wir sind rechtlich verpflichtet diese Seite zu haben."} /-->
+
+        <!-- wp:custom/content -->
+        <!-- wp:paragraph -->
+        <p></p>
+        <!-- /wp:paragraph -->
+        <!-- /wp:custom/content -->
       format: gutenberg
       summary: ''

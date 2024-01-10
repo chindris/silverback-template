@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: d4c8ad3e-a288-4551-a528-3798606a6a03
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: file_upload.xml
+  uri:
+    -
+      value: 'private://webform/styling/_sid_/file_upload.xml'
+  filemime:
+    -
+      value: application/xml
+  filesize:
+    -
+      value: 4411
+  status:
+    -
+      value: false
+  created:
+    -
+      value: 1704722701
