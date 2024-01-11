@@ -14,6 +14,8 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.40.1",
-    "@types/node": "^18"
+    "@types/node": "^18",
+    "@types/website-scraper": "^1.2.10",
+    "website-scraper": "^5.3.1"
   }
 }

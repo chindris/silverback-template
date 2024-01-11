@@ -1,0 +1,11 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+.form-actions input[type='submit'],
+input[type='submit'].delete-order-item {
+  @apply inline-flex cursor-pointer select-none items-center justify-center rounded border-2 border-yellow-500 bg-yellow-500 px-6 pt-[0.813rem] pb-3 text-sm font-bold leading-none text-black ring-yellow-500 ring-offset-2 ring-offset-white transition duration-300 hover:border-yellow-600 hover:bg-yellow-600 hover:drop-shadow-xl focus:outline-none focus-visible:ring-1;
+}
+.form-actions {
+  @apply my-4 flex w-full flex-col flex-wrap justify-between max-w-2xl gap-5 md:gap-0;
+}

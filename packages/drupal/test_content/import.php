@@ -9,8 +9,7 @@ if (PHP_SAPI !== 'cli') {
 
 Import::run('test_content');
 
-// Webforms are ignored from the config. Create an example form now.
-var_dump(getcwd());
-Webform::create(Yaml::decode(file_get_contents(
-  'modules/custom/test_content/contact-webform.yml'
-)))->save();
+// Import webforms.
+foreach (glob(__DIR__ . '/webforms/*.yml') as $file) {
+  Webform::create(Yaml::decode(file_get_contents($file)))->save();
+}

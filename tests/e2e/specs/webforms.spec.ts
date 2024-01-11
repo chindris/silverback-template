@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-import { websiteUrl } from '../helpers/url';
+import { cmsUrl, websiteUrl } from '../helpers/url';
 
 test('Webforms work', async ({ page }) => {
   await page.goto(websiteUrl('/en/blocks-complete'));
@@ -36,4 +36,10 @@ test('Webforms work', async ({ page }) => {
 
   // TODO: Move all silverback-mono tests here?
   //  https://github.com/AmazeeLabs/silverback-mono/tree/development/packages/tests/silverback-iframe/playwright-tests
+});
+
+test('Export webforms for styling', async ({ page }) => {
+  await page.goto(cmsUrl('/en/form/styling?iframe=true'));
+  await page.getByRole('button', { name: 'Submit' }).click();
+  await page.pause(); // AXXX
 });

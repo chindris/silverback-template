@@ -1,5 +1,7 @@
 <?php
 use AmazeeLabs\DefaultContent\Export;
+use Drupal\webform\Entity\Webform;
+use Drupal\webform\Utility\WebformYaml;
 
 if (PHP_SAPI !== 'cli') {
   die;
@@ -26,4 +28,17 @@ foreach (glob(__DIR__ . '/content/file/*.yml') as $file) {
 }
 foreach (glob(__DIR__ . '/content/file/generic*.png') as $file) {
   unlink($file);
+}
+
+// Export webforms.
+foreach (Webform::loadMultiple() as $webform) {
+  $configPrefix = \Drupal::entityTypeManager()
+    ->getDefinition('webform')
+    ->getConfigPrefix();
+  $configName = $configPrefix . '.' . $webform->getConfigTarget();
+  $data = \Drupal::config($configName)->getRawData();
+  file_put_contents(
+    __DIR__ . '/webforms/' . $webform->id() . '.yml',
+    WebformYaml::encode($data)
+  );
 }
