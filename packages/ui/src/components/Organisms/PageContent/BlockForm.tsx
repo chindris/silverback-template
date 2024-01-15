@@ -4,9 +4,12 @@ import React from 'react';
 
 import { buildMessages, storeMessages } from '../../Molecules/Messages';
 
-// TODO: Style, add stories.
-
-export function BlockForm(props: BlockFormFragment) {
+export function BlockForm(
+  props: BlockFormFragment & {
+    // For Storybook.
+    cssStylesToInject?: string;
+  },
+) {
   const [, navigate] = useLocation();
 
   if (!props.url) {
@@ -28,6 +31,7 @@ export function BlockForm(props: BlockFormFragment) {
         minWidth: '100%',
       }}
       heightCalculationMethod="lowestElement"
+      cssStylesToInject={props.cssStylesToInject}
     />
   );
 }
