@@ -32,6 +32,10 @@
       ],
       "outputs": ["build/styles.css"]
     },
+    "prep:cms-css": {
+      "inputs": ["postcss.config.cjs", "tailwind.config.cjs", "cms.css"],
+      "outputs": ["../drupal-themes/custom_iframe/styles.css"]
+    },
     "prep:gutenberg": {
       "inputs": [
         "postcss.config.cjs",
@@ -51,6 +55,7 @@
         "prep:types",
         "prep:scripts",
         "prep:styles",
+        "prep:cms-css",
         "prep:gutenberg",
         "prep:i18n"
       ]

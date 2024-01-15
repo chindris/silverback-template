@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Styles for Drupal webforms */
+
+/* TODO: Implement styles */
+[data-drupal-messages] [role="alert"] {
+  color: red;
+}
+.form-item input.error {
+  border: 2px solid red;
+}
