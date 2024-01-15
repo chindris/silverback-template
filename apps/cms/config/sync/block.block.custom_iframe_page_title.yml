@@ -1,0 +1,20 @@
+uuid: a184f7b3-7895-4a4e-bdfa-27b07d22374e
+langcode: en
+status: true
+dependencies:
+  theme:
+    - custom_iframe
+_core:
+  default_config_hash: fNwDdW063tk_ktzSWzZVeQS9wzvLooVO280BQ9WrsIs
+id: custom_iframe_page_title
+theme: custom_iframe
+region: content
+weight: -3
+provider: null
+plugin: page_title_block
+settings:
+  id: page_title_block
+  label: 'Page title'
+  label_display: '0'
+  provider: core
+visibility: {  }

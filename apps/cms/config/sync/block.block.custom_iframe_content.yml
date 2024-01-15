@@ -1,0 +1,22 @@
+uuid: cb045863-8725-4d26-aef2-1c50ea18703d
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - custom_iframe
+_core:
+  default_config_hash: a0Yyx1GeyKarZ4T_yXQBR_ZFKnXiFLtxAb6gWLd8nr0
+id: custom_iframe_content
+theme: custom_iframe
+region: content
+weight: -1
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Main page content'
+  label_display: '0'
+  provider: system
+visibility: {  }
