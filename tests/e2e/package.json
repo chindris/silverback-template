@@ -5,15 +5,20 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "type": "module",
   "scripts": {
     "test:static": "tsc --noEmit && eslint '**/*.{ts,tsx,js,jsx}' --ignore-path='./.gitignore'",
     "test:integration": "playwright test",
     "test:headed": "playwright test --headed",
     "dev": "playwright test --ui",
+    "webform-snapshots": "playwright test --config playwright.config.webforms.ts",
+    "webform-snapshots:headed": "playwright test --config playwright.config.webforms.ts --headed",
     "download-browsers": "playwright install chromium"
   },
   "devDependencies": {
     "@playwright/test": "^1.40.1",
-    "@types/node": "^18"
+    "@types/node": "^18",
+    "@types/website-scraper": "^1.2.10",
+    "website-scraper": "^5.3.1"
   }
 }
