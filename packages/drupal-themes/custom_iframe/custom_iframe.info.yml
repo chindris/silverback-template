@@ -1,0 +1,20 @@
+name: Custom iframe
+type: theme
+base theme: silverback_iframe_theme
+description: 'A theme for pages embedded as iframes in the Gatsby website.'
+version: VERSION
+core_version_requirement: ^9 || ^10
+
+# An example on how to remove CSS we don't need:
+#libraries-override:
+#  commerce_order/total_summary:
+#    css:
+#      layout:
+#        css/commerce_order.total_summary.css: false
+#  address/form:
+#    css:
+#      theme:
+#        css/address.form.css: false
+
+regions:
+  content: Content

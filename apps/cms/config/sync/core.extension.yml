@@ -96,4 +96,5 @@ module:
 theme:
   claro: 0
   silverback_iframe_theme: 0
+  custom_iframe: 0
 profile: minimal
