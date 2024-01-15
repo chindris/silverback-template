@@ -14,7 +14,7 @@
     "turbo:test": "pnpm turbo:local && turbo test:unit --no-daemon --go-fallback --output-logs=new-only && turbo test:integration --no-daemon --go-fallback --output-logs=new-only --concurrency=1",
     "turbo:test:quick": "pnpm turbo:local && turbo test:unit --no-daemon --go-fallback --output-logs=new-only",
     "turbo:prep": "pnpm turbo:local && turbo prep --no-daemon --go-fallback --output-logs=new-only",
-    "turbo:prep:force": "rm apps/cms/web/sites/default/files/.sqlite && turbo prep --no-daemon --go-fallback --force"
+    "turbo:prep:force": "rm -f apps/cms/web/sites/default/files/.sqlite && turbo prep --no-daemon --go-fallback --force"
   },
   "private": true,
   "devDependencies": {
