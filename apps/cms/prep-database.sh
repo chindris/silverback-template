@@ -7,6 +7,7 @@ fi
 if ! test -f web/sites/default/files/.sqlite
 then
   pnpm drupal-install
+  pnpm export-webforms
 else
   pnpm drush cr
 fi
