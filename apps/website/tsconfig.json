@@ -13,6 +13,7 @@
     "moduleResolution": "Node",
     "resolveJsonModule": true,
     "isolatedModules": true,
+    "checkJs": true,
     "jsx": "react"
   },
   "exclude": ["netlify", "node_modules", "public"]
