@@ -98,8 +98,8 @@ type DrupalPage implements ContentHubResultItem & Page
   @type(id: "page") {
   id: ID! @resolveEntityUuid
   locale: Locale! @resolveEntityLanguage
-  path: Url! @resolveEntityPath @isPath
   translations: [Page] @resolveEntityTranslations
+  path: Url! @resolveEntityPath
   title: String! @resolveProperty(path: "title.value")
   teaserImage: MediaImage
     @resolveEditorBlocks(path: "body.value")
