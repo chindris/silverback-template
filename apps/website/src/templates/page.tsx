@@ -1,28 +1,18 @@
-import { SilverbackPageContext } from '@amazeelabs/gatsby-source-silverback';
+import { graphql } from '@amazeelabs/gatsby-plugin-operations';
 import {
   Locale,
-  PageFragment,
+  PageListEntryFragment,
   registerExecutor,
   ViewPageQuery,
 } from '@custom/schema';
 import { Page } from '@custom/ui/routes/Page';
-import { graphql, HeadProps, PageProps } from 'gatsby';
+import { HeadProps, PageProps } from 'gatsby';
 import React from 'react';
 
-export const query = graphql`
-  query DrupalPageTemplate($remoteId: String!) {
-    page: drupalPage(_id: { eq: $remoteId }) {
-      ...Page
-    }
-  }
-`;
+export const query = graphql(ViewPageQuery);
 
-type PageTemplateQuery = {
-  page: PageFragment;
-};
-
-export function Head({ data }: HeadProps<PageTemplateQuery>) {
-  return (
+export function Head({ data }: HeadProps<typeof query>) {
+  return data.page ? (
     <>
       <title>{data.page.title}</title>
       {data.page.metaTags?.map((metaTag, index) => {
@@ -46,13 +36,13 @@ export function Head({ data }: HeadProps<PageTemplateQuery>) {
         return null;
       }) || null}
     </>
-  );
+  ) : null;
 }
 
-export default function DrupalPageTemplate({
+export default function PageTemplate({
   data,
   pageContext,
-}: PageProps<PageTemplateQuery, SilverbackPageContext>) {
+}: PageProps<typeof query, PageListEntryFragment>) {
   registerExecutor(
     ViewPageQuery,
     {

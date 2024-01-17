@@ -1,4 +1,4 @@
-import { PageListEntryFragment, ViewPageQuery } from '@custom/schema';
+import { ViewPageQuery } from '@custom/schema';
 import React from 'react';
 
 import { isTruthy } from '../../utils/isTruthy';
@@ -10,7 +10,7 @@ import { BlockMarkup } from '../Organisms/PageContent/BlockMarkup';
 import { BlockMedia } from '../Organisms/PageContent/BlockMedia';
 import { PageHero } from '../Organisms/PageHero';
 
-export function Page(props: PageListEntryFragment) {
+export function Page(props: { id: string; locale: string }) {
   const { data } = useOperation(ViewPageQuery, props);
   return data?.page ? (
     <PageTransition>

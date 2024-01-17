@@ -1,6 +1,7 @@
 fragment PageListEntry on Page {
   id
   locale
+  path
 }
 
 query ListPages {
