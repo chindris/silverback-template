@@ -6,5 +6,4 @@ public
 styles.css
 persisted-store
 
-src/gatsby-fragments.js
 autoload.mjs
