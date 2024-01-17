@@ -43,6 +43,12 @@ export default {
     'gatsby-plugin-layout',
     'gatsby-plugin-sharp',
     {
+      resolve: '@amazeelabs/gatsby-plugin-operations',
+      options: {
+        operations: './node_modules/@custom/schema/build/operations.json',
+      },
+    },
+    {
       resolve: '@amazeelabs/gatsby-source-silverback',
       options: {
         drupal_url: process.env.DRUPAL_INTERNAL_URL || 'http://127.0.0.1:8888',

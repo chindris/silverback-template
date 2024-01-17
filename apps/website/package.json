@@ -4,8 +4,9 @@
   "dependencies": {
     "@amazeelabs/bridge-gatsby": "^1.2.7",
     "@amazeelabs/cloudinary-responsive-image": "^1.6.15",
+    "@amazeelabs/gatsby-plugin-operations": "workspace:*",
     "@amazeelabs/gatsby-silverback-cloudinary": "^1.2.7",
-    "@amazeelabs/gatsby-source-silverback": "^1.13.7",
+    "@amazeelabs/gatsby-source-silverback": "^1.13.10",
     "@amazeelabs/publisher": "^2.4.17",
     "@amazeelabs/strangler-netlify": "^1.1.9",
     "@custom/decap": "workspace:*",
