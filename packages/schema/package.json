@@ -36,7 +36,6 @@
   },
   "devDependencies": {
     "@amazeelabs/codegen-autoloader": "^1.1.3",
-    "@amazeelabs/codegen-gatsby-fragments": "^1.1.15",
     "@amazeelabs/codegen-operation-ids": "^0.1.34",
     "@graphql-codegen/cli": "^5.0.0",
     "@graphql-codegen/schema-ast": "^4.0.0",
