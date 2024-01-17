@@ -1,10 +1,11 @@
+import { graphql } from '@amazeelabs/gatsby-plugin-operations';
 import {
   NotFoundPageQuery,
   registerExecutor,
   ViewPageQuery,
 } from '@custom/schema';
 import { Page } from '@custom/ui/routes/Page';
-import { graphql, PageProps } from 'gatsby';
+import { PageProps } from 'gatsby';
 import React from 'react';
 
 import {
@@ -12,25 +13,13 @@ import {
   LanguageNegotiatorContent,
 } from '../utils/language-negotiator';
 
-export const query = graphql`
-  query NotFoundPage {
-    websiteSettings {
-      notFoundPage {
-        translations {
-          id
-          locale
-          ...Page
-        }
-      }
-    }
-  }
-`;
+export const query = graphql(NotFoundPageQuery);
 
 function isTruthy<T>(value: T | undefined | null): value is T {
   return Boolean(value);
 }
 
-export default function Index({ data }: PageProps<NotFoundPageQuery>) {
+export default function Index({ data }: PageProps<typeof query>) {
   data.websiteSettings?.notFoundPage?.translations
     ?.filter(isTruthy)
     .forEach(({ id, locale, ...page }) => {
