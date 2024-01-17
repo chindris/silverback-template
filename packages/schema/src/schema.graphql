@@ -31,10 +31,8 @@ type ContentHubResult @default @value(json: "{\"total\": 0, \"items\": []}") {
 
 type WebsiteSettings
   @entity(type: "config_pages", bundle: "website_settings", access: false) {
-  homePage: DrupalPage
-    @resolveEntityReference(field: "field_home_page")
-    @seek(pos: 0)
-  notFoundPage: DrupalPage
+  homePage: Page @resolveEntityReference(field: "field_home_page") @seek(pos: 0)
+  notFoundPage: Page
     @resolveEntityReference(field: "field_404_page")
     @seek(pos: 0)
 }
@@ -67,8 +65,9 @@ type FooterNavigation implements Navigation @menu(menu_id: "footer") {
   items: [NavigationItem]! @lang @resolveMenuItems
 }
 
-interface Page implements ContentHubResultItem {
+interface Page implements ContentHubResultItem @value(json: "\"page\"") {
   id: ID!
+  translations: [Page]
   locale: Locale!
   path: Url!
   title: String!
@@ -81,6 +80,7 @@ interface Page implements ContentHubResultItem {
 type DecapPage implements ContentHubResultItem & Page
   @sourceFrom(fn: "getPages") {
   id: ID!
+  translations: [Page]
   locale: Locale!
   path: Url!
   title: String!
@@ -98,8 +98,8 @@ type DrupalPage implements ContentHubResultItem & Page
   @type(id: "page") {
   id: ID! @resolveEntityUuid
   locale: Locale! @resolveEntityLanguage
-  translations: [DrupalPage] @resolveEntityTranslations
   path: Url! @resolveEntityPath @isPath
+  translations: [Page] @resolveEntityTranslations
   title: String! @resolveProperty(path: "title.value")
   teaserImage: MediaImage
     @resolveEditorBlocks(path: "body.value")
@@ -173,7 +173,7 @@ type Query {
 
   allPages: [Page] @gatsbyNodes(type: "Page")
   websiteSettings: WebsiteSettings
-  page(id: ID!, rid: ID, locale: String!): Page
+  viewPage(id: ID!, rid: ID, locale: String!): Page
     @fetchEntity(type: "node", id: "$id", rid: "$rid", language: "$locale")
     @gatsbyNode(type: "Page", id: "$id")
 

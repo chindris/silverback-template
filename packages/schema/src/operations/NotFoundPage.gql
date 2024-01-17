@@ -4,6 +4,7 @@ query NotFoundPage {
       translations {
         id
         locale
+        path
         ...Page
       }
     }
