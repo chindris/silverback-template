@@ -31,10 +31,6 @@ const config: CodegenConfig = {
     'build/operations.json': {
       plugins: ['@amazeelabs/codegen-operation-ids'],
     },
-    // All fragments collected into one javascript file for Gatsby.
-    'build/gatsby-fragments.js': {
-      plugins: ['@amazeelabs/codegen-gatsby-fragments'],
-    },
     // Directive autoloader for Gatsby.
     '../../apps/website/autoload.mjs': {
       plugins: ['@amazeelabs/codegen-autoloader'],

@@ -1,5 +1,5 @@
-// TODO: re-add @ts-check when the issue with the type definitions is resolved.
-import { Locale } from '@custom/schema';
+import { graphqlQuery } from '@amazeelabs/gatsby-plugin-operations';
+import { IndexPagesQuery, ListPagesQuery, Locale } from '@custom/schema';
 import { cpSync } from 'fs';
 import { resolve } from 'path';
 import serve from 'serve-static';
@@ -18,10 +18,19 @@ export const onCreateWebpackConfig = ({ actions }) => {
 };
 
 /**
+ * @template T extends any
+ * @param {T | undefined | null} val
+ * @returns {val is T}
+ */
+function isDefined(val) {
+  return Boolean(val);
+}
+
+/**
  *
  * @type {import('gatsby').GatsbyNode['createPages']}
  */
-export const createPages = async ({ actions, graphql }) => {
+export const createPages = async ({ actions }) => {
   // Rewrite file requests to Drupal.
   actions.createRedirect({
     fromPath: '/sites/default/files/*',
@@ -35,31 +44,24 @@ export const createPages = async ({ actions, graphql }) => {
     statusCode: 200,
   });
 
-  // TODO: Remove duplication of queries and fix typing.
-  /**
-   * @type {{data: import('@custom/schema')['IndexPagesQuery'], errors?: [string]}}
-   */
-  // @ts-ignore
-  const settings = await graphql(`
-    query IndexPages {
-      websiteSettings {
-        homePage {
-          translations: _translations {
-            typeName: __typename
-            locale
-            id: _id
-            remoteId: _id
-            path
-          }
-        }
-        notFoundPage {
-          translations: _translations {
-            path
-          }
-        }
-      }
-    }
-  `);
+  // Run the query that lists all pages, both decap and Drupal.
+  const pages = await graphqlQuery(ListPagesQuery);
+
+  // Create a gatsby page for each of these pages.
+  pages.data?.allPages?.filter(isDefined).forEach(({ id, path, locale }) => {
+    const context = {
+      id,
+      locale,
+    };
+    actions.createPage({
+      path: path,
+      component: resolve(`./src/templates/page.tsx`),
+      context,
+    });
+  });
+
+  // Search for index page settings.
+  const settings = await graphqlQuery(IndexPagesQuery);
 
   if (settings.errors) {
     settings.errors.map((e) => console.error(e));
@@ -67,42 +69,35 @@ export const createPages = async ({ actions, graphql }) => {
   }
 
   if (settings.data?.websiteSettings?.homePage) {
-    /**
-     * @type {import('@amazeelabs/gatsby-source-silverback').SilverbackPageContext['localizations']}
-     */
     const frontPageLocalizations =
-      settings.data?.websiteSettings?.homePage.translations.map(
-        ({ locale }) => ({
+      settings.data?.websiteSettings?.homePage.translations
+        ?.filter(isDefined)
+        .map(({ locale }) => ({
           path: `/${locale}`,
           locale,
-        }),
-      );
+        })) || [];
 
-    settings.data?.websiteSettings?.homePage.translations.forEach(
-      ({ locale, typeName, id, remoteId, path }) => {
+    settings.data?.websiteSettings?.homePage.translations
+      ?.filter(isDefined)
+      .forEach(({ locale, id, path }) => {
         // Create a page at the "front" path.
         const frontPath =
           frontPageLocalizations.length > 1 ? `/${locale}` : '/';
-        /**
-         * @type {import('@amazeelabs/gatsby-source-silverback').SilverbackPageContext}
-         */
         const context = {
-          typeName,
           id,
-          remoteId,
           locale,
           localizations:
             frontPageLocalizations.length > 1 ? frontPageLocalizations : [],
         };
         actions.createPage({
           path: frontPath,
-          component: resolve(`./src/templates/drupal-page.tsx`),
+          component: resolve(`./src/templates/page.tsx`),
           context,
         });
         // Delete the page at the original path.
         actions.deletePage({
           path,
-          component: resolve(`./src/templates/drupal-page.tsx`),
+          component: resolve(`./src/templates/page.tsx`),
         });
         // Create a redirect from the original path to the "front" path.
         actions.createRedirect({
@@ -111,64 +106,18 @@ export const createPages = async ({ actions, graphql }) => {
           isPermanent: true,
           force: true,
         });
-      },
-    );
+      });
   }
 
   // Remove 404 pages. We handle them in src/pages/404.tsx
-  settings.data?.websiteSettings?.notFoundPage?.translations.forEach(
-    ({ path }) => {
+  settings.data?.websiteSettings?.notFoundPage?.translations
+    ?.filter(isDefined)
+    .forEach(({ path }) => {
       actions.deletePage({
         path,
-        component: resolve(`./src/templates/drupal-page.tsx`),
+        component: resolve(`./src/templates/page.tsx`),
       });
-    },
-  );
-
-  /**
-   * @type {{
-   *   data?: {
-   *     allDecapPage: {
-   *       nodes: Array<{
-   *         id: string;
-   *         path: string;
-   *         locale: string;
-   *       }>
-   *     }
-   *   },
-   *   errors?: any[];
-   * }}
-   */
-  const decapPages = await graphql(`
-    query DecapPages {
-      allDecapPage {
-        nodes {
-          id
-          path
-          locale
-        }
-      }
-    }
-  `);
-
-  decapPages.data?.allDecapPage.nodes.forEach(({ id, path, locale }) => {
-    /**
-     * @type {import('@amazeelabs/gatsby-source-silverback').SilverbackPageContext}
-     */
-    const context = {
-      typeName: 'DecapPage',
-      id,
-      remoteId: id,
-      locale,
-      // TODO: Handle decap localizations.
-      localizations: [],
-    };
-    actions.createPage({
-      path: path,
-      component: resolve(`./src/templates/decap-page.tsx`),
-      context,
     });
-  });
 
   // Broken Gatsby links will attempt to load page-data.json files, which don't exist
   // and also should not be piped into the strangler function. Thats why they

@@ -4,8 +4,9 @@
   "dependencies": {
     "@amazeelabs/bridge-gatsby": "^1.2.7",
     "@amazeelabs/cloudinary-responsive-image": "^1.6.15",
+    "@amazeelabs/gatsby-plugin-operations": "^1.1.0",
     "@amazeelabs/gatsby-silverback-cloudinary": "^1.2.7",
-    "@amazeelabs/gatsby-source-silverback": "^1.13.7",
+    "@amazeelabs/gatsby-source-silverback": "^1.13.10",
     "@amazeelabs/publisher": "^2.4.17",
     "@amazeelabs/strangler-netlify": "^1.1.9",
     "@custom/decap": "workspace:*",
@@ -38,9 +39,8 @@
   },
   "scripts": {
     "test:static": "tsc --noEmit && eslint '**/*.{ts,tsx,js,jsx}' --ignore-path='./.gitignore'",
-    "prep": "pnpm run prep:styles && pnpm run prep:fragments",
+    "prep": "pnpm run prep:styles",
     "prep:styles": "rm -f styles.css && cp node_modules/@custom/ui/build/styles.css styles.css",
-    "prep:fragments": "rm -rf src/gatsby-fragments.js && cp node_modules/@custom/schema/build/gatsby-fragments.js src/gatsby-fragments.js",
     "build:gatsby": "pnpm build:dotenv && gatsby build",
     "build:dotenv": "rm -rf .env && echo \"DRUPAL_EXTERNAL_URL='$DRUPAL_EXTERNAL_URL'\nDRUPAL_INTERNAL_URL='$DRUPAL_INTERNAL_URL'\" >> .env",
     "rebuild": "gatsby build",
