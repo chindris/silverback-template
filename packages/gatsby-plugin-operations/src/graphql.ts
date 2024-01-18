@@ -19,11 +19,10 @@ export function initialize(
  * Execute a graphql query against gatsby.
  */
 export function graphqlQuery(id: string, vars?: any): any {
-  if (!_graphql) {
-    throw '_graphql has not been initialized';
-  }
-  if (!_operations) {
-    throw '_operations have not been initialized';
+  if (!_graphql || !_operations) {
+    throw new Error(
+      'Plugin "@amazeelabs/gatsby-plugin-operations" not available. Make sure its configured in "gatsby-config.mjs" and that "graphqlQuery" is used within "createPages" only.',
+    );
   }
   const operation = _operations?.[id];
   return _graphql(operation, vars);
