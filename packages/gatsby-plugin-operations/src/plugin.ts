@@ -55,7 +55,7 @@ export default () =>
         }
       },
     },
-  }) as PluginObj<
+  }) satisfies PluginObj<
     PluginPass & {
       opts: {
         operations: string;
