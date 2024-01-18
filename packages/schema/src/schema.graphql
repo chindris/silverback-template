@@ -65,7 +65,7 @@ type FooterNavigation implements Navigation @menu(menu_id: "footer") {
   items: [NavigationItem]! @lang @resolveMenuItems
 }
 
-interface Page implements ContentHubResultItem @value(json: "\"page\"") {
+interface Page implements ContentHubResultItem @resolveEntityBundle {
   id: ID!
   translations: [Page]
   locale: Locale!
