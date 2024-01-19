@@ -1,3 +1,0 @@
-schema: 'src/schema.graphql'
-include:
-  - 'phpstorm-support/**/directives.graphql'
