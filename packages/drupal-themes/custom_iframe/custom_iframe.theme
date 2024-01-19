@@ -1,0 +1,10 @@
+<?php
+
+function custom_iframe_preprocess_page(&$variables) {
+  $noCssParamName = 'no_css';
+  $variables['page']['#cache']['contexts'][] = 'url.query_args:' . $noCssParamName;
+  $noCss = !!\Drupal::request()->query->get($noCssParamName);
+  if (!$noCss) {
+    $variables['#attached']['library'][] = 'custom_iframe/global';
+  }
+}

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a7e691011d35af8c349d55ae81630584",
+    "content-hash": "311e78367982e8dc03f205c19ae9871e",
     "packages": [
         {
             "name": "amazeeio/drupal_integrations",
@@ -551,16 +551,16 @@
         },
         {
             "name": "amazeelabs/silverback_iframe_theme",
-            "version": "1.2.3",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/AmazeeLabs/silverback_iframe_theme.git",
-                "reference": "04beb5aaefd309c268e6a7569cd73cc89c0c6427"
+                "reference": "67ede78e214389737c97a20d9d3e84963671397c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AmazeeLabs/silverback_iframe_theme/zipball/04beb5aaefd309c268e6a7569cd73cc89c0c6427",
-                "reference": "04beb5aaefd309c268e6a7569cd73cc89c0c6427",
+                "url": "https://api.github.com/repos/AmazeeLabs/silverback_iframe_theme/zipball/67ede78e214389737c97a20d9d3e84963671397c",
+                "reference": "67ede78e214389737c97a20d9d3e84963671397c",
                 "shasum": ""
             },
             "type": "drupal-theme",
@@ -572,9 +572,9 @@
             "homepage": "https://github.com/AmazeeLabs/silverback-mono/tree/development/packages/composer/amazeelabs/silverback_iframe_theme#readme",
             "support": {
                 "issues": "https://github.com/AmazeeLabs/silverback_iframe_theme/issues",
-                "source": "https://github.com/AmazeeLabs/silverback_iframe_theme/tree/1.2.3"
+                "source": "https://github.com/AmazeeLabs/silverback_iframe_theme/tree/1.3.0"
             },
-            "time": "2023-03-23T11:12:37+00:00"
+            "time": "2024-01-15T09:50:37+00:00"
         },
         {
             "name": "amazeelabs/silverback_publisher_monitor",

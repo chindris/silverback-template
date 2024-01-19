@@ -2,6 +2,7 @@
   "compilerOptions": {
     "strict": true,
     "skipLibCheck": true,
+    "esModuleInterop": true,
     "lib": ["es2015"],
     "types": ["node"]
   }

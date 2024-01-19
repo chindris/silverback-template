@@ -16,7 +16,10 @@
         "web/modules/custom/**",
         "web/themes/custom/**"
       ],
-      "outputs": ["web/sites/default/files/**"],
+      "outputs": [
+        "web/sites/default/files/**",
+        "../../packages/ui/static/public/webforms/**"
+      ],
       "env": ["CI", "LAGOON"]
     },
     "prep:composer": {
