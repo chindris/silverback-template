@@ -1,6 +1,6 @@
+import { saveWebpage } from '@amazeelabs/save-webpage';
 import { expect, Page, test } from '@playwright/test';
 import { execSync } from 'child_process';
-import scrape from 'website-scraper';
 
 import { cmsUrl } from '../helpers/url';
 
@@ -23,44 +23,9 @@ test('Export webforms for styling', async ({ page }) => {
 });
 
 async function savePage(page: Page, name: string) {
-  await scrape({
+  await saveWebpage({
     directory: `${baseDir}/${name}`,
-    urls: [page.url()],
-    plugins: [new ScrapePlugin(await page.content())],
+    url: page.url(),
+    content: await page.content(),
   });
-}
-
-// Replaces the first request response with given content.
-class ScrapePlugin {
-  isFirstRequest = true;
-
-  constructor(public firstRequestResponse: string) {}
-
-  apply(
-    registerAction: (
-      event: 'afterResponse',
-      handler: <T>(args: { response: T }) => Promise<
-        | T
-        | {
-            body: string;
-            encoding: 'utf8';
-            metadata: {};
-          }
-      >,
-    ) => void,
-  ): void {
-    registerAction('afterResponse', async ({ response }) => {
-      if (this.isFirstRequest) {
-        this.isFirstRequest = false;
-        return {
-          body: this.firstRequestResponse,
-          encoding: 'utf8',
-          metadata: {},
-        };
-      } else {
-        this.isFirstRequest = false;
-        return response;
-      }
-    });
-  }
 }
