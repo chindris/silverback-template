@@ -1,5 +1,3 @@
-import './styles.css';
-
 import { registerExecutor } from '@custom/schema';
 import { GatsbyBrowser } from 'gatsby';
 

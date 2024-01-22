@@ -39,8 +39,6 @@
   },
   "scripts": {
     "test:static": "tsc --noEmit && eslint '**/*.{ts,tsx,js,jsx}' --ignore-path='./.gitignore'",
-    "prep": "pnpm run prep:styles",
-    "prep:styles": "rm -f styles.css && cp node_modules/@custom/ui/build/styles.css styles.css",
     "build:gatsby": "pnpm build:dotenv && gatsby build",
     "build:dotenv": "rm -rf .env && echo \"DRUPAL_EXTERNAL_URL='$DRUPAL_EXTERNAL_URL'\nDRUPAL_INTERNAL_URL='$DRUPAL_INTERNAL_URL'\" >> .env",
     "rebuild": "gatsby build",

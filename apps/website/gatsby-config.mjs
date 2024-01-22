@@ -46,6 +46,7 @@ export default {
       resolve: '@amazeelabs/gatsby-plugin-static-dirs',
       options: {
         directories: {
+          'node_modules/@custom/ui/build/styles.css': '/styles.css',
           'node_modules/@custom/ui/static/public': '/',
           'node_modules/@custom/decap/dist': '/admin',
           'node_modules/@custom/decap/media': '/media',
