@@ -180,8 +180,8 @@ importers:
         specifier: ^1.6.15
         version: 1.6.15
       '@amazeelabs/gatsby-plugin-operations':
-        specifier: ^1.1.1
-        version: 1.1.1
+        specifier: ^1.1.2
+        version: 1.1.2
       '@amazeelabs/gatsby-silverback-cloudinary':
         specifier: ^1.2.7
         version: 1.2.7
@@ -762,8 +762,8 @@ packages:
       lodash-es: 4.17.21
     dev: false
 
-  /@amazeelabs/gatsby-plugin-operations@1.1.1:
-    resolution: {integrity: sha512-7so4BWPew4PLnL2XC+nx015d/6KG+NcIg7qhYiwUkfl4rHTbyXpfb2nytTtJe6KAsD8AGQSPAJzjbPo5sWnbhA==}
+  /@amazeelabs/gatsby-plugin-operations@1.1.2:
+    resolution: {integrity: sha512-3Z3NvH+/kqoX6N1Jp0/mkwWxowvC13QJBLei/hDFEgP1OluC9Kh8yIVtmB1vpiN2ka7Y1Bvf33LnNvuDBN1zyw==}
     dependencies:
       '@babel/core': 7.23.7
       '@babel/preset-react': 7.23.3(@babel/core@7.23.7)
