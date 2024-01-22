@@ -43,6 +43,16 @@ export default {
     'gatsby-plugin-layout',
     'gatsby-plugin-sharp',
     {
+      resolve: '@amazeelabs/gatsby-plugin-static-dirs',
+      options: {
+        directories: {
+          'node_modules/@custom/ui/static/public': '/',
+          'node_modules/@custom/decap/dist': '/admin',
+          'node_modules/@custom/decap/media': '/media',
+        },
+      },
+    },
+    {
       resolve: '@amazeelabs/gatsby-plugin-operations',
       options: {
         operations: './node_modules/@custom/schema/build/operations.json',
