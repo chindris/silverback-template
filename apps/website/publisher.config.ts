@@ -34,7 +34,7 @@ export default defineConfig({
         ].join(' && ')
       : 'echo "Fake deployment done"',
   },
-  databaseUrl: 'persisted-store/publisher.sqlite',
+  databaseUrl: '/tmp/publisher.sqlite',
   publisherPort: isLagoon ? 3000 : 8000,
   oAuth2: isLagoon
     ? {
