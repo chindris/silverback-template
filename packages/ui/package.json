@@ -26,7 +26,7 @@
     "prep:types": "tsc --emitDeclarationOnly",
     "prep:scripts": "swc ./src -d ./build",
     "prep:styles": "NODE_ENV=production pnpm postcss tailwind.css -o build/styles.css",
-    "prep:cms-css": "NODE_ENV=production pnpm postcss cms.css -o ../drupal-themes/custom_iframe/styles.css",
+    "prep:cms-css": "NODE_ENV=production pnpm postcss cms.css -o build/cms.css",
     "prep:gutenberg": "NODE_ENV=production PREFIX=gutenberg pnpm postcss tailwind.css -o build/gutenberg.css",
     "prep:i18n": "formatjs extract 'src/**/*.ts*' --ignore='**/*.d.ts' --ignore='**/*.stories.ts*' --out-file build/translatables.json --id-interpolation-pattern '[sha512:contenthash:base64:6]'\n",
     "build": "storybook build",
