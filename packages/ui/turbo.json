@@ -11,11 +11,7 @@
         "tsconfig.json",
         "static/public/**"
       ],
-      "outputs": [
-        "build/**/*.js",
-        "../../apps/cms/autoload.json",
-        "../../apps/website/autoload.mjs"
-      ]
+      "outputs": ["build/**/*.js"]
     },
     "prep:types": {
       "dependsOn": ["^prep"],
