@@ -6,7 +6,8 @@
     "forceConsistentCasingInFileNames": true,
     "declaration": true,
     "declarationDir": "build",
-    "outDir": "build"
+    "outDir": "build",
+    "lib": ["ES2015"]
   },
   "include": ["src"]
 }
