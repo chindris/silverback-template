@@ -1,16 +1,17 @@
 edit:
   version: VERSION
   js:
-   js/gutenberg_blocks.umd.js: { }
+    js/gutenberg_blocks.umd.js: {}
   css:
     theme:
-      css/edit.css: { }
+      css/edit.css: {}
   dependencies:
     - gutenberg/edit-node
     - silverback_gutenberg/base
 customisations:
   css:
     theme:
-      css/ui.css: { preprocess: false }
+      /gutenberg.css: { preprocess: false }
   dependencies:
     - core/drupalSettings
+
