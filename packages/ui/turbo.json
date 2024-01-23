@@ -32,9 +32,9 @@
       ],
       "outputs": ["build/styles.css"]
     },
-    "prep:cms-css": {
-      "inputs": ["postcss.config.cjs", "tailwind.config.cjs", "cms.css"],
-      "outputs": ["build/cms.css"]
+    "prep:iframe": {
+      "inputs": ["postcss.config.cjs", "tailwind.config.cjs", "iframe.css"],
+      "outputs": ["build/iframe.css"]
     },
     "prep:gutenberg": {
       "inputs": [
@@ -55,7 +55,7 @@
         "prep:types",
         "prep:scripts",
         "prep:styles",
-        "prep:cms-css",
+        "prep:iframe",
         "prep:gutenberg",
         "prep:i18n"
       ]
