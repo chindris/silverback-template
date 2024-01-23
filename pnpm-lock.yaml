@@ -82,6 +82,9 @@ importers:
       '@custom/test_content':
         specifier: workspace:*
         version: link:../../packages/drupal/test_content
+      '@custom/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
 
   apps/decap:
     dependencies:
