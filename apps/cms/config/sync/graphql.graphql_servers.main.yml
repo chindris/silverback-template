@@ -1,7 +1,7 @@
 uuid: f31854e4-2c2b-4687-9553-9f2d1f87028c
 langcode: en
 status: true
-dependencies: {  }
+dependencies: {}
 name: main
 label: Main
 endpoint: /graphql
@@ -15,7 +15,7 @@ query_complexity: null
 schema_configuration:
   directable:
     schema_definition: ../node_modules/@custom/schema/build/schema.graphql
-    autoload_registry: ../autoload.json
+    autoload_registry: ../node_modules/@custom/schema/build/drupal-autoload.json
     extensions:
       silverback_campaign_urls: silverback_campaign_urls
       silverback_gatsby: silverback_gatsby
