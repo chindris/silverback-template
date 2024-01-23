@@ -30,7 +30,7 @@ export default defineConfig({
       ? [
           `pnpm netlify env:set AWS_LAMBDA_JS_RUNTIME nodejs18.x`,
           `pnpm netlify env:set DRUPAL_EXTERNAL_URL ${process.env.DRUPAL_EXTERNAL_URL}`,
-          `pnpm netlify deploy --cwd=. --dir=public --prod`,
+          `pnpm netlify deploy --cwd=. --dir=public --prodIfUnlocked`,
         ].join(' && ')
       : 'echo "Fake deployment done"',
   },
