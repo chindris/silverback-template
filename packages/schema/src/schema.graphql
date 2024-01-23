@@ -6,7 +6,7 @@ scalar ImageSource @default @value(json: "\"\"")
 Retrieve the properties of an image.
 TODO: Move to a shared "image" package.
 
-implementation(gatsby): ./image.mjs#imageProps
+implementation(gatsby): ./image.js#imageProps
 """
 directive @imageProps repeatable on FIELD_DEFINITION | SCALAR | UNION | ENUM | INTERFACE | OBJECT
 

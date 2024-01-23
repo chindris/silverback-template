@@ -7,9 +7,8 @@
 // pick it up instead of the JS file.
 
 import { getPages } from '@custom/decap';
+import autoload from '@custom/schema/gatsby-autoload';
 import { resolve } from 'path';
-
-import autoload from './gatsby-autoload.mjs';
 
 const dir = resolve('node_modules/@custom/decap/data/page');
 

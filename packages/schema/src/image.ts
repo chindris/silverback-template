@@ -1,10 +1,8 @@
+import type { GraphQLFieldResolver } from 'graphql';
 import sizeOf from 'image-size';
-import mime from 'mime-types';
+import { lookup } from 'mime-types';
 
-/**
- * @param {string | undefined} source
- */
-export function imageProps(source) {
+export const imageProps: GraphQLFieldResolver<string, any> = (source) => {
   // If its a decap image, process it.
   // Otherwise, it comes from Drupal and
   // already has all necessary props.
@@ -20,8 +18,8 @@ export function imageProps(source) {
       originalSrc: imageSrc,
       width: dimensions.width || 0,
       height: dimensions.height || 0,
-      mime: mime.lookup(relativeSource) || 'application/octet-stream',
+      mime: lookup(relativeSource) || 'application/octet-stream',
     });
   }
   return source;
-}
+};
