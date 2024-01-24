@@ -1,4 +1,4 @@
-import { cpSync, rmSync } from 'fs';
+import { cpSync } from 'fs';
 import serve from 'serve-static';
 
 /**
