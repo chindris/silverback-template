@@ -31,7 +31,7 @@ export const onRenderBody: GatsbySSR['onRenderBody'] = ({
     React.createElement('link', {
       key: 'styles.css',
       rel: 'stylesheet',
-      href: '/styles.css',
+      href: `/styles.css?t=${new Date().getTime()}`,
     }),
   ]);
 };
