@@ -2,7 +2,7 @@ module.exports = {
   plugins: {
     'postcss-import-ext-glob': {},
     'postcss-import': {},
-    tailwindcss: {},
+    tailwindcss: require('./tailwind.config.cjs'),
     autoprefixer: {},
     'postcss-prefix-selector': {
       prefix:
