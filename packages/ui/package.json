@@ -3,13 +3,18 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "sideEffects": false,
+  "sideEffects": [
+    "styles.css"
+  ],
   "exports": {
     "./intl": [
       "./build/utils/intl/index.js"
     ],
     "./routes/*": [
       "./build/components/Routes/*.js"
+    ],
+    "./styles.css": [
+      "./build/styles.css"
     ]
   },
   "typesVersions": {
