@@ -1,12 +1,10 @@
 import { Locale, registerExecutor } from '@custom/schema';
 import { GatsbySSR } from 'gatsby';
-import React from 'react';
 
 import { drupalExecutor } from './src/utils/drupal-executor';
 
 export const onRenderBody: GatsbySSR['onRenderBody'] = ({
   setHtmlAttributes,
-  setHeadComponents,
   pathname,
 }) => {
   registerExecutor(drupalExecutor(`/graphql`));
@@ -27,11 +25,4 @@ export const onRenderBody: GatsbySSR['onRenderBody'] = ({
       // We don't know the language.
     }
   }
-  setHeadComponents([
-    React.createElement('link', {
-      key: 'styles.css',
-      rel: 'stylesheet',
-      href: `/styles.css?t=${new Date().getTime()}`,
-    }),
-  ]);
 };

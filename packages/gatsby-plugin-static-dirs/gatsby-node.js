@@ -11,9 +11,9 @@ export const pluginOptionsSchema = ({ Joi }) => {
 };
 
 /**
- * @type {import('gatsby').GatsbyNode['onPostBuild']}
+ * @type {import('gatsby').GatsbyNode['onPreBuild']}
  */
-export const onPostBuild = (_, options) => {
+export const onPreBuild = (_, options) => {
   Object.keys(options.directories).forEach((src) => {
     const dest = options.directories[src];
     cpSync(src, `public${dest}`, {
