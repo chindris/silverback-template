@@ -1,3 +1,5 @@
+import './node_modules/@custom/ui/build/styles.css';
+
 import { registerExecutor } from '@custom/schema';
 import { GatsbyBrowser } from 'gatsby';
 
