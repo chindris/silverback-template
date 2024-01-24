@@ -13,11 +13,7 @@
         ".graphqlrc.json",
         "tsconfig.json"
       ],
-      "outputs": [
-        "build/**",
-        "../../apps/website/autoload.mjs",
-        "../../apps/cms/autoload.json"
-      ]
+      "outputs": ["build/**"]
     }
   }
 }

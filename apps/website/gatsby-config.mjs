@@ -7,9 +7,8 @@
 // pick it up instead of the JS file.
 
 import { getPages } from '@custom/decap';
+import autoload from '@custom/schema/gatsby-autoload';
 import { resolve } from 'path';
-
-import autoload from './autoload.mjs';
 
 const dir = resolve('node_modules/@custom/decap/data/page');
 
@@ -39,9 +38,21 @@ export default {
     siteUrl: process.env.NETLIFY_URL,
   },
   plugins: [
+    'gatsby-plugin-uninline-styles',
     'gatsby-plugin-pnpm',
     'gatsby-plugin-layout',
     'gatsby-plugin-sharp',
+    {
+      resolve: '@amazeelabs/gatsby-plugin-static-dirs',
+      options: {
+        directories: {
+          'node_modules/@custom/ui/build/styles.css': '/styles.css',
+          'node_modules/@custom/ui/static/public': '/',
+          'node_modules/@custom/decap/dist': '/admin',
+          'node_modules/@custom/decap/media': '/media',
+        },
+      },
+    },
     {
       resolve: '@amazeelabs/gatsby-plugin-operations',
       options: {

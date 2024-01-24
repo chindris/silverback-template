@@ -32,7 +32,7 @@ const config: CodegenConfig = {
       plugins: ['@amazeelabs/codegen-operation-ids'],
     },
     // Directive autoloader for Gatsby.
-    '../../apps/website/autoload.mjs': {
+    'build/gatsby-autoload.mjs': {
       plugins: ['@amazeelabs/codegen-autoloader'],
       config: {
         mode: 'js',
@@ -41,7 +41,7 @@ const config: CodegenConfig = {
       },
     },
     // Directive autoloader for Drupla.
-    '../../apps/cms/autoload.json': {
+    'build/drupal-autoload.json': {
       plugins: ['@amazeelabs/codegen-autoloader'],
       config: {
         mode: 'drupal',

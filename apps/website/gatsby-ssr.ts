@@ -1,5 +1,3 @@
-import './styles.css';
-
 import { Locale, registerExecutor } from '@custom/schema';
 import { GatsbySSR } from 'gatsby';
 

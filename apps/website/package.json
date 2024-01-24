@@ -5,7 +5,7 @@
     "@amazeelabs/bridge-gatsby": "^1.2.7",
     "@amazeelabs/cloudinary-responsive-image": "^1.6.15",
     "@amazeelabs/gatsby-plugin-operations": "^1.1.3",
-    "@amazeelabs/gatsby-silverback-cloudinary": "^1.2.7",
+    "@amazeelabs/gatsby-plugin-static-dirs": "^1.0.1",
     "@amazeelabs/gatsby-source-silverback": "^1.13.10",
     "@amazeelabs/publisher": "^2.4.17",
     "@amazeelabs/strangler-netlify": "^1.1.9",
@@ -20,13 +20,13 @@
     "gatsby-plugin-robots-txt": "^1.8.0",
     "gatsby-plugin-sharp": "^5.13.0",
     "gatsby-plugin-sitemap": "^6.13.0",
+    "gatsby-plugin-uninline-styles": "^0.2.0",
     "gatsby-source-filesystem": "^5.13.0",
     "image-size": "^1.1.1",
     "mime-types": "^2.1.35",
     "netlify-cli": "^17.11.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "serve-static": "^1.15.0"
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@testing-library/react": "^14.1.2",
@@ -39,8 +39,6 @@
   },
   "scripts": {
     "test:static": "tsc --noEmit && eslint '**/*.{ts,tsx,js,jsx}' --ignore-path='./.gitignore'",
-    "prep": "pnpm run prep:styles",
-    "prep:styles": "rm -f styles.css && cp node_modules/@custom/ui/build/styles.css styles.css",
     "build:gatsby": "pnpm build:dotenv && gatsby build",
     "build:dotenv": "rm -rf .env && echo \"DRUPAL_EXTERNAL_URL='$DRUPAL_EXTERNAL_URL'\nDRUPAL_INTERNAL_URL='$DRUPAL_INTERNAL_URL'\" >> .env",
     "rebuild": "gatsby build",

@@ -11,11 +11,7 @@
         "tsconfig.json",
         "static/public/**"
       ],
-      "outputs": [
-        "build/**/*.js",
-        "../../apps/cms/autoload.json",
-        "../../apps/website/autoload.mjs"
-      ]
+      "outputs": ["build/**/*.js"]
     },
     "prep:types": {
       "dependsOn": ["^prep"],
@@ -32,9 +28,9 @@
       ],
       "outputs": ["build/styles.css"]
     },
-    "prep:cms-css": {
-      "inputs": ["postcss.config.cjs", "tailwind.config.cjs", "cms.css"],
-      "outputs": ["../drupal-themes/custom_iframe/styles.css"]
+    "prep:iframe": {
+      "inputs": ["postcss.config.cjs", "tailwind.config.cjs", "iframe.css"],
+      "outputs": ["build/iframe.css"]
     },
     "prep:gutenberg": {
       "inputs": [
@@ -55,7 +51,7 @@
         "prep:types",
         "prep:scripts",
         "prep:styles",
-        "prep:cms-css",
+        "prep:iframe",
         "prep:gutenberg",
         "prep:i18n"
       ]

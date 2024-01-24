@@ -1,4 +1,4 @@
 global:
   css:
     theme:
-      styles.css: { preprocess: false }
+      /iframe.css: { preprocess: false }

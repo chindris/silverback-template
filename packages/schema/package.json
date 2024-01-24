@@ -15,6 +15,9 @@
     ],
     "./operations": [
       "./build/operations.json"
+    ],
+    "./gatsby-autoload": [
+      "./build/gatsby-autoload.mjs"
     ]
   },
   "typesVersions": {
@@ -24,6 +27,9 @@
       ],
       "/source": [
         "build/generated/source.d.ts"
+      ],
+      "gatsby-autoload": [
+        "src/types/gatsby-autoload.d.ts"
       ]
     }
   },
@@ -43,14 +49,20 @@
     "@graphql-codegen/typescript-operations": "^4.0.1",
     "@swc/cli": "^0.1.62",
     "@swc/core": "^1.3.67",
+    "@types/image-size": "^0.8.0",
+    "@types/node": "^18",
     "concurrently": "^8.2.2",
     "graphql": "16.8.1",
     "typescript": "^5.3.3"
   },
   "dependencies": {
     "@amazeelabs/executors": "^1.1.0",
+    "@amazeelabs/gatsby-silverback-cloudinary": "^1.2.7",
+    "@amazeelabs/gatsby-source-silverback": "^1.13.10",
     "@amazeelabs/scalars": "^1.6.13",
     "@swc/cli": "^0.1.63",
-    "@swc/core": "^1.3.102"
+    "@swc/core": "^1.3.102",
+    "image-size": "^1.1.1",
+    "mime-types": "^2.1.35"
   }
 }
