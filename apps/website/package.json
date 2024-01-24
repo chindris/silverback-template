@@ -20,6 +20,7 @@
     "gatsby-plugin-robots-txt": "^1.8.0",
     "gatsby-plugin-sharp": "^5.13.0",
     "gatsby-plugin-sitemap": "^6.13.0",
+    "gatsby-plugin-uninline-styles": "^0.2.0",
     "gatsby-source-filesystem": "^5.13.0",
     "image-size": "^1.1.1",
     "mime-types": "^2.1.35",

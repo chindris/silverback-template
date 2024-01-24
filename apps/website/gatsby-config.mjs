@@ -38,6 +38,7 @@ export default {
     siteUrl: process.env.NETLIFY_URL,
   },
   plugins: [
+    'gatsby-plugin-uninline-styles',
     'gatsby-plugin-pnpm',
     'gatsby-plugin-layout',
     'gatsby-plugin-sharp',
