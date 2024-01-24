@@ -1,7 +1,7 @@
 import { Url } from '@custom/schema';
 import { Meta, StoryObj } from '@storybook/react';
 
-import cmsCss from '../../../../iframe.css?inline';
+import cmsCss from '../../../iframe.css?inline';
 import { BlockForm } from './BlockForm';
 
 export default {

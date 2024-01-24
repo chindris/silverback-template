@@ -7,6 +7,9 @@ import { resolve, dirname } from 'path';
 const config: StorybookConfig = {
   viteFinal: (config, { configType }) =>
     mergeConfig(config, {
+      css: {
+        postcss: 'src',
+      },
       resolve: {
         alias: {
           '@amazeelabs/bridge': '@amazeelabs/bridge-storybook',
