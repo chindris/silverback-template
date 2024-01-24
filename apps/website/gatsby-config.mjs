@@ -74,7 +74,6 @@ export default {
         sources: { getPages: getPages(dir) },
       },
     },
-    '@amazeelabs/gatsby-silverback-cloudinary',
     {
       resolve: 'gatsby-plugin-netlify',
       options: {
