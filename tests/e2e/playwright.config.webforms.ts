@@ -5,6 +5,7 @@ import defaults from './playwright.config';
 export default defineConfig({
   ...defaults,
   testDir: './webform-snapshots',
+  reporter: 'list',
   webServer: [
     {
       command: 'pnpm run --filter "@custom/cms" start',
