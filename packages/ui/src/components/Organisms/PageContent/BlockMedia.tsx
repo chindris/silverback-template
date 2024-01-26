@@ -13,7 +13,7 @@ export function BlockMedia(props: BlockMediaFragment) {
       <figure className="mt-16 mx-auto max-w-3xl">
         <Media {...props.media} />
         {props.caption ? (
-          <figcaption className="mt-4 flex gap-x-2 text-sm leading-6 text-gray-500">
+          <figcaption className="mt-4 flex gap-x-2 text-sm leading-6 text-red-500">
             <Html markup={props.caption} />
           </figcaption>
         ) : null}
