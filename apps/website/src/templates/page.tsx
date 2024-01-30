@@ -1,10 +1,5 @@
 import { graphql } from '@amazeelabs/gatsby-plugin-operations';
-import {
-  Locale,
-  PageListEntryFragment,
-  registerExecutor,
-  ViewPageQuery,
-} from '@custom/schema';
+import { registerExecutor, useLocation, ViewPageQuery } from '@custom/schema';
 import { Page } from '@custom/ui/routes/Page';
 import { HeadProps, PageProps } from 'gatsby';
 import React from 'react';
@@ -39,19 +34,12 @@ export function Head({ data }: HeadProps<typeof query>) {
   ) : null;
 }
 
-export default function PageTemplate({
-  data,
-  pageContext,
-}: PageProps<typeof query, PageListEntryFragment>) {
-  registerExecutor(
-    ViewPageQuery,
-    {
-      id: pageContext.id,
-      locale: pageContext.locale,
-    },
-    data,
-  );
-  return (
-    <Page id={pageContext.id} locale={(pageContext.locale || 'en') as Locale} />
-  );
+export default function PageTemplate({ data }: PageProps<typeof query>) {
+  // Retrieve the current location and prefill the
+  // "ViewPageQuery" with these arguments.
+  // That makes shure the `useOperation(ViewPageQuery, ...)` with this
+  // path immediately returns this data.
+  const [loc] = useLocation();
+  registerExecutor(ViewPageQuery, { pathname: loc.pathname }, data);
+  return <Page />;
 }

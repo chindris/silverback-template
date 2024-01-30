@@ -2,6 +2,7 @@ import { graphql } from '@amazeelabs/gatsby-plugin-operations';
 import {
   NotFoundPageQuery,
   registerExecutor,
+  useLocation,
   ViewPageQuery,
 } from '@custom/schema';
 import { Page } from '@custom/ui/routes/Page';
@@ -20,14 +21,14 @@ function isTruthy<T>(value: T | undefined | null): value is T {
 }
 
 export default function Index({ data }: PageProps<typeof query>) {
+  const [loc] = useLocation();
   data.websiteSettings?.notFoundPage?.translations
     ?.filter(isTruthy)
-    .forEach(({ id, locale, ...page }) => {
+    .forEach(({ ...page }) => {
       registerExecutor(
         ViewPageQuery,
         {
-          id,
-          locale,
+          pathname: loc.pathname,
         },
         {
           page,
@@ -38,9 +39,9 @@ export default function Index({ data }: PageProps<typeof query>) {
     <LanguageNegotiator defaultLanguage={'en'}>
       {data.websiteSettings?.notFoundPage?.translations
         ?.filter(isTruthy)
-        .map(({ id, locale }) => (
+        .map(({ locale }) => (
           <LanguageNegotiatorContent key={locale} language={locale}>
-            <Page id={id} locale={locale} />
+            <Page />
           </LanguageNegotiatorContent>
         ))}
     </LanguageNegotiator>
