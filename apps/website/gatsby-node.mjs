@@ -46,15 +46,11 @@ export const createPages = async ({ actions }) => {
   const pages = await graphqlQuery(ListPagesQuery);
 
   // Create a gatsby page for each of these pages.
-  pages.data?.allPages?.filter(isDefined).forEach(({ id, path, locale }) => {
-    const context = {
-      id,
-      locale,
-    };
+  pages.data?.allPages?.filter(isDefined).forEach(({ path, locale }) => {
     actions.createPage({
       path: path,
       component: resolve(`./src/templates/page.tsx`),
-      context,
+      context: { pathname: path, locale },
     });
   });
 
@@ -81,16 +77,11 @@ export const createPages = async ({ actions }) => {
         // Create a page at the "front" path.
         const frontPath =
           frontPageLocalizations.length > 1 ? `/${locale}` : '/';
-        const context = {
-          id,
-          locale,
-          localizations:
-            frontPageLocalizations.length > 1 ? frontPageLocalizations : [],
-        };
+
         actions.createPage({
           path: frontPath,
           component: resolve(`./src/templates/page.tsx`),
-          context,
+          context: { pathname: path },
         });
         // Delete the page at the original path.
         actions.deletePage({
