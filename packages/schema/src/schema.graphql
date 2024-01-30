@@ -12,6 +12,8 @@ directive @imageProps repeatable on FIELD_DEFINITION | SCALAR | UNION | ENUM | I
 
 """
 Retrieve a page from the Gatsby datastore by its path. foo
+
+implementation(gatsby): ./page.js#pageByPath
 """
 directive @gatsbyPageByPath(path: String!) on FIELD_DEFINITION
 
