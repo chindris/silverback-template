@@ -153,9 +153,3 @@ export const createPages = async ({ actions }) => {
     statusCode: 200,
   });
 };
-
-// TODO: Move to shared package.
-/**
- * @type Record<string, string>
- */
-const staticDirectories = {};
