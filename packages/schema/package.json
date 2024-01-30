@@ -52,6 +52,7 @@
     "@types/image-size": "^0.8.0",
     "@types/node": "^18",
     "concurrently": "^8.2.2",
+    "gatsby": "^5.13.1",
     "graphql": "16.8.1",
     "typescript": "^5.3.3"
   },
