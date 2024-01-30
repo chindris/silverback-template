@@ -24,16 +24,16 @@ CMS.init({
           name: 'test-repo',
         }
       : window.location.hostname === 'localhost'
-      ? // On localhost, use the proxy backend.
-        {
-          name: 'proxy',
-          proxy_url: 'http://localhost:8081/api/v1',
-        }
-      : // Otherwise, its production. Use the Git Gateway backend.
-        {
-          name: 'git-gateway',
-          branch: 'release',
-        },
+        ? // On localhost, use the proxy backend.
+          {
+            name: 'proxy',
+            proxy_url: 'http://localhost:8081/api/v1',
+          }
+        : // Otherwise, its production. Use the Git Gateway backend.
+          {
+            name: 'git-gateway',
+            branch: 'release',
+          },
     i18n: {
       structure: 'single_file',
       locales: ['en', 'de'],
@@ -71,7 +71,7 @@ CMS.registerPreviewTemplate(
     pageSchema,
     (data) => {
       registerExecutor(ViewPageQuery, { page: data.preview });
-      return <Page id="preview" locale="en" />;
+      return <Page />;
     },
     'previewDecapPage',
   ),

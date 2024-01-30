@@ -1,4 +1,4 @@
-import { ViewPageQuery } from '@custom/schema';
+import { useLocation, ViewPageQuery } from '@custom/schema';
 import React from 'react';
 
 import { isTruthy } from '../../utils/isTruthy';
@@ -10,8 +10,12 @@ import { BlockMarkup } from '../Organisms/PageContent/BlockMarkup';
 import { BlockMedia } from '../Organisms/PageContent/BlockMedia';
 import { PageHero } from '../Organisms/PageHero';
 
-export function Page(props: { id: string; locale: string }) {
-  const { data } = useOperation(ViewPageQuery, props);
+export function Page() {
+  // Retrieve the current location and load the page
+  // behind it.
+  const [loc] = useLocation();
+  const { data } = useOperation(ViewPageQuery, { pathname: loc.pathname });
+  data?.page;
   return data?.page ? (
     <PageTransition>
       <div>
@@ -36,5 +40,7 @@ export function Page(props: { id: string; locale: string }) {
         </div>
       </div>
     </PageTransition>
-  ) : null;
+  ) : (
+    <div>No page found for {loc.pathname}</div>
+  );
 }

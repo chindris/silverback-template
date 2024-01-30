@@ -10,6 +10,11 @@ implementation(gatsby): ./image.js#imageProps
 """
 directive @imageProps repeatable on FIELD_DEFINITION | SCALAR | UNION | ENUM | INTERFACE | OBJECT
 
+"""
+Retrieve a page from the Gatsby datastore by its path. foo
+"""
+directive @gatsbyPageByPath(path: String!) on FIELD_DEFINITION
+
 enum Locale @default @value(json: "\"en\"") {
   en
   de
@@ -173,9 +178,10 @@ type Query {
 
   allPages: [Page] @gatsbyNodes(type: "Page")
   websiteSettings: WebsiteSettings
-  viewPage(id: ID!, rid: ID, locale: String!): Page
-    @fetchEntity(type: "node", id: "$id", rid: "$rid", language: "$locale")
-    @gatsbyNode(type: "Page", id: "$id")
+  viewPage(path: String!): Page
+    @route(path: "$path")
+    @fetchEntity
+    @gatsbyPageByPath(path: "$path")
 
   contentHub(query: String, pagination: PaginationInput!): ContentHubResult!
     @contentHub(query: "$query", pagination: "$pagination")

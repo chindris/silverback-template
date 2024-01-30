@@ -22,7 +22,7 @@ export const ContentPage = (() => {
   registerExecutor(ViewPageQuery, () => PageStory.args);
   return (
     <Frame>
-      <Page id="1" locale="en" />
+      <Page />
     </Frame>
   );
 }) satisfies StoryFn;
