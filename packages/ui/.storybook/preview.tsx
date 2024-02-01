@@ -1,9 +1,9 @@
 import '../src/tailwind.css';
 
 import { Decorator } from '@storybook/react';
-import { IntlProvider } from '../src/utils/intl';
 import { clearRegistry, LocationProvider } from '@custom/schema';
 import React from 'react';
+import { IntlProvider } from 'react-intl';
 import { SWRConfig, useSWRConfig } from 'swr';
 
 // Every story is wrapped in an IntlProvider by default.

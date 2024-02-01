@@ -5,9 +5,8 @@ import {
 } from '@heroicons/react/20/solid';
 import clsx from 'clsx';
 import React from 'react';
+import { useIntl } from 'react-intl';
 import { z } from 'zod';
-
-import { useIntl } from '../../utils/intl';
 
 export const paginationParamsSchema = z.object({
   page: z.coerce.number().default(1),
