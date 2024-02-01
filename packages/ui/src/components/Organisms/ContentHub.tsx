@@ -1,7 +1,7 @@
 import { ContentHubQuery, Image, Link } from '@custom/schema';
 import React from 'react';
+import { useIntl } from 'react-intl';
 
-import { useIntl } from '../../utils/intl';
 import { isTruthy } from '../../utils/isTruthy';
 import { useOperation } from '../../utils/operation';
 import { Pagination, useCurrentPage } from '../Molecules/Pagination';

@@ -398,9 +398,6 @@ importers:
 
   packages/ui:
     dependencies:
-      '@amazeelabs/react-intl-rsc':
-        specifier: ^1.1.18
-        version: 1.1.18(react@18.2.0)
       '@amazeelabs/silverback-iframe':
         specifier: ^1.3.0
         version: 1.3.0(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
@@ -431,6 +428,9 @@ importers:
       react-hook-form:
         specifier: ^7.49.2
         version: 7.49.2(react@18.2.0)
+      react-intl:
+        specifier: ^6.6.2
+        version: 6.6.2(react@18.2.0)(typescript@5.3.3)
       swr:
         specifier: ^2.2.4
         version: 2.2.4(react@18.2.0)
@@ -482,7 +482,7 @@ importers:
         version: 8.0.0-alpha.14(jest@29.7.0)(vitest@1.1.1)
       '@storybook/test-runner':
         specifier: ^0.16.0
-        version: 0.16.0
+        version: 0.16.0(@types/node@18.19.4)
       '@swc/cli':
         specifier: ^0.1.63
         version: 0.1.63(@swc/core@1.3.102)
@@ -578,7 +578,7 @@ importers:
         version: 5.3.3
       vite:
         specifier: ^5.0.10
-        version: 5.0.10
+        version: 5.0.10(@types/node@18.19.4)
       vite-imagetools:
         specifier: ^6.2.9
         version: 6.2.9
@@ -587,7 +587,7 @@ importers:
         version: 1.0.3
       vitest:
         specifier: ^1.1.1
-        version: 1.1.1(happy-dom@12.10.3)
+        version: 1.1.1(@types/node@18.19.4)(happy-dom@12.10.3)
 
   tests/e2e:
     devDependencies:
@@ -953,18 +953,6 @@ packages:
       - tedious
       - typescript
       - utf-8-validate
-    dev: false
-
-  /@amazeelabs/react-intl-rsc@1.1.18(react@18.2.0):
-    resolution: {integrity: sha512-bvM+A6z+zKlHzfM0seZICQhYV5x1Ho0vnRup4uyfEu4uqoJ73L85KxRdI6U8CRuSQNNcPqntBnvxQM7YFSw5gg==}
-    peerDependencies:
-      react: ^18.2.0
-    dependencies:
-      react: 18.2.0
-      react-intl: 6.5.5(react@18.2.0)(typescript@5.3.3)
-    optionalDependencies:
-      '@types/react': 18.2.46
-      typescript: 5.3.3
     dev: false
 
   /@amazeelabs/save-webpage@1.1.1:
@@ -3817,6 +3805,14 @@ packages:
     dependencies:
       '@formatjs/intl-localematcher': 0.5.2
       tslib: 2.6.2
+    dev: true
+
+  /@formatjs/ecma402-abstract@1.18.2:
+    resolution: {integrity: sha512-+QoPW4csYALsQIl8GbN14igZzDbuwzcpWrku9nyMXlaqAlwRBgl5V+p0vWMGFqHOw37czNXaP/lEk4wbLgcmtA==}
+    dependencies:
+      '@formatjs/intl-localematcher': 0.5.4
+      tslib: 2.6.2
+    dev: false
 
   /@formatjs/fast-memoize@2.2.0:
     resolution: {integrity: sha512-hnk/nY8FyrL5YxwP9e4r9dqeM6cAbo8PeU9UjyXojZMNvVad2Z06FAVHyR3Ecw6fza+0GH7vdJgiKIVXTMbSBA==}
@@ -3830,26 +3826,43 @@ packages:
       '@formatjs/ecma402-abstract': 1.18.0
       '@formatjs/icu-skeleton-parser': 1.7.0
       tslib: 2.6.2
+    dev: true
+
+  /@formatjs/icu-messageformat-parser@2.7.6:
+    resolution: {integrity: sha512-etVau26po9+eewJKYoiBKP6743I1br0/Ie00Pb/S/PtmYfmjTcOn2YCh2yNkSZI12h6Rg+BOgQYborXk46BvkA==}
+    dependencies:
+      '@formatjs/ecma402-abstract': 1.18.2
+      '@formatjs/icu-skeleton-parser': 1.8.0
+      tslib: 2.6.2
+    dev: false
 
   /@formatjs/icu-skeleton-parser@1.7.0:
     resolution: {integrity: sha512-Cfdo/fgbZzpN/jlN/ptQVe0lRHora+8ezrEeg2RfrNjyp+YStwBy7cqDY8k5/z2LzXg6O0AdzAV91XS0zIWv+A==}
     dependencies:
       '@formatjs/ecma402-abstract': 1.18.0
       tslib: 2.6.2
+    dev: true
 
-  /@formatjs/intl-displaynames@6.6.4:
-    resolution: {integrity: sha512-ET8KQ+L9Q0K8x1SnJQa4DNssUcbATlMopWqYvGGR8yAvw5qwAQc1fv+DshCoZNIE9pbcue0IGC4kWNAkWqlFag==}
+  /@formatjs/icu-skeleton-parser@1.8.0:
+    resolution: {integrity: sha512-QWLAYvM0n8hv7Nq5BEs4LKIjevpVpbGLAJgOaYzg9wABEoX1j0JO1q2/jVkO6CVlq0dbsxZCngS5aXbysYueqA==}
     dependencies:
-      '@formatjs/ecma402-abstract': 1.18.0
-      '@formatjs/intl-localematcher': 0.5.2
+      '@formatjs/ecma402-abstract': 1.18.2
       tslib: 2.6.2
     dev: false
 
-  /@formatjs/intl-listformat@7.5.3:
-    resolution: {integrity: sha512-l7EOr0Yh1m8KagytukB90yw81uyzrM7amKFrgxXqphz4KeSIL0KPa68lPsdtZ+JmQB73GaDQRwLOwUKFZ1VZPQ==}
+  /@formatjs/intl-displaynames@6.6.6:
+    resolution: {integrity: sha512-Dg5URSjx0uzF8VZXtHb6KYZ6LFEEhCbAbKoYChYHEOnMFTw/ZU3jIo/NrujzQD2EfKPgQzIq73LOUvW6Z/LpFA==}
     dependencies:
-      '@formatjs/ecma402-abstract': 1.18.0
-      '@formatjs/intl-localematcher': 0.5.2
+      '@formatjs/ecma402-abstract': 1.18.2
+      '@formatjs/intl-localematcher': 0.5.4
+      tslib: 2.6.2
+    dev: false
+
+  /@formatjs/intl-listformat@7.5.5:
+    resolution: {integrity: sha512-XoI52qrU6aBGJC9KJddqnacuBbPlb/bXFN+lIFVFhQ1RnFHpzuFrlFdjD9am2O7ZSYsyqzYRpkVcXeT1GHkwDQ==}
+    dependencies:
+      '@formatjs/ecma402-abstract': 1.18.2
+      '@formatjs/intl-localematcher': 0.5.4
       tslib: 2.6.2
     dev: false
 
@@ -3857,21 +3870,28 @@ packages:
     resolution: {integrity: sha512-txaaE2fiBMagLrR4jYhxzFO6wEdEG4TPMqrzBAcbr4HFUYzH/YC+lg6OIzKCHm8WgDdyQevxbAAV1OgcXctuGw==}
     dependencies:
       tslib: 2.6.2
+    dev: true
 
-  /@formatjs/intl@2.9.9(typescript@5.3.3):
-    resolution: {integrity: sha512-JI3CNgL2Zdg5lv9ncT2sYKqbAj2RGrCbdzaCckIxMPxn4QuHuOVvYUGmBAXVusBmfG/0sxLmMrnwnBioz+QKdA==}
+  /@formatjs/intl-localematcher@0.5.4:
+    resolution: {integrity: sha512-zTwEpWOzZ2CiKcB93BLngUX59hQkuZjT2+SAQEscSm52peDW/getsawMcWF1rGRpMCX6D7nSJA3CzJ8gn13N/g==}
+    dependencies:
+      tslib: 2.6.2
+    dev: false
+
+  /@formatjs/intl@2.10.0(typescript@5.3.3):
+    resolution: {integrity: sha512-X3xT9guVkKDS86EKV80lS0KxoazUglkJTGZO66sKY7otgl0VeStPA8B3u8UkKT47PexVV98fUzjpkchYmbe9nw==}
     peerDependencies:
-      typescript: '5'
+      typescript: ^4.7 || 5
     peerDependenciesMeta:
       typescript:
         optional: true
     dependencies:
-      '@formatjs/ecma402-abstract': 1.18.0
+      '@formatjs/ecma402-abstract': 1.18.2
       '@formatjs/fast-memoize': 2.2.0
-      '@formatjs/icu-messageformat-parser': 2.7.3
-      '@formatjs/intl-displaynames': 6.6.4
-      '@formatjs/intl-listformat': 7.5.3
-      intl-messageformat: 10.5.8
+      '@formatjs/icu-messageformat-parser': 2.7.6
+      '@formatjs/intl-displaynames': 6.6.6
+      '@formatjs/intl-listformat': 7.5.5
+      intl-messageformat: 10.5.11
       tslib: 2.6.2
       typescript: 5.3.3
     dev: false
@@ -5250,7 +5270,7 @@ packages:
       magic-string: 0.27.0
       react-docgen-typescript: 2.2.2(typescript@5.3.3)
       typescript: 5.3.3
-      vite: 5.0.10
+      vite: 5.0.10(@types/node@18.19.4)
     dev: true
 
   /@jridgewell/gen-mapping@0.3.3:
@@ -8465,7 +8485,7 @@ packages:
       magic-string: 0.30.5
       rollup: 3.29.4
       typescript: 5.3.3
-      vite: 5.0.10
+      vite: 5.0.10(@types/node@18.19.4)
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -8881,7 +8901,7 @@ packages:
       react: 18.2.0
       react-docgen: 7.0.1
       react-dom: 18.2.0(react@18.2.0)
-      vite: 5.0.10
+      vite: 5.0.10(@types/node@18.19.4)
     transitivePeerDependencies:
       - '@preact/preset-vite'
       - encoding
@@ -8955,7 +8975,7 @@ packages:
       - supports-color
     dev: true
 
-  /@storybook/test-runner@0.16.0:
+  /@storybook/test-runner@0.16.0(@types/node@18.19.4):
     resolution: {integrity: sha512-LDmNbKFoEDW/VS9o6KR8e1r5MnbCc5ZojUfi5yqLdq80gFD7BvilgKgV0lUh/xWHryzoy+Ids5LYgrPJZmU2dQ==}
     engines: {node: ^16.10.0 || ^18.0.0 || >=20.0.0}
     hasBin: true
@@ -8975,7 +8995,7 @@ packages:
       commander: 9.5.0
       expect-playwright: 0.8.0
       glob: 10.3.10
-      jest: 29.7.0
+      jest: 29.7.0(@types/node@18.19.4)
       jest-circus: 29.7.0
       jest-environment-node: 29.7.0
       jest-junit: 16.0.0
@@ -9310,10 +9330,10 @@ packages:
       chalk: 3.0.0
       css.escape: 1.5.1
       dom-accessibility-api: 0.6.3
-      jest: 29.7.0
+      jest: 29.7.0(@types/node@18.19.4)
       lodash: 4.17.21
       redent: 3.0.0
-      vitest: 1.1.1(happy-dom@12.10.3)
+      vitest: 1.1.1(@types/node@18.19.4)(happy-dom@12.10.3)
     dev: true
 
   /@testing-library/react@14.1.2(react-dom@18.2.0)(react@18.2.0):
@@ -10510,7 +10530,7 @@ packages:
       vite: ^4 || ^5
     dependencies:
       '@swc/core': 1.3.102
-      vite: 5.0.10
+      vite: 5.0.10(@types/node@18.19.4)
     transitivePeerDependencies:
       - '@swc/helpers'
     dev: true
@@ -10526,7 +10546,7 @@ packages:
       '@babel/plugin-transform-react-jsx-source': 7.23.3(@babel/core@7.23.7)
       magic-string: 0.27.0
       react-refresh: 0.14.0
-      vite: 5.0.10
+      vite: 5.0.10(@types/node@18.19.4)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -13905,7 +13925,7 @@ packages:
     dependencies:
       '@babel/runtime': 7.23.7
 
-  /create-jest@29.7.0:
+  /create-jest@29.7.0(@types/node@18.19.4):
     resolution: {integrity: sha512-Adz2bdH0Vq3F53KEMJOoftQFutWCukm6J24wbPWRO4k1kMY7gS7ds/uoJkNuV8wDCtWWnuwGcJwpWcih+zEW1Q==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
     hasBin: true
@@ -13914,7 +13934,7 @@ packages:
       chalk: 4.1.2
       exit: 0.1.2
       graceful-fs: 4.2.11
-      jest-config: 29.7.0
+      jest-config: 29.7.0(@types/node@18.19.4)
       jest-util: 29.7.0
       prompts: 2.4.2
     transitivePeerDependencies:
@@ -20191,12 +20211,12 @@ packages:
       hasown: 2.0.0
       side-channel: 1.0.4
 
-  /intl-messageformat@10.5.8:
-    resolution: {integrity: sha512-NRf0jpBWV0vd671G5b06wNofAN8tp7WWDogMZyaU8GUAsmbouyvgwmFJI7zLjfAMpm3zK+vSwRP3jzaoIcMbaA==}
+  /intl-messageformat@10.5.11:
+    resolution: {integrity: sha512-eYq5fkFBVxc7GIFDzpFQkDOZgNayNTQn4Oufe8jw6YY6OHVw70/4pA3FyCsQ0Gb2DnvEJEMmN2tOaXUGByM+kg==}
     dependencies:
-      '@formatjs/ecma402-abstract': 1.18.0
+      '@formatjs/ecma402-abstract': 1.18.2
       '@formatjs/fast-memoize': 2.2.0
-      '@formatjs/icu-messageformat-parser': 2.7.3
+      '@formatjs/icu-messageformat-parser': 2.7.6
       tslib: 2.6.2
     dev: false
 
@@ -21057,7 +21077,7 @@ packages:
       - supports-color
     dev: true
 
-  /jest-cli@29.7.0:
+  /jest-cli@29.7.0(@types/node@18.19.4):
     resolution: {integrity: sha512-OVVobw2IubN/GSYsxETi+gOe7Ka59EFMR/twOU3Jb2GnKKeMGJB5SGUUrEz3SFVmJASUdZUzy83sLNNQ2gZslg==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
     hasBin: true
@@ -21071,10 +21091,10 @@ packages:
       '@jest/test-result': 29.7.0
       '@jest/types': 29.6.3
       chalk: 4.1.2
-      create-jest: 29.7.0
+      create-jest: 29.7.0(@types/node@18.19.4)
       exit: 0.1.2
       import-local: 3.1.0
-      jest-config: 29.7.0
+      jest-config: 29.7.0(@types/node@18.19.4)
       jest-util: 29.7.0
       jest-validate: 29.7.0
       yargs: 17.7.2
@@ -21083,45 +21103,6 @@ packages:
       - babel-plugin-macros
       - supports-color
       - ts-node
-    dev: true
-
-  /jest-config@29.7.0:
-    resolution: {integrity: sha512-uXbpfeQ7R6TZBqI3/TxCU4q4ttk3u0PJeC+E0zbfSoSjq6bJ7buBPxzQPL0ifrkY4DNu4JUdk0ImlBUYi840eQ==}
-    engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
-    peerDependencies:
-      '@types/node': '*'
-      ts-node: '>=9.0.0'
-    peerDependenciesMeta:
-      '@types/node':
-        optional: true
-      ts-node:
-        optional: true
-    dependencies:
-      '@babel/core': 7.23.7
-      '@jest/test-sequencer': 29.7.0
-      '@jest/types': 29.6.3
-      babel-jest: 29.7.0(@babel/core@7.23.7)
-      chalk: 4.1.2
-      ci-info: 3.9.0
-      deepmerge: 4.3.1
-      glob: 7.2.3
-      graceful-fs: 4.2.11
-      jest-circus: 29.7.0
-      jest-environment-node: 29.7.0
-      jest-get-type: 29.6.3
-      jest-regex-util: 29.6.3
-      jest-resolve: 29.7.0
-      jest-runner: 29.7.0
-      jest-util: 29.7.0
-      jest-validate: 29.7.0
-      micromatch: 4.0.5
-      parse-json: 5.2.0
-      pretty-format: 29.7.0
-      slash: 3.0.0
-      strip-json-comments: 3.1.1
-    transitivePeerDependencies:
-      - babel-plugin-macros
-      - supports-color
     dev: true
 
   /jest-config@29.7.0(@types/node@18.19.4):
@@ -21302,7 +21283,7 @@ packages:
       jest-runner: ^29.3.1
     dependencies:
       expect-playwright: 0.8.0
-      jest: 29.7.0
+      jest: 29.7.0(@types/node@18.19.4)
       jest-circus: 29.7.0
       jest-environment-node: 29.7.0
       jest-process-manager: 0.4.0
@@ -21513,7 +21494,7 @@ packages:
     dependencies:
       ansi-escapes: 6.2.0
       chalk: 5.3.0
-      jest: 29.7.0
+      jest: 29.7.0(@types/node@18.19.4)
       jest-regex-util: 29.6.3
       jest-watcher: 29.7.0
       slash: 5.1.0
@@ -21561,7 +21542,7 @@ packages:
       supports-color: 8.1.1
     dev: true
 
-  /jest@29.7.0:
+  /jest@29.7.0(@types/node@18.19.4):
     resolution: {integrity: sha512-NIy3oAFp9shda19hy4HK0HRTWKtPJmGdnvywu01nOqNC2vZg+Z+fvJDxpMQA88eb2I9EcafcdjYgsDthnYTvGw==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
     hasBin: true
@@ -21574,7 +21555,7 @@ packages:
       '@jest/core': 29.7.0
       '@jest/types': 29.6.3
       import-local: 3.1.0
-      jest-cli: 29.7.0
+      jest-cli: 29.7.0(@types/node@18.19.4)
     transitivePeerDependencies:
       - '@types/node'
       - babel-plugin-macros
@@ -26597,24 +26578,24 @@ packages:
       react: 18.2.0
     dev: false
 
-  /react-intl@6.5.5(react@18.2.0)(typescript@5.3.3):
-    resolution: {integrity: sha512-cI5UKvBh4tc1zxLIziHBYGMX3dhYWDEFlvUDVN6NfT2i96zTXz/zH2AmM8+2waqgOhwkFUzd+7kK1G9q7fiC2g==}
+  /react-intl@6.6.2(react@18.2.0)(typescript@5.3.3):
+    resolution: {integrity: sha512-IpW2IkLtGENSFlX3vfH11rjuCIsW0VyjT0Q1pPKMZPtT2z1FxLt4weFT5Ezti2TScT1xiyb3aQBFth9EB7jzAg==}
     peerDependencies:
       react: ^16.6.0 || 17 || 18
-      typescript: '5'
+      typescript: ^4.7 || 5
     peerDependenciesMeta:
       typescript:
         optional: true
     dependencies:
-      '@formatjs/ecma402-abstract': 1.18.0
-      '@formatjs/icu-messageformat-parser': 2.7.3
-      '@formatjs/intl': 2.9.9(typescript@5.3.3)
-      '@formatjs/intl-displaynames': 6.6.4
-      '@formatjs/intl-listformat': 7.5.3
+      '@formatjs/ecma402-abstract': 1.18.2
+      '@formatjs/icu-messageformat-parser': 2.7.6
+      '@formatjs/intl': 2.10.0(typescript@5.3.3)
+      '@formatjs/intl-displaynames': 6.6.6
+      '@formatjs/intl-listformat': 7.5.5
       '@types/hoist-non-react-statics': 3.3.5
       '@types/react': 18.2.46
       hoist-non-react-statics: 3.3.2
-      intl-messageformat: 10.5.8
+      intl-messageformat: 10.5.11
       react: 18.2.0
       tslib: 2.6.2
       typescript: 5.3.3
@@ -31037,27 +31018,6 @@ packages:
       - terser
     optional: true
 
-  /vite-node@1.1.1:
-    resolution: {integrity: sha512-2bGE5w4jvym5v8llF6Gu1oBrmImoNSs4WmRVcavnG2me6+8UQntTqLiAMFyiAobp+ZXhj5ZFhI7SmLiFr/jrow==}
-    engines: {node: ^18.0.0 || >=20.0.0}
-    hasBin: true
-    dependencies:
-      cac: 6.7.14
-      debug: 4.3.4
-      pathe: 1.1.1
-      picocolors: 1.0.0
-      vite: 5.0.10
-    transitivePeerDependencies:
-      - '@types/node'
-      - less
-      - lightningcss
-      - sass
-      - stylus
-      - sugarss
-      - supports-color
-      - terser
-    dev: true
-
   /vite-node@1.1.1(@types/node@18.19.4):
     resolution: {integrity: sha512-2bGE5w4jvym5v8llF6Gu1oBrmImoNSs4WmRVcavnG2me6+8UQntTqLiAMFyiAobp+ZXhj5ZFhI7SmLiFr/jrow==}
     engines: {node: ^18.0.0 || >=20.0.0}
@@ -31092,41 +31052,6 @@ packages:
 
   /vite-plugin-turbosnap@1.0.3:
     resolution: {integrity: sha512-p4D8CFVhZS412SyQX125qxyzOgIFouwOcvjZWk6bQbNPR1wtaEzFT6jZxAjf1dejlGqa6fqHcuCvQea6EWUkUA==}
-    dev: true
-
-  /vite@5.0.10:
-    resolution: {integrity: sha512-2P8J7WWgmc355HUMlFrwofacvr98DAjoE52BfdbwQtyLH06XKwaL/FMnmKM2crF0iX4MpmMKoDlNCB1ok7zHCw==}
-    engines: {node: ^18.0.0 || >=20.0.0}
-    hasBin: true
-    peerDependencies:
-      '@types/node': ^18.0.0 || >=20.0.0
-      less: '*'
-      lightningcss: ^1.21.0
-      sass: '*'
-      stylus: '*'
-      sugarss: '*'
-      terser: ^5.4.0
-    peerDependenciesMeta:
-      '@types/node':
-        optional: true
-      less:
-        optional: true
-      lightningcss:
-        optional: true
-      sass:
-        optional: true
-      stylus:
-        optional: true
-      sugarss:
-        optional: true
-      terser:
-        optional: true
-    dependencies:
-      esbuild: 0.19.11
-      postcss: 8.4.32
-      rollup: 4.9.2
-    optionalDependencies:
-      fsevents: 2.3.3
     dev: true
 
   /vite@5.0.10(@types/node@18.19.4):
@@ -31460,63 +31385,6 @@ packages:
       tinypool: 0.8.1
       vite: 5.0.10(@types/node@18.19.4)
       vite-node: 1.1.1(@types/node@18.19.4)
-      why-is-node-running: 2.2.2
-    transitivePeerDependencies:
-      - less
-      - lightningcss
-      - sass
-      - stylus
-      - sugarss
-      - supports-color
-      - terser
-    dev: true
-
-  /vitest@1.1.1(happy-dom@12.10.3):
-    resolution: {integrity: sha512-Ry2qs4UOu/KjpXVfOCfQkTnwSXYGrqTbBZxw6reIYEFjSy1QUARRg5pxiI5BEXy+kBVntxUYNMlq4Co+2vD3fQ==}
-    engines: {node: ^18.0.0 || >=20.0.0}
-    hasBin: true
-    peerDependencies:
-      '@edge-runtime/vm': '*'
-      '@types/node': ^18.0.0 || >=20.0.0
-      '@vitest/browser': ^1.0.0
-      '@vitest/ui': ^1.0.0
-      happy-dom: '*'
-      jsdom: '*'
-    peerDependenciesMeta:
-      '@edge-runtime/vm':
-        optional: true
-      '@types/node':
-        optional: true
-      '@vitest/browser':
-        optional: true
-      '@vitest/ui':
-        optional: true
-      happy-dom:
-        optional: true
-      jsdom:
-        optional: true
-    dependencies:
-      '@vitest/expect': 1.1.1
-      '@vitest/runner': 1.1.1
-      '@vitest/snapshot': 1.1.1
-      '@vitest/spy': 1.1.1
-      '@vitest/utils': 1.1.1
-      acorn-walk: 8.3.1
-      cac: 6.7.14
-      chai: 4.3.10
-      debug: 4.3.4
-      execa: 8.0.1
-      happy-dom: 12.10.3
-      local-pkg: 0.5.0
-      magic-string: 0.30.5
-      pathe: 1.1.1
-      picocolors: 1.0.0
-      std-env: 3.7.0
-      strip-literal: 1.3.0
-      tinybench: 2.5.1
-      tinypool: 0.8.1
-      vite: 5.0.10
-      vite-node: 1.1.1
       why-is-node-running: 2.2.2
     transitivePeerDependencies:
       - less

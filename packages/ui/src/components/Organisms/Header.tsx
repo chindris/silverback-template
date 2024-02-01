@@ -1,8 +1,8 @@
 import { FrameQuery, Link } from '@custom/schema';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import React from 'react';
+import { useIntl } from 'react-intl';
 
-import { useIntl } from '../../utils/intl';
 import { isTruthy } from '../../utils/isTruthy';
 import { buildNavigationTree } from '../../utils/navigation';
 import { useOperation } from '../../utils/operation';
