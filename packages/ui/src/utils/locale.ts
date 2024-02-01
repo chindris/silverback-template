@@ -1,7 +1,17 @@
-import { Locale } from '@custom/schema';
+import { Locale, useLocation } from '@custom/schema';
 
-import { useIntl } from './intl';
+const locales = Object.values(Locale);
+const defaultLocale: Locale = 'en';
 
+function isLocale(input: any): input is Locale {
+  return locales.includes(input);
+}
+
+/**
+ * Extract the current locale from the path prefix.
+ */
 export function useLocale() {
-  return useIntl().locale as Locale;
+  const [{ pathname }] = useLocation();
+  const prefix = pathname.split('/')[1];
+  return isLocale(prefix) ? prefix : defaultLocale;
 }

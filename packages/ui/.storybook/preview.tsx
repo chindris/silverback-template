@@ -1,7 +1,7 @@
 import '../src/tailwind.css';
 
-import { Decorator } from '@storybook/react';
 import { clearRegistry, LocationProvider } from '@custom/schema';
+import { Decorator } from '@storybook/react';
 import React from 'react';
 import { IntlProvider } from 'react-intl';
 import { SWRConfig, useSWRConfig } from 'swr';
@@ -46,6 +46,7 @@ const SWRCacheDecorator: Decorator = (Story) => {
       value={{
         use: [
           (useSWR) => (key, fetcher, config) => {
+            // eslint-disable-next-line react-hooks/rules-of-hooks
             return useSWR(
               // Make sure SWR caches are unique per story.
               [key, window.__STORYBOOK_PREVIEW__.currentRender.id],

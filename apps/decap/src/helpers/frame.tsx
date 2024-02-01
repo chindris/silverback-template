@@ -1,6 +1,5 @@
 import { FrameQuery, Locale, registerExecutor, Url } from '@custom/schema';
 import { NavigationItemSource } from '@custom/schema/source';
-import { IntlProvider } from '@custom/ui/intl';
 import { Frame } from '@custom/ui/routes/Frame';
 import { PropsWithChildren } from 'react';
 
@@ -12,7 +11,7 @@ const menuItems = (amount: number) =>
         __typename: 'NavigationItem',
         title: `Item ${i + 1}`,
         target: '/' as Url,
-      } satisfies NavigationItemSource),
+      }) satisfies NavigationItemSource,
   );
 
 export function PreviewFrame({ children }: PropsWithChildren) {
@@ -30,9 +29,5 @@ export function PreviewFrame({ children }: PropsWithChildren) {
       },
     ],
   }));
-  return (
-    <IntlProvider locale={'en'}>
-      <Frame>{children}</Frame>
-    </IntlProvider>
-  );
+  return <Frame>{children}</Frame>;
 }
