@@ -7,9 +7,6 @@
     "styles.css"
   ],
   "exports": {
-    "./intl": [
-      "./build/utils/intl/index.js"
-    ],
     "./routes/*": [
       "./build/components/Routes/*.js"
     ],
@@ -21,9 +18,6 @@
     "*": {
       "routes/*": [
         "build/components/Routes/*.d.ts"
-      ],
-      "intl": [
-        "build/utils/intl/index.d.ts"
       ]
     }
   },
