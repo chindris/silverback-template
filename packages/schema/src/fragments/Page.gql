@@ -1,4 +1,6 @@
 fragment Page on Page {
+  locale
+  path
   title
   hero {
     headline

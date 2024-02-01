@@ -1,6 +1,6 @@
-query NotFoundPage {
+query HomePage {
   websiteSettings {
-    notFoundPage {
+    homePage {
       translations {
         ...Page
       }

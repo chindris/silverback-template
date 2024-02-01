@@ -1,5 +1,10 @@
 import { graphqlQuery } from '@amazeelabs/gatsby-plugin-operations';
-import { IndexPagesQuery, ListPagesQuery, Locale } from '@custom/schema';
+import {
+  HomePageQuery,
+  ListPagesQuery,
+  Locale,
+  NotFoundPageQuery,
+} from '@custom/schema';
 import { resolve } from 'path';
 
 /**
@@ -42,69 +47,50 @@ export const createPages = async ({ actions }) => {
     statusCode: 200,
   });
 
+  // Grab Home- and 404 pages.
+  const homePages =
+    (
+      await graphqlQuery(HomePageQuery)
+    ).data.websiteSettings?.homePage?.translations?.filter(isDefined) || [];
+  const notFoundPages =
+    (
+      await graphqlQuery(NotFoundPageQuery)
+    ).data.websiteSettings?.notFoundPage?.translations?.filter(isDefined) || [];
+
+  // Create pages and root-redirects for home-pages.
+  homePages.forEach((page) => {
+    actions.createPage({
+      path: `/${page.locale}`,
+      component: resolve('./src/templates/home.tsx'),
+    });
+    // If a menu link points to the drupal-path of a home page,
+    // it should redirect to the root path with the language prefix.
+    actions.createRedirect({
+      fromPath: page.path,
+      toPath: `/${page.locale}`,
+      statusCode: 301,
+    });
+  });
+
+  // Create a list of paths that we don't want to render regularly.
+  // 404 and homepages are dealt with differrently.
+  const skipPaths = [
+    ...(homePages.map((page) => page.path) || []),
+    ...(notFoundPages.map((page) => page.path) || []),
+  ];
+
   // Run the query that lists all pages, both decap and Drupal.
   const pages = await graphqlQuery(ListPagesQuery);
 
   // Create a gatsby page for each of these pages.
-  pages.data?.allPages?.filter(isDefined).forEach(({ path, locale }) => {
-    actions.createPage({
-      path: path,
-      component: resolve(`./src/templates/page.tsx`),
-      context: { pathname: path, locale },
-    });
-  });
-
-  // Search for index page settings.
-  const settings = await graphqlQuery(IndexPagesQuery);
-
-  if (settings.errors) {
-    settings.errors.map((e) => console.error(e));
-    throw settings.errors;
-  }
-
-  if (settings.data?.websiteSettings?.homePage) {
-    const frontPageLocalizations =
-      settings.data?.websiteSettings?.homePage.translations
-        ?.filter(isDefined)
-        .map(({ locale }) => ({
-          path: `/${locale}`,
-          locale,
-        })) || [];
-
-    settings.data?.websiteSettings?.homePage.translations
-      ?.filter(isDefined)
-      .forEach(({ locale, id, path }) => {
-        // Create a page at the "front" path.
-        const frontPath =
-          frontPageLocalizations.length > 1 ? `/${locale}` : '/';
-
-        actions.createPage({
-          path: frontPath,
-          component: resolve(`./src/templates/page.tsx`),
-          context: { pathname: path },
-        });
-        // Delete the page at the original path.
-        actions.deletePage({
-          path,
-          component: resolve(`./src/templates/page.tsx`),
-        });
-        // Create a redirect from the original path to the "front" path.
-        actions.createRedirect({
-          fromPath: path,
-          toPath: frontPath,
-          isPermanent: true,
-          force: true,
-        });
-      });
-  }
-
-  // Remove 404 pages. We handle them in src/pages/404.tsx
-  settings.data?.websiteSettings?.notFoundPage?.translations
+  pages.data?.allPages
     ?.filter(isDefined)
+    .filter((page) => !skipPaths.includes(page.path))
     .forEach(({ path }) => {
-      actions.deletePage({
-        path,
+      actions.createPage({
+        path: path,
         component: resolve(`./src/templates/page.tsx`),
+        context: { pathname: path },
       });
     });
 
@@ -125,6 +111,7 @@ export const createPages = async ({ actions }) => {
       statusCode: 200,
     });
   });
+
   // Additionally proxy themes and modules as they can have additional
   // non-aggregated assets.
   ['themes', 'modules'].forEach((path) => {
