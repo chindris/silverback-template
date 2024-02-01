@@ -14,6 +14,8 @@ export { clearRegistry } from '@amazeelabs/executors';
 export * from './generated/index.js';
 export * from '@amazeelabs/scalars';
 
+export * from './locale.js';
+
 type Executor<OperationId extends AnyOperationId> =
   | OperationResult<OperationId>
   | ((
