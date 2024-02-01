@@ -1,4 +1,6 @@
-import { Locale, useLocation } from '@custom/schema';
+import { useLocation } from '@amazeelabs/scalars';
+
+import { Locale } from './generated/index.js';
 
 const locales = Object.values(Locale);
 const defaultLocale: Locale = 'en';

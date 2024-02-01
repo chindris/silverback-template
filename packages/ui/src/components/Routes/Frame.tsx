@@ -1,8 +1,8 @@
+import { useLocale } from '@custom/schema';
 import { AnimatePresence, useReducedMotion } from 'framer-motion';
 import React, { PropsWithChildren } from 'react';
 import { IntlProvider } from 'react-intl';
 
-import { useLocale } from '../../utils/locale';
 import { Footer } from '../Organisms/Footer';
 import { Header } from '../Organisms/Header';
 

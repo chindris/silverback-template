@@ -1,7 +1,6 @@
-import { HomePageQuery } from '@custom/schema';
+import { HomePageQuery, useLocalized } from '@custom/schema';
 import React from 'react';
 
-import { useLocalized } from '../../utils/locale';
 import { useOperation } from '../../utils/operation';
 import { PageDisplay } from '../Organisms/PageDisplay';
 
