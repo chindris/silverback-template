@@ -39,7 +39,7 @@ export default function PageTemplate({ data }: PageProps<typeof query>) {
   // "ViewPageQuery" with these arguments.
   // That makes shure the `useOperation(ViewPageQuery, ...)` with this
   // path immediately returns this data.
-  const [loc] = useLocation();
-  registerExecutor(ViewPageQuery, { pathname: loc.pathname }, data);
+  const [location] = useLocation();
+  registerExecutor(ViewPageQuery, { pathname: location.pathname }, data);
   return <Page />;
 }
