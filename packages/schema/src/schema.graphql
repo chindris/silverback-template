@@ -11,7 +11,7 @@ implementation(gatsby): ./image.js#imageProps
 directive @imageProps repeatable on FIELD_DEFINITION | SCALAR | UNION | ENUM | INTERFACE | OBJECT
 
 """
-Retrieve a page from the Gatsby datastore by its path. foo
+Retrieve a page from the Gatsby datastore by its path.
 
 implementation(gatsby): ./page.js#pageByPath
 """
