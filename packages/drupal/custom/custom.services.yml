@@ -10,3 +10,7 @@ services:
   custom.webform:
     class: Drupal\custom\Webform
     arguments: ['@renderer', '@entity_type.manager']
+
+  custom.page:
+    class: Drupal\custom\Page
+    arguments: ['@path.validator', '@redirect.repository', '@entity_type.manager']

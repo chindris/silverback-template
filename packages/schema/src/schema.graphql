@@ -14,8 +14,9 @@ directive @imageProps repeatable on FIELD_DEFINITION | SCALAR | UNION | ENUM | I
 Retrieve a page from the Gatsby datastore by its path.
 
 implementation(gatsby): ./page.js#pageByPath
+implementation(drupal): custom.page::byPath
 """
-directive @gatsbyPageByPath(path: String!) on FIELD_DEFINITION
+directive @pageByPath(path: String!) on FIELD_DEFINITION
 
 enum Locale @default @value(json: "\"en\"") {
   en
@@ -180,10 +181,7 @@ type Query {
 
   allPages: [Page] @gatsbyNodes(type: "Page")
   websiteSettings: WebsiteSettings
-  viewPage(path: String!): Page
-    @route(path: "$path")
-    @fetchEntity
-    @gatsbyPageByPath(path: "$path")
+  viewPage(path: String!): Page @pageByPath(path: "$path")
 
   contentHub(query: String, pagination: PaginationInput!): ContentHubResult!
     @contentHub(query: "$query", pagination: "$pagination")
