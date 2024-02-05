@@ -40,5 +40,11 @@ export const route: GraphQLFieldResolver<
   { nodeModel: any },
   { path: string }
 > = (_, { path }) => {
-  return new URL(path, process.env.NETLIFY_URL || 'https://localhost:8000');
+  try {
+    return new URL(path, process.env.NETLIFY_URL || 'https://localhost:8000');
+  } catch (e) {
+    console.warn(`Invalid url "${path}".`);
+    console.warn(e);
+    return new URL('/', process.env.NETLIFY_URL || 'https://localhost:8000');
+  }
 };
