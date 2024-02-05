@@ -1,5 +1,5 @@
-query ViewPage($id: ID!, $rid: ID, $locale: String!) {
-  page: viewPage(id: $id, rid: $rid, locale: $locale) {
+query ViewPage($pathname: String!) {
+  page: viewPage(path: $pathname) {
     ...Page
   }
 }

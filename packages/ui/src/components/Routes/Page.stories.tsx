@@ -1,4 +1,4 @@
-import { registerExecutor, ViewPageQuery } from '@custom/schema';
+import { registerExecutor, Url, ViewPageQuery } from '@custom/schema';
 import Landscape from '@stories/landscape.jpg?as=metadata';
 import { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
@@ -15,11 +15,13 @@ export default {
 export const Default = {
   render: (args) => {
     registerExecutor(ViewPageQuery, () => args);
-    return <Page id="1" locale="en" />;
+    return <Page />;
   },
   args: {
     page: {
       title: 'Page Title',
+      locale: 'en',
+      path: '/test' as Url,
       hero: {
         headline: 'Page Hero Headline',
       },

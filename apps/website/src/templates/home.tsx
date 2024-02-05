@@ -1,16 +1,17 @@
 import { graphql } from '@amazeelabs/gatsby-plugin-operations';
-import { registerExecutor, useLocation, ViewPageQuery } from '@custom/schema';
-import { Page } from '@custom/ui/routes/Page';
+import { HomePageQuery, registerExecutor, useLocalized } from '@custom/schema';
+import { HomePage } from '@custom/ui/routes/HomePage';
 import { HeadProps, PageProps } from 'gatsby';
 import React from 'react';
 
-export const query = graphql(ViewPageQuery);
+export const query = graphql(HomePageQuery);
 
 export function Head({ data }: HeadProps<typeof query>) {
-  return data.page ? (
+  const page = useLocalized(data.websiteSettings?.homePage?.translations);
+  return page ? (
     <>
-      <title>{data.page.title}</title>
-      {data.page.metaTags?.map((metaTag, index) => {
+      <title>{page.title}</title>
+      {page.metaTags?.map((metaTag, index) => {
         if (metaTag?.tag === 'meta') {
           return (
             <meta
@@ -34,12 +35,7 @@ export function Head({ data }: HeadProps<typeof query>) {
   ) : null;
 }
 
-export default function PageTemplate({ data }: PageProps<typeof query>) {
-  // Retrieve the current location and prefill the
-  // "ViewPageQuery" with these arguments.
-  // That makes shure the `useOperation(ViewPageQuery, ...)` with this
-  // path immediately returns this data.
-  const [location] = useLocation();
-  registerExecutor(ViewPageQuery, { pathname: location.pathname }, data);
-  return <Page />;
+export default function Index({ data }: PageProps<typeof query>) {
+  registerExecutor(HomePageQuery, {}, data);
+  return <HomePage />;
 }

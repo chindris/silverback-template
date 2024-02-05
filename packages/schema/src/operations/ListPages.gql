@@ -1,11 +1,5 @@
-fragment PageListEntry on Page {
-  id
-  locale
-  path
-}
-
 query ListPages {
   allPages {
-    ...PageListEntry
+    path
   }
 }

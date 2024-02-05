@@ -25,7 +25,7 @@ export default function PagePreview() {
       });
       return { page: data.preview };
     });
-    return <Page id="preview" locale="en" />;
+    return <Page />;
   }
   return null;
 }
