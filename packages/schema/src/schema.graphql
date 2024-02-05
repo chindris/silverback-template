@@ -11,11 +11,28 @@ implementation(gatsby): ./image.js#imageProps
 directive @imageProps repeatable on FIELD_DEFINITION | SCALAR | UNION | ENUM | INTERFACE | OBJECT
 
 """
-Retrieve a page from the Gatsby datastore by its path.
+Retrieve an entity from the Gatsby datastore.
+For Drupal, this is implicitly implemented in the "graphql_directives" module.
 
-implementation(gatsby): ./page.js#pageByPath
+implementation(gatsby): ./page.js#loadEntity
 """
-directive @gatsbyPageByPath(path: String!) on FIELD_DEFINITION
+directive @loadEntity(
+  route: String
+  type: String
+  uuid: String
+  id: String
+  operation: String
+) repeatable on FIELD_DEFINITION | SCALAR | UNION | ENUM | INTERFACE | OBJECT
+
+"""
+Parse a given Url.
+For Drupal, this is implicitly implemented in the "grraphql_directives" module.
+
+implementation(gatsby): ./page.js#route
+"""
+directive @route(
+  path: String!
+) repeatable on FIELD_DEFINITION | SCALAR | UNION | ENUM | INTERFACE | OBJECT
 
 enum Locale @default @value(json: "\"en\"") {
   en
@@ -180,10 +197,7 @@ type Query {
 
   allPages: [Page] @gatsbyNodes(type: "Page")
   websiteSettings: WebsiteSettings
-  viewPage(path: String!): Page
-    @route(path: "$path")
-    @fetchEntity
-    @gatsbyPageByPath(path: "$path")
+  viewPage(path: String!): Page @route(path: "$path") @loadEntity
 
   contentHub(query: String, pagination: PaginationInput!): ContentHubResult!
     @contentHub(query: "$query", pagination: "$pagination")
