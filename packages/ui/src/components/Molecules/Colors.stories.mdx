@@ -1,0 +1,32 @@
+import { Meta, ColorPalette, ColorItem } from "@storybook/blocks"
+import tailwindConfig from '../../stylingAssets.json';
+
+
+<Meta title="Theme/Styling & Theming/Colors" />
+
+# Colors
+
+  {tailwindConfig.theme?.colors ? (
+  <ColorPalette>
+    {Object.entries(tailwindConfig.theme.colors).map(([key, value]) => {
+      if (typeof value === "string") {
+        return <ColorItem key={key} title={key} colors={{ [key]: value }} />;
+      } else if (typeof value === "object") {
+        // Handle nested colors
+        return (
+          <div key={key}>
+            <br/><br/>
+              {Object.entries(value).map(([nestedKey, nestedValue]) => (
+                <ColorItem
+                  key={`${key}-${nestedKey}`}
+                  title={`${key}-${nestedKey}`}
+                  colors={{ [nestedKey]: nestedValue }}
+                />
+              ))}
+          </div>
+        );
+      }
+      return null;
+    })}
+  </ColorPalette>
+  ) : <span>There are no Colors defined in the tailwind config</span>}
