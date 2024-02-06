@@ -38,7 +38,9 @@
     "watch:codegen": "graphql-codegen --verbose --watch",
     "watch:swc": "swc ./src -d ./build --watch",
     "watch:tsc": "tsc --emitDeclarationOnly --watch",
-    "prep": "graphql-codegen --verbose && swc ./src -d ./build && tsc --emitDeclarationOnly"
+    "prep:codegen": "graphql-codegen --verbose",
+    "prep:scripts": "swc ./src -d ./build",
+    "prep:types": "tsc --emitDeclarationOnly"
   },
   "devDependencies": {
     "@amazeelabs/codegen-autoloader": "^1.1.3",
