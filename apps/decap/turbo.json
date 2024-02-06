@@ -1,8 +1,38 @@
 {
-  "extends": ["//"],
+  "$schema": "https://turborepo.org/schema.json",
+  "extends": [
+    "//"
+  ],
   "pipeline": {
+    "prep:vite": {
+      "dependsOn": [
+        "^prep"
+      ],
+      "inputs": [
+        "src/**",
+        "vite.config.js"
+      ],
+      "outputs": [
+        "build/**"
+      ]
+    },
+    "prep:scripts": {
+      "dependsOn": [
+        "^prep"
+      ],
+      "inputs": [
+        "src/**",
+        "tsup.config.js"
+      ],
+      "outputs": [
+        "dist/**"
+      ]
+    },
     "prep": {
-      "outputs": ["dist/**", "build/**"]
+      "dependsOn": [
+        "prep:vite",
+        "prep:scripts"
+      ]
     }
   }
 }
