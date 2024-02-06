@@ -1,19 +1,52 @@
 {
   "$schema": "https://turborepo.org/schema.json",
-  "extends": ["//"],
+  "extends": [
+    "//"
+  ],
   "pipeline": {
-    "prep": {
-      "dependsOn": ["@custom/cms#prep:composer"],
+    "prep:codegen": {
+      "dependsOn": [
+        "@custom/cms#prep:composer"
+      ],
       "inputs": [
-        "../../apps/website/node_modules/@amazeelabs/*/directives.graphql",
-        "../../apps/cms/web/modules/contrib/*/directives.graphql",
-        "../../apps/cms/web/modules/custom/*/directives.graphql",
-        "src/**",
         "codegen.ts",
         ".graphqlrc.json",
-        "tsconfig.json"
+        "src/**/*.gql",
+        "src/**/*.graphql",
+        "src/**/*.graphqls"
       ],
-      "outputs": ["build/**"]
+      "outputs": [
+        "build/schema.graphql",
+        "build/operations.json",
+        "build/gatsby-autoload.mjs",
+        "build/drupal-autoload.json",
+        "src/generated/index.ts",
+        "src/generated/source.ts"
+      ]
+    },
+    "prep:scripts": {
+      "dependsOn": [
+        "prep:codegen"
+      ],
+      "inputs": [
+        "tsconfig.json",
+        "src/**/*.ts"
+      ],
+      "outputs": [
+        "build/**/*.js"
+      ]
+    },
+    "prep:tsc": {
+      "dependsOn": [
+        "prep:codegen"
+      ],
+      "inputs": [
+        "tsconfig.json",
+        "src/**/*.ts"
+      ],
+      "outputs": [
+        "build/**/*.d.ts"
+      ]
     }
   }
 }
