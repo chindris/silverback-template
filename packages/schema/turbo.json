@@ -36,7 +36,7 @@
         "build/**/*.js"
       ]
     },
-    "prep:tsc": {
+    "prep:types": {
       "dependsOn": [
         "prep:codegen"
       ],
@@ -46,6 +46,12 @@
       ],
       "outputs": [
         "build/**/*.d.ts"
+      ]
+    },
+    "prep": {
+      "dependsOn": [
+        "prep:scripts",
+        "prep:types"
       ]
     }
   }

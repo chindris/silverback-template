@@ -7,7 +7,6 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host",
-    "prep": "pnpm prep:vite && pnpm prep:scripts",
     "prep:vite": "vite build",
     "prep:scripts": "tsup",
     "start": "GIT_REPO_DIRECTORY=../../ pnpm netlify-cms-proxy-server",
