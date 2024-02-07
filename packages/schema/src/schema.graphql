@@ -225,3 +225,10 @@ type MetaTagAttributes @default @value(json: "{}") {
   rel: String
   href: String
 }
+
+type DemoBlock {
+  heading: String!
+  description: Markup
+  image: MediaImage
+  url: Url!
+}
