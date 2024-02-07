@@ -3,6 +3,16 @@ scalar Markup @default @value(json: "\"\"")
 scalar ImageSource @default @value(json: "\"\"")
 
 """
+implementation(drupal): custom.content_hub::query
+"""
+directive @contentHub(pagination: String, query: String) on FIELD_DEFINITION
+
+"""
+implementation(drupal): custom.webform::url
+"""
+directive @webformIdToUrl(id: String!) on FIELD_DEFINITION
+
+"""
 Retrieve the properties of an image.
 TODO: Move to a shared "image" package.
 
