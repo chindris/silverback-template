@@ -1,5 +1,5 @@
 type DrupalMediaComponent = React.FC<{
-  classname?: string;
+  className?: string;
   isMediaLibraryEnabled?: boolean;
   isSelected?: boolean;
   clientId?: string;
