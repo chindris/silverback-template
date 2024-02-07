@@ -94,6 +94,14 @@ export const createPages = async ({ actions }) => {
       });
     });
 
+  // Create the content hub page in each language.
+  Object.values(Locale).forEach((locale) => {
+    actions.createPage({
+      path: `/${locale}/content-hub`,
+      component: resolve(`./src/templates/content-hub.tsx`),
+    });
+  });
+
   // Broken Gatsby links will attempt to load page-data.json files, which don't exist
   // and also should not be piped into the strangler function. Thats why they
   // are caught right here.
