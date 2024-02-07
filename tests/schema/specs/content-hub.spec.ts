@@ -7,7 +7,7 @@ describe('content hub', () => {
   it('returns limited results', async () => {
     const result = await fetch(gql`
       {
-        contentHub(pagination: { limit: 2, offset: 0 }) {
+        contentHub(pagination: { limit: 2, offset: 0 }, locale: en) {
           items {
             title
           }
@@ -22,7 +22,7 @@ describe('content hub', () => {
   it('respects an offset', async () => {
     const resultA = await fetch(gql`
       {
-        contentHub(pagination: { limit: 2, offset: 0 }) {
+        contentHub(pagination: { limit: 2, offset: 0 }, locale: en) {
           items {
             path
           }
@@ -31,7 +31,7 @@ describe('content hub', () => {
     `);
     const resultB = await fetch(gql`
       {
-        contentHub(pagination: { limit: 2, offset: 1 }) {
+        contentHub(pagination: { limit: 2, offset: 1 }, locale: en) {
           items {
             path
           }
@@ -53,7 +53,11 @@ describe('content hub', () => {
   it('accepts a query for the title', async () => {
     const result = await fetch(gql`
       {
-        contentHub(query: "Arch", pagination: { limit: 3, offset: 0 }) {
+        contentHub(
+          query: "Arch"
+          pagination: { limit: 3, offset: 0 }
+          locale: en
+        ) {
           total
           items {
             path
@@ -62,5 +66,41 @@ describe('content hub', () => {
       }
     `);
     expect(result.data.contentHub.items[0].path).toBe('/en/architecture');
+  });
+
+  it('queries results in a different language', async () => {
+    const result = await fetch(gql`
+      {
+        contentHub(
+          query: "Arch"
+          pagination: { limit: 3, offset: 0 }
+          locale: de
+        ) {
+          total
+          items {
+            path
+          }
+        }
+      }
+    `);
+    expect(result.data.contentHub.items[0].path).toBe('/de/architektur');
+  });
+
+  it('only returns items in the queried language', async () => {
+    const result = await fetch(gql`
+      {
+        contentHub(
+          query: "Gatsby"
+          pagination: { limit: 3, offset: 0 }
+          locale: de
+        ) {
+          total
+          items {
+            path
+          }
+        }
+      }
+    `);
+    expect(result.data.contentHub.total).toBe(0);
   });
 });
