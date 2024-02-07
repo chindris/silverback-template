@@ -31,4 +31,12 @@ test.describe('content hub', () => {
     await expect(content.getByText('Architecture')).not.toBeVisible();
     await expect(content.getByText('Technologies')).toBeVisible();
   });
+
+  test('returns language specific results', async ({ page }) => {
+    await page.goto(websiteUrl('/de/content-hub'));
+    const content = await page.getByRole('main');
+    await expect(content.getByText('Architektur')).toBeVisible();
+    await expect(content.getByText('Architecture')).not.toBeVisible();
+    await expect(content.getByText('Gatsby')).not.toBeVisible();
+  });
 });
