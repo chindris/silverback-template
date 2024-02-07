@@ -42,6 +42,9 @@ class ContentHub {
     $limit = $args->args['pagination']['limit'];
     $nodeStorage = $this->entityTypeManager->getStorage('node');
 
+    // Clear this whenever nodes are changed.
+    $args->context->addCacheTags($nodeStorage->getEntityType()->getListCacheTags());
+
     $countQuery = $nodeStorage->getQuery();
     $countQuery->condition('type', 'page');
     $countQuery->condition('status', 1);
