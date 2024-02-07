@@ -5,7 +5,11 @@ scalar ImageSource @default @value(json: "\"\"")
 """
 implementation(drupal): custom.content_hub::query
 """
-directive @contentHub(pagination: String, query: String) on FIELD_DEFINITION
+directive @contentHub(
+  pagination: String
+  query: String
+  locale: String!
+) on FIELD_DEFINITION
 
 """
 implementation(drupal): custom.webform::url
@@ -209,8 +213,12 @@ type Query {
   websiteSettings: WebsiteSettings
   viewPage(path: String!): Page @route(path: "$path") @loadEntity
 
-  contentHub(query: String, pagination: PaginationInput!): ContentHubResult!
-    @contentHub(query: "$query", pagination: "$pagination")
+  contentHub(
+    query: String
+    pagination: PaginationInput!
+    locale: Locale!
+  ): ContentHubResult!
+    @contentHub(query: "$query", pagination: "$pagination", locale: "$locale")
 }
 
 type MetaTag {
