@@ -80,7 +80,7 @@ registerBlockType('custom/demo-block', {
             }}
           />
 					 <DrupalMediaEntity
-            className={'w-full'}
+            classname={'w-full'}
             attributes={{
               ...props.attributes,
               lockViewMode: true,

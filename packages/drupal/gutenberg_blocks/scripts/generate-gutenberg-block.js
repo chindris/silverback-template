@@ -150,7 +150,7 @@ function getGutenbergFieldBlock(attribute) {
           />`;
     case 'array':
       return ` <DrupalMediaEntity
-            className={'w-full'}
+            classname={'w-full'}
             attributes={{
               ...props.attributes,
               lockViewMode: true,
