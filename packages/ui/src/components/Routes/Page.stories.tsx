@@ -1,4 +1,4 @@
-import { registerExecutor, Url, ViewPageQuery } from '@custom/schema';
+import { Locale, registerExecutor, Url, ViewPageQuery } from '@custom/schema';
 import Landscape from '@stories/landscape.jpg?as=metadata';
 import { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
@@ -21,6 +21,12 @@ export const Default = {
     page: {
       title: 'Page Title',
       locale: 'en',
+      translations: [
+        {
+          locale: Locale.En,
+          path: '/test' as Url,
+        },
+      ],
       path: '/test' as Url,
       hero: {
         headline: 'Page Hero Headline',
