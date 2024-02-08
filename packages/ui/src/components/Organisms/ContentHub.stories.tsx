@@ -22,7 +22,6 @@ type ContentHubExecutor = (
 export default {
   title: 'Components/Organisms/ContentHub',
   render: (args) => {
-    console.log(args);
     registerExecutor(ContentHubQuery, args.exec);
     return <ContentHub pageSize={6} />;
   },
