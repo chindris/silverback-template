@@ -39,6 +39,13 @@ directive @loadEntity(
 ) repeatable on FIELD_DEFINITION | SCALAR | UNION | ENUM | INTERFACE | OBJECT
 
 """
+Retrieve all translations of a decap page.
+
+implementation(gatsby): ./page.js#decapTranslations
+"""
+directive @decapPageTranslations on FIELD_DEFINITION
+
+"""
 Parse a given Url.
 For Drupal, this is implicitly implemented in the "grraphql_directives" module.
 
@@ -118,7 +125,7 @@ interface Page implements ContentHubResultItem @resolveEntityBundle {
 type DecapPage implements ContentHubResultItem & Page
   @sourceFrom(fn: "getPages") {
   id: ID!
-  translations: [Page]
+  translations: [Page] @decapPageTranslations
   locale: Locale!
   path: Url!
   title: String!
