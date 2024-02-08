@@ -33,7 +33,8 @@ test.describe('content hub', () => {
   });
 
   test('returns language specific results', async ({ page }) => {
-    await page.goto(websiteUrl('/de/content-hub'));
+    await page.goto(websiteUrl('/en/content-hub'));
+    await page.getByRole('link', { name: 'de' }).click();
     const content = await page.getByRole('main');
     await expect(content.getByText('Architektur')).toBeVisible();
     await expect(content.getByText('Architecture')).not.toBeVisible();
