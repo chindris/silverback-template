@@ -2,7 +2,7 @@ query Frame {
   mainNavigation: mainNavigations {
     ...Navigation
   }
-  footerNavigation: mainNavigations {
+  footerNavigation: footerNavigations {
     ...Navigation
   }
 }
