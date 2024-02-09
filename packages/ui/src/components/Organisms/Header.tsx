@@ -105,8 +105,8 @@ export function Header() {
                 </DesktopMenuDropDown>
               ),
             )}
-            </div>
-            <LanguageSwitcher />
+          </div>
+          <LanguageSwitcher />
         </nav>
         <MobileMenu>
           <div className="mt-6 flow-root">
