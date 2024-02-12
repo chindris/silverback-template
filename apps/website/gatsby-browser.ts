@@ -4,6 +4,9 @@ import { registerExecutor } from '@custom/schema';
 import { GatsbyBrowser } from 'gatsby';
 
 import { drupalExecutor } from './src/utils/drupal-executor';
+import { WrapRootElement } from './src/utils/wrapRootElement';
+
+export const wrapRootElement = WrapRootElement;
 
 export const onClientEntry: GatsbyBrowser['onClientEntry'] = async () => {
   registerExecutor(drupalExecutor(`/graphql`));
