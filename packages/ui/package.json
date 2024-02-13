@@ -43,6 +43,7 @@
     "@headlessui/react": "^1.7.17",
     "@heroicons/react": "^2.1.1",
     "@hookform/resolvers": "^3.3.3",
+    "@storybook/jest": "^0.2.3",
     "clsx": "^2.1.0",
     "framer-motion": "^10.17.4",
     "hast-util-is-element": "^2.1.3",
