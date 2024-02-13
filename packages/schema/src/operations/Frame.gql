@@ -5,4 +5,10 @@ query Frame {
   footerNavigation: footerNavigations {
     ...Navigation
   }
+
+  stringTranslations {
+    locale
+    source
+    translation
+  }
 }
