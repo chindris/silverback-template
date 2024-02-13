@@ -44,8 +44,11 @@ export function Footer() {
               id: 'qA8qQH',
             },
             {
-              year: 2020,
-              company_name: 'Company name, Inc',
+              year: 2024,
+              company_name: intl.formatMessage({
+                defaultMessage: 'Company name',
+                id: 'FPGwAt',
+              }),
             },
           )}
         </p>
