@@ -16,11 +16,11 @@ test.describe('menus', () => {
 
   test('footer navigation', async ({ page }) => {
     await page.goto(websiteUrl('/en'));
-    const mainNav = page.getByRole('contentinfo').getByRole('navigation');
-    await expect(mainNav.getByText('Privacy')).toBeVisible();
-    await expect(mainNav.getByText('Privatsphäre')).not.toBeVisible();
+    const footerNav = page.getByRole('contentinfo').getByRole('navigation');
+    await expect(footerNav.getByText('Privacy')).toBeVisible();
+    await expect(footerNav.getByText('Privatsphäre')).not.toBeVisible();
     await page.getByRole('link', { name: 'de' }).click();
-    await expect(mainNav.getByText('Privacy')).not.toBeVisible();
-    await expect(mainNav.getByText('Privatsphäre')).toBeVisible();
+    await expect(footerNav.getByText('Privacy')).not.toBeVisible();
+    await expect(footerNav.getByText('Privatsphäre')).toBeVisible();
   });
 });
