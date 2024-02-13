@@ -17,6 +17,11 @@ implementation(drupal): custom.webform::url
 directive @webformIdToUrl(id: String!) on FIELD_DEFINITION
 
 """
+implementation(drupal): custom.contact::create
+"""
+directive @createContact(contact: ContactInput) on FIELD_DEFINITION
+
+"""
 Retrieve the properties of an image.
 TODO: Move to a shared "image" package.
 
@@ -229,6 +234,37 @@ type Query {
 
   stringTranslations: [TranslatableString!]
     @gatsbyNodes(type: "TranslatableString")
+}
+
+type Mutation {
+  createContact(contact: ContactInput): ContactCreateResponse
+    @createContact(contact: "$contact")
+}
+
+type Contact {
+  id: String!
+  name: String
+  email: String
+  subject: String
+  message: String
+}
+
+input ContactInput {
+  name: String
+  email: String
+  subject: String
+  message: String
+}
+
+type ContactCreateResponse {
+  errors: [MutationError]
+  contact: Contact
+}
+
+type MutationError {
+  message: String!
+  key: String!
+  field: String
 }
 
 type MetaTag {
