@@ -6,11 +6,11 @@
 // TS file name should be different from gastby-config.ts, otherwise Gatsby will
 // pick it up instead of the JS file.
 
-import { getPages } from '@custom/decap';
+import { getPages, getTranslatables } from '@custom/decap';
 import autoload from '@custom/schema/gatsby-autoload';
 import { resolve } from 'path';
 
-const dir = resolve('node_modules/@custom/decap/data/page');
+const dir = resolve('node_modules/@custom/decap/data');
 
 process.env.GATSBY_DRUPAL_URL =
   process.env.DRUPAL_EXTERNAL_URL || 'http://127.0.0.1:8888';
@@ -71,7 +71,10 @@ export default {
         type_prefix: '',
         schema_configuration: './graphqlrc.yml',
         directives: autoload,
-        sources: { getPages: getPages(dir) },
+        sources: {
+          getPages: getPages(`${dir}/page`),
+          getTranslatables: getTranslatables(dir),
+        },
       },
     },
     {
