@@ -30,7 +30,7 @@
     "php": "^8.2 <8.3",
     "amazeeio/drupal_integrations": "^0.3.7",
     "amazeelabs/default-content": "^1.2.11",
-    "amazeelabs/graphql_directives": "^2.1",
+    "amazeelabs/graphql_directives": "^2.4",
     "amazeelabs/proxy-drupal-core": "^1.1.12",
     "amazeelabs/proxy-graphql": "^1.1.7",
     "amazeelabs/proxy-gutenberg": "^1.3",
