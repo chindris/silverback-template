@@ -28,6 +28,7 @@ export function PreviewFrame({ children }: PropsWithChildren) {
         items: menuItems(4),
       },
     ],
+    stringTranslations: [],
   }));
   return <Frame>{children}</Frame>;
 }
