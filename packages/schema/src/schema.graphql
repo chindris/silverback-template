@@ -56,6 +56,14 @@ directive @route(
 ) repeatable on FIELD_DEFINITION | SCALAR | UNION | ENUM | INTERFACE | OBJECT
 
 enum Locale @default @value(json: "\"en\"") {
+"""
+Merge string translations from different sources and emit a list
+of "TranslatedString" objects.
+
+implementation(gatsby): ./translatables.js#mergeTranslatableStrings
+"""
+directive @mergeTranslatableStrings on FIELD_DEFINITION
+
   en
   de
 }
@@ -226,6 +234,10 @@ type Query {
     locale: Locale!
   ): ContentHubResult!
     @contentHub(query: "$query", pagination: "$pagination", locale: "$locale")
+
+  stringTranslations: [TranslatableString!]!
+    @gatsbyNodes(type: "TranslatableString")
+    @mergeTranslatableStrings
 }
 
 type MetaTag {
@@ -246,4 +258,30 @@ type DemoBlock {
   description: Markup
   image: MediaImage
   url: Url!
+}
+
+"""
+The type provided by translations source (e.g. Decap or Drupal).
+Ingested by @mergeTranslatableStrings which handles priorities.
+"""
+interface TranslatableString @default @value {
+  """
+  The default message, used in the UI.
+  """
+  source: String!
+  """
+  The language of this translation.
+  """
+  locale: Locale!
+  """
+  The actual translated string.
+  """
+  translation: String
+}
+
+type DecapTranslatableString implements TranslatableString
+  @sourceFrom(fn: "getTranslatables") {
+  source: String!
+  locale: Locale!
+  translation: String
 }
