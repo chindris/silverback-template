@@ -93,12 +93,15 @@ export const Expanded: StoryObj<FrameQuery> = {
       await userEvent.click(
         await dialog.findByRole('button', { name: 'Products' }),
       );
-      await dialog.findByRole('button', { name: 'Drupal' });
+      await dialog.findByRole('link', { name: 'Drupal' });
     } else {
       await userEvent.click(
         await navigation.findByRole('button', { name: 'Products' }),
       );
-      await navigation.findByRole('button', { name: 'Drupal' });
+      userEvent.click(
+        await navigation.findByRole('button', { name: 'Gatsby' }),
+      );
+      await navigation.findByRole('link', { name: 'Gatsby Turbo' });
     }
   },
 };
