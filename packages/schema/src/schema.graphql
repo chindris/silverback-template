@@ -1,6 +1,6 @@
-scalar Url @default @value(json: "\"\"")
-scalar Markup @default @value(json: "\"\"")
-scalar ImageSource @default @value(json: "\"\"")
+scalar Url @default @value(string: "")
+scalar Markup @default @value(string: "")
+scalar ImageSource @default @value(string: "")
 
 """
 implementation(drupal): custom.content_hub::query
@@ -55,7 +55,6 @@ directive @route(
   path: String!
 ) repeatable on FIELD_DEFINITION | SCALAR | UNION | ENUM | INTERFACE | OBJECT
 
-enum Locale @default @value(json: "\"en\"") {
 """
 Merge string translations from different sources and emit a list
 of "TranslatedString" objects.
@@ -64,6 +63,7 @@ implementation(gatsby): ./translatables.js#mergeTranslatableStrings
 """
 directive @mergeTranslatableStrings on FIELD_DEFINITION
 
+enum Locale @default @value(string: "en") {
   en
   de
 }
