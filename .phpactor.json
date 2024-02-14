@@ -1,21 +1,13 @@
 {
-  "composer.autoloader_path": "%project_root%\/apps\/cms\/vendor\/autoload.php",
-  "php_code_sniffer.bin": "%project_root%\/apps\/cms\/vendor\/bin\/phpcs",
+  "composer.autoloader_path": "%project_root%/apps/cms/vendor/autoload.php",
+  "php_code_sniffer.bin": "%project_root%/apps/cms/vendor/bin/phpcs",
   "language_server_phpstan.enabled": true,
-  "language_server_phpstan.bin": "%project_root%\/apps\/cms\/vendor\/bin\/phpstan",
+  "language_server_phpstan.bin": "%project_root%/apps/cms/vendor/bin/phpstan",
   "php_code_sniffer.enabled": true,
-  "language_server_php_cs_fixer.bin": "%project_root%\/apps\/cms\/vendor\/bin\/php-cs-fixer",
+  "language_server_php_cs_fixer.bin": "%project_root%/apps/cms/vendor/bin/php-cs-fixer",
   "prophecy.enabled": true,
   "code_transform.indentation": "  ",
-  "indexer.supported_extensions": [
-    "php",
-    "inc",
-    "module"
-  ],
-  "indexer.include_patterns": [
-    "/**/*.php",
-    "/**/*.inc",
-    "/**/*.module"
-  ],
+  "indexer.supported_extensions": ["php", "inc", "module"],
+  "indexer.include_patterns": ["/**/*.php", "/**/*.inc", "/**/*.module"],
   "indexer.follow_symlinks": true
 }

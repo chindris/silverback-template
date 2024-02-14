@@ -71,7 +71,7 @@ export const WithResults = {
                       height: 300,
                     }),
                   },
-          } satisfies ContentHubResultItemFragment),
+          }) satisfies ContentHubResultItemFragment,
       );
       const filtered = items.filter(
         (item) => !vars.query || item.title.includes(vars.query),
