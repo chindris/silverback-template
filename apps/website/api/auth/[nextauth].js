@@ -1,5 +1,6 @@
 // Gatsby Functions are not yet supported on Vercel, so you'll need to use the root `api` folder.
 import NextAuth from 'next-auth';
+
 import { authConfig } from '../../nextauth.config';
 
 // @ts-ignore

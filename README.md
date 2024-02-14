@@ -206,6 +206,44 @@ lagoon runtime configuration.
 lagoon add variable -p [project name] -e dev -N NETLIFY_SITE_ID -V [netlify site id]
 ```
 
+### Gatsby authentication / SSO
+
+Enabled only when `NEXTAUTH_URL` is set.
+
+Authentication providers are relying on Auth.js (formerly Next-Auth) and can be
+configured in `/apps/website/nextauth.config.js`
+
+An example is provided for Drupal and a dummy `Credentials` provider.
+
+<details>
+  <summary>How it works</summary>
+On Netlify, several environment variables are required to be set:
+
+##### In all cases
+
+- `NEXTAUTH_URL` The URL of the website. This is used for the callback.
+- `NEXTAUTH_SECRET` A random string used for encryption.
+
+Generate the secret with e.g. `openssl rand -base64 32`
+
+##### For Drupal
+
+- `AUTH_DRUPAL_ID` The client ID of the Drupal Consumer
+- `AUTH_DRUPAL_SECRET` The client secret of the Drupal Consumer
+
+In Drupal go to `/admin/config/services/consumer` and add a new Consumer.
+
+- Label: `Gatsby`
+- Client ID: `gatsby`
+- Secret: a random string matching `AUTH_DRUPAL_SECRET`
+- Redirect URI: `[netlify-gatsby-site-url]/oauth/callback`
+
+##### Other providers
+
+Refer to [Auth.js documentation](https://next-auth.js.org/providers/).
+
+</details>
+
 ### Publisher authentication with Drupal
 
 Publisher can require to authenticate with Drupal based on OAuth2. It is only
