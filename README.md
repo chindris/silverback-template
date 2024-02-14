@@ -208,7 +208,7 @@ lagoon add variable -p [project name] -e dev -N NETLIFY_SITE_ID -V [netlify site
 
 ### Gatsby authentication / SSO
 
-Enabled only when `NEXTAUTH_URL` is set.
+Enabled only when at least one provider is configured.
 
 Authentication providers are relying on Auth.js (formerly Next-Auth) and can be
 configured in `/apps/website/nextauth.config.js`
