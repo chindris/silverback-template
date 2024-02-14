@@ -1,26 +1,48 @@
+import CredentialsProvider from 'next-auth/providers/credentials';
+
+export const AUTH_DRUPAL_URL =
+  process.env.AUTH_DRUPAL_URL || 'http://127.0.0.1:8888';
+
 /** @type {import("next-auth").NextAuthOptions} */
 export const authConfig = {
-  // @todo set hardcoded configuration from env vars.
   providers: [
+    // Dummy provider for local development
+    // without the need to set up e.g. OAuth.
+    CredentialsProvider({
+      credentials: {
+        Password: { placeholder: `type "password"`, type: 'password' },
+      },
+      // @ts-ignore
+      authorize(credentials) {
+        // @ts-ignore
+        if (credentials.Password === 'password') {
+          return {
+            name: 'Amazee Labs',
+            email: 'hello@amazeelabs.com',
+            image: 'https://www.amazeelabs.com/images/icon.png',
+          };
+        }
+      },
+    }),
     {
       // Client ID and secret are set in the Drupal Consumer.
-      clientId: 'gatsby_editor',
-      clientSecret: 'gatsby_editor',
+      clientId: process.env.AUTH_DRUPAL_ID || 'gatsby',
+      clientSecret: process.env.AUTH_DRUPAL_SECRET || 'gatsby',
       id: 'drupal',
-      name: 'DrupalProvider',
+      name: 'Drupal',
       type: 'oauth',
       // Language prefix is added to prevent 301
       // that will not be handled by NextAuth.
       authorization: {
-        url: 'http://127.0.0.1:8888/en/oauth/authorize',
+        url: `${AUTH_DRUPAL_URL}/en/oauth/authorize`,
         params: {
           // @todo refine scope, editor (role) is used for now.
           scope: 'editor',
         },
       },
       idToken: false,
-      token: 'http://127.0.0.1:8888/en/oauth/token',
-      userinfo: 'http://127.0.0.1:8888/en/oauth/userinfo',
+      token: `${AUTH_DRUPAL_URL}/en/oauth/token`,
+      userinfo: `${AUTH_DRUPAL_URL}/en/oauth/userinfo`,
       profile(profile) {
         return {
           id: profile.sub,
@@ -28,13 +50,11 @@ export const authConfig = {
           email: profile.email,
         };
       },
-      //theme: 'light',
     },
   ],
   theme: {
-    // @todo use custom logo.
-    logo: 'https://www.gatsbyjs.com/Gatsby-Monogram.svg',
+    logo: 'https://www.amazeelabs.com/images/icon.png',
     colorScheme: 'light',
-    brandColor: '#663399',
+    brandColor: '#951B81',
   },
 };

@@ -1,0 +1,38 @@
+_meta:
+  version: '1.0'
+  entity_type: consumer
+  uuid: 57e1b8a7-48a5-4468-89d9-0016825b9868
+  default_langcode: en
+default:
+  owner_id:
+    -
+      target_id: 1
+  client_id:
+    -
+      value: gatsby
+  label:
+    -
+      value: Gatsby
+  third_party:
+    -
+      value: true
+  is_default:
+    -
+      value: false
+  secret:
+    -
+      value: $2y$10$oF1wWQgp0zlEYBnomKI.f.CvWf9VfpsowJA/JFNVN4u773miv90QW
+      existing: ''
+      pre_hashed: false
+  confidential:
+    -
+      value: true
+  roles:
+    -
+      target_id: editor
+  redirect:
+    -
+      value: 'http://localhost:8000/api/auth/callback/drupal'
+  pkce:
+    -
+      value: false
