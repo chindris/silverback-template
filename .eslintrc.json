@@ -40,12 +40,8 @@
     "react-hooks"
   ],
   "rules": {
-    "no-unused-vars": [
-      "off"
-    ],
-    "@typescript-eslint/no-unused-vars": [
-      "error"
-    ],
+    "no-unused-vars": ["off"],
+    "@typescript-eslint/no-unused-vars": ["error"],
     "simple-import-sort/imports": "error",
     "sort-imports": "off",
     "import/first": "error",
@@ -54,14 +50,8 @@
     "no-only-tests/no-only-tests": "error",
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
-    "react/prop-types": [
-      "off"
-    ],
-    "react/prefer-stateless-function": [
-      "error"
-    ],
-    "react/react-in-jsx-scope": [
-      "off"
-    ]
+    "react/prop-types": ["off"],
+    "react/prefer-stateless-function": ["error"],
+    "react/react-in-jsx-scope": ["off"]
   }
 }
