@@ -5,10 +5,14 @@
   "scripts": {
     "dev": "vite build --watch",
     "prep": "vite build",
-    "test:static": "tsc --noEmit && eslint \"**/*.{ts,tsx,js,jsx}\" --ignore-path=\"./.eslintignore\""
+    "test:static": "tsc --noEmit && eslint \"**/*.{ts,tsx,js,jsx}\" --ignore-path=\"./.eslintignore\"",
+    "gutenberg:generate": "node ./scripts/generate-gutenberg-block.js"
   },
   "dependencies": {
+    "@types/node": "^18",
     "clsx": "^2.1.0",
+    "fs": "0.0.1-security",
+    "graphql": "16.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
