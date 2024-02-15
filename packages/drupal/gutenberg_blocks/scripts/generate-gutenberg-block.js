@@ -189,5 +189,5 @@ const [, , typeName] = process.argv;
 if (typeName) {
   generateGutenbergBlockCode(typeName);
 } else {
-  console.error('Usage: node generate-gutenberg-block.js <GraphQLType>');
+  console.error('Usage: pnpm run generate-block <GraphQLType>');
 }
