@@ -15,7 +15,8 @@ export function Head({ data }: HeadProps<typeof query>) {
           return (
             <meta
               key={`meta-${index}`}
-              name={metaTag.attributes?.name || metaTag.attributes?.property}
+              name={metaTag.attributes?.name}
+              property={metaTag.attributes?.property}
               content={metaTag.attributes?.content}
             />
           );
