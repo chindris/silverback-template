@@ -7,7 +7,8 @@ query Frame {
   }
 
   stringTranslations {
-    locale
+    __typename
+    language
     source
     translation
   }

@@ -55,14 +55,6 @@ directive @route(
   path: String!
 ) repeatable on FIELD_DEFINITION | SCALAR | UNION | ENUM | INTERFACE | OBJECT
 
-"""
-Merge string translations from different sources and emit a list
-of "TranslatedString" objects.
-
-implementation(gatsby): ./translatables.js#mergeTranslatableStrings
-"""
-directive @mergeTranslatableStrings on FIELD_DEFINITION
-
 enum Locale @default @value(string: "en") {
   en
   de
@@ -235,9 +227,8 @@ type Query {
   ): ContentHubResult!
     @contentHub(query: "$query", pagination: "$pagination", locale: "$locale")
 
-  stringTranslations: [TranslatableString!]!
+  stringTranslations: [TranslatableString!]
     @gatsbyNodes(type: "TranslatableString")
-    @mergeTranslatableStrings
 }
 
 type MetaTag {
@@ -272,7 +263,7 @@ interface TranslatableString @default @value {
   """
   The language of this translation.
   """
-  locale: Locale!
+  language: Locale!
   """
   The actual translated string.
   """
@@ -282,6 +273,13 @@ interface TranslatableString @default @value {
 type DecapTranslatableString implements TranslatableString
   @sourceFrom(fn: "getTranslatables") {
   source: String!
-  locale: Locale!
+  language: Locale!
+  translation: String
+}
+
+type DrupalTranslatableString implements TranslatableString
+  @translatableString(contextPrefix: "gatsby") {
+  source: String!
+  language: Locale!
   translation: String
 }

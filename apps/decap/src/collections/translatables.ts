@@ -63,7 +63,7 @@ export function getTranslatables(
                 {
                   __typename: 'DecapTranslatableString',
                   source: translationSources[key],
-                  locale: locale as Locale,
+                  language: locale as Locale,
                   translation: data[locale][key],
                 },
               ]);
