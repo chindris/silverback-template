@@ -189,8 +189,8 @@ importers:
         specifier: ^1.0.1
         version: 1.0.1
       '@amazeelabs/gatsby-source-silverback':
-        specifier: ^1.13.10
-        version: 1.13.10(@types/node@18.19.4)(gatsby@5.13.1)(typescript@4.9.5)
+        specifier: ^1.13.12
+        version: 1.13.12(@types/node@18.19.4)(gatsby@5.13.1)(typescript@4.9.5)
       '@amazeelabs/publisher':
         specifier: ^2.4.17
         version: 2.4.17(@types/react@18.2.46)(react@18.2.0)(typescript@4.9.5)
@@ -814,14 +814,14 @@ packages:
     resolution: {integrity: sha512-LUhtYau6zFZPTtE0hut0MmoTu4eFI9YUkiBNLHN02EsZlCrPrP0pdyWTqByGsL10WIvQ4bry0dPotKoqZVnx8g==}
     dev: false
 
-  /@amazeelabs/gatsby-source-silverback@1.13.10(@types/node@18.19.4)(gatsby@5.13.1)(typescript@4.9.5):
+  /@amazeelabs/gatsby-source-silverback@1.13.10(@types/node@18.19.4)(gatsby@5.13.1)(typescript@5.3.3):
     resolution: {integrity: sha512-NPukKTJHj3EFrG0EeABoLsQzWLUuJkKthzhGggStKwV1dQ797IF1cVkYk4IMJoB+Y53YeVjE9fzQeCBOWW8NZA==}
     dependencies:
       '@amazeelabs/graphql-directives': 1.2.5
       fetch-retry: 5.0.6
       gatsby-graphql-source-toolkit: 2.0.4(gatsby@5.13.1)
       graphql: 16.8.1
-      graphql-config: 5.0.3(@types/node@18.19.4)(graphql@16.8.1)(typescript@4.9.5)
+      graphql-config: 5.0.3(@types/node@18.19.4)(graphql@16.8.1)(typescript@5.3.3)
       isomorphic-fetch: 3.0.0
       lodash-es: 4.17.21
       node-fetch: 3.3.2
@@ -836,14 +836,14 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@amazeelabs/gatsby-source-silverback@1.13.10(@types/node@18.19.4)(gatsby@5.13.1)(typescript@5.3.3):
-    resolution: {integrity: sha512-NPukKTJHj3EFrG0EeABoLsQzWLUuJkKthzhGggStKwV1dQ797IF1cVkYk4IMJoB+Y53YeVjE9fzQeCBOWW8NZA==}
+  /@amazeelabs/gatsby-source-silverback@1.13.12(@types/node@18.19.4)(gatsby@5.13.1)(typescript@4.9.5):
+    resolution: {integrity: sha512-dHkBwRccBkwWY08r9q4PvCQECLAAG8dCevF5fy7zk5HZUe0/88WnictTFnsly+3y+32lmo+GBc+ZLmnMVWErLg==}
     dependencies:
-      '@amazeelabs/graphql-directives': 1.2.5
+      '@amazeelabs/graphql-directives': 1.3.0
       fetch-retry: 5.0.6
       gatsby-graphql-source-toolkit: 2.0.4(gatsby@5.13.1)
       graphql: 16.8.1
-      graphql-config: 5.0.3(@types/node@18.19.4)(graphql@16.8.1)(typescript@5.3.3)
+      graphql-config: 5.0.3(@types/node@18.19.4)(graphql@16.8.1)(typescript@4.9.5)
       isomorphic-fetch: 3.0.0
       lodash-es: 4.17.21
       node-fetch: 3.3.2
@@ -887,6 +887,12 @@ packages:
 
   /@amazeelabs/graphql-directives@1.2.5:
     resolution: {integrity: sha512-ybGuzHsnybh8Ftq2CZ5XBtZS4atmcMkX+49djYhJ+M0hFvjRAb5TjRK9lWZ6UmtaCyvNRCUBqgD0V3FTKX/zuw==}
+    dependencies:
+      lodash-es: 4.17.21
+    dev: false
+
+  /@amazeelabs/graphql-directives@1.3.0:
+    resolution: {integrity: sha512-3h0WrG0Cl/8HXDfpC8TVbK0FU0wrez9nMa2/4NxkEdOrlYwqlvZ7H7RezRDf7pfQ80p81AmN/8+RtD4JjeSKrg==}
     dependencies:
       lodash-es: 4.17.21
     dev: false
