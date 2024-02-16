@@ -12,11 +12,18 @@ To create a custom Gutenberg you must:
    within the Gutenberg editor.
 
 ### GraphQL type-based Gutenberg block auto-generation
-To speed up the process of creating new blocks, you can use the command below to create a new block based on a GraphQL type.
+
+To speed up the process of creating new blocks, you can use the command below to
+create a new block based on a GraphQL type.
+
 ```
 pnpm gutenberg:generate <GraphQLType>
-``` 
-This will create a new block in the `src/blocks` directory, with the necessary fields and attributes already defined. You will still need to add the block to `src/index.ts` and clear the cache to see the new block in the Gutenberg editor after running this command.
+```
+
+This will create a new block in the `src/blocks` directory, with the necessary
+fields and attributes already defined. You will still need to add the block to
+`src/index.ts` and clear the cache to see the new block in the Gutenberg editor
+after running this command.
 
 ### Icons
 

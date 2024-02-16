@@ -6,7 +6,5 @@
     "apps/cms/web/modules/custom/*/directives.graphql",
     "packages/schema/src/schema.graphql"
   ],
-  "documents": [
-    "packages/schema/src/**/*.gql"
-  ]
+  "documents": ["packages/schema/src/**/*.gql"]
 }

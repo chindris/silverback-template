@@ -1,13 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/eslintrc.json",
-  "extends": [
-    "plugin:storybook/recommended",
-    "plugin:tailwindcss/recommended"
-  ],
-  "plugins": [
-    "tailwindcss",
-    "formatjs"
-  ],
+  "extends": ["plugin:storybook/recommended", "plugin:tailwindcss/recommended"],
+  "plugins": ["tailwindcss", "formatjs"],
   "rules": {
     "react/jsx-no-literals": [
       "warn",

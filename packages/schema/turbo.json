@@ -1,13 +1,9 @@
 {
   "$schema": "https://turborepo.org/schema.json",
-  "extends": [
-    "//"
-  ],
+  "extends": ["//"],
   "pipeline": {
     "prep:codegen": {
-      "dependsOn": [
-        "@custom/cms#prep:composer"
-      ],
+      "dependsOn": ["@custom/cms#prep:composer"],
       "inputs": [
         "codegen.ts",
         ".graphqlrc.json",
@@ -25,34 +21,17 @@
       ]
     },
     "prep:scripts": {
-      "dependsOn": [
-        "prep:codegen"
-      ],
-      "inputs": [
-        "tsconfig.json",
-        "src/**/*.ts"
-      ],
-      "outputs": [
-        "build/**/*.js"
-      ]
+      "dependsOn": ["prep:codegen"],
+      "inputs": ["tsconfig.json", "src/**/*.ts"],
+      "outputs": ["build/**/*.js"]
     },
     "prep:types": {
-      "dependsOn": [
-        "prep:codegen"
-      ],
-      "inputs": [
-        "tsconfig.json",
-        "src/**/*.ts"
-      ],
-      "outputs": [
-        "build/**/*.d.ts"
-      ]
+      "dependsOn": ["prep:codegen"],
+      "inputs": ["tsconfig.json", "src/**/*.ts"],
+      "outputs": ["build/**/*.d.ts"]
     },
     "prep": {
-      "dependsOn": [
-        "prep:scripts",
-        "prep:types"
-      ]
+      "dependsOn": ["prep:scripts", "prep:types"]
     }
   }
 }
