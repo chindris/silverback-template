@@ -83,7 +83,8 @@ registerBlockType('custom/${blockName}', {
   icon: 'text',
   category: 'common',
   attributes: {
-    ${attributes.filter((attribute) => attribute.type)
+    ${attributes
+      .filter((attribute) => attribute.type)
       .map(
         (attribute) =>
           `${attribute.name}: {

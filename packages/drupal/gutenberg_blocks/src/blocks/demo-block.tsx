@@ -1,8 +1,5 @@
 import React, { Fragment } from 'react';
-import {
-  InspectorControls,
-  RichText,
-} from 'wordpress__block-editor';
+import { InspectorControls, RichText } from 'wordpress__block-editor';
 import { registerBlockType } from 'wordpress__blocks';
 import { PanelBody } from 'wordpress__components';
 import { compose, withState } from 'wordpress__compose';
@@ -12,29 +9,29 @@ import { DrupalMediaEntity } from '../utils/drupal-media';
 
 // @ts-ignore
 const { t: __ } = Drupal;
- // @ts-ignore
+// @ts-ignore
 registerBlockType('custom/demo-block', {
   title: 'Demo Block',
   icon: 'text',
   category: 'common',
   attributes: {
     heading: {
-      type: 'string'
+      type: 'string',
     },
-		description: {
-      type: 'string'
+    description: {
+      type: 'string',
     },
-		mediaEntityIds: {
-      type: 'array'
+    mediaEntityIds: {
+      type: 'array',
     },
-		url: {
-      type: 'string'
-    }
-  }, 
+    url: {
+      type: 'string',
+    },
+  },
   // @ts-ignore
   edit: compose(withState())((props) => {
     const { attributes, setAttributes } = props;
-    
+
     // Set default values this way so that values get saved in the block's attributes.
     //props.setAttributes({
     //  isQuote:
@@ -42,11 +39,11 @@ registerBlockType('custom/demo-block', {
     //      ? false
     //      : props.attributes.isQuote,
     //});
-    
+
     return (
       <Fragment>
         <InspectorControls>
-          <PanelBody title={__('Block settings')}>  
+          <PanelBody title={__('Block settings')}>
             <p>Block settings</p>
           </PanelBody>
         </InspectorControls>
@@ -54,59 +51,59 @@ registerBlockType('custom/demo-block', {
           <div className={'container-label'}>{__('Demo Block')}</div>
           <div className="custom-block-demo-block">
             <RichText
-            identifier="heading"
-            tagName="p"
-            value={attributes.heading}
-            allowedFormats={[]}
-            // @ts-ignore
-            disableLineBreaks={true}
-            placeholder={__("Heading")}
-            keepPlaceholderOnFocus={true}
-            onChange={(newValue) => {
-              setAttributes({ heading: newValue })
-            }}
-          />
-					<RichText
-            identifier="description"
-            tagName="p"
-            value={attributes.description}
-            allowedFormats={[]}
-            // @ts-ignore
-            disableLineBreaks={true}
-            placeholder={__("Description")}
-            keepPlaceholderOnFocus={true}
-            onChange={(newValue) => {
-              setAttributes({ description: newValue })
-            }}
-          />
-					 <DrupalMediaEntity
-            classname={'w-full'}
-            attributes={{
-              ...props.attributes,
-              lockViewMode: true,
-              allowedTypes: ['image'],
-            }}
-            setAttributes={props.setAttributes}
-            isMediaLibraryEnabled={true}
-            onError={(error) => {
+              identifier="heading"
+              tagName="p"
+              value={attributes.heading}
+              allowedFormats={[]}
               // @ts-ignore
-              error = typeof error === 'string' ? error : error[2];
-              dispatch('core/notices').createWarningNotice(error);
-            }}
+              disableLineBreaks={true}
+              placeholder={__('Heading')}
+              keepPlaceholderOnFocus={true}
+              onChange={(newValue) => {
+                setAttributes({ heading: newValue });
+              }}
             />
-					<RichText
-            identifier="url"
-            tagName="p"
-            value={attributes.url}
-            allowedFormats={[]}
-            // @ts-ignore
-            disableLineBreaks={true}
-            placeholder={__("Url")}
-            keepPlaceholderOnFocus={true}
-            onChange={(newValue) => {
-              setAttributes({ url: newValue })
-            }}
-          />
+            <RichText
+              identifier="description"
+              tagName="p"
+              value={attributes.description}
+              allowedFormats={[]}
+              // @ts-ignore
+              disableLineBreaks={true}
+              placeholder={__('Description')}
+              keepPlaceholderOnFocus={true}
+              onChange={(newValue) => {
+                setAttributes({ description: newValue });
+              }}
+            />
+            <DrupalMediaEntity
+              classname={'w-full'}
+              attributes={{
+                ...props.attributes,
+                lockViewMode: true,
+                allowedTypes: ['image'],
+              }}
+              setAttributes={props.setAttributes}
+              isMediaLibraryEnabled={true}
+              onError={(error) => {
+                // @ts-ignore
+                error = typeof error === 'string' ? error : error[2];
+                dispatch('core/notices').createWarningNotice(error);
+              }}
+            />
+            <RichText
+              identifier="url"
+              tagName="p"
+              value={attributes.url}
+              allowedFormats={[]}
+              // @ts-ignore
+              disableLineBreaks={true}
+              placeholder={__('Url')}
+              keepPlaceholderOnFocus={true}
+              onChange={(newValue) => {
+                setAttributes({ url: newValue });
+              }}
+            />
           </div>
         </div>
       </Fragment>
