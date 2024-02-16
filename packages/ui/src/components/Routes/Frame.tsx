@@ -10,13 +10,21 @@ import { Footer } from '../Organisms/Footer';
 import { Header } from '../Organisms/Header';
 
 function filterByLocale(locale: Locale) {
-  return (str: FrameQuery['stringTranslations'][number]) =>
-    str.locale === locale;
+  return (str: Exclude<FrameQuery['stringTranslations'], undefined>[number]) =>
+    str.language === locale;
 }
 
 function translationsMap(translatables: FrameQuery['stringTranslations']) {
   return Object.fromEntries(
-    translatables
+    [
+      // Make sure that Drupal translations have higher precedence.
+      ...(translatables?.filter(
+        (tr) => tr.__typename === 'DecapTranslatableString',
+      ) || []),
+      ...(translatables?.filter(
+        (tr) => tr.__typename === 'DrupalTranslatableString',
+      ) || []),
+    ]
       .filter((tr) => tr.translation)
       .map((tr) => [tr.source, tr.translation]),
   );
@@ -25,7 +33,6 @@ function translationsMap(translatables: FrameQuery['stringTranslations']) {
 function useTranslations() {
   const locale = useLocale();
   const translations = useOperation(FrameQuery).data?.stringTranslations;
-  console.log('out', translations);
   return {
     ...translationsMap(translations?.filter(filterByLocale('en')) || []),
     ...translationsMap(translations?.filter(filterByLocale(locale)) || []),
