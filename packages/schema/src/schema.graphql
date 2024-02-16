@@ -2,6 +2,10 @@ scalar Url @default @value(string: "")
 scalar Markup @default @value(string: "")
 scalar ImageSource @default @value(string: "")
 
+# TODO: remove after https://github.com/AmazeeLabs/silverback-mono/pull/1494 is merged
+# Directive for the "TranslatableStringFeed" plugin.
+directive @translatableString(contextPrefix: String) on OBJECT
+
 """
 implementation(drupal): custom.content_hub::query
 """
