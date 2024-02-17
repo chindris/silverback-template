@@ -41,7 +41,8 @@
     "prep:directives": "graphql-codegen -c codegen.directives.ts --verbose",
     "prep:codegen": "graphql-codegen",
     "prep:scripts": "swc ./src -d ./build",
-    "prep:types": "tsc --emitDeclarationOnly"
+    "prep:types": "tsc --emitDeclarationOnly",
+    "watcher": "graphql-codegen && tsc --emitDeclarationOnly"
   },
   "devDependencies": {
     "@amazeelabs/codegen-autoloader": "^1.1.3",
