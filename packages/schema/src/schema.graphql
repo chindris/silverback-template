@@ -31,12 +31,12 @@ For Drupal, this is implicitly implemented in the "graphql_directives" module.
 implementation(gatsby): ./page.js#loadEntity
 """
 directive @loadEntity(
+  id: String
+  operation: String
   route: String
   type: String
   uuid: String
-  id: String
-  operation: String
-) repeatable on FIELD_DEFINITION | SCALAR | UNION | ENUM | INTERFACE | OBJECT
+) repeatable on ENUM | FIELD_DEFINITION | INTERFACE | OBJECT | SCALAR | UNION
 
 """
 Retrieve all translations of a decap page.
