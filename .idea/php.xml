@@ -19,7 +19,15 @@
       <PhpCSConfiguration beautifier_path="$PROJECT_DIR$/apps/cms/vendor/bin/phpcbf" standards="Drupal;DrupalPractice;MySource;PEAR;PSR1;PSR12;PSR2;SlevomatCodingStandard;Squiz;VariableAnalysis;Zend" tool_path="$PROJECT_DIR$/apps/cms/vendor/bin/phpcs" />
     </phpcs_settings>
   </component>
-  <component name="PhpProjectSharedConfiguration" php_language_level="8.1">
+  <component name="PhpIncludePathManager">
+    <include_path>
+      <path value="$PROJECT_DIR$/packages/drupal" />
+      <path value="$PROJECT_DIR$/apps/cms/web/modules/contrib" />
+      <path value="$PROJECT_DIR$/apps/cms/vendor" />
+      <path value="$PROJECT_DIR$/apps/cms/web/core" />
+    </include_path>
+  </component>
+  <component name="PhpProjectSharedConfiguration" php_language_level="8.2">
     <option name="suggestChangeDefaultLanguageLevel" value="false" />
   </component>
   <component name="PhpStan">
