@@ -2,8 +2,13 @@
   "$schema": "https://turborepo.org/schema.json",
   "extends": ["//"],
   "pipeline": {
-    "prep:codegen": {
+    "prep:directives": {
       "dependsOn": ["@custom/cms#prep:composer"],
+      "inputs": ["package.json"],
+      "outputs": ["src/directives.graphql"]
+    },
+    "prep:codegen": {
+      "dependsOn": ["prep:directives"],
       "inputs": [
         "codegen.ts",
         ".graphqlrc.json",
