@@ -1,7 +1,18 @@
+de:
+  path: /de/decap-example
+  title: Decap Beispiel
+  teaserImage: /apps/decap/media/landscape.jpg
+  hero:
+    headline: Decap Beispiel
+    lead: Diese Seite wurde mit Decap CMS erstellt
+    image: /apps/decap/media/landscape.jpg
+  content:
+    - type: text
+      text: Dieser Inhalt wird in einer **JSON** Datei gespeichert.
 en:
   id: BTPzQnq79fWNOF1dFmESP
   path: /en/decap-example
-  title: Decap example
+  title: Decap example!
   teaserImage: /apps/decap/media/landscape.jpg
   hero:
     headline: Decap Example
@@ -14,14 +25,3 @@ en:
       caption: Here is an ***image***, for good measure.
       alt: Some architecture.
       image: /apps/decap/media/portrait.jpg
-de:
-  path: /de/decap-example
-  title: Decap Beispiel
-  teaserImage: /apps/decap/media/landscape.jpg
-  hero:
-    headline: Decap Beispiel
-    lead: Diese Seite wurde mit Decap CMS erstellt
-    image: /apps/decap/media/landscape.jpg
-  content:
-    - type: text
-      text: Dieser Inhalt wird in einer **JSON** Datei gespeichert.
