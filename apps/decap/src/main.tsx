@@ -1,4 +1,5 @@
 import {
+  Locale,
   PreviewDecapPageQuery,
   registerExecutor,
   ViewPageQuery,
@@ -8,8 +9,12 @@ import CMS from 'decap-cms-app';
 
 import css from '../node_modules/@custom/ui/build/styles.css?raw';
 import { PageCollection, pageSchema } from './collections/page';
+import { Translatables } from './collections/translatables';
 import { createPreview } from './helpers/preview';
 import { UuidWidget } from './helpers/uuid';
+
+const locales = Object.values(Locale);
+const default_locale = locales.includes('en') ? 'en' : locales[0];
 
 CMS.registerPreviewStyle(css, { raw: true });
 CMS.registerWidget('uuid', UuidWidget);
@@ -36,8 +41,8 @@ CMS.init({
           },
     i18n: {
       structure: 'single_file',
-      locales: ['en', 'de'],
-      default_locale: 'en',
+      locales,
+      default_locale,
     },
     collections: [
       {
@@ -59,6 +64,7 @@ CMS.init({
           },
         ],
       },
+      Translatables,
       PageCollection,
     ],
   },

@@ -14,6 +14,7 @@ import {
   MobileMenuLink,
   MobileMenuProvider,
 } from '../Client/MobileMenu';
+import { LanguageSwitcher } from '../Molecules/LanguageSwitcher';
 
 function useHeaderNavigation(lang: string = 'en') {
   return (
@@ -85,14 +86,8 @@ export function Header() {
                 </DesktopMenuDropDown>
               ),
             )}
+            <LanguageSwitcher />
           </DesktopMenu>
-
-          {/*TODO: Add the language switcher here.*/}
-          {/*<div className="hidden lg:flex lg:flex-1 lg:justify-end">*/}
-          {/*  <a href="#" className="text-sm font-semibold leading-6 text-gray-900">*/}
-          {/*    Log in <span aria-hidden="true">&rarr;</span>*/}
-          {/*  </a>*/}
-          {/*</div>*/}
         </nav>
         <MobileMenu>
           <div className="flex items-center justify-between">
@@ -143,16 +138,8 @@ export function Header() {
                     </MobileMenuDropdown>
                   ),
                 )}
+                <LanguageSwitcher />
               </div>
-              {/*TODO: Add the language switcher here.*/}
-              {/*<div className="py-6">*/}
-              {/*  <a*/}
-              {/*    href="#"*/}
-              {/*    className="-mx-3 block rounded-lg py-2.5 px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"*/}
-              {/*  >*/}
-              {/*    Log in*/}
-              {/*  </a>*/}
-              {/*</div>*/}
             </div>
           </div>
         </MobileMenu>

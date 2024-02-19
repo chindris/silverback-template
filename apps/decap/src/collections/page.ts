@@ -193,22 +193,30 @@ export const pageSchema = z.object({
 
 export const getPages: (dir: string) => SilverbackSource<DecapPageSource> =
   (dir: string) => () => {
-    const pages: Array<[string, DecapPageSource]> = [];
+    const pages: Array<[string, DecapPageSource & { _decap_id: string }]> = [];
     fs.readdirSync(dir)
       .filter((file) => file.endsWith('.yml'))
       .forEach((file) => {
         const content = yaml.parse(fs.readFileSync(`${dir}/${file}`, 'utf-8'));
+        const id = Object.values(content)
+          .map((page: any) => page.id)
+          .filter((id) => !!id)
+          .pop();
         Object.keys(content).forEach((lang) => {
           if (Object.keys(content[lang]).length < 2) {
             return;
           }
           const input = {
             ...content[lang],
+            id,
             locale: lang,
           };
           const page = pageSchema.safeParse(input);
           if (page.success) {
-            pages.push([page.data.id, page.data]);
+            pages.push([
+              `${page.data.id}:${lang}`,
+              { ...page.data, _decap_id: id },
+            ]);
           } else {
             console.warn(`Error parsing ${file} (${lang}):`);
             console.warn(page.error.message);
@@ -218,3 +226,5 @@ export const getPages: (dir: string) => SilverbackSource<DecapPageSource> =
       });
     return pages;
   };
+
+export function getPageTranslations() {}
