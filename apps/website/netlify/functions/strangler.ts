@@ -1,5 +1,5 @@
 import { createStrangler } from '@amazeelabs/strangler-netlify';
-import fs from 'fs';
+import { readFileSync } from 'fs';
 
 export const handler = createStrangler(
   [
@@ -14,5 +14,5 @@ export const handler = createStrangler(
         [301, 302].includes(response.status) ? response : undefined,
     },
   ],
-  fs.readFileSync('public/404.html').toString(),
+  readFileSync('public/404.html').toString(),
 );

@@ -24,11 +24,13 @@
     "gatsby-source-filesystem": "^5.13.0",
     "image-size": "^1.1.1",
     "mime-types": "^2.1.35",
-    "netlify-cli": "^17.11.0",
+    "netlify-cli": "^17.16.2",
+    "netlify-functions-session-cookie": "^0.1.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@netlify/functions": "^2.6.0",
     "@testing-library/react": "^14.1.2",
     "@types/react": "^18.2.46",
     "@types/react-dom": "^18.2.18",
@@ -42,6 +44,7 @@
     "build:gatsby": "pnpm build:dotenv && gatsby build",
     "build:dotenv": "rm -rf .env && echo \"DRUPAL_EXTERNAL_URL='$DRUPAL_EXTERNAL_URL'\nDRUPAL_INTERNAL_URL='$DRUPAL_INTERNAL_URL'\" >> .env",
     "rebuild": "gatsby build",
+    "turbo:rebuild": "turbo rebuild",
     "start:cms": "pnpm run --filter @custom/cms start",
     "build": "CLOUDINARY_CLOUDNAME=test start-test start:cms 8888 build:gatsby",
     "start": "publisher",
