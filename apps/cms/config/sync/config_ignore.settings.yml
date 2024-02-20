@@ -1,5 +1,6 @@
 _core:
   default_config_hash: OGO6If5ygdADQmnHdSDaxVa0WGqnJaUo_VnG7zMSX_8
+mode: simple
 ignored_config_entities:
   - 'webform.webform*'
 enable_export_filtering: true
