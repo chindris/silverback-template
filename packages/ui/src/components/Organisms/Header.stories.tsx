@@ -72,7 +72,9 @@ export const Expanded: StoryObj<FrameQuery> = {
       name: 'Open main navigation',
     });
     if (mobileMenuButton) {
-      await userEvent.click(mobileMenuButton);
+      await userEvent.click(mobileMenuButton, {
+        delay: 100, // The mobile navigation does not appear randomly without this delay.
+      });
       const dialog = within(
         await within(canvasElement.parentElement!).findByRole('dialog'),
       );
