@@ -3,6 +3,8 @@ if [ ! -z $LAGOON ]; then
   exit 0
 fi
 
+set -e
+
 if ! test -f web/sites/default/files/.sqlite; then
   pnpm drupal-install
   pnpm export-webforms
