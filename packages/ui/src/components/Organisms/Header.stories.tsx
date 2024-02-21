@@ -72,14 +72,16 @@ export const Expanded: StoryObj<FrameQuery> = {
       name: 'Open main navigation',
     });
     if (mobileMenuButton) {
-      userEvent.click(mobileMenuButton);
+      await userEvent.click(mobileMenuButton);
       const dialog = within(
         await within(canvasElement.parentElement!).findByRole('dialog'),
       );
-      userEvent.click(await dialog.findByRole('button', { name: 'Products' }));
+      await userEvent.click(
+        await dialog.findByRole('button', { name: 'Products' }),
+      );
       await dialog.findByRole('link', { name: 'Drupal' });
     } else {
-      userEvent.click(
+      await userEvent.click(
         await navigation.findByRole('button', { name: 'Products' }),
       );
       await navigation.findByRole('link', { name: 'Drupal' });
