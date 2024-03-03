@@ -1,20 +1,12 @@
 {
-  "extends": [
-    "//"
-  ],
+  "extends": ["//"],
   "pipeline": {
     "test:static": {
-      "inputs": [
-        "src/**"
-      ]
+      "inputs": ["src/**"]
     },
     "prep": {
-      "inputs": [
-        "src/**"
-      ],
-      "outputs": [
-        "js/**"
-      ]
+      "inputs": ["src/**"],
+      "outputs": ["js/**"]
     }
   }
 }

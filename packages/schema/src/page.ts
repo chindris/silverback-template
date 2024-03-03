@@ -1,5 +1,7 @@
 import { GraphQLFieldResolver } from 'graphql';
 
+import { DecapPageSource } from './generated/source';
+
 // TODO: Generate typing helpers to make this easier.
 // TODO: Move these into a shared package that implements Drupals "graphql_directives" for Gatsby.
 
@@ -47,4 +49,16 @@ export const route: GraphQLFieldResolver<
     console.warn(e);
     return new URL('/', process.env.NETLIFY_URL || 'https://localhost:8000');
   }
+};
+
+export const decapTranslations: GraphQLFieldResolver<
+  DecapPageSource & { _decap_id: string },
+  { nodeModel: any }
+> = async (page, _, { nodeModel }) => {
+  return (
+    await nodeModel.findAll({
+      type: 'DecapPage',
+      query: { filter: { _decap_id: { eq: page._decap_id } } },
+    })
+  ).entries;
 };

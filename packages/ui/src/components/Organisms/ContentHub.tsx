@@ -1,4 +1,4 @@
-import { ContentHubQuery, Image, Link } from '@custom/schema';
+import { ContentHubQuery, Image, Link, Locale } from '@custom/schema';
 import React from 'react';
 import { useIntl } from 'react-intl';
 
@@ -18,6 +18,7 @@ export function ContentHub({ pageSize = 10 }: { pageSize: number }) {
       limit: pageSize,
       offset: currentPage * pageSize - pageSize,
     },
+    locale: intl.locale as Locale,
   });
   return (
     <div className="mx-auto max-w-6xl">

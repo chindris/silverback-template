@@ -2,7 +2,14 @@ query Frame {
   mainNavigation: mainNavigations {
     ...Navigation
   }
-  footerNavigation: mainNavigations {
+  footerNavigation: footerNavigations {
     ...Navigation
+  }
+
+  stringTranslations {
+    __typename
+    language
+    source
+    translation
   }
 }

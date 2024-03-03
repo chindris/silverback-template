@@ -1,11 +1,15 @@
-scalar Url @default @value(json: "\"\"")
-scalar Markup @default @value(json: "\"\"")
-scalar ImageSource @default @value(json: "\"\"")
+scalar Url @default @value(string: "")
+scalar Markup @default @value(string: "")
+scalar ImageSource @default @value(string: "")
 
 """
 implementation(drupal): custom.content_hub::query
 """
-directive @contentHub(pagination: String, query: String) on FIELD_DEFINITION
+directive @contentHub(
+  pagination: String
+  query: String
+  locale: String!
+) on FIELD_DEFINITION
 
 """
 implementation(drupal): custom.webform::url
@@ -32,12 +36,19 @@ For Drupal, this is implicitly implemented in the "graphql_directives" module.
 implementation(gatsby): ./page.js#loadEntity
 """
 directive @loadEntity(
+  id: String
+  operation: String
   route: String
   type: String
   uuid: String
-  id: String
-  operation: String
-) repeatable on FIELD_DEFINITION | SCALAR | UNION | ENUM | INTERFACE | OBJECT
+) repeatable on ENUM | FIELD_DEFINITION | INTERFACE | OBJECT | SCALAR | UNION
+
+"""
+Retrieve all translations of a decap page.
+
+implementation(gatsby): ./page.js#decapTranslations
+"""
+directive @decapPageTranslations on FIELD_DEFINITION
 
 """
 Parse a given Url.
@@ -49,7 +60,7 @@ directive @route(
   path: String!
 ) repeatable on FIELD_DEFINITION | SCALAR | UNION | ENUM | INTERFACE | OBJECT
 
-enum Locale @default @value(json: "\"en\"") {
+enum Locale @default @value(string: "en") {
   en
   de
 }
@@ -119,7 +130,7 @@ interface Page implements ContentHubResultItem @resolveEntityBundle {
 type DecapPage implements ContentHubResultItem & Page
   @sourceFrom(fn: "getPages") {
   id: ID!
-  translations: [Page]
+  translations: [Page] @decapPageTranslations
   locale: Locale!
   path: Url!
   title: String!
@@ -214,8 +225,15 @@ type Query {
   websiteSettings: WebsiteSettings
   viewPage(path: String!): Page @route(path: "$path") @loadEntity
 
-  contentHub(query: String, pagination: PaginationInput!): ContentHubResult!
-    @contentHub(query: "$query", pagination: "$pagination")
+  contentHub(
+    query: String
+    pagination: PaginationInput!
+    locale: Locale!
+  ): ContentHubResult!
+    @contentHub(query: "$query", pagination: "$pagination", locale: "$locale")
+
+  stringTranslations: [TranslatableString!]
+    @gatsbyNodes(type: "TranslatableString")
 }
 
 type Mutation {
@@ -260,4 +278,44 @@ type MetaTagAttributes @default @value(json: "{}") {
   property: String
   rel: String
   href: String
+}
+
+type DemoBlock {
+  heading: String!
+  description: Markup
+  image: MediaImage
+  url: Url!
+}
+
+"""
+The type provided by translations source (e.g. Decap or Drupal).
+Ingested by @mergeTranslatableStrings which handles priorities.
+"""
+interface TranslatableString @default @value {
+  """
+  The default message, used in the UI.
+  """
+  source: String!
+  """
+  The language of this translation.
+  """
+  language: Locale!
+  """
+  The actual translated string.
+  """
+  translation: String
+}
+
+type DecapTranslatableString implements TranslatableString
+  @sourceFrom(fn: "getTranslatables") {
+  source: String!
+  language: Locale!
+  translation: String
+}
+
+type DrupalTranslatableString implements TranslatableString
+  @translatableString(contextPrefix: "gatsby") {
+  source: String!
+  language: Locale!
+  translation: String
 }

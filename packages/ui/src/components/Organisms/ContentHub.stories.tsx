@@ -22,7 +22,6 @@ type ContentHubExecutor = (
 export default {
   title: 'Components/Organisms/ContentHub',
   render: (args) => {
-    console.log(args);
     registerExecutor(ContentHubQuery, args.exec);
     return <ContentHub pageSize={6} />;
   },
@@ -71,7 +70,7 @@ export const WithResults = {
                       height: 300,
                     }),
                   },
-          } satisfies ContentHubResultItemFragment),
+          }) satisfies ContentHubResultItemFragment,
       );
       const filtered = items.filter(
         (item) => !vars.query || item.title.includes(vars.query),
