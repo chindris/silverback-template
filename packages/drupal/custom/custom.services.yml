@@ -13,4 +13,4 @@ services:
 
   custom.contact:
     class: Drupal\custom\Contact
-    arguments: ['@entity_type.manager']
+    arguments: ['@custom.webform']

@@ -6,6 +6,8 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Render\RenderContext;
 use Drupal\Core\Render\RendererInterface;
 use Drupal\graphql_directives\DirectiveArguments;
+use Drupal\webform\WebformSubmissionForm;
+use Drupal\webform\WebformSubmissionInterface;
 
 /**
  * Helper service for managing webforms with graphql.
@@ -66,6 +68,37 @@ class Webform {
     }
 
     return $result;
+  }
+
+  /**
+   * Creates a webform submission.
+   *
+   * @param string $webformId
+   * @param array $submissionData
+   *
+   * @return \Drupal\webform\WebformSubmissionInterface|array|null
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+   */
+  public function createSubmission(string $webformId, array $submissionData) : WebformSubmissionInterface | array | null {
+    $webform = $this->entityTypeManager->getStorage('webform')->load($webformId);
+    if (!$webform) {
+      throw new \InvalidArgumentException('The webform could no be loaded.');
+    }
+    $isOpen = WebformSubmissionForm::isOpen($webform);
+    if ($isOpen !== TRUE) {
+      throw new \Exception($isOpen);
+    }
+    $values = [
+      'webform_id' => 'contact',
+      'entity_type' => NULL,
+      'entity_id' => NULL,
+      'data' => $submissionData,
+    ];
+    // The WebformSubmissionForm::submitFormValues() will return an array with
+    // errors, if there are validation errors, otherwise it will return a
+    // webform submission entity.
+    return WebformSubmissionForm::submitFormValues($values);
   }
 
 }
