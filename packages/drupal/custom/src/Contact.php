@@ -2,69 +2,57 @@
 
 namespace Drupal\custom;
 
-use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\graphql_directives\DirectiveArguments;
-use Drupal\silverback_iframe\WebformSubmissionForm;
+use Drupal\webform\WebformSubmissionInterface;
 
+/**
+ * Helper service to create a contact
+ */
 class Contact {
   use StringTranslationTrait;
 
   /**
-   * The entity type manager, to query and load pages.
+   * The custom webform service.
    *
-   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   * @var \Drupal\custom\Webform
    */
-  protected EntityTypeManagerInterface $entityTypeManager;
+  protected Webform $webformService;
 
   /**
    * Contact constructor.
    */
   public function __construct(
-    EntityTypeManagerInterface $entityTypeManager
+    Webform $webformService
   ) {
-    $this->entityTypeManager = $entityTypeManager;
+    $this->webformService = $webformService;
   }
 
   /**
    * Creates a contact webform entry.
    */
   public function create(DirectiveArguments $args): array {
-    $webform = $this->entityTypeManager->getStorage('webform')->load('contact');
-    $values = [
-      'webform_id' => 'contact',
-      'entity_type' => NULL,
-      'entity_id' => NULL,
-      'data' => [
+    try {
+      $submissionData = [
         'name' => $args->args['contact']['name'],
         'email' => $args->args['contact']['email'],
         'subject' => $args->args['contact']['subject'],
         'message' => $args->args['contact']['message'],
-      ],
-    ];
-    $isOpen = WebformSubmissionForm::isOpen($webform);
-    if ($isOpen === TRUE) {
-      // Validate submission.
-      $errors = WebformSubmissionForm::validateFormValues($values);
+      ];
+      $webformSubmission = $this->webformService->createSubmission('contact', $submissionData);
 
-      // Check there are no validation errors.
-      if (!empty($errors)) {
-        $contactSubmissionErrors = [];
-        foreach ($errors as $fieldName => $error) {
-          $contactSubmissionErrors[] = [
-            'message' => $error->__toString(),
-            'key' => $fieldName,
-            'field' => $fieldName,
-          ];
-        }
+      // If we get an array from the createSubmission call, then it means there
+      // were errors during the insert / validate operation, so we just return
+      // them.
+      if (is_array($webformSubmission)) {
         return [
-          'errors' => $contactSubmissionErrors,
+          'errors' => $this->formatErrors($webformSubmission),
           'contact' => NULL,
         ];
       }
-      else {
-        // Submit values and get submission ID.
-        $webformSubmission = WebformSubmissionForm::submitFormValues($values);
+
+      // We successfully submitted the data.
+      if (is_object($webformSubmission) && $webformSubmission instanceof WebformSubmissionInterface) {
         $submittedData = $webformSubmission->getData();
         return [
           'errors' => NULL,
@@ -77,15 +65,54 @@ class Contact {
           ],
         ];
       }
+    } catch (\InvalidArgumentException $e) {
+      return [
+        'contact' => NULL,
+        'errors' => [
+          [
+            'message' => $e->getMessage(),
+            'key' => 'invalid_webform'
+          ]
+        ]
+      ];
+    } catch (\Exception $e) {
+      return [
+        'contact' => NULL,
+        'errors' => [
+          [
+            'message' => $e->getMessage(),
+            'key' => 'invalid_input'
+          ]
+        ]
+      ];
     }
+
+    // We should actually never get here... if we do, we don't know what
+    // happened.
     return [
+      'contact' => NULL,
       'errors' => [
         [
-          'message' => $this->t('The contact form is not open'),
-          'key' => 'contact_not_open',
+          'message' => 'Unknown error',
+          'key' => 'unknown_error',
         ]
-      ],
-      'contact' => NULL,
+      ]
     ];
+  }
+
+  /**
+   * Helper method to arrange a set of webform submission errors in a way that
+   * can be used by the MutationError graphl type.
+   */
+  protected function formatErrors(array $webformSubmissionErrors) {
+    $formattedErrors = [];
+    foreach ($webformSubmissionErrors as $fieldName => $error) {
+      $formattedErrors[] = [
+        'message' => $error->__toString(),
+        'key' => 'invalid_field_' . $fieldName,
+        'field' => $fieldName,
+      ];
+    }
+    return $formattedErrors;
   }
 }
