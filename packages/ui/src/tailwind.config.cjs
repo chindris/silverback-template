@@ -2,7 +2,7 @@
 const theme = require('./stylingAssets.json');
 
 module.exports = {
-  content: ["./src/**/*.{tsx, mdx}"],
+  content: ['./src/**/*.{tsx, mdx}'],
   ...theme,
   plugins: [
     require('@tailwindcss/line-clamp'),
