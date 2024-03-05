@@ -1,0 +1,17 @@
+mutation ContactRequest (
+  $contact: ContactInput
+){
+  createContact(contact: $contact) {
+    errors {
+      key
+      field
+      message
+    }
+    contact {
+      name
+      email
+      message
+      subject
+    }
+  }
+}
