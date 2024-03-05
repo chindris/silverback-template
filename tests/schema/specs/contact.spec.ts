@@ -66,7 +66,7 @@ describe('create contact', () => {
             {
               "field": "email",
               "key": "invalid_field_email",
-              "message": "The email address <em class=\"placeholder\">invalid_email</em> is not valid. Use the format user@example.com.",
+              "message": "The email address <em class="placeholder">invalid_email</em> is not valid. Use the format user@example.com.",
             },
           ],
         },
