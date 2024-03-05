@@ -1,6 +1,4 @@
-mutation ContactRequest (
-  $contact: ContactInput
-){
+mutation ContactRequest($contact: ContactInput) {
   createContact(contact: $contact) {
     errors {
       key
