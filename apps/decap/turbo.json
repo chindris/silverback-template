@@ -5,12 +5,12 @@
     "prep:vite": {
       "dependsOn": ["^prep"],
       "inputs": ["src/**", "vite.config.js"],
-      "outputs": ["build/**"]
+      "outputs": ["dist/**"]
     },
     "prep:scripts": {
       "dependsOn": ["^prep"],
       "inputs": ["src/**", "tsup.config.js"],
-      "outputs": ["dist/**"]
+      "outputs": ["build/**"]
     },
     "prep": {
       "dependsOn": ["prep:vite", "prep:scripts"]
