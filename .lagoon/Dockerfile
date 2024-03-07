@@ -78,7 +78,7 @@ ENV WEBROOT=web
 # ====================================================================================================
 # NGINX IMAGE
 # ====================================================================================================
-FROM amazeeio/nginx-drupal as nginx
+FROM uselagoon/nginx-drupal as nginx
 
 COPY --from=cli /app /app
 COPY .lagoon/nginx-conf/redirects-map.conf /etc/nginx/redirects-map.conf
