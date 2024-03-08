@@ -24,7 +24,7 @@
     "gatsby-source-filesystem": "^5.13.0",
     "image-size": "^1.1.1",
     "mime-types": "^2.1.35",
-    "netlify-cli": "^17.16.2",
+    "netlify-cli": "^17.17.1",
     "netlify-functions-session-cookie": "^0.1.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"

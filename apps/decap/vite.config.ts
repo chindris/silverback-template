@@ -5,4 +5,13 @@ import { defineConfig } from 'vite';
 export default defineConfig({
   base: '/admin/',
   plugins: [react()],
+  server: {
+    proxy: {
+      '/_decap': {
+        target: 'http://localhost:8000',
+        changeOrigin: true,
+        secure: false,
+      },
+    },
+  },
 });

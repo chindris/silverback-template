@@ -1,0 +1,12 @@
+diff --git a/package.json b/package.json
+index 8353ffb3e896ba5f2baeace3f98eb0c3e8cb9ae0..0c6a8629a4f751953742984bacda49b949fb3788 100644
+--- a/package.json
++++ b/package.json
+@@ -6,6 +6,7 @@
+   "bugs": "https://github.com/decaporg/decap-cms/issues",
+   "module": "dist/esm/index.js",
+   "main": "dist/decap-cms-lib-util.js",
++  "types": "src/index.ts",
+   "license": "MIT",
+   "keywords": [
+     "decap-cms"

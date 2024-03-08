@@ -1,0 +1,12 @@
+diff --git a/package.json b/package.json
+index 11b4e6e9362444d6ec3156e47395cf10f275f6ef..c1c585649a6861b20bc4d337f39051717531cf2a 100644
+--- a/package.json
++++ b/package.json
+@@ -7,6 +7,7 @@
+   "bugs": "https://github.com/decaporg/decap-cms/issues",
+   "module": "dist/esm/index.js",
+   "main": "dist/decap-cms-backend-github.js",
++  "types": "src/index.ts",
+   "keywords": [
+     "decap-cms",
+     "backend",

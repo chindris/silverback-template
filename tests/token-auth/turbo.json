@@ -1,0 +1,11 @@
+{
+  "extends": ["//"],
+  "pipeline": {
+    "test:integration": {
+      "dependsOn": ["prep", "^prep"]
+    },
+    "dev": {
+      "persistent": true
+    }
+  }
+}

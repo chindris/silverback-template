@@ -22,6 +22,7 @@
     "decap-cms-backend-github": "^3.1.0",
     "decap-cms-backend-test": "^3.1.0",
     "decap-cms-core": "^3.2.8",
+    "decap-cms-lib-util": "^3.0.2",
     "decap-cms-ui-default": "^3.1.0",
     "graphql": "16.8.1",
     "nanoid": "^5.0.4",

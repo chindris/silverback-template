@@ -1,28 +1,48 @@
 import type { Context, Config } from '@netlify/functions';
 import { createHash } from 'crypto';
 
+
 // TODO: Use a github app install token.
-const githubToken = `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`;
+const githubToken = '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';
 // TODO: inject hash salt as environment variable
 const hashSalt = 'banana';
 // TODO: configurable email whitelist
-const acceptedEmails = ['philipp.melab@amazeelabs.com'];
+const acceptedEmails = { 'philipp.melab@amazeelabs.com': 'Philipp Melab' };
 // TODO: configurable lifetimes as environment variable
 const tokenLifetime = 60 * 5;
 const sessionLifetime = 0;
+const postmarkToken = 'abc';
+
+async function sendLoginLink(email: string, name, link) {
+  const result = await fetch('https://api.postmarkapp.com/email/withTemplate', {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'X-Postmark-Server-Token': postmarkToken,
+    },
+    body: JSON.stringify({
+      // TODO: Make all this data configurable.
+      TemplateAlias: 'decap-login',
+      From: 'philipp.melab@amazeelabs.com',
+      To: email,
+      TemplateModel: {
+        product_url: 'https://example.amazeelabs.dev/admin/',
+        product_name: 'Silverback Starter Decap',
+        name: name,
+        action_url: link,
+        company_name: 'Amazee Labs AG',
+        company_address: 'Förrlibuckstrasse 190\nCH-8005 Zurich',
+      },
+    })
+  });
+  if (result.status !== 200) {
+    throw new Error(await result.text());
+  }
+}
+
 
 export default async (request: Request, context: Context) => {
-  if (request.method === 'OPTIONS') {
-    return new Response(undefined, {
-      status: 204,
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'POST, GET, OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type',
-      },
-    });
-  }
-
   if (context.params['0'].startsWith('api/')) {
     if (!validateSession(request)) {
       return new Response('', {
@@ -59,32 +79,47 @@ export default async (request: Request, context: Context) => {
   if (request.method === 'POST') {
     if (context.params['0'].startsWith('login')) {
       const email = await request.text();
-      if (acceptedEmails.includes(email)) {
-        // TODO: Send token via email
-        context.log(`Login link for ${email}: ${context.site.url}/admin/?token=${createToken(email, tokenLifetime)}`);
-      }
-      else {
+      if (acceptedEmails.hasOwnProperty(email)) {
+        const link = `${
+          context.site.url
+        }/admin/?token=${createToken(email, tokenLifetime)}`;
+
+        context.log(
+          `Login link for ${email}: ${link}`,
+        );
+        try {
+          await sendLoginLink(email, acceptedEmails[email], link);
+        }
+        catch (e) {
+          if (e instanceof Error) {
+            context.log(`[ERROR] Failed to send email: ${e.message}`);
+          }
+          return new Response(`Failed to send email: ${e.message}`, {
+            status: 500,
+          });
+        }
+      } else {
         console.log(`Invalid login attempt: ${email}`);
       }
 
       return new Response('', {
         status: 200,
       });
-
     }
     if (context.params['0'].startsWith('auth')) {
       const token = await request.text();
       if (validateToken(token)) {
-        const { email } = getTokenInfo(token);
-        if (!acceptedEmails.includes(email)) {
+        const info = getTokenInfo(token);
+        if (!acceptedEmails.hasOwnProperty(info.email)) {
           return new Response('', {
             status: 403,
           });
         }
-        const sessionToken = createToken(email, sessionLifetime);
-        return new Response('', {
+        const sessionToken = createToken(info.email, sessionLifetime);
+        return new Response(JSON.stringify(info), {
           status: 200,
           headers: {
+            'Content-Type': 'application/json',
             'Set-Cookie': `session=${sessionToken}; Path=/; HttpOnly; Secure; SameSite=Strict; Path=/_decap/`,
           },
         });
@@ -109,7 +144,10 @@ export default async (request: Request, context: Context) => {
     if (context.params['0'].startsWith('status')) {
       const session = validateSession(request);
       if (session) {
-        return new Response(session, {
+        return new Response(JSON.stringify(session), {
+          headers: {
+            'Content-Type': 'application/json',
+          },
           status: 200,
         });
       }
@@ -127,19 +165,20 @@ export default async (request: Request, context: Context) => {
 function validateSession(request: Request) {
   const cookies = request.headers.get('Cookie');
   if (cookies) {
-    const session = cookies.split(';').find((c) => c.trim().startsWith('session='));
+    const session = cookies
+      .split(';')
+      .find((c) => c.trim().startsWith('session='));
     if (session) {
       const token = session.split('=')[1];
       if (validateToken(token)) {
-        const { email } = getTokenInfo(token);
-        if (acceptedEmails.includes(email)) {
-          return email;
+        const info = getTokenInfo(token);
+        if (acceptedEmails.hasOwnProperty(info.email)) {
+          return info;
         }
       }
     }
   }
   return false;
-
 }
 
 /**
@@ -149,7 +188,8 @@ function validateSession(request: Request) {
  * @param lifetime
  */
 function createToken(email: string, lifetime: number) {
-  const validUntil = new Date().getTime() + lifetime * 1000;
+  const validUntil =
+    lifetime === 0 ? 0 : new Date().getTime() + lifetime * 1000;
   return `${email}:${validUntil}:${hashToken(email, validUntil)}`;
 }
 
@@ -178,6 +218,7 @@ function getTokenInfo(token: string) {
   return {
     email,
     validUntil,
+    name: acceptedEmails[email] || 'Unknown',
   };
 }
 

@@ -1,0 +1,23 @@
+{
+  "name": "token-auth-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "prep": "tsup src/token-auth.ts --minify --format esm --outDir dist",
+    "build": "pnpm prep",
+    "test:static": "tsc --noEmit && eslint \"**/*.{ts,tsx,js,jsx}\" --ignore-path=\"./.gitignore\"",
+    "test:integration": "playwright test",
+    "serve:netlify": "netlify dev -d site --port 8887"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "netlify-cli": "^17.18.1",
+    "@amazeelabs/token-auth-middleware": "workspace:*",
+    "@netlify/edge-functions": "^2.3.1",
+    "@playwright/test": "^1.40.1",
+    "tsup": "^8.0.2",
+    "typescript": "^5.4.2"
+  }
+}
