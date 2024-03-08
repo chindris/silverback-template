@@ -3,8 +3,8 @@
 
 [build]
     base = "tests/token-auth"
-    publish = "tests/token-auth/site"
-    edge_functions = "tests/token-auth/dist"
+    publish = "site"
+    edge_functions = "dist"
 
 [[edge_functions]]
     path = "/restricted/*"
