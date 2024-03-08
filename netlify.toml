@@ -1,0 +1,11 @@
+[dev]
+    autoLaunch = false
+
+[build]
+    base = "tests/token-auth"
+    publish = "tests/token-auth/site"
+    edge_functions = "tests/token-auth/dist"
+
+[[edge_functions]]
+    path = "/restricted/*"
+    function = "token-auth"
