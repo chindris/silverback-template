@@ -4,7 +4,6 @@
 [build]
     base = "tests/token-auth"
     publish = "site"
-    edge_functions = "dist"
 
 [[edge_functions]]
     path = "/restricted/*"

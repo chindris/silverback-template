@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "prep": "tsup src/token-auth.ts --minify --format esm --outDir dist",
+    "prep": "tsup src/token-auth.ts --minify --format esm --outDir netlify/edge-functions",
     "build": "pnpm prep",
     "test:static": "tsc --noEmit && eslint \"**/*.{ts,tsx,js,jsx}\" --ignore-path=\"./.gitignore\"",
     "test:integration": "playwright test",
