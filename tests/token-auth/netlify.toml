@@ -1,2 +1,2 @@
-[build.token-auth-test]
+[build]
     edge_functions = "netlify/edge-functions"
