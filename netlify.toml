@@ -1,3 +1,6 @@
+[build]
+    edge_functions = "tests/token-auth/netlify/edge-functions"
+
 [[edge_functions]]
     path = "/restricted/*"
     function = "token-auth"
