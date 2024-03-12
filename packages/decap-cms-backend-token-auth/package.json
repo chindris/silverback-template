@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "@netlify/functions": "^2.6.0",
+    "@amazeelabs/token-auth-middleware": "workspace:*",
     "@emotion/styled": "^11.11.0",
     "decap-cms-backend-github": "^3.1.0",
     "decap-cms-lib-util": "^3.0.2",

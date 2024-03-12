@@ -9,3 +9,5 @@ export type {
 } from './lib/handler.js';
 export { JwtEncoder } from './lib/jwt-encoder.js';
 export { EmailBackend } from './lib/email-backend.js';
+
+export { TokenAuthClient } from './lib/client.js';

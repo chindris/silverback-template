@@ -17,35 +17,6 @@ class TestEmailBackend extends EmailBackend {
     }
     loginLink = link;
     console.log(`Login link for ${info.name} (${info.email}): ${link}`);
-    if (Netlify.env.has('POSTMARK_API_TOKEN')) {
-      const result = await fetch(
-        'https://api.postmarkapp.com/email/withTemplate',
-        {
-          method: 'POST',
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-            'X-Postmark-Server-Token': Netlify.env.get(
-              'POSTMARK_API_TOKEN',
-            ) as string,
-          },
-          body: JSON.stringify({
-            From: 'noreply@amazeelabs.com',
-            To: info.email,
-            TemplateAlias: 'login-link',
-            TemplateModel: {
-              title: 'Login link',
-              name: info.name,
-              website: 'https://token-auth.amazeelabs.dev',
-              action_url: link,
-            },
-          }),
-        },
-      );
-      if (!result.ok) {
-        console.error(`Failed to send email.`);
-      }
-    }
   }
 }
 
@@ -60,18 +31,16 @@ const handler = new TokenAuthHandler(encoder, backend, {
 });
 
 export default async (request: Request, context: Context) => {
-  if (!Netlify.env.has('POSTMARK_API_TOKEN')) {
-    // For integration tests to retrieve the login link.
-    if (request.url.endsWith('/___link')) {
-      let response: Response;
-      if (loginLink) {
-        response = new Response(loginLink, { status: 200 });
-      } else {
-        response = new Response('No link generated yet', { status: 404 });
-        loginLink = null;
-      }
-      return response;
+  // For integration tests to retrieve the login link.
+  if (request.url.endsWith('/___link')) {
+    let response: Response;
+    if (loginLink) {
+      response = new Response(loginLink, { status: 200 });
+    } else {
+      response = new Response('No link generated yet', { status: 404 });
+      loginLink = null;
     }
+    return response;
   }
   return handler.handle(request, context.next);
 };

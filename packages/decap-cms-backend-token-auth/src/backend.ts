@@ -1,3 +1,4 @@
+import { TokenAuthClient } from '@amazeelabs/token-auth-middleware';
 import { GitHubBackend } from 'decap-cms-backend-github';
 import { Implementation } from 'decap-cms-lib-util';
 
@@ -22,10 +23,16 @@ export class TokenAuthBackend implements Implementation {
    */
   protected delegate: GitHubBackend;
 
+  protected client: TokenAuthClient<
+    { email: string },
+    { email: string; name: string; token: string }
+  >;
+
   /**
    * Creates a new SilverbackBackend instance.
    */
   constructor(...args: ConstructorParameters<typeof GitHubBackend>) {
+    this.client = new TokenAuthClient(args[0].backend.api_root);
     this.delegate = new GitHubBackend(...args);
   }
 
@@ -37,21 +44,15 @@ export class TokenAuthBackend implements Implementation {
    * matter.
    */
   async authenticate(): ReturnType<Implementation['authenticate']> {
-    const result = await fetch('/admin/_github/___status');
-
-    if (result.ok) {
-      const status = (await result.json()) as {
-        email: string;
-        token: string;
-        name: string;
-      };
+    try {
+      const status = await this.client.status();
       await this.delegate.authenticate(status);
       return {
         ...status,
         login: status.email,
         useOpenAuthoring: true,
       };
-    } else {
+    } catch (e: unknown) {
       throw new Error('Invalid session.');
     }
   }
@@ -67,9 +68,7 @@ export class TokenAuthBackend implements Implementation {
    * Destroy the current user session.
    */
   async logout() {
-    await fetch('/admin/_github/___logout', {
-      method: 'POST',
-    });
+    await this.client.logout();
   }
 
   /**
@@ -83,10 +82,11 @@ export class TokenAuthBackend implements Implementation {
    * Retrieve the current token.
    */
   async getToken() {
-    const result = await fetch('/admin/_github/___status', {
-      method: 'GET',
-    });
-    return result.ok ? (await result.json()).token : null;
+    try {
+      return (await this.client.status()).token;
+    } catch (e: unknown) {
+      return null;
+    }
   }
 
   /**

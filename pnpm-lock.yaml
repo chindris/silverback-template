@@ -312,6 +312,9 @@ importers:
 
   packages/decap-cms-backend-token-auth:
     dependencies:
+      '@amazeelabs/token-auth-middleware':
+        specifier: workspace:*
+        version: link:../token-auth-middleware
       '@emotion/styled':
         specifier: ^11.11.0
         version: 11.11.0(@emotion/react@11.11.3)(@types/react@18.2.60)(react@18.2.0)
@@ -14383,8 +14386,8 @@ packages:
       prop-types: ^15.7.2
       react: ^18.2.0
     dependencies:
-      '@emotion/react': 11.11.3(@types/react@18.2.60)(react@18.2.0)
-      '@emotion/styled': 11.11.0(@emotion/react@11.11.3)(@types/react@18.2.60)(react@18.2.0)
+      '@emotion/react': 11.11.3(@types/react@18.2.46)(react@18.2.0)
+      '@emotion/styled': 11.11.0(@emotion/react@11.11.3)(@types/react@18.2.46)(react@18.2.0)
       apollo-cache-inmemory: 1.6.6(graphql@16.8.1)
       apollo-client: 2.6.10(graphql@16.8.1)
       apollo-link-context: 1.0.20(graphql@16.8.1)
@@ -14618,8 +14621,8 @@ packages:
       prop-types: ^15.7.2
       react: ^18.2.0
     dependencies:
-      '@emotion/react': 11.11.3(@types/react@18.2.60)(react@18.2.0)
-      '@emotion/styled': 11.11.0(@emotion/react@11.11.3)(@types/react@18.2.60)(react@18.2.0)
+      '@emotion/react': 11.11.3(@types/react@18.2.46)(react@18.2.0)
+      '@emotion/styled': 11.11.0(@emotion/react@11.11.3)(@types/react@18.2.46)(react@18.2.0)
       lodash: 4.17.21
       prop-types: 15.8.1
       react: 18.2.0

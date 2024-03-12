@@ -1,3 +1,4 @@
+import { TokenAuthClient } from '@amazeelabs/token-auth-middleware';
 import styled from '@emotion/styled';
 import type { Credentials } from 'decap-cms-lib-util';
 import {
@@ -75,27 +76,19 @@ export const AuthComponent = ({
 
   const handleLogin = async (event: FormEvent) => {
     event.preventDefault();
+    const client = new TokenAuthClient(config.backend.api_root);
     setState('progress');
     const destination = new URL(window.location.href);
     destination.searchParams.append('auth', 'true');
-    const result = await fetch(
-      `${config.backend.api_root}/___login?destination=${encodeURIComponent(
-        destination.toString(),
-      )}`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: `email=${encodeURIComponent(email)}`,
-      },
-    );
-    if (!result.ok) {
-      setError(await result.text());
-      setState('idle');
-      return;
+    try {
+      await client.login({ email }, destination.toString());
+      setState('sent');
+    } catch (e: unknown) {
+      if (e instanceof Error) {
+        setError(e.message);
+        setState('idle');
+      }
     }
-    setState('sent');
   };
 
   useEffect(() => {
