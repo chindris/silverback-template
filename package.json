@@ -45,11 +45,5 @@
     "sharp": "0.33.1",
     "eslint": "7",
     "graphql": "16.8.1"
-  },
-  "pnpm": {
-    "patchedDependencies": {
-      "decap-cms-backend-github@3.1.0": "patches/decap-cms-backend-github@3.1.0.patch",
-      "decap-cms-lib-util@3.0.2": "patches/decap-cms-lib-util@3.0.2.patch"
-    }
   }
 }

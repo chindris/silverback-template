@@ -1,4 +1,4 @@
-import type { AuthenticationBackendInterface } from './handler.ts';
+import type { AuthenticationBackendInterface } from './handler.js';
 
 export abstract class EmailBackend
   implements

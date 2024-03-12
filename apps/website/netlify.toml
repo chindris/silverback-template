@@ -13,3 +13,7 @@
 [[edge_functions]]
   path = "/"
   function = "homepage-redirect"
+
+[[edge_functions]]
+  path = "/admin/_github/*"
+  function = "github-proxy-auth"

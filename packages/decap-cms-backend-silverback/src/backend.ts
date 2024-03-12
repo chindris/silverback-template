@@ -1,7 +1,7 @@
 import { GitHubBackend } from 'decap-cms-backend-github';
 import { Implementation } from 'decap-cms-lib-util';
 
-import { AuthComponent } from './ui';
+import { AuthComponent } from './ui.js';
 
 /**
  * Helper type to extract argument types from the `Implementation` interface.
@@ -16,7 +16,7 @@ type Arg<TMethod extends keyof Implementation> =
  * layer using the silverback decap proxy and delegates everything else to
  * the stock GitHub backend.
  */
-export class SilverbackBackend implements Implementation {
+export class TokenAuthBackend implements Implementation {
   /**
    * The delegate backend that this backend forwards all requests to.
    */
@@ -30,37 +30,30 @@ export class SilverbackBackend implements Implementation {
   }
 
   /**
-   * Authenticate the user using the token provided in the state.
+   * Authenticate the user using the current session cookie.
    *
    * Authenticate against the proxy first, then delegate to the GitHub backend.
    * The proxy backend has its own Github token, so the token here does not
    * matter.
    */
-  async authenticate(
-    state: Arg<'authenticate'>[0],
-  ): ReturnType<Implementation['authenticate']> {
-    if (typeof state.token !== 'string') {
-      throw new Error('Invalid token');
-    }
-
-    const result = await fetch('/_decap/auth', {
-      method: 'POST',
-      body: state.token,
-    });
+  async authenticate(): ReturnType<Implementation['authenticate']> {
+    const result = await fetch('/admin/_github/___status');
 
     if (result.ok) {
-      await this.delegate.authenticate(state);
+      const status = (await result.json()) as {
+        email: string;
+        token: string;
+        name: string;
+      };
+      await this.delegate.authenticate(status);
+      return {
+        ...status,
+        login: status.email,
+        useOpenAuthoring: true,
+      };
     } else {
-      throw new Error('Invalid token');
+      throw new Error('Invalid session.');
     }
-    const { email, name } = await result.json();
-
-    return {
-      token: state.token as string,
-      useOpenAuthoring: true,
-      login: email,
-      name,
-    };
   }
 
   /**
@@ -74,7 +67,7 @@ export class SilverbackBackend implements Implementation {
    * Destroy the current user session.
    */
   async logout() {
-    await fetch('/_decap/api/___logout', {
+    await fetch('/admin/_github/___logout', {
       method: 'POST',
     });
   }
@@ -82,15 +75,15 @@ export class SilverbackBackend implements Implementation {
   /**
    * Re-authenticate the user based on the provided token.
    */
-  async restoreUser(user: Arg<'restoreUser'>[0]) {
-    return this.authenticate(user);
+  async restoreUser() {
+    return this.authenticate();
   }
 
   /**
    * Retrieve the current token.
    */
   async getToken() {
-    const result = await fetch('/_decap/status', {
+    const result = await fetch('/admin/_github/___status', {
       method: 'GET',
     });
     return result.ok ? (await result.json()).token : null;

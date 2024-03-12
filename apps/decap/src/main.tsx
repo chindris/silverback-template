@@ -1,3 +1,4 @@
+import { TokenAuthBackend } from '@amazeelabs/decap-cms-backend-silverback/backend';
 import {
   Locale,
   PreviewDecapPageQuery,
@@ -8,7 +9,6 @@ import { Page } from '@custom/ui/routes/Page';
 import CMS from 'decap-cms-app';
 
 import css from '../node_modules/@custom/ui/build/styles.css?raw';
-import { SilverbackBackend } from './backend';
 import { PageCollection, pageSchema } from './collections/page';
 import { Translatables } from './collections/translatables';
 import { createPreview } from './helpers/preview';
@@ -19,17 +19,18 @@ const default_locale = locales.includes('en') ? 'en' : locales[0];
 
 CMS.registerPreviewStyle(css, { raw: true });
 CMS.registerWidget('uuid', UuidWidget);
-CMS.registerBackend('silverback', SilverbackBackend);
+CMS.registerBackend('silverback', TokenAuthBackend);
 
 CMS.init({
   config: {
     publish_mode: 'simple',
     media_folder: 'apps/decap/media',
+    // @ts-ignore
     backend: import.meta.env.DEV
       ? // In development, use the in-memory backend.
         {
           name: 'silverback',
-          api_root: '/_decap/api',
+          api_root: '/admin/_github',
           repo: 'AmazeeLabs/silverback-template',
           branch: 'release',
         }
@@ -37,7 +38,7 @@ CMS.init({
         ? // On localhost, use the proxy backend.
           {
             name: 'silverback',
-            api_root: '/_decap/api',
+            api_root: '/admin/_github',
             repo: 'AmazeeLabs/silverback-template',
             branch: 'release',
           }

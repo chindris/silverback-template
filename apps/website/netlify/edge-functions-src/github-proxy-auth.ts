@@ -16,7 +16,6 @@ class TestEmailBackend extends EmailBackend {
       return;
     }
     loginLink = link;
-    console.log(`Login link for ${info.name} (${info.email}): ${link}`);
     if (Netlify.env.has('POSTMARK_API_TOKEN')) {
       const result = await fetch(
         'https://api.postmarkapp.com/email/withTemplate',
@@ -45,11 +44,13 @@ class TestEmailBackend extends EmailBackend {
       if (!result.ok) {
         console.error(`Failed to send email.`);
       }
+    } else {
+      console.log(`Login link for ${info.email}: ${link}`);
     }
   }
 }
 
-const encoder = new JwtEncoder('shhhh');
+const encoder = new JwtEncoder(Netlify.env.get('JWT_SECRET') || 'banana');
 const backend = new TestEmailBackend({
   '*@amazeelabs.com': '*',
 });

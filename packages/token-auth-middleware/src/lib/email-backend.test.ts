@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
 
-import { EmailBackend } from './email-backend';
+import { EmailBackend } from './email-backend.js';
 
 const delivery = vi.fn();
 

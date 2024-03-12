@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "target": "ES2015",
-    "module": "NodeNext",
+    "target": "ES2019",
+    "module": "node16",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
@@ -11,6 +11,7 @@
     "jsx": "react-jsx",
     "outDir": "build"
   },
+  "include": ["src"],
   "$schema": "https://json.schemastore.org/tsconfig",
   "display": "Recommended"
 }

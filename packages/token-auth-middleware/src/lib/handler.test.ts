@@ -1,8 +1,8 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { EmailBackend } from './email-backend';
-import { cookieHeader, metaRedirect, TokenAuthHandler } from './handler';
-import { JwtEncoder } from './jwt-encoder';
+import { EmailBackend } from './email-backend.js';
+import { cookieHeader, metaRedirect, TokenAuthHandler } from './handler.js';
+import { JwtEncoder } from './jwt-encoder.js';
 
 beforeEach(() => {
   vi.resetAllMocks();
@@ -165,6 +165,60 @@ describe('Token Auth Handler', () => {
           method: 'POST',
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+          },
+          body: formData,
+        }),
+        async () => new Response(''),
+      );
+      expect(delivery).toHaveBeenCalledWith(
+        'bob@amazeelabs.dev',
+        'Bob',
+        `test:/resource/___auth?token=${token}`,
+      );
+    });
+
+    it('sends a login link, retaining a destination parameter', async () => {
+      vi.setSystemTime(new Date('2024-01-01 00:00:00'));
+      const handler = new TokenAuthHandler(encoder, backend, {
+        tokenLifetime: 10,
+      });
+      const token = await encoder.create({ email: 'bob@amazeelabs.dev' }, 10);
+      const formData = new URLSearchParams();
+      formData.append('email', 'bob@amazeelabs.dev');
+      await handler.handle(
+        new Request(
+          'test:/resource/___login?destination=' +
+            encodeURIComponent('test:/resource?a=b'),
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+            },
+            body: formData,
+          },
+        ),
+        async () => new Response(''),
+      );
+      expect(delivery).toHaveBeenCalledWith(
+        'bob@amazeelabs.dev',
+        'Bob',
+        `test:/resource/___auth?destination=test%3A%2Fresource%3Fa%3Db&token=${token}`,
+      );
+    });
+
+    it('sends a login link with the referrer as destination', async () => {
+      vi.setSystemTime(new Date('2024-01-01 00:00:00'));
+      const handler = new TokenAuthHandler(encoder, backend, {
+        tokenLifetime: 10,
+      });
+      const token = await encoder.create({ email: 'bob@amazeelabs.dev' }, 10);
+      const formData = new URLSearchParams();
+      formData.append('email', 'bob@amazeelabs.dev');
+      await handler.handle(
+        new Request('test:/resource/___login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
             Referer: 'test:/login.html?destination=test%3A%2Fresource%3Fa%3Db',
           },
           body: formData,
@@ -241,6 +295,7 @@ describe('Token Auth Handler', () => {
       expect(response.status).toBe(200);
       expect(response.headers.get('Content-Type')).toBe('application/json');
       expect(await response.json()).toEqual({
+        token: sessionToken,
         email: 'bob@amazeelabs.dev',
         name: 'Bob',
       });

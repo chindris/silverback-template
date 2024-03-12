@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
 
-import { JwtEncoder } from './jwt-encoder';
+import { JwtEncoder } from './jwt-encoder.js';
 
 describe('JwtEncoder', () => {
   const data = { email: 'test@amazeelabs.dev' };

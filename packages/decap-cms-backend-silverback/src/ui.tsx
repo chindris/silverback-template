@@ -52,7 +52,13 @@ type LoginState = 'idle' | 'progress' | 'sent' | 'validating' | 'invalid';
 type AuthComponentProps = {
   onLogin: (credentials: Credentials) => void;
   inProgress?: boolean;
-  config: any;
+  config: {
+    logo_url: string;
+    site_url: string;
+    backend: {
+      api_root: string;
+    };
+  };
   t: (key: string) => string;
 };
 
@@ -64,15 +70,26 @@ export const AuthComponent = ({
 }: AuthComponentProps) => {
   const [error, setError] = useState<string | null>(null);
   const [state, setState] = useState<LoginState>('idle');
+  const [authAttempted, setAuthAttempted] = useState(false);
   const [email, setEmail] = useState('');
 
   const handleLogin = async (event: FormEvent) => {
     event.preventDefault();
     setState('progress');
-    const result = await fetch('/_decap/login', {
-      method: 'POST',
-      body: email,
-    });
+    const destination = new URL(window.location.href);
+    destination.searchParams.append('auth', 'true');
+    const result = await fetch(
+      `${config.backend.api_root}/___login?destination=${encodeURIComponent(
+        destination.toString(),
+      )}`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `email=${encodeURIComponent(email)}`,
+      },
+    );
     if (!result.ok) {
       setError(await result.text());
       setState('idle');
@@ -82,14 +99,13 @@ export const AuthComponent = ({
   };
 
   useEffect(() => {
-    const token = new URLSearchParams(window.location.search).get('token');
-    if (token) {
-      const [email] = token?.split(':') || [];
-      setEmail(email);
-      onLogin({ token });
+    if (!authAttempted && window.location.search.includes('auth=true')) {
+      setState('progress');
+      setAuthAttempted(true);
+      onLogin({});
       window.history.replaceState({}, document.title, '/admin/');
     }
-  }, [state]);
+  }, [onLogin, authAttempted, setAuthAttempted]);
 
   return (
     <AuthenticationPage

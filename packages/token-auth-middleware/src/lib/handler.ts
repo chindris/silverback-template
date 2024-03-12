@@ -102,16 +102,19 @@ export class TokenAuthHandler<TPayload extends Payload> {
         if (info) {
           const url = new URL(req.url);
           const referrer = req.headers.get('Referer');
-          const destination = referrer
-            ? new URL(referrer).searchParams.get('destination')
-            : null;
-          if (destination) {
-            url.searchParams.append('destination', destination);
+          if (!url.searchParams.has('destination')) {
+            const destination = referrer
+              ? new URL(referrer).searchParams.get('destination')
+              : null;
+            if (destination) {
+              url.searchParams.append('destination', destination);
+            }
           }
           const token = await this.encoder.create(
             payload,
             this.options.tokenLifetime,
           );
+
           url.searchParams.append('token', token);
           url.pathname = url.pathname.replace('___login', '___auth');
           const link = url.toString();
@@ -215,13 +218,16 @@ export class TokenAuthHandler<TPayload extends Payload> {
           const info = await this.backend.getInfo(payload);
           if (info) {
             if (path.endsWith('___status')) {
-              return new Response(JSON.stringify(info), {
-                headers: {
-                  'Content-Type': 'application/json',
-                  'Cache-Control': 'no-store',
+              return new Response(
+                JSON.stringify({ ...info, token: sessionToken }),
+                {
+                  headers: {
+                    'Content-Type': 'application/json',
+                    'Cache-Control': 'no-store',
+                  },
+                  status: 200,
                 },
-                status: 200,
-              });
+              );
             }
 
             const response = await next();
