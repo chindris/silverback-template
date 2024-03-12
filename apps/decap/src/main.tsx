@@ -1,4 +1,4 @@
-import { TokenAuthBackend } from '@amazeelabs/decap-cms-backend-silverback/backend';
+import { TokenAuthBackend } from '@amazeelabs/decap-cms-backend-token-auth/backend';
 import {
   Locale,
   PreviewDecapPageQuery,

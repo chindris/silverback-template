@@ -1,5 +1,5 @@
 import type { Context, Config } from '@netlify/functions';
-import { githubProxy } from '@amazeelabs/decap-cms-backend-silverback/proxy';
+import { githubProxy } from '@amazeelabs/decap-cms-backend-token-auth/proxy';
 
 export const config: Config = {
   path: '/admin/_github/*',
