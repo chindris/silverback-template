@@ -5,8 +5,6 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "prep": "tsup src/token-auth.ts --minify --format esm --outDir netlify/edge-functions",
-    "build": "pnpm prep",
     "test:static": "tsc --noEmit && eslint \"**/*.{ts,tsx,js,jsx}\" --ignore-path=\"./.gitignore\"",
     "test:integration": "playwright test",
     "serve:netlify": "netlify dev -d site --port 8887"
@@ -19,7 +17,6 @@
     "@playwright/test": "^1.40.1",
     "@types/node": "^20.11.25",
     "netlify-cli": "^17.18.1",
-    "tsup": "^8.0.2",
     "typescript": "^5.4.2"
   }
 }

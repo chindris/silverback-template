@@ -8,6 +8,10 @@ export type {
   TokenEncoderInterface,
 } from './lib/handler.js';
 export { JwtEncoder } from './lib/jwt-encoder.js';
-export { EmailBackend } from './lib/email-backend.js';
+export {
+  EmailBackend,
+  PostmarkEmailBackend,
+  TestEmailBackend,
+} from './lib/email-backend.js';
 
 export { TokenAuthClient } from './lib/client.js';

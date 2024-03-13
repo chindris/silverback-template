@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-test('authentication', async ({ page }) => {
+test('http authentication', async ({ page }) => {
   // Go to the home page
   await page.goto('/');
   await expect(page).toHaveTitle(/Token authentication test/);
@@ -12,12 +12,10 @@ test('authentication', async ({ page }) => {
   await page.getByText('Restricted content').click();
 
   // Fill the login form we are redirected to.
-  await page.getByLabel('E-Mail').fill('bob@amazeelabs.com');
+  await page.getByLabel('User-ID').fill('bob@amazeelabs.com');
   await page.getByText('Login').click();
   await expect(
-    page.getByText(
-      'A login-link has been sent to the provided e-mail address.',
-    ),
+    page.getByText('You will receive a message with instructions.'),
   ).toBeVisible();
 
   // Fetch the login link from `/restricted/___link`.

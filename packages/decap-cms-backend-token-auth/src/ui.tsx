@@ -81,7 +81,7 @@ export const AuthComponent = ({
     const destination = new URL(window.location.href);
     destination.searchParams.append('auth', 'true');
     try {
-      await client.login({ email }, destination.toString());
+      await client.login(email, destination.toString());
       setState('sent');
     } catch (e: unknown) {
       if (e instanceof Error) {

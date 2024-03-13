@@ -22,14 +22,14 @@
           })
           .then((data) => {
             document.getElementById('status').innerHTML = [
-              '<p>Authenticated as: ' + data.name + ' (' + data.email + ')</p>',
+              '<p>Authenticated as: ' + data.name + ' (' + data.id + ')</p>',
               '<form method="post" action="/restricted/___logout">',
               '<input type="submit" value="Logout" />' + '</form>',
             ].join('');
           })
           .catch((error) => {
             document.getElementById('status').innerHTML =
-              '<p><a href="login.html">Login</a></p>';
+              '<p><a href="/restricted/___login">Login</a></p>';
           });
       })();
     </script>

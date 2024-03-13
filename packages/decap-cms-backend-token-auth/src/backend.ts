@@ -23,10 +23,11 @@ export class TokenAuthBackend implements Implementation {
    */
   protected delegate: GitHubBackend;
 
-  protected client: TokenAuthClient<
-    { email: string },
-    { email: string; name: string; token: string }
-  >;
+  protected client: TokenAuthClient<{
+    id: string;
+    name: string;
+    token: string;
+  }>;
 
   /**
    * Creates a new SilverbackBackend instance.
@@ -49,7 +50,7 @@ export class TokenAuthBackend implements Implementation {
       await this.delegate.authenticate(status);
       return {
         ...status,
-        login: status.email,
+        login: status.id,
         useOpenAuthoring: true,
       };
     } catch (e: unknown) {

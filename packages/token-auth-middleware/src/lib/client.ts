@@ -1,9 +1,9 @@
-import type { Info, Payload } from './handler.js';
+import type { Info } from './handler.js';
 
 /**
  * Client implementation to communicate with a token-auth backend.
  */
-export class TokenAuthClient<TPayload extends Payload, TInfo extends Info> {
+export class TokenAuthClient<TInfo extends Info> {
   /**
    * @param basePath
    */
@@ -12,10 +12,10 @@ export class TokenAuthClient<TPayload extends Payload, TInfo extends Info> {
   /**
    * Log in to the token-auth backend and optionally redirect to a destination.
    *
-   * @param payload The token payload.
+   * @param id The users unique identifier.
    * @param destination The destination url.
    */
-  async login(payload: TPayload, destination?: string) {
+  async login(id: string, destination?: string) {
     const url = `${this.basePath}/___login`;
     const dest = destination
       ? `?destination=${encodeURIComponent(destination)}`
@@ -25,7 +25,7 @@ export class TokenAuthClient<TPayload extends Payload, TInfo extends Info> {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: new URLSearchParams(payload).toString(),
+      body: new URLSearchParams({ id }).toString(),
     });
     if (!result.ok) {
       throw new Error(await result.text());

@@ -3,8 +3,8 @@ import { describe, expect, it, vi } from 'vitest';
 import { JwtEncoder } from './jwt-encoder.js';
 
 describe('JwtEncoder', () => {
-  const data = { email: 'test@amazeelabs.dev' };
-  const encoder = new JwtEncoder<typeof data>('sshhhhh');
+  const data = 'test@amazeelabs.dev';
+  const encoder = new JwtEncoder('sshhhhh');
 
   // The point in time when the token is created.
   const timeCreated = new Date(`2024-01-01 00:00:00`);
@@ -37,7 +37,7 @@ describe('JwtEncoder', () => {
 
   it('should detect a tampered token', async () => {
     vi.setSystemTime(timeCreated);
-    const token = await encoder.create({ email: 'test@amazeelabs.dev' }, 60);
+    const token = await encoder.create('test@amazeelabs.dev', 60);
     const [header, , signature] = token.split('.');
     const tamperedBody = btoa(JSON.stringify({ email: 'hacker@evil.com' }));
     const tamperedToken = [header, tamperedBody, signature].join('.');
@@ -49,7 +49,7 @@ describe('JwtEncoder', () => {
 
   it('should allow an infinite token', async () => {
     vi.setSystemTime(timeCreated);
-    const token = await encoder.create({ email: 'test@amazeelabs.dev' });
+    const token = await encoder.create('test@amazeelabs.dev');
     vi.setSystemTime(timeValidated);
     expect(async () => await encoder.validate(token)).not.toThrow();
   });
