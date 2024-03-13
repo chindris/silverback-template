@@ -1,0 +1,27 @@
+{
+  "name": "@custom/astro",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "check": "astro check",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@amazeelabs/bridge-astro": "workspace:*",
+    "@amazeelabs/publisher": "^2.4.17",
+    "@astrojs/check": "^0.5.9",
+    "@astrojs/react": "^3.1.0",
+    "@custom/schema": "workspace:*",
+    "@custom/ui": "workspace:*",
+    "@types/react": "^18.2.65",
+    "@types/react-dom": "^18.2.22",
+    "astro": "^4.5.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "typescript": "^5.4.2"
+  }
+}

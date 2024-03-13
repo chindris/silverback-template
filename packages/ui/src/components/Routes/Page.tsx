@@ -6,11 +6,13 @@ import { useOperation } from '../../utils/operation';
 import { useTranslations } from '../../utils/translations';
 import { PageDisplay } from '../Organisms/PageDisplay';
 
-export function Page() {
+export function Page({ path }: { path?: string }) {
   // Retrieve the current location and load the page
   // behind it.
   const [loc] = useLocation();
-  const { data } = useOperation(ViewPageQuery, { pathname: loc.pathname });
+  const { data } = useOperation(ViewPageQuery, {
+    pathname: path ?? loc.pathname,
+  });
 
   // Initialize the language switcher with the options this page has.
   useTranslations(

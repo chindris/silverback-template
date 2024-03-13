@@ -47,6 +47,7 @@ RUN --mount=type=cache,target=/tmp/cache pnpm i && \
 # Deploy apps.
 RUN --mount=type=cache,target=/tmp/cache pnpm deploy --filter "@custom/cms" /tmp/.deploy/cms --prod
 RUN --mount=type=cache,target=/tmp/cache pnpm deploy --filter "@custom/website" /tmp/.deploy/website --prod
+RUN --mount=type=cache,target=/tmp/cache pnpm deploy --filter "@custom/astro" /tmp/.deploy/astro --prod
 
 # ====================================================================================================
 # CLI IMAGE
@@ -129,5 +130,17 @@ RUN if [ "$(uname -m)" != "aarch64" ]; then ln -s /home/.deno/bin/deno /usr/loca
 COPY --from=builder /tmp/.deploy/website /app
 
 RUN mkdir -p /home/.cache/deno/gen && chmod -R 777 /home/.cache/deno
+
+CMD pnpm publisher
+
+# ====================================================================================================
+# ASTRO IMAGE
+# ====================================================================================================
+
+FROM uselagoon/node-18:23.12.0 as astro
+
+RUN npm install -g pnpm@8.6.0
+
+COPY --from=builder /tmp/.deploy/astro /app
 
 CMD pnpm publisher

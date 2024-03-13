@@ -109,6 +109,21 @@ services:
       lagoon.persistent: /app/persisted-store
       lagoon.name: build
 
+  astro:
+    build:
+      context: .
+      target: astro
+      dockerfile: .lagoon/Dockerfile
+    environment:
+      <<: *default-environment
+      LAGOON_LOCALDEV_URL: astro-${COMPOSE_PROJECT_NAME:-slbtemplate}.docker.amazee.io
+    networks:
+      - amazeeio-network
+      - default
+    labels:
+      lagoon.type: node
+      lagoon.name: astro
+
 networks:
   amazeeio-network:
     external: true
