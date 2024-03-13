@@ -1,6 +1,11 @@
 {
   "$schema": "https://json.schemastore.org/swcrc",
   "jsc": {
+    "baseUrl": ".",
+    "paths": {
+      "@/shadcn/*": ["./src/components/Molecules/shadcn/*"],
+      "@/utils": ["./src/utils/shadcn/utils.js"],
+    },
     "parser": {
       "syntax": "typescript"
     },
