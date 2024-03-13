@@ -49,14 +49,14 @@
     "hast-util-select": "^5.0.5",
     "react-hook-form": "^7.49.2",
     "react-intl": "^6.6.2",
-    "swr": "^2.2.4",
+    "swr": "2.1.5",
     "unified": "^10.1.2",
     "zod": "^3.22.4",
     "zustand": "^4.4.7"
   },
   "peerDependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react": "18.3.0-canary-56e20051c-20240311",
+    "react-dom": "18.3.0-canary-56e20051c-20240311"
   },
   "devDependencies": {
     "@amazeelabs/bridge-storybook": "^1.2.8",
@@ -96,8 +96,9 @@
     "postcss-import": "^16.0.0",
     "postcss-import-ext-glob": "^2.1.1",
     "postcss-prefix-selector": "^1.16.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react": "18.3.0-canary-56e20051c-20240311",
+    "react-dom": "18.3.0-canary-56e20051c-20240311",
+    "react-server-dom-webpack": "18.3.0-canary-56e20051c-20240311",
     "serve": "^14.2.1",
     "start-server-and-test": "^2.0.3",
     "storybook": "^7.6.7",

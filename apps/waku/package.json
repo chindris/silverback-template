@@ -5,10 +5,12 @@
   "private": true,
   "scripts": {
     "dev": "waku dev",
-    "build": "waku build",
+    "build": "waku build --with-netlify-static --with-netlify",
     "start": "waku start"
   },
   "dependencies": {
+    "@custom/schema": "workspace:*",
+    "@custom/ui": "workspace:*",
     "react": "18.3.0-canary-56e20051c-20240311",
     "react-dom": "18.3.0-canary-56e20051c-20240311",
     "react-server-dom-webpack": "18.3.0-canary-56e20051c-20240311",

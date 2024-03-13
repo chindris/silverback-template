@@ -44,7 +44,9 @@
   "resolutions": {
     "sharp": "0.33.1",
     "eslint": "7",
-    "graphql": "16.8.1"
+    "graphql": "16.8.1",
+    "react": "18.3.0-canary-56e20051c-20240311",
+    "react-dom": "18.3.0-canary-56e20051c-20240311"
   },
   "pnpm": {
     "patchedDependencies": {}
