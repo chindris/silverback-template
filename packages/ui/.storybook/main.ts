@@ -12,6 +12,14 @@ const config: StorybookConfig = {
       },
       resolve: {
         alias: {
+          '@/utils': resolve(
+            dirname(new URL(import.meta.url).pathname),
+            '../src/utils/shadcn/utils',
+          ),
+          '@/shadcn': resolve(
+            dirname(new URL(import.meta.url).pathname),
+            '../src/components/Molecules/shadcn',
+          ),
           '@amazeelabs/bridge': '@amazeelabs/bridge-storybook',
           '@stories': resolve(
             dirname(new URL(import.meta.url).pathname),
