@@ -1,6 +1,6 @@
 de:
   path: /de/decap-example
-  title: Decap Beispiel
+  title: Decap Beispiel!
   teaserImage: /apps/decap/media/landscape.jpg
   hero:
     headline: Decap Beispiel
@@ -12,7 +12,7 @@ de:
 en:
   id: BTPzQnq79fWNOF1dFmESP
   path: /en/decap-example
-  title: Decap example
+  title: Decap example!
   teaserImage: /apps/decap/media/landscape.jpg
   hero:
     headline: Decap Example
