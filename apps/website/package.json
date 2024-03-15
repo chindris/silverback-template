@@ -24,11 +24,13 @@
     "gatsby-source-filesystem": "^5.13.0",
     "image-size": "^1.1.1",
     "mime-types": "^2.1.35",
-    "netlify-cli": "^17.11.0",
+    "netlify-cli": "^17.17.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@netlify/functions": "^2.6.0",
+    "@netlify/edge-functions": "^2.3.1",
     "@testing-library/react": "^14.1.2",
     "@types/react": "^18.2.46",
     "@types/react-dom": "^18.2.18",
