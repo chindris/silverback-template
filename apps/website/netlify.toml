@@ -4,6 +4,9 @@
 [functions]
   directory = "netlify/functions"
 
+[build]
+  edge_functions = "netlify/edge-functions"
+
 [functions.strangler]
   included_files = ["public/404.html"]
 
@@ -11,3 +14,6 @@
   path = "/"
   function = "homepage-redirect"
 
+[[edge_functions]]
+  path = "/admin/_github/*"
+  function = "github-proxy-auth"
