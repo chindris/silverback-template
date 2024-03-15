@@ -1,4 +1,12 @@
 query Frame {
+  websiteSettings {
+    homePage {
+      translations {
+        locale
+        path
+      }
+    }
+  }
   mainNavigation: mainNavigations {
     ...Navigation
   }
