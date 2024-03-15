@@ -21,7 +21,7 @@ export function Footer() {
   return (
     <footer
       id="footer"
-      className={'relative z-10 bg-gray-100 text-gray-500 py-4 lg:py-16 px-4'}
+      className={'relative z-10 bg-gray-100 text-gray-500 p-4 lg:py-16'}
     >
       <h2 className={'sr-only'}>Footer</h2>
       <div className="container mx-auto pb-8">
@@ -204,9 +204,9 @@ export function Footer() {
               {
                 year: 2024,
                 company_name: intl.formatMessage({
-                defaultMessage: 'Company name',
-                id: 'FPGwAt',
-              }),
+                  defaultMessage: 'Company name',
+                  id: 'FPGwAt',
+                }),
               },
             )}
           </p>
