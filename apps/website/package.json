@@ -3,6 +3,7 @@
   "private": true,
   "dependencies": {
     "@amazeelabs/bridge-gatsby": "^1.2.7",
+    "@amazeelabs/decap-cms-backend-token-auth": "workspace:*",
     "@amazeelabs/cloudinary-responsive-image": "^1.6.15",
     "@amazeelabs/gatsby-plugin-operations": "^1.1.3",
     "@amazeelabs/gatsby-plugin-static-dirs": "^1.0.1",

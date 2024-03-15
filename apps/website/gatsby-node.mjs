@@ -130,6 +130,13 @@ export const createPages = async ({ actions }) => {
     });
   });
 
+  // Redirect Decap Github requests to the proxy function.
+  actions.createRedirect({
+    fromPath: '/admin/_github/*',
+    toPath: `/.netlify/functions/github-proxy`,
+    statusCode: 200,
+  });
+
   // Any unhandled requests are handed to strangler, which will try to pass
   // them to all registered legacy systems and return 404 if none of them
   // respond.
