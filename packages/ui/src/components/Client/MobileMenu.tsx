@@ -1,9 +1,9 @@
 'use client';
-import { useIntl } from '@amazeelabs/react-intl-rsc';
 import { Dialog, Disclosure } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import clsx from 'clsx';
 import React, { createContext, PropsWithChildren } from 'react';
+import { useIntl } from 'react-intl';
 
 const MobileMenuContext = createContext({
   isOpen: false,
