@@ -58,15 +58,17 @@ export function getTranslatables(
         Object.keys(data).forEach((langcode) => {
           Object.keys(data[langcode]).forEach((key) => {
             Object.keys(data).forEach((locale) => {
-              translations.push([
-                `${key}:${locale}`,
-                {
-                  __typename: 'DecapTranslatableString',
-                  source: translationSources[key],
-                  language: locale as Locale,
-                  translation: data[locale][key],
-                },
-              ]);
+              if (translationSources[key]) {
+                translations.push([
+                  `${key}:${locale}`,
+                  {
+                    __typename: 'DecapTranslatableString',
+                    source: translationSources[key],
+                    language: locale as Locale,
+                    translation: data[locale][key],
+                  },
+                ]);
+              }
             });
           });
         });
