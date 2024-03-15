@@ -28,6 +28,17 @@
         "styles.css"
       ],
       "outputs": [".cache/**", ".netlify/**", "public/**", ".env"]
+    },
+    "rebuild": {
+      "dependsOn": ["prep"],
+      "inputs": [
+        "src/**",
+        "gatsby-node.js",
+        "gatsby-config.js",
+        "gatsby-browser.ts",
+        "gatsby-ssr.ts"
+      ],
+      "outputs": ["public/**"]
     }
   }
 }
