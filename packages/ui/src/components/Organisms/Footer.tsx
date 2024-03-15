@@ -69,9 +69,6 @@ export function Footer() {
                 </g>
               </svg>
             </a>
-            <div className={'text-base text-gray-500 mb-4'}>
-              <p>meta description</p>
-            </div>
             <div className="sm:flex sm:items-center sm:justify-between">
               <div className="flex mt-4 space-x-6 sm:justify-center sm:mt-0">
                 <a
@@ -141,51 +138,53 @@ export function Footer() {
               </div>
             </div>
           </div>
-          <ul
-            className={'md:ml-[5.625rem] flex flex-wrap justify-between grow'}
-            aria-label="Footer Primary"
-          >
-            {items.map((item, key) => (
-              <>
-                <li
-                  key={key + 'header'}
-                  className={
-                    'block mb-3 lg:mr-5 last:mr-0 md:mb-0 md:text-left w-1/2 lg:w-auto'
-                  }
-                >
-                  {item.target ? (
-                    <Link
-                      href={item.target!}
-                      className={
-                        'text-gray-900 block hover:text-blue-600 transition-all font-bold text-[0.875rem] leading-[1.313rem] uppercase mb-4'
-                      }
-                    >
-                      {item.title}
-                    </Link>
-                  ) : (
-                    <span
-                      className={
-                        'block transition-all font-bold text-[0.875rem] leading-[1.313rem] uppercase mb-4'
-                      }
-                    >
-                      {item.title}
-                    </span>
-                  )}
-                  {item.children.length > 0
-                    ? item.children.map((child) => (
-                        <Link
-                          key={child.target}
-                          href={child.target}
-                          className="block transition-all text-base mb-4 hover:text-blue-600"
-                        >
-                          {child.title}
-                        </Link>
-                      ))
-                    : null}
-                </li>
-              </>
-            ))}
-          </ul>
+          <nav>
+            <ul
+              className={'md:ml-[5.625rem] flex flex-wrap justify-between grow'}
+              aria-label="Footer Primary"
+            >
+              {items.map((item, key) => (
+                <>
+                  <li
+                    key={key + 'header'}
+                    className={
+                      'block mb-3 lg:mr-5 last:mr-0 md:mb-0 md:text-left w-1/2 lg:w-auto'
+                    }
+                  >
+                    {item.target ? (
+                      <Link
+                        href={item.target!}
+                        className={
+                          'text-gray-900 block hover:text-blue-600 transition-all font-bold text-[0.875rem] leading-[1.313rem] uppercase mb-4'
+                        }
+                      >
+                        {item.title}
+                      </Link>
+                    ) : (
+                      <span
+                        className={
+                          'block transition-all font-bold text-[0.875rem] leading-[1.313rem] uppercase mb-4'
+                        }
+                      >
+                        {item.title}
+                      </span>
+                    )}
+                    {item.children.length > 0
+                      ? item.children.map((child) => (
+                          <Link
+                            key={child.target}
+                            href={child.target}
+                            className="block transition-all text-base mb-4 hover:text-blue-600"
+                          >
+                            {child.title}
+                          </Link>
+                        ))
+                      : null}
+                  </li>
+                </>
+              ))}
+            </ul>
+          </nav>
         </div>
       </div>
       <div
