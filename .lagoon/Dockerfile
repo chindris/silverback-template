@@ -71,6 +71,9 @@ RUN apk add --no-cache imagemagick qpdf icu-dev && \
   docker-php-ext-enable intl
 
 COPY --from=cli /app /app
+RUN cd /app/web && \
+    ln -s ../node_modules/@custom/ui/build/gutenberg.css . && \
+    ln -s ../node_modules/@custom/ui/build/iframe.css .
 
 WORKDIR /app
 ENV WEBROOT=web
