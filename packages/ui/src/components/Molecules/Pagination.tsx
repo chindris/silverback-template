@@ -25,7 +25,7 @@ export function Pagination(props: { total: number; pageSize: number }) {
   const totalPages = Math.ceil(props.total / props.pageSize);
   const [location] = useLocation();
   const arrowCls =
-    'inline-flex items-center border-t-2 border-transparent pr-1 pt-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700';
+    'inline-flex items-center border-t-2 border-transparent pr-1 pt-4 text-sm font-medium text-gray-500';
 
   return (
     <nav className="flex items-center justify-between border-t border-gray-200 px-4 sm:px-0">
@@ -42,7 +42,10 @@ export function Pagination(props: { total: number; pageSize: number }) {
           <Link
             href={location}
             search={{ page: Math.max(currentPage - 1, 1) }}
-            className={clsx(arrowCls)}
+            className={clsx(
+              'hover:border-gray-300 hover:text-gray-700',
+              arrowCls,
+            )}
           >
             <ArrowLongLeftIcon
               className="mr-3 h-5 w-5 text-gray-400"
@@ -78,7 +81,10 @@ export function Pagination(props: { total: number; pageSize: number }) {
             search={{
               page: Math.min(currentPage + 1, totalPages),
             }}
-            className={clsx(arrowCls)}
+            className={clsx(
+              'hover:border-gray-300 hover:text-gray-700',
+              arrowCls,
+            )}
           >
             {intl.formatMessage({ defaultMessage: 'Next', id: '9+Ddtu' })}
             <ArrowLongRightIcon
