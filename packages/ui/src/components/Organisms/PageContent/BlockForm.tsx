@@ -17,21 +17,23 @@ export function BlockForm(
   }
 
   return (
-    <SilverbackIframe
-      src={props.url}
-      buildMessages={buildMessages}
-      redirect={(url, messages) => {
-        if (messages) {
-          storeMessages(messages);
-        }
-        navigate(url as Url);
-      }}
-      style={{
-        width: '1px',
-        minWidth: '100%',
-      }}
-      heightCalculationMethod="lowestElement"
-      cssStylesToInject={props.cssStylesToInject}
-    />
+    <div className="mt-16 mx-auto max-w-3xl">
+      <SilverbackIframe
+        src={props.url}
+        buildMessages={buildMessages}
+        redirect={(url, messages) => {
+          if (messages) {
+            storeMessages(messages);
+          }
+          navigate(url as Url);
+        }}
+        style={{
+          width: '1px',
+          minWidth: '100%',
+        }}
+        heightCalculationMethod="lowestElement"
+        cssStylesToInject={props.cssStylesToInject}
+      />
+    </div>
   );
 }
