@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+h1 {
+  /* We never want the H1 to be displayed in an iframe. */
+  @apply hidden;
+}
 
 /* Vertical spacing */
 .webform-submission-form > *:not(:last-child) {
