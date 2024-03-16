@@ -122,6 +122,8 @@ export const AuthComponent = ({
               An email has been sent to {email}. Please check your inbox and
               click the link to log in.
             </SuccessMessage>
+          ) : state === 'validating' ? (
+            <div />
           ) : (
             <>
               {state === 'invalid' ? (
