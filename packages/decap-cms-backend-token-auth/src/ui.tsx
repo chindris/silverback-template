@@ -48,7 +48,7 @@ const SuccessMessage = styled.p`
   color: ${colors.statusReadyText};
 `;
 
-type LoginState = 'idle' | 'progress' | 'sent' | 'validating' | 'invalid';
+type LoginState = 'idle' | 'progress' | 'sent' | 'validating';
 
 type AuthComponentProps = {
   onLogin: (credentials: Credentials) => void;
@@ -70,7 +70,7 @@ export const AuthComponent = ({
   inProgress,
 }: AuthComponentProps) => {
   const [error, setError] = useState<string | null>(null);
-  const [state, setState] = useState<LoginState>('progress');
+  const [state, setState] = useState<LoginState>('validating');
   const [email, setEmail] = useState('');
 
   const handleLogin = async (event: FormEvent) => {
@@ -96,7 +96,6 @@ export const AuthComponent = ({
     if (!authAttempted) {
       const client = new TokenAuthClient(config.backend.api_root);
       setAuthAttempted(true);
-      setState('validating');
       client
         .status()
         .then(() => {
@@ -122,17 +121,16 @@ export const AuthComponent = ({
               An email has been sent to {email}. Please check your inbox and
               click the link to log in.
             </SuccessMessage>
-          ) : state === 'validating' ? (
-            <div />
           ) : (
             <>
-              {state === 'invalid' ? (
-                <ErrorMessage>
-                  The token is invalid. Please try again or request a new login.
-                </ErrorMessage>
-              ) : null}
               {error ? <ErrorMessage>{error}</ErrorMessage> : null}
-              <AuthForm onSubmit={handleLogin}>
+              <AuthForm
+                onSubmit={handleLogin}
+                style={{
+                  opacity: state === 'validating' ? 0 : 1,
+                  transition: 'opacity 0.3s',
+                }}
+              >
                 <AuthInput
                   type="text"
                   name="email"
