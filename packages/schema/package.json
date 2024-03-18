@@ -28,6 +28,9 @@
       "/source": [
         "build/generated/source.d.ts"
       ],
+      "operations": [
+        "build/operations.json"
+      ],
       "gatsby-autoload": [
         "src/types/gatsby-autoload.d.ts"
       ]
