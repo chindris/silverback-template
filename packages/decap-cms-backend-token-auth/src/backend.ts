@@ -78,6 +78,7 @@ export class TokenAuthBackend implements Implementation {
    */
   async logout() {
     await this.client.logout();
+    await this.delegate.logout();
   }
 
   /**
