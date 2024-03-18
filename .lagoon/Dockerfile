@@ -143,4 +143,7 @@ RUN npm install -g pnpm@8.6.0
 
 COPY --from=builder /tmp/.deploy/astro /app
 
+RUN mkdir /app/node_modules/.vite
+RUN chmod 777 /app/node_modules/.vite
+
 CMD pnpm publisher
