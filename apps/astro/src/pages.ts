@@ -2,28 +2,42 @@ import { FrameQuery, registerExecutor, ViewPageQuery } from '@custom/schema';
 import operations from '@custom/schema/operations';
 import type { GetStaticPaths } from 'astro';
 
+type Pages = Array<{
+  translations: Array<{ path: string }>;
+}>;
+
 export const getStaticPaths: GetStaticPaths = async () => {
   // AXXX All fields are null at the moment. The resolvers are only implemented
   //  in Gatsby.
   registerExecutor(FrameQuery, await query(operations[FrameQuery]));
 
-  const {
-    data: { pages },
-  }: {
-    data: {
-      pages: Array<{
-        translations: Array<{ path: string }>;
-      }>;
-    };
-  } = await query(`
+  let offset = 0;
+  const limit = 100;
+  const pages: Pages = [];
+
+  // eslint-disable-next-line no-constant-condition
+  while (true) {
+    const {
+      data: { pages: fetchedPages },
+    }: {
+      data: { pages: Pages };
+    } = await query(`
     {
-      pages: _queryDrupalPages(offset: 0, limit: 99999999) {
+      pages: _queryDrupalPages(offset: ${offset}, limit: ${limit}) {
         translations {
           path
         }
       }
     }
   `);
+
+    if (fetchedPages.length === 0) {
+      break;
+    }
+
+    pages.push(...fetchedPages);
+    offset += limit;
+  }
 
   return pages.flatMap((page) =>
     page.translations.map((translation) => ({
