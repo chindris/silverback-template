@@ -63,7 +63,7 @@ export function metaRedirect(message: string, destination: string) {
 }
 
 export function cookieHeader(token: string, path: string) {
-  return `session=${token}; HttpOnly; Secure; SameSite=Strict; Path=${path}/`;
+  return `session=${token}; HttpOnly; Secure; SameSite=Strict; Path=${path}`;
 }
 
 export class TokenAuthHandler {
