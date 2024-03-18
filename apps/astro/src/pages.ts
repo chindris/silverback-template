@@ -22,19 +22,68 @@ export const getStaticPaths: GetStaticPaths = async () => {
     }: {
       data: { pages: Pages };
     } = await query(`
-    {
-      pages: _queryDrupalPages(offset: ${offset}, limit: ${limit}) {
-        translations {
-          path
+      {
+        pages: _queryDrupalPages(offset: ${offset}, limit: ${limit}) {
+          translations {
+            ... on Page {
+              locale
+              path
+              translations {
+                locale
+                path
+              }
+              title
+              hero {
+                headline
+                lead
+                image {
+                  source(
+                    width: 2000
+                    sizes: [[800, 800], [1200, 200], [1600, 1600], [2000, 2000], [2800, 2800]]
+                  )
+                  alt
+                }
+              }
+              content {
+                __typename
+                ... on BlockMarkup {
+                  markup
+                }
+                ... on BlockMedia {
+                  media {
+                    __typename
+                    ... on MediaImage {
+                      source(width: 1536, sizes: [[768, 768], [1536, 1536]])
+                      alt
+                    }
+                    ... on MediaVideo {
+                      url
+                    }
+                  }
+                  caption
+                }
+                ... on BlockForm {
+                  url
+                }
+              }
+              metaTags {
+                tag
+                attributes {
+                  name
+                  content
+                  property
+                  rel
+                  href
+                }
+              }
+            }
+          }
         }
       }
-    }
-  `);
-
+    `);
     if (fetchedPages.length === 0) {
       break;
     }
-
     pages.push(...fetchedPages);
     offset += limit;
   }
@@ -42,14 +91,13 @@ export const getStaticPaths: GetStaticPaths = async () => {
   return pages.flatMap((page) =>
     page.translations.map((translation) => ({
       params: { path: translation.path },
+      props: translation,
     })),
   );
 };
 
-export const fetchPageData = async (path: string) => {
-  const res = await query(operations[ViewPageQuery], { pathname: path });
-  console.log('axxx res', res); // AXXX
-  registerExecutor(ViewPageQuery, { pathname: path }, res.data);
+export const storePageData = async (path: string, data: any) => {
+  registerExecutor(ViewPageQuery, { pathname: path }, { page: data });
 };
 
 async function query(query: string, variables?: any): Promise<any> {
