@@ -21,12 +21,48 @@ export const Footer = {
       {
         locale: Locale.En,
         items: [
-          { title: 'About', target: '/about' as Url },
-          { title: 'Blog', target: '/blog' as Url },
-          { title: 'Jobs', target: '/jobs' as Url },
-          { title: 'Press', target: '/press' as Url },
-          { title: 'Accessibility', target: '/accessibility' as Url },
-          { title: 'Partners', target: '/partners' as Url },
+          {
+            id: '1',
+            title: 'About',
+            target: '/about' as Url,
+          },
+          {
+            id: '2',
+            title: 'Blog',
+            target: '/blog' as Url,
+          },
+          {
+            id: '3',
+            title: 'Jobs',
+            target: '/jobs' as Url,
+          },
+          {
+            id: '4',
+            title: 'Press',
+            target: '/press' as Url,
+          },
+          {
+            id: '5',
+            title: 'Accessibility',
+            target: '/accessibility' as Url,
+          },
+          {
+            id: '6',
+            title: 'Partners',
+            target: '/partners' as Url,
+          },
+          {
+            id: '7',
+            title: 'Drupal',
+            target: '/drupal' as Url,
+            parent: '0',
+          },
+          {
+            id: '8',
+            title: 'Gatsby',
+            target: '/gatsby' as Url,
+            parent: '0',
+          },
         ].map((item, index) => ({
           ...item,
           id: index.toString(),

@@ -1,4 +1,10 @@
-import { Locale, registerExecutor, Url, ViewPageQuery } from '@custom/schema';
+import {
+  FrameQuery,
+  Locale,
+  registerExecutor,
+  Url,
+  ViewPageQuery,
+} from '@custom/schema';
 import Landscape from '@stories/landscape.jpg?as=metadata';
 import { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
@@ -6,6 +12,7 @@ import React from 'react';
 import { image } from '../../helpers/image';
 import { Mixed, Paragraph } from '../Organisms/PageContent/BlockMarkup.stories';
 import { WithCaption } from '../Organisms/PageContent/BlockMedia.stories';
+import { Default as FrameStory } from './Frame.stories';
 import { Page } from './Page';
 
 export default {
@@ -15,6 +22,7 @@ export default {
 export const Default = {
   render: (args) => {
     registerExecutor(ViewPageQuery, () => args);
+    registerExecutor(FrameQuery, FrameStory.args);
     return <Page />;
   },
   args: {

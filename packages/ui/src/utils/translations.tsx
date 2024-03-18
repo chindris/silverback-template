@@ -1,4 +1,4 @@
-import { Locale, Url } from '@custom/schema';
+import { FrameQuery, Locale, Url } from '@custom/schema';
 import React, {
   createContext,
   PropsWithChildren,
@@ -6,6 +6,9 @@ import React, {
   useEffect,
   useState,
 } from 'react';
+
+import { isTruthy } from './isTruthy';
+import { useOperation } from './operation';
 
 /**
  * A list of translations for the given page.
@@ -36,15 +39,30 @@ export function TranslationsProvider({
 }
 
 function deepCompare(a: any, b: any) {
-  return JSON.stringify(a) === JSON.stringify(b);
+  return (
+    a &&
+    b &&
+    Object.keys(a).length === Object.keys(b).length &&
+    Object.keys(a).every((key) => a[key] === b[key])
+  );
 }
 
 export function useTranslations(newTranslations?: Translations) {
+  const homeTranslations = Object.fromEntries(
+    useOperation(FrameQuery)
+      .data?.websiteSettings?.homePage?.translations?.filter(isTruthy)
+      .map(({ locale, path }) => [locale, path]) || [],
+  );
   const { setTranslations, translations } = useContext(TranslationsContext);
   useEffect(() => {
     if (newTranslations && !deepCompare(translations, newTranslations)) {
       setTranslations(newTranslations);
     }
   }, [setTranslations, newTranslations, translations]);
-  return translations;
+
+  const homePaths = Object.fromEntries(
+    Object.values(Locale).map((locale) => [locale, `/${locale}` as Url]),
+  );
+
+  return deepCompare(homeTranslations, translations) ? homePaths : translations;
 }
