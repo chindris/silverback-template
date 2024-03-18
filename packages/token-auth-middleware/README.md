@@ -27,7 +27,7 @@ sequenceDiagram
 ## Usage
 
 Create a Netlify edge and create an instance of an encoder, backend, and handler
-(see more under "Extensibility"). The
+(see more under "Extensibility").
 
 ```typescript
 import {
@@ -56,8 +56,8 @@ a generic login form, which will prompt the user to authenticate. Then
 middleware will then send a login link to the user, which will grant access to
 the resource.
 
-There is a very simple Javascript library that allows to implement this process
-in a client side application.
+The package also includes a Javascript client that allows to implement this
+process in a browser application.
 
 ```typescript
 import { TokenAuthClient } from '@amazeelabs/token-auth-middleware';
@@ -101,10 +101,16 @@ which can be used to implement email-based authentication with other services.
 Email backends allow to restrict access to specific addresses and domains.
 
 ```typescript
-const backend = new TestEmailBackend({
-  // Allow everybody with an amazeelabs.com email address.
-  '*@amazeelabs.com': '*',
-  // Allow only a specific user.
-  'my@email.com': 'Jane Doe',
-});
+import { PostmarkEmailBackend } from './email-backend';
+
+const backend = new PostmarkEmailBackend(
+  {
+    // Allow everybody with an amazeelabs.com email address.
+    '*@amazeelabs.com': '*',
+    // Allow only a specific user.
+    'my@email.com': 'Jane Doe',
+  },
+  '[POSTMARK_API_TOKEN]',
+  'postmark-template',
+);
 ```
