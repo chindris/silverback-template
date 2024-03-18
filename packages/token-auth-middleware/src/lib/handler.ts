@@ -17,7 +17,7 @@ export type TokenAuthHandlerOptions = {
 
   /**
    * Lifetime of the login token in seconds.
-   * Defaults to one minute.
+   * Defaults to five minute.
    */
   tokenLifetime?: number;
 
@@ -75,7 +75,7 @@ export class TokenAuthHandler {
     options: TokenAuthHandlerOptions = {},
   ) {
     this.options = {
-      tokenLifetime: 60,
+      tokenLifetime: 300,
       sessionLifetime: 0,
       ...options,
     };
