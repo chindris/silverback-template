@@ -102,7 +102,7 @@ export const storePageData = async (path: string, data: any) => {
 
 async function query(query: string, variables?: any): Promise<any> {
   return (
-    await fetch('http://127.0.0.1:8888/graphql', {
+    await fetch('http://nginx:8080/graphql', {
       method: 'POST',
       headers: {
         'api-key': 'cfdb0555111c0f8924cecab028b53474',
