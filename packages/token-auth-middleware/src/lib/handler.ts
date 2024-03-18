@@ -157,13 +157,27 @@ export class TokenAuthHandler {
             const info = await this.backend.getInfo(id);
             if (info) {
               const url = new URL(req.url);
-              const destination = url.searchParams.get('destination') || '/';
+              const rawDestination = url.searchParams.get('destination') || '/';
+              let destination = null;
+              try {
+                // Make sure destination is a proper url within the restricted
+                // path.
+                const destinationUrl = new URL(rawDestination);
+                if (
+                  destinationUrl.pathname.startsWith(this.basePath) &&
+                  destinationUrl.hostname === url.hostname
+                ) {
+                  destination = rawDestination;
+                }
+              } catch (e) {
+                // Ignore, just don't set a destination.
+              }
               const sessionToken = await this.encoder.create(
                 id,
                 this.options.sessionLifetime,
               );
               return new Response(
-                metaRedirect('Login successful', destination),
+                metaRedirect('Login successful', destination || this.basePath),
                 {
                   status: 200,
                   headers: {
