@@ -202,19 +202,18 @@ export class TokenAuthHandler {
         });
       }
 
-      const destination = req.headers.get('Referer');
+      const destination = this.options.customLogin
+        ? this.options.customLogin
+        : this.basePath + '/___login';
 
-      return new Response(
-        metaRedirect('Logged out', destination || this.basePath),
-        {
-          status: 200,
-          headers: {
-            'Set-Cookie': cookieHeader('', this.basePath),
-            'Content-Type': 'text/html',
-            'Cache-Control': 'no-store',
-          },
+      return new Response(metaRedirect('Logged out', destination), {
+        status: 200,
+        headers: {
+          'Set-Cookie': cookieHeader('', this.basePath),
+          'Content-Type': 'text/html',
+          'Cache-Control': 'no-store',
         },
-      );
+      });
     }
 
     const sessionToken = parseCookies(req);

@@ -278,7 +278,7 @@ describe('Token Auth Handler', () => {
       expect(response.status).toBe(405);
     });
 
-    it('clears the session cookie and reloads the same page', async () => {
+    it('clears the session cookie and redirects to login', async () => {
       const handler = new TokenAuthHandler('/resource', encoder, backend, {
         customLogin: 'test:/login',
       });
@@ -294,7 +294,7 @@ describe('Token Auth Handler', () => {
       expect(response.headers.get('Cache-Control')).toBe('no-store');
       expect(response.status).toBe(200);
       expect(await response.text()).toEqual(
-        metaRedirect('Logged out', 'test:/resource/'),
+        metaRedirect('Logged out', 'test:/login'),
       );
       expect(response.headers.get('Set-Cookie')).toEqual(
         cookieHeader('', '/resource'),
