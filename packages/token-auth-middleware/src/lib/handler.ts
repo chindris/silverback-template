@@ -59,7 +59,10 @@ export interface AuthenticationBackendInterface<TInfo extends Info> {
 }
 
 export function metaRedirect(message: string, destination: string) {
-  return `<html lang="en"><head><title>${message}</title><meta http-equiv="refresh" content="0;url=${destination}" /></head></html>`;
+  return `<html lang="en"><head><title>${message.replace(
+    /(<([^>]+)>)/gi,
+    '',
+  )}</title><meta http-equiv="refresh" content="0;url=${destination}" /></head></html>`;
 }
 
 export function cookieHeader(token: string, path: string) {
