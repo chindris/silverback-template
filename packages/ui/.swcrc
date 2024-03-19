@@ -4,6 +4,10 @@
     "parser": {
       "syntax": "typescript"
     },
+    "experimental": {
+      "keepImportAttributes": true,
+      "emitAssertForImportAttributes": true
+    }
   },
   "module": {
     "type": "es6"

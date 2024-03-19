@@ -3,7 +3,7 @@ import { AnimatePresence, useReducedMotion } from 'framer-motion';
 import React, { PropsWithChildren } from 'react';
 import { IntlProvider } from 'react-intl';
 
-import translationSources from '../../../build/translatables.json';
+import translationSources from '../../../build/translatables.json' assert { type: 'json' };
 import { useOperation } from '../../utils/operation';
 import { TranslationsProvider } from '../../utils/translations';
 import { Footer } from '../Organisms/Footer';
