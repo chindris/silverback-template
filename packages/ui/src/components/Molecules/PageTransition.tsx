@@ -1,7 +1,7 @@
 import { motion, useReducedMotion } from 'framer-motion';
 import React, { PropsWithChildren, useEffect } from 'react';
 
-import { Messages, readMessages } from './Messages';
+import { Messages, readMessages } from './Messages.js';
 
 export function PageTransition({ children }: PropsWithChildren) {
   const [messages, setMessages] = React.useState<Array<string>>([]);

@@ -1,1 +1,1 @@
-export { Loading } from '../Molecules/Loading';
+export { Loading } from '../Molecules/Loading.js';

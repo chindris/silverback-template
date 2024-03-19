@@ -1,7 +1,7 @@
 import { Markup } from '@custom/schema';
 import { Meta, StoryObj } from '@storybook/react';
 
-import { BlockMarkup } from './BlockMarkup';
+import { BlockMarkup } from './BlockMarkup.js';
 
 export default {
   component: BlockMarkup,

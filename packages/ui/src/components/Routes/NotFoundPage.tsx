@@ -1,8 +1,8 @@
 import { NotFoundPageQuery, useLocalized } from '@custom/schema';
 import React from 'react';
 
-import { useOperation } from '../../utils/operation';
-import { PageDisplay } from '../Organisms/PageDisplay';
+import { useOperation } from '../../utils/operation.js';
+import { PageDisplay } from '../Organisms/PageDisplay.js';
 
 export function NotFoundPage() {
   const { data } = useOperation(NotFoundPageQuery);

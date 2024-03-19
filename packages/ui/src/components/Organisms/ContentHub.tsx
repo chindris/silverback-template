@@ -2,11 +2,11 @@ import { ContentHubQuery, Image, Link, Locale } from '@custom/schema';
 import React from 'react';
 import { useIntl } from 'react-intl';
 
-import { isTruthy } from '../../utils/isTruthy';
-import { useOperation } from '../../utils/operation';
-import { Pagination, useCurrentPage } from '../Molecules/Pagination';
-import { SearchForm, useSearchParameters } from '../Molecules/SearchForm';
-import { Loading } from '../Routes/Loading';
+import { isTruthy } from '../../utils/isTruthy.js';
+import { useOperation } from '../../utils/operation.js';
+import { Pagination, useCurrentPage } from '../Molecules/Pagination.js';
+import { SearchForm, useSearchParameters } from '../Molecules/SearchForm.js';
+import { Loading } from '../Routes/Loading.js';
 
 export function ContentHub({ pageSize = 10 }: { pageSize: number }) {
   const intl = useIntl();

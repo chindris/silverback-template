@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { userEvent, within } from '@storybook/test';
 
-import { Pagination as Component } from './Pagination';
+import { Pagination as Component } from './Pagination.js';
 
 export default {
   component: Component,

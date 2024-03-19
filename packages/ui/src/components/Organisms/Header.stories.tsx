@@ -3,7 +3,7 @@ import { Meta, StoryObj } from '@storybook/react';
 import { userEvent, within } from '@storybook/test';
 import React from 'react';
 
-import { Header } from './Header';
+import { Header } from './Header.js';
 
 export default {
   component: Header,

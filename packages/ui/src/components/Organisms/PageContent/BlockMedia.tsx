@@ -1,8 +1,8 @@
 import { BlockMediaFragment, Html, Image } from '@custom/schema';
 import React from 'react';
 
-import { UnreachableCaseError } from '../../../utils/unreachable-case-error';
-import { ScrollPop } from '../../Client/ScrollPop';
+import { UnreachableCaseError } from '../../../utils/unreachable-case-error.js';
+import { ScrollPop } from '../../Client/ScrollPop.js';
 
 export function BlockMedia(props: BlockMediaFragment) {
   if (!props.media) {

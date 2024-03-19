@@ -3,10 +3,13 @@ import Landscape from '@stories/landscape.jpg?as=metadata';
 import { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
-import { image } from '../../helpers/image';
-import { Mixed, Paragraph } from '../Organisms/PageContent/BlockMarkup.stories';
-import { WithCaption } from '../Organisms/PageContent/BlockMedia.stories';
-import { Page } from './Page';
+import { image } from '../../helpers/image.js';
+import {
+  Mixed,
+  Paragraph,
+} from '../Organisms/PageContent/BlockMarkup.stories.js';
+import { WithCaption } from '../Organisms/PageContent/BlockMedia.stories.js';
+import { Page } from './Page.js';
 
 export default {
   component: Page,

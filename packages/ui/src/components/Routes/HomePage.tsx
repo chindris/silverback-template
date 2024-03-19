@@ -1,10 +1,10 @@
 import { HomePageQuery, useLocalized } from '@custom/schema';
 import React from 'react';
 
-import { isTruthy } from '../../utils/isTruthy';
-import { useOperation } from '../../utils/operation';
-import { useTranslations } from '../../utils/translations';
-import { PageDisplay } from '../Organisms/PageDisplay';
+import { isTruthy } from '../../utils/isTruthy.js';
+import { useOperation } from '../../utils/operation.js';
+import { useTranslations } from '../../utils/translations.js';
+import { PageDisplay } from '../Organisms/PageDisplay.js';
 
 export function HomePage() {
   const { data } = useOperation(HomePageQuery);

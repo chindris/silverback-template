@@ -2,7 +2,7 @@ import { Link, Locale, useLocation } from '@custom/schema';
 import clsx from 'clsx';
 import React from 'react';
 
-import { useTranslations } from '../../utils/translations';
+import { useTranslations } from '../../utils/translations.js';
 
 export function LanguageSwitcher() {
   const translations = useTranslations();

@@ -2,9 +2,9 @@ import { FrameQuery, registerExecutor } from '@custom/schema';
 import { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
-import { Footer as FooterStory } from '../Organisms/Footer.stories';
-import { Idle as HeaderStory } from '../Organisms/Header.stories';
-import { Frame } from './Frame';
+import { Footer as FooterStory } from '../Organisms/Footer.stories.js';
+import { Idle as HeaderStory } from '../Organisms/Header.stories.js';
+import { Frame } from './Frame.js';
 
 export default {
   component: Frame,

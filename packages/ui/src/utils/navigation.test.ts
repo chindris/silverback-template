@@ -1,7 +1,7 @@
 import { Url } from '@custom/schema';
 import { describe, expect, it } from 'vitest';
 
-import { buildNavigationTree } from './navigation';
+import { buildNavigationTree } from './navigation.js';
 
 describe('buildNavigationTree', () => {
   it('should not break on an empty array', () => {

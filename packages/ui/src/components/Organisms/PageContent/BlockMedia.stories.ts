@@ -3,8 +3,8 @@ import Landscape from '@stories/landscape.jpg?as=metadata';
 import Portrait from '@stories/portrait.jpg?as=metadata';
 import { Meta, StoryObj } from '@storybook/react';
 
-import { image } from '../../../helpers/image';
-import { BlockMedia } from './BlockMedia';
+import { image } from '../../../helpers/image.js';
+import { BlockMedia } from './BlockMedia.js';
 
 export default {
   component: BlockMedia,

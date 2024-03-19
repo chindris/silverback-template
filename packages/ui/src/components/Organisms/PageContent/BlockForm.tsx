@@ -2,7 +2,7 @@ import { SilverbackIframe } from '@amazeelabs/silverback-iframe';
 import { BlockFormFragment, Url, useLocation } from '@custom/schema';
 import React from 'react';
 
-import { buildMessages, storeMessages } from '../../Molecules/Messages';
+import { buildMessages, storeMessages } from '../../Molecules/Messages.js';
 
 export function BlockForm(
   props: BlockFormFragment & {

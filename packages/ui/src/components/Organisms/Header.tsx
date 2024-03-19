@@ -3,18 +3,18 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import React from 'react';
 import { useIntl } from 'react-intl';
 
-import { isTruthy } from '../../utils/isTruthy';
-import { buildNavigationTree } from '../../utils/navigation';
-import { useOperation } from '../../utils/operation';
-import { DesktopMenu, DesktopMenuDropDown } from '../Client/DesktopMenu';
+import { isTruthy } from '../../utils/isTruthy.js';
+import { buildNavigationTree } from '../../utils/navigation.js';
+import { useOperation } from '../../utils/operation.js';
+import { DesktopMenu, DesktopMenuDropDown } from '../Client/DesktopMenu.js';
 import {
   MobileMenu,
   MobileMenuButton,
   MobileMenuDropdown,
   MobileMenuLink,
   MobileMenuProvider,
-} from '../Client/MobileMenu';
-import { LanguageSwitcher } from '../Molecules/LanguageSwitcher';
+} from '../Client/MobileMenu.js';
+import { LanguageSwitcher } from '../Molecules/LanguageSwitcher.js';
 
 function useHeaderNavigation(lang: string = 'en') {
   return (

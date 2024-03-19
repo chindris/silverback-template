@@ -2,7 +2,7 @@ import { FrameQuery, Locale, registerExecutor, Url } from '@custom/schema';
 import { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
-import { Footer as Component } from './Footer';
+import { Footer as Component } from './Footer.js';
 
 export default {
   component: Component,

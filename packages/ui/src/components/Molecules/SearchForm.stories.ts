@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 
-import { SearchForm as Component } from './SearchForm';
+import { SearchForm as Component } from './SearchForm.js';
 
 export default {
   component: Component,

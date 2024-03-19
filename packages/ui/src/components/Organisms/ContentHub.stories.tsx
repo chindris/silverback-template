@@ -11,8 +11,8 @@ import Portrait from '@stories/portrait.jpg?as=metadata';
 import { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
-import { image } from '../../helpers/image';
-import { ContentHub } from './ContentHub';
+import { image } from '../../helpers/image.js';
+import { ContentHub } from './ContentHub.js';
 
 type ContentHubExecutor = (
   id: typeof ContentHubQuery,

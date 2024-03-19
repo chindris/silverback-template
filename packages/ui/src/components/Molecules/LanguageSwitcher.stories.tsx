@@ -2,8 +2,11 @@ import { Url } from '@custom/schema';
 import { Decorator, Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
-import { Translations, TranslationsProvider } from '../../utils/translations';
-import { LanguageSwitcher } from './LanguageSwitcher';
+import {
+  Translations,
+  TranslationsProvider,
+} from '../../utils/translations.js';
+import { LanguageSwitcher } from './LanguageSwitcher.js';
 
 const TranslationsDecorator = ((Story, ctx) => (
   <TranslationsProvider defaultTranslations={ctx.args}>

@@ -1,13 +1,13 @@
 import { PageFragment } from '@custom/schema';
 import React from 'react';
 
-import { isTruthy } from '../../utils/isTruthy';
-import { UnreachableCaseError } from '../../utils/unreachable-case-error';
-import { PageTransition } from '../Molecules/PageTransition';
-import { BlockForm } from './PageContent/BlockForm';
-import { BlockMarkup } from './PageContent/BlockMarkup';
-import { BlockMedia } from './PageContent/BlockMedia';
-import { PageHero } from './PageHero';
+import { isTruthy } from '../../utils/isTruthy.js';
+import { UnreachableCaseError } from '../../utils/unreachable-case-error.js';
+import { PageTransition } from '../Molecules/PageTransition.js';
+import { BlockForm } from './PageContent/BlockForm.js';
+import { BlockMarkup } from './PageContent/BlockMarkup.js';
+import { BlockMedia } from './PageContent/BlockMedia.js';
+import { PageHero } from './PageHero.js';
 
 export function PageDisplay(page: PageFragment) {
   return (

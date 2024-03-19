@@ -4,10 +4,10 @@ import React, { PropsWithChildren } from 'react';
 import { IntlProvider } from 'react-intl';
 
 import translationSources from '../../../build/translatables.json' assert { type: 'json' };
-import { useOperation } from '../../utils/operation';
-import { TranslationsProvider } from '../../utils/translations';
-import { Footer } from '../Organisms/Footer';
-import { Header } from '../Organisms/Header';
+import { useOperation } from '../../utils/operation.js';
+import { TranslationsProvider } from '../../utils/translations.js';
+import { Footer } from '../Organisms/Footer.js';
+import { Header } from '../Organisms/Header.js';
 
 function filterByLocale(locale: Locale) {
   return (str: Exclude<FrameQuery['stringTranslations'], undefined>[number]) =>

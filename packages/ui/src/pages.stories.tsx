@@ -7,12 +7,12 @@ import {
 import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 
-import { WithResults } from './components/Organisms/ContentHub.stories';
-import { ContentHub } from './components/Routes/ContentHub';
-import { Frame } from './components/Routes/Frame';
-import { Default as FrameStory } from './components/Routes/Frame.stories';
-import { Page } from './components/Routes/Page';
-import { Default as PageStory } from './components/Routes/Page.stories';
+import { WithResults } from './components/Organisms/ContentHub.stories.js';
+import { ContentHub } from './components/Routes/ContentHub.js';
+import { Frame } from './components/Routes/Frame.js';
+import { Default as FrameStory } from './components/Routes/Frame.stories.js';
+import { Page } from './components/Routes/Page.js';
+import { Default as PageStory } from './components/Routes/Page.stories.js';
 
 export default {
   title: 'Pages',

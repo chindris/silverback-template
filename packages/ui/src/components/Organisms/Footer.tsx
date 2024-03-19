@@ -2,9 +2,9 @@ import { FrameQuery, Link } from '@custom/schema';
 import React from 'react';
 import { useIntl } from 'react-intl';
 
-import { isTruthy } from '../../utils/isTruthy';
-import { buildNavigationTree } from '../../utils/navigation';
-import { useOperation } from '../../utils/operation';
+import { isTruthy } from '../../utils/isTruthy.js';
+import { buildNavigationTree } from '../../utils/navigation.js';
+import { useOperation } from '../../utils/operation.js';
 
 function useFooterNavigation(lang: string = 'en') {
   return (
