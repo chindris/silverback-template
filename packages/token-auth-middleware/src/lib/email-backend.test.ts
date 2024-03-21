@@ -37,4 +37,9 @@ describe('EmailBackend', () => {
       name: 'hillary',
     });
   });
+  it('it catches fake addresses', async () => {
+    expect(
+      await backend.getInfo('"@amazeelabs.com@"@evil.com'),
+    ).toBeUndefined();
+  });
 });

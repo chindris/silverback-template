@@ -20,7 +20,16 @@ export abstract class EmailBackend
     if (id && this.users[id]) {
       return { id, name: this.users[id] };
     }
+
+    if (id.split('@').length > 2) {
+      return;
+    }
+
     const [name, host] = id.split('@');
+    if (name.includes('@')) {
+      return;
+    }
+
     const wildcard = `*@${host}`;
     if (this.users[wildcard]) {
       return { id, name };
