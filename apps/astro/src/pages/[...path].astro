@@ -1,9 +1,9 @@
 ---
-import { storePageData } from '../pages';
-import { Frame } from '@custom/ui/routes/Frame';
-import { Page } from '@custom/ui/routes/Page';
+import { storePageData } from '../pages.js';
+import { Frame } from '@custom/ui/routes/Frame.js';
+import { Page } from '@custom/ui/routes/Page.js';
 
-export { getStaticPaths } from '../pages';
+export { getStaticPaths } from '../pages.js';
 
 const { path } = Astro.params;
 await storePageData(path, Astro.props);
