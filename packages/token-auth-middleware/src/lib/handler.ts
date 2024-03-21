@@ -166,10 +166,7 @@ export class TokenAuthHandler {
                 // Make sure destination is a proper url within the restricted
                 // path.
                 const destinationUrl = new URL(rawDestination);
-                if (
-                  destinationUrl.pathname.startsWith(this.basePath) &&
-                  destinationUrl.hostname === url.hostname
-                ) {
+                if (destinationUrl.hostname === url.hostname) {
                   destination = rawDestination;
                 }
               } catch (e) {

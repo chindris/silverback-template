@@ -209,10 +209,28 @@ describe('Token Auth Handler', () => {
       expect(response.status).toBe(401);
     });
 
-    it('writes a cookie on successful authentication and redirects to the destination', async () => {
+    it('writes a cookie on successful authentication', async () => {
       vi.setSystemTime(new Date('2024-01-01 00:00:00'));
       const token = await encoder.create('bob@amazeelabs.dev', 60);
       const sessionToken = await encoder.create('bob@amazeelabs.dev');
+      const handler = new TokenAuthHandler('/resource', encoder, backend);
+      const response = await handler.handle(
+        new Request(`test:/resource/___auth?token=${token}`),
+        async () => new Response(''),
+      );
+      expect(response.headers.get('Cache-Control')).toBe('no-store');
+      expect(response.status).toBe(200);
+      expect(await response.text()).toEqual(
+        metaRedirect('Login successful', '/resource'),
+      );
+      expect(response.headers.get('Set-Cookie')).toEqual(
+        cookieHeader(sessionToken, '/resource'),
+      );
+    });
+
+    it('redirects to the destination', async () => {
+      vi.setSystemTime(new Date('2024-01-01 00:00:00'));
+      const token = await encoder.create('bob@amazeelabs.dev', 60);
       const handler = new TokenAuthHandler('/resource', encoder, backend);
       const response = await handler.handle(
         new Request(
@@ -225,8 +243,22 @@ describe('Token Auth Handler', () => {
       expect(await response.text()).toEqual(
         metaRedirect('Login successful', 'test:/resource/something?a=b'),
       );
-      expect(response.headers.get('Set-Cookie')).toEqual(
-        cookieHeader(sessionToken, '/resource'),
+    });
+
+    it('ignores a destination on a different host', async () => {
+      vi.setSystemTime(new Date('2024-01-01 00:00:00'));
+      const token = await encoder.create('bob@amazeelabs.dev', 60);
+      const handler = new TokenAuthHandler('/resource', encoder, backend);
+      const response = await handler.handle(
+        new Request(
+          `test:/resource/___auth?destination=https%3A%2F%2Fhacker.com&token=${token}`,
+        ),
+        async () => new Response(''),
+      );
+      expect(response.headers.get('Cache-Control')).toBe('no-store');
+      expect(response.status).toBe(200);
+      expect(await response.text()).toEqual(
+        metaRedirect('Login successful', '/resource'),
       );
     });
   });
