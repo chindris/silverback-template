@@ -1,0 +1,12 @@
+{
+  "extends": ["//"],
+  "pipeline": {
+    "test:static": {
+      "inputs": ["src/**"]
+    },
+    "prep": {
+      "inputs": ["src/**", ".swcrc"],
+      "outputs": ["build/**"]
+    }
+  }
+}

@@ -11,7 +11,7 @@
     "access": "public"
   },
   "scripts": {
-    "build": "rm -rf build && swc ./src -d ./build && tsc --emitDeclarationOnly",
+    "prep": "rm -rf build && swc ./src -d ./build && tsc --emitDeclarationOnly",
     "test:static": "tsc --noEmit && eslint \"**/*.{ts,tsx,js,jsx}\" --ignore-path=\"./.gitignore\" --fix"
   },
   "optionalDependencies": {
