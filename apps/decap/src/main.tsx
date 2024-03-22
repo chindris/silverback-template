@@ -1,3 +1,4 @@
+import { TokenAuthBackend } from '@amazeelabs/decap-cms-backend-token-auth/backend';
 import {
   Locale,
   PreviewDecapPageQuery,
@@ -18,26 +19,31 @@ const default_locale = locales.includes('en') ? 'en' : locales[0];
 
 CMS.registerPreviewStyle(css, { raw: true });
 CMS.registerWidget('uuid', UuidWidget);
+CMS.registerBackend('token-auth', TokenAuthBackend);
 
 CMS.init({
   config: {
     publish_mode: 'simple',
     media_folder: 'apps/decap/media',
+    // @ts-ignore
     backend: import.meta.env.DEV
-      ? // In development, use the in-memory backend.
-        {
+      ? {
+          // In development, use the in-memory backend.
           name: 'test-repo',
         }
       : window.location.hostname === 'localhost'
-        ? // On localhost, use the proxy backend.
-          {
+        ? {
+            // On localhost, use the proxy backend that writes to files.
             name: 'proxy',
             proxy_url: 'http://localhost:8081/api/v1',
           }
-        : // Otherwise, its production. Use the Git Gateway backend.
-          {
-            name: 'git-gateway',
-            branch: 'release',
+        : {
+            // Otherwise, its production. Use the token auth backend.
+            name: 'token-auth',
+            api_root: '/admin/_github',
+            repo: 'AmazeeLabs/silverback-template',
+            // TODO: set to "prod" before merge
+            branch: 'lagoon-SLB-204',
           },
     i18n: {
       structure: 'single_file',
