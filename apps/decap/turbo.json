@@ -4,12 +4,12 @@
   "pipeline": {
     "prep:vite": {
       "dependsOn": ["^prep"],
-      "inputs": ["src/**", "vite.config.js"],
+      "inputs": ["src/**", "vite.config.ts", "index.html"],
       "outputs": ["dist/**"]
     },
     "prep:scripts": {
       "dependsOn": ["^prep"],
-      "inputs": ["src/**", "tsup.config.js"],
+      "inputs": ["src/**", "tsup.config.ts"],
       "outputs": ["build/**"]
     },
     "prep": {

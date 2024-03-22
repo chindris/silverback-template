@@ -1,9 +1,9 @@
 de:
   path: /de/decap-example
-  title: Decap Beispiel!
+  title: Decap Beispiel
   teaserImage: /apps/decap/media/landscape.jpg
   hero:
-    headline: Decap Beispiel
+    headline: Decap Beispiel!
     lead: Diese Seite wurde mit Decap CMS erstellt
     image: /apps/decap/media/landscape.jpg
   content:
@@ -12,10 +12,10 @@ de:
 en:
   id: BTPzQnq79fWNOF1dFmESP
   path: /en/decap-example
-  title: Decap example!
+  title: Decap example (UPDATE)
   teaserImage: /apps/decap/media/landscape.jpg
   hero:
-    headline: Decap Example
+    headline: Decap Example!
     lead: This page was created with Decap CMS
     image: /apps/decap/media/landscape.jpg
   content:
