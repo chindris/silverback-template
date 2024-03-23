@@ -42,8 +42,7 @@ CMS.init({
             name: 'token-auth',
             api_root: '/admin/_github',
             repo: 'AmazeeLabs/silverback-template',
-            // TODO: set to "prod" before merge
-            branch: 'lagoon-SLB-204',
+            branch: 'prod',
           },
     i18n: {
       structure: 'single_file',
