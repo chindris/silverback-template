@@ -40,7 +40,7 @@ CMS.init({
         : {
             // Otherwise, its production. Use the token auth backend.
             name: 'token-auth',
-            api_root: '/admin/_github',
+            api_root: '/.netlify/functions/github-proxy',
             repo: 'AmazeeLabs/silverback-template',
             branch: 'prod',
           },

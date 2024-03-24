@@ -27,8 +27,13 @@ export default async (request: Request, context: Context) => {
     'login-link',
   );
 
-  const handler = new TokenAuthHandler('/admin/_github', encoder, backend, {
-    tokenLifetime: 300,
-  });
+  const handler = new TokenAuthHandler(
+    '/.netlify/functions/github-proxy',
+    encoder,
+    backend,
+    {
+      tokenLifetime: 300,
+    },
+  );
   return handler.handle(request, context.next);
 };
