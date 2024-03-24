@@ -1,4 +1,4 @@
-import type { Context } from '@netlify/functions';
+import type { Context, Config } from '@netlify/functions';
 import { githubProxy } from '@amazeelabs/decap-cms-backend-token-auth/proxy';
 
 export default function (request: Request, context: Context) {
@@ -7,3 +7,8 @@ export default function (request: Request, context: Context) {
   }
   return githubProxy(request, process.env.DECAP_GITHUB_TOKEN, '/admin/_github');
 }
+
+export const config: Config = {
+  path: '/admin/_github',
+};
+
