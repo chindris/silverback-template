@@ -15,5 +15,9 @@
   function = "homepage-redirect"
 
 [[edge_functions]]
+  path = "/.netlify/functions/github-proxy"
+  function = "github-proxy-auth"
+
+[[edge_functions]]
   path = "/.netlify/functions/github-proxy/*"
   function = "github-proxy-auth"
