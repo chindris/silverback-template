@@ -13,7 +13,7 @@
     },
     "build": {
       "env": ["DRUPAL_INTERNAL_URL", "DRUPAL_EXTERNAL_URL"],
-      "dependsOn": ["@custom/cms#prep", "prep", "^prep"],
+      "dependsOn": ["prep", "^prep"],
       "inputs": [
         "netlify/**",
         "src/**",
