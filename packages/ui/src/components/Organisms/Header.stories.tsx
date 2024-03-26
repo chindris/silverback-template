@@ -60,15 +60,39 @@ export const Idle = {
           },
           {
             id: '7',
-            title: 'Gatsby Turbo',
-            target: '/gatsby-turbo' as Url,
-            parent: '6',
+            title: 'Test one',
+            target: '/testone' as Url,
+            parent: '3',
           },
           {
             id: '8',
-            title: 'Super Gatsby Turbo',
-            target: '/gatsby-turbo' as Url,
-            parent: '6',
+            title: 'Test two',
+            target: '/testtwo' as Url,
+            parent: '3',
+          },
+          {
+            id: '9',
+            title: 'Test three',
+            target: '/testthree' as Url,
+            parent: '3',
+          },
+          {
+            id: '10',
+            title: 'Blog one',
+            target: '/blogone' as Url,
+            parent: '4',
+          },
+          {
+            id: '11',
+            title: 'Blog two',
+            target: '/blogtwo' as Url,
+            parent: '4',
+          },
+          {
+            id: '12',
+            title: 'Blog three',
+            target: '/blogthree' as Url,
+            parent: '4',
           },
         ],
       },
@@ -101,10 +125,7 @@ export const Expanded: StoryObj<FrameQuery> = {
       await userEvent.click(
         await navigation.findByRole('button', { name: 'Products' }),
       );
-      userEvent.click(
-        await navigation.findByRole('button', { name: 'Gatsby' }),
-      );
-      await navigation.findByRole('link', { name: 'Gatsby Turbo' });
+      await navigation.findByRole('link', { name: 'Drupal' });
     }
   },
 };

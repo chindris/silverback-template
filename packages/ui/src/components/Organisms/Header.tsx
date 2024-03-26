@@ -6,16 +6,11 @@ import { useIntl } from 'react-intl';
 import { isTruthy } from '../../utils/isTruthy';
 import { buildNavigationTree } from '../../utils/navigation';
 import { useOperation } from '../../utils/operation';
-import {
-  DesktopMenuDropDown,
-  DesktopMenuDropdownDisclosure,
-} from '../Client/DesktopMenu';
+import { DesktopMenu, DesktopMenuDropDown } from '../Client/DesktopMenu';
 import {
   MobileMenu,
-  MobileMenuButton,
   MobileMenuDropdown,
   MobileMenuLink,
-  MobileMenuProvider,
 } from '../Client/MobileMenu';
 import { LanguageSwitcher } from '../Molecules/LanguageSwitcher';
 
@@ -33,134 +28,109 @@ export function Header() {
   const items = buildNavigationTree(useHeaderNavigation(intl.locale));
 
   return (
-    <MobileMenuProvider>
-      <header className="max-w-screen-xl mx-auto">
-        <div className="hidden md:flex">
-          <UserActions iconWidth="16" iconHeight="16" />
-        </div>
-        <nav
-          className="border-b border-b-gray-200 z-20 relative mx-auto flex items-center justify-between py-6 px-3.5"
-          aria-label="Global"
-        >
-          <div className="flex lg:flex-1">
-            <Link href={'/' as Url} className="-ml-1 mt-1 md:-mt-2.5">
+    <header className="bg-white">
+      <div className="hidden md:flex">
+        <UserActions iconWidth="16" iconHeight="16" />
+      </div>
+      <nav
+        className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
+        aria-label="Global"
+      >
+        <div className="flex lg:flex-1">
+          <Link href={'/' as Url} className="-ml-1 mt-1 md:-mt-2.5">
               <span className="sr-only">
                 {intl.formatMessage({
                   defaultMessage: 'Company name',
                   id: 'FPGwAt',
                 })}
               </span>
-              <SiteLogo width={213} height={59} className={'hidden lg:block'} />
-              <SiteLogo width={160} height={40} className={'block lg:hidden'} />
-            </Link>
-          </div>
-          <div className="flex md:hidden">
-            <UserActions
-              iconWidth="23"
-              iconHeight="23"
-              showIconText={false}
-              isDesktop={false}
-            />
-            <MobileMenuButton className="inline-flex items-center justify-center rounded-md text-gray-700 ml-5 sm:ml-7 cursor-pointer"></MobileMenuButton>
-          </div>
-          <div className={'hidden md:flex'}>
-            {items.map((item, key) =>
-              item.children.length === 0 ? (
-                <Link
-                  key={key}
-                  href={item.target}
-                  className="text-base font-medium text-gray-600 ml-8 hover:text-blue-600"
-                  activeClassName={'font-bold text-blue-200'}
-                >
-                  {item.title}
-                </Link>
-              ) : (
-                <DesktopMenuDropDown title={item.title} key={item.title}>
-                  {item.children.map((child) =>
-                    child.children.length === 0 ? (
-                      <Link
-                        key={child.target}
-                        href={child.target}
-                        className="m-1.5 block hover:text-blue-600 p-2 text-sm leading-[1.25rem] text-gray-500"
-                      >
-                        {child.title}
-                      </Link>
-                    ) : (
-                      <DesktopMenuDropdownDisclosure
-                        title={child.title}
-                        key={child.title}
-                      >
-                        {child.children.map((grandChild) => (
-                          <Link
-                            key={grandChild.target}
-                            href={grandChild.target}
-                            className="block p-2 pl-5 text-sm leading-[1.25rem] text-gray-500 hover:text-blue-600"
-                          >
-                            {grandChild.title}
-                          </Link>
-                        ))}
-                      </DesktopMenuDropdownDisclosure>
-                    ),
-                  )}
-                </DesktopMenuDropDown>
-              ),
-            )}
-          </div>
-        </nav>
+            <SiteLogo width={213} height={59} className={'hidden lg:block'} />
+            <SiteLogo width={160} height={40} className={'block lg:hidden'} />
+          </Link>
+        </div>
+        <DesktopMenu>
+          <UserActions
+            iconWidth="23"
+            iconHeight="23"
+            showIconText={false}
+            isDesktop={false}
+          />
+          {items.map((item, key) =>
+            item.children.length === 0 ? (
+              <Link
+                key={key}
+                href={item.target}
+                className="text-sm font-semibold leading-6 text-gray-900"
+              >
+                {item.title}
+              </Link>
+            ) : (
+              <DesktopMenuDropDown title={item.title} key={key}>
+                {item.children.map((child) => (
+                  <Link
+                    key={child.target}
+                    href={child.target}
+                    className="block rounded-lg py-2 px-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-50"
+                  >
+                    {child.title}
+                  </Link>
+                ))}
+              </DesktopMenuDropDown>
+            ),
+          )}
+          <LanguageSwitcher />
+        </DesktopMenu>
         <MobileMenu>
+          <div className="flex items-center justify-between">
+            <a href="#" className="-m-1.5 p-1.5">
+              <span className="sr-only">
+                {intl.formatMessage({
+                  defaultMessage: 'Company name',
+                  id: 'FPGwAt',
+                })}
+              </span>
+              <img
+                className="h-8 w-auto"
+                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+                alt=""
+              />
+            </a>
+          </div>
           <div className="mt-6 flow-root">
             <div className="-my-6 divide-y divide-gray-500/10">
-              <div>
+              <div className="space-y-2 py-6">
                 {items.map((item) =>
                   item.children.length === 0 ? (
                     <Link
                       key={item.title}
                       href={item.target}
-                      className="block hover:text-blue-600 py-4 px-8 text-lg text-gray-600 border-b border-b-solid border-b-blue-100"
+                      className="-mx-3 block rounded-lg py-3.5 px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                     >
                       {item.title}
                     </Link>
                   ) : (
                     <MobileMenuDropdown
                       title={item.title}
+                      target={item.target}
                       key={item.title}
-                      nestLevel={1}
                     >
-                      {item.children.map((child) =>
-                        child.children.length === 0 ? (
-                          <Link
-                            key={child.target}
-                            href={child.target}
-                            title={child.title}
-                            className="block hover:text-blue-600 py-4 pr-8 pl-10 text-base text-gray-600"
-                          >
-                            {child.title}
-                          </Link>
-                        ) : (
-                          <MobileMenuDropdown
-                            title={child.title}
-                            key={child.title}
-                            nestLevel={2}
-                          >
-                            {child.children.map((grandChild) => (
-                              <MobileMenuLink
-                                key={grandChild.target}
-                                href={grandChild.target}
-                                title={grandChild.title}
-                              />
-                            ))}
-                          </MobileMenuDropdown>
-                        ),
-                      )}
+                      {item.children.map((child) => (
+                        <MobileMenuLink
+                          key={child.target}
+                          href={child.target}
+                          title={child.title}
+                        />
+                      ))}
                     </MobileMenuDropdown>
                   ),
                 )}
+                <LanguageSwitcher />
               </div>
             </div>
           </div>
         </MobileMenu>
-      </header>
-    </MobileMenuProvider>
+      </nav>
+    </header>
   );
 }
 
