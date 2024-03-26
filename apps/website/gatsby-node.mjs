@@ -73,13 +73,13 @@ export const createPages = async ({ actions }) => {
   });
 
   // Create a list of paths that we don't want to render regularly.
-  // 404 and homepages are dealt with differrently.
+  // 404 and homepages are dealt with differently.
   const skipPaths = [
     ...(homePages.map((page) => page.path) || []),
     ...(notFoundPages.map((page) => page.path) || []),
   ];
 
-  // Run the query that lists all pages, both decap and Drupal.
+  // Run the query that lists all pages, both Decap and Drupal.
   const pages = await graphqlQuery(ListPagesQuery);
 
   // Create a gatsby page for each of these pages.
