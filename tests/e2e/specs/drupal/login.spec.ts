@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-import { cmsUrl } from '../helpers/url';
+import { cmsUrl } from '../../helpers/url';
 
 test.describe('authentication', () => {
   test.use({ storageState: '.auth/admin.json' });

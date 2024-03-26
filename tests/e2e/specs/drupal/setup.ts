@@ -1,6 +1,6 @@
 import { expect, test as setup } from '@playwright/test';
 
-import { cmsUrl } from '../helpers/url';
+import { cmsUrl } from '../../helpers/url';
 
 setup('setup', async ({ page }) => {
   await page.goto(cmsUrl('/user/login'));

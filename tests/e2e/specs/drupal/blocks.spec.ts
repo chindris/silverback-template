@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-import { websiteUrl } from '../helpers/url';
+import { websiteUrl } from '../../helpers/url';
 
 test('All blocks are rendered', async ({ page }) => {
   await page.goto(websiteUrl('/en/blocks-complete'));

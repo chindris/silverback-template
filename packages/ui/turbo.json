@@ -71,6 +71,7 @@
       "outputs": ["storybook-static/**"]
     },
     "test:integration": {
+      "dependsOn": ["build"],
       "outputs": ["coverage/**"]
     }
   }

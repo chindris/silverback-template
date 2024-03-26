@@ -10,7 +10,7 @@ import { defineConfig, devices } from '@playwright/test';
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  testDir: './specs',
+  testDir: './specs/drupal',
   webServer: [
     {
       command: 'pnpm run --filter "@custom/cms" start',
@@ -46,7 +46,7 @@ export default defineConfig({
   projects: [
     {
       name: 'setup',
-      testMatch: /setup\.ts/,
+      testMatch: /drupal\/setup\.ts/,
     },
     {
       name: 'chromium',

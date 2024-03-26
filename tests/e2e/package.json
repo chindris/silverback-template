@@ -8,8 +8,10 @@
   "type": "module",
   "scripts": {
     "test:static": "tsc --noEmit && eslint '**/*.{ts,tsx,js,jsx}' --ignore-path='./.gitignore'",
-    "test:integration": "playwright test",
-    "test:headed": "playwright test --headed",
+    "test:integration:drupal": "playwright test --config playwright.config.drupal.ts",
+    "test:integration:decap": "playwright test --config playwright.config.decap.ts",
+    "test:headed:drupal": "playwright test --headed --config playwright.config.drupal.ts",
+    "test:headed:decap": "playwright test --headed --config playwright.config.decap.ts",
     "dev": "playwright test --ui",
     "webform-snapshots": "playwright test --config playwright.config.webforms.ts",
     "webform-snapshots:headed": "playwright test --config playwright.config.webforms.ts --headed",
