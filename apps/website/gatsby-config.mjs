@@ -9,6 +9,7 @@
 import { getPages, getTranslatables } from '@custom/decap';
 import autoload from '@custom/schema/gatsby-autoload';
 import { resolve } from 'path';
+import { existsSync } from 'fs';
 
 const dir = resolve('node_modules/@custom/decap/data');
 
@@ -20,6 +21,95 @@ process.env.NETLIFY_URL = process.env.NETLIFY_URL || 'http://127.0.0.1:8000';
 process.env.CLOUDINARY_API_KEY = process.env.CLOUDINARY_API_KEY || 'test';
 process.env.CLOUDINARY_API_SECRET = process.env.CLOUDINARY_API_SECRET || 'test';
 process.env.CLOUDINARY_CLOUDNAME = process.env.CLOUDINARY_CLOUDNAME || 'demo';
+
+/**
+ *
+ * @type {import('gatsby').GatsbyConfig['plugins']}
+ */
+const plugins = [
+  'gatsby-plugin-uninline-styles',
+  'gatsby-plugin-pnpm',
+  'gatsby-plugin-layout',
+  'gatsby-plugin-sharp',
+  {
+    resolve: '@amazeelabs/gatsby-plugin-static-dirs',
+    options: {
+      directories: {
+        'node_modules/@custom/ui/build/styles.css': '/styles.css',
+        'node_modules/@custom/ui/build/iframe.css': '/iframe.css',
+        'node_modules/@custom/ui/static/public': '/',
+      },
+    },
+  },
+  {
+    resolve: '@amazeelabs/gatsby-plugin-operations',
+    options: {
+      operations: './node_modules/@custom/schema/build/operations.json',
+    },
+  },
+  {
+    resolve: 'gatsby-plugin-netlify',
+    options: {
+      // To avoid "X-Frame-Options: DENY" and let it work in the preview
+      // iframe.
+      mergeSecurityHeaders: false,
+    },
+  },
+  {
+    resolve: 'gatsby-plugin-sitemap',
+    options: {
+      excludes: ['/__preview/**'],
+    },
+  },
+  {
+    resolve: 'gatsby-plugin-robots-txt',
+    options: {
+      policy: [{ userAgent: '*', allow: '/', disallow: [] }],
+    },
+  },
+];
+
+// Probe if Drupal is there and use it to source data.
+if (existsSync('./node_modules/@custom/cms/package.json')) {
+  plugins.push({
+    resolve: '@amazeelabs/gatsby-source-silverback',
+    options: {
+      schema_configuration: './graphqlrc.yml',
+      directives: autoload,
+      drupal_url: process.env.DRUPAL_INTERNAL_URL || 'http://127.0.0.1:8888',
+      drupal_external_url:
+        // File requests are proxied through netlify.
+        process.env.NETLIFY_URL || 'http://127.0.0.1:8000',
+      graphql_path: '/graphql',
+      auth_key: 'cfdb0555111c0f8924cecab028b53474',
+      type_prefix: '',
+    },
+  });
+}
+
+// Probe if Decap is there and use it for data sourcing and static assets.
+if (existsSync('./node_modules/@custom/decap/package.json')) {
+  plugins.push({
+    resolve: '@amazeelabs/gatsby-source-silverback',
+    options: {
+      schema_configuration: './graphqlrc.yml',
+      directives: autoload,
+      sources: {
+        getPages: getPages(`${dir}/page`),
+        getTranslatables: getTranslatables(dir),
+      },
+    },
+  });
+  plugins.push({
+    resolve: '@amazeelabs/gatsby-plugin-static-dirs',
+    options: {
+      directories: {
+        'node_modules/@custom/decap/dist': '/admin',
+        'node_modules/@custom/decap/media': '/media',
+      },
+    },
+  });
+}
 
 /**
  * @type {import('gatsby').GatsbyConfig}
@@ -37,66 +127,5 @@ export default {
     // For gatsby-plugin-sitemap and gatsby-plugin-robots-txt.
     siteUrl: process.env.NETLIFY_URL,
   },
-  plugins: [
-    'gatsby-plugin-uninline-styles',
-    'gatsby-plugin-pnpm',
-    'gatsby-plugin-layout',
-    'gatsby-plugin-sharp',
-    {
-      resolve: '@amazeelabs/gatsby-plugin-static-dirs',
-      options: {
-        directories: {
-          'node_modules/@custom/ui/build/styles.css': '/styles.css',
-          'node_modules/@custom/ui/build/iframe.css': '/iframe.css',
-          'node_modules/@custom/ui/static/public': '/',
-          'node_modules/@custom/decap/dist': '/admin',
-          'node_modules/@custom/decap/media': '/media',
-        },
-      },
-    },
-    {
-      resolve: '@amazeelabs/gatsby-plugin-operations',
-      options: {
-        operations: './node_modules/@custom/schema/build/operations.json',
-      },
-    },
-    {
-      resolve: '@amazeelabs/gatsby-source-silverback',
-      options: {
-        drupal_url: process.env.DRUPAL_INTERNAL_URL || 'http://127.0.0.1:8888',
-        drupal_external_url:
-          // File requests are proxied through netlify.
-          process.env.NETLIFY_URL || 'http://127.0.0.1:8000',
-        graphql_path: '/graphql',
-        auth_key: 'cfdb0555111c0f8924cecab028b53474',
-        type_prefix: '',
-        schema_configuration: './graphqlrc.yml',
-        directives: autoload,
-        sources: {
-          getPages: getPages(`${dir}/page`),
-          getTranslatables: getTranslatables(dir),
-        },
-      },
-    },
-    {
-      resolve: 'gatsby-plugin-netlify',
-      options: {
-        // To avoid "X-Frame-Options: DENY" and let it work in the preview
-        // iframe.
-        mergeSecurityHeaders: false,
-      },
-    },
-    {
-      resolve: 'gatsby-plugin-sitemap',
-      options: {
-        excludes: ['/__preview/**'],
-      },
-    },
-    {
-      resolve: 'gatsby-plugin-robots-txt',
-      options: {
-        policy: [{ userAgent: '*', allow: '/', disallow: [] }],
-      },
-    },
-  ],
+  plugins,
 };
