@@ -195,8 +195,8 @@ importers:
         specifier: ^1.0.1
         version: 1.0.1
       '@amazeelabs/gatsby-source-silverback':
-        specifier: ^1.13.12
-        version: 1.13.12(@types/node@18.19.17)(gatsby@5.13.1)(typescript@4.9.5)
+        specifier: ^1.13.16
+        version: 1.13.16(@types/node@18.19.17)(gatsby-plugin-sharp@5.13.0)(gatsby@5.13.1)(typescript@4.9.5)
       '@amazeelabs/publisher':
         specifier: ^2.4.17
         version: 2.4.17(@types/react@18.2.46)(react@18.2.0)(typescript@4.9.5)
@@ -869,12 +869,15 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@amazeelabs/gatsby-source-silverback@1.13.12(@types/node@18.19.17)(gatsby@5.13.1)(typescript@4.9.5):
-    resolution: {integrity: sha512-dHkBwRccBkwWY08r9q4PvCQECLAAG8dCevF5fy7zk5HZUe0/88WnictTFnsly+3y+32lmo+GBc+ZLmnMVWErLg==}
+  /@amazeelabs/gatsby-source-silverback@1.13.16(@types/node@18.19.17)(gatsby-plugin-sharp@5.13.0)(gatsby@5.13.1)(typescript@4.9.5):
+    resolution: {integrity: sha512-JUBZPhtCJemmPvwj2U29y8Aio9iWU1pLuyq7dYKmZbBovzf6CuaQtD5mG11H14z8oJO7gQjoYfnsBKZF8yijAQ==}
+    peerDependencies:
+      gatsby-plugin-sharp: ^5.13.1
     dependencies:
-      '@amazeelabs/graphql-directives': 1.3.0
+      '@amazeelabs/graphql-directives': 1.3.2
       fetch-retry: 5.0.6
       gatsby-graphql-source-toolkit: 2.0.4(gatsby@5.13.1)
+      gatsby-plugin-sharp: 5.13.0(gatsby@5.13.1)(graphql@16.8.1)
       graphql: 16.8.1
       graphql-config: 5.0.3(@types/node@18.19.17)(graphql@16.8.1)(typescript@4.9.5)
       isomorphic-fetch: 3.0.0
@@ -924,8 +927,8 @@ packages:
       lodash-es: 4.17.21
     dev: false
 
-  /@amazeelabs/graphql-directives@1.3.0:
-    resolution: {integrity: sha512-3h0WrG0Cl/8HXDfpC8TVbK0FU0wrez9nMa2/4NxkEdOrlYwqlvZ7H7RezRDf7pfQ80p81AmN/8+RtD4JjeSKrg==}
+  /@amazeelabs/graphql-directives@1.3.2:
+    resolution: {integrity: sha512-Lhxa1fm10CTm2p2vFX79RgoginVA+VHQVd0karY0tH6lkHsQQaV09HDKTqhRbQWiDwrycNeGRi6ksPMC8fqqVQ==}
     dependencies:
       lodash-es: 4.17.21
     dev: false
