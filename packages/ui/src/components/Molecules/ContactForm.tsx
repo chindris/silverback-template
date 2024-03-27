@@ -1,4 +1,4 @@
-import { ContactRequestMutation } from '@custom/schema';
+import { CreateSubmissionMutation } from '@custom/schema';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useIntl } from 'react-intl';
@@ -19,18 +19,18 @@ export function ContactForm() {
   type FormValue = z.infer<typeof formValueSchema>;
   const { register, handleSubmit } = useForm<FormValue>();
 
-  const { data, trigger, isMutating } = useMutation(ContactRequestMutation);
+  const { data, trigger, isMutating } = useMutation(CreateSubmissionMutation);
   const errorMessages =
     !isMutating &&
     data &&
-    data.createContact?.errors &&
-    data.createContact.errors.length > 0
-      ? data.createContact.errors.map((error) => {
+    data.createWebformSubmission?.errors &&
+    data.createWebformSubmission.errors.length > 0
+      ? data.createWebformSubmission.errors.map((error) => {
           return error?.message || '';
         })
       : null;
   const successMessages =
-    !isMutating && data && data.createContact?.contact
+    !isMutating && data && data.createWebformSubmission?.submission
       ? [
           intl.formatMessage({
             defaultMessage: 'The contact has been submitted.',
@@ -48,7 +48,8 @@ export function ContactForm() {
           className="mt-5 sm:items-center"
           onSubmit={handleSubmit((values) => {
             trigger({
-              contact: values,
+              webformId: 'contact',
+              submittedData: JSON.stringify(values),
             });
           })}
         >

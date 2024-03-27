@@ -9,8 +9,4 @@ services:
 
   custom.webform:
     class: Drupal\custom\Webform
-    arguments: ['@renderer', '@entity_type.manager']
-
-  custom.contact:
-    class: Drupal\custom\Contact
-    arguments: ['@custom.webform']
+    arguments: ['@renderer', '@entity_type.manager', '@serializer']

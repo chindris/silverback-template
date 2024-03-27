@@ -1,6 +1,7 @@
 scalar Url @default @value(string: "")
 scalar Markup @default @value(string: "")
 scalar ImageSource @default @value(string: "")
+scalar JSONString @default @value(string: "{}")
 
 """
 implementation(drupal): custom.content_hub::query
@@ -17,9 +18,9 @@ implementation(drupal): custom.webform::url
 directive @webformIdToUrl(id: String!) on FIELD_DEFINITION
 
 """
-implementation(drupal): custom.contact::create
+implementation(drupal): custom.webform::createSubmission
 """
-directive @createContact(contact: ContactInput) on FIELD_DEFINITION
+directive @createWebformSubmission(webformId: String!, submittedData: JSONString!) on FIELD_DEFINITION
 
 """
 Retrieve the properties of an image.
@@ -237,28 +238,13 @@ type Query {
 }
 
 type Mutation {
-  createContact(contact: ContactInput): ContactCreateResponse
-    @createContact(contact: "$contact")
+  createWebformSubmission(webformId: String!, submittedData: JSONString!): WebformSubmissionCreateResponse
+    @createWebformSubmission(webformId: "$webformId", submittedData: "$submittedData")
 }
 
-type Contact {
-  id: String!
-  name: String
-  email: String
-  subject: String
-  message: String
-}
-
-input ContactInput {
-  name: String
-  email: String
-  subject: String
-  message: String
-}
-
-type ContactCreateResponse {
+type WebformSubmissionCreateResponse {
   errors: [MutationError]
-  contact: Contact
+  submission: JSONString
 }
 
 type MutationError {

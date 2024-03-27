@@ -1,6 +1,6 @@
 import { Contact } from '@custom/ui/routes/Contact';
 import React from 'react';
 
-export default function ContentHubPage() {
+export default function ContactPage() {
   return <Contact />;
 }
