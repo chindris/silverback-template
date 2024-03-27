@@ -77,3 +77,37 @@ export const WithValidationErrors: StoryObj<{ exec: ContactFormExecutor }> = {
     await userEvent.click(submitButton);
   },
 }
+
+export const WithSuccessfulSubmission: StoryObj<{ exec: ContactFormExecutor }> = {
+  args: {
+    exec: async () => {
+      return {
+        createWebformSubmission: {
+          error: null,
+          submission: "{\"submissionId\": \"1\"}"
+        }
+      };
+    }
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const nameInput = canvas.getByPlaceholderText('Name');
+    await userEvent.type(nameInput, 'John doe', {
+      delay: 5,
+    });
+    const emailInput = canvas.getByPlaceholderText('Email');
+    await userEvent.type(emailInput, 'john@mail.com', {
+      delay: 5,
+    });
+    const subjectInput = canvas.getByPlaceholderText('Subject');
+    await userEvent.type(subjectInput, 'Lorem ipsum', {
+      delay: 5,
+    });
+    const messageInput = canvas.getByPlaceholderText('Message');
+    await userEvent.type(messageInput, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', {
+      delay: 5,
+    });
+    const submitButton = canvas.getByRole('button');
+    await userEvent.click(submitButton);
+  },
+}
