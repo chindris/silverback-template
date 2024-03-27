@@ -1,0 +1,6 @@
+/* Import all atom stylesheets. */
+@import './components/Atoms/Fonts.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
