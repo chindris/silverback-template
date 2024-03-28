@@ -9,14 +9,15 @@ export function drupalExecutor(endpoint: string, forward: boolean = true) {
     variables?: OperationVariables<OperationId>,
   ) {
     const url = new URL(endpoint, window.location.origin);
-    if (variables && variables.graphqlOperationType === 'mutation') {
+    const isMutation = id.includes('Mutation:');
+    if (isMutation) {
       const { data, errors } = await (
         await fetch(url, {
           method: 'POST',
           credentials: 'include',
           body: JSON.stringify({
             queryId: id,
-            variables: variables.variables,
+            variables: variables?.variables,
           }),
           headers: forward
             ? {

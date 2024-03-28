@@ -28,7 +28,6 @@ function swrMutator<TOperation extends AnyOperationId>(
   args?: OperationVariables<TOperation>,
 ) {
   const executor = createExecutor(operation as TOperation, {
-    graphqlOperationType: 'mutation',
     variables: args?.arg,
   });
   if (executor instanceof Function) {
