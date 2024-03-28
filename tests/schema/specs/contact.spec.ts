@@ -8,7 +8,7 @@ describe('create contact', () => {
     const result = await fetch(gql`
       mutation {
         createWebformSubmission(
-          webformId: "contact",
+          webformId: "contact"
           submittedData: "{\\"name\\": \\"John Doe\\", \\"email\\": \\"john@doe.com\\", \\"message\\": \\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. In pretium aliquam magna.\\", \\"subject\\": \\"Lorem ipsum\\"}"
         ) {
           errors {
@@ -20,9 +20,13 @@ describe('create contact', () => {
         }
       }
     `);
-    const submission = JSON.parse(result.data.createWebformSubmission.submission);
+    const submission = JSON.parse(
+      result.data.createWebformSubmission.submission,
+    );
     expect(submission.email).toEqual('john@doe.com');
-    expect(submission.message).toEqual('Lorem ipsum dolor sit amet, consectetur adipiscing elit. In pretium aliquam magna.');
+    expect(submission.message).toEqual(
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. In pretium aliquam magna.',
+    );
     expect(submission.name).toEqual('John Doe');
     expect(submission.subject).toEqual('Lorem ipsum');
     expect(result.data.createWebformSubmission.errors).toBeNull();
@@ -32,7 +36,7 @@ describe('create contact', () => {
     const result = await fetch(gql`
       mutation {
         createWebformSubmission(
-          webformId: "contact",
+          webformId: "contact"
           submittedData: "{\\"name\\": \\"Jane\\",\\"email\\": \\"invalid_email\\",\\"message\\": \\"Test message.\\",\\"subject\\": \\"Test subject\\"}"
         ) {
           errors {
