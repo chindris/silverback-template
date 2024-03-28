@@ -44,6 +44,14 @@ directive @route(
   path: String!
 ) repeatable on FIELD_DEFINITION | SCALAR | UNION | ENUM | INTERFACE | OBJECT
 
+"""
+Retrieve the properties of the current user.
+
+Provided by the "silverback_gatsby" module.
+Implemented in "Drupal\custom\Plugin\GraphQL\Directive\CurrentUser".
+"""
+directive @currentUser repeatable on FIELD_DEFINITION | SCALAR | UNION | ENUM | INTERFACE | OBJECT
+
 enum Locale @default @value(json: "\"en\"") {
   en
   de
@@ -211,6 +219,15 @@ type Query {
 
   contentHub(query: String, pagination: PaginationInput!): ContentHubResult!
     @contentHub(query: "$query", pagination: "$pagination")
+
+  currentUser: User @currentUser
+}
+
+type User {
+  id: ID!
+  name: String!
+  email: String!
+  memberFor: String!
 }
 
 type MetaTag {
