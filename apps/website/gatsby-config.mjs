@@ -6,6 +6,7 @@
 // TS file name should be different from gastby-config.ts, otherwise Gatsby will
 // pick it up instead of the JS file.
 
+// @ts-ignore: Ignore import errors if decap is not among the dependencies.
 import { getPages, getTranslatables } from '@custom/decap';
 import autoload from '@custom/schema/gatsby-autoload';
 import { resolve } from 'path';
