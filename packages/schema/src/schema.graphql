@@ -20,7 +20,10 @@ directive @webformIdToUrl(id: String!) on FIELD_DEFINITION
 """
 implementation(drupal): custom.webform::createSubmission
 """
-directive @createWebformSubmission(webformId: String!, submittedData: JSONString!) on FIELD_DEFINITION
+directive @createWebformSubmission(
+  webformId: String!
+  submittedData: JSONString!
+) on FIELD_DEFINITION
 
 """
 Retrieve the properties of an image.
@@ -238,8 +241,14 @@ type Query {
 }
 
 type Mutation {
-  createWebformSubmission(webformId: String!, submittedData: JSONString!): WebformSubmissionCreateResponse
-    @createWebformSubmission(webformId: "$webformId", submittedData: "$submittedData")
+  createWebformSubmission(
+    webformId: String!
+    submittedData: JSONString!
+  ): WebformSubmissionCreateResponse
+    @createWebformSubmission(
+      webformId: "$webformId"
+      submittedData: "$submittedData"
+    )
 }
 
 type WebformSubmissionCreateResponse {
