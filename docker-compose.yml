@@ -84,7 +84,7 @@ services:
       <<: *default-environment
 
   mariadb:
-    image: amazeeio/mariadb-drupal
+    image: uselagoon/mariadb-drupal
     labels:
       lagoon.type: mariadb
     ports:

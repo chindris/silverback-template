@@ -1,4 +1,4 @@
-import { FrameQuery, Locale, registerExecutor, Url } from '@custom/schema';
+import { FrameQuery, Locale, OperationExecutor, Url } from '@custom/schema';
 import { Meta, StoryObj } from '@storybook/react';
 import { userEvent, within } from '@storybook/test';
 import React from 'react';
@@ -15,8 +15,11 @@ export default {
 
 export const Idle = {
   render: (args) => {
-    registerExecutor(FrameQuery, () => args);
-    return <Header />;
+    return (
+      <OperationExecutor id={FrameQuery} executor={() => args}>
+        <Header />
+      </OperationExecutor>
+    );
   },
   args: {
     mainNavigation: [
@@ -55,6 +58,18 @@ export const Idle = {
             target: '/gatsby' as Url,
             parent: '2',
           },
+          {
+            id: '7',
+            title: 'Gatsby Turbo',
+            target: '/gatsby-turbo' as Url,
+            parent: '6',
+          },
+          {
+            id: '8',
+            title: 'Super Gatsby Turbo',
+            target: '/gatsby-turbo' as Url,
+            parent: '6',
+          },
         ],
       },
     ],
@@ -86,7 +101,10 @@ export const Expanded: StoryObj<FrameQuery> = {
       await userEvent.click(
         await navigation.findByRole('button', { name: 'Products' }),
       );
-      await navigation.findByRole('link', { name: 'Drupal' });
+      userEvent.click(
+        await navigation.findByRole('button', { name: 'Gatsby' }),
+      );
+      await navigation.findByRole('link', { name: 'Gatsby Turbo' });
     }
   },
 };

@@ -55,13 +55,14 @@
     "@swc/core": "^1.3.67",
     "@types/image-size": "^0.8.0",
     "@types/node": "^18",
+    "@types/react": "^18.2.46",
     "concurrently": "^8.2.2",
     "gatsby": "^5.13.1",
     "graphql": "16.8.1",
     "typescript": "^5.3.3"
   },
   "dependencies": {
-    "@amazeelabs/executors": "^1.1.0",
+    "@amazeelabs/executors": "^2.0.1",
     "@amazeelabs/gatsby-silverback-cloudinary": "^1.2.7",
     "@amazeelabs/gatsby-source-silverback": "^1.13.10",
     "@amazeelabs/scalars": "^1.6.13",
