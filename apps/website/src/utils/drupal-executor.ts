@@ -15,18 +15,18 @@ export function drupalExecutor(endpoint: string, forward: boolean = true) {
           method: 'POST',
           credentials: 'include',
           body: JSON.stringify({
-            'queryId': id,
-            'variables': variables.variables,
+            queryId: id,
+            variables: variables.variables,
           }),
           headers: forward
             ? {
                 'SLB-Forwarded-Proto': window.location.protocol.slice(0, -1),
                 'SLB-Forwarded-Host': window.location.hostname,
                 'SLB-Forwarded-Port': window.location.port,
-                "Content-Type": "application/json",
+                'Content-Type': 'application/json',
               }
             : {
-                "Content-Type": "application/json",
+                'Content-Type': 'application/json',
               },
         })
       ).json();

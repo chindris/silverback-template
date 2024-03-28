@@ -7,12 +7,10 @@ import {
 import useSwr, { SWRResponse } from 'swr';
 import useSWRMutation, { SWRMutationResponse } from 'swr/mutation';
 
-function swrFetcher<TOperation extends AnyOperationId>(
-  operationMetadata: {
-    operation: TOperation,
-    variables?: OperationVariables<TOperation>,
-  },
-) {
+function swrFetcher<TOperation extends AnyOperationId>(operationMetadata: {
+  operation: TOperation;
+  variables?: OperationVariables<TOperation>;
+}) {
   const executor = createExecutor(operationMetadata.operation, {
     variables: operationMetadata.variables,
   });
@@ -28,7 +26,7 @@ function swrFetcher<TOperation extends AnyOperationId>(
 
 function swrMutator<TOperation extends AnyOperationId>(
   operationMetadata: {
-    operation: TOperation,
+    operation: TOperation;
   },
   args?: OperationVariables<TOperation>,
 ) {
@@ -49,7 +47,7 @@ export function useOperation<TOperation extends AnyOperationId>(
   variables?: OperationVariables<TOperation>,
 ): SWRResponse<OperationResult<TOperation>> {
   return useSwr<OperationResult<TOperation>>(
-    {operation, variables},
+    { operation, variables },
     swrFetcher,
     {
       suspense: false,
@@ -61,7 +59,7 @@ export function useMutation<TOperation extends AnyOperationId>(
   operation: TOperation,
 ): SWRMutationResponse<OperationResult<TOperation>> {
   return useSWRMutation<OperationResult<TOperation>>(
-    {operation},
+    { operation },
     // @todo: fix this.
     // @ts-ignore
     swrMutator,

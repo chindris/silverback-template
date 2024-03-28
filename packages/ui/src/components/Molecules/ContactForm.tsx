@@ -20,15 +20,18 @@ export function ContactForm() {
   const { register, handleSubmit } = useForm<FormValue>();
 
   const { data, trigger, isMutating } = useMutation(ContactRequestMutation);
-  const errorMessages = (!isMutating && data && data.createContact?.errors && data.createContact.errors.length > 0 ) ?
-    data.createContact.errors.map(error => {
-      return error?.message || '';
-    })
-  :
-  null;
+  const errorMessages =
+    !isMutating &&
+    data &&
+    data.createContact?.errors &&
+    data.createContact.errors.length > 0
+      ? data.createContact.errors.map((error) => {
+          return error?.message || '';
+        })
+      : null;
   return (
     <div>
-      { errorMessages ? <Messages messages={errorMessages} /> : null}
+      {errorMessages ? <Messages messages={errorMessages} /> : null}
       <form
         className="mt-5 sm:items-center"
         onSubmit={handleSubmit((values) => {
@@ -109,7 +112,12 @@ export function ContactForm() {
             disabled={isMutating}
             className="mt-3 inline-flex w-full items-center justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sm:ml-3 sm:mt-0 sm:w-auto"
           >
-            {isMutating ? intl.formatMessage({ defaultMessage: 'Sending...', id: '82Y7Sa' }) : intl.formatMessage({ defaultMessage: 'Submit', id: 'wSZR47' })}
+            {isMutating
+              ? intl.formatMessage({
+                  defaultMessage: 'Sending...',
+                  id: '82Y7Sa',
+                })
+              : intl.formatMessage({ defaultMessage: 'Submit', id: 'wSZR47' })}
           </button>
         </div>
       </form>
