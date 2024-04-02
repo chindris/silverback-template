@@ -7,13 +7,17 @@ import {
 import useSwr, { SWRResponse } from 'swr';
 import useSWRMutation, { SWRMutationResponse } from 'swr/mutation';
 
-function swrFetcher<TOperation extends AnyOperationId>(operationMetadata: {
+// @todo: this does seem to work properly when click on the language switcher
+// links. Even though the url does get changed, the data on the page does not.
+// This should be use in the useOperation() for the call to useSwr().
+/*function swrFetcher<TOperation extends AnyOperationId>(operationMetadata: {
   operation: string;
   variables?: OperationVariables<TOperation>;
 }) {
-  const executor = createExecutor(operationMetadata.operation as TOperation, {
-    variables: operationMetadata.variables,
-  });
+  const executor = createExecutor(
+    operationMetadata.operation as TOperation,
+    operationMetadata.variables,
+  );
 
   if (executor instanceof Function) {
     return executor();
@@ -21,15 +25,13 @@ function swrFetcher<TOperation extends AnyOperationId>(operationMetadata: {
   // If the executor is not a function, then just return it. This means the
   // executor is already the data we want.
   return executor;
-}
+}*/
 
 function swrMutator<TOperation extends AnyOperationId>(
   operation: string,
   args?: OperationVariables<TOperation>,
 ) {
-  const executor = createExecutor(operation as TOperation, {
-    variables: args?.arg,
-  });
+  const executor = createExecutor(operation as TOperation, args?.arg);
   if (executor instanceof Function) {
     return executor();
   }
@@ -50,7 +52,7 @@ export function useOperation<TOperation extends AnyOperationId>(
     {
       suspense: false,
     },
-  );
+  );*/
 }
 
 export function useMutation<TOperation extends AnyOperationId>(

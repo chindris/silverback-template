@@ -17,7 +17,7 @@ export function drupalExecutor(endpoint: string, forward: boolean = true) {
           credentials: 'include',
           body: JSON.stringify({
             queryId: id,
-            variables: variables?.variables,
+            variables: variables,
           }),
           headers: forward
             ? {
@@ -37,9 +37,7 @@ export function drupalExecutor(endpoint: string, forward: boolean = true) {
       return data;
     } else {
       url.searchParams.set('queryId', id);
-      if (variables?.variables) {
-        url.searchParams.set('variables', JSON.stringify(variables.variables));
-      }
+      url.searchParams.set('variables', JSON.stringify(variables));
       const { data, errors } = await (
         await fetch(url, {
           credentials: 'include',
