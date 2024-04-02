@@ -170,15 +170,17 @@ export function Footer() {
                       </span>
                     )}
                     {item.children.length > 0
-                      ? item.children.map((child) => (
-                          <Link
-                            key={child.target}
-                            href={child.target}
-                            className="block transition-all text-base mb-4 hover:text-blue-600"
-                          >
-                            {child.title}
-                          </Link>
-                        ))
+                      ? item.children.map((child) =>
+                          child.target ? (
+                            <Link
+                              key={child.target}
+                              href={child.target}
+                              className="block transition-all text-base mb-4 hover:text-blue-600"
+                            >
+                              {child.title}
+                            </Link>
+                          ) : null,
+                        )
                       : null}
                   </li>
                 </>

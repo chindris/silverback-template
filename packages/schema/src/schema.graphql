@@ -105,7 +105,7 @@ type NavigationItem {
   id: ID! @resolveMenuItemId
   parent: ID @resolveMenuItemParentId
   title: String! @resolveMenuItemLabel
-  target: Url! @resolveMenuItemUrl
+  target: Url @resolveMenuItemUrl
 }
 
 interface Navigation {

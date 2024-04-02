@@ -39,7 +39,6 @@ export const Idle = {
           {
             id: '3',
             title: 'About us',
-            target: '/about' as Url,
           },
           {
             id: '4',
