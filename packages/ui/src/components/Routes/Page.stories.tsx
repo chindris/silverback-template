@@ -1,7 +1,7 @@
 import {
   FrameQuery,
   Locale,
-  registerExecutor,
+  OperationExecutor,
   Url,
   ViewPageQuery,
 } from '@custom/schema';
@@ -21,9 +21,13 @@ export default {
 
 export const Default = {
   render: (args) => {
-    registerExecutor(ViewPageQuery, () => args);
-    registerExecutor(FrameQuery, FrameStory.args);
-    return <Page />;
+    return (
+      <OperationExecutor executor={() => args} id={ViewPageQuery}>
+        <OperationExecutor executor={FrameStory.args} id={FrameQuery}>
+          <Page />
+        </OperationExecutor>
+      </OperationExecutor>
+    );
   },
   args: {
     page: {

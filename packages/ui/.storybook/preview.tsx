@@ -1,6 +1,6 @@
 import '../src/tailwind.css';
 
-import { clearRegistry, LocationProvider } from '@custom/schema';
+import { LocationProvider } from '@custom/schema';
 import { Decorator } from '@storybook/react';
 import React from 'react';
 import { IntlProvider } from 'react-intl';
@@ -12,11 +12,6 @@ const IntlDecorator: Decorator = (Story) => (
     <Story />
   </IntlProvider>
 );
-
-const OperatorDecorator: Decorator = (Story) => {
-  clearRegistry();
-  return <Story />;
-};
 
 const LocationDecorator: Decorator = (Story, ctx) => {
   return (
@@ -66,9 +61,4 @@ export const parameters = {
   chromatic: { viewports: [320, 840, 1440] },
 };
 
-export const decorators = [
-  LocationDecorator,
-  IntlDecorator,
-  OperatorDecorator,
-  SWRCacheDecorator,
-];
+export const decorators = [LocationDecorator, IntlDecorator, SWRCacheDecorator];
