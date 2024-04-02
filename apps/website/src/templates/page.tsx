@@ -1,5 +1,5 @@
 import { graphql } from '@amazeelabs/gatsby-plugin-operations';
-import { registerExecutor, useLocation, ViewPageQuery } from '@custom/schema';
+import { OperationExecutor, useLocation, ViewPageQuery } from '@custom/schema';
 import { Page } from '@custom/ui/routes/Page';
 import { HeadProps, PageProps } from 'gatsby';
 import React from 'react';
@@ -41,6 +41,13 @@ export default function PageTemplate({ data }: PageProps<typeof query>) {
   // That makes shure the `useOperation(ViewPageQuery, ...)` with this
   // path immediately returns this data.
   const [location] = useLocation();
-  registerExecutor(ViewPageQuery, { pathname: location.pathname }, data);
-  return <Page />;
+  return (
+    <OperationExecutor
+      id={ViewPageQuery}
+      executor={data}
+      variables={{ pathname: location.pathname }}
+    >
+      <Page />
+    </OperationExecutor>
+  );
 }

@@ -1,13 +1,6 @@
 import '@custom/ui/styles.css';
 
-import { registerExecutor } from '@custom/schema';
 import { GatsbyBrowser } from 'gatsby';
-
-import { drupalExecutor } from './src/utils/drupal-executor';
-
-export const onClientEntry: GatsbyBrowser['onClientEntry'] = async () => {
-  registerExecutor(drupalExecutor(`/graphql`));
-};
 
 export const shouldUpdateScroll: GatsbyBrowser['shouldUpdateScroll'] = (
   args,

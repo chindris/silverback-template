@@ -1,8 +1,8 @@
 import {
   AnyOperationId,
-  createExecutor,
   OperationResult,
   OperationVariables,
+  useExecutor,
 } from '@custom/schema';
 import useSwr, { SWRResponse } from 'swr';
 
@@ -10,7 +10,7 @@ export function useOperation<TOperation extends AnyOperationId>(
   operation: TOperation,
   variables?: OperationVariables<TOperation>,
 ): Omit<SWRResponse<OperationResult<TOperation>>, 'mutate'> {
-  const executor = createExecutor(operation, variables);
+  const executor = useExecutor(operation, variables);
   // If the executor is a function, use SWR to manage it.
   const result = useSwr<OperationResult<TOperation>>(
     [operation, variables],

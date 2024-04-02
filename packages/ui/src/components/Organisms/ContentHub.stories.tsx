@@ -1,9 +1,9 @@
 import {
   ContentHubQuery,
   ContentHubResultItemFragment,
+  OperationExecutor,
   OperationResult,
   OperationVariables,
-  registerExecutor,
   Url,
 } from '@custom/schema';
 import Landscape from '@stories/landscape.jpg?as=metadata';
@@ -22,8 +22,11 @@ type ContentHubExecutor = (
 export default {
   title: 'Components/Organisms/ContentHub',
   render: (args) => {
-    registerExecutor(ContentHubQuery, args.exec);
-    return <ContentHub pageSize={6} />;
+    return (
+      <OperationExecutor executor={args.exec} id={ContentHubQuery}>
+        <ContentHub pageSize={6} />
+      </OperationExecutor>
+    );
   },
 } satisfies Meta<{ exec: ContentHubExecutor }>;
 
