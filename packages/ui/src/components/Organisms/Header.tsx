@@ -38,47 +38,59 @@ export function Header() {
       >
         <div className="flex lg:flex-1">
           <Link href={'/' as Url} className="-ml-1 mt-1 md:-mt-2.5">
-              <span className="sr-only">
-                {intl.formatMessage({
-                  defaultMessage: 'Company name',
-                  id: 'FPGwAt',
-                })}
-              </span>
+            <span className="sr-only">
+              {intl.formatMessage({
+                defaultMessage: 'Company name',
+                id: 'FPGwAt',
+              })}
+            </span>
             <SiteLogo width={213} height={59} className={'hidden lg:block'} />
             <SiteLogo width={160} height={40} className={'block lg:hidden'} />
           </Link>
         </div>
         <DesktopMenu>
-          <UserActions
-            iconWidth="23"
-            iconHeight="23"
-            showIconText={false}
-            isDesktop={false}
-          />
           {items.map((item, key) =>
             item.children.length === 0 ? (
-              <Link
-                key={key}
-                href={item.target}
-                className="text-sm font-semibold leading-6 text-gray-900"
-              >
-                {item.title}
-              </Link>
+              item.target ? (
+                <Link
+                  key={key}
+                  href={item.target}
+                  className="text-sm font-semibold leading-6 text-gray-900"
+                >
+                  {item.title}
+                </Link>
+              ) : (
+                <span className="text-sm font-semibold leading-6 text-gray-900">
+                  {item.title}
+                </span>
+              )
             ) : (
-              <DesktopMenuDropDown title={item.title} key={key}>
-                {item.children.map((child) => (
-                  <Link
-                    key={child.target}
-                    href={child.target}
-                    className="block rounded-lg py-2 px-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-50"
-                  >
-                    {child.title}
-                  </Link>
-                ))}
+              <DesktopMenuDropDown
+                title={item.title}
+                target={item.target}
+                key={key}
+              >
+                {item.children.map((child) =>
+                  child.target ? (
+                    <Link
+                      key={child.target}
+                      href={child.target}
+                      className="block rounded-lg py-2 px-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-50"
+                    >
+                      {child.title}
+                    </Link>
+                  ) : (
+                    <span
+                      key={child.target}
+                      className="block rounded-lg py-2 px-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-50"
+                    >
+                      {item.title}
+                    </span>
+                  ),
+                )}
               </DesktopMenuDropDown>
             ),
           )}
-          <LanguageSwitcher />
         </DesktopMenu>
         <MobileMenu>
           <div className="flex items-center justify-between">
@@ -101,30 +113,42 @@ export function Header() {
               <div className="space-y-2 py-6">
                 {items.map((item) =>
                   item.children.length === 0 ? (
-                    <Link
-                      key={item.title}
-                      href={item.target}
-                      className="-mx-3 block rounded-lg py-3.5 px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                    >
-                      {item.title}
-                    </Link>
+                    item.target ? (
+                      <Link
+                        key={item.title}
+                        href={item.target}
+                        className="-mx-3 block rounded-lg py-3.5 px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                      >
+                        {item.title}
+                      </Link>
+                    ) : (
+                      <span
+                        key={item.title}
+                        className="-mx-3 block rounded-lg py-3.5 px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                      >
+                        {item.title}
+                      </span>
+                    )
                   ) : (
                     <MobileMenuDropdown
                       title={item.title}
                       target={item.target}
                       key={item.title}
                     >
-                      {item.children.map((child) => (
-                        <MobileMenuLink
-                          key={child.target}
-                          href={child.target}
-                          title={child.title}
-                        />
-                      ))}
+                      {item.children.map((child) =>
+                        child.target ? (
+                          <MobileMenuLink
+                            key={child.target}
+                            href={child.target}
+                            title={child.title}
+                          />
+                        ) : (
+                          <span key={child.target}>{child.title}</span>
+                        ),
+                      )}
                     </MobileMenuDropdown>
                   ),
                 )}
-                <LanguageSwitcher />
               </div>
             </div>
           </div>
