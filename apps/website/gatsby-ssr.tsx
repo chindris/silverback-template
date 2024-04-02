@@ -7,7 +7,7 @@ import { drupalExecutor } from './src/utils/drupal-executor';
 export const onRenderBody: GatsbySSR['onRenderBody'] = ({
   setHtmlAttributes,
   pathname,
-  setHeadComponents
+  setHeadComponents,
 }) => {
   registerExecutor(drupalExecutor(`/graphql`));
   const locales = Object.values(Locale);
@@ -36,6 +36,6 @@ export const onRenderBody: GatsbySSR['onRenderBody'] = ({
       type="font/woff2"
       crossOrigin="anonymous"
       key="NotoSansGurmukhi"
-    />
-  ])
+    />,
+  ]);
 };
