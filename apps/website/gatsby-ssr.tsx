@@ -27,6 +27,7 @@ export const onRenderBody: GatsbySSR['onRenderBody'] = ({
       // We don't know the language.
     }
   }
+
   setHeadComponents([
     <link
       rel="preload"
