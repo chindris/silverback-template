@@ -1,5 +1,6 @@
 import { Locale, registerExecutor } from '@custom/schema';
 import { GatsbySSR } from 'gatsby';
+import React from 'react';
 
 import { drupalExecutor } from './src/utils/drupal-executor';
 
@@ -26,15 +27,14 @@ export const onRenderBody: GatsbySSR['onRenderBody'] = ({
       // We don't know the language.
     }
   }
-  // preload our fonts
   setHeadComponents([
-    `<link
+    <link
       rel="preload"
       href="/fonts/NotoSansGurmukhi-Regular.woff2"
       as="font"
       type="font/woff2"
       crossOrigin="anonymous"
-      key="interFont"
-    />`
+      key="NotoSansGurmukhi"
+    />
   ])
 };
