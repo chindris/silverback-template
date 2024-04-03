@@ -66,7 +66,6 @@ const plugins = [
       schema_configuration: './graphqlrc.yml',
     },
   },
-  '@custom/cms',
   '@custom/decap',
 ];
 
