@@ -41,6 +41,8 @@ export function useExecutor<OperationId extends AnyOperationId>(
   variables?: OperationVariables<OperationId>,
 ):
   | OperationResult<OperationId>
-  | (() => Promise<OperationResult<OperationId>>) {
+  | ((
+      variables?: OperationVariables<OperationId>,
+    ) => Promise<OperationResult<OperationId>>) {
   return untypedUseExecutor(id, variables);
 }

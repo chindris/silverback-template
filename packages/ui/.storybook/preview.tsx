@@ -44,7 +44,10 @@ const SWRCacheDecorator: Decorator = (Story) => {
             // eslint-disable-next-line react-hooks/rules-of-hooks
             return useSWR(
               // Make sure SWR caches are unique per story.
-              [key, window.__STORYBOOK_PREVIEW__.currentRender.id],
+              [
+                ...(key instanceof Array ? key : [key]),
+                window.__STORYBOOK_PREVIEW__.currentRender.id,
+              ],
               fetcher,
               config,
             );
