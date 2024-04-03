@@ -14,6 +14,9 @@
     },
     "prep": {
       "dependsOn": ["prep:vite", "prep:scripts"]
+    },
+    "test:integration": {
+      "dependsOn": ["@custom-tests/e2e#test:integration:decap"]
     }
   }
 }
