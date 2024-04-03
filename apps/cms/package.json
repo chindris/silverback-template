@@ -28,6 +28,9 @@
     "schema:test:update": "pnpm schema:test -u",
     "import-translations": "pnpm drush scr scripts/translations-import.php"
   },
+  "peerDependencies": {
+    "@amazeelabs/gatsby-source-silverback": "*"
+  },
   "dependencies": {
     "@custom/custom": "workspace:*",
     "@custom/custom_heavy": "workspace:*",

@@ -34,19 +34,6 @@ function isDefined(val) {
  * @type {import('gatsby').GatsbyNode['createPages']}
  */
 export const createPages = async ({ actions }) => {
-  // Rewrite file requests to Drupal.
-  actions.createRedirect({
-    fromPath: '/sites/default/files/*',
-    toPath: `${process.env.GATSBY_DRUPAL_URL}/sites/default/files/:splat`,
-    statusCode: 200,
-  });
-
-  actions.createRedirect({
-    fromPath: '/graphql',
-    toPath: `${process.env.GATSBY_DRUPAL_URL}/graphql`,
-    statusCode: 200,
-  });
-
   // Grab Home- and 404 pages.
   const homePages =
     (

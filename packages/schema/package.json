@@ -28,7 +28,7 @@
       "/source": [
         "build/generated/source.d.ts"
       ],
-      "gatsby-autoload": [
+      "/gatsby-autoload": [
         "src/types/gatsby-autoload.d.ts"
       ]
     }
@@ -64,7 +64,7 @@
   "dependencies": {
     "@amazeelabs/executors": "^2.0.1",
     "@amazeelabs/gatsby-silverback-cloudinary": "^1.2.7",
-    "@amazeelabs/gatsby-source-silverback": "^1.13.10",
+    "@amazeelabs/gatsby-source-silverback": "^1.13.17",
     "@amazeelabs/scalars": "^1.6.13",
     "@swc/cli": "^0.1.63",
     "@swc/core": "^1.3.102",
