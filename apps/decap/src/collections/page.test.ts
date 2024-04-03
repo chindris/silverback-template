@@ -1,12 +1,14 @@
-import { dirname, resolve } from 'path';
-import { expect, test } from 'vitest';
+import { expect, test, vi } from 'vitest';
 
 import { getPages } from '..';
 
+vi.mock('../helpers/path', () => ({
+  path: `${new URL(import.meta.url).pathname
+    .split('/')
+    .slice(0, -1)
+    .join('/')}/../..`,
+}));
+
 test('getPages', () => {
-  const dir = resolve(
-    dirname(new URL(import.meta.url).pathname),
-    '../../data/page',
-  );
-  expect(() => getPages(dir)).not.toThrow();
+  expect(() => getPages()).not.toThrow();
 });

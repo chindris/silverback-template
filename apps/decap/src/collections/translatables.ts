@@ -7,6 +7,7 @@ import yaml from 'yaml';
 import { z } from 'zod';
 
 import rawTranslatables from '../../node_modules/@custom/ui/build/translatables.json';
+import { path } from '../helpers/path';
 
 // Validate that translatables.json contains what we expect.
 const translationSources = z
@@ -44,36 +45,35 @@ export const Translatables: CmsCollection = {
   ],
 };
 
-export function getTranslatables(
-  dir: string,
-): SilverbackSource<DecapTranslatableStringSource> {
-  return function () {
-    const rawTranslations = yaml.parse(
-      fs.readFileSync(`${dir}/translatables.yml`, 'utf-8'),
-    );
-    return z
-      .record(z.record(z.string()))
-      .transform((data) => {
-        const translations: Array<[string, DecapTranslatableStringSource]> = [];
-        Object.keys(data).forEach((langcode) => {
-          Object.keys(data[langcode]).forEach((key) => {
-            Object.keys(data).forEach((locale) => {
-              if (translationSources[key]) {
-                translations.push([
-                  `${key}:${locale}`,
-                  {
-                    __typename: 'DecapTranslatableString',
-                    source: translationSources[key],
-                    language: locale as Locale,
-                    translation: data[locale][key],
-                  },
-                ]);
-              }
-            });
+export const getTranslatables: SilverbackSource<
+  DecapTranslatableStringSource
+> = () => {
+  const dir = `${path}/data`;
+  const rawTranslations = yaml.parse(
+    fs.readFileSync(`${dir}/translatables.yml`, 'utf-8'),
+  );
+  return z
+    .record(z.record(z.string()))
+    .transform((data) => {
+      const translations: Array<[string, DecapTranslatableStringSource]> = [];
+      Object.keys(data).forEach((langcode) => {
+        Object.keys(data[langcode]).forEach((key) => {
+          Object.keys(data).forEach((locale) => {
+            if (translationSources[key]) {
+              translations.push([
+                `${key}:${locale}`,
+                {
+                  __typename: 'DecapTranslatableString',
+                  source: translationSources[key],
+                  language: locale as Locale,
+                  translation: data[locale][key],
+                },
+              ]);
+            }
           });
         });
-        return translations;
-      })
-      .parse(rawTranslations);
-  };
-}
+      });
+      return translations;
+    })
+    .parse(rawTranslations);
+};
