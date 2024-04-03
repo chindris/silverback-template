@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-import { websiteUrl } from '../helpers/url';
+import { websiteUrl } from '../../helpers/url';
 
 test('Metatags on Basic page', async ({ page }) => {
   const pageUrl = websiteUrl('/en/page-complete');
