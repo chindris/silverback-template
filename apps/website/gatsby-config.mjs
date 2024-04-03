@@ -66,8 +66,6 @@ const plugins = [
       schema_configuration: './graphqlrc.yml',
     },
   },
-  '@custom/cms',
-  '@custom/decap',
 ];
 
 // Probe if Drupal is there and use it to source data.

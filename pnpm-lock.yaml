@@ -212,12 +212,6 @@ importers:
       '@amazeelabs/token-auth-middleware':
         specifier: ^1.1.1
         version: 1.1.1
-      '@custom/cms':
-        specifier: workspace:*
-        version: link:../cms
-      '@custom/decap':
-        specifier: workspace:*
-        version: link:../decap
       '@custom/schema':
         specifier: workspace:*
         version: link:../../packages/schema
