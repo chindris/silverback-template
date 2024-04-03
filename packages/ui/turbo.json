@@ -57,7 +57,6 @@
       ]
     },
     "build": {
-      "dependsOn": ["@custom/cms#prep"],
       "inputs": [
         ".storybook/**",
         "postcss.config.cjs",
@@ -71,6 +70,7 @@
       "outputs": ["storybook-static/**"]
     },
     "test:integration": {
+      "dependsOn": ["build"],
       "outputs": ["coverage/**"]
     }
   }
