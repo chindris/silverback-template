@@ -12,8 +12,7 @@
       "inputs": ["src/**", "!src/gatsby-fragments.js"]
     },
     "build": {
-      "env": ["DRUPAL_INTERNAL_URL", "DRUPAL_EXTERNAL_URL"],
-      "dependsOn": ["@custom/cms#prep", "prep", "^prep"],
+      "dependsOn": ["prep", "^prep"],
       "inputs": [
         "netlify/**",
         "src/**",
@@ -28,17 +27,6 @@
         "styles.css"
       ],
       "outputs": [".cache/**", ".netlify/**", "public/**", ".env"]
-    },
-    "rebuild": {
-      "dependsOn": ["prep"],
-      "inputs": [
-        "src/**",
-        "gatsby-node.js",
-        "gatsby-config.js",
-        "gatsby-browser.ts",
-        "gatsby-ssr.ts"
-      ],
-      "outputs": ["public/**"]
     }
   }
 }
