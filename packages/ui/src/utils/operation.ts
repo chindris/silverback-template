@@ -7,17 +7,6 @@ import {
 import useSwr, { SWRResponse } from 'swr';
 import useSWRMutation, { SWRMutationResponse } from 'swr/mutation';
 
-function swrMutator<TOperation extends AnyOperationId>(
-  operation: string,
-  args?: OperationVariables<TOperation>,
-) {
-  const executor = createExecutor(operation as TOperation, args?.arg);
-  if (executor instanceof Function) {
-    return executor();
-  }
-  return executor;
-}
-
 export function useOperation<TOperation extends AnyOperationId>(
   operation: TOperation,
   variables?: OperationVariables<TOperation>,
@@ -32,7 +21,16 @@ export function useOperation<TOperation extends AnyOperationId>(
     {
       suspense: false,
     },
-  );*/
+  );
+  return executor instanceof Function
+    ? result
+    : // If the executor is not a function, return a mock SWR response.
+      {
+        data: executor,
+        error: undefined,
+        isValidating: false,
+        isLoading: false,
+      };
 }
 
 export function useMutation<TOperation extends AnyOperationId>(
@@ -43,10 +41,14 @@ export function useMutation<TOperation extends AnyOperationId>(
   string,
   OperationVariables<TOperation>
 > {
+  // Mutations don't support variable matching, since it does not make sense.
+  const executor = useExecutor(operation);
   return useSWRMutation<
     OperationResult<TOperation>,
     string,
     string,
     OperationVariables<TOperation>
-  >(operation, swrMutator);
+  >(operation, (_, opts) =>
+    executor instanceof Function ? executor(opts.arg) : executor,
+  );
 }

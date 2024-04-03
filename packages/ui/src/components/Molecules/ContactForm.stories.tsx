@@ -1,7 +1,7 @@
 import {
   CreateSubmissionMutation,
+  OperationExecutor,
   OperationResult,
-  registerExecutor,
 } from '@custom/schema';
 import { Meta, StoryObj } from '@storybook/react';
 import { userEvent, within } from '@storybook/test';
@@ -16,8 +16,11 @@ type ContactFormExecutor = () => Promise<
 export default {
   title: 'Components/Molecules/ContactForm',
   render: (args) => {
-    registerExecutor(CreateSubmissionMutation, args.exec);
-    return <ContactForm />;
+    return (
+      <OperationExecutor id={CreateSubmissionMutation} executor={args.exec}>
+        <ContactForm />
+      </OperationExecutor>
+    );
   },
 } satisfies Meta<{ exec: ContactFormExecutor }>;
 
