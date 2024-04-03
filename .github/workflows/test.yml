@@ -32,6 +32,13 @@ jobs:
           TURBO_TOKEN: 'local'
           TURBO_TEAM: 'local'
 
+      - name: Test 2
+        run: pnpm turbo:test
+        env:
+          TURBO_API: 'http://127.0.0.1:9080'
+          TURBO_TOKEN: 'local'
+          TURBO_TEAM: 'local'
+
       - name: Upload Playwright report
         uses: actions/upload-artifact@v3
         if: failure()
