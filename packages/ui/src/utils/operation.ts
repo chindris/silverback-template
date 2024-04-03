@@ -16,7 +16,7 @@ export function useOperation<TOperation extends AnyOperationId>(
     [operation, variables],
     // If the executor is not a function, pass null to SWR,
     // so it does not try to fetch.
-    typeof executor === 'function' ? executor : null,
+    executor instanceof Function ? (arg) => executor(arg[1]) : null,
     {
       suspense: false,
     },
