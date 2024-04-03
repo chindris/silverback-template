@@ -9,4 +9,4 @@ services:
 
   custom.webform:
     class: Drupal\custom\Webform
-    arguments: ['@renderer', '@entity_type.manager']
+    arguments: ['@renderer', '@entity_type.manager', '@serializer']

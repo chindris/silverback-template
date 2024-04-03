@@ -6,3 +6,4 @@ dependencies:
   - silverback_gatsby:silverback_gatsby
   - simple_oauth:simple_oauth
   - consumers:consumers
+  - drupal:serialization
