@@ -29,6 +29,7 @@ export const onRenderBody: GatsbySSR['onRenderBody'] = ({
   }
 
   setHeadComponents([
+    // here you will map config file consumed
     <link
       rel="preload"
       href="/fonts/NotoSansGurmukhi-Regular.woff2"
