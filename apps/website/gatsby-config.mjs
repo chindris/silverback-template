@@ -70,11 +70,6 @@ const plugins = [
   '@custom/decap',
 ];
 
-// Probe if Drupal is there and use it to source data.
-if (existsSync('./node_modules/@custom/cms/package.json')) {
-  plugins.push();
-}
-
 /**
  * @type {import('gatsby').GatsbyConfig}
  */
