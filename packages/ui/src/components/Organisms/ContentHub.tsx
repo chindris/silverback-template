@@ -1,4 +1,5 @@
 import { ContentHubQuery, Image, Link, Locale } from '@custom/schema';
+import qs from 'query-string';
 import React from 'react';
 import { useIntl } from 'react-intl';
 
@@ -8,17 +9,26 @@ import { Pagination, useCurrentPage } from '../Molecules/Pagination';
 import { SearchForm, useSearchParameters } from '../Molecules/SearchForm';
 import { Loading } from '../Routes/Loading';
 
+export type ContentHubQueryArgs = {
+  title: string | undefined;
+  page: string | undefined;
+  pageSize: string | undefined;
+};
+
 export function ContentHub({ pageSize = 10 }: { pageSize: number }) {
   const intl = useIntl();
-  const currentPage = useCurrentPage();
+  const page = useCurrentPage();
   const search = useSearchParameters();
   const { data, isLoading, error } = useOperation(ContentHubQuery, {
-    query: search.keyword,
-    pagination: {
-      limit: pageSize,
-      offset: currentPage * pageSize - pageSize,
-    },
     locale: intl.locale as Locale,
+    args: qs.stringify(
+      {
+        title: search.keyword,
+        page: `${page}`,
+        pageSize: `${pageSize}`,
+      } satisfies ContentHubQueryArgs,
+      { arrayFormat: 'bracket' },
+    ),
   });
   return (
     <div className="bg-white py-12 px-6 lg:px-8">
