@@ -213,20 +213,20 @@ Enabled only when at least one provider is configured.
 Authentication providers are relying on Auth.js (formerly Next-Auth) and can be
 configured in `/apps/website/nextauth.config.js`
 
-An example is provided for Drupal and a dummy `Credentials` provider.
+An example provider is available for Drupal.
 
 <details>
   <summary>How it works</summary>
 On Netlify, several environment variables are required to be set:
 
-##### In all cases
+#### In all cases
 
 - `NEXTAUTH_URL` The URL of the website. This is used for the callback.
 - `NEXTAUTH_SECRET` A random string used for encryption.
 
 Generate the secret with e.g. `openssl rand -base64 32`
 
-##### For Drupal
+#### For Drupal
 
 - `AUTH_DRUPAL_ID` The client ID of the Drupal Consumer
 - `AUTH_DRUPAL_SECRET` The client secret of the Drupal Consumer
@@ -238,9 +238,27 @@ In Drupal go to `/admin/config/services/consumer` and add a new Consumer.
 - Secret: a random string matching `AUTH_DRUPAL_SECRET`
 - Redirect URI: `[netlify-gatsby-site-url]/oauth/callback`
 
-##### Other providers
+#### Other providers
 
 Refer to [Auth.js documentation](https://next-auth.js.org/providers/).
+
+</details>
+
+<details>
+  <summary>Local development</summary>
+
+#### Start Drupal and Gatsby
+
+- Drupal: in `/apps/cms` - `pnpm start` use http://127.0.0.1:8888
+- Gatsby: in `/apps/website` - `pnpm gatsby:develop` use
+  http://localhost:8000/en
+
+#### Basic troubleshooting
+
+- Make sure to have keys generated
+  http://127.0.0.1:8888/en/admin/config/people/simple_oauth
+- Make sure to have the correct client id and secret set
+  http://127.0.0.1:8888/en/admin/config/services/consumer/2/edit
 
 </details>
 
