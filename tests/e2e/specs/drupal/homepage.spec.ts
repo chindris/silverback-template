@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-import { websiteUrl } from '../helpers/url';
+import { websiteUrl } from '../../helpers/url';
 
 test.describe('the homepage', () => {
   test('exists in english', async ({ page }) => {
@@ -12,8 +12,9 @@ test.describe('the homepage', () => {
   });
 
   test('exists in german', async ({ page }) => {
-    await page.goto(websiteUrl('/de'));
+    await page.goto(websiteUrl('/en'));
     const content = await page.getByRole('main');
+    await page.getByRole('link', { name: 'de' }).click();
     await expect(
       content.getByRole('heading', { name: 'Architektur' }),
     ).toBeVisible();

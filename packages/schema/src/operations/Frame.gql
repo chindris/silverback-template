@@ -1,8 +1,23 @@
 query Frame {
+  websiteSettings {
+    homePage {
+      translations {
+        locale
+        path
+      }
+    }
+  }
   mainNavigation: mainNavigations {
     ...Navigation
   }
-  footerNavigation: mainNavigations {
+  footerNavigation: footerNavigations {
     ...Navigation
+  }
+
+  stringTranslations {
+    __typename
+    language
+    source
+    translation
   }
 }

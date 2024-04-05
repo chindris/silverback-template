@@ -2,12 +2,95 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Styles for Drupal webforms */
-
-/* TODO: Implement styles */
-[data-drupal-messages] [role="alert"] {
-  color: red;
+h1 {
+  /* We never want the H1 to be displayed in an iframe. */
+  @apply hidden;
 }
+
+/* Vertical spacing */
+.webform-submission-form > *:not(:last-child) {
+  @apply mb-10;
+}
+
+.fieldset-wrapper > *:not(:last-child) {
+  @apply mb-5;
+}
+
+/* Label */
+.form-item label {
+  @apply block mb-2;
+}
+
+.form-item input[type="checkbox"] + label, .form-item input[type="radio"] + label {
+  @apply inline;
+}
+
+.form-item input[type="checkbox"], .form-item input[type="radio"] {
+  @apply mr-1;
+}
+
+/* field description */
+.form-item .webform-element-description {
+  @apply text-sm text-gray-600;
+}
+
+.form-item .description {
+  @apply mt-2;
+}
+
+.form-item input[type="checkbox"] + label + .description,
+.form-item input[type="radio"] + label + .description {
+  @apply mt-0;
+}
+
+
+/* field  */
+.form-item input[type="email"],
+.form-item input[type="password"],
+.form-item input[type="date"],
+.form-item input[type="text"],
+.form-item input[type="number"],
+.form-item input[type="datetime-local"],
+.form-item input[type="time"],
+.form-item input[type="url"],
+.form-item input[type="tel"],
+.form-item input[type="search"],
+.form-item input[type="color"],
+.form-item textarea,
+.form-item select {
+  @apply bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5;
+}
+
+/* checkbox  */
+.form-item input[type="checkbox"] {
+  @apply rounded;
+}
+
+.form-item input[type="checkbox"]:not(:checked), .form-item input[type="radio"]:not(:checked)  {
+  @apply bg-gray-50 border-gray-300;
+}
+
+.form-item input[type="file"] {
+  @apply block cursor-pointer bg-gray-50 border border-gray-300 rounded-lg block text-sm w-full;
+}
+
+.form-item input[type="file"]::file-selector-button {
+  @apply text-white bg-blue-700 hover:bg-blue-800 rounded-l-lg text-sm w-full sm:w-auto px-6 py-2.5 text-center shadow-none border-0 font-medium mr-4;
+}
+
+
+.form-actions input[type="submit"] {
+  @apply text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center;
+}
+
 .form-item input.error {
-  border: 2px solid red;
+  @apply border-red-500;
+}
+
+.fieldset-legend {
+  @apply font-bold mb-2 block;
+}
+
+[data-drupal-messages] [role="alert"] {
+  @apply text-red-500;
 }

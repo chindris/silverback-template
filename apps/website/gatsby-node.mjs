@@ -34,19 +34,6 @@ function isDefined(val) {
  * @type {import('gatsby').GatsbyNode['createPages']}
  */
 export const createPages = async ({ actions }) => {
-  // Rewrite file requests to Drupal.
-  actions.createRedirect({
-    fromPath: '/sites/default/files/*',
-    toPath: `${process.env.GATSBY_DRUPAL_URL}/sites/default/files/:splat`,
-    statusCode: 200,
-  });
-
-  actions.createRedirect({
-    fromPath: '/graphql',
-    toPath: `${process.env.GATSBY_DRUPAL_URL}/graphql`,
-    statusCode: 200,
-  });
-
   // Grab Home- and 404 pages.
   const homePages =
     (
@@ -73,13 +60,13 @@ export const createPages = async ({ actions }) => {
   });
 
   // Create a list of paths that we don't want to render regularly.
-  // 404 and homepages are dealt with differrently.
+  // 404 and homepages are dealt with differently.
   const skipPaths = [
     ...(homePages.map((page) => page.path) || []),
     ...(notFoundPages.map((page) => page.path) || []),
   ];
 
-  // Run the query that lists all pages, both decap and Drupal.
+  // Run the query that lists all pages, both Decap and Drupal.
   const pages = await graphqlQuery(ListPagesQuery);
 
   // Create a gatsby page for each of these pages.
@@ -93,6 +80,22 @@ export const createPages = async ({ actions }) => {
         context: { pathname: path },
       });
     });
+
+  // Create the content hub page in each language.
+  Object.values(Locale).forEach((locale) => {
+    actions.createPage({
+      path: `/${locale}/content-hub`,
+      component: resolve(`./src/templates/content-hub.tsx`),
+    });
+  });
+
+  // Create a contact page in each language.
+  Object.values(Locale).forEach((locale) => {
+    actions.createPage({
+      path: `/${locale}/contact`,
+      component: resolve(`./src/templates/contact.tsx`),
+    });
+  });
 
   // Broken Gatsby links will attempt to load page-data.json files, which don't exist
   // and also should not be piped into the strangler function. Thats why they

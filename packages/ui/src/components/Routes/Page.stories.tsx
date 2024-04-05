@@ -1,4 +1,10 @@
-import { registerExecutor, Url, ViewPageQuery } from '@custom/schema';
+import {
+  FrameQuery,
+  Locale,
+  OperationExecutor,
+  Url,
+  ViewPageQuery,
+} from '@custom/schema';
 import Landscape from '@stories/landscape.jpg?as=metadata';
 import { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
@@ -6,6 +12,7 @@ import React from 'react';
 import { image } from '../../helpers/image';
 import { Mixed, Paragraph } from '../Organisms/PageContent/BlockMarkup.stories';
 import { WithCaption } from '../Organisms/PageContent/BlockMedia.stories';
+import { Default as FrameStory } from './Frame.stories';
 import { Page } from './Page';
 
 export default {
@@ -14,13 +21,24 @@ export default {
 
 export const Default = {
   render: (args) => {
-    registerExecutor(ViewPageQuery, () => args);
-    return <Page />;
+    return (
+      <OperationExecutor executor={() => args} id={ViewPageQuery}>
+        <OperationExecutor executor={FrameStory.args} id={FrameQuery}>
+          <Page />
+        </OperationExecutor>
+      </OperationExecutor>
+    );
   },
   args: {
     page: {
       title: 'Page Title',
       locale: 'en',
+      translations: [
+        {
+          locale: Locale.En,
+          path: '/test' as Url,
+        },
+      ],
       path: '/test' as Url,
       hero: {
         headline: 'Page Hero Headline',

@@ -1,1 +1,3 @@
 src/generated
+src/directives.graphql
+build

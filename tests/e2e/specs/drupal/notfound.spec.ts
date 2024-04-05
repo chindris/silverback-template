@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-import { websiteUrl } from '../helpers/url';
+import { websiteUrl } from '../../helpers/url';
 
 test.describe('not found pages', () => {
   test('are english by default', async ({ page }) => {

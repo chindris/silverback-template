@@ -1,6 +1,6 @@
 import '../src/tailwind.css';
 
-import { clearRegistry, LocationProvider } from '@custom/schema';
+import { LocationProvider } from '@custom/schema';
 import { Decorator } from '@storybook/react';
 import React from 'react';
 import { IntlProvider } from 'react-intl';
@@ -12,11 +12,6 @@ const IntlDecorator: Decorator = (Story) => (
     <Story />
   </IntlProvider>
 );
-
-const OperatorDecorator: Decorator = (Story) => {
-  clearRegistry();
-  return <Story />;
-};
 
 const LocationDecorator: Decorator = (Story, ctx) => {
   return (
@@ -49,7 +44,10 @@ const SWRCacheDecorator: Decorator = (Story) => {
             // eslint-disable-next-line react-hooks/rules-of-hooks
             return useSWR(
               // Make sure SWR caches are unique per story.
-              [key, window.__STORYBOOK_PREVIEW__.currentRender.id],
+              [
+                ...(key instanceof Array ? key : [key]),
+                window.__STORYBOOK_PREVIEW__.currentRender.id,
+              ],
               fetcher,
               config,
             );
@@ -66,9 +64,4 @@ export const parameters = {
   chromatic: { viewports: [320, 840, 1440] },
 };
 
-export const decorators = [
-  LocationDecorator,
-  IntlDecorator,
-  OperatorDecorator,
-  SWRCacheDecorator,
-];
+export const decorators = [LocationDecorator, IntlDecorator, SWRCacheDecorator];

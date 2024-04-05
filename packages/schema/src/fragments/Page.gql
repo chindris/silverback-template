@@ -1,6 +1,10 @@
 fragment Page on Page {
   locale
   path
+  translations {
+    locale
+    path
+  }
   title
   hero {
     headline

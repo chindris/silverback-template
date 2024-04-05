@@ -6,6 +6,10 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Render\RenderContext;
 use Drupal\Core\Render\RendererInterface;
 use Drupal\graphql_directives\DirectiveArguments;
+use Drupal\webform\WebformSubmissionForm;
+use Drupal\webform\WebformSubmissionInterface;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\SerializerInterface;
 
 /**
  * Helper service for managing webforms with graphql.
@@ -25,14 +29,23 @@ class Webform {
   protected EntityTypeManagerInterface $entityTypeManager;
 
   /**
+   * The serializer serice.
+   *
+   * @var \Symfony\Component\Serializer\SerializerInterface
+   */
+  protected Serializer $serializer;
+
+  /**
    * Webform constructor.
    */
   public function __construct(
     RendererInterface $renderer,
-    EntityTypeManagerInterface $entityTypeManager
+    EntityTypeManagerInterface $entityTypeManager,
+    SerializerInterface $serializer
   ) {
     $this->entityTypeManager = $entityTypeManager;
     $this->renderer = $renderer;
+    $this->serializer = $serializer;
   }
 
   /**
@@ -66,6 +79,105 @@ class Webform {
     }
 
     return $result;
+  }
+
+  /**
+   * Directive to create a webform submission.
+   */
+  public function createSubmission(DirectiveArguments $args) : array {
+    try {
+      $webformId = $args->args['webformId'];
+      $webform = $this->entityTypeManager->getStorage('webform')
+        ->load($webformId);
+      if (!$webform) {
+        throw new \InvalidArgumentException('The webform could no be loaded.');
+      }
+      $isOpen = WebformSubmissionForm::isOpen($webform);
+      if ($isOpen !== TRUE) {
+        throw new \Exception($isOpen);
+      }
+      $submittedData = $args->args['submittedData'];
+      $values = [
+        'webform_id' => $webformId,
+        'entity_type' => NULL,
+        'entity_id' => NULL,
+        'data' => $this->serializer->decode($submittedData, 'json'),
+      ];
+      // The WebformSubmissionForm::submitFormValues() will return an array with
+      // errors, if there are validation errors, otherwise it will return a
+      // webform submission entity.
+      $webformSubmission = WebformSubmissionForm::submitFormValues($values);
+
+      // If we get an array from the createSubmission call, then it means there
+      // were errors during the insert / validate operation, so we just return
+      // them.
+      if (is_array($webformSubmission)) {
+        return [
+          'errors' => $this->formatErrors($webformSubmission),
+          'submission' => NULL,
+        ];
+      }
+
+      // We successfully submitted the data.
+      if (is_object($webformSubmission) && $webformSubmission instanceof WebformSubmissionInterface) {
+        $webformSubmissionData = $webformSubmission->getData();
+        return [
+          'errors' => NULL,
+          'submission' => $this->serializer->encode(array_merge([
+            'submissionId' => $webformSubmission->id(),
+          ], $webformSubmissionData), 'json'),
+        ];
+      }
+    } catch (\InvalidArgumentException $e) {
+      return [
+        'submission' => NULL,
+        'errors' => [
+          [
+            'message' => $e->getMessage(),
+            'key' => 'invalid_webform'
+          ]
+        ]
+      ];
+    } catch (\Exception $e) {
+      return [
+        'submission' => NULL,
+        'errors' => [
+          [
+            'message' => $e->getMessage(),
+            'key' => 'invalid_input'
+          ]
+        ]
+      ];
+    }
+
+    // We should actually never get here... if we do, we don't know what
+    // happened.
+    return [
+      'submission' => NULL,
+      'errors' => [
+        [
+          'message' => 'Unknown error',
+          'key' => 'unknown_error',
+        ]
+      ]
+    ];
+
+  }
+
+  /**
+   * Helper method to arrange a set of webform submission errors in a way that
+   * can be used by the MutationError graphl type.
+   */
+  protected function formatErrors(array $webformSubmissionErrors) {
+    $formattedErrors = [];
+    foreach ($webformSubmissionErrors as $fieldName => $error) {
+      $formattedErrors[] = [
+        'message' => $error->__toString(),
+        'key' => 'invalid_field_' . $fieldName,
+        'field' => $fieldName,
+      ];
+    }
+    return $formattedErrors;
   }
 
 }

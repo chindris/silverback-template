@@ -78,9 +78,10 @@ ENV WEBROOT=web
 # ====================================================================================================
 # NGINX IMAGE
 # ====================================================================================================
-FROM amazeeio/nginx-drupal as nginx
+FROM uselagoon/nginx-drupal as nginx
 
 COPY --from=cli /app /app
+RUN cd /app/web && cp ../node_modules/@custom/ui/build/gutenberg.css .
 COPY .lagoon/nginx-conf/redirects-map.conf /etc/nginx/redirects-map.conf
 
 WORKDIR /app
@@ -90,7 +91,7 @@ ENV WEBROOT=web
 # PUBLISHER IMAGE
 # ====================================================================================================
 
-FROM uselagoon/node-18 as publisher
+FROM uselagoon/node-18:23.12.0 as publisher
 
 # DENO INSTALL
 ENV ALPINE_GLIBC_BASE_URL="https://github.com/sgerrand/alpine-pkg-glibc/releases/download"

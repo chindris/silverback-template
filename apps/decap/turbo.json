@@ -1,38 +1,22 @@
 {
   "$schema": "https://turborepo.org/schema.json",
-  "extends": [
-    "//"
-  ],
+  "extends": ["//"],
   "pipeline": {
     "prep:vite": {
-      "dependsOn": [
-        "^prep"
-      ],
-      "inputs": [
-        "src/**",
-        "vite.config.js"
-      ],
-      "outputs": [
-        "build/**"
-      ]
+      "dependsOn": ["^prep"],
+      "inputs": ["src/**", "vite.config.ts", "index.html"],
+      "outputs": ["dist/**"]
     },
     "prep:scripts": {
-      "dependsOn": [
-        "^prep"
-      ],
-      "inputs": [
-        "src/**",
-        "tsup.config.js"
-      ],
-      "outputs": [
-        "dist/**"
-      ]
+      "dependsOn": ["^prep"],
+      "inputs": ["src/**", "tsup.config.ts"],
+      "outputs": ["build/**"]
     },
     "prep": {
-      "dependsOn": [
-        "prep:vite",
-        "prep:scripts"
-      ]
+      "dependsOn": ["prep:vite", "prep:scripts"]
+    },
+    "test:integration": {
+      "dependsOn": ["@custom-tests/e2e#test:integration:decap"]
     }
   }
 }
