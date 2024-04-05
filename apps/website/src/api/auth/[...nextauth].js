@@ -1,5 +1,4 @@
 // If your deployment environment supports Gatsby Functions, you won't need the root `api` folder, only this.
-
 import NextAuth from 'next-auth';
 
 import { authConfig } from '../../../nextauth.config';

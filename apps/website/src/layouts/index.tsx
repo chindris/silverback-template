@@ -15,6 +15,8 @@ export default function Layout({
   const data = useStaticQuery(graphql(FrameQuery));
   registerExecutor(FrameQuery, data);
 
+  console.log('session', session);
+
   // @todo move signin/signout to a specific component.
   return (
     <>
