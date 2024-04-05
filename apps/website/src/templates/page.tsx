@@ -38,7 +38,7 @@ export function Head({ data }: HeadProps<typeof query>) {
 export default function PageTemplate({ data }: PageProps<typeof query>) {
   // Retrieve the current location and prefill the
   // "ViewPageQuery" with these arguments.
-  // That makes shure the `useOperation(ViewPageQuery, ...)` with this
+  // That makes sure the `useOperation(ViewPageQuery, ...)` with this
   // path immediately returns this data.
   const [location] = useLocation();
   return (

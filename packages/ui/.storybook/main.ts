@@ -23,6 +23,10 @@ const config: StorybookConfig = {
         pluginTurbosnap({ rootDir: config.root ?? process.cwd() }),
         imagetools(),
       ],
+      // https://github.com/nextauthjs/next-auth/discussions/4566
+      define: {
+        'process.env': process.env,
+      },
     } satisfies UserConfig),
   staticDirs: ['../static/public', '../static/stories'],
   stories: ['../src/**/*.stories.@(ts|tsx|mdx)'],
