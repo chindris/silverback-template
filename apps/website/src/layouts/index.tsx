@@ -4,9 +4,8 @@ import { Frame } from '@custom/ui/routes/Frame';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import React, { PropsWithChildren } from 'react';
 
-import { drupalExecutor } from '../utils/drupal-executor';
-
 import { authConfig } from '../../nextauth.config';
+import { drupalExecutor } from '../utils/drupal-executor';
 
 export default function Layout({
   children,
@@ -39,14 +38,14 @@ export default function Layout({
                 )}
                 {session?.status === 'authenticated' && session.data.user && (
                   <>
-                  <span>
-                    <small>Signed in as</small>
-                    <br />
-                    <strong>{session.data.user.email} </strong>
-                    {session.data.user.name
-                      ? `(${session.data.user.name})`
-                      : null}
-                  </span>
+                    <span>
+                      <small>Signed in as</small>
+                      <br />
+                      <strong>{session.data.user.email} </strong>
+                      {session.data.user.name
+                        ? `(${session.data.user.name})`
+                        : null}
+                    </span>
                     <a
                       href="/api/auth/signout"
                       onClick={(e) => {
