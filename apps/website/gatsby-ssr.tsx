@@ -1,4 +1,5 @@
 import { Locale, registerExecutor } from '@custom/schema';
+import { loadFonts } from '@custom/ui/fonts-async';
 import { GatsbySSR } from 'gatsby';
 import React from 'react';
 

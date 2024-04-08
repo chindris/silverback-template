@@ -12,6 +12,9 @@
     ],
     "./styles.css": [
       "./build/styles.css"
+    ],
+    "./fonts-async": [
+      "./build/fonts-async.js"
     ]
   },
   "typesVersions": {
