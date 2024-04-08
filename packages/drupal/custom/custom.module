@@ -6,6 +6,8 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Language\LanguageInterface;
 use Drupal\Core\Render\Element;
 use Drupal\Core\Render\RenderContext;
+use Drupal\Core\StreamWrapper\LocalStream;
+use Drupal\Core\StreamWrapper\StreamWrapperInterface;
 use Drupal\Core\Utility\Error as ErrorUtil;
 use Drupal\file\Entity\File;
 use Drupal\media\Entity\Media;
@@ -87,6 +89,75 @@ function custom_silverback_gutenberg_link_processor_outbound_url_alter(
         }
       }
     );
+  }
+}
+
+/**
+ * Implements hook_silverback_gutenberg_link_processor_inbound_link_alter().
+ * @param \DOMElement $link
+ * @param \Drupal\silverback_gutenberg\LinkProcessor $linkProcessor
+ *
+ * @return void
+ * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+ * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+ */
+function custom_silverback_gutenberg_link_processor_inbound_link_alter(
+  \DOMElement $link,
+  LinkProcessor $linkProcessor
+) {
+  // For inbound links (when data gets saved), if the link points to a public
+  // file, then we want to replace the href value with "media/uuid/edit" and
+  // also make sure the data-id and data-entity-type attributes have the proper
+  // values (the uuid and the 'media' value). This is a special case for media,
+  // because the url of the media item is replaced by
+  // custom_silverback_gutenberg_link_processor_outbound_url_alter() with the
+  // file path, so now on inbound we need to basically do the opposite. This is
+  // needed so that the entity usage integration works properly (where the
+  // data-id and data-entity-type attributes are checked).
+  $href = $link->getAttribute('href');
+  /* @var \Drupal\Core\StreamWrapper\StreamWrapperManager $wrapperManager */
+  $wrapperManager = \Drupal::service('stream_wrapper_manager');
+  /* @var \Drupal\Core\StreamWrapper\StreamWrapperInterface[] $visibleWrappers */
+  $visibleWrappers = $wrapperManager->getWrappers(StreamWrapperInterface::VISIBLE);
+  foreach ($visibleWrappers as $scheme => $wrapperInfo) {
+    $wrapper = $wrapperManager->getViaScheme($scheme);
+    // We are only handle local streams for now.
+    if (!$wrapper instanceof LocalStream) {
+      continue;
+    }
+    if (!str_starts_with($href, '/' . $wrapper->getDirectoryPath() . '/')) {
+      continue;
+    }
+    // When searching for a file inside the database, the wrapper uri is used
+    // instead of the directory path. That is why we need the wrapper in the
+    // first place.
+    $fileuri = str_replace('/' . $wrapper->getDirectoryPath() . '/', $wrapper->getUri(), urldecode($href));
+    $files = \Drupal::entityTypeManager()
+      ->getStorage('file')
+      ->loadByProperties(['uri' => $fileuri]);
+    // No files found, just continue to the next wrapper.
+    if (empty($files)) {
+      continue;
+    }
+    $file = array_shift($files);
+    $usageList = \Drupal::service('file.usage')->listUsage($file);
+    // If the media file usage list is empty, then this is probably some kind of
+    // orphan file, or tracked by some other entity type.
+    if (empty($usageList['file']['media'])) {
+      continue;
+    }
+    $mids = array_keys($usageList['file']['media']);
+    $mid = reset($mids);
+    $media = Media::load($mid);
+    if (empty($media)) {
+      continue;
+    }
+    // If we got here, we found a matching media item, so we can populate the
+    // link metadata with its values and just break out of the wrappers loop.
+    $link->setAttribute('href', '/media/' . $media->uuid() . '/edit');
+    $link->setAttribute('data-id', $media->uuid());
+    $link->setAttribute('data-entity-type', 'media');
+    break;
   }
 }
 

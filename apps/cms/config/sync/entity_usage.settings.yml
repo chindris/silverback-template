@@ -5,8 +5,8 @@ local_task_enabled_entity_types:
   - node
 track_enabled_source_entity_types:
   - node
-  - content_moderation_state
   - block_content
+  - content_moderation_state
   - menu_link_content
   - media
   - redirect
@@ -14,8 +14,8 @@ track_enabled_source_entity_types:
   - path_alias
 track_enabled_target_entity_types:
   - node
-  - content_moderation_state
   - block_content
+  - content_moderation_state
   - menu_link_content
   - media
   - redirect
@@ -32,6 +32,8 @@ track_enabled_plugins:
   - html_link
   - ckeditor_image
   - block_field
+  - gutenberg_linked_content
+  - gutenberg_referenced_content
   - gutenberg_media_embed
 track_enabled_base_fields: false
 site_domains: {  }
