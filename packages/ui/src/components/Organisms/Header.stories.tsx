@@ -123,8 +123,14 @@ export const Expanded: StoryObj<FrameQuery> = {
     } else {
       await userEvent.click(
         await navigation.findByRole('button', { name: 'Products' }),
+        {
+          delay: 100, // The navigation does not appear randomly without this delay.
+        },
       );
-      await navigation.findByRole('link', { name: 'Drupal' });
+      const dialog = within(
+        await within(canvasElement.parentElement!).findByRole('dialog'),
+      );
+      await dialog.findByRole('link', { name: 'Drupal' });
     }
   },
 };
