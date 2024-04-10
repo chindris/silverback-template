@@ -7,7 +7,7 @@
     "declaration": true,
     "declarationDir": "build",
     "outDir": "build",
-    "lib": ["ES2015"]
+    "lib": ["ES2021"]
   },
   "include": ["src"]
 }
