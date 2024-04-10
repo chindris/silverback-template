@@ -10,7 +10,7 @@ export const imageProps: GraphQLFieldResolver<string, any> = (source) => {
     const relativeSource = source.substring(`/apps/decap`.length);
     const dimensions = sizeOf(`node_modules/@custom/decap/${relativeSource}`);
     const imageSrc = `${
-      process.env.GATSBY_PUBLIC_URL || 'http://localhost:8000'
+      process.env.GATSBY_PUBLIC_URL || 'node_modules/@custom/decap'
     }${relativeSource}`;
 
     return JSON.stringify({
@@ -20,6 +20,16 @@ export const imageProps: GraphQLFieldResolver<string, any> = (source) => {
       height: dimensions.height || 0,
       mime: lookup(relativeSource) || 'application/octet-stream',
     });
+  }
+  // Otherwise, replace NETLIFY_URL with DRUPAL_EXTERNAL_URL.
+  // - If images are processed in Gatsby, they have to be loaded from Drupal directly.
+  // - If images are processed in Cloudinary, we don't need two CDN's (Netlify & Cloudinary)
+  // - TODO: Once we have image processing in Drupal, it has to be handled here.
+  if (process.env.NETLIFY_URL && process.env.DRUPAL_EXTERNAL_URL) {
+    return source.replaceAll(
+      process.env.NETLIFY_URL,
+      process.env.DRUPAL_EXTERNAL_URL,
+    );
   }
   return source;
 };
