@@ -16,6 +16,7 @@ $excluded = [
   'oauth2_token',
   'redirect',
   'webform_submission',
+  'consumer',
 ];
 
 Export::run('test_content', $excluded);

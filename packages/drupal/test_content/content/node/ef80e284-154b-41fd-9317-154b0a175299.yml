@@ -93,6 +93,15 @@ translations:
         value: false
     body:
       -
-        value: "<!-- wp:custom/hero {\"mediaEntityIds\":[\"3a0fe860-a6d6-428a-9474-365bd57509aa\"],\"headline\":\"Headline\",\"lead\":\"Lead text\"} /-->\r\n\r\n<!-- wp:custom/content -->\r\n<!-- wp:paragraph -->\r\n<p>Paragraph</p>\r\n<!-- /wp:paragraph -->\r\n\r\n<!-- wp:drupalmedia/drupal-media-entity {\"mediaEntityIds\":[\"72187a1f-3e48-4b45-a9b7-189c6fd7ee26\"],\"caption\":\"Image caption\"} /-->\r\n<!-- /wp:custom/content -->"
+        value: |-
+          <!-- wp:custom/hero {"mediaEntityIds":["3a0fe860-a6d6-428a-9474-365bd57509aa"],"headline":"Headline","lead":"Lead text"} /-->
+
+          <!-- wp:custom/content -->
+          <!-- wp:paragraph -->
+          <p>Paragraph</p>
+          <!-- /wp:paragraph -->
+
+          <!-- wp:drupalmedia/drupal-media-entity {"mediaEntityIds":["72187a1f-3e48-4b45-a9b7-189c6fd7ee26"],"caption":"Image caption"} /-->
+          <!-- /wp:custom/content -->
         format: gutenberg
         summary: ''

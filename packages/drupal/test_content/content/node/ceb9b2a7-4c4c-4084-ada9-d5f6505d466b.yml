@@ -51,7 +51,15 @@ default:
         <!-- wp:custom/form /-->
 
         <!-- wp:list -->
-        <ul><li></li></ul><!-- /wp:list --><!-- wp:table --><figure class="wp-block-table"><table><tbody><tr><td></td><td></td></tr><tr><td></td><td></td></tr></tbody></table></figure><!-- /wp:table --><!-- wp:quote --><blockquote class="wp-block-quote"><p></p></blockquote>
+        <ul><li></li></ul>
+        <!-- /wp:list -->
+
+        <!-- wp:table -->
+        <figure class="wp-block-table"><table><tbody><tr><td></td><td></td></tr><tr><td></td><td></td></tr></tbody></table></figure>
+        <!-- /wp:table -->
+
+        <!-- wp:quote -->
+        <blockquote class="wp-block-quote"><p></p></blockquote>
         <!-- /wp:quote -->
 
         <!-- wp:custom/heading -->

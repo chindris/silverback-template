@@ -193,7 +193,10 @@ export function Footer() {
         }
       >
         <div className={'text-base'}>
-          <p className="mt-10 text-center text-xs leading-5 text-gray-500">
+          <p
+            className="mt-10 text-center text-xs leading-5 text-gray-500"
+            data-chromatic="ignore"
+          >
             &copy;{' '}
             {intl.formatMessage(
               {
@@ -201,7 +204,7 @@ export function Footer() {
                 id: 'qA8qQH',
               },
               {
-                year: 2024,
+                year: new Date().getFullYear(),
                 company_name: intl.formatMessage({
                   defaultMessage: 'Company name',
                   id: 'FPGwAt',

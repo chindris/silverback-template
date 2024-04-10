@@ -4,15 +4,6 @@ scalar ImageSource @default @value(string: "")
 scalar JSONString @default @value(string: "{}")
 
 """
-implementation(drupal): custom.content_hub::query
-"""
-directive @contentHub(
-  pagination: String
-  query: String
-  locale: String!
-) on FIELD_DEFINITION
-
-"""
 implementation(drupal): custom.webform::url
 """
 directive @webformIdToUrl(id: String!) on FIELD_DEFINITION
@@ -32,6 +23,19 @@ TODO: Move to a shared "image" package.
 implementation(gatsby): ./image.js#imageProps
 """
 directive @imageProps repeatable on FIELD_DEFINITION | SCALAR | UNION | ENUM | INTERFACE | OBJECT
+
+"""
+Retrieve the properties of an image.
+TODO: Move to a shared "image" package.
+
+implementation(gatsby): @amazeelabs/gatsby-source-silverback#responsiveImageSharp
+"""
+directive @responsiveImage(
+  height: String
+  sizes: String
+  transform: String
+  width: String
+) repeatable on ENUM | FIELD_DEFINITION | INTERFACE | OBJECT | SCALAR | UNION
 
 """
 Retrieve an entity from the Gatsby datastore.
@@ -88,7 +92,7 @@ interface ContentHubResultItem @resolveEntityBundle {
 
 type ContentHubResult @default @value(json: "{\"total\": 0, \"items\": []}") {
   total: Int!
-  items: [ContentHubResultItem]!
+  items: [ContentHubResultItem]! @prop(key: "rows")
 }
 
 type WebsiteSettings
@@ -190,6 +194,11 @@ type Hero {
   headline: String! @resolveEditorBlockAttribute(key: "headline")
   lead: String @resolveEditorBlockAttribute(key: "lead")
   image: MediaImage @resolveEditorBlockMedia
+  ctaText: String @resolveEditorBlockAttribute(key: "ctaText")
+  ctaUrl: Url @resolveEditorBlockAttribute(key: "ctaUrl")
+  formUrl: Url
+    @resolveEditorBlockAttribute(key: "formId")
+    @webformIdToUrl(id: "$")
 }
 
 union PageContent @resolveEditorBlockType = BlockMarkup | BlockMedia | BlockForm
@@ -237,12 +246,9 @@ type Query {
   websiteSettings: WebsiteSettings
   viewPage(path: String!): Page @route(path: "$path") @loadEntity
 
-  contentHub(
-    query: String
-    pagination: PaginationInput!
-    locale: Locale!
-  ): ContentHubResult!
-    @contentHub(query: "$query", pagination: "$pagination", locale: "$locale")
+  contentHub(locale: Locale!, args: String): ContentHubResult!
+    @lang(code: "$locale")
+    @drupalView(id: "content_hub:default", args: "$args")
 
   stringTranslations: [TranslatableString!]
     @gatsbyNodes(type: "TranslatableString")

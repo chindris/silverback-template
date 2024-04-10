@@ -3,9 +3,6 @@ services:
     class: Drupal\custom\Routing\RouteSubscriber
     tags:
       - { name: event_subscriber }
-  custom.content_hub:
-    class: Drupal\custom\ContentHub
-    arguments: ['@entity_type.manager']
 
   custom.webform:
     class: Drupal\custom\Webform

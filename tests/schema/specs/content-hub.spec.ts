@@ -7,7 +7,7 @@ describe('content hub', () => {
   it('returns limited results', async () => {
     const result = await fetch(gql`
       {
-        contentHub(pagination: { limit: 2, offset: 0 }, locale: en) {
+        contentHub(locale: en, args: "pageSize=2") {
           items {
             title
           }
@@ -19,10 +19,10 @@ describe('content hub', () => {
     expect(result.data.contentHub.items.length).toBe(2);
   });
 
-  it('respects an offset', async () => {
+  it('respects pagination', async () => {
     const resultA = await fetch(gql`
       {
-        contentHub(pagination: { limit: 2, offset: 0 }, locale: en) {
+        contentHub(locale: en, args: "pageSize=1&page=2") {
           items {
             path
           }
@@ -31,7 +31,7 @@ describe('content hub', () => {
     `);
     const resultB = await fetch(gql`
       {
-        contentHub(pagination: { limit: 2, offset: 1 }, locale: en) {
+        contentHub(locale: en, args: "pageSize=2") {
           items {
             path
           }
@@ -39,25 +39,17 @@ describe('content hub', () => {
       }
     `);
 
-    expect(resultA.data.contentHub.items[0].path).not.toBe(
-      resultB.data.contentHub.items[0].path,
-    );
-    expect(resultA.data.contentHub.items[1].path).not.toBe(
+    expect(resultA.data.contentHub.items.length).toBe(1);
+    expect(resultB.data.contentHub.items.length).toBe(2);
+    expect(resultA.data.contentHub.items[0].path).toBe(
       resultB.data.contentHub.items[1].path,
-    );
-    expect(resultA.data.contentHub.items[1].path).toBe(
-      resultB.data.contentHub.items[0].path,
     );
   });
 
   it('accepts a query for the title', async () => {
     const result = await fetch(gql`
       {
-        contentHub(
-          query: "Arch"
-          pagination: { limit: 3, offset: 0 }
-          locale: en
-        ) {
+        contentHub(locale: en, args: "title=Arch&pageSize=3") {
           total
           items {
             path
@@ -71,11 +63,7 @@ describe('content hub', () => {
   it('queries results in a different language', async () => {
     const result = await fetch(gql`
       {
-        contentHub(
-          query: "Arch"
-          pagination: { limit: 3, offset: 0 }
-          locale: de
-        ) {
+        contentHub(locale: de, args: "title=Arch&pageSize=3") {
           total
           items {
             path
@@ -89,11 +77,7 @@ describe('content hub', () => {
   it('only returns items in the queried language', async () => {
     const result = await fetch(gql`
       {
-        contentHub(
-          query: "Gatsby"
-          pagination: { limit: 3, offset: 0 }
-          locale: de
-        ) {
+        contentHub(locale: de, args: "title=Gatsby&pageSize=3") {
           total
           items {
             path
