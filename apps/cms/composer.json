@@ -96,6 +96,9 @@
     "patches": {
       "drupal/userprotect": {
         "Fix site install": "https://www.drupal.org/files/issues/2023-07-28/3349663-8.patch"
+      },
+      "amazeelabs/silverback_gatsby": {
+        "Autosave preview": "./patches/fetch-entity-patch"
       }
     },
     "patchLevel": {
