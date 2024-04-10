@@ -1,6 +1,6 @@
 import { defineConfig, devices } from '@playwright/test';
 
-import defaults from './playwright.config.drupal';
+import defaults from './playwright.config';
 
 export default defineConfig({
   ...defaults,

@@ -1,7 +1,7 @@
 import {
   ContentHubQuery,
   FrameQuery,
-  OperationExecutor,
+  registerExecutor,
   ViewPageQuery,
 } from '@custom/schema';
 import { Meta, StoryFn } from '@storybook/react';
@@ -25,25 +25,21 @@ export default {
 } satisfies Meta;
 
 export const ContentPage = (() => {
+  registerExecutor(FrameQuery, () => FrameStory.args);
+  registerExecutor(ViewPageQuery, () => PageStory.args);
   return (
-    <OperationExecutor executor={PageStory.args} id={ViewPageQuery}>
-      <OperationExecutor executor={FrameStory.args} id={FrameQuery}>
-        <Frame>
-          <Page />
-        </Frame>
-      </OperationExecutor>
-    </OperationExecutor>
+    <Frame>
+      <Page />
+    </Frame>
   );
 }) satisfies StoryFn;
 
 export const ContentHubPage = (() => {
+  registerExecutor(FrameQuery, () => FrameStory.args);
+  registerExecutor(ContentHubQuery, WithResults.args.exec);
   return (
-    <OperationExecutor executor={FrameStory.args} id={FrameQuery}>
-      <OperationExecutor executor={WithResults.args.exec} id={ContentHubQuery}>
-        <Frame>
-          <ContentHub pageSize={6} />
-        </Frame>
-      </OperationExecutor>
-    </OperationExecutor>
+    <Frame>
+      <ContentHub pageSize={6} />
+    </Frame>
   );
 }) satisfies StoryFn;

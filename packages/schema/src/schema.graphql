@@ -1,20 +1,20 @@
 scalar Url @default @value(string: "")
 scalar Markup @default @value(string: "")
 scalar ImageSource @default @value(string: "")
-scalar JSONString @default @value(string: "{}")
+
+"""
+implementation(drupal): custom.content_hub::query
+"""
+directive @contentHub(
+  pagination: String
+  query: String
+  locale: String!
+) on FIELD_DEFINITION
 
 """
 implementation(drupal): custom.webform::url
 """
 directive @webformIdToUrl(id: String!) on FIELD_DEFINITION
-
-"""
-implementation(drupal): custom.webform::createSubmission
-"""
-directive @createWebformSubmission(
-  webformId: String!
-  submittedData: JSONString!
-) on FIELD_DEFINITION
 
 """
 Retrieve the properties of an image.
@@ -71,7 +71,7 @@ interface ContentHubResultItem @resolveEntityBundle {
 
 type ContentHubResult @default @value(json: "{\"total\": 0, \"items\": []}") {
   total: Int!
-  items: [ContentHubResultItem]! @prop(key: "rows")
+  items: [ContentHubResultItem]!
 }
 
 type WebsiteSettings
@@ -220,34 +220,15 @@ type Query {
   websiteSettings: WebsiteSettings
   viewPage(path: String!): Page @route(path: "$path") @loadEntity
 
-  contentHub(locale: Locale!, args: String): ContentHubResult!
-    @lang(code: "$locale")
-    @drupalView(id: "content_hub:default", args: "$args")
+  contentHub(
+    query: String
+    pagination: PaginationInput!
+    locale: Locale!
+  ): ContentHubResult!
+    @contentHub(query: "$query", pagination: "$pagination", locale: "$locale")
 
   stringTranslations: [TranslatableString!]
     @gatsbyNodes(type: "TranslatableString")
-}
-
-type Mutation {
-  createWebformSubmission(
-    webformId: String!
-    submittedData: JSONString!
-  ): WebformSubmissionCreateResponse
-    @createWebformSubmission(
-      webformId: "$webformId"
-      submittedData: "$submittedData"
-    )
-}
-
-type WebformSubmissionCreateResponse {
-  errors: [MutationError]
-  submission: JSONString
-}
-
-type MutationError {
-  message: String!
-  key: String!
-  field: String
 }
 
 type MetaTag {

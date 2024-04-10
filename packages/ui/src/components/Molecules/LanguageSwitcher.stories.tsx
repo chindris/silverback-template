@@ -1,4 +1,4 @@
-import { FrameQuery, OperationExecutor, Url } from '@custom/schema';
+import { FrameQuery, registerExecutor, Url } from '@custom/schema';
 import { Decorator, Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
@@ -7,25 +7,21 @@ import { Default } from '../Routes/Frame.stories';
 import { LanguageSwitcher } from './LanguageSwitcher';
 
 const TranslationsDecorator = ((Story, ctx) => {
+  registerExecutor(FrameQuery, {
+    ...Default.args,
+    websiteSettings: {
+      homePage: {
+        translations: [
+          { locale: 'en', path: '/en/home' as Url },
+          { locale: 'de', path: '/de/home' as Url },
+        ],
+      },
+    },
+  });
   return (
-    <OperationExecutor
-      id={FrameQuery}
-      executor={{
-        ...Default.args,
-        websiteSettings: {
-          homePage: {
-            translations: [
-              { locale: 'en', path: '/en/home' as Url },
-              { locale: 'de', path: '/de/home' as Url },
-            ],
-          },
-        },
-      }}
-    >
-      <TranslationsProvider defaultTranslations={ctx.args}>
-        <Story />
-      </TranslationsProvider>
-    </OperationExecutor>
+    <TranslationsProvider defaultTranslations={ctx.args}>
+      <Story />
+    </TranslationsProvider>
   );
 }) as Decorator<Translations>;
 

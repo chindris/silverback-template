@@ -1,4 +1,4 @@
-import { FrameQuery, OperationExecutor } from '@custom/schema';
+import { FrameQuery, registerExecutor } from '@custom/schema';
 import { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
@@ -15,11 +15,8 @@ export default {
 
 export const Default = {
   render: (args) => {
-    return (
-      <OperationExecutor executor={() => args} id={FrameQuery}>
-        <Frame />
-      </OperationExecutor>
-    );
+    registerExecutor(FrameQuery, () => args);
+    return <Frame />;
   },
   args: {
     mainNavigation: HeaderStory.args.mainNavigation,

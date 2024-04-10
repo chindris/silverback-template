@@ -1,14 +1,13 @@
+import { dirname, resolve } from 'node:path';
+import { afterEach } from 'node:test';
+
 import { expect, test, vi } from 'vitest';
 
 import { getTranslatables } from './translatables';
 
-vi.mock('../helpers/path', () => ({
-  path: `${new URL(import.meta.url).pathname
-    .split('/')
-    .slice(0, -1)
-    .join('/')}/../..`,
-}));
+afterEach(vi.resetAllMocks);
 
 test('getTranslatables', () => {
-  expect(() => getTranslatables()).not.toThrow();
+  const dir = resolve(dirname(new URL(import.meta.url).pathname), '../../data');
+  expect(getTranslatables(dir)).not.toThrow();
 });

@@ -1,35 +1,29 @@
 import {
   ContentHubQuery,
   ContentHubResultItemFragment,
-  OperationExecutor,
   OperationResult,
   OperationVariables,
+  registerExecutor,
   Url,
 } from '@custom/schema';
 import Landscape from '@stories/landscape.jpg?as=metadata';
 import Portrait from '@stories/portrait.jpg?as=metadata';
 import { Meta, StoryObj } from '@storybook/react';
-import qs from 'query-string';
 import React from 'react';
 
 import { image } from '../../helpers/image';
-import { ContentHub, ContentHubQueryArgs } from './ContentHub';
+import { ContentHub } from './ContentHub';
 
 type ContentHubExecutor = (
   id: typeof ContentHubQuery,
   vars: OperationVariables<typeof ContentHubQuery>,
 ) => Promise<OperationResult<typeof ContentHubQuery>>;
 
-const pageSize = 6;
-
 export default {
   title: 'Components/Organisms/ContentHub',
   render: (args) => {
-    return (
-      <OperationExecutor executor={args.exec} id={ContentHubQuery}>
-        <ContentHub pageSize={pageSize} />
-      </OperationExecutor>
-    );
+    registerExecutor(ContentHubQuery, args.exec);
+    return <ContentHub pageSize={6} />;
   },
 } satisfies Meta<{ exec: ContentHubExecutor }>;
 
@@ -78,17 +72,16 @@ export const WithResults = {
                   },
           }) satisfies ContentHubResultItemFragment,
       );
-      const args = qs.parse(vars.args || '') as ContentHubQueryArgs;
       const filtered = items.filter(
-        (item) => !args.title || item.title.includes(args.title),
+        (item) => !vars.query || item.title.includes(vars.query),
       );
-      const offset = args.page
-        ? ((parseInt(args.page) || 1) - 1) * pageSize
-        : 0;
       return {
         contentHub: {
           total: filtered.length,
-          items: filtered.slice(offset, offset + pageSize),
+          items: filtered.slice(
+            vars.pagination.offset,
+            vars.pagination.offset + vars.pagination.limit,
+          ),
         },
       };
     },

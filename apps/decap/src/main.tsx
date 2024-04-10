@@ -1,8 +1,8 @@
 import { TokenAuthBackend } from '@amazeelabs/decap-cms-backend-token-auth/backend';
 import {
   Locale,
-  OperationExecutor,
   PreviewDecapPageQuery,
+  registerExecutor,
   ViewPageQuery,
 } from '@custom/schema';
 import { Page } from '@custom/ui/routes/Page';
@@ -81,11 +81,8 @@ CMS.registerPreviewTemplate(
     PreviewDecapPageQuery,
     pageSchema,
     (data) => {
-      return (
-        <OperationExecutor executor={{ page: data.preview }} id={ViewPageQuery}>
-          <Page />
-        </OperationExecutor>
-      );
+      registerExecutor(ViewPageQuery, { page: data.preview });
+      return <Page />;
     },
     'previewDecapPage',
   ),

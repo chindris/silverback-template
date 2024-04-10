@@ -18,7 +18,7 @@
       ],
       "outputs": [
         "web/sites/default/files/**",
-        "../../packages/ui/static/stories/webforms/**"
+        "../../packages/ui/static/public/webforms/**"
       ],
       "env": ["CI", "LAGOON"]
     },
@@ -32,13 +32,6 @@
         "!web/modules/custom/**",
         "!web/themes/custom/**",
         "!web/sites/default/files/**"
-      ]
-    },
-    "test:integration": {
-      "dependsOn": [
-        "prep",
-        "@custom-tests/e2e#test:integration:drupal",
-        "@custom-tests/schema#test:integration"
       ]
     }
   }

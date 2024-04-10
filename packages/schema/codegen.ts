@@ -8,7 +8,6 @@ const scalars = {
   Markup: '@amazeelabs/scalars#Markup',
   Url: '@amazeelabs/scalars#Url',
   ImageSource: '@amazeelabs/scalars#ImageSource',
-  JSONString: 'string',
 };
 
 const common = {

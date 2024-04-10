@@ -1,6 +1,6 @@
 import {
-  OperationExecutor,
   PreviewDrupalPageQuery,
+  registerExecutor,
   ViewPageQuery,
 } from '@custom/schema';
 import { Page } from '@custom/ui/routes/Page';
@@ -17,21 +17,15 @@ const previewExecutor = drupalExecutor(
 export default function PagePreview() {
   const { nid, rid, lang } = usePreviewParameters();
   if (nid && rid && lang) {
-    return (
-      <OperationExecutor
-        id={ViewPageQuery}
-        executor={async () => {
-          const data = await previewExecutor(PreviewDrupalPageQuery, {
-            id: nid,
-            locale: lang,
-            rid,
-          });
-          return { page: data.preview };
-        }}
-      >
-        <Page />
-      </OperationExecutor>
-    );
+    registerExecutor(ViewPageQuery, async () => {
+      const data = await previewExecutor(PreviewDrupalPageQuery, {
+        id: nid,
+        locale: lang,
+        rid,
+      });
+      return { page: data.preview };
+    });
+    return <Page />;
   }
   return null;
 }
