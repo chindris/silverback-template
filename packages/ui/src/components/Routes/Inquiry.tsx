@@ -3,18 +3,18 @@ import React from 'react';
 
 import { useTranslations } from '../../utils/translations';
 import { PageTransition } from '../Molecules/PageTransition';
-import { Contact as ContactOrganism } from '../Organisms/Contact';
+import { Inquiry as InquiryOrganism } from '../Organisms/Inquiry';
 
-export function Contact() {
-  // Initialize the contact page in each language.
+export function Inquiry() {
+  // Initialize the inquiry page in each language.
   useTranslations(
     Object.fromEntries(
-      Object.values(Locale).map((locale) => [locale, `/${locale}/contact`]),
+      Object.values(Locale).map((locale) => [locale, `/${locale}/inquiry`]),
     ),
   );
   return (
     <PageTransition>
-      <ContactOrganism />
+      <InquiryOrganism />
     </PageTransition>
   );
 }

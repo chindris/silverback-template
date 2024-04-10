@@ -3,4 +3,5 @@ _core:
 mode: simple
 ignored_config_entities:
   - 'webform.webform*'
+  - ~webform.webform.inquiry
 enable_export_filtering: true
