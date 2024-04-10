@@ -60,7 +60,7 @@ test('Blocks', async () => {
             {
               "__typename": "BlockMarkup",
               "markup": "
-    <p>A standalone paragraph with <strong><em>markup</em></strong> and <a href="/en/architecture" data-type="Content: Basic page" data-id="[numeric]">link</a></p>
+    <p>A standalone paragraph with <strong><em>markup</em></strong> and <a href="/en/architecture" data-type="Content: Basic page" data-id="[numeric]" data-entity-type="node">link</a></p>
     ",
             },
             {
@@ -86,7 +86,11 @@ test('Blocks', async () => {
               "markup": "
     <p>Starting from this paragraph, all the following blocks should be aggregated, as they are just HTML</p>
 
-    <figure class="wp-block-table"><table><tbody><tr><td>1</td><td>2</td></tr><tr><td>3</td><td>4 with <strong>markup</strong></td></tr></tbody></table><figcaption>Table caption</figcaption></figure><ul><li>list 1</li><li>list 2<ol><li>list 2.2</li></ol></li></ul><h3 class="wp-block-custom-heading">Heading 3</h3>
+    <figure class="wp-block-table"><table><tbody><tr><td>1</td><td>2</td></tr><tr><td>3</td><td>4 with <strong>markup</strong></td></tr></tbody></table><figcaption>Table caption</figcaption></figure>
+
+    <ul><li>list 1</li><li>list 2<ol><li>list 2.2</li></ol></li></ul>
+
+    <h3 class="wp-block-custom-heading">Heading 3</h3>
 
     <blockquote class="wp-block-quote"><p>Quote</p><cite>Citation</cite></blockquote>
 
@@ -117,7 +121,11 @@ test('Blocks', async () => {
             {
               "__typename": "BlockMarkup",
               "markup": "
-    <ul><li></li></ul><figure class="wp-block-table"><table><tbody><tr><td></td><td></td></tr><tr><td></td><td></td></tr></tbody></table></figure><blockquote class="wp-block-quote"><p></p></blockquote>
+    <ul><li></li></ul>
+
+    <figure class="wp-block-table"><table><tbody><tr><td></td><td></td></tr><tr><td></td><td></td></tr></tbody></table></figure>
+
+    <blockquote class="wp-block-quote"><p></p></blockquote>
 
     <h2 class="wp-block-custom-heading"></h2>
     ",

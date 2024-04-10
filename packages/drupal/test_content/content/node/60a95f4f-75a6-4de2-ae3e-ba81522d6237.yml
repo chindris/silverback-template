@@ -88,6 +88,13 @@ translations:
         value: false
     body:
       -
-        value: "<!-- wp:custom/hero {\"headline\":\"404 - Nicht gefunden\",\"lead\":\"Die Seite die sie gerne h\\u00e4tten is grade nicht da.\"} /-->\r\n\r\n<!-- wp:custom/content -->\r\n<!-- wp:paragraph -->\r\n<p></p>\r\n<!-- /wp:paragraph -->\r\n<!-- /wp:custom/content -->"
+        value: |-
+          <!-- wp:custom/hero {"headline":"404 - Nicht gefunden","lead":"Die Seite die sie gerne h\u00e4tten is grade nicht da."} /-->
+
+          <!-- wp:custom/content -->
+          <!-- wp:paragraph -->
+          <p></p>
+          <!-- /wp:paragraph -->
+          <!-- /wp:custom/content -->
         format: gutenberg
         summary: ''
