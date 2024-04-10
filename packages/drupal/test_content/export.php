@@ -15,6 +15,7 @@ $excluded = [
   'content_moderation_state',
   'redirect',
   'webform_submission',
+  'consumer',
 ];
 
 Export::run('test_content', $excluded);

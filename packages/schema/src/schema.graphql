@@ -25,6 +25,19 @@ implementation(gatsby): ./image.js#imageProps
 directive @imageProps repeatable on FIELD_DEFINITION | SCALAR | UNION | ENUM | INTERFACE | OBJECT
 
 """
+Retrieve the properties of an image.
+TODO: Move to a shared "image" package.
+
+implementation(gatsby): @amazeelabs/gatsby-source-silverback#responsiveImageSharp
+"""
+directive @responsiveImage(
+  height: String
+  sizes: String
+  transform: String
+  width: String
+) repeatable on ENUM | FIELD_DEFINITION | INTERFACE | OBJECT | SCALAR | UNION
+
+"""
 Retrieve an entity from the Gatsby datastore.
 For Drupal, this is implicitly implemented in the "graphql_directives" module.
 
@@ -173,6 +186,8 @@ type Hero {
   headline: String! @resolveEditorBlockAttribute(key: "headline")
   lead: String @resolveEditorBlockAttribute(key: "lead")
   image: MediaImage @resolveEditorBlockMedia
+  ctaText: String @resolveEditorBlockAttribute(key: "ctaText")
+  ctaUrl: Url @resolveEditorBlockAttribute(key: "ctaUrl")
 }
 
 union PageContent @resolveEditorBlockType = BlockMarkup | BlockMedia | BlockForm

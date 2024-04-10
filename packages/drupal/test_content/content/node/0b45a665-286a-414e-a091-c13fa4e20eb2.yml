@@ -89,6 +89,11 @@ translations:
         value: false
     body:
       -
-        value: "<!-- wp:custom/hero {\"mediaEntityIds\":[\"3a0fe860-a6d6-428a-9474-365bd57509aa\"],\"headline\":\"Architektur\",\"lead\":\"Unsere Architektur f\\u00fcr entkoppelte Websites\"} /-->\r\n\r\n<!-- wp:custom/content -->\r\n<!-- wp:drupalmedia/drupal-media-entity {\"mediaEntityIds\":[\"72187a1f-3e48-4b45-a9b7-189c6fd7ee26\"],\"caption\":\"Skizze der entkoppelten Architektur\"} /-->\r\n<!-- /wp:custom/content -->"
+        value: |-
+          <!-- wp:custom/hero {"mediaEntityIds":["3a0fe860-a6d6-428a-9474-365bd57509aa"],"headline":"Architektur","lead":"Unsere Architektur f\u00fcr entkoppelte Websites"} /-->
+
+          <!-- wp:custom/content -->
+          <!-- wp:drupalmedia/drupal-media-entity {"mediaEntityIds":["72187a1f-3e48-4b45-a9b7-189c6fd7ee26"],"caption":"Skizze der entkoppelten Architektur"} /-->
+          <!-- /wp:custom/content -->
         format: gutenberg
         summary: ''

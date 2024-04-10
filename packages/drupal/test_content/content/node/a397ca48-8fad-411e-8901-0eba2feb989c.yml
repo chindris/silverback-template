@@ -46,11 +46,11 @@ default:
   body:
     -
       value: |-
-        <!-- wp:custom/hero {"mediaEntityIds":["3a0fe860-a6d6-428a-9474-365bd57509aa"],"headline":"All kinds of blocks with maximum data","lead":"Lead text"} /-->
+        <!-- wp:custom/hero {"mediaEntityIds":["3a0fe860-a6d6-428a-9474-365bd57509aa"],"headline":"All kinds of blocks with maximum data","lead":"Lead text","ctaUrl":"https://example.com","ctaText":"CTA text"} /-->
 
         <!-- wp:custom/content -->
         <!-- wp:paragraph -->
-        <p>A standalone paragraph with <strong><em>markup</em></strong> and <a href="/node/0b45a665-286a-414e-a091-c13fa4e20eb2" data-type="Content: Basic page" data-id="0b45a665-286a-414e-a091-c13fa4e20eb2">link</a></p>
+        <p>A standalone paragraph with <strong><em>markup</em></strong> and <a href="/node/0b45a665-286a-414e-a091-c13fa4e20eb2" data-type="Content: Basic page" data-id="0b45a665-286a-414e-a091-c13fa4e20eb2" data-entity-type="node">link</a></p>
         <!-- /wp:paragraph -->
 
         <!-- wp:drupalmedia/drupal-media-entity {"mediaEntityIds":["3a0fe860-a6d6-428a-9474-365bd57509aa"],"caption":"Media image"} /-->
@@ -64,7 +64,15 @@ default:
         <!-- /wp:paragraph -->
 
         <!-- wp:table -->
-        <figure class="wp-block-table"><table><tbody><tr><td>1</td><td>2</td></tr><tr><td>3</td><td>4 with <strong>markup</strong></td></tr></tbody></table><figcaption>Table caption</figcaption></figure><!-- /wp:table --><!-- wp:list --><ul><li>list 1</li><li>list 2<ol><li>list 2.2</li></ol></li></ul><!-- /wp:list --><!-- wp:custom/heading {"level":3,"text":"Heading 3"} --><h3 class="wp-block-custom-heading">Heading 3</h3>
+        <figure class="wp-block-table"><table><tbody><tr><td>1</td><td>2</td></tr><tr><td>3</td><td>4 with <strong>markup</strong></td></tr></tbody></table><figcaption>Table caption</figcaption></figure>
+        <!-- /wp:table -->
+
+        <!-- wp:list -->
+        <ul><li>list 1</li><li>list 2<ol><li>list 2.2</li></ol></li></ul>
+        <!-- /wp:list -->
+
+        <!-- wp:custom/heading {"level":3,"text":"Heading 3"} -->
+        <h3 class="wp-block-custom-heading">Heading 3</h3>
         <!-- /wp:custom/heading -->
 
         <!-- wp:quote -->
@@ -113,6 +121,43 @@ translations:
         value: false
     body:
       -
-        value: "<!-- wp:custom/hero {\"mediaEntityIds\":[\"3a0fe860-a6d6-428a-9474-365bd57509aa\"],\"headline\":\"All kinds of blocks with maximum data DE\",\"lead\":\"Lead text DE\"} /-->\r\n\r\n<!-- wp:custom/content -->\r\n<!-- wp:paragraph -->\r\n<p>A standalone paragraph with <strong><em>markup</em></strong> and <a href=\"/node/0b45a665-286a-414e-a091-c13fa4e20eb2\" data-type=\"Content: Basic page\" data-id=\"0b45a665-286a-414e-a091-c13fa4e20eb2\">link</a> DE</p>\r\n<!-- /wp:paragraph -->\r\n\r\n<!-- wp:drupalmedia/drupal-media-entity {\"mediaEntityIds\":[\"3a0fe860-a6d6-428a-9474-365bd57509aa\"],\"caption\":\"Media image DE\"} /-->\r\n\r\n<!-- wp:drupalmedia/drupal-media-entity {\"mediaEntityIds\":[\"478c4289-961d-4ce8-85d6-578ae05f3019\"],\"caption\":\"Media video DE\"} /-->\r\n\r\n<!-- wp:custom/form {\"formId\":\"contact\"} /-->\r\n\r\n<!-- wp:paragraph -->\r\n<p>Starting from this paragraph, all the following blocks should be aggregated, as they are just HTML DE</p>\r\n<!-- /wp:paragraph -->\r\n\r\n<!-- wp:table -->\r\n<figure class=\"wp-block-table\"><table><tbody><tr><td>1</td><td>2</td></tr><tr><td>3</td><td>4 with <strong>markup</strong> DE</td></tr></tbody></table><figcaption>Table caption DE</figcaption></figure><!-- /wp:table --><!-- wp:list --><ul><li>list 1 DE</li><li>list 2 DE<ol><li>list 2.2 DE</li></ol></li></ul><!-- /wp:list --><!-- wp:custom/heading {\"level\":3,\"text\":\"Heading 3 DE\"} --><h3 class=\"wp-block-custom-heading\">Heading 3 DE</h3>\r\n<!-- /wp:custom/heading -->\r\n\r\n<!-- wp:quote -->\r\n<blockquote class=\"wp-block-quote\"><p>Quote DE</p><cite>Citation DE</cite></blockquote>\r\n<!-- /wp:quote -->\r\n\r\n<!-- wp:paragraph -->\r\n<p></p>\r\n<!-- /wp:paragraph -->\r\n<!-- /wp:custom/content -->"
+        value: |-
+          <!-- wp:custom/hero {"mediaEntityIds":["3a0fe860-a6d6-428a-9474-365bd57509aa"],"headline":"All kinds of blocks with maximum data DE","lead":"Lead text DE"} /-->
+
+          <!-- wp:custom/content -->
+          <!-- wp:paragraph -->
+          <p>A standalone paragraph with <strong><em>markup</em></strong> and <a href="/node/0b45a665-286a-414e-a091-c13fa4e20eb2" data-type="Content: Basic page" data-id="0b45a665-286a-414e-a091-c13fa4e20eb2" data-entity-type="node">link</a> DE</p>
+          <!-- /wp:paragraph -->
+
+          <!-- wp:drupalmedia/drupal-media-entity {"mediaEntityIds":["3a0fe860-a6d6-428a-9474-365bd57509aa"],"caption":"Media image DE"} /-->
+
+          <!-- wp:drupalmedia/drupal-media-entity {"mediaEntityIds":["478c4289-961d-4ce8-85d6-578ae05f3019"],"caption":"Media video DE"} /-->
+
+          <!-- wp:custom/form {"formId":"contact"} /-->
+
+          <!-- wp:paragraph -->
+          <p>Starting from this paragraph, all the following blocks should be aggregated, as they are just HTML DE</p>
+          <!-- /wp:paragraph -->
+
+          <!-- wp:table -->
+          <figure class="wp-block-table"><table><tbody><tr><td>1</td><td>2</td></tr><tr><td>3</td><td>4 with <strong>markup</strong> DE</td></tr></tbody></table><figcaption>Table caption DE</figcaption></figure>
+          <!-- /wp:table -->
+
+          <!-- wp:list -->
+          <ul><li>list 1 DE</li><li>list 2 DE<ol><li>list 2.2 DE</li></ol></li></ul>
+          <!-- /wp:list -->
+
+          <!-- wp:custom/heading {"level":3,"text":"Heading 3 DE"} -->
+          <h3 class="wp-block-custom-heading">Heading 3 DE</h3>
+          <!-- /wp:custom/heading -->
+
+          <!-- wp:quote -->
+          <blockquote class="wp-block-quote"><p>Quote DE</p><cite>Citation DE</cite></blockquote>
+          <!-- /wp:quote -->
+
+          <!-- wp:paragraph -->
+          <p></p>
+          <!-- /wp:paragraph -->
+          <!-- /wp:custom/content -->
         format: gutenberg
         summary: ''

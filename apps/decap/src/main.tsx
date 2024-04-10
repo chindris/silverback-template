@@ -21,9 +21,20 @@ CMS.registerPreviewStyle(css, { raw: true });
 CMS.registerWidget('uuid', UuidWidget);
 CMS.registerBackend('token-auth', TokenAuthBackend);
 
+if (
+  window.location.hostname !== 'localhost' &&
+  !import.meta.env.DEV &&
+  (!import.meta.env.VITE_DECAP_REPO || !import.meta.env.VITE_DECAP_BRANCH)
+) {
+  console.error(
+    "VITE_DECAP_REPO and VITE_DECAP_BRANCH environment variables are missing. Can't connect to the repository.",
+  );
+}
+
 CMS.init({
   config: {
-    publish_mode: 'simple',
+    load_config_file: false,
+    publish_mode: 'editorial_workflow',
     media_folder: 'apps/decap/media',
     // @ts-ignore
     backend: import.meta.env.DEV
@@ -31,7 +42,9 @@ CMS.init({
           // In development, use the in-memory backend.
           name: 'test-repo',
         }
-      : window.location.hostname === 'localhost'
+      : window.location.hostname === 'localhost' ||
+          !import.meta.env.VITE_DECAP_REPO ||
+          !import.meta.env.VITE_DECAP_BRANCH
         ? {
             // On localhost, use the proxy backend that writes to files.
             name: 'proxy',
@@ -41,8 +54,8 @@ CMS.init({
             // Otherwise, its production. Use the token auth backend.
             name: 'token-auth',
             api_root: '/.netlify/functions/github-proxy',
-            repo: 'AmazeeLabs/silverback-template',
-            branch: 'prod',
+            repo: import.meta.env.VITE_DECAP_REPO,
+            branch: import.meta.env.VITE_DECAP_BRANCH,
           },
     i18n: {
       structure: 'single_file',
