@@ -18,14 +18,9 @@ RUN /home/gitpod/.deno/bin/deno completions bash > /home/gitpod/.bashrc.d/90-den
   echo 'export DENO_INSTALL="/home/gitpod/.deno"' >> /home/gitpod/.bashrc.d/90-deno && \
   echo 'export PATH="$DENO_INSTALL/bin:$PATH"' >> /home/gitpod/.bashrc.d/90-deno
 
-# Install neovim and helpers
-RUN wget https://github.com/neovim/neovim/releases/download/v0.9.2/nvim-linux64.tar.gz && \
-  tar xzf nvim-linux64.tar.gz && \
-  sudo mv nvim-linux64 /usr/local/nvim && \
-  sudo ln -s /usr/local/nvim/bin/nvim /usr/local/bin/nvim && \
-  rm -rf nvim-linux64.tar.gz
-RUN sudo apt-get install -y fd-find
-RUN npm install -g neovim
+RUN sudo add-apt-repository ppa:maveonair/helix-editor && \
+    sudo apt update && \
+    sudo apt install helix
 
 # Install phpactor
 RUN curl -Lo phpactor.phar https://github.com/phpactor/phpactor/releases/latest/download/phpactor.phar
