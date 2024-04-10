@@ -3,10 +3,10 @@
   "jsc": {
     "parser": {
       "syntax": "typescript"
-    },
+    }
   },
   "module": {
     "type": "es6"
   },
-  "exclude": ["src/samples", "src/helpers"],
+  "exclude": ["src/samples", "src/helpers"]
 }
