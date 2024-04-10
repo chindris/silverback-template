@@ -18,8 +18,9 @@ export function useOperation<TOperation extends AnyOperationId>(
     // If the executor is not a function, pass null to SWR,
     // so it does not try to fetch.
     executor instanceof Function ? (arg) => executor(arg[1]) : null,
-    variables?.pathname?.indexOf('__preview') > 0 ?
-      { suspense: false, refreshInterval: 1000 } : { suspense: false },
+    variables?.pathname?.indexOf('__preview') > 0
+      ? { suspense: false, refreshInterval: 1000 }
+      : { suspense: false },
   );
   return executor instanceof Function
     ? result
