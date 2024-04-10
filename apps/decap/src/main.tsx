@@ -33,7 +33,7 @@ if (
 
 CMS.init({
   config: {
-    publish_mode: 'simple',
+    publish_mode: 'editorial_workflow',
     media_folder: 'apps/decap/media',
     // @ts-ignore
     backend: import.meta.env.DEV
