@@ -11,10 +11,10 @@ const formValueSchema = z.object({
   name: z.string(),
   email: z.string(),
   subject: z.string().optional(),
-  message: z.string(),
+  question: z.string(),
 });
 
-export function ContactForm() {
+export function InquiryForm() {
   const intl = useIntl();
   type FormValue = z.infer<typeof formValueSchema>;
   const { register, handleSubmit } = useForm<FormValue>();
@@ -33,8 +33,8 @@ export function ContactForm() {
     !isMutating && data && data.createWebformSubmission?.submission
       ? [
           intl.formatMessage({
-            defaultMessage: 'The contact has been submitted.',
-            id: 'gD5ZU1',
+            defaultMessage: 'The inquiry has been submitted.',
+            id: 'SEJ9ng',
           }),
         ]
       : null;
@@ -48,7 +48,7 @@ export function ContactForm() {
           className="mt-5 sm:items-center"
           onSubmit={handleSubmit((values) => {
             trigger({
-              webformId: 'contact',
+              webformId: 'inquiry',
               submittedData: JSON.stringify(values),
             });
           })}
@@ -102,18 +102,18 @@ export function ContactForm() {
             />
           </div>
           <div className="w-full sm:max-w-sm pt-2">
-            <label htmlFor="message" className="sr-only">
+            <label htmlFor="question" className="sr-only">
               {intl.formatMessage({
                 defaultMessage: 'Message',
                 id: 'T7Ry38',
               })}
             </label>
             <textarea
-              {...register('message', { required: true })}
+              {...register('question', { required: true })}
               className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               placeholder={intl.formatMessage({
-                defaultMessage: 'Message',
-                id: 'T7Ry38',
+                defaultMessage: 'Question',
+                id: 'kgOBET',
               })}
             />
           </div>
