@@ -46,7 +46,7 @@ default:
   body:
     -
       value: |-
-        <!-- wp:custom/hero {"mediaEntityIds":["3a0fe860-a6d6-428a-9474-365bd57509aa"],"headline":"All kinds of blocks with maximum data","lead":"Lead text","ctaUrl":"https://example.com","ctaText":"CTA text"} /-->
+        <!-- wp:custom/hero {"mediaEntityIds":["3a0fe860-a6d6-428a-9474-365bd57509aa"],"headline":"All kinds of blocks with maximum data","lead":"Lead text","ctaUrl":"https://example.com","ctaText":"CTA text","formId":"contact"} /-->
 
         <!-- wp:custom/content -->
         <!-- wp:paragraph -->

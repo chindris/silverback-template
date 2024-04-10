@@ -6,11 +6,21 @@ import {
   RichText,
 } from 'wordpress__block-editor';
 import { registerBlockType } from 'wordpress__blocks';
-import { PanelBody } from 'wordpress__components';
+import { PanelBody, SelectControl } from 'wordpress__components';
 import { compose, withState } from 'wordpress__compose';
 import { dispatch } from 'wordpress__data';
 
 import { DrupalMediaEntity } from '../utils/drupal-media';
+
+declare const drupalSettings: {
+  customGutenbergBlocks: {
+    forms: Array<{
+      id: string;
+      url: string;
+      label: string;
+    }>;
+  };
+};
 
 // @ts-ignore
 const { t: __ } = Drupal;
@@ -43,6 +53,9 @@ registerBlockType('custom/hero', {
     showLinkControl: {
       type: 'boolean',
       default: true,
+    },
+    formId: {
+      type: 'string',
     },
   },
   supports: {
@@ -92,6 +105,23 @@ registerBlockType('custom/hero', {
                 {__('Remove')}
               </button>
             )}
+          </PanelBody>
+          <PanelBody title={__('Form')}>
+            <SelectControl
+              value={props.attributes.formId as string}
+              options={[
+                { label: __('- Select a form -'), value: '' },
+                ...drupalSettings.customGutenbergBlocks.forms.map((form) => ({
+                  label: form.label,
+                  value: form.id,
+                })),
+              ]}
+              onChange={(formId: string) => {
+                props.setAttributes({
+                  formId,
+                });
+              }}
+            />
           </PanelBody>
         </InspectorControls>
         <div>
@@ -169,6 +199,16 @@ registerBlockType('custom/hero', {
                 />
               </div>
             )}
+            {props.attributes.formId ? (
+              <iframe
+                src={
+                  drupalSettings.customGutenbergBlocks.forms.find(
+                    (form) => form.id === props.attributes.formId,
+                  )!.url + '?iframe=true'
+                }
+                style={{ width: '100%', height: 300, pointerEvents: 'none' }}
+              />
+            ) : null}
           </div>
         </div>
       </>

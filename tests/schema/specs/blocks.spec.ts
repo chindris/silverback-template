@@ -15,6 +15,7 @@ test('Blocks', async () => {
         }
         ctaText
         ctaUrl
+        formUrl
       }
       content {
         __typename
@@ -104,6 +105,7 @@ test('Blocks', async () => {
             "__typename": "Hero",
             "ctaText": "CTA text",
             "ctaUrl": "https://example.com",
+            "formUrl": "http://127.0.0.1:8000/en/form/contact",
             "headline": "All kinds of blocks with maximum data",
             "image": {
               "__typename": "MediaImage",
@@ -139,6 +141,7 @@ test('Blocks', async () => {
             "__typename": "Hero",
             "ctaText": null,
             "ctaUrl": null,
+            "formUrl": null,
             "headline": "All kinds of blocks with minimum data",
             "image": null,
             "lead": null,
