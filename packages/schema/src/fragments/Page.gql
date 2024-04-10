@@ -22,6 +22,8 @@ fragment Page on Page {
       )
       alt
     }
+    ctaText
+    ctaUrl
   }
   content {
     __typename

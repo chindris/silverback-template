@@ -186,6 +186,8 @@ type Hero {
   headline: String! @resolveEditorBlockAttribute(key: "headline")
   lead: String @resolveEditorBlockAttribute(key: "lead")
   image: MediaImage @resolveEditorBlockMedia
+  ctaText: String @resolveEditorBlockAttribute(key: "ctaText")
+  ctaUrl: Url @resolveEditorBlockAttribute(key: "ctaUrl")
 }
 
 union PageContent @resolveEditorBlockType = BlockMarkup | BlockMedia | BlockForm

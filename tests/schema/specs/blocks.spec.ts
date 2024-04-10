@@ -13,6 +13,8 @@ test('Blocks', async () => {
         image {
           __typename
         }
+        ctaText
+        ctaUrl
       }
       content {
         __typename
@@ -100,6 +102,8 @@ test('Blocks', async () => {
           ],
           "hero": {
             "__typename": "Hero",
+            "ctaText": "CTA text",
+            "ctaUrl": "https://example.com",
             "headline": "All kinds of blocks with maximum data",
             "image": {
               "__typename": "MediaImage",
@@ -133,6 +137,8 @@ test('Blocks', async () => {
           ],
           "hero": {
             "__typename": "Hero",
+            "ctaText": null,
+            "ctaUrl": null,
             "headline": "All kinds of blocks with minimum data",
             "image": null,
             "lead": null,
