@@ -188,6 +188,9 @@ type Hero {
   image: MediaImage @resolveEditorBlockMedia
   ctaText: String @resolveEditorBlockAttribute(key: "ctaText")
   ctaUrl: Url @resolveEditorBlockAttribute(key: "ctaUrl")
+  formUrl: Url
+    @resolveEditorBlockAttribute(key: "formId")
+    @webformIdToUrl(id: "$")
 }
 
 union PageContent @resolveEditorBlockType = BlockMarkup | BlockMedia | BlockForm
