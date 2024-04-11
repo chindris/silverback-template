@@ -26,10 +26,22 @@ export const imageProps: GraphQLFieldResolver<string, any> = (source) => {
   // - If images are processed in Cloudinary, we don't need two CDN's (Netlify & Cloudinary)
   // - TODO: Once we have image processing in Drupal, it has to be handled here.
   if (process.env.NETLIFY_URL && process.env.DRUPAL_EXTERNAL_URL) {
-    return source.replaceAll(
-      process.env.NETLIFY_URL,
-      process.env.DRUPAL_EXTERNAL_URL,
-    );
+    try {
+      const decoded = JSON.parse(source);
+      if (decoded && typeof decoded === 'object') {
+        for (const key in decoded) {
+          if (typeof decoded[key] === 'string') {
+            decoded[key] = decoded[key].replaceAll(
+              process.env.NETLIFY_URL,
+              process.env.DRUPAL_EXTERNAL_URL,
+            );
+          }
+        }
+        return JSON.stringify(decoded);
+      }
+    } catch (error) {
+      return source;
+    }
   }
   return source;
 };
