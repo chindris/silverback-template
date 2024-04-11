@@ -6,7 +6,10 @@ import { useIntl } from 'react-intl';
 export function UserButton() {
   const session = useSession();
   const intl = useIntl();
-  const hostWithScheme = `${location.protocol}//${location.host}`;
+  const hostWithScheme =
+    typeof window !== 'undefined'
+      ? `${location.protocol}//${location.host}`
+      : '';
   return (
     <>
       {!session && <></>}
