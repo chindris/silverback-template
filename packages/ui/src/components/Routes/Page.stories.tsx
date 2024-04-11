@@ -80,3 +80,24 @@ export const FullHero = {
     },
   },
 } satisfies StoryObj<ViewPageQuery>;
+
+export const FormHero = {
+  ...Default,
+  args: {
+    ...Default.args,
+    page: {
+      ...Default.args.page,
+      hero: {
+        headline: 'Page Hero Headline',
+        lead: 'A longer lead text that even might break into multiple lines.',
+        image: {
+          source: image(Landscape, { width: 2000 }),
+          alt: 'Stock photo landscape hero.',
+        },
+        ctaUrl: '/test' as Url,
+        ctaText: 'Call to action',
+        formUrl: 'webforms/error/index.html' as Url,
+      },
+    },
+  },
+} satisfies StoryObj<ViewPageQuery>;
