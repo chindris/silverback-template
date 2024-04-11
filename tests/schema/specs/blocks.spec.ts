@@ -48,6 +48,11 @@ test('Blocks', async () => {
             ctaUrl
           }
         }
+        ... on BlockCta {
+          url
+          text
+          openInNewTab
+        }
       }
     }
     {
@@ -133,6 +138,18 @@ test('Blocks', async () => {
               ],
             },
             {
+              "__typename": "BlockCta",
+              "openInNewTab": null,
+              "text": "Internal CTA",
+              "url": "/en/drupal",
+            },
+            {
+              "__typename": "BlockCta",
+              "openInNewTab": true,
+              "text": "External CTA",
+              "url": "https://www.google.com",
+            },
+            {
               "__typename": "BlockMarkup",
               "markup": "
     <p></p>
@@ -173,6 +190,12 @@ test('Blocks', async () => {
 
     <h2 class="wp-block-custom-heading"></h2>
     ",
+            },
+            {
+              "__typename": "BlockCta",
+              "openInNewTab": null,
+              "text": null,
+              "url": null,
             },
           ],
           "hero": {
