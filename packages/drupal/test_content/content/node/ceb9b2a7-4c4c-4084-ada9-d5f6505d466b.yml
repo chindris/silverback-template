@@ -65,6 +65,8 @@ default:
         <!-- wp:custom/heading -->
         <h2 class="wp-block-custom-heading"></h2>
         <!-- /wp:custom/heading -->
+
+        <!-- wp:custom/cta /-->
         <!-- /wp:custom/content -->
       format: gutenberg
       summary: ''
