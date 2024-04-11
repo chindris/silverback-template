@@ -1,11 +1,13 @@
 import { SilverbackIframe } from '@amazeelabs/silverback-iframe';
 import { BlockFormFragment, Url, useLocation } from '@custom/schema';
+import clsx from 'clsx';
 import React from 'react';
 
 import { buildMessages, storeMessages } from '../../Molecules/Messages';
 
 export function BlockForm(
   props: BlockFormFragment & {
+    className?: string;
     // For Storybook.
     cssStylesToInject?: string;
   },
@@ -17,7 +19,7 @@ export function BlockForm(
   }
 
   return (
-    <div className="mt-16 mx-auto max-w-3xl">
+    <div className={clsx('mx-auto max-w-3xl', props.className)}>
       <SilverbackIframe
         src={props.url}
         buildMessages={buildMessages}
