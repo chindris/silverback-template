@@ -74,6 +74,8 @@ export const FullHero = {
           source: image(Landscape, { width: 2000 }),
           alt: 'Stock photo landscape hero.',
         },
+        ctaUrl: '/test' as Url,
+        ctaText: 'Call to action',
       },
     },
   },
