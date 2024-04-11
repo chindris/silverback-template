@@ -7,6 +7,7 @@ _meta:
   depends:
     3a0fe860-a6d6-428a-9474-365bd57509aa: media
     478c4289-961d-4ce8-85d6-578ae05f3019: media
+    72187a1f-3e48-4b45-a9b7-189c6fd7ee26: media
 default:
   revision_uid:
     -
@@ -78,6 +79,12 @@ default:
         <!-- wp:quote -->
         <blockquote class="wp-block-quote"><p>Quote</p><cite>Citation</cite></blockquote>
         <!-- /wp:quote -->
+
+        <!-- wp:custom/image-teasers -->
+        <!-- wp:custom/image-teaser {"mediaEntityIds":["3a0fe860-a6d6-428a-9474-365bd57509aa"],"title":"Teaser 1","ctaUrl":"https://google.com","ctaText":"Foo"} /-->
+
+        <!-- wp:custom/image-teaser {"mediaEntityIds":["72187a1f-3e48-4b45-a9b7-189c6fd7ee26"],"title":"Teaser 2","ctaUrl":"https://google.com","ctaText":"Bar"} /-->
+        <!-- /wp:custom/image-teasers -->
 
         <!-- wp:paragraph -->
         <p></p>
