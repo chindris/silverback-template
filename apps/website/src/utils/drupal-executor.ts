@@ -7,9 +7,37 @@ export function drupalExecutor(endpoint: string, forward: boolean = true) {
   return async function <OperationId extends AnyOperationId>(
     id: OperationId,
     variables?: OperationVariables<OperationId>,
+    accessToken?: string,
   ) {
     const url = new URL(endpoint, window.location.origin);
     const isMutation = id.includes('Mutation:');
+    const isAuthenticated = accessToken !== undefined;
+    if (isAuthenticated) {
+      const { data, errors } = await (
+        await fetch(url, {
+          method: 'POST',
+          body: JSON.stringify({
+            queryId: id,
+            variables: variables,
+          }),
+          headers: forward
+            ? {
+                'SLB-Forwarded-Proto': window.location.protocol.slice(0, -1),
+                'SLB-Forwarded-Host': window.location.hostname,
+                'SLB-Forwarded-Port': window.location.port,
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${accessToken}`,
+              }
+            : {
+                'Content-Type': 'application/json',
+              },
+        })
+      ).json();
+      if (errors) {
+        throw errors;
+      }
+      return data;
+    }
     if (isMutation) {
       const { data, errors } = await (
         await fetch(url, {
