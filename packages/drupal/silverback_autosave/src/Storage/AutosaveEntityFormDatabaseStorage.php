@@ -53,6 +53,13 @@ class AutosaveEntityFormDatabaseStorage implements AutosaveEntityFormStorageInte
     ]);
 
     if (!$entity->isNew()) {
+
+      // Purge previous stored states for the entity,
+      // e.g. when user is navigating away from the page.
+      // Also, this approach ensures that there will be always
+      // a stored form state in the db, in case we need to restore.
+      $this->purgeAutosavedEntityState($entity_type_id, $entity_id, NULL, $form_id, $langcode, $uid);
+      // Now, enter the new values.
       $this->connection->insert(static::AUTOSAVE_ENTITY_FORM_TABLE)
         ->fields([
           'form_id',
@@ -163,7 +170,7 @@ class AutosaveEntityFormDatabaseStorage implements AutosaveEntityFormStorageInte
       ->condition('form_id', $form_id);
 
     if (isset($form_session_id)) {
-      // $query->condition('form_session_id', $form_session_id);
+      $query->condition('form_session_id', $form_session_id);
     }
 
     $query->condition('entity_type_id', $entity_type_id)

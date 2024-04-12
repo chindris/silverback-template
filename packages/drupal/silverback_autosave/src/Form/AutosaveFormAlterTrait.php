@@ -37,7 +37,9 @@ trait AutosaveFormAlterTrait {
 
     $silverback_autosave_session_id = $this->getAutosaveFormSessionID($form_state);
     if (!$silverback_autosave_session_id) {
-      $silverback_autosave_session_id = !empty($input['silverback_autosave_session_id']) ? $input['silverback_autosave_session_id'] : $form['#build_id'];
+      $silverback_autosave_session_id = !empty($input['silverback_autosave_session_id']) ?
+        $input['silverback_autosave_session_id'] :
+        $form['#build_id'];
       $this->setAutosaveFormSessionID($form_state, $silverback_autosave_session_id);
     }
 
@@ -77,43 +79,6 @@ trait AutosaveFormAlterTrait {
       '#name' => 'silverback_autosave_last_autosave_timestamp',
       '#value' => $form_state->get('silverback_autosave_last_autosave_timestamp') ?: '',
     ];
-  }
-
-  /**
-   * Form submission handler for restoring autosaved state.
-   */
-  public function autosaveFormRestoreSubmit($form, FormStateInterface $form_state) {
-    $triggering_element = $form_state->getTriggeringElement();
-    if (!empty($triggering_element['#silverback_autosave_state_timestamp'])) {
-      // Set the timestamp of the autosaved state which has to be used to
-      // restore the form on rebuild.
-      $form_state->set('silverback_autosave_state_timestamp', $triggering_element['#silverback_autosave_state_timestamp']);
-      $form_state->setRebuild();
-    }
-  }
-
-  /**
-   * Form submission handler for rejecting autosaved states.
-   */
-  public function autosaveFormRejectSubmit($form, FormStateInterface $form_state) {
-    // As this processing might take some time we want to prevent that if the
-    // connection is terminated the user input will be lost.
-    ignore_user_abort(TRUE);
-    // Mark the form state with a flag indicating an action for autosave has
-    // been chosen.
-    $form_state->set('silverback_autosave_rejected', TRUE);
-    // Cache the form state in order for the flag to be kept.
-    $form_state->setCached();
-
-    // Purge the autosave states.
-    $this->purgeAllAutosavedStates($form_state, $this->currentUser->id());
-  }
-
-  /**
-   * Ajax callback for rejecting autosaved states.
-   */
-  public function autosaveFormRejectAjax($form, FormStateInterface $form_state) {
-    return new AjaxResponse();
   }
 
   /**

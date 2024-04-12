@@ -20,8 +20,6 @@
     message: '',
     dialog_options: [],
     autosave_submit_class: 'autosave-form-save',
-    autosave_restore_class: 'autosave-form-restore',
-    autosave_reject_class: 'autosave-form-reject',
     notification: {
       active: true,
       message: Drupal.t('Updating preview...'),
@@ -188,8 +186,8 @@
           return;
         }
 
-        // If there are gutenberg fields, we need to make sure the textarea value
-        // is updated before autosaving.
+        // If there are gutenberg fields, we need to make sure
+        // the textarea value is updated before autosaving.
         const $gutenbergFields = $('.field--gutenberg textarea').first();
         if ($gutenbergFields.length) {
           const { data } = window.wp;
