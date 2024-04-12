@@ -193,7 +193,11 @@ type Hero {
     @webformIdToUrl(id: "$")
 }
 
-union PageContent @resolveEditorBlockType = BlockMarkup | BlockMedia | BlockForm
+union PageContent @resolveEditorBlockType =
+    BlockMarkup
+  | BlockMedia
+  | BlockForm
+  | BlockImageTeasers
 
 type BlockForm @type(id: "custom/form") {
   url: Url @resolveEditorBlockAttribute(key: "formId") @webformIdToUrl(id: "$")
@@ -220,6 +224,17 @@ type MediaVideo @type(id: "video") @entity(type: "media", bundle: "video") {
 type BlockMedia @type(id: "drupalmedia/drupal-media-entity") {
   media: Media @resolveEditorBlockMedia
   caption: Markup @resolveEditorBlockAttribute(key: "caption")
+}
+
+type BlockImageTeasers @type(id: "custom/image-teasers") {
+  teasers: [BlockImageTeaser!]! @resolveEditorBlockChildren
+}
+
+type BlockImageTeaser @default @value {
+  image: MediaImage @resolveEditorBlockMedia
+  title: String @resolveEditorBlockAttribute(key: "title")
+  ctaText: String @resolveEditorBlockAttribute(key: "ctaText")
+  ctaUrl: Url @resolveEditorBlockAttribute(key: "ctaUrl")
 }
 
 input PaginationInput {

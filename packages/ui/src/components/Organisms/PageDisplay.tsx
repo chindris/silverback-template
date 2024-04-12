@@ -25,6 +25,21 @@ export function PageDisplay(page: PageFragment) {
                     return <BlockMarkup key={index} {...block} />;
                   case 'BlockForm':
                     return <BlockForm key={index} {...block} />;
+                  case 'BlockImageTeasers':
+                    return (
+                      // TODO: Implement BlockImageTeasers
+                      <div
+                        style={{
+                          color: 'red',
+                          border: 'solid 3px red',
+                          padding: '3px',
+                          margin: '5px 0',
+                        }}
+                        // eslint-disable-next-line react/jsx-no-literals
+                      >
+                        BlockImageTeasers goes here
+                      </div>
+                    );
                   default:
                     throw new UnreachableCaseError(block);
                 }
