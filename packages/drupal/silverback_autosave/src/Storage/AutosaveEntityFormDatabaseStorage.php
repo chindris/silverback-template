@@ -169,10 +169,9 @@ class AutosaveEntityFormDatabaseStorage implements AutosaveEntityFormStorageInte
       ->orderBy('timestamp', 'DESC')
       ->condition('form_id', $form_id);
 
-    // Use this for future restore state.
-    /* if (isset($form_session_id)) {
-    $query->condition('form_session_id', $form_session_id);
-    } */
+    if (isset($form_session_id)) {
+      $query->condition('form_session_id', $form_session_id);
+    }
 
     $query->condition('entity_type_id', $entity_type_id)
       ->condition('entity_id', $entity_id)
