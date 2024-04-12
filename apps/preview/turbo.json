@@ -1,0 +1,20 @@
+{
+  "extends": ["//"],
+  "pipeline": {
+    "prep": {
+      "dependsOn": ["prep:app", "prep:server"]
+    },
+    "prep:app": {
+      "dependsOn": ["^prep"],
+      "inputs": ["src/**", "index.html", "vite.config.ts"],
+      "outputs": ["dist/**"]
+    },
+    "prep:server": {
+      "inputs": ["server/**"],
+      "outputs": ["build/**"]
+    },
+    "test:static": {
+      "inputs": ["src/**", "!src/gatsby-fragments.js"]
+    }
+  }
+}
