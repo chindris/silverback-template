@@ -120,6 +120,9 @@ services:
     networks:
       - amazeeio-network
       - default
+    labels:
+      lagoon.type: node
+      lagoon.name: preview
 
 networks:
   amazeeio-network:
