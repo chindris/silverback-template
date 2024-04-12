@@ -6,6 +6,12 @@ import { webSocket } from 'rxjs/webSocket';
 
 import { drupalExecutor } from './drupal-executor';
 
+declare global {
+  interface Window {
+    GRAPHQL_ENDPOINT: string;
+  }
+}
+
 const updates$ = webSocket({
   url: `${window.location.origin.replace('http', 'ws')}/__preview`,
 });
@@ -18,10 +24,7 @@ function App() {
   }, [refresh]);
   return (
     <OperationExecutor
-      executor={drupalExecutor(
-        `${import.meta.env.VITE_DRUPAL_URL || 'http://localhost:8888'}/graphql`,
-        false,
-      )}
+      executor={drupalExecutor(window.GRAPHQL_ENDPOINT, false)}
     >
       <Frame>
         <Preview />
