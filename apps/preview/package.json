@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "test:static": "tsc --noEmit && eslint \"**/*.{ts,tsx,js,jsx}\" --ignore-path=\"./.gitignore\"",
-    "dev:vite": "vite",
-    "dev:hono": "tsx watch src/index.ts",
+    "dev:app": "vite",
+    "dev:server": "tsx watch server/index.ts",
     "prep:app": "vite build",
     "prep:server": "swc ./server -d ./build",
     "start": "node build/index.js"
