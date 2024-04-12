@@ -92,7 +92,7 @@ ENV WEBROOT=web
 # PREVIEW IMAGE
 # ====================================================================================================
 
-FROM uselagoon/node-18:23.12.0 as publisher
+FROM uselagoon/node-18:23.12.0 as preview
 
 RUN npm install -g pnpm@8.6.0
 COPY --from=builder /tmp/.deploy/preview /app
