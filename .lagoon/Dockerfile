@@ -96,7 +96,6 @@ FROM uselagoon/node-18:23.12.0 as preview
 
 RUN npm install -g pnpm@8.6.0
 COPY --from=builder /tmp/.deploy/preview /app
-ENV PREVIEW_PORT=3000
 CMD pnpm start
 
 # ====================================================================================================

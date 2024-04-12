@@ -13,6 +13,7 @@ app.get('/endpoint.js', (_, res) => {
     `window.GRAPHQL_ENDPOINT = "${process.env.DRUPAL_URL || 'http://localhost:8888'}/graphql";`,
   );
 });
+
 // TODO: Protect endpoints and preview with Drupal authentication.
 app.post('/__preview', (req, res) => {
   updates$.next({ body: req.body });
@@ -33,7 +34,9 @@ app.get('/__preview/*', (req, _, next) => {
 });
 
 app.use(express.static('./dist'));
-const port = process.env.PREVIEW_PORT || 8001;
+
+const isLagoon = !!process.env.LAGOON;
+const port = isLagoon ? 3000 : 8001;
 console.log(`Server is running on port ${port}`);
 
 app.listen({ port });
