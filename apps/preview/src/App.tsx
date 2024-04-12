@@ -17,12 +17,7 @@ function App() {
     return sub.unsubscribe;
   }, [refresh]);
   return (
-    <OperationExecutor
-      executor={drupalExecutor(
-        `${import.meta.env.VITE_DRUPAL_URL || 'http://localhost:8888'}/graphql`,
-        false,
-      )}
-    >
+    <OperationExecutor executor={drupalExecutor('/graphql', false)}>
       <Frame>
         <Preview />
       </Frame>
