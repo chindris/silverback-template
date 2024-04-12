@@ -21,7 +21,7 @@ function silverback_autosave_schema() {
     'fields' => [
       'form_id' => [
         'type' => 'varchar_ascii',
-        'length' => AutosaveEntityFormStorageInterface::silverback_autosave_FORM_ID_LENGTH,
+        'length' => AutosaveEntityFormStorageInterface::SILVERBACK_AUTOSAVE_FORM_ID_LENGTH,
         'not null' => TRUE,
       ],
       // We need the form session id as it is possible that the user opens the
@@ -31,7 +31,7 @@ function silverback_autosave_schema() {
       // case.
       'form_session_id' => [
         'type' => 'varchar_ascii',
-        'length' => AutosaveEntityFormStorageInterface::silverback_autosave_FORM_ID_LENGTH,
+        'length' => AutosaveEntityFormStorageInterface::SILVERBACK_AUTOSAVE_FORM_ID_LENGTH,
         'not null' => TRUE,
       ],
       'entity_type_id' => [

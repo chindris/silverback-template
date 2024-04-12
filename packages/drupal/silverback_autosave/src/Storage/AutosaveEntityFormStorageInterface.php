@@ -12,7 +12,7 @@ interface AutosaveEntityFormStorageInterface {
 
   const AUTOSAVE_ENTITY_FORM_TABLE = 'silverback_autosave_entity_form';
 
-  const silverback_autosave_FORM_ID_LENGTH = 512;
+  const SILVERBACK_AUTOSAVE_FORM_ID_LENGTH = 512;
 
   /**
    * Stores the entity together with the form state.
