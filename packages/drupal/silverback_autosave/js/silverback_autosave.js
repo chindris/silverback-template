@@ -124,71 +124,7 @@
           .appendTo('body')
           .append(Drupal.autosaveForm.notification.message);
 
-        // Show the resume/discard confirmation message only if the form does
-        // not contain any errors, otherwise continue with normal autosave
-        // submissions. This is for the use case where a form is submitted but
-        // returned to the user with validation errors in which case we should
-        // not show the resume/discard message but continue the autosave
-        // submissions.
-        if (Drupal.autosaveForm.message && !Drupal.autosaveForm.formHasErrors) {
-          var dialogOptions = {
-            buttons: {
-              button_confirm: {
-                text: Drupal.t('Resume editing'),
-                class: 'autosave-form-resume-button',
-                click: function () {
-                  // Non ajax buttons are bound to click.
-                  // autosave-form-restore
-                  $('.' + Drupal.autosaveForm.autosave_restore_class).trigger(
-                    'click',
-                  );
-                },
-              },
-              button_reject: {
-                text: Drupal.t('Discard'),
-                class: 'autosave-form-reject-button',
-                click: function () {
-                  triggerAjaxSubmitWithoutProgressIndication(
-                    Drupal.autosaveForm.autosave_reject_class,
-                    true,
-                  );
-                  $(this).dialog('close');
-                },
-                primary: true,
-              },
-            },
-            close: function (event, ui) {
-              $(this).remove();
-              $(context)
-                .find('.' + Drupal.autosaveForm.autosave_restore_class)
-                .remove();
-              $(context)
-                .find('.' + Drupal.autosaveForm.autosave_reject_class)
-                .remove();
-              $(context).find('.autosave-form-restore-discard').remove();
-              autosavePeriodic();
-            },
-          };
-
-          $.extend(
-            true,
-            dialogOptions,
-            Drupal.autosaveForm.defaultDialogOptions,
-            Drupal.autosaveForm.dialog_options,
-          );
-
-          $('<div></div>')
-            .appendTo('body')
-            .html('<div>' + Drupal.autosaveForm.message + '</div>')
-            .dialog(dialogOptions);
-
-          // Temp
-          const btn = $('.autosave-form-restore');
-          $('.ui-dialog-buttonset').append(btn[0]);
-          // ....
-        } else {
-          autosavePeriodic();
-        }
+        autosavePeriodic();
       }
 
       /**

@@ -35,44 +35,6 @@ trait AutosaveFormAlterTrait {
     $form['#attached']['drupalSettings']['autosaveForm']['notification'] = $this->configFactory->get('silverback_autosave.settings')->get('notification');
     $input = $form_state->getUserInput();
 
-    // $show_restore_discard = !$form_state->isRebuilding() ?: !empty($input['autosave_restore_discard']);
-    $show_restore_discard = FALSE;
-    if ($show_restore_discard && !$form_state->get('silverback_autosave_state_timestamp') && !$form_state->get('silverback_autosave_rejected') && ($silverback_autosave_state_timestamp = $this->getLastAutosavedTimestamp($form_state, $this->currentUser->id()))) {
-      $form[AutosaveFormInterface::AUTOSAVE_RESTORE_ELEMENT_NAME] = [
-        '#type' => 'submit',
-        '#name' => AutosaveFormInterface::AUTOSAVE_RESTORE_ELEMENT_NAME,
-        '#value' => $this->t('Autosave restore'),
-        '#limit_validation_errors' => [],
-        // '#attributes' => ['class' => ['autosave-form-restore', 'visually-hidden']],
-        '#attributes' => ['class' => ['autosave-form-restore']],
-        '#submit' => [[$this, 'autosaveFormRestoreSubmit']],
-        '#silverback_autosave_state_timestamp' => $silverback_autosave_state_timestamp,
-      ];
-      $form[AutosaveFormInterface::AUTOSAVE_REJECT_ELEMENT_NAME] = [
-        '#type' => 'submit',
-        '#name' => 'silverback_autosave_reject',
-        '#value' => $this->t('Autosave reject'),
-        '#limit_validation_errors' => [],
-        '#attributes' => ['class' => ['autosave-form-reject', 'visually-hidden']],
-        '#submit' => [[$this, 'autosaveFormRejectSubmit']],
-        '#ajax' => [
-          'callback' => [$this, 'autosaveFormRejectAjax'],
-        ],
-      ];
-      $form['autosave_restore_discard'] = [
-        '#type' => 'hidden',
-        '#default_value' => 'autosave_restore_discard',
-        '#attributes' => ['class' => ['autosave-form-restore-discard']],
-      ];
-
-      // Add the message to be shown on the form. Our JS library will check if
-      // the message exist and only then offer the options for restore and
-      // reject, otherwise will start the auto save process.
-      $date = $this->dateFormatter->format($silverback_autosave_state_timestamp, 'custom', 'M d, Y H:i');
-      $message = $this->t('A version of this page you were editing at @date was saved as a draft. Do you want to resume editing or discard it?', ['@date' => $date]);
-      $form['#attached']['drupalSettings']['autosaveForm']['message'] = (string) $message;
-    }
-
     $silverback_autosave_session_id = $this->getAutosaveFormSessionID($form_state);
     if (!$silverback_autosave_session_id) {
       $silverback_autosave_session_id = !empty($input['silverback_autosave_session_id']) ? $input['silverback_autosave_session_id'] : $form['#build_id'];
@@ -204,9 +166,6 @@ trait AutosaveFormAlterTrait {
       'form_token',
       'ajax_page_state',
       'silverback_autosave_last_autosave_timestamp',
-      AutosaveFormInterface::AUTOSAVE_RESTORE_ELEMENT_NAME,
-      AutosaveFormInterface::AUTOSAVE_REJECT_ELEMENT_NAME,
-      'autosave_restore_discard',
     ];
     foreach ($skip_from_comparison_keys as $skip_from_comparison_key) {
       unset($autosaved_form_state_input[$skip_from_comparison_key]);

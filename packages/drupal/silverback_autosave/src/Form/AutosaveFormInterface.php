@@ -10,8 +10,6 @@ use Drupal\Core\Form\FormStateInterface;
 interface AutosaveFormInterface {
 
   const AUTOSAVE_ELEMENT_NAME = 'silverback_autosave_save';
-  const AUTOSAVE_RESTORE_ELEMENT_NAME = 'silverback_autosave_restore';
-  const AUTOSAVE_REJECT_ELEMENT_NAME = 'silverback_autosave_reject';
 
   /**
    * Performs the needed alterations to the form.

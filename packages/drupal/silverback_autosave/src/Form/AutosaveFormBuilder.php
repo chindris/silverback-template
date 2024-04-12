@@ -116,9 +116,6 @@ class AutosaveFormBuilder extends FormBuilder {
       // Additionally unset the form elements and settings which might have been
       // added, but aren't actually needed.
       unset($form['#attached']['drupalSettings']['autosaveForm']['message']);
-      unset($form[AutosaveFormInterface::AUTOSAVE_RESTORE_ELEMENT_NAME]);
-      unset($form[AutosaveFormInterface::AUTOSAVE_REJECT_ELEMENT_NAME]);
-      unset($form['autosave_restore_discard']);
     }
     return $form;
   }
