@@ -6,7 +6,6 @@
  */
 
 use Drupal\Core\Entity\ContentEntityFormInterface;
-use Drupal\Core\Entity\EntityFormInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\silverback_autosave\Form\AutosaveEntityFormHandler;
@@ -34,7 +33,6 @@ function silverback_autosave_entity_type_alter(array &$entity_types) {
  * Implements hook_form_alter().
  */
 function silverback_autosave_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-
   $active_on = \Drupal::configFactory()->get('silverback_autosave.settings')->get('active_on');
   $form_object = $form_state->getFormObject();
 
@@ -58,11 +56,6 @@ function silverback_autosave_form_alter(&$form, FormStateInterface $form_state, 
         (!empty($allowed_content_entity_types[$entity_type_id]['bundles']) && !isset($allowed_content_entity_types[$entity_type_id]['bundles'][$entity->bundle()]))) {
         return;
       }
-    }
-  }
-  elseif ($form_object instanceof EntityFormInterface) {
-    if (!$active_on['config_entity_forms']) {
-      return;
     }
   }
   else {

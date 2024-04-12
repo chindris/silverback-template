@@ -17,9 +17,6 @@ silverback_autosave.settings:
         content_entity_forms:
           type: boolean
           label: 'Content entity forms'
-        config_entity_forms:
-          type: boolean
-          label: 'Config entity forms'
     notification:
       type: mapping
       label: 'Notification'

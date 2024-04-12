@@ -44,9 +44,3 @@ services:
     class: Drupal\silverback_autosave\Form\AutosaveFormErrorHandler
     decorates: form_error_handler
     arguments: ['@form_error_handler.silverback_autosave.inner']
-
-  silverback_autosave.config_subscriber:
-    class: Drupal\silverback_autosave\EventSubscriber\ConfigSubscriber
-    tags:
-      - { name: event_subscriber }
-    arguments: ['@silverback_autosave.entity_form_storage']

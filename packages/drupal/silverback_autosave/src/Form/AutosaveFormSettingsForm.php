@@ -80,6 +80,7 @@ class AutosaveFormSettingsForm extends ConfigFormBase {
     ];
     $form['only_on_form_change'] = [
       '#type' => 'checkbox',
+      '#access' => FALSE,
       '#title' => $this->t('Run only on form change.') . ' ' . $this->t('(Experimental)'),
       '#description' => $this->t('If enabled an autosave submission will only occur if the form changed since the previous autosave submission.'),
       '#default_value' => $config->get('only_on_form_change'),
@@ -94,11 +95,6 @@ class AutosaveFormSettingsForm extends ConfigFormBase {
       '#type' => 'checkbox',
       '#title' => $this->t('Content Entity Forms'),
       '#default_value' => $config->get('active_on')['content_entity_forms'],
-    ];
-    $form['active_on']['config_entity_forms'] = [
-      '#type' => 'checkbox',
-      '#title' => $this->t('Config Entity Forms'),
-      '#default_value' => $config->get('active_on')['config_entity_forms'],
     ];
 
     $form['notification'] = [
