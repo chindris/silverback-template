@@ -39,4 +39,4 @@ const isLagoon = !!process.env.LAGOON;
 const port = isLagoon ? 3000 : 8001;
 console.log(`Server is running on port ${port}`);
 
-app.listen({ port });
+app.listen({ port, host: '0.0.0.0' });
