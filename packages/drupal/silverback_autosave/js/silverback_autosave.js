@@ -32,7 +32,13 @@
    * Add a variable which determines if the window is being unloaded.
    */
   Drupal.autosaveForm.beforeUnloadCalled = false;
-  $(window).on('beforeunload pagehide', function () {
+
+  $(window).on('pagehide', function () {
+    Drupal.autosaveForm.beforeUnloadCalled = true;
+  });
+
+  $(window).on('beforeunload', function () {
+    $('#purge-button').trigger('click');
     Drupal.autosaveForm.beforeUnloadCalled = true;
   });
 

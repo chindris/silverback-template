@@ -74,11 +74,41 @@ trait AutosaveFormAlterTrait {
       '#silverback_autosave_session_id' => $silverback_autosave_session_id,
     ];
 
+    $form['purge'] = [
+      '#type' => 'submit',
+      '#id' => 'purge-button',
+      '#name' => 'autosave_form_purge',
+      '#value' => $this->t('Autosave purge'),
+      '#limit_validation_errors' => [],
+      '#attributes' => ['class' => ['autosave-form-purge', 'visually-hidden']],
+      '#submit' => [[$this, 'autosaveFormPurgeSubmit']],
+      '#ajax' => [
+        'callback' => [$this, 'autosaveFormPurgeAjax'],
+        'event' => 'click',
+      ],
+    ];
+
     $form['silverback_autosave_last_autosave_timestamp'] = [
       '#type' => 'hidden',
       '#name' => 'silverback_autosave_last_autosave_timestamp',
       '#value' => $form_state->get('silverback_autosave_last_autosave_timestamp') ?: '',
     ];
+  }
+
+  /**
+   * Form submission handler for rejecting autosaved states.
+   */
+  public function autosaveFormPurgeSubmit($form, FormStateInterface $form_state) {
+    \Drupal::logger('debug')->debug(__METHOD__);
+    $this->purgeAllAutosavedStates($form_state, $this->currentUser->id());
+  }
+
+  /**
+   * Ajax callback for rejecting autosaved states.
+   */
+  public function autosaveFormPurgeAjax($form, FormStateInterface $form_state) {
+    \Drupal::logger('debug')->debug(__METHOD__);
+    return new AjaxResponse();
   }
 
   /**
