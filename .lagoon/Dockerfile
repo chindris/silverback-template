@@ -47,6 +47,7 @@ RUN --mount=type=cache,target=/tmp/cache pnpm i && \
 # Deploy apps.
 RUN --mount=type=cache,target=/tmp/cache pnpm deploy --filter "@custom/cms" /tmp/.deploy/cms --prod
 RUN --mount=type=cache,target=/tmp/cache pnpm deploy --filter "@custom/website" /tmp/.deploy/website --prod
+RUN --mount=type=cache,target=/tmp/cache pnpm deploy --filter "@custom/preview" /tmp/.deploy/preview --prod
 
 # ====================================================================================================
 # CLI IMAGE
@@ -86,6 +87,17 @@ COPY .lagoon/nginx-conf/redirects-map.conf /etc/nginx/redirects-map.conf
 
 WORKDIR /app
 ENV WEBROOT=web
+
+# ====================================================================================================
+# PREVIEW IMAGE
+# ====================================================================================================
+
+FROM uselagoon/node-18:23.12.0 as publisher
+
+RUN npm install -g pnpm@8.6.0
+COPY --from=builder /tmp/.deploy/preview /app
+ENV PREVIEW_PORT=3000
+CMD pnpm start
 
 # ====================================================================================================
 # PUBLISHER IMAGE
