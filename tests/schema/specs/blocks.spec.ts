@@ -37,6 +37,17 @@ test('Blocks', async () => {
         ... on BlockForm {
           url
         }
+        ... on BlockImageTeasers {
+          teasers {
+            __typename
+            image {
+              __typename
+            }
+            title
+            ctaText
+            ctaUrl
+          }
+        }
       }
     }
     {
@@ -96,7 +107,34 @@ test('Blocks', async () => {
     <h3 class="wp-block-custom-heading">Heading 3</h3>
 
     <blockquote class="wp-block-quote"><p>Quote</p><cite>Citation</cite></blockquote>
-
+    ",
+            },
+            {
+              "__typename": "BlockImageTeasers",
+              "teasers": [
+                {
+                  "__typename": "BlockImageTeaser",
+                  "ctaText": "Foo",
+                  "ctaUrl": "https://google.com",
+                  "image": {
+                    "__typename": "MediaImage",
+                  },
+                  "title": "Teaser 1",
+                },
+                {
+                  "__typename": "BlockImageTeaser",
+                  "ctaText": "Bar",
+                  "ctaUrl": "https://google.com",
+                  "image": {
+                    "__typename": "MediaImage",
+                  },
+                  "title": "Teaser 2",
+                },
+              ],
+            },
+            {
+              "__typename": "BlockMarkup",
+              "markup": "
     <p></p>
     ",
             },

@@ -89,11 +89,11 @@ export const createPages = async ({ actions }) => {
     });
   });
 
-  // Create a contact page in each language.
+  // Create a inquiry page in each language.
   Object.values(Locale).forEach((locale) => {
     actions.createPage({
-      path: `/${locale}/contact`,
-      component: resolve(`./src/templates/contact.tsx`),
+      path: `/${locale}/inquiry`,
+      component: resolve(`./src/templates/inquiry.tsx`),
     });
   });
 

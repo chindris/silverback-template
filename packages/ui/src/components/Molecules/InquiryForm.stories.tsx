@@ -7,26 +7,26 @@ import { Meta, StoryObj } from '@storybook/react';
 import { userEvent, within } from '@storybook/test';
 import React from 'react';
 
-import { ContactForm } from './ContactForm';
+import { InquiryForm } from './InquiryForm';
 
-type ContactFormExecutor = () => Promise<
+type InquiryFormExecutor = () => Promise<
   OperationResult<typeof CreateSubmissionMutation>
 >;
 
 export default {
-  title: 'Components/Molecules/ContactForm',
+  title: 'Components/Molecules/InquiryForm',
   render: (args) => {
     return (
       <OperationExecutor id={CreateSubmissionMutation} executor={args.exec}>
-        <ContactForm />
+        <InquiryForm />
       </OperationExecutor>
     );
   },
-} satisfies Meta<{ exec: ContactFormExecutor }>;
+} satisfies Meta<{ exec: InquiryFormExecutor }>;
 
-export const Empty = {} satisfies StoryObj<typeof ContactForm>;
+export const Empty = {} satisfies StoryObj<typeof InquiryForm>;
 
-export const FilledForm: StoryObj<typeof ContactForm> = {
+export const FilledForm: StoryObj<typeof InquiryForm> = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const nameInput = canvas.getByPlaceholderText('Name');
@@ -41,10 +41,10 @@ export const FilledForm: StoryObj<typeof ContactForm> = {
     await userEvent.type(subjectInput, 'Lorem ipsum', {
       delay: 5,
     });
-    const messageInput = canvas.getByPlaceholderText('Message');
+    const questionInput = canvas.getByPlaceholderText('Question');
     await userEvent.type(
-      messageInput,
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+      questionInput,
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit?',
       {
         delay: 5,
       },
@@ -52,7 +52,7 @@ export const FilledForm: StoryObj<typeof ContactForm> = {
   },
 };
 
-export const WithValidationErrors: StoryObj<{ exec: ContactFormExecutor }> = {
+export const WithValidationErrors: StoryObj<{ exec: InquiryFormExecutor }> = {
   args: {
     exec: async () => {
       return {
@@ -83,10 +83,10 @@ export const WithValidationErrors: StoryObj<{ exec: ContactFormExecutor }> = {
     await userEvent.type(subjectInput, 'Lorem ipsum', {
       delay: 5,
     });
-    const messageInput = canvas.getByPlaceholderText('Message');
+    const questionInput = canvas.getByPlaceholderText('Question');
     await userEvent.type(
-      messageInput,
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+      questionInput,
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit?',
       {
         delay: 5,
       },
@@ -96,7 +96,7 @@ export const WithValidationErrors: StoryObj<{ exec: ContactFormExecutor }> = {
   },
 };
 
-export const WithSuccessfulSubmission: StoryObj<{ exec: ContactFormExecutor }> =
+export const WithSuccessfulSubmission: StoryObj<{ exec: InquiryFormExecutor }> =
   {
     args: {
       exec: async () => {
@@ -122,10 +122,10 @@ export const WithSuccessfulSubmission: StoryObj<{ exec: ContactFormExecutor }> =
       await userEvent.type(subjectInput, 'Lorem ipsum', {
         delay: 5,
       });
-      const messageInput = canvas.getByPlaceholderText('Message');
+      const questionInput = canvas.getByPlaceholderText('Question');
       await userEvent.type(
-        messageInput,
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        questionInput,
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit?',
         {
           delay: 5,
         },

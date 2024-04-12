@@ -1,4 +1,4 @@
-import { Image, PageFragment } from '@custom/schema';
+import { Image, Link, PageFragment } from '@custom/schema';
 import React from 'react';
 
 export function PageHero(props: NonNullable<PageFragment['hero']>) {
@@ -44,6 +44,16 @@ export function PageHero(props: NonNullable<PageFragment['hero']>) {
           </h1>
           {props.lead ? (
             <p className="mt-6 text-lg leading-8 text-gray-300">{props.lead}</p>
+          ) : null}
+          {props.ctaText && props.ctaUrl ? (
+            <Link
+              href={props.ctaUrl}
+              className={
+                'mt-7 inline-block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800'
+              }
+            >
+              {props.ctaText}
+            </Link>
           ) : null}
         </div>
       </div>

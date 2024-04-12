@@ -31,6 +31,7 @@ fragment Page on Page {
     ...BlockMarkup
     ...BlockMedia
     ...BlockForm
+    ...BlockImageTeasers
   }
   metaTags {
     tag
