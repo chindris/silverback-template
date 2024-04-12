@@ -3,15 +3,19 @@ import { AnyOperationId, OperationVariables } from '@custom/schema';
 /**
  * Create an executor that operates against a Drupal endpoint.
  */
-export function drupalExecutor(endpoint: string, forward: boolean = true) {
+export function drupalExecutor(
+  endpoint: string,
+  forward: boolean = true,
+  accessToken: string | undefined = undefined,
+) {
   return async function <OperationId extends AnyOperationId>(
     id: OperationId,
     variables?: OperationVariables<OperationId>,
-    accessToken?: string,
   ) {
     const url = new URL(endpoint, window.location.origin);
     const isMutation = id.includes('Mutation:');
     const isAuthenticated = accessToken !== undefined;
+
     if (isAuthenticated) {
       const { data, errors } = await (
         await fetch(url, {
@@ -30,6 +34,7 @@ export function drupalExecutor(endpoint: string, forward: boolean = true) {
               }
             : {
                 'Content-Type': 'application/json',
+                Authorization: `Bearer ${accessToken}`,
               },
         })
       ).json();

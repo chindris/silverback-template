@@ -1,51 +1,35 @@
+import { CurrentUserQuery, OperationExecutor } from '@custom/schema';
 import { UserProfile } from '@custom/ui/routes/UserProfile';
 import { useSession } from 'next-auth/react';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
-export async function getCurrentUser(accessToken: string): Promise<any> {
-  const host = process.env.GATSBY_DRUPAL_URL || 'http://127.0.0.1:8888';
-  const endpoint = `${host}/graphql`;
-  const headers = {
-    'Content-Type': 'application/json',
-    Authorization: `Bearer ${accessToken}`,
-  };
-  const graphqlQuery = {
-    query: `
-      query CurrentUser {
-        currentUser {
-          id
-          name
-          email
-          memberFor
-        }
-      }
-    `,
-    variables: {},
-  };
-  const options = {
-    method: 'POST',
-    headers,
-    body: JSON.stringify(graphqlQuery),
-  };
-  return await fetch(endpoint, options);
-}
+import { drupalExecutor } from '../utils/drupal-executor';
 
 export default function ProfilePage() {
   const session = useSession();
-  const [user, setUser] = useState(null);
-  const [error, setError] = useState(null);
-  useEffect(() => {
-    if (session && session.status === 'authenticated') {
-      // @ts-ignore
-      const accessToken = session.data.user.tokens.access_token;
-      getCurrentUser(accessToken)
-        .then((response) => response.json())
-        .then((result) => {
-          setUser(result.data.currentUser);
-          return result;
-        })
-        .catch((error) => setError(error));
-    }
-  }, [session]);
-  return <UserProfile user={user} error={error} />;
+  let accessToken = null;
+  if (session && session.status === 'authenticated') {
+    // @ts-ignore
+    accessToken = session.data.user.tokens.access_token;
+    const authenticatedExecutor = drupalExecutor(
+      `${process.env.GATSBY_DRUPAL_URL}/graphql`,
+      false,
+      accessToken,
+    );
+    return (
+      <OperationExecutor
+        executor={async () => {
+          const data = await authenticatedExecutor(CurrentUserQuery, {});
+          return {
+            currentUser: data.currentUser,
+          };
+        }}
+        id={CurrentUserQuery}
+      >
+        <UserProfile />
+      </OperationExecutor>
+    );
+  } else {
+    return <UserProfile />;
+  }
 }
