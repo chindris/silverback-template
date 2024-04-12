@@ -1,6 +1,5 @@
 import express from 'express';
 import expressWs from 'express-ws';
-import { createProxyMiddleware } from 'http-proxy-middleware';
 import { Subject } from 'rxjs';
 
 const expressServer = express();
@@ -8,14 +7,6 @@ const expressWsInstance = expressWs(expressServer);
 const { app } = expressWsInstance;
 
 const updates$ = new Subject();
-
-app.use(
-  '/graphql',
-  createProxyMiddleware({
-    target: process.env.DRUPAL_URL || 'http://localhost:8888',
-    changeOrigin: true,
-  }),
-);
 
 // TODO: Protect endpoints and preview with Drupal authentication.
 app.post('/__preview', (req, res) => {
