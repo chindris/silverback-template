@@ -4,8 +4,15 @@ import {
   OperationVariables,
   useExecutor,
 } from '@custom/schema';
-import useSwr, { SWRResponse } from 'swr';
+import useSwr, { mutate, SWRResponse } from 'swr';
 import useSWRMutation, { SWRMutationResponse } from 'swr/mutation';
+
+export function clear<TOperation extends AnyOperationId>(
+  operation: TOperation,
+  variables?: OperationVariables<TOperation>,
+) {
+  mutate([operation, variables]);
+}
 
 export function useOperation<TOperation extends AnyOperationId>(
   operation: TOperation,
