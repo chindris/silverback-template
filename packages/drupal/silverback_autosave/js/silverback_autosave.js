@@ -307,6 +307,8 @@
               );
             }, 500);
           }
+          // TODO: Implement a mechanism that takes user interaction into account.
+          //       E.g. autosave after the user did not interact for 2 seconds.
 
           Drupal.autosaveForm.timer = setInterval(function () {
             if (!Drupal.ajax.instances.some(isAjaxing)) {
