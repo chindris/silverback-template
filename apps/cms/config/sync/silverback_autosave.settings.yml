@@ -1,6 +1,6 @@
 _core:
   default_config_hash: HaTNbtQe6_A0WF-ZElHNWcv0VK_aqOj5lBEFhAgY85s
-interval: 3000
+interval: 2000
 only_on_form_change: false
 active_on:
   content_entity_forms: true
