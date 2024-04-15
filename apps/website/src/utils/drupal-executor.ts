@@ -3,14 +3,11 @@ import { AnyOperationId, OperationVariables } from '@custom/schema';
 /**
  * Create an executor that operates against a Drupal endpoint.
  */
-export function drupalExecutor(
-  endpoint: string,
-  forward: boolean = true,
-  accessToken: string | undefined = undefined,
-) {
+export function drupalExecutor(endpoint: string, forward: boolean = true) {
   return async function <OperationId extends AnyOperationId>(
     id: OperationId,
     variables?: OperationVariables<OperationId>,
+    accessToken?: string,
   ) {
     const url = new URL(endpoint, window.location.origin);
     const isMutation = id.includes('Mutation:');

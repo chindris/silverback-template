@@ -39,11 +39,10 @@ export function OperationExecutor<OperationId extends AnyOperationId>(
 export function useExecutor<OperationId extends AnyOperationId>(
   id: OperationId,
   variables?: OperationVariables<OperationId>,
-  accessToken?: string,
 ):
   | OperationResult<OperationId>
   | ((
       variables?: OperationVariables<OperationId>,
     ) => Promise<OperationResult<OperationId>>) {
-  return untypedUseExecutor(id, variables, accessToken);
+  return untypedUseExecutor(id, variables);
 }

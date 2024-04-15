@@ -7,19 +7,22 @@ import { drupalExecutor } from '../utils/drupal-executor';
 
 export default function ProfilePage() {
   const session = useSession();
-  let accessToken = null;
+  let accessToken: string | undefined = undefined;
   if (session && session.status === 'authenticated') {
     // @ts-ignore
     accessToken = session.data.user.tokens.access_token;
     const authenticatedExecutor = drupalExecutor(
       `${process.env.GATSBY_DRUPAL_URL}/graphql`,
       false,
-      accessToken,
     );
     return (
       <OperationExecutor
         executor={async () => {
-          const data = await authenticatedExecutor(CurrentUserQuery, {});
+          const data = await authenticatedExecutor(
+            CurrentUserQuery,
+            {},
+            accessToken,
+          );
           return {
             currentUser: data.currentUser,
           };
