@@ -182,7 +182,8 @@ registerBlockType('custom/hero', {
               <div>
                 <RichText
                   identifier="ctaText"
-                  tagName="div"
+                  className={`button`}
+                  tagName="p"
                   multiline={false}
                   value={props.attributes.ctaText}
                   allowedFormats={[]}
