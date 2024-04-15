@@ -43,7 +43,7 @@ export function BlockMarkup(props: BlockMarkupFragment) {
                 className={clsx(className, { 'list-none relative': unordered })}
               >
                 {unordered ? (
-                  <ArrowRightCircleIcon className="w-6 h-6 absolute mt-0.5 left-[-1.5em] text-indigo-600" />
+                  <ArrowRightCircleIcon className="not-prose w-6 h-6 absolute mt-1.5 left-[-1.5em] text-indigo-600" />
                 ) : null}
                 {children}
               </li>

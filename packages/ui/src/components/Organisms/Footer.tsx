@@ -73,7 +73,7 @@ export function Footer() {
               <div className="flex mt-4 space-x-6 sm:justify-center sm:mt-0">
                 <a
                   href="#"
-                  className="text-gray-400 hover:text-blue-600 dark:hover:text-white"
+                  className="text-gray-400 hover:text-black dark:hover:text-white"
                 >
                   <svg
                     className="w-5 h-5"
@@ -90,7 +90,7 @@ export function Footer() {
                 </a>
                 <a
                   href="#"
-                  className="text-gray-400 hover:text-blue-600 dark:hover:text-white"
+                  className="text-gray-400 hover:text-black dark:hover:text-white"
                 >
                   <svg
                     className="w-5 h-5"
@@ -103,7 +103,7 @@ export function Footer() {
                 </a>
                 <a
                   href="#"
-                  className="text-gray-400 hover:text-blue-600 dark:hover:text-white"
+                  className="text-gray-400 hover:text-black dark:hover:text-white"
                 >
                   <svg
                     className="w-5 h-5"
@@ -120,7 +120,7 @@ export function Footer() {
                 </a>
                 <a
                   href="#"
-                  className="text-gray-400 hover:text-blue-600 dark:hover:text-white"
+                  className="text-gray-400 hover:text-black"
                 >
                   <svg
                     className="w-5 h-5"
@@ -155,7 +155,7 @@ export function Footer() {
                       <Link
                         href={item.target!}
                         className={
-                          'text-gray-900 block hover:text-blue-600 transition-all font-bold text-[0.875rem] leading-[1.313rem] uppercase mb-4'
+                          'text-gray-900 block hover:underline transition-all font-bold text-[0.875rem] leading-[1.313rem] uppercase mb-4'
                         }
                       >
                         {item.title}
@@ -174,7 +174,7 @@ export function Footer() {
                           <Link
                             key={child.target}
                             href={child.target}
-                            className="block transition-all text-base mb-4 hover:text-blue-600"
+                            className="block transition-all text-base mb-4 hover:underline"
                           >
                             {child.title}
                           </Link>
