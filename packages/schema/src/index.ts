@@ -31,7 +31,6 @@ export function OperationExecutor<OperationId extends AnyOperationId>(
     id?: OperationId;
     variables?: VariablesMatcher<OperationVariables<OperationId>>;
     executor: Executor<OperationId>;
-    accessToken?: string;
   }>,
 ) {
   return UntypedOperationExecutor(props);
