@@ -39,8 +39,7 @@ export function drupalExecutor(endpoint: string, forward: boolean = true) {
         throw errors;
       }
       return data;
-    }
-    if (isMutation) {
+    } else if (isMutation) {
       const { data, errors } = await (
         await fetch(url, {
           method: 'POST',
