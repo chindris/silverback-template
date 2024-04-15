@@ -42,6 +42,9 @@ export const Default = {
       path: '/test' as Url,
       hero: {
         headline: 'Page Hero Headline',
+        lead: 'A longer lead text that even might break into multiple lines.',
+        ctaUrl: '/test' as Url,
+        ctaText: 'Call to action',
       },
       content: [
         {
