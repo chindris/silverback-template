@@ -118,10 +118,7 @@ export function Footer() {
                     />
                   </svg>
                 </a>
-                <a
-                  href="#"
-                  className="text-gray-400 hover:text-black"
-                >
+                <a href="#" className="text-gray-400 hover:text-black">
                   <svg
                     className="w-5 h-5"
                     fill="currentColor"
