@@ -71,6 +71,12 @@ test('Blocks', async () => {
     'data-id="[numeric]"',
   );
 
+  const ctaToMediaBlock = result.data.complete.content[8];
+  ctaToMediaBlock.url = ctaToMediaBlock.url.replace(
+    /media\/\d+/,
+    'media/[numeric]',
+  );
+
   expect(result).toMatchInlineSnapshot(`
     {
       "data": {
@@ -148,6 +154,12 @@ test('Blocks', async () => {
               "openInNewTab": true,
               "text": "External CTA",
               "url": "https://www.google.com",
+            },
+            {
+              "__typename": "BlockCta",
+              "openInNewTab": null,
+              "text": "CTA with link to media",
+              "url": "/media/[numeric]",
             },
             {
               "__typename": "BlockMarkup",

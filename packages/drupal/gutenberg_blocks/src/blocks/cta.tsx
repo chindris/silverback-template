@@ -26,8 +26,11 @@ registerBlockType('custom/cta', {
       type: 'string',
     },
     // To have an easier integration with entity usage, we also retrieve and
-    // store the uuid of internal links.
-    uuid: {
+    // store the uuid (data-id) and the entity type of internal links.
+    'data-id': {
+      type: 'string',
+    },
+    'data-entity-type': {
       type: 'string',
     },
     openInNewTab: {
@@ -61,11 +64,37 @@ registerBlockType('custom/cta', {
             openInNewTab: props.attributes.openInNewTab,
           }}
           settings={{}}
+          // If you want to use a specific linkit profile for the suggestions,
+          // then you can do that by using the 'suggestionsQuery' property, like
+          // the one bellow, and change the 'subtype' property to the machine
+          // name of the linkit profile. By default, the 'gutenberg' profile
+          // is used. Of course, in this case, if the linkit profile can search
+          // through multiple entity types, then you'll have to set the value
+          // for 'data-entity-type' in the onChange() handler by yourself.
+
+          //suggestionsQuery={{
+          //  type: 'post',
+          //  subtype: 'gutenberg',
+          //}}
           // @ts-ignore
           onChange={(link) => {
             props.setAttributes({
               url: link.url,
-              uuid: link.id,
+              'data-id': link.id,
+              'data-entity-type':
+                // At the moment, the silverback_gutenberg link autocomplete
+                // controller does not return the machine name of the entity
+                // type. Instead, it returns the human readable, translated,
+                // entity type label. We should refactor the LinkAutocomplete
+                // controller to return the machine name of the entity type, and
+                // then we can set the data-entity-type value more accurate.
+                // Right now, we just make a "guess" based on the the human
+                // readable label for English and German.
+                link.type.startsWith('Media') || link.type.startsWith('Medien')
+                  ? 'media'
+                  : link.type !== 'URL'
+                    ? 'node'
+                    : '',
             });
           }}
         />
