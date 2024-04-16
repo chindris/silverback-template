@@ -12,6 +12,11 @@
   content: '';
 }
 
+.gutenberg__editor blockquote .quote-author,
+.gutenberg__editor blockquote .quote-role {
+  text-align: right;
+}
+
 .gutenberg__editor .container-wrapper {
   display: block;
   position: relative;
