@@ -40,7 +40,7 @@ const config: CodegenConfig = {
         context: ['gatsby'],
       },
     },
-    // Directive autoloader for Drupla.
+    // Directive autoloader for Drupal.
     'build/drupal-autoload.json': {
       plugins: ['@amazeelabs/codegen-autoloader'],
       config: {

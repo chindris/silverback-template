@@ -72,7 +72,7 @@ directive @route(
 Retrieve the properties of the current user.
 
 Provided by the "silverback_gatsby" module.
-Implemented in "Drupal\custom\Plugin\GraphQL\Directive\CurrentUser".
+implementation(drupal): custom.directives::currentUser
 """
 directive @currentUser repeatable on FIELD_DEFINITION | SCALAR | UNION | ENUM | INTERFACE | OBJECT
 
