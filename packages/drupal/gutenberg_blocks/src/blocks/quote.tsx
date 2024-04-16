@@ -46,7 +46,7 @@ registerBlockType(`custom/quote`, {
           keepPlaceholderOnFocus={false}
           onChange={(text) => {
             props.setAttributes({
-              text: cleanUpText(text),
+              text: cleanUpText(text, ['strong']),
             });
           }}
         />
