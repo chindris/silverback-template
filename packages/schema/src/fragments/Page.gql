@@ -33,6 +33,7 @@ fragment Page on Page {
     ...BlockForm
     ...BlockImageTeasers
     ...BlockCta
+    ...BlockQuote
   }
   metaTags {
     tag
