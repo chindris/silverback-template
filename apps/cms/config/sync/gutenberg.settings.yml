@@ -4,12 +4,12 @@ page_template_lock: all
 page_allowed_blocks:
   core/paragraph: core/paragraph
   core/list: core/list
-  core/quote: core/quote
   core/table: core/table
   core/all: 0
   core/image: 0
   core/heading: 0
   core/gallery: 0
+  core/quote: 0
   core/audio: 0
   core/button: 0
   core/buttons: 0
@@ -75,6 +75,7 @@ page_allowed_drupal_blocks:
   drupalblock/all_core: 0
   page_title_block: 0
   drupalblock/all_forms: 0
+  masquerade: 0
   user_login_block: 0
   drupalblock/all_lists_views_: 0
   'views_block:content_recent-block_1': 0
@@ -91,3 +92,6 @@ page_allowed_drupal_blocks:
   system_branding_block: 0
   node_syndicate_block: 0
   drupalblock/all_user: 0
+  drupalblock/all_webform: 0
+  webform_block: 0
+  webform_submission_limit_block: 0
