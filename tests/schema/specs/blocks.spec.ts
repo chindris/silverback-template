@@ -53,6 +53,14 @@ test('Blocks', async () => {
           text
           openInNewTab
         }
+        ... on BlockQuote {
+          quote
+          author
+          role
+          image {
+            __typename
+          }
+        }
       }
     }
     {
@@ -162,6 +170,15 @@ test('Blocks', async () => {
               "url": "/media/[numeric]",
             },
             {
+              "__typename": "BlockQuote",
+              "author": "John Doe",
+              "image": {
+                "__typename": "MediaImage",
+              },
+              "quote": "Lorem ipsum dolor sit amet, <strong>consectetur</strong> adipiscing elit. Vivamus sagittis nisi nec neque porta, a ornare ligula efficitur.",
+              "role": "Project manager",
+            },
+            {
               "__typename": "BlockMarkup",
               "markup": "
     <p></p>
@@ -208,6 +225,13 @@ test('Blocks', async () => {
               "openInNewTab": null,
               "text": null,
               "url": null,
+            },
+            {
+              "__typename": "BlockQuote",
+              "author": "Jane Doe",
+              "image": null,
+              "quote": "In vitae diam quis odio tincidunt faucibus eget ut libero",
+              "role": null,
             },
           ],
           "hero": {
