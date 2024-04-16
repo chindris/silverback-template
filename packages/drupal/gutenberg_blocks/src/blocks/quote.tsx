@@ -19,7 +19,7 @@ registerBlockType(`custom/quote`, {
   icon: 'format-quote',
   category: 'text',
   attributes: {
-    text: {
+    quote: {
       type: 'string',
     },
     author: {
@@ -37,16 +37,16 @@ registerBlockType(`custom/quote`, {
     return (
       <blockquote>
         <RichText
-          identifier="text"
-          value={props.attributes.text}
+          identifier="quote"
+          value={props.attributes.quote}
           allowedFormats={['core/bold']}
           // @ts-ignore
           disableLineBreaks={false}
           placeholder={__('Quote')}
           keepPlaceholderOnFocus={false}
-          onChange={(text) => {
+          onChange={(quote) => {
             props.setAttributes({
-              text: cleanUpText(text, ['strong']),
+              quote: cleanUpText(quote, ['strong']),
             });
           }}
         />
