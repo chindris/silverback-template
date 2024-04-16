@@ -11,3 +11,27 @@
 .gutenberg__editor blockquote::after {
   content: '';
 }
+
+.gutenberg__editor .container-wrapper {
+  display: block;
+  position: relative;
+  margin: 40px 0;
+  border-left: 34px solid #666666;
+  padding-left: 10px;
+  min-height: 250px;
+}
+
+.gutenberg__editor .container-wrapper .container-label {
+  font: bold 12px Sans-Serif;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #fff;
+  padding: 5px 10px;
+  margin: 0 0 10px 0;
+  line-height: 24px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: 0 0;
+  transform: rotate(90deg);
+}
