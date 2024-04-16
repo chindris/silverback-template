@@ -10,9 +10,8 @@ import useSWRMutation, { SWRMutationResponse } from 'swr/mutation';
 export function useOperation<TOperation extends AnyOperationId>(
   operation: TOperation,
   variables?: OperationVariables<TOperation>,
-  accessToken?: string,
 ): Omit<SWRResponse<OperationResult<TOperation>>, 'mutate'> {
-  const executor = useExecutor(operation, variables, accessToken);
+  const executor = useExecutor(operation, variables);
   // If the executor is a function, use SWR to manage it.
   const result = useSwr<OperationResult<TOperation>>(
     [operation, variables],
