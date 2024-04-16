@@ -83,6 +83,7 @@ FROM uselagoon/nginx-drupal as nginx
 
 COPY --from=cli /app /app
 RUN cd /app/web && cp ../node_modules/@custom/ui/build/gutenberg.css .
+RUN cd /app/web && cp ../node_modules/@custom/ui/build/iframe.css .
 COPY .lagoon/nginx-conf/redirects-map.conf /etc/nginx/redirects-map.conf
 
 WORKDIR /app
