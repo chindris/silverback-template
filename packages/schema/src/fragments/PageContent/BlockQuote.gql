@@ -1,0 +1,9 @@
+fragment BlockQuote on BlockQuote {
+  text
+  author
+  role
+  image {
+    source(width: 1536, sizes: [[768, 768], [1536, 1536]])
+    alt
+  }
+}
