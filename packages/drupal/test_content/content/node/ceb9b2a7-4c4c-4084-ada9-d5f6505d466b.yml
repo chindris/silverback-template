@@ -73,6 +73,7 @@ default:
         <p></p>
         <!-- /wp:paragraph -->
         <!-- /wp:custom/image-with-text -->
+        <!-- wp:custom/quote {"quote":"In vitae diam quis odio tincidunt faucibus eget ut libero","author":"Jane Doe"} /-->
         <!-- /wp:custom/content -->
       format: gutenberg
       summary: ''
