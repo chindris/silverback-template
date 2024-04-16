@@ -1,5 +1,5 @@
 fragment BlockQuote on BlockQuote {
-  text
+  quote
   author
   role
   image {
