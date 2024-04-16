@@ -219,8 +219,6 @@ lagoon add variable -p [project name] -e dev -N NETLIFY_SITE_ID -V [netlify site
 
 ### Gatsby authentication / SSO
 
-Enabled only when at least one provider is configured.
-
 Authentication providers are relying on Auth.js (formerly Next-Auth) and can be
 configured in `/apps/website/nextauth.config.js`
 
@@ -230,9 +228,9 @@ An example provider is available for Drupal.
   <summary>How it works</summary>
 On Netlify, several environment variables are required to be set:
 
-#### In all cases
+#### For all providers
 
-- `NEXTAUTH_URL` The URL of the website. This is used for the callback.
+- `NEXTAUTH_URL` The URL of the frontend. This is used for the callback.
 - `NEXTAUTH_SECRET` A random string used for encryption.
 
 Generate the secret with e.g. `openssl rand -base64 32`
