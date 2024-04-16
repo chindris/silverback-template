@@ -11,13 +11,14 @@ registerBlockType('custom/image-teasers', {
   attributes: {},
   edit: () => {
     return (
-      <>
+      <div className={'container-wrapper'}>
+        <div className={'container-label'}>{__('Image Teasers')}</div>
         <InnerBlocks
           templateLock={false}
           allowedBlocks={['custom/image-teaser']}
           template={[['custom/image-teaser']]}
         />
-      </>
+      </div>
     );
   },
   save: () => <InnerBlocks.Content />,

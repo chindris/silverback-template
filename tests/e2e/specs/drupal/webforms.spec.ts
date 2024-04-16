@@ -8,6 +8,7 @@ test('Webforms work', async ({ page }) => {
   // Webform can be submitted.
   await page
     .frameLocator('.silverback-iframe iframe')
+    .last()
     .getByRole('button', { name: 'Send message' })
     .click();
 
@@ -29,6 +30,7 @@ test('Webforms work', async ({ page }) => {
   await page.goto(websiteUrl('/de/blocks-complete'));
   await page
     .frameLocator('.silverback-iframe iframe')
+    .last()
     .getByRole('button', { name: 'Send message' })
     .click();
   // TODO: Find out why it does not work.
