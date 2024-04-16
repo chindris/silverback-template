@@ -26,7 +26,7 @@ class QuoteValidator extends GutenbergValidatorBase {
    */
   public function validatedFields($block = []): array {
     return [
-      'text' => [
+      'quote' => [
         'field_label' => $this->t('Quote text'),
         'rules' => ['required'],
       ],

@@ -246,7 +246,7 @@ type BlockCta @type(id: "custom/cta") {
 }
 
 type BlockQuote @type(id: "custom/quote") {
-  text: Markup @resolveEditorBlockAttribute(key: "text")
+  quote: Markup @resolveEditorBlockAttribute(key: "quote")
   author: String @resolveEditorBlockAttribute(key: "author")
   role: String @resolveEditorBlockAttribute(key: "role")
   image: MediaImage @resolveEditorBlockMedia
