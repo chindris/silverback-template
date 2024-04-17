@@ -71,11 +71,11 @@ test('Blocks', async () => {
     'data-id="[numeric]"',
   );
 
-  const ctaToMediaBlock = result.data.complete.content[8];
-  ctaToMediaBlock.url = ctaToMediaBlock.url.replace(
-    /media\/\d+/,
-    'media/[numeric]',
-  );
+  for (const block of result.data.complete.content) {
+    if (block.__typename === 'BlockCta') {
+      block.url = block.url.replace(/media\/\d+/, 'media/[numeric]');
+    }
+  }
 
   expect(result).toMatchInlineSnapshot(`
     {
