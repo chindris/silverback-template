@@ -48,6 +48,11 @@ test('Blocks', async () => {
             ctaUrl
           }
         }
+        ... on BlockCta {
+          url
+          text
+          openInNewTab
+        }
       }
     }
     {
@@ -64,6 +69,12 @@ test('Blocks', async () => {
   firstParagraph.markup = firstParagraph.markup.replace(
     /data-id="\d+"/,
     'data-id="[numeric]"',
+  );
+
+  const ctaToMediaBlock = result.data.complete.content[8];
+  ctaToMediaBlock.url = ctaToMediaBlock.url.replace(
+    /media\/\d+/,
+    'media/[numeric]',
   );
 
   expect(result).toMatchInlineSnapshot(`
@@ -133,6 +144,24 @@ test('Blocks', async () => {
               ],
             },
             {
+              "__typename": "BlockCta",
+              "openInNewTab": null,
+              "text": "Internal CTA",
+              "url": "/en/drupal",
+            },
+            {
+              "__typename": "BlockCta",
+              "openInNewTab": true,
+              "text": "External CTA",
+              "url": "https://www.google.com",
+            },
+            {
+              "__typename": "BlockCta",
+              "openInNewTab": null,
+              "text": "CTA with link to media",
+              "url": "/media/[numeric]",
+            },
+            {
               "__typename": "BlockMarkup",
               "markup": "
     <p></p>
@@ -173,6 +202,12 @@ test('Blocks', async () => {
 
     <h2 class="wp-block-custom-heading"></h2>
     ",
+            },
+            {
+              "__typename": "BlockCta",
+              "openInNewTab": null,
+              "text": null,
+              "url": null,
             },
           ],
           "hero": {
