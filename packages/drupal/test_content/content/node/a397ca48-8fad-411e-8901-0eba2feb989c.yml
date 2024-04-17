@@ -60,6 +60,32 @@ default:
 
         <!-- wp:custom/form {"formId":"contact"} /-->
 
+        <!-- wp:custom/image-with-text {"mediaEntityIds":["3a0fe860-a6d6-428a-9474-365bd57509aa"]} -->
+        <!-- wp:paragraph -->
+        <p>All kinds of allowed blocks</p>
+        <!-- /wp:paragraph -->
+
+        <!-- wp:list -->
+        <ul><li>bla</li></ul>
+        <!-- /wp:list -->
+
+        <!-- wp:custom/heading {"text":"Heading"} -->
+        <h2 class="wp-block-custom-heading">Heading</h2>
+        <!-- /wp:custom/heading -->
+
+        <!-- wp:table -->
+        <figure class="wp-block-table"><table><tbody><tr><td>1</td><td>2</td></tr><tr><td>3</td><td>4</td></tr></tbody></table><figcaption>Caption</figcaption></figure>
+        <!-- /wp:table -->
+
+        <!-- wp:quote -->
+        <blockquote class="wp-block-quote"><p>Quote</p><cite>Citation</cite></blockquote>
+        <!-- /wp:quote -->
+
+        <!-- wp:paragraph -->
+        <p></p>
+        <!-- /wp:paragraph -->
+        <!-- /wp:custom/image-with-text -->
+
         <!-- wp:paragraph -->
         <p>Starting from this paragraph, all the following blocks should be aggregated, as they are just HTML</p>
         <!-- /wp:paragraph -->
