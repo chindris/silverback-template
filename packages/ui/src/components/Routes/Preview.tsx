@@ -18,7 +18,20 @@ function usePreviewParameters(): OperationVariables<
 
 export function usePreviewRefresh() {
   const params = usePreviewParameters();
-  return () => clear(PreviewDrupalPageQuery, params);
+  return (input: {
+    entity_type_id?: string;
+    entity_id?: string;
+    langcode?: string;
+  }) => {
+    if (
+      // TODO: Extend for non-node entities?
+      input.entity_type_id === 'node' &&
+      input.entity_id === params.id &&
+      input.langcode === params.locale
+    ) {
+      clear(PreviewDrupalPageQuery, params);
+    }
+  };
 }
 
 export function Preview() {

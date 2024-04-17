@@ -7,6 +7,7 @@ const expressWsInstance = expressWs(expressServer);
 const { app } = expressWsInstance;
 
 const updates$ = new Subject();
+app.use(express.json());
 
 app.get('/endpoint.js', (_, res) => {
   res.send(
@@ -18,7 +19,7 @@ app.get('/endpoint.js', (_, res) => {
 
 // TODO: Protect endpoints and preview with Drupal authentication.
 app.post('/__preview', (req, res) => {
-  updates$.next({ body: req.body });
+  updates$.next(req.body || {});
   res.json(true);
 });
 
