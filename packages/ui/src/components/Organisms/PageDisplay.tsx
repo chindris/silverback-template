@@ -43,6 +43,21 @@ export function PageDisplay(page: PageFragment) {
                     );
                   case 'BlockCta':
                     return <BlockCta key={index} {...block} />;
+                  case 'BlockImageWithText':
+                    return (
+                      // TODO: Implement BlockImageWithText
+                      <div
+                        style={{
+                          color: 'red',
+                          border: 'solid 3px red',
+                          padding: '3px',
+                          margin: '5px 0',
+                        }}
+                        // eslint-disable-next-line react/jsx-no-literals
+                      >
+                        BlockImageWithText goes here
+                      </div>
+                    );
                   default:
                     throw new UnreachableCaseError(block);
                 }

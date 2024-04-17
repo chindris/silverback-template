@@ -199,6 +199,7 @@ union PageContent @resolveEditorBlockType =
   | BlockForm
   | BlockImageTeasers
   | BlockCta
+  | BlockImageWithText
 
 type BlockForm @type(id: "custom/form") {
   url: Url @resolveEditorBlockAttribute(key: "formId") @webformIdToUrl(id: "$")
@@ -242,6 +243,11 @@ type BlockCta @type(id: "custom/cta") {
   url: Url @resolveEditorBlockAttribute(key: "url")
   text: String @resolveEditorBlockAttribute(key: "text")
   openInNewTab: Boolean @resolveEditorBlockAttribute(key: "openInNewTab")
+}
+
+type BlockImageWithText @type(id: "custom/image-with-text") {
+  image: MediaImage @resolveEditorBlockMedia
+  textContent: BlockMarkup @resolveEditorBlockChildren @seek(pos: 0)
 }
 
 input PaginationInput {

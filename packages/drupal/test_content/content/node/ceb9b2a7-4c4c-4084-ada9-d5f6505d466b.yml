@@ -67,6 +67,12 @@ default:
         <!-- /wp:custom/heading -->
 
         <!-- wp:custom/cta /-->
+
+        <!-- wp:custom/image-with-text -->
+        <!-- wp:paragraph -->
+        <p></p>
+        <!-- /wp:paragraph -->
+        <!-- /wp:custom/image-with-text -->
         <!-- /wp:custom/content -->
       format: gutenberg
       summary: ''
