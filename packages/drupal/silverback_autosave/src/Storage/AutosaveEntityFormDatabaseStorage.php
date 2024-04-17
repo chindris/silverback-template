@@ -86,7 +86,7 @@ class AutosaveEntityFormDatabaseStorage implements AutosaveEntityFormStorageInte
         ->execute();
       // @todo Clean up this prototype.
       // @todo pass entity information so clients can filter if they have to update.
-      \Drupal::service('http_client')->post((getenv('PREVIEW_URL') ?? 'http://localhost:8001') . '/__preview');
+      \Drupal::service('http_client')->post((getenv('PREVIEW_URL') ?: 'http://localhost:8001') . '/__preview');
     }
   }
 
