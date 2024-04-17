@@ -18,7 +18,6 @@ export function BlockMarkup(props: BlockMarkupFragment) {
       className={clsx([
         'mx-auto max-w-3xl prose lg:prose-xl mt-10',
         'prose-a:text-indigo-600',
-        'prose-blockquote:border-indigo-200',
         'prose-em:text-indigo-600',
         'prose-strong:text-indigo-600',
         'marker:text-indigo-600 marker:font-bold',
