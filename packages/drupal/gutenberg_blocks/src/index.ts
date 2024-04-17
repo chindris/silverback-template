@@ -5,4 +5,5 @@ import './blocks/heading';
 import './blocks/form';
 import './blocks/image-teaser';
 import './blocks/image-teasers';
+import './filters/list';
 import './blocks/cta';
