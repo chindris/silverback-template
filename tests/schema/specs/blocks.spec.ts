@@ -48,6 +48,19 @@ test('Blocks', async () => {
             ctaUrl
           }
         }
+        ... on BlockCta {
+          url
+          text
+          openInNewTab
+        }
+        ... on BlockQuote {
+          quote
+          author
+          role
+          image {
+            __typename
+          }
+        }
       }
     }
     {
@@ -64,6 +77,12 @@ test('Blocks', async () => {
   firstParagraph.markup = firstParagraph.markup.replace(
     /data-id="\d+"/,
     'data-id="[numeric]"',
+  );
+
+  const ctaToMediaBlock = result.data.complete.content[8];
+  ctaToMediaBlock.url = ctaToMediaBlock.url.replace(
+    /media\/\d+/,
+    'media/[numeric]',
   );
 
   expect(result).toMatchInlineSnapshot(`
@@ -133,6 +152,33 @@ test('Blocks', async () => {
               ],
             },
             {
+              "__typename": "BlockCta",
+              "openInNewTab": null,
+              "text": "Internal CTA",
+              "url": "/en/drupal",
+            },
+            {
+              "__typename": "BlockCta",
+              "openInNewTab": true,
+              "text": "External CTA",
+              "url": "https://www.google.com",
+            },
+            {
+              "__typename": "BlockCta",
+              "openInNewTab": null,
+              "text": "CTA with link to media",
+              "url": "/media/[numeric]",
+            },
+            {
+              "__typename": "BlockQuote",
+              "author": "John Doe",
+              "image": {
+                "__typename": "MediaImage",
+              },
+              "quote": "Lorem ipsum dolor sit amet, <strong>consectetur</strong> adipiscing elit. Vivamus sagittis nisi nec neque porta, a ornare ligula efficitur.",
+              "role": "Project manager",
+            },
+            {
               "__typename": "BlockMarkup",
               "markup": "
     <p></p>
@@ -173,6 +219,19 @@ test('Blocks', async () => {
 
     <h2 class="wp-block-custom-heading"></h2>
     ",
+            },
+            {
+              "__typename": "BlockCta",
+              "openInNewTab": null,
+              "text": null,
+              "url": null,
+            },
+            {
+              "__typename": "BlockQuote",
+              "author": "Jane Doe",
+              "image": null,
+              "quote": "In vitae diam quis odio tincidunt faucibus eget ut libero",
+              "role": null,
             },
           ],
           "hero": {

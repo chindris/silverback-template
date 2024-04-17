@@ -4,9 +4,11 @@ import React from 'react';
 import { isTruthy } from '../../utils/isTruthy';
 import { UnreachableCaseError } from '../../utils/unreachable-case-error';
 import { PageTransition } from '../Molecules/PageTransition';
+import { BlockCta } from './PageContent/BlockCta';
 import { BlockForm } from './PageContent/BlockForm';
 import { BlockMarkup } from './PageContent/BlockMarkup';
 import { BlockMedia } from './PageContent/BlockMedia';
+import { BlockQuote } from './PageContent/BlockQuote';
 import { PageHero } from './PageHero';
 
 export function PageDisplay(page: PageFragment) {
@@ -40,6 +42,10 @@ export function PageDisplay(page: PageFragment) {
                         BlockImageTeasers goes here
                       </div>
                     );
+                  case 'BlockCta':
+                    return <BlockCta key={index} {...block} />;
+                  case 'BlockQuote':
+                    return <BlockQuote key={index} {...block} />;
                   default:
                     throw new UnreachableCaseError(block);
                 }

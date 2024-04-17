@@ -65,6 +65,10 @@ default:
         <!-- wp:custom/heading -->
         <h2 class="wp-block-custom-heading"></h2>
         <!-- /wp:custom/heading -->
+
+        <!-- wp:custom/cta /-->
+
+        <!-- wp:custom/quote {"quote":"In vitae diam quis odio tincidunt faucibus eget ut libero","author":"Jane Doe"} /-->
         <!-- /wp:custom/content -->
       format: gutenberg
       summary: ''
