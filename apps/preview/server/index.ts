@@ -10,7 +10,9 @@ const updates$ = new Subject();
 
 app.get('/endpoint.js', (_, res) => {
   res.send(
-    `window.GRAPHQL_ENDPOINT = "${process.env.DRUPAL_URL || 'http://localhost:8888'}/graphql";`,
+    `window.GRAPHQL_ENDPOINT = "${
+      process.env.DRUPAL_URL || 'http://localhost:8888'
+    }/graphql";`,
   );
 });
 
