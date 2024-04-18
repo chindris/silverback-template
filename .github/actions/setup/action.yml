@@ -33,10 +33,8 @@ runs:
 
     - name: Install dependencies
       shell: bash
+      run: pnpm i
 
-    - name: Cache playwright binaries
-      uses: actions/cache@v3
-      id: playwright-cache
-      with:
-        path: ~/.cache/ms-playwright
-        key: ${{ runner.os }}-playwright-${{ hashFiles('**/pnpm-lock.yaml') }}
+    - name: Check formatting
+      shell: bash
+      run: pnpm test:format
