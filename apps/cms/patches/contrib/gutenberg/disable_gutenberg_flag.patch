@@ -1,0 +1,15 @@
+diff --git a/gutenberg.module b/gutenberg.module
+index dec6b80..173c424 100644
+--- a/gutenberg.module
++++ b/gutenberg.module
+@@ -1042,6 +1042,10 @@ function _gutenberg_is_gutenberg_enabled(EntityInterface $entity = NULL) {
+     return FALSE;
+   }
+ 
++  if (isset($entity->disableGutenberg) && $entity->disableGutenberg === TRUE) {
++    return FALSE;
++  }
++
+   if ($entity->getEntityTypeId() !== 'node') {
+     return FALSE;
+   }
