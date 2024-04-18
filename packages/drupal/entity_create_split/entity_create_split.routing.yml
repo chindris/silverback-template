@@ -1,0 +1,9 @@
+entity_create_split.create:
+  path: '/entity/create/{entity_type}/{bundle}'
+  defaults:
+    _controller: '\Drupal\entity_create_split\Controller\EntityCreateSplitController::createForm'
+    _title: 'Create entity'
+  requirements:
+    _permission: 'administer graphql configuration'
+  options:
+    _admin_route: TRUE

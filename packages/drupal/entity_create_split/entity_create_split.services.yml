@@ -1,0 +1,3 @@
+services:
+  entity_create_split.form_operations:
+    class: Drupal\entity_create_split\FormOperations
