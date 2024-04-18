@@ -1,5 +1,5 @@
 import { Markup } from '@custom/schema';
-import Portrait from '@stories/portrait.jpg?as=metadata';
+import Avatar from '@stories/avatar.jpg?as=metadata';
 import { Meta, StoryObj } from '@storybook/react';
 
 import { image } from '../../../helpers/image';
@@ -14,7 +14,7 @@ export const Quote = {
     role: 'test role',
     author: 'Author name',
     image: {
-      source: image({ src: Portrait.src, width: 50, height: 50 }),
+      source: image(Avatar),
       alt: 'Portrait',
     },
     quote:
