@@ -1,0 +1,30 @@
+<?php
+
+/**
+ * @file
+ * Provides a route for splitting the entity creation in two steps: first for
+ * the mandatory fields and a second one, which is actually the edit form, for
+ * the rest of the fields.
+ */
+
+use Drupal\Core\Entity\EntityFormInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Render\Element;
+
+/**
+ * Implements hook_form_alter().
+ */
+function entity_create_split_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  // We are only interested in entity create forms, and only when the
+  // splitRequiredFields flag is set on the entity (which means the form was
+  // requested from the entity_create_split.create route.
+  if ($form_state->getFormObject() instanceof EntityFormInterface) {
+    $entity = $form_state->getFormObject()->getEntity();
+    if (!$entity->isNew() || empty($entity->hideOptionalFormFields)) {
+      return;
+    }
+    /* @var \Drupal\entity_create_split\FormOperationsInterface $formOperations */
+    $formOperations = \Drupal::service('entity_create_split.form_operations');
+    $formOperations->hideOptionalFields($form);
+  }
+}
