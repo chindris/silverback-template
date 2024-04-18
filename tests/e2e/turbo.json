@@ -4,6 +4,10 @@
     "prep": {
       "cache": false
     },
+    "webform-snapshots": {
+      "cache": false,
+      "dependsOn": ["@custom/cms#prep:database", "prep"]
+    },
     "test:integration:decap": {
       "dependsOn": ["@custom/website#build", "prep"],
       "env": ["PLAYWRIGHT_WEBSITE_URL"],
