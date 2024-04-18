@@ -495,16 +495,16 @@
         },
         {
             "name": "amazeelabs/silverback_gutenberg",
-            "version": "2.5.12",
+            "version": "2.5.15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/AmazeeLabs/silverback_gutenberg.git",
-                "reference": "ccd955f455a6cd55ee8ce3063876e0d707b816a0"
+                "reference": "413248bb07ca02405bf84f01dfd55b86f121c97c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AmazeeLabs/silverback_gutenberg/zipball/ccd955f455a6cd55ee8ce3063876e0d707b816a0",
-                "reference": "ccd955f455a6cd55ee8ce3063876e0d707b816a0",
+                "url": "https://api.github.com/repos/AmazeeLabs/silverback_gutenberg/zipball/413248bb07ca02405bf84f01dfd55b86f121c97c",
+                "reference": "413248bb07ca02405bf84f01dfd55b86f121c97c",
                 "shasum": ""
             },
             "require": {
@@ -519,9 +519,9 @@
             "homepage": "https://github.com/AmazeeLabs/silverback-mono/tree/development/packages/composer/amazeelabs/silverback_gutenberg#readme",
             "support": {
                 "issues": "https://github.com/AmazeeLabs/silverback_gutenberg/issues",
-                "source": "https://github.com/AmazeeLabs/silverback_gutenberg/tree/2.5.12"
+                "source": "https://github.com/AmazeeLabs/silverback_gutenberg/tree/2.5.15"
             },
-            "time": "2024-02-20T11:44:25+00:00"
+            "time": "2024-04-18T06:58:24+00:00"
         },
         {
             "name": "amazeelabs/silverback_iframe",
@@ -15789,5 +15789,8 @@
         "php": "^8.2 <8.3"
     },
     "platform-dev": [],
+    "platform-overrides": {
+        "php": "8.2"
+    },
     "plugin-api-version": "2.6.0"
 }
