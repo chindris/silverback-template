@@ -24,7 +24,7 @@
   "scripts": {
     "prep:types": "tsc --emitDeclarationOnly",
     "prep:scripts": "swc ./src -d ./build",
-    "prep:fonts": "node preloaded-fonts.js",
+    "prep:fonts": "mkdir -p build && node preloaded-fonts.js",
     "prep:styles": "NODE_ENV=production pnpm postcss src/tailwind.css -o build/styles.css",
     "prep:iframe": "NODE_ENV=production pnpm postcss src/iframe.css -o build/iframe.css",
     "prep:gutenberg": "NODE_ENV=production PREFIX=gutenberg pnpm postcss src/tailwind.css -o build/gutenberg.css",
