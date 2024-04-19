@@ -29,13 +29,13 @@ export function BlockQuote(props: BlockQuoteFragment) {
               alt={props.image.alt || 'Author image'}
             />
           )}
-          <div className="ml-2 not-italic text-base">
-            {props.author && <p>{props.author}</p>}
+          <div className="ml-3.5 not-italic text-base">
+            {props.author && <p className="not-prose">{props.author}</p>}
           </div>
           {props.role && (
-            <p>
-              <span className="ml-2">/</span>
-              <span className="not-italic text-gray-500 text-sm ml-2">
+            <p className="not-prose flex">
+              <span className="ml-3 text-base">/</span>
+              <span className="mt-0.5 not-italic text-gray-500 text-sm ml-3">
                 {props.role}
               </span>
             </p>
