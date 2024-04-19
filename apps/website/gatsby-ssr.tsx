@@ -1,5 +1,5 @@
 import { Locale } from '@custom/schema';
-import { fonts } from '@custom/ui/fonts';
+import { fonts } from '@custom/ui/preloaded-fonts';
 import { GatsbySSR } from 'gatsby';
 import React from 'react';
 
@@ -34,7 +34,7 @@ export const onRenderBody: GatsbySSR['onRenderBody'] = ({
         as="font"
         type="font/woff2"
         crossOrigin="anonymous"
-        key="NotoSansGurmukhi"
+        key={font}
       />,
     ]);
   });
