@@ -1,5 +1,5 @@
 import { Locale } from '@custom/schema';
-import { loadFonts } from '@custom/ui/fonts-async';
+import { fonts } from '@custom/ui/fonts';
 import { GatsbySSR } from 'gatsby';
 import React from 'react';
 
@@ -26,15 +26,16 @@ export const onRenderBody: GatsbySSR['onRenderBody'] = ({
     }
   }
 
-  setHeadComponents([
-    // here you will map config file consumed
-    <link
-      rel="preload"
-      href="/fonts/NotoSansGurmukhi-Regular.woff2"
-      as="font"
-      type="font/woff2"
-      crossOrigin="anonymous"
-      key="NotoSansGurmukhi"
-    />,
-  ]);
+  fonts.forEach((font) => {
+    setHeadComponents([
+      <link
+        rel="preload"
+        href={font}
+        as="font"
+        type="font/woff2"
+        crossOrigin="anonymous"
+        key="NotoSansGurmukhi"
+      />,
+    ]);
+  });
 };
