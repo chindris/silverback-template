@@ -24,7 +24,18 @@ Other steps
 - [Create a new Lagoon project](https://amazeelabs.atlassian.net/wiki/spaces/ALU/pages/368115717/Create+a+new+Lagoon+project)
 - [Create a new Netlify project](https://amazeelabs.atlassian.net/wiki/spaces/ALU/pages/368017428/Create+a+new+Netlify+project)
 - Check the [Environment overrides](#environment-overrides) section below
+- Check the [Choose a CMS](#choose-a-cms) section below
 - Create `dev` and `prod` branches (and optionally `stage`) from `release`
+
+## Choose a CMS
+
+The template comes with Drupal and Decap CMS enabled by default. To disable
+either (or both), follow these two steps:
+
+1. Remove the dependencies to `@custom/cms`/`@custom/decap` from
+   `apps/website/package.json`
+2. Remove the `@custom/cms`/`@custom/decap` plugins from
+   `apps/website/gatsby-config.mjs`
 
 ## Branches and environments
 

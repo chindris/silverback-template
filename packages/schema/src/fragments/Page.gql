@@ -22,12 +22,17 @@ fragment Page on Page {
       )
       alt
     }
+    ctaText
+    ctaUrl
+    formUrl
   }
   content {
     __typename
     ...BlockMarkup
     ...BlockMedia
     ...BlockForm
+    ...BlockImageTeasers
+    ...BlockCta
   }
   metaTags {
     tag

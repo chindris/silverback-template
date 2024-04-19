@@ -13,6 +13,9 @@ test('Blocks', async () => {
         image {
           __typename
         }
+        ctaText
+        ctaUrl
+        formUrl
       }
       content {
         __typename
@@ -34,6 +37,22 @@ test('Blocks', async () => {
         ... on BlockForm {
           url
         }
+        ... on BlockImageTeasers {
+          teasers {
+            __typename
+            image {
+              __typename
+            }
+            title
+            ctaText
+            ctaUrl
+          }
+        }
+        ... on BlockCta {
+          url
+          text
+          openInNewTab
+        }
       }
     }
     {
@@ -52,6 +71,12 @@ test('Blocks', async () => {
     'data-id="[numeric]"',
   );
 
+  for (const block of result.data.complete.content) {
+    if (block.__typename === 'BlockCta') {
+      block.url = block.url.replace(/media\/\d+/, 'media/[numeric]');
+    }
+  }
+
   expect(result).toMatchInlineSnapshot(`
     {
       "data": {
@@ -60,7 +85,7 @@ test('Blocks', async () => {
             {
               "__typename": "BlockMarkup",
               "markup": "
-    <p>A standalone paragraph with <strong><em>markup</em></strong> and <a href="/en/architecture" data-type="Content: Basic page" data-id="[numeric]">link</a></p>
+    <p>A standalone paragraph with <strong><em>markup</em></strong> and <a href="/en/architecture" data-type="Content: Basic page" data-id="[numeric]" data-entity-type="node">link</a></p>
     ",
             },
             {
@@ -86,16 +111,68 @@ test('Blocks', async () => {
               "markup": "
     <p>Starting from this paragraph, all the following blocks should be aggregated, as they are just HTML</p>
 
-    <figure class="wp-block-table"><table><tbody><tr><td>1</td><td>2</td></tr><tr><td>3</td><td>4 with <strong>markup</strong></td></tr></tbody></table><figcaption>Table caption</figcaption></figure><ul><li>list 1</li><li>list 2<ol><li>list 2.2</li></ol></li></ul><h3 class="wp-block-custom-heading">Heading 3</h3>
+    <figure class="wp-block-table"><table><tbody><tr><td>1</td><td>2</td></tr><tr><td>3</td><td>4 with <strong>markup</strong></td></tr></tbody></table><figcaption>Table caption</figcaption></figure>
+
+    <ul><li>list 1</li><li>list 2<ol><li>list 2.2</li></ol></li></ul>
+
+    <h3 class="wp-block-custom-heading">Heading 3</h3>
 
     <blockquote class="wp-block-quote"><p>Quote</p><cite>Citation</cite></blockquote>
-
+    ",
+            },
+            {
+              "__typename": "BlockImageTeasers",
+              "teasers": [
+                {
+                  "__typename": "BlockImageTeaser",
+                  "ctaText": "Foo",
+                  "ctaUrl": "https://google.com",
+                  "image": {
+                    "__typename": "MediaImage",
+                  },
+                  "title": "Teaser 1",
+                },
+                {
+                  "__typename": "BlockImageTeaser",
+                  "ctaText": "Bar",
+                  "ctaUrl": "https://google.com",
+                  "image": {
+                    "__typename": "MediaImage",
+                  },
+                  "title": "Teaser 2",
+                },
+              ],
+            },
+            {
+              "__typename": "BlockCta",
+              "openInNewTab": null,
+              "text": "Internal CTA",
+              "url": "/en/drupal",
+            },
+            {
+              "__typename": "BlockCta",
+              "openInNewTab": true,
+              "text": "External CTA",
+              "url": "https://www.google.com",
+            },
+            {
+              "__typename": "BlockCta",
+              "openInNewTab": null,
+              "text": "CTA with link to media",
+              "url": "/media/[numeric]",
+            },
+            {
+              "__typename": "BlockMarkup",
+              "markup": "
     <p></p>
     ",
             },
           ],
           "hero": {
             "__typename": "Hero",
+            "ctaText": "CTA text",
+            "ctaUrl": "https://example.com",
+            "formUrl": "http://127.0.0.1:8000/en/form/contact",
             "headline": "All kinds of blocks with maximum data",
             "image": {
               "__typename": "MediaImage",
@@ -117,14 +194,27 @@ test('Blocks', async () => {
             {
               "__typename": "BlockMarkup",
               "markup": "
-    <ul><li></li></ul><figure class="wp-block-table"><table><tbody><tr><td></td><td></td></tr><tr><td></td><td></td></tr></tbody></table></figure><blockquote class="wp-block-quote"><p></p></blockquote>
+    <ul><li></li></ul>
+
+    <figure class="wp-block-table"><table><tbody><tr><td></td><td></td></tr><tr><td></td><td></td></tr></tbody></table></figure>
+
+    <blockquote class="wp-block-quote"><p></p></blockquote>
 
     <h2 class="wp-block-custom-heading"></h2>
     ",
             },
+            {
+              "__typename": "BlockCta",
+              "openInNewTab": null,
+              "text": null,
+              "url": null,
+            },
           ],
           "hero": {
             "__typename": "Hero",
+            "ctaText": null,
+            "ctaUrl": null,
+            "formUrl": null,
             "headline": "All kinds of blocks with minimum data",
             "image": null,
             "lead": null,

@@ -21,7 +21,11 @@ replace(
   '# ' + process.env.PROJECT_NAME_HUMAN,
 );
 replace(
-  'apps/cms/config/sync/system.site.yml',
+  [
+    'apps/cms/config/sync/system.site.yml',
+    'tests/schema/specs/content.spec.ts',
+    'tests/e2e/specs/drupal/metatags.spec.ts',
+  ],
   'Silverback Drupal Template',
   process.env.PROJECT_NAME_HUMAN,
 );
@@ -97,7 +101,7 @@ Update the auth key for Gatsby user.
 ```ts
 const authKey = randomString(32);
 replace(
-  'apps/website/gatsby-config.mjs',
+  'apps/cms/gatsby-config.mjs',
   "auth_key: 'cfdb0555111c0f8924cecab028b53474'",
   `auth_key: '${authKey}'`,
 );

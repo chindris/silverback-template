@@ -1,9 +1,24 @@
 [dev]
   autoLaunch = false
 
+[functions]
+  directory = "netlify/functions"
+
+[build]
+  publish = "public"
+  edge_functions = "netlify/edge-functions"
+
 [functions.strangler]
   included_files = ["public/404.html"]
 
 [[edge_functions]]
   path = "/"
   function = "homepage-redirect"
+
+[[edge_functions]]
+  path = "/.netlify/functions/github-proxy"
+  function = "github-proxy-auth"
+
+[[edge_functions]]
+  path = "/.netlify/functions/github-proxy/*"
+  function = "github-proxy-auth"

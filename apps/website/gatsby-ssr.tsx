@@ -1,16 +1,13 @@
-import { Locale, registerExecutor } from '@custom/schema';
+import { Locale } from '@custom/schema';
 import { loadFonts } from '@custom/ui/fonts-async';
 import { GatsbySSR } from 'gatsby';
 import React from 'react';
-
-import { drupalExecutor } from './src/utils/drupal-executor';
 
 export const onRenderBody: GatsbySSR['onRenderBody'] = ({
   setHtmlAttributes,
   pathname,
   setHeadComponents,
 }) => {
-  registerExecutor(drupalExecutor(`/graphql`));
   const locales = Object.values(Locale);
   if (locales.length === 1) {
     // Single-language project.

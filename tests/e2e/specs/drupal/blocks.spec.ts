@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-import { websiteUrl } from '../helpers/url';
+import { websiteUrl } from '../../helpers/url';
 
 test('All blocks are rendered', async ({ page }) => {
   await page.goto(websiteUrl('/en/blocks-complete'));
@@ -56,8 +56,7 @@ test('All blocks are rendered', async ({ page }) => {
   );
 
   // Form
-  await expect(page.locator('.silverback-iframe iframe')).toHaveAttribute(
-    'src',
-    'http://127.0.0.1:8000/en/form/contact?iframe=true',
-  );
+  await expect(
+    page.locator('.silverback-iframe iframe').last(),
+  ).toHaveAttribute('src', 'http://127.0.0.1:8000/en/form/contact?iframe=true');
 });

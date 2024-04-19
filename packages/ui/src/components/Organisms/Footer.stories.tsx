@@ -1,4 +1,4 @@
-import { FrameQuery, Locale, registerExecutor, Url } from '@custom/schema';
+import { FrameQuery, Locale, OperationExecutor, Url } from '@custom/schema';
 import { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
@@ -13,8 +13,11 @@ export default {
 
 export const Footer = {
   render: (args) => {
-    registerExecutor(FrameQuery, () => args);
-    return <Component />;
+    return (
+      <OperationExecutor id={FrameQuery} executor={() => args}>
+        <Component />
+      </OperationExecutor>
+    );
   },
   args: {
     footerNavigation: [

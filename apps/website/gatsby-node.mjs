@@ -34,19 +34,6 @@ function isDefined(val) {
  * @type {import('gatsby').GatsbyNode['createPages']}
  */
 export const createPages = async ({ actions }) => {
-  // Rewrite file requests to Drupal.
-  actions.createRedirect({
-    fromPath: '/sites/default/files/*',
-    toPath: `${process.env.GATSBY_DRUPAL_URL}/sites/default/files/:splat`,
-    statusCode: 200,
-  });
-
-  actions.createRedirect({
-    fromPath: '/graphql',
-    toPath: `${process.env.GATSBY_DRUPAL_URL}/graphql`,
-    statusCode: 200,
-  });
-
   // Grab Home- and 404 pages.
   const homePages =
     (
@@ -73,13 +60,13 @@ export const createPages = async ({ actions }) => {
   });
 
   // Create a list of paths that we don't want to render regularly.
-  // 404 and homepages are dealt with differrently.
+  // 404 and homepages are dealt with differently.
   const skipPaths = [
     ...(homePages.map((page) => page.path) || []),
     ...(notFoundPages.map((page) => page.path) || []),
   ];
 
-  // Run the query that lists all pages, both decap and Drupal.
+  // Run the query that lists all pages, both Decap and Drupal.
   const pages = await graphqlQuery(ListPagesQuery);
 
   // Create a gatsby page for each of these pages.
@@ -102,6 +89,14 @@ export const createPages = async ({ actions }) => {
     });
   });
 
+  // Create a inquiry page in each language.
+  Object.values(Locale).forEach((locale) => {
+    actions.createPage({
+      path: `/${locale}/inquiry`,
+      component: resolve(`./src/templates/inquiry.tsx`),
+    });
+  });
+
   // Broken Gatsby links will attempt to load page-data.json files, which don't exist
   // and also should not be piped into the strangler function. Thats why they
   // are caught right here.
@@ -109,25 +104,6 @@ export const createPages = async ({ actions }) => {
     fromPath: '/page-data/*',
     toPath: '/404',
     statusCode: 404,
-  });
-
-  // Proxy Drupal webforms.
-  Object.values(Locale).forEach((locale) => {
-    actions.createRedirect({
-      fromPath: `/${locale}/form/*`,
-      toPath: `${process.env.GATSBY_DRUPAL_URL}/${locale}/form/:splat`,
-      statusCode: 200,
-    });
-  });
-
-  // Additionally proxy themes and modules as they can have additional
-  // non-aggregated assets.
-  ['themes', 'modules'].forEach((path) => {
-    actions.createRedirect({
-      fromPath: `/${path}/*`,
-      toPath: `${process.env.GATSBY_DRUPAL_URL}/${path}/:splat`,
-      statusCode: 200,
-    });
   });
 
   // Any unhandled requests are handed to strangler, which will try to pass

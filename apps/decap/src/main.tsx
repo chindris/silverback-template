@@ -1,7 +1,8 @@
+import { TokenAuthBackend } from '@amazeelabs/decap-cms-backend-token-auth/backend';
 import {
   Locale,
+  OperationExecutor,
   PreviewDecapPageQuery,
-  registerExecutor,
   ViewPageQuery,
 } from '@custom/schema';
 import { Page } from '@custom/ui/routes/Page';
@@ -18,26 +19,43 @@ const default_locale = locales.includes('en') ? 'en' : locales[0];
 
 CMS.registerPreviewStyle(css, { raw: true });
 CMS.registerWidget('uuid', UuidWidget);
+CMS.registerBackend('token-auth', TokenAuthBackend);
+
+if (
+  window.location.hostname !== 'localhost' &&
+  !import.meta.env.DEV &&
+  (!import.meta.env.VITE_DECAP_REPO || !import.meta.env.VITE_DECAP_BRANCH)
+) {
+  console.error(
+    "VITE_DECAP_REPO and VITE_DECAP_BRANCH environment variables are missing. Can't connect to the repository.",
+  );
+}
 
 CMS.init({
   config: {
-    publish_mode: 'simple',
+    load_config_file: false,
+    publish_mode: 'editorial_workflow',
     media_folder: 'apps/decap/media',
+    // @ts-ignore
     backend: import.meta.env.DEV
-      ? // In development, use the in-memory backend.
-        {
+      ? {
+          // In development, use the in-memory backend.
           name: 'test-repo',
         }
-      : window.location.hostname === 'localhost'
-        ? // On localhost, use the proxy backend.
-          {
+      : window.location.hostname === 'localhost' ||
+          !import.meta.env.VITE_DECAP_REPO ||
+          !import.meta.env.VITE_DECAP_BRANCH
+        ? {
+            // On localhost, use the proxy backend that writes to files.
             name: 'proxy',
             proxy_url: 'http://localhost:8081/api/v1',
           }
-        : // Otherwise, its production. Use the Git Gateway backend.
-          {
-            name: 'git-gateway',
-            branch: 'release',
+        : {
+            // Otherwise, its production. Use the token auth backend.
+            name: 'token-auth',
+            api_root: '/.netlify/functions/github-proxy',
+            repo: import.meta.env.VITE_DECAP_REPO,
+            branch: import.meta.env.VITE_DECAP_BRANCH,
           },
     i18n: {
       structure: 'single_file',
@@ -76,8 +94,11 @@ CMS.registerPreviewTemplate(
     PreviewDecapPageQuery,
     pageSchema,
     (data) => {
-      registerExecutor(ViewPageQuery, { page: data.preview });
-      return <Page />;
+      return (
+        <OperationExecutor executor={{ page: data.preview }} id={ViewPageQuery}>
+          <Page />
+        </OperationExecutor>
+      );
     },
     'previewDecapPage',
   ),

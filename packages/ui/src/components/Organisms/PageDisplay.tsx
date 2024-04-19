@@ -4,6 +4,7 @@ import React from 'react';
 import { isTruthy } from '../../utils/isTruthy';
 import { UnreachableCaseError } from '../../utils/unreachable-case-error';
 import { PageTransition } from '../Molecules/PageTransition';
+import { BlockCta } from './PageContent/BlockCta';
 import { BlockForm } from './PageContent/BlockForm';
 import { BlockMarkup } from './PageContent/BlockMarkup';
 import { BlockMedia } from './PageContent/BlockMedia';
@@ -25,6 +26,23 @@ export function PageDisplay(page: PageFragment) {
                     return <BlockMarkup key={index} {...block} />;
                   case 'BlockForm':
                     return <BlockForm key={index} {...block} />;
+                  case 'BlockImageTeasers':
+                    return (
+                      // TODO: Implement BlockImageTeasers
+                      <div
+                        style={{
+                          color: 'red',
+                          border: 'solid 3px red',
+                          padding: '3px',
+                          margin: '5px 0',
+                        }}
+                        // eslint-disable-next-line react/jsx-no-literals
+                      >
+                        BlockImageTeasers goes here
+                      </div>
+                    );
+                  case 'BlockCta':
+                    return <BlockCta key={index} {...block} />;
                   default:
                     throw new UnreachableCaseError(block);
                 }

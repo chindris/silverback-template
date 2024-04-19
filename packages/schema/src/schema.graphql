@@ -1,20 +1,20 @@
 scalar Url @default @value(string: "")
 scalar Markup @default @value(string: "")
 scalar ImageSource @default @value(string: "")
-
-"""
-implementation(drupal): custom.content_hub::query
-"""
-directive @contentHub(
-  pagination: String
-  query: String
-  locale: String!
-) on FIELD_DEFINITION
+scalar JSONString @default @value(string: "{}")
 
 """
 implementation(drupal): custom.webform::url
 """
 directive @webformIdToUrl(id: String!) on FIELD_DEFINITION
+
+"""
+implementation(drupal): custom.webform::createSubmission
+"""
+directive @createWebformSubmission(
+  webformId: String!
+  submittedData: JSONString!
+) on FIELD_DEFINITION
 
 """
 Retrieve the properties of an image.
@@ -23,6 +23,19 @@ TODO: Move to a shared "image" package.
 implementation(gatsby): ./image.js#imageProps
 """
 directive @imageProps repeatable on FIELD_DEFINITION | SCALAR | UNION | ENUM | INTERFACE | OBJECT
+
+"""
+Retrieve the properties of an image.
+TODO: Move to a shared "image" package.
+
+implementation(gatsby): @amazeelabs/gatsby-source-silverback#responsiveImageSharp
+"""
+directive @responsiveImage(
+  height: String
+  sizes: String
+  transform: String
+  width: String
+) repeatable on ENUM | FIELD_DEFINITION | INTERFACE | OBJECT | SCALAR | UNION
 
 """
 Retrieve an entity from the Gatsby datastore.
@@ -71,7 +84,7 @@ interface ContentHubResultItem @resolveEntityBundle {
 
 type ContentHubResult @default @value(json: "{\"total\": 0, \"items\": []}") {
   total: Int!
-  items: [ContentHubResultItem]!
+  items: [ContentHubResultItem]! @prop(key: "rows")
 }
 
 type WebsiteSettings
@@ -173,9 +186,19 @@ type Hero {
   headline: String! @resolveEditorBlockAttribute(key: "headline")
   lead: String @resolveEditorBlockAttribute(key: "lead")
   image: MediaImage @resolveEditorBlockMedia
+  ctaText: String @resolveEditorBlockAttribute(key: "ctaText")
+  ctaUrl: Url @resolveEditorBlockAttribute(key: "ctaUrl")
+  formUrl: Url
+    @resolveEditorBlockAttribute(key: "formId")
+    @webformIdToUrl(id: "$")
 }
 
-union PageContent @resolveEditorBlockType = BlockMarkup | BlockMedia | BlockForm
+union PageContent @resolveEditorBlockType =
+    BlockMarkup
+  | BlockMedia
+  | BlockForm
+  | BlockImageTeasers
+  | BlockCta
 
 type BlockForm @type(id: "custom/form") {
   url: Url @resolveEditorBlockAttribute(key: "formId") @webformIdToUrl(id: "$")
@@ -204,6 +227,23 @@ type BlockMedia @type(id: "drupalmedia/drupal-media-entity") {
   caption: Markup @resolveEditorBlockAttribute(key: "caption")
 }
 
+type BlockImageTeasers @type(id: "custom/image-teasers") {
+  teasers: [BlockImageTeaser!]! @resolveEditorBlockChildren
+}
+
+type BlockImageTeaser @default @value {
+  image: MediaImage @resolveEditorBlockMedia
+  title: String @resolveEditorBlockAttribute(key: "title")
+  ctaText: String @resolveEditorBlockAttribute(key: "ctaText")
+  ctaUrl: Url @resolveEditorBlockAttribute(key: "ctaUrl")
+}
+
+type BlockCta @type(id: "custom/cta") {
+  url: Url @resolveEditorBlockAttribute(key: "url")
+  text: String @resolveEditorBlockAttribute(key: "text")
+  openInNewTab: Boolean @resolveEditorBlockAttribute(key: "openInNewTab")
+}
+
 input PaginationInput {
   limit: Int!
   offset: Int!
@@ -220,15 +260,34 @@ type Query {
   websiteSettings: WebsiteSettings
   viewPage(path: String!): Page @route(path: "$path") @loadEntity
 
-  contentHub(
-    query: String
-    pagination: PaginationInput!
-    locale: Locale!
-  ): ContentHubResult!
-    @contentHub(query: "$query", pagination: "$pagination", locale: "$locale")
+  contentHub(locale: Locale!, args: String): ContentHubResult!
+    @lang(code: "$locale")
+    @drupalView(id: "content_hub:default", args: "$args")
 
   stringTranslations: [TranslatableString!]
     @gatsbyNodes(type: "TranslatableString")
+}
+
+type Mutation {
+  createWebformSubmission(
+    webformId: String!
+    submittedData: JSONString!
+  ): WebformSubmissionCreateResponse
+    @createWebformSubmission(
+      webformId: "$webformId"
+      submittedData: "$submittedData"
+    )
+}
+
+type WebformSubmissionCreateResponse {
+  errors: [MutationError]
+  submission: JSONString
+}
+
+type MutationError {
+  message: String!
+  key: String!
+  field: String
 }
 
 type MetaTag {

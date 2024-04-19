@@ -96,16 +96,16 @@
         },
         {
             "name": "amazeelabs/graphql_directives",
-            "version": "2.4.0",
+            "version": "2.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/AmazeeLabs/graphql_directives.git",
-                "reference": "57d0b5b48a42f27c612e8fe22da967e138f64e30"
+                "reference": "aa67a16d5acedc87a46f80827482527bd3bc19b2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AmazeeLabs/graphql_directives/zipball/57d0b5b48a42f27c612e8fe22da967e138f64e30",
-                "reference": "57d0b5b48a42f27c612e8fe22da967e138f64e30",
+                "url": "https://api.github.com/repos/AmazeeLabs/graphql_directives/zipball/aa67a16d5acedc87a46f80827482527bd3bc19b2",
+                "reference": "aa67a16d5acedc87a46f80827482527bd3bc19b2",
                 "shasum": ""
             },
             "require": {
@@ -127,9 +127,9 @@
             "homepage": "https://silverback.netlify.app",
             "support": {
                 "issues": "https://github.com/AmazeeLabs/graphql_directives/issues",
-                "source": "https://github.com/AmazeeLabs/graphql_directives/tree/2.4.0"
+                "source": "https://github.com/AmazeeLabs/graphql_directives/tree/2.5.0"
             },
-            "time": "2024-02-07T13:55:07+00:00"
+            "time": "2024-04-04T10:12:23+00:00"
         },
         {
             "name": "amazeelabs/proxy-default-content",

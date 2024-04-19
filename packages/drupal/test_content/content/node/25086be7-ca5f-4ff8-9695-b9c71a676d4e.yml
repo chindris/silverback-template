@@ -51,7 +51,7 @@ default:
         <!-- /wp:paragraph -->
 
         <!-- wp:paragraph -->
-        <p><a href="/node/50a28359-32f7-48ee-9577-330d79a2b62c" data-type="Content: Basic page" data-id="50a28359-32f7-48ee-9577-330d79a2b62c">link to page</a></p>
+        <p><a href="/node/50a28359-32f7-48ee-9577-330d79a2b62c" data-type="Content: Basic page" data-id="50a28359-32f7-48ee-9577-330d79a2b62c" data-entity-type="node">link to page</a></p>
         <!-- /wp:paragraph -->
         <!-- /wp:custom/content -->
       format: gutenberg

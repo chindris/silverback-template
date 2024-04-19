@@ -8,6 +8,7 @@ const scalars = {
   Markup: '@amazeelabs/scalars#Markup',
   Url: '@amazeelabs/scalars#Url',
   ImageSource: '@amazeelabs/scalars#ImageSource',
+  JSONString: 'string',
 };
 
 const common = {
@@ -36,8 +37,7 @@ const config: CodegenConfig = {
       plugins: ['@amazeelabs/codegen-autoloader'],
       config: {
         mode: 'js',
-        // TODO: make responsiveImageSharp work with everything and remove 'cloudinary'
-        context: ['gatsby', 'cloudinary'],
+        context: ['gatsby'],
       },
     },
     // Directive autoloader for Drupla.

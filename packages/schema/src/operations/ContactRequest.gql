@@ -1,0 +1,13 @@
+mutation CreateSubmission($webformId: String!, $submittedData: JSONString!) {
+  createWebformSubmission(
+    webformId: $webformId
+    submittedData: $submittedData
+  ) {
+    errors {
+      key
+      field
+      message
+    }
+    submission
+  }
+}

@@ -1,7 +1,7 @@
 import {
   FrameQuery,
   Locale,
-  registerExecutor,
+  OperationExecutor,
   Url,
   ViewPageQuery,
 } from '@custom/schema';
@@ -21,9 +21,13 @@ export default {
 
 export const Default = {
   render: (args) => {
-    registerExecutor(ViewPageQuery, () => args);
-    registerExecutor(FrameQuery, FrameStory.args);
-    return <Page />;
+    return (
+      <OperationExecutor executor={() => args} id={ViewPageQuery}>
+        <OperationExecutor executor={FrameStory.args} id={FrameQuery}>
+          <Page />
+        </OperationExecutor>
+      </OperationExecutor>
+    );
   },
   args: {
     page: {
@@ -38,6 +42,9 @@ export const Default = {
       path: '/test' as Url,
       hero: {
         headline: 'Page Hero Headline',
+        lead: 'A longer lead text that even might break into multiple lines.',
+        ctaUrl: '/test' as Url,
+        ctaText: 'Call to action',
       },
       content: [
         {
@@ -70,6 +77,29 @@ export const FullHero = {
           source: image(Landscape, { width: 2000 }),
           alt: 'Stock photo landscape hero.',
         },
+        ctaUrl: '/test' as Url,
+        ctaText: 'Call to action',
+      },
+    },
+  },
+} satisfies StoryObj<ViewPageQuery>;
+
+export const FormHero = {
+  ...Default,
+  args: {
+    ...Default.args,
+    page: {
+      ...Default.args.page,
+      hero: {
+        headline: 'Page Hero Headline',
+        lead: 'A longer lead text that even might break into multiple lines.',
+        image: {
+          source: image(Landscape, { width: 2000 }),
+          alt: 'Stock photo landscape hero.',
+        },
+        ctaUrl: '/test' as Url,
+        ctaText: 'Call to action',
+        formUrl: 'webforms/error/index.html' as Url,
       },
     },
   },

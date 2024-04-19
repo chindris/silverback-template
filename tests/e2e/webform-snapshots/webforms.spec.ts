@@ -4,7 +4,7 @@ import { execSync } from 'child_process';
 
 import { cmsUrl } from '../helpers/url';
 
-const baseDir = '../../packages/ui/static/public/webforms';
+const baseDir = '../../packages/ui/static/stories/webforms';
 
 test('Export webforms for styling', async ({ page }) => {
   execSync(`rm -rf ${baseDir}`);

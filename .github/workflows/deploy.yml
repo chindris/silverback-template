@@ -1,0 +1,69 @@
+name: Deploy
+on:
+  push:
+    branches:
+      - prod
+      - dev
+
+jobs:
+  test:
+    name: Deploy
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup
+        uses: ./.github/actions/setup
+
+      - run: pwd
+        working-directory: ${{ runner.home }}
+
+      - name: Extract branch name
+        shell: bash
+        run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
+        id: extract_branch
+
+      - name: Prepare deployment package
+        run: pnpm turbo:prep && pnpm deploy --filter "@custom/website" ../deploy --prod
+        env:
+          VITE_DECAP_REPO: ${{ github.repository }}
+          VITE_DECAP_BRANCH: ${{ steps.extract_branch.outputs.branch }}
+
+      - name: Build
+        run: pnpm run --filter @custom/website build
+        working-directory: ../deploy
+        env:
+          CLOUDINARY_API_KEY: ${{ vars.CLOUDINARY_API_KEY }}
+          CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
+          CLOUDINARY_CLOUDNAME: ${{ secrets.CLOUDINARY_CLOUDNAME }}
+          GATSBY_PUBLIC_URL: ${{ vars.GATSBY_PUBLIC_URL }}
+
+      - name: Check for Netlify auth token
+        id: netlify-check
+        shell: bash
+        run: |
+          if [ "${{ secrets.NETLIFY_AUTH_TOKEN }}" != '' ]; then
+            echo "available=true" >> $GITHUB_OUTPUT;
+          else
+            echo "available=false" >> $GITHUB_OUTPUT;
+          fi
+
+      - name: Deploy to dev
+        run: pnpm netlify deploy --prod --filter "@custom/website"
+        working-directory: ../deploy
+        if: github.ref == 'refs/heads/dev' && steps.netlify-check.outputs.available == 'true' && vars.NETLIFY_DEV_ID != ''
+        env:
+          NETLIFY_SITE_ID: ${{ vars.NETLIFY_DEV_ID }}
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+
+      - name: Deploy to prod
+        run: pnpm netlify deploy --prod --filter "@custom/website"
+        working-directory: ../deploy
+        if: github.ref == 'refs/heads/prod' && steps.netlify-check.outputs.available == 'true' && vars.NETLIFY_PROD_ID != ''
+        env:
+          NETLIFY_SITE_ID: ${{ vars.NETLIFY_PROD_ID }}
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+

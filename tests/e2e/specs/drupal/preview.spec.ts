@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-import { cmsUrl } from '../helpers/url';
+import { cmsUrl } from '../../helpers/url';
 
 test.describe.fixme('instant preview', () => {
   test.use({ storageState: '.auth/admin.json' });

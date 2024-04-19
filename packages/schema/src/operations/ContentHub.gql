@@ -1,9 +1,5 @@
-query ContentHub(
-  $query: String
-  $pagination: PaginationInput!
-  $locale: Locale!
-) {
-  contentHub(query: $query, pagination: $pagination, locale: $locale) {
+query ContentHub($locale: Locale!, $args: String) {
+  contentHub(locale: $locale, args: $args) {
     total
     items {
       ...ContentHubResultItem
