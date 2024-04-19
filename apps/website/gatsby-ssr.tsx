@@ -1,7 +1,8 @@
 import { Locale } from '@custom/schema';
-import { fonts } from '@custom/ui/preloaded-fonts';
 import { GatsbySSR } from 'gatsby';
 import React from 'react';
+
+import fonts from './node_modules/@custom/ui/build/preloaded-fonts.json';
 
 export const onRenderBody: GatsbySSR['onRenderBody'] = ({
   setHtmlAttributes,
