@@ -1,3 +1,6 @@
+/* Import all atom stylesheets. */
+@import './components/Atoms/Container.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
