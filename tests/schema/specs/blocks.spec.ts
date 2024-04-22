@@ -124,8 +124,6 @@ test('Blocks', async () => {
     <ul><li>list 1</li><li>list 2<ol><li>list 2.2</li></ol></li></ul>
 
     <h3 class="wp-block-custom-heading">Heading 3</h3>
-
-    <blockquote class="wp-block-quote"><p>Quote</p><cite>Citation</cite></blockquote>
     ",
             },
             {
@@ -214,8 +212,6 @@ test('Blocks', async () => {
     <ul><li></li></ul>
 
     <figure class="wp-block-table"><table><tbody><tr><td></td><td></td></tr><tr><td></td><td></td></tr></tbody></table></figure>
-
-    <blockquote class="wp-block-quote"><p></p></blockquote>
 
     <h2 class="wp-block-custom-heading"></h2>
     ",
