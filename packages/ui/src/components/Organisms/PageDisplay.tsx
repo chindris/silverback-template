@@ -8,6 +8,7 @@ import { BlockCta } from './PageContent/BlockCta';
 import { BlockForm } from './PageContent/BlockForm';
 import { BlockMarkup } from './PageContent/BlockMarkup';
 import { BlockMedia } from './PageContent/BlockMedia';
+import { BlockQuote } from './PageContent/BlockQuote';
 import { PageHero } from './PageHero';
 
 export function PageDisplay(page: PageFragment) {
@@ -58,6 +59,8 @@ export function PageDisplay(page: PageFragment) {
                         BlockImageWithText goes here
                       </div>
                     );
+                  case 'BlockQuote':
+                    return <BlockQuote key={index} {...block} />;
                   default:
                     throw new UnreachableCaseError(block);
                 }

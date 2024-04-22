@@ -15,7 +15,7 @@ export function PageHero(props: NonNullable<PageFragment['hero']>) {
 
 function DefaultHero(props: NonNullable<PageFragment['hero']>) {
   return (
-    <section className="relative isolate overflow-hidden bg-gray-900 py-24 sm:py-32">
+    <section className="relative isolate overflow-hidden bg-gray-900 pt-12 pb-24 min-h-[19rem] lg:min-h-[25rem]">
       {props.image ? (
         <Image
           alt={props.image.alt}
@@ -27,7 +27,7 @@ function DefaultHero(props: NonNullable<PageFragment['hero']>) {
       ) : null}
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl lg:mx-0">
-          <h1 className="max-w-xl text-5xl font-extrabold tracking-tight leading-tight text-white">
+          <h1 className="text-5xl font-extrabold tracking-tight leading-tight text-white drop-shadow-md">
             {props.headline}
           </h1>
           {props.lead ? (
@@ -74,7 +74,7 @@ function FormHero(props: NonNullable<PageFragment['hero']>) {
         ) : null}
 
         <div className="px-4 lg:pt-24 pt-8 pb-72 lg:pb-80 mx-auto max-w-screen-sm text-center lg:px-6 ">
-          <h1 className="text-4xl tracking-tight font-extrabold text-white">
+          <h1 className="text-4xl tracking-tight font-extrabold text-white drop-shadow-md">
             {props.headline}
           </h1>
           {props.lead ? (
