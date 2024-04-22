@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 2f1be18f-dc18-4b56-8ff0-ce24d8ff7df7
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: the_silverback.jpeg
+  uri:
+    -
+      value: 'public://2024-04/the_silverback.jpeg'
+  filemime:
+    -
+      value: image/jpeg
+  filesize:
+    -
+      value: 146269
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1713785099

@@ -1,0 +1,74 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 5dfc1856-e9e4-4f02-9cd6-9d888870ce1a
+  bundle: image
+  default_langcode: en
+  depends:
+    2f1be18f-dc18-4b56-8ff0-ce24d8ff7df7: file
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: the_silverback.jpeg
+  created:
+    -
+      value: 1713785099
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_media_image:
+    -
+      entity: 2f1be18f-dc18-4b56-8ff0-ce24d8ff7df7
+      alt: 'The silverback'
+      title: ''
+      width: 1280
+      height: 720
+translations:
+  de:
+    status:
+      -
+        value: true
+    uid:
+      -
+        target_id: 1
+    name:
+      -
+        value: the_silverback.jpeg
+    created:
+      -
+        value: 1713785205
+    path:
+      -
+        alias: ''
+        langcode: de
+        pathauto: 0
+    content_translation_source:
+      -
+        value: en
+    content_translation_outdated:
+      -
+        value: false
+    field_media_image:
+      -
+        entity: 2f1be18f-dc18-4b56-8ff0-ce24d8ff7df7
+        alt: 'The silverback DE'
+        title: ''
+        width: 1280
+        height: 720
