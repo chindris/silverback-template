@@ -55,6 +55,11 @@ test('All blocks are rendered', async ({ page }) => {
     1,
   );
 
+  // CTA blocks
+  await expect(page.locator('a:text("Internal CTA")')).toHaveCount(1);
+  await expect(page.locator('a:text("External CTA")')).toHaveCount(1);
+  await expect(page.locator('a:text("CTA with link to media")')).toHaveCount(1);
+
   // Form
   await expect(
     page.locator('.silverback-iframe iframe').last(),

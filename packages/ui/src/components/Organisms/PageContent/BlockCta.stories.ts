@@ -1,4 +1,4 @@
-import { Url, VerticalPosition } from '@custom/schema';
+import { CtaIconPosition, Url } from '@custom/schema';
 import { Meta, StoryObj } from '@storybook/react';
 
 import { BlockCta } from './BlockCta';
@@ -12,8 +12,8 @@ export const BlockCtaDefault = {
     text: 'Support center',
     url: 'https://example.com' as Url,
     openInNewTab: false,
-    displayIcon: true,
-    iconPosition: VerticalPosition.Right,
+    icon: 'ARROW',
+    iconPosition: CtaIconPosition.After,
   },
 } satisfies StoryObj<typeof BlockCta>;
 
@@ -22,8 +22,8 @@ export const BlockCtaStoryIconLeft = {
     text: 'Support center',
     url: 'https://example.com' as Url,
     openInNewTab: false,
-    displayIcon: true,
-    iconPosition: VerticalPosition.Left,
+    icon: 'ARROW',
+    iconPosition: CtaIconPosition.Before,
   },
 } satisfies StoryObj<typeof BlockCta>;
 
@@ -32,6 +32,5 @@ export const BlockCtaStoryNoIcon = {
     text: 'Support center',
     url: 'https://example.com' as Url,
     openInNewTab: false,
-    displayIcon: false,
   },
 } satisfies StoryObj<typeof BlockCta>;

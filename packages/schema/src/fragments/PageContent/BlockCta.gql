@@ -2,6 +2,6 @@ fragment BlockCta on BlockCta {
   url
   text
   openInNewTab
-  displayIcon
+  icon
   iconPosition
 }

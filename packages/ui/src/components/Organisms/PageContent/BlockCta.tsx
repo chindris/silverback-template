@@ -1,4 +1,4 @@
-import { BlockCtaFragment, VerticalPosition } from '@custom/schema';
+import { BlockCtaFragment, CtaIconPosition, CtaIconType } from '@custom/schema';
 import clsx from 'clsx';
 import React from 'react';
 
@@ -6,7 +6,7 @@ export function BlockCta(props: BlockCtaFragment) {
   return (
     <a
       className={clsx(
-        { 'flex-row-reverse': props.iconPosition === VerticalPosition.Left },
+        { 'flex-row-reverse': props.iconPosition === CtaIconPosition.Before },
         'text-blue-600 hover:text-white border border-blue-600 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg  py-2 px-3 gap-2 flex flex-row items-center text-xs font-medium text-center w-fit transition-all duration-200 ease-in-out group',
       )}
       href={props.url}
@@ -14,7 +14,7 @@ export function BlockCta(props: BlockCtaFragment) {
       rel="noreferrer"
     >
       {props.text}
-      {!!props.displayIcon && <ArrowRightIcon />}
+      {!!props.icon && props.icon === CtaIconType.Arrow && <ArrowRightIcon />}
     </a>
   );
 }

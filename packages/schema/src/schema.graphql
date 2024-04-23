@@ -73,11 +73,6 @@ enum Locale @default @value(string: "en") {
   de
 }
 
-enum VerticalPosition {
-  Right
-  Left
-}
-
 """
 Inteface for anything that can appear in the content hub.
 """
@@ -247,8 +242,19 @@ type BlockCta @type(id: "custom/cta") {
   url: Url @resolveEditorBlockAttribute(key: "url")
   text: String @resolveEditorBlockAttribute(key: "text")
   openInNewTab: Boolean @resolveEditorBlockAttribute(key: "openInNewTab")
-  displayIcon: Boolean
-  iconPosition: VerticalPosition
+  icon: CTAIconType @resolveEditorBlockAttribute(key: "icon")
+  iconPosition: CTAIconPosition
+    @resolveEditorBlockAttribute(key: "iconPosition")
+}
+
+enum CTAIconType {
+  NONE
+  ARROW
+}
+
+enum CTAIconPosition {
+  AFTER
+  BEFORE
 }
 
 input PaginationInput {
