@@ -15,7 +15,7 @@ export function PageHero(props: NonNullable<PageFragment['hero']>) {
 
 function DefaultHero(props: NonNullable<PageFragment['hero']>) {
   return (
-    <section className="relative isolate overflow-hidden bg-gray-900 pt-12 pb-24 min-h-[19rem] lg:min-h-[25rem]">
+    <section className="relative isolate overflow-hidden bg-gray-900 pt-12 pb-24 min-h-[20rem] lg:min-h-[33rem]">
       {props.image ? (
         <Image
           alt={props.image.alt}
