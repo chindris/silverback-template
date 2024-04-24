@@ -57,6 +57,7 @@ test('Blocks', async () => {
           image {
             __typename
           }
+          imagePosition
           textContent {
             __typename
             markup
@@ -120,6 +121,7 @@ test('Blocks', async () => {
               "image": {
                 "__typename": "MediaImage",
               },
+              "imagePosition": "right",
               "textContent": {
                 "__typename": "BlockMarkup",
                 "markup": "
@@ -243,6 +245,7 @@ test('Blocks', async () => {
             {
               "__typename": "BlockImageWithText",
               "image": null,
+              "imagePosition": "left",
               "textContent": {
                 "__typename": "BlockMarkup",
                 "markup": "

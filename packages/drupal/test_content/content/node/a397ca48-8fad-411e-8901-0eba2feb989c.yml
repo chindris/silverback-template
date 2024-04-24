@@ -60,7 +60,7 @@ default:
 
         <!-- wp:custom/form {"formId":"contact"} /-->
 
-        <!-- wp:custom/image-with-text {"mediaEntityIds":["3a0fe860-a6d6-428a-9474-365bd57509aa"]} -->
+        <!-- wp:custom/image-with-text {"mediaEntityIds":["3a0fe860-a6d6-428a-9474-365bd57509aa"],"imagePosition":"right"} -->
         <!-- wp:paragraph -->
         <p>All kinds of allowed blocks</p>
         <!-- /wp:paragraph -->
@@ -117,6 +117,7 @@ default:
         <!-- wp:custom/cta {"url":"https://www.google.com","text":"External CTA","data-id":"https://www.google.com","data-entity-type":"","openInNewTab":true} /-->
 
         <!-- wp:custom/cta {"url":"/media/1","text":"CTA with link to media","data-id":"b998ae5e-8b56-40ca-8f80-fd4404e7e716","data-entity-type":"media"} /-->
+
         <!-- wp:paragraph -->
         <p></p>
         <!-- /wp:paragraph -->

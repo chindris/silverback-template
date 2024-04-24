@@ -247,7 +247,14 @@ type BlockCta @type(id: "custom/cta") {
 
 type BlockImageWithText @type(id: "custom/image-with-text") {
   image: MediaImage @resolveEditorBlockMedia
+  imagePosition: ImagePosition!
+    @resolveEditorBlockAttribute(key: "imagePosition")
   textContent: BlockMarkup @resolveEditorBlockChildren @seek(pos: 0)
+}
+
+enum ImagePosition @default @value(string: "left") {
+  left
+  right
 }
 
 input PaginationInput {
