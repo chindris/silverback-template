@@ -4,7 +4,7 @@ import React from 'react';
 export function BlockQuote(props: BlockQuoteFragment) {
   return (
     <div className="prose lg:prose-xl prose-p:text-xl prose-p:font-bold prose-p:leading-8 prose-p:text-gray-900">
-      <blockquote className="border-l-0 relative pl-0">
+      <blockquote className="border-l-0 relative pl-0 pb-8 pt-16">
         <svg
           width="32"
           height="24"
