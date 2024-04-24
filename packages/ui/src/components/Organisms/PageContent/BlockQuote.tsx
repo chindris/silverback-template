@@ -24,12 +24,12 @@ export function BlockQuote(props: BlockQuoteFragment) {
         <div className="flex not-prose items-center flex-wrap">
           {props.image && (
             <Image
-              className="w-6 h-6 rounded-full object-contain"
+              className="w-6 h-6 rounded-full object-contain mr-3.5 "
               source={props.image.source}
               alt={props.image.alt || 'Author image'}
             />
           )}
-          <div className="ml-3.5 not-italic text-base">
+          <div className="not-italic text-base">
             {props.author && <p className="not-prose">{props.author}</p>}
           </div>
           {props.role && (
