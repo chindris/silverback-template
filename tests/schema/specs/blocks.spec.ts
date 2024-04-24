@@ -271,6 +271,7 @@ test('Blocks', async () => {
                 "markup": "
     <p></p>
     ",
+              },
             },
             {
               "__typename": "BlockQuote",
