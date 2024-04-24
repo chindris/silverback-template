@@ -21,3 +21,12 @@ export const Quote = {
       '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>' as Markup,
   },
 } satisfies StoryObj<typeof BlockQuote>;
+
+export const NoAvatarQuote = {
+  args: {
+    role: 'test role',
+    author: 'Author name',
+    quote:
+      '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>' as Markup,
+  },
+} satisfies StoryObj<typeof BlockQuote>;
