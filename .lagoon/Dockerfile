@@ -15,7 +15,7 @@ RUN npm install -g pnpm@8.6.12 && pnpm config set store-dir /tmp/cache/pnpm
 
 # Copy pnpm lockfile and install dependencies.
 COPY pnpm-lock.yaml .npmrc /app/
-#COPY patches /app/patches
+# COPY patches /app/patches
 RUN --mount=type=cache,target=/tmp/cache pnpm fetch && \
     # There is a bug in pnpm: `pnpm fetch` creates _some_ node_modules folders
     # with _some_ packages. This can lead to an incomplete package installation.
@@ -47,6 +47,7 @@ RUN --mount=type=cache,target=/tmp/cache pnpm i && \
 # Deploy apps.
 RUN --mount=type=cache,target=/tmp/cache pnpm deploy --filter "@custom/cms" /tmp/.deploy/cms --prod
 RUN --mount=type=cache,target=/tmp/cache pnpm deploy --filter "@custom/website" /tmp/.deploy/website --prod
+RUN --mount=type=cache,target=/tmp/cache pnpm deploy --filter "@custom/preview" /tmp/.deploy/preview --prod
 
 # ====================================================================================================
 # CLI IMAGE
@@ -82,10 +83,21 @@ FROM uselagoon/nginx-drupal as nginx
 
 COPY --from=cli /app /app
 RUN cd /app/web && cp ../node_modules/@custom/ui/build/gutenberg.css .
+RUN cd /app/web && cp ../node_modules/@custom/ui/build/iframe.css .
 COPY .lagoon/nginx-conf/redirects-map.conf /etc/nginx/redirects-map.conf
 
 WORKDIR /app
 ENV WEBROOT=web
+
+# ====================================================================================================
+# PREVIEW IMAGE
+# ====================================================================================================
+
+FROM uselagoon/node-18:23.12.0 as preview
+
+RUN npm install -g pnpm@8.6.0
+COPY --from=builder /tmp/.deploy/preview /app
+CMD pnpm start
 
 # ====================================================================================================
 # PUBLISHER IMAGE

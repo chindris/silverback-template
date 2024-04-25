@@ -22,6 +22,11 @@ export default defineConfig({
       port: 8000,
       reuseExistingServer: !process.env.CI,
     },
+    {
+      command: 'pnpm run --filter "@custom/preview" start',
+      port: 8001,
+      reuseExistingServer: !process.env.CI,
+    },
   ],
   /* Run tests in files in parallel */
   fullyParallel: true,

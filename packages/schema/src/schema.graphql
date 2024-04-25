@@ -4,6 +4,11 @@ scalar ImageSource @default @value(string: "")
 scalar JSONString @default @value(string: "{}")
 
 """
+implementation(drupal): custom.menus::getMenuTranslations
+"""
+directive @menuTranslations(menu_id: String!) on FIELD_DEFINITION
+
+"""
 implementation(drupal): custom.webform::url
 """
 directive @webformIdToUrl(id: String!) on FIELD_DEFINITION
@@ -274,8 +279,14 @@ type Query {
   previewDecapPage: DecapPage
   previewDrupalPage(id: ID!, rid: ID, locale: String!): DrupalPage
     @fetchEntity(type: "node", id: "$id", rid: "$rid", language: "$locale")
-  mainNavigations: [MainNavigation] @gatsbyNodes(type: "MainNavigation")
-  footerNavigations: [FooterNavigation] @gatsbyNodes(type: "FooterNavigation")
+
+  mainNavigations: [MainNavigation]
+    @gatsbyNodes(type: "MainNavigation")
+    @menuTranslations(menu_id: "main")
+
+  footerNavigations: [FooterNavigation]
+    @gatsbyNodes(type: "FooterNavigation")
+    @menuTranslations(menu_id: "footer")
 
   allPages: [Page] @gatsbyNodes(type: "Page")
   websiteSettings: WebsiteSettings

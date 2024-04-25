@@ -31,5 +31,7 @@
     "*.profile": "php"
   },
   "graphql-config.load.filePath": ".graphqlrc.json",
-  "graphql-config.load.rootDir": "packages/schema"
+  "graphql-config.load.rootDir": "packages/schema",
+  "phpsab.executablePathCBF": "./apps/cms/vendor/bin/phpcbf",
+  "phpsab.executablePathCS": "./apps/cms/vendor/bin/phpcs"
 }
