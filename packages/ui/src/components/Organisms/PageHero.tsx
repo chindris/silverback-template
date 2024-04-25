@@ -62,18 +62,21 @@ function DefaultHero(props: NonNullable<PageFragment['hero']>) {
 function FormHero(props: NonNullable<PageFragment['hero']>) {
   return (
     <section>
-      <div className="relative isolate overflow-hidden bg-gray-900 py-24">
+      <div className="relative isolate overflow-hidden bg-gray-900 py-12 md:py-24">
         {props.image ? (
-          <Image
-            alt={props.image.alt}
-            source={props.image.source}
-            priority={true}
-            className="absolute inset-0 -z-10 h-full w-full object-cover"
-            data-test-id={'hero-image'}
-          />
+          <>
+            <Image
+              alt={props.image.alt}
+              source={props.image.source}
+              priority={true}
+              className="absolute inset-0 h-full w-full object-cover"
+              data-test-id={'hero-image'}
+            />
+            <div className="absolute inset-0 h-full w-full bg-black opacity-40" />
+          </>
         ) : null}
 
-        <div className="px-4 lg:pt-24 pt-8 pb-72 lg:pb-80 mx-auto max-w-screen-sm text-center lg:px-6 ">
+        <div className="px-4 pb-[22rem] lg:pb-96 mx-auto max-w-screen-sm text-center lg:px-6 relative">
           <h1 className="text-4xl tracking-tight font-extrabold text-white drop-shadow-md">
             {props.headline}
           </h1>
@@ -117,7 +120,7 @@ function NoImageHero(props: NonNullable<PageFragment['hero']>) {
   return (
     <section className="relative isolate overflow-hidden pt-12 sm:pt-20 px-6 lg:px-8">
       <div className="mx-auto max-w-3xl">
-        <h1 className="max-w-xl text-4xl font-extrabold tracking-tight leading-tight">
+        <h1 className="text-4xl font-extrabold tracking-tight leading-tight">
           {props.headline}
         </h1>
         {props.lead ? (
