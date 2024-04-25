@@ -28,6 +28,7 @@
     "image-size": "^1.1.1",
     "mime-types": "^2.1.35",
     "netlify-cli": "^17.21.1",
+    "next-auth": "^4.24.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
@@ -49,11 +50,11 @@
     "build:drupal": "CLOUDINARY_CLOUDNAME=test pnpm start-test start:drupal 8888 build:gatsby",
     "build:gatsby": "gatsby build",
     "build": "if node has-drupal.mjs; then pnpm build:drupal; else pnpm build:gatsby; fi",
-    "start": "publisher",
+    "start": "NEXTAUTH_URL=http://localhost:8000 NEXTAUTH_SECRET=banana publisher",
     "serve": "netlify dev --cwd=. --dir=public --port=8000",
     "dev": "pnpm clean && publisher",
     "open": "open http://127.0.0.1:8000/___status/",
-    "gatsby:develop": "ENABLE_GATSBY_REFRESH_ENDPOINT=true pnpm gatsby develop",
+    "gatsby:develop": "NEXTAUTH_URL=http://localhost:8000 NEXTAUTH_SECRET=banana ENABLE_GATSBY_REFRESH_ENDPOINT=true pnpm gatsby develop",
     "gatsby:refresh": "curl -X POST http://localhost:8000/__refresh",
     "clean": "gatsby clean"
   }
