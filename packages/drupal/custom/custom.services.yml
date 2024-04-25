@@ -11,3 +11,6 @@ services:
   custom.directives:
     class: Drupal\custom\Directives
     arguments: ['@current_user', '@date.formatter']
+
+  custom.menus:
+    class: Drupal\custom\Menus

@@ -4,3 +4,33 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Prose overrides  */
+.prose
+  :where(blockquote):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
+  font-weight: 400;
+}
+
+.lg\:prose-xl
+  :where(blockquote):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
+  padding-left: 0 !important;
+}
+
+.prose :where(blockquote p):not(:where([class~='not-prose'])) {
+  margin-top: 12px !important;
+  margin-bottom: 12px !important;
+}
+
+.prose
+  :where(blockquote p:first-of-type):not(
+    :where([class~='not-prose'], [class~='not-prose'] *)
+  )::before {
+  content: '' !important;
+}
+
+.prose
+  :where(blockquote p:first-of-type):not(
+    :where([class~='not-prose'], [class~='not-prose'] *)
+  )::after {
+  content: '' !important;
+}

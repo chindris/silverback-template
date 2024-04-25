@@ -58,10 +58,6 @@ default:
         <figure class="wp-block-table"><table><tbody><tr><td></td><td></td></tr><tr><td></td><td></td></tr></tbody></table></figure>
         <!-- /wp:table -->
 
-        <!-- wp:quote -->
-        <blockquote class="wp-block-quote"><p></p></blockquote>
-        <!-- /wp:quote -->
-
         <!-- wp:custom/heading -->
         <h2 class="wp-block-custom-heading"></h2>
         <!-- /wp:custom/heading -->
@@ -73,6 +69,7 @@ default:
         <p></p>
         <!-- /wp:paragraph -->
         <!-- /wp:custom/image-with-text -->
+        <!-- wp:custom/quote {"quote":"In vitae diam quis odio tincidunt faucibus eget ut libero","author":"Jane Doe"} /-->
         <!-- /wp:custom/content -->
       format: gutenberg
       summary: ''

@@ -35,6 +35,7 @@
     "amazeelabs/proxy-graphql": "^1.1.7",
     "amazeelabs/proxy-gutenberg": "^1.3",
     "amazeelabs/silverback-cli": "^2.9.4",
+    "amazeelabs/silverback_autosave": "^1.1",
     "amazeelabs/silverback_campaign_urls": "^1.0.5",
     "amazeelabs/silverback_cloudinary": "^1.3.0",
     "amazeelabs/silverback_external_preview": "^2.0.3",
@@ -73,7 +74,7 @@
     "drupal/stage_file_proxy": "^2.0.2",
     "drupal/userprotect": "^1.2",
     "drupal/webform": "^6.1.5",
-    "drush/drush": "^12",
+    "drush/drush": "^12.5",
     "enyo/dropzone": "^5.7.1"
   },
   "conflict": {
@@ -96,6 +97,9 @@
     "patches": {
       "drupal/userprotect": {
         "Fix site install": "https://www.drupal.org/files/issues/2023-07-28/3349663-8.patch"
+      },
+      "amazeelabs/silverback_gatsby": {
+        "Autosave preview": "./patches/fetch-entity.patch"
       }
     },
     "patchLevel": {
@@ -152,6 +156,7 @@
   },
   "require-dev": {
     "drupal/core-dev": "^10",
+    "drupal/devel": "^5.2",
     "phpspec/prophecy-phpunit": "^2.0.2"
   }
 }

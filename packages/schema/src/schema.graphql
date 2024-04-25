@@ -4,6 +4,11 @@ scalar ImageSource @default @value(string: "")
 scalar JSONString @default @value(string: "{}")
 
 """
+implementation(drupal): custom.menus::getMenuTranslations
+"""
+directive @menuTranslations(menu_id: String!) on FIELD_DEFINITION
+
+"""
 implementation(drupal): custom.webform::url
 """
 directive @webformIdToUrl(id: String!) on FIELD_DEFINITION
@@ -208,6 +213,7 @@ union PageContent @resolveEditorBlockType =
   | BlockImageTeasers
   | BlockCta
   | BlockImageWithText
+  | BlockQuote
 
 type BlockForm @type(id: "custom/form") {
   url: Url @resolveEditorBlockAttribute(key: "formId") @webformIdToUrl(id: "$")
@@ -265,6 +271,13 @@ enum ImagePosition @default @value(string: "left") {
   right
 }
 
+type BlockQuote @type(id: "custom/quote") {
+  quote: Markup @resolveEditorBlockAttribute(key: "quote")
+  author: String @resolveEditorBlockAttribute(key: "author")
+  role: String @resolveEditorBlockAttribute(key: "role")
+  image: MediaImage @resolveEditorBlockMedia
+}
+
 input PaginationInput {
   limit: Int!
   offset: Int!
@@ -274,8 +287,14 @@ type Query {
   previewDecapPage: DecapPage
   previewDrupalPage(id: ID!, rid: ID, locale: String!): DrupalPage
     @fetchEntity(type: "node", id: "$id", rid: "$rid", language: "$locale")
-  mainNavigations: [MainNavigation] @gatsbyNodes(type: "MainNavigation")
-  footerNavigations: [FooterNavigation] @gatsbyNodes(type: "FooterNavigation")
+
+  mainNavigations: [MainNavigation]
+    @gatsbyNodes(type: "MainNavigation")
+    @menuTranslations(menu_id: "main")
+
+  footerNavigations: [FooterNavigation]
+    @gatsbyNodes(type: "FooterNavigation")
+    @menuTranslations(menu_id: "footer")
 
   allPages: [Page] @gatsbyNodes(type: "Page")
   websiteSettings: WebsiteSettings

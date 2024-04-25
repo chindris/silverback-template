@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test';
 
 import { cmsUrl } from '../../helpers/url';
 
-test.describe.fixme('instant preview', () => {
+test.describe('instant preview', () => {
   test.use({ storageState: '.auth/admin.json' });
   test('display an unpublished page in an iframe', async ({ page }) => {
     await page.goto(cmsUrl('/admin/content'));

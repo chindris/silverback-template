@@ -8,6 +8,7 @@ _meta:
     3a0fe860-a6d6-428a-9474-365bd57509aa: media
     478c4289-961d-4ce8-85d6-578ae05f3019: media
     72187a1f-3e48-4b45-a9b7-189c6fd7ee26: media
+    5dfc1856-e9e4-4f02-9cd6-9d888870ce1a: media
 default:
   revision_uid:
     -
@@ -102,10 +103,6 @@ default:
         <h3 class="wp-block-custom-heading">Heading 3</h3>
         <!-- /wp:custom/heading -->
 
-        <!-- wp:quote -->
-        <blockquote class="wp-block-quote"><p>Quote</p><cite>Citation</cite></blockquote>
-        <!-- /wp:quote -->
-
         <!-- wp:custom/image-teasers -->
         <!-- wp:custom/image-teaser {"mediaEntityIds":["3a0fe860-a6d6-428a-9474-365bd57509aa"],"title":"Teaser 1","ctaUrl":"https://google.com","ctaText":"Foo"} /-->
 
@@ -117,6 +114,8 @@ default:
         <!-- wp:custom/cta {"url":"https://www.google.com","text":"External CTA","data-id":"https://www.google.com","data-entity-type":"","openInNewTab":true} /-->
 
         <!-- wp:custom/cta {"url":"/media/1","text":"CTA with link to media","data-id":"b998ae5e-8b56-40ca-8f80-fd4404e7e716","data-entity-type":"media"} /-->
+
+        <!-- wp:custom/quote {"quote":"Lorem ipsum dolor sit amet, \u003cstrong\u003econsectetur\u003c/strong\u003e adipiscing elit. Vivamus sagittis nisi nec neque porta, a ornare ligula efficitur.","author":"John Doe","role":"Project manager","mediaEntityIds":["5dfc1856-e9e4-4f02-9cd6-9d888870ce1a"]} /-->
 
         <!-- wp:paragraph -->
         <p></p>
@@ -190,15 +189,13 @@ translations:
           <h3 class="wp-block-custom-heading">Heading 3 DE</h3>
           <!-- /wp:custom/heading -->
 
-          <!-- wp:quote -->
-          <blockquote class="wp-block-quote"><p>Quote DE</p><cite>Citation DE</cite></blockquote>
-          <!-- /wp:quote -->
-
           <!-- wp:custom/cta {"url":"/en/drupal","text":"Internal CTA DE","data-id":"f1f827c9-ed06-4e7d-b89d-a169e70a459c","data-entity-type":"node"} /-->
 
           <!-- wp:custom/cta {"url":"https://www.example.com","text":"External CTA DE","data-id":"https://www.example.com","data-entity-type":"","openInNewTab":true} /-->
 
           <!-- wp:custom/cta {"url":"/media/1","text":"CTA with link to media DE","data-id":"b998ae5e-8b56-40ca-8f80-fd4404e7e716","data-entity-type":"media"} /-->
+
+          <!-- wp:custom/quote {"quote":"Lorem ipsum dolor sit amet, consectetur \u003cstrong\u003eadipiscing\u003c/strong\u003e elit. Vivamus sagittis nisi nec neque porta, a ornare ligula efficitur DE.","author":"John Doe","role":"Projektmanager","mediaEntityIds":["5dfc1856-e9e4-4f02-9cd6-9d888870ce1a"]} /-->
           <!-- /wp:custom/content -->
         format: gutenberg
         summary: ''
