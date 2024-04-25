@@ -1,0 +1,40 @@
+.container-page {
+  @apply max-w-full px-[1.25rem] md:px-[3.75rem];
+}
+
+.container-content {
+  @apply mx-auto max-w-7xl;
+}
+
+.container-text {
+  @apply max-w-[40.75rem] xl:ml-[11rem] lg:ml-[7rem];
+}
+
+.nested-container .container-page {
+  @apply px-0 max-w-none;
+}
+
+.nested-container .container-content {
+  @apply max-w-none;
+}
+
+.nested-container .container-text {
+  @apply max-w-none ml-0 my-2.5 md:my-5;
+}
+
+.container-content-wrapper {
+  @apply mx-auto max-w-[62rem];
+}
+
+.nested-container .container-page:first-child .container-text,
+.nested-container .container-page:first-child .container-text *:first-child{
+  @apply mt-0;
+}
+.nested-container .container-page:last-child .container-text,
+.nested-container .container-page:last-child .container-text *:last-child {
+  @apply mb-0;
+}
+
+.container-nested .prose ul:not(ul ul), .container-nested .prose ol:not(ol ol) {
+  @apply mt-0;
+}

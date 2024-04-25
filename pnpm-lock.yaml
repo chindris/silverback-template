@@ -430,6 +430,9 @@ importers:
       '@types/wordpress__editor':
         specifier: 13.0.0
         version: 13.0.0(react-dom@18.2.0)(react@18.2.0)
+      '@types/wordpress__hooks':
+        specifier: 2.4.0
+        version: 2.4.0
       '@vitejs/plugin-react':
         specifier: 4.2.1
         version: 4.2.1(vite@5.0.10)
@@ -10066,6 +10069,10 @@ packages:
     transitivePeerDependencies:
       - react
       - react-dom
+    dev: true
+
+  /@types/wordpress__hooks@2.4.0:
+    resolution: {integrity: sha512-SixjDsBvPynmMQxBFX3i4nuWtLifqtml7PhSosoCk5RJy9S7xs/G6vvtcnAuslV3BJTyvxEbAsz4WpKaF0bqMw==}
     dev: true
 
   /@types/wordpress__keycodes@2.18.0:

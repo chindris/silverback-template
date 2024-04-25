@@ -50,10 +50,20 @@ test('All blocks are rendered', async ({ page }) => {
   await expect(page.locator('h3:text("Heading 3")')).toHaveCount(1);
 
   // Quote
-  await expect(page.locator('blockquote > p:text("Quote")')).toHaveCount(1);
-  await expect(page.locator('blockquote > cite:text("Citation")')).toHaveCount(
-    1,
-  );
+  await expect(
+    page.locator(
+      'blockquote p:text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sagittis nisi nec neque porta, a ornare ligula efficitur.")',
+    ),
+  ).toHaveCount(1);
+  await expect(
+    page.locator('blockquote p.not-prose:text("John Doe")'),
+  ).toHaveCount(1);
+  await expect(
+    page.locator('blockquote p.not-prose span:text("Project manager")'),
+  ).toHaveCount(1);
+  await expect(
+    page.locator('blockquote img[alt="The silverback"]'),
+  ).toHaveCount(1);
 
   // Form
   await expect(
