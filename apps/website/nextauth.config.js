@@ -7,8 +7,8 @@ export const authConfig = {
     // Other providers can be added here (e.g. Google, Keycloak).
     {
       // Client ID and secret are set in the Drupal Consumer.
-      clientId: process.env.AUTH_DRUPAL_ID || 'gatsby',
-      clientSecret: process.env.AUTH_DRUPAL_SECRET || 'gatsby',
+      clientId: process.env.AUTH_DRUPAL_ID || 'website',
+      clientSecret: process.env.AUTH_DRUPAL_SECRET || 'banana',
       id: 'drupal',
       name: 'Drupal',
       type: 'oauth',
@@ -17,8 +17,7 @@ export const authConfig = {
       authorization: {
         url: `${AUTH_DRUPAL_URL}/en/oauth/authorize`,
         params: {
-          // @todo refine scope, editor (role) is used for now.
-          scope: 'editor',
+          scope: 'authenticated',
         },
       },
       token: `${AUTH_DRUPAL_URL}/en/oauth/token`,

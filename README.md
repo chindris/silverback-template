@@ -242,8 +242,8 @@ Generate the secret with e.g. `openssl rand -base64 32`
 
 In Drupal go to `/admin/config/services/consumer` and add a new Consumer.
 
-- Label: `Gatsby`
-- Client ID: `gatsby`
+- Label: `Website`
+- Client ID: `website`
 - Secret: a random string matching `AUTH_DRUPAL_SECRET`
 - Redirect URI: `[netlify-gatsby-site-url]/oauth/callback`
 

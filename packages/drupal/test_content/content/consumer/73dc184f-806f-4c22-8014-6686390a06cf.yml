@@ -1,7 +1,7 @@
 _meta:
   version: '1.0'
   entity_type: consumer
-  uuid: 57e1b8a7-48a5-4468-89d9-0016825b9868
+  uuid: 73dc184f-806f-4c22-8014-6686390a06cf
   default_langcode: en
 default:
   owner_id:
@@ -9,10 +9,13 @@ default:
       target_id: 1
   client_id:
     -
-      value: gatsby
+      value: website
   label:
     -
-      value: Gatsby
+      value: Website
+  description:
+    -
+      value: banana
   third_party:
     -
       value: true
@@ -21,15 +24,12 @@ default:
       value: false
   secret:
     -
-      value: $2y$10$oF1wWQgp0zlEYBnomKI.f.CvWf9VfpsowJA/JFNVN4u773miv90QW
+      value: $2y$10$VFVObrn/AcLeb7Va.xcy8OUQTPYC3t7DzJsfwZK8DzHzlZ05njMSS
       existing: ''
       pre_hashed: false
   confidential:
     -
       value: true
-  roles:
-    -
-      target_id: editor
   redirect:
     -
       value: 'http://localhost:8000/api/auth/callback/drupal'
