@@ -226,11 +226,6 @@ configured in `/apps/website/nextauth.config.js`
 
 An example provider is available for Drupal.
 
-Netlify environment variables are required are displayed in the console when
-running `pnpx @amazeelabs/mzx run INIT.md`.
-
-<details>
-  <summary>How it works</summary>
 On Netlify, several environment variables are required to be set:
 
 #### For all providers
@@ -245,7 +240,12 @@ Generate the secret with e.g. `openssl rand -base64 32`
 - `AUTH_DRUPAL_ID` The client ID of the Drupal Consumer
 - `AUTH_DRUPAL_SECRET` The client secret of the Drupal Consumer
 
-In Drupal go to `/admin/config/services/consumer` and add a new Consumer.
+Drupal environment variables are displayed in the console when running
+`pnpx @amazeelabs/mzx run INIT.md`.
+
+<details>
+  <summary>How it works</summary>
+A `Website` consumer is created in Drupal `/admin/config/services/consumer` with
 
 - Label: `Website`
 - Client ID: `website`
