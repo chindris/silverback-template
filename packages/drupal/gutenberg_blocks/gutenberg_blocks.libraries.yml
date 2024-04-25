@@ -1,5 +1,4 @@
 edit:
-  version: VERSION
   js:
     js/gutenberg_blocks.umd.js: {}
   css:

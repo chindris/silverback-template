@@ -48,6 +48,21 @@ test('Blocks', async () => {
             ctaUrl
           }
         }
+        ... on BlockCta {
+          url
+          text
+          openInNewTab
+        }
+        ... on BlockImageWithText {
+          image {
+            __typename
+          }
+          imagePosition
+          textContent {
+            __typename
+            markup
+          }
+        }
       }
     }
     {
@@ -65,6 +80,12 @@ test('Blocks', async () => {
     /data-id="\d+"/,
     'data-id="[numeric]"',
   );
+
+  for (const block of result.data.complete.content) {
+    if (block.__typename === 'BlockCta') {
+      block.url = block.url.replace(/media\/\d+/, 'media/[numeric]');
+    }
+  }
 
   expect(result).toMatchInlineSnapshot(`
     {
@@ -94,6 +115,29 @@ test('Blocks', async () => {
             {
               "__typename": "BlockForm",
               "url": "http://127.0.0.1:8000/en/form/contact",
+            },
+            {
+              "__typename": "BlockImageWithText",
+              "image": {
+                "__typename": "MediaImage",
+              },
+              "imagePosition": "right",
+              "textContent": {
+                "__typename": "BlockMarkup",
+                "markup": "
+    <p>All kinds of allowed blocks</p>
+
+    <ul><li>bla</li></ul>
+
+    <h2 class="wp-block-custom-heading">Heading</h2>
+
+    <figure class="wp-block-table"><table><tbody><tr><td>1</td><td>2</td></tr><tr><td>3</td><td>4</td></tr></tbody></table><figcaption>Caption</figcaption></figure>
+
+    <blockquote class="wp-block-quote"><p>Quote</p><cite>Citation</cite></blockquote>
+
+    <p></p>
+    ",
+              },
             },
             {
               "__typename": "BlockMarkup",
@@ -131,6 +175,24 @@ test('Blocks', async () => {
                   "title": "Teaser 2",
                 },
               ],
+            },
+            {
+              "__typename": "BlockCta",
+              "openInNewTab": null,
+              "text": "Internal CTA",
+              "url": "/en/drupal",
+            },
+            {
+              "__typename": "BlockCta",
+              "openInNewTab": true,
+              "text": "External CTA",
+              "url": "https://www.google.com",
+            },
+            {
+              "__typename": "BlockCta",
+              "openInNewTab": null,
+              "text": "CTA with link to media",
+              "url": "/media/[numeric]",
             },
             {
               "__typename": "BlockMarkup",
@@ -173,6 +235,23 @@ test('Blocks', async () => {
 
     <h2 class="wp-block-custom-heading"></h2>
     ",
+            },
+            {
+              "__typename": "BlockCta",
+              "openInNewTab": null,
+              "text": null,
+              "url": null,
+            },
+            {
+              "__typename": "BlockImageWithText",
+              "image": null,
+              "imagePosition": "left",
+              "textContent": {
+                "__typename": "BlockMarkup",
+                "markup": "
+    <p></p>
+    ",
+              },
             },
           ],
           "hero": {

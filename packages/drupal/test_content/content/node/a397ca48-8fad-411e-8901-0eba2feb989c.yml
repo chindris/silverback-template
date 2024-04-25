@@ -60,6 +60,32 @@ default:
 
         <!-- wp:custom/form {"formId":"contact"} /-->
 
+        <!-- wp:custom/image-with-text {"mediaEntityIds":["3a0fe860-a6d6-428a-9474-365bd57509aa"],"imagePosition":"right"} -->
+        <!-- wp:paragraph -->
+        <p>All kinds of allowed blocks</p>
+        <!-- /wp:paragraph -->
+
+        <!-- wp:list -->
+        <ul><li>bla</li></ul>
+        <!-- /wp:list -->
+
+        <!-- wp:custom/heading {"text":"Heading"} -->
+        <h2 class="wp-block-custom-heading">Heading</h2>
+        <!-- /wp:custom/heading -->
+
+        <!-- wp:table -->
+        <figure class="wp-block-table"><table><tbody><tr><td>1</td><td>2</td></tr><tr><td>3</td><td>4</td></tr></tbody></table><figcaption>Caption</figcaption></figure>
+        <!-- /wp:table -->
+
+        <!-- wp:quote -->
+        <blockquote class="wp-block-quote"><p>Quote</p><cite>Citation</cite></blockquote>
+        <!-- /wp:quote -->
+
+        <!-- wp:paragraph -->
+        <p></p>
+        <!-- /wp:paragraph -->
+        <!-- /wp:custom/image-with-text -->
+
         <!-- wp:paragraph -->
         <p>Starting from this paragraph, all the following blocks should be aggregated, as they are just HTML</p>
         <!-- /wp:paragraph -->
@@ -85,6 +111,12 @@ default:
 
         <!-- wp:custom/image-teaser {"mediaEntityIds":["72187a1f-3e48-4b45-a9b7-189c6fd7ee26"],"title":"Teaser 2","ctaUrl":"https://google.com","ctaText":"Bar"} /-->
         <!-- /wp:custom/image-teasers -->
+
+        <!-- wp:custom/cta {"url":"/en/drupal","text":"Internal CTA","data-id":"f1f827c9-ed06-4e7d-b89d-a169e70a459c","data-entity-type":"node"} /-->
+
+        <!-- wp:custom/cta {"url":"https://www.google.com","text":"External CTA","data-id":"https://www.google.com","data-entity-type":"","openInNewTab":true} /-->
+
+        <!-- wp:custom/cta {"url":"/media/1","text":"CTA with link to media","data-id":"b998ae5e-8b56-40ca-8f80-fd4404e7e716","data-entity-type":"media"} /-->
 
         <!-- wp:paragraph -->
         <p></p>
@@ -162,9 +194,11 @@ translations:
           <blockquote class="wp-block-quote"><p>Quote DE</p><cite>Citation DE</cite></blockquote>
           <!-- /wp:quote -->
 
-          <!-- wp:paragraph -->
-          <p></p>
-          <!-- /wp:paragraph -->
+          <!-- wp:custom/cta {"url":"/en/drupal","text":"Internal CTA DE","data-id":"f1f827c9-ed06-4e7d-b89d-a169e70a459c","data-entity-type":"node"} /-->
+
+          <!-- wp:custom/cta {"url":"https://www.example.com","text":"External CTA DE","data-id":"https://www.example.com","data-entity-type":"","openInNewTab":true} /-->
+
+          <!-- wp:custom/cta {"url":"/media/1","text":"CTA with link to media DE","data-id":"b998ae5e-8b56-40ca-8f80-fd4404e7e716","data-entity-type":"media"} /-->
           <!-- /wp:custom/content -->
         format: gutenberg
         summary: ''

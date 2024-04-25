@@ -27,6 +27,7 @@
     "@types/wordpress__core-data": "2.4.5",
     "@types/wordpress__data": "6.0.2",
     "@types/wordpress__editor": "13.0.0",
+    "@types/wordpress__hooks": "2.4.0",
     "@vitejs/plugin-react": "4.2.1",
     "typescript": "^5.3.3",
     "vite": "^5.0.10"
