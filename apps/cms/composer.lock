@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7fdb7073ff9cc88dcbc78224e439e65f",
+    "content-hash": "f2375207790855cc777235f699c7c2b9",
     "packages": [
         {
             "name": "amazeeio/drupal_integrations",
@@ -342,6 +342,32 @@
                 "source": "https://github.com/AmazeeLabs/silverback-cli/tree/2.9.9"
             },
             "time": "2024-01-03T06:30:01+00:00"
+        },
+        {
+            "name": "amazeelabs/silverback_autosave",
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/AmazeeLabs/silverback_autosave.git",
+                "reference": "8208ddba6d5da916bf5649b7e0e53efdf491bb7a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AmazeeLabs/silverback_autosave/zipball/8208ddba6d5da916bf5649b7e0e53efdf491bb7a",
+                "reference": "8208ddba6d5da916bf5649b7e0e53efdf491bb7a",
+                "shasum": ""
+            },
+            "type": "drupal-module",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "description": "Adds autosave feature on forms.",
+            "support": {
+                "issues": "https://github.com/AmazeeLabs/silverback_autosave/issues",
+                "source": "https://github.com/AmazeeLabs/silverback_autosave/tree/1.2.0"
+            },
+            "time": "2024-04-25T13:14:00+00:00"
         },
         {
             "name": "amazeelabs/silverback_campaign_urls",
