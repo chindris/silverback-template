@@ -52,7 +52,7 @@ test('All blocks are rendered', async ({ page }) => {
   // Quote
   await expect(
     page.locator(
-      'blockquote:text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sagittis nisi nec neque porta, a ornare ligula efficitur.")',
+      'blockquote p:text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sagittis nisi nec neque porta, a ornare ligula efficitur.")',
     ),
   ).toHaveCount(1);
   await expect(
