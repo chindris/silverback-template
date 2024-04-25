@@ -3,7 +3,7 @@ import React from 'react';
 
 export function BlockQuote(props: BlockQuoteFragment) {
   return (
-    <div className="prose lg:prose-xl prose-p:text-xl prose-p:font-bold prose-p:leading-8 prose-p:text-gray-900">
+    <div className="prose lg:prose-xl prose-p:text-xl prose-p:font-bold prose-p:leading-8 prose-p:text-[#111928]">
       <blockquote className="border-l-0 relative pl-0 pb-8 pt-16">
         <svg
           width="32"
@@ -20,7 +20,7 @@ export function BlockQuote(props: BlockQuoteFragment) {
             fill="#9CA3AF"
           />
         </svg>
-        {props.quote && <Html markup={props.quote} />}
+        <p>{props.quote && <Html markup={props.quote} />}</p>
         <div className="flex not-prose items-center flex-wrap">
           {props.image && (
             <Image
@@ -29,7 +29,7 @@ export function BlockQuote(props: BlockQuoteFragment) {
               alt={props.image.alt || 'Author image'}
             />
           )}
-          <div className="not-italic text-base">
+          <div className="not-italic text-base font-semibold">
             {props.author && <p className="not-prose">{props.author}</p>}
           </div>
           {props.role && (
