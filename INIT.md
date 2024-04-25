@@ -74,7 +74,7 @@ const publisherClientSecret = randomString(32);
 replace(
   ['apps/cms/.lagoon.env', 'apps/website/.lagoon.env'],
   'PUBLISHER_OAUTH2_CLIENT_SECRET=REPLACE_ME',
-  `PUBLISHER_OAUTH2_CLIENT_SECRET='${publisherClientSecret}`,
+  `PUBLISHER_OAUTH2_CLIENT_SECRET=${publisherClientSecret}`,
 );
 const publisherSessionSecret = randomString(32);
 replace(
