@@ -23,6 +23,8 @@ Other steps
 
 - [Create a new Lagoon project](https://amazeelabs.atlassian.net/wiki/spaces/ALU/pages/368115717/Create+a+new+Lagoon+project)
 - [Create a new Netlify project](https://amazeelabs.atlassian.net/wiki/spaces/ALU/pages/368017428/Create+a+new+Netlify+project)
+- Set `AUTH_DRUPAL_ID` and `AUTH_DRUPAL_SECRET` in
+  [Netlify environment variables](#gatsby-authentication--sso)
 - Check the [Environment overrides](#environment-overrides) section below
 - Check the [Choose a CMS](#choose-a-cms) section below
 - Create `dev` and `prod` branches (and optionally `stage`) from `release`
@@ -223,6 +225,9 @@ Authentication providers are relying on Auth.js (formerly Next-Auth) and can be
 configured in `/apps/website/nextauth.config.js`
 
 An example provider is available for Drupal.
+
+Netlify environment variables are required are displayed in the console when
+running `pnpx @amazeelabs/mzx run INIT.md`.
 
 <details>
   <summary>How it works</summary>

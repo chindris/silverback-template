@@ -70,17 +70,28 @@ replace(
   'PROJECT_NAME=example',
   'PROJECT_NAME=' + process.env.PROJECT_NAME_MACHINE,
 );
-const clientSecret = randomString(32);
+const publisherClientSecret = randomString(32);
 replace(
   ['apps/cms/.lagoon.env', 'apps/website/.lagoon.env'],
   'PUBLISHER_OAUTH2_CLIENT_SECRET=REPLACE_ME',
-  'PUBLISHER_OAUTH2_CLIENT_SECRET=' + clientSecret,
+  `PUBLISHER_OAUTH2_CLIENT_SECRET='${publisherClientSecret}`,
 );
-const sessionSecret = randomString(32);
+const publisherSessionSecret = randomString(32);
 replace(
   ['apps/website/.lagoon.env'],
   'PUBLISHER_OAUTH2_SESSION_SECRET=REPLACE_ME',
-  'PUBLISHER_OAUTH2_SESSION_SECRET=' + sessionSecret,
+  `PUBLISHER_OAUTH2_SESSION_SECRET=${publisherSessionSecret}`,
+);
+const websiteClientSecret = randomString(32);
+replace(
+  ['apps/cms/.lagoon.env'],
+  'WEBSITE_OAUTH2_CLIENT_SECRET=REPLACE_ME',
+  `WEBSITE_OAUTH2_CLIENT_SECRET=${websiteClientSecret}`,
+);
+console.log(
+  'Website OAuth2 environment variables to be set in Netlify',
+  `AUTH_DRUPAL_ID: website`,
+  `AUTH_DRUPAL_SECRET: ${websiteClientSecret}`,
 );
 // Template's prod domain is special.
 replace(
