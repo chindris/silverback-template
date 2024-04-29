@@ -36,6 +36,8 @@ environments:
           - example.cms.amazeelabs.dev
       - build:
           - example.build.amazeelabs.dev
+      - preview:
+          - example.preview.amazeelabs.dev
     cronjobs:
       - name: drush cron
         schedule: '*/15 * * * *'
@@ -47,6 +49,8 @@ environments:
           - stage-example.cms.amazeelabs.dev
       - build:
           - stage-example.build.amazeelabs.dev
+      - preview:
+          - stage-example.preview.amazeelabs.dev
     cronjobs:
       - name: drush cron
         schedule: '*/15 * * * *'
@@ -58,6 +62,8 @@ environments:
           - dev-example.cms.amazeelabs.dev
       - build:
           - dev-example.build.amazeelabs.dev
+      - preview:
+          - dev-example.preview.amazeelabs.dev
     cronjobs:
       - name: drush cron
         schedule: '*/15 * * * *'

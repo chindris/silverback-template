@@ -72,6 +72,27 @@ test('Blocks', async () => {
             __typename
           }
         }
+        ... on BlockImageWithText {
+          image {
+            __typename
+          }
+          imagePosition
+          textContent {
+            __typename
+            markup
+          }
+        }
+        ... on BlockQuote {
+          quote
+          author
+          role
+          image {
+            __typename
+          }
+        }
+        ... on BlockHorizontalSeparator {
+          __typename
+        }
       }
     }
     {
@@ -108,6 +129,9 @@ test('Blocks', async () => {
     ",
             },
             {
+              "__typename": "BlockHorizontalSeparator",
+            },
+            {
               "__typename": "BlockMedia",
               "caption": "Media image",
               "media": {
@@ -130,6 +154,7 @@ test('Blocks', async () => {
               "image": {
                 "__typename": "MediaImage",
               },
+              "imagePosition": "right",
               "textContent": {
                 "__typename": "BlockMarkup",
                 "markup": "
@@ -266,6 +291,7 @@ test('Blocks', async () => {
             {
               "__typename": "BlockImageWithText",
               "image": null,
+              "imagePosition": "left",
               "textContent": {
                 "__typename": "BlockMarkup",
                 "markup": "

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json.schemastore.org/eslintrc.json",
+  "extends": ["plugin:storybook/recommended", "plugin:tailwindcss/recommended"],
+  "plugins": ["tailwindcss", "formatjs"],
+  "rules": {
+    "react/jsx-no-literals": [
+      "warn",
+      {
+        "noStrings": true,
+        "ignoreProps": true,
+        "noAttributeStrings": false
+      }
+    ],
+    "formatjs/enforce-default-message": "error",
+    "formatjs/enforce-id": [
+      "error",
+      {
+        "idInterpolationPattern": "[sha512:contenthash:base64:6]"
+      }
+    ],
+    "formatjs/enforce-placeholders": "error",
+    "formatjs/no-camel-case": "error",
+    "tailwindcss/classnames-order": [0]
+  }
+}

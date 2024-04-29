@@ -4,8 +4,15 @@ import {
   OperationVariables,
   useExecutor,
 } from '@custom/schema';
-import useSwr, { SWRResponse } from 'swr';
+import useSwr, { mutate, SWRResponse } from 'swr';
 import useSWRMutation, { SWRMutationResponse } from 'swr/mutation';
+
+export function clear<TOperation extends AnyOperationId>(
+  operation: TOperation,
+  variables?: OperationVariables<TOperation>,
+) {
+  mutate([operation, variables]);
+}
 
 export function useOperation<TOperation extends AnyOperationId>(
   operation: TOperation,
@@ -18,9 +25,12 @@ export function useOperation<TOperation extends AnyOperationId>(
     // If the executor is not a function, pass null to SWR,
     // so it does not try to fetch.
     executor instanceof Function ? (arg) => executor(arg[1]) : null,
-    {
-      suspense: false,
-    },
+    variables?.pathname?.indexOf('__preview') > 0
+      ? {
+          suspense: false,
+          keepPreviousData: true,
+        }
+      : { suspense: false },
   );
   return executor instanceof Function
     ? result
