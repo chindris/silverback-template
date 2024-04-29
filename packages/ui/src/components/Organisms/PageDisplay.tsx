@@ -6,6 +6,7 @@ import { UnreachableCaseError } from '../../utils/unreachable-case-error';
 import { PageTransition } from '../Molecules/PageTransition';
 import { BlockCta } from './PageContent/BlockCta';
 import { BlockForm } from './PageContent/BlockForm';
+import { BlockHorizontalSeparator } from './PageContent/BlockHorizontalSeparator';
 import { BlockMarkup } from './PageContent/BlockMarkup';
 import { BlockMedia } from './PageContent/BlockMedia';
 import { BlockQuote } from './PageContent/BlockQuote';
@@ -60,6 +61,8 @@ export function PageDisplay(page: PageFragment) {
                   );
                 case 'BlockQuote':
                   return <BlockQuote key={index} {...block} />;
+                case 'BlockHorizontalSeparator':
+                  return <BlockHorizontalSeparator key={index} {...block} />;
                 default:
                   throw new UnreachableCaseError(block);
               }

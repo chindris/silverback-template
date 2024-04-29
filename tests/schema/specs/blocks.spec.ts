@@ -71,6 +71,9 @@ test('Blocks', async () => {
             __typename
           }
         }
+        ... on BlockHorizontalSeparator {
+          __typename
+        }
       }
     }
     {
@@ -105,6 +108,9 @@ test('Blocks', async () => {
               "markup": "
     <p>A standalone paragraph with <strong><em>markup</em></strong> and <a href="/en/architecture" data-type="Content: Basic page" data-id="[numeric]" data-entity-type="node">link</a></p>
     ",
+            },
+            {
+              "__typename": "BlockHorizontalSeparator",
             },
             {
               "__typename": "BlockMedia",

@@ -22,6 +22,9 @@ test('All blocks are rendered', async ({ page }) => {
     page.locator('a:text("link")[href="/en/architecture"]'),
   ).toHaveCount(1);
 
+  // Horizontal separator.
+  await expect(page.locator('hr')).toHaveCount(1);
+
   // Image
   await expect(
     page.locator(
