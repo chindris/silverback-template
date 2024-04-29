@@ -37,6 +37,7 @@
     "@custom/gutenberg_blocks": "workspace:*",
     "@custom/schema": "workspace:*",
     "@custom/test_content": "workspace:*",
-    "@custom/ui": "workspace:*"
+    "@custom/ui": "workspace:*",
+    "@custom/preview": "workspace:*"
   }
 }

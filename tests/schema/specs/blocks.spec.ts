@@ -53,6 +53,24 @@ test('Blocks', async () => {
           text
           openInNewTab
         }
+        ... on BlockImageWithText {
+          image {
+            __typename
+          }
+          imagePosition
+          textContent {
+            __typename
+            markup
+          }
+        }
+        ... on BlockQuote {
+          quote
+          author
+          role
+          image {
+            __typename
+          }
+        }
       }
     }
     {
@@ -107,6 +125,29 @@ test('Blocks', async () => {
               "url": "http://127.0.0.1:8000/en/form/contact",
             },
             {
+              "__typename": "BlockImageWithText",
+              "image": {
+                "__typename": "MediaImage",
+              },
+              "imagePosition": "right",
+              "textContent": {
+                "__typename": "BlockMarkup",
+                "markup": "
+    <p>All kinds of allowed blocks</p>
+
+    <ul><li>bla</li></ul>
+
+    <h2 class="wp-block-custom-heading">Heading</h2>
+
+    <figure class="wp-block-table"><table><tbody><tr><td>1</td><td>2</td></tr><tr><td>3</td><td>4</td></tr></tbody></table><figcaption>Caption</figcaption></figure>
+
+    <blockquote class="wp-block-quote"><p>Quote</p><cite>Citation</cite></blockquote>
+
+    <p></p>
+    ",
+              },
+            },
+            {
               "__typename": "BlockMarkup",
               "markup": "
     <p>Starting from this paragraph, all the following blocks should be aggregated, as they are just HTML</p>
@@ -116,8 +157,6 @@ test('Blocks', async () => {
     <ul><li>list 1</li><li>list 2<ol><li>list 2.2</li></ol></li></ul>
 
     <h3 class="wp-block-custom-heading">Heading 3</h3>
-
-    <blockquote class="wp-block-quote"><p>Quote</p><cite>Citation</cite></blockquote>
     ",
             },
             {
@@ -162,6 +201,15 @@ test('Blocks', async () => {
               "url": "/media/[numeric]",
             },
             {
+              "__typename": "BlockQuote",
+              "author": "John Doe",
+              "image": {
+                "__typename": "MediaImage",
+              },
+              "quote": "Lorem ipsum dolor sit amet, <strong>consectetur</strong> adipiscing elit. Vivamus sagittis nisi nec neque porta, a ornare ligula efficitur.",
+              "role": "Project manager",
+            },
+            {
               "__typename": "BlockMarkup",
               "markup": "
     <p></p>
@@ -198,8 +246,6 @@ test('Blocks', async () => {
 
     <figure class="wp-block-table"><table><tbody><tr><td></td><td></td></tr><tr><td></td><td></td></tr></tbody></table></figure>
 
-    <blockquote class="wp-block-quote"><p></p></blockquote>
-
     <h2 class="wp-block-custom-heading"></h2>
     ",
             },
@@ -208,6 +254,24 @@ test('Blocks', async () => {
               "openInNewTab": null,
               "text": null,
               "url": null,
+            },
+            {
+              "__typename": "BlockImageWithText",
+              "image": null,
+              "imagePosition": "left",
+              "textContent": {
+                "__typename": "BlockMarkup",
+                "markup": "
+    <p></p>
+    ",
+              },
+            },
+            {
+              "__typename": "BlockQuote",
+              "author": "Jane Doe",
+              "image": null,
+              "quote": "In vitae diam quis odio tincidunt faucibus eget ut libero",
+              "role": null,
             },
           ],
           "hero": {
