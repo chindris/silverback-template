@@ -35,6 +35,7 @@ fragment Page on Page {
     ...BlockCta
     ...BlockImageWithText
     ...BlockQuote
+    ...BlockHorizontalSeparator
   }
   metaTags {
     tag
