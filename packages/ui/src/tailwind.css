@@ -34,3 +34,7 @@
   )::after {
   content: '' !important;
 }
+
+.default-hero + div > :first-child.block-background-image-cards {
+  @apply mt-2 px-0;
+}
