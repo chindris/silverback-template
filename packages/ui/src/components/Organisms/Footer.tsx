@@ -1,23 +1,23 @@
+import { useIntl } from '@amazeelabs/react-intl';
 import { FrameQuery, Link } from '@custom/schema';
 import React from 'react';
-import { useIntl } from 'react-intl';
 
 import { isTruthy } from '../../utils/isTruthy';
 import { buildNavigationTree } from '../../utils/navigation';
 import { useOperation } from '../../utils/operation';
 
-function useFooterNavigation(lang: string = 'en') {
+async function useFooterNavigation(lang: string = 'en') {
   return (
-    useOperation(FrameQuery)
-      .data?.footerNavigation?.filter((nav) => nav?.locale === lang)
+    (await useOperation(FrameQuery)).footerNavigation
+      ?.filter((nav) => nav?.locale === lang)
       .pop()
       ?.items.filter(isTruthy) || []
   );
 }
 
-export function Footer() {
+export async function Footer() {
   const intl = useIntl();
-  const items = buildNavigationTree(useFooterNavigation(intl.locale));
+  const items = buildNavigationTree(await useFooterNavigation(intl.locale));
   return (
     <footer
       id="footer"

@@ -1,4 +1,5 @@
 import {
+  ExecuteOperation as UntypedExecuteOperation,
   OperationExecutor as UntypedOperationExecutor,
   useExecutor as untypedUseExecutor,
 } from '@amazeelabs/executors';
@@ -32,8 +33,20 @@ export function OperationExecutor<OperationId extends AnyOperationId>(
     variables?: VariablesMatcher<OperationVariables<OperationId>>;
     executor: Executor<OperationId>;
   }>,
-) {
+): JSX.Element {
   return UntypedOperationExecutor(props);
+}
+
+export function ExecuteOperation<OperationId extends AnyOperationId>(props: {
+  id: OperationId;
+  variables?: OperationVariables<OperationId>;
+  children: (result: {
+    loading: boolean;
+    result: OperationResult<OperationId>;
+  }) => JSX.Element;
+}): JSX.Element {
+  return UntypedExecuteOperation(props) as JSX.Element;
+
 }
 
 export function useExecutor<OperationId extends AnyOperationId>(

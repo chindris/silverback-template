@@ -3,7 +3,7 @@ import '../src/tailwind.css';
 import { LocationProvider } from '@custom/schema';
 import { Decorator } from '@storybook/react';
 import React from 'react';
-import { IntlProvider } from 'react-intl';
+import { IntlProvider } from '@amazeelabs/react-intl';
 import { SWRConfig, useSWRConfig } from 'swr';
 
 // Every story is wrapped in an IntlProvider by default.

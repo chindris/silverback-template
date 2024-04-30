@@ -1,17 +1,25 @@
-import { FrameQuery, Locale, useLocale } from '@custom/schema';
-import { AnimatePresence, useReducedMotion } from 'framer-motion';
-import React, { PropsWithChildren } from 'react';
-import { IntlProvider } from 'react-intl';
+import { IntlProvider } from '@amazeelabs/react-intl';
+import {
+  ExecuteOperation,
+  FrameQuery,
+  Locale,
+  useLocale,
+} from '@custom/schema';
+import React, { PropsWithChildren, ReactNode } from 'react';
 
 import translationSources from '../../../build/translatables.json';
 import { useOperation } from '../../utils/operation';
 import { TranslationsProvider } from '../../utils/translations';
-import { Footer } from '../Organisms/Footer';
-import { Header } from '../Organisms/Header';
 
 function filterByLocale(locale: Locale) {
   return (str: Exclude<FrameQuery['stringTranslations'], undefined>[number]) =>
     str.language === locale;
+}
+
+function hasTranslation<T extends { translation?: string }>(
+  value: T,
+): value is T & { translation: string } {
+  return !!value?.translation;
 }
 
 function translationsMap(translatables: FrameQuery['stringTranslations']) {
@@ -25,49 +33,53 @@ function translationsMap(translatables: FrameQuery['stringTranslations']) {
         (tr) => tr.__typename === 'DrupalTranslatableString',
       ) || []),
     ]
-      .filter((tr) => tr.translation)
+      .filter(hasTranslation)
       .map((tr) => [tr.source, tr.translation]),
   );
 }
 
-function useTranslations() {
+function Translations({
+  children,
+}: {
+  children: (translations: Record<string, string>) => JSX.Element;
+}) {
   const locale = useLocale();
-  const translations = useOperation(FrameQuery).data?.stringTranslations;
-  return {
-    ...translationsMap(translations?.filter(filterByLocale('en')) || []),
-    ...translationsMap(translations?.filter(filterByLocale(locale)) || []),
-  };
+  return (
+    <ExecuteOperation id={FrameQuery}>
+      {({ result }) => {
+        return children({
+          ...translationsMap(
+            result.stringTranslations?.filter(filterByLocale('en')) || [],
+          ),
+          ...translationsMap(
+            result.stringTranslations?.filter(filterByLocale(locale)) || [],
+          ),
+        });
+      }}
+    </ExecuteOperation>
+  );
 }
 
-export function Frame(props: PropsWithChildren<{}>) {
-  const locale = useLocale();
-  const translations = useTranslations();
-  const messages = Object.fromEntries(
-    Object.keys(translationSources).map((key) => [
-      key,
-      translations[
-        translationSources[key as keyof typeof translationSources]
-          .defaultMessage
-      ] ||
-        translationSources[key as keyof typeof translationSources]
-          .defaultMessage,
-    ]),
-  );
+export async function Frame({ children }: PropsWithChildren<{}>) {
+  // const locale = useLocale();
+  // const translations = await useTranslations();
+  // const messages = Object.fromEntries(
+  //   Object.keys(translationSources).map((key) => [
+  //     key,
+  //     translations[
+  //       translationSources[key as keyof typeof translationSources]
+  //         .defaultMessage
+  //     ] ||
+  //       translationSources[key as keyof typeof translationSources]
+  //         .defaultMessage,
+  //   ]),
+  // );
   return (
-    <IntlProvider locale={locale} messages={messages}>
-      <TranslationsProvider>
-        <Header />
-        <main>
-          {useReducedMotion() ? (
-            <>{props.children}</>
-          ) : (
-            <AnimatePresence mode="wait" initial={false}>
-              {props.children}
-            </AnimatePresence>
-          )}
-        </main>
-        <Footer />
-      </TranslationsProvider>
-    </IntlProvider>
+    <Translations>
+      {
+        (translations) => <>{children}</>
+        // <IntlProvider messages={translations}>{props.children}</IntlProvider>
+      }
+    </Translations>
   );
 }

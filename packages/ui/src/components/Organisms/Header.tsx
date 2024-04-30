@@ -1,7 +1,7 @@
+import { useIntl } from '@amazeelabs/react-intl';
 import { FrameQuery, Link, Url } from '@custom/schema';
 import clsx from 'clsx';
 import React from 'react';
-import { useIntl } from 'react-intl';
 
 import { isTruthy } from '../../utils/isTruthy';
 import { buildNavigationTree } from '../../utils/navigation';
@@ -19,18 +19,18 @@ import {
 } from '../Client/MobileMenu';
 import { LanguageSwitcher } from '../Molecules/LanguageSwitcher';
 
-function useHeaderNavigation(lang: string = 'en') {
+async function useHeaderNavigation(lang: string = 'en') {
   return (
-    useOperation(FrameQuery)
-      .data?.mainNavigation?.filter((nav) => nav?.locale === lang)
+    (await useOperation(FrameQuery)).mainNavigation
+      ?.filter((nav) => nav?.locale === lang)
       .pop()
       ?.items.filter(isTruthy) || []
   );
 }
 
-export function Header() {
+export async function Header() {
   const intl = useIntl();
-  const items = buildNavigationTree(useHeaderNavigation(intl.locale));
+  const items = buildNavigationTree(await useHeaderNavigation(intl.locale));
 
   return (
     <MobileMenuProvider>

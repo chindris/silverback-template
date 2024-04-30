@@ -46,7 +46,9 @@
     "gatsby-plugin-sharp": "5.13.1",
     "sharp": "0.33.1",
     "eslint": "7",
-    "graphql": "16.8.1"
+    "graphql": "16.8.1",
+    "react": "19.0.0-canary-e3ebcd54b-20240405",
+    "react-dom": "19.0.0-canary-e3ebcd54b-20240405"
   },
   "pnpm": {
     "patchedDependencies": {}

@@ -4,6 +4,13 @@ scalar ImageSource @default @value(string: "")
 scalar JSONString @default @value(string: "{}")
 
 """
+Access restrictions for the country selection overlay.
+Provided by the "custom" module.
+Implemented in "Drupal\custom\Plugin\GraphQL\Directive\ListEntities".
+"""
+directive @listEntities(type: String!, bundle: String!) repeatable on FIELD_DEFINITION | SCALAR | UNION | ENUM | INTERFACE | OBJECT
+
+"""
 implementation(drupal): custom.webform::url
 """
 directive @webformIdToUrl(id: String!) on FIELD_DEFINITION
@@ -256,13 +263,14 @@ type Query {
   mainNavigations: [MainNavigation] @gatsbyNodes(type: "MainNavigation")
   footerNavigations: [FooterNavigation] @gatsbyNodes(type: "FooterNavigation")
 
-  allPages: [Page] @gatsbyNodes(type: "Page")
+  allPages: [Page]
+    @gatsbyNodes(type: "Page")
+    @listEntities(type: "node", bundle: "page")
   websiteSettings: WebsiteSettings
   viewPage(path: String!): Page @route(path: "$path") @loadEntity
 
   contentHub(locale: Locale!, args: String): ContentHubResult!
     @lang(code: "$locale")
-    @drupalView(id: "content_hub:default", args: "$args")
 
   stringTranslations: [TranslatableString!]
     @gatsbyNodes(type: "TranslatableString")

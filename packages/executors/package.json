@@ -1,0 +1,50 @@
+{
+  "name": "@amazeelabs/executors",
+  "version": "2.0.4",
+  "description": "",
+  "main": "build/client.js",
+  "types": "types.d.ts",
+  "private": false,
+  "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "type": "module",
+  "scripts": {
+    "prep": "tsc",
+    "watch": "tsc --watch",
+    "build": "pnpm prep",
+    "test:unit": "vitest run",
+    "test:static": "tsc --noEmit && eslint \"**/*.{ts,tsx,js,jsx}\" --ignore-path=\"./.gitignore\" --fix"
+  },
+  "exports": {
+    ".": {
+      "react-server": "./build/server.js",
+      "default": "./build/client.js"
+    }
+  },
+  "keywords": [],
+  "author": "Amazee Labs <development@amazeelabs.com>",
+  "license": "ISC",
+  "dependencies": {
+    "lodash-es": "^4.17.21"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@amazeelabs/eslint-config": "1.4.43",
+    "@amazeelabs/prettier-config": "1.1.3",
+    "@testing-library/react": "14.3.1",
+    "@types/lodash-es": "4.17.12",
+    "@types/react": "18.2.78",
+    "@types/react-dom": "18.2.25",
+    "eslint": "8.57.0",
+    "prettier": "3.2.5",
+    "rollup": "4.14.3",
+    "rollup-plugin-dts": "6.1.0",
+    "typescript": "5.4.5",
+    "vitest": "1.5.0"
+  }
+}
