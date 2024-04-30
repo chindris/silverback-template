@@ -42,17 +42,12 @@ const plugins = [
   {
     resolve: 'gatsby-plugin-netlify',
     options: {
-      // To avoid "X-Frame-Options: DENY" and let it work in the preview
-      // iframe.
+      // To avoid "X-Frame-Options: DENY" in Drupal iframes.
       mergeSecurityHeaders: false,
     },
   },
   {
-    // TODO: Move preview to Drupal and remove this.
     resolve: 'gatsby-plugin-sitemap',
-    options: {
-      excludes: ['/__preview/**'],
-    },
   },
   {
     resolve: 'gatsby-plugin-robots-txt',

@@ -1,0 +1,33 @@
+uuid: 195a40ca-6da4-4e2e-bc2f-c9c1fc0385bb
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.quote
+    - field.field.media.image.field_media_image
+    - image.style.quote
+    - media.type.image
+  module:
+    - image
+id: media.image.quote
+targetEntityType: media
+bundle: image
+mode: quote
+content:
+  field_media_image:
+    type: image
+    label: visually_hidden
+    settings:
+      image_link: ''
+      image_style: quote
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  created: true
+  langcode: true
+  name: true
+  thumbnail: true
+  uid: true

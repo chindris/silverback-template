@@ -7,3 +7,6 @@ services:
   custom.webform:
     class: Drupal\custom\Webform
     arguments: ['@renderer', '@entity_type.manager', '@serializer']
+
+  custom.menus:
+    class: Drupal\custom\Menus

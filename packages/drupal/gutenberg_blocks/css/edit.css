@@ -7,6 +7,12 @@
   margin:0;
 }
 
+.gutenberg__editor blockquote .quote-image img {
+  object-fit: cover;
+  max-width: 100%;
+  border-radius: 9999px;
+}
+
 .gutenberg__editor blockquote::before,
 .gutenberg__editor blockquote::after {
   content: '';
