@@ -34,3 +34,41 @@
   )::after {
   content: '' !important;
 }
+
+ul li {
+  @apply !text-base !font-medium !text-gray-900;
+}
+
+.list-style--arrows li,
+.list-style--checkmarks li,
+.list-style--question-marks li {
+  list-style-type: none;
+  position: relative;
+}
+
+.list-style--arrows li::before {
+  position: absolute;
+  left: -1.25rem;
+  vertical-align: middle;
+  line-height: 1.5rem;
+  margin-top: 2px;
+  content: url('static/icons/arrow.svg');
+}
+
+.list-style--checkmarks li::before {
+  position: absolute;
+  left: -1.25rem;
+  vertical-align: middle;
+  line-height: 1.5rem;
+  margin-top: 2px;
+  content: url('static/icons/check.svg');
+}
+
+.list-style--question-marks li::before {
+  position: absolute;
+  left: -1.25rem;
+  vertical-align: middle;
+  line-height: 1.5rem;
+  margin-top: 1px;
+  content: url('static/icons/question-mark-circle.svg');
+}

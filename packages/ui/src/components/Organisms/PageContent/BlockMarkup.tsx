@@ -1,5 +1,4 @@
 import { BlockMarkupFragment, Html } from '@custom/schema';
-import { ArrowRightCircleIcon } from '@heroicons/react/20/solid';
 import clsx from 'clsx';
 import type { Element } from 'hast';
 import { selectAll } from 'hast-util-select';
@@ -21,33 +20,11 @@ export function BlockMarkup(props: BlockMarkupFragment) {
         'prose-em:text-indigo-600',
         'prose-strong:text-indigo-600',
         'marker:text-indigo-600 marker:font-bold',
-        'prose-h2:text-indigo-600 prose-h2:font-bold',
       ])}
     >
       <Html
         plugins={[unorderedItems]}
         components={{
-          li: ({
-            unordered,
-            children,
-            className,
-            ...props
-          }: PropsWithChildren<{
-            unordered?: boolean;
-            className?: string;
-          }>) => {
-            return (
-              <li
-                {...props}
-                className={clsx(className, { 'list-none relative': unordered })}
-              >
-                {unordered ? (
-                  <ArrowRightCircleIcon className="not-prose w-6 h-6 absolute mt-1.5 left-[-1.5em] text-indigo-600" />
-                ) : null}
-                {children}
-              </li>
-            );
-          },
           blockquote: ({ children }: PropsWithChildren<{}>) => {
             return (
               <blockquote className="border-l-0 relative pl-0">
