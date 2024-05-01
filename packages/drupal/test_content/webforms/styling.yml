@@ -25,12 +25,17 @@ elements: |-
       Foo: Foo
       Bar: 'Bar -- Bar has a description.'
       Baz: Baz
-  textfield:
-    '#type': textfield
-    '#title': Textfield
-    '#description': 'Textfield description.'
-    '#placeholder': 'Placeholder goes here'
-    '#required': true
+  flexbox:
+    '#type': webform_flexbox
+    textfield:
+      '#type': textfield
+      '#title': 'First name'
+      '#description': 'Textfield description.'
+      '#placeholder': 'Placeholder goes here'
+      '#required': true
+    last_name:
+      '#type': textfield
+      '#title': 'Last name'
   email_with_a_conformation:
     '#type': webform_email_confirm
     '#title': 'Email with a confirmation'
