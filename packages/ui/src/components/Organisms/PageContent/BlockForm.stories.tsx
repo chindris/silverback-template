@@ -21,3 +21,17 @@ export const Error = {
     cssStylesToInject: cmsCss,
   },
 } satisfies StoryObj<typeof BlockForm>;
+
+export const TermsOfServiceModal = {
+  args: {
+    url: 'webforms/terms-of-service-modal/index.html' as Url,
+    cssStylesToInject: cmsCss,
+  },
+} satisfies StoryObj<typeof BlockForm>;
+
+export const TermsOfServiceSlideout = {
+  args: {
+    url: 'webforms/terms-of-service-slideout/index.html' as Url,
+    cssStylesToInject: cmsCss,
+  },
+} satisfies StoryObj<typeof BlockForm>;
