@@ -52,7 +52,7 @@ ul li {
   vertical-align: middle;
   line-height: 1.5rem;
   margin-top: 2px;
-  content: url('static/icons/arrow.svg');
+  content: url('../static/icons/arrow.svg');
 }
 
 .list-style--checkmarks li::before {
@@ -61,7 +61,7 @@ ul li {
   vertical-align: middle;
   line-height: 1.5rem;
   margin-top: 2px;
-  content: url('static/icons/check.svg');
+  content: url('../static/icons/check.svg');
 }
 
 .list-style--question-marks li::before {
@@ -70,5 +70,5 @@ ul li {
   vertical-align: middle;
   line-height: 1.5rem;
   margin-top: 1px;
-  content: url('static/icons/question-mark-circle.svg');
+  content: url('../static/icons/question-mark-circle.svg');
 }
