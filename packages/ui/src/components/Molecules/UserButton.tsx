@@ -1,4 +1,4 @@
-import { Link } from '@custom/schema';
+import { Link, Url } from '@custom/schema';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import React from 'react';
 import { useIntl } from 'react-intl';
@@ -6,16 +6,12 @@ import { useIntl } from 'react-intl';
 export function UserButton() {
   const session = useSession();
   const intl = useIntl();
-  const hostWithScheme =
-    typeof window !== 'undefined'
-      ? `${location.protocol}//${location.host}`
-      : '';
   return (
     <>
       {!session && <></>}
       {session?.status !== 'authenticated' && (
         <Link
-          href={new URL(`${hostWithScheme}/api/auth/signin`)}
+          href={'/api/auth/signin' as Url}
           className="text-gray-500 underline"
           onClick={(e) => {
             e.preventDefault();
@@ -31,7 +27,7 @@ export function UserButton() {
       {session?.status === 'authenticated' && session.data.user && (
         <>
           <Link
-            href={new URL(`${hostWithScheme}/${intl.locale}/profile`)}
+            href={`/${intl.locale}/profile` as Url}
             className="text-gray-700 mr-2"
           >
             {session.data.user.name
@@ -39,7 +35,7 @@ export function UserButton() {
               : session.data.user.email}
           </Link>
           <Link
-            href={new URL(`${hostWithScheme}/api/auth/signout`)}
+            href={'/api/auth/signout' as Url}
             className="text-gray-500"
             onClick={(e) => {
               e.preventDefault();
