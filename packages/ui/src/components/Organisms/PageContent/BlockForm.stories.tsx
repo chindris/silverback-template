@@ -19,6 +19,5 @@ export const Error = {
   args: {
     url: 'webforms/error/index.html' as Url,
     cssStylesToInject: cmsCss,
-    className: 'mt-16',
   },
 } satisfies StoryObj<typeof BlockForm>;

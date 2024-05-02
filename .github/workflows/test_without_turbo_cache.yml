@@ -3,11 +3,14 @@ on:
   workflow_dispatch:
 
 jobs:
-
   test:
     name: Test
     runs-on: ubuntu-20.04
     steps:
+      - name: Init check
+        if: ${{ github.repository != 'AmazeeLabs/silverback-template'}}
+        run: echo 'Please run the INIT script. See the root README.md for instructions.' && false
+
       - name: Checkout
         uses: actions/checkout@v3
         with:
@@ -16,8 +19,18 @@ jobs:
       - name: Setup
         uses: ./.github/actions/setup
 
+      - name: TurboRepo local server
+        uses: felixmosh/turborepo-gh-artifacts@v2
+        with:
+          server-token: 'local'
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Test
-        run: pnpm turbo:test
+        run: pnpm turbo:test:force
+        env:
+          TURBO_API: 'http://127.0.0.1:9080'
+          TURBO_TOKEN: 'local'
+          TURBO_TEAM: 'local'
 
       - name: Upload Playwright report
         uses: actions/upload-artifact@v3
