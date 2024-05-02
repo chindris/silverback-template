@@ -76,6 +76,13 @@ export function Header() {
                 </Link>
               ) : (
                 <DesktopMenuDropDown title={item.title} key={item.title}>
+                  <Link
+                    key={item.target}
+                    href={item.target}
+                    className="m-1.5 block hover:text-blue-600 p-2 text-sm leading-[1.25rem] text-gray-900 font-bold"
+                  >
+                    {item.title}
+                  </Link>
                   {item.children.map((child) =>
                     child.children.length === 0 ? (
                       <Link
@@ -126,6 +133,14 @@ export function Header() {
                       key={item.title}
                       nestLevel={1}
                     >
+                      <Link
+                        key={item.target}
+                        href={item.target}
+                        title={item.title}
+                        className="block hover:text-blue-600 py-4 pr-8 pl-10 text-base text-gray-600"
+                      >
+                        {item.title}
+                      </Link>
                       {item.children.map((child) =>
                         child.children.length === 0 ? (
                           <Link
