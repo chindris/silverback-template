@@ -250,7 +250,7 @@ A `Website` consumer is created in Drupal `/admin/config/services/consumer` with
 - Label: `Website`
 - Client ID: `website`
 - Secret: a random string matching `AUTH_DRUPAL_SECRET`
-- Redirect URI: `[netlify-gatsby-site-url]/oauth/callback`
+- Redirect URI: `[netlify-gatsby-site-url]/api/auth/callback/drupal`
 
 #### Other providers
 
