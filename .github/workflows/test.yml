@@ -59,6 +59,7 @@ jobs:
           storybookBaseDir: packages/ui
           onlyChanged: true
           exitOnceUploaded: true
+          externals: packages/ui/static/stories/webforms/**
         if: ${{ steps.chromatic-check.outputs.available == 'true' }}
 
       - name: Deploy storybook to netlify

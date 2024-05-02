@@ -5,6 +5,8 @@ import { execSync } from 'child_process';
 import { cmsUrl } from '../helpers/url';
 
 const baseDir = '../../packages/ui/static/stories/webforms';
+const iframeResizerSelector =
+  'script[src*="silverback_iframe/js/iframeResizer.contentWindow.min.js"]';
 
 test('Export webforms for styling', async ({ page }) => {
   execSync(`rm -rf ${baseDir}`);
@@ -12,6 +14,7 @@ test('Export webforms for styling', async ({ page }) => {
   const baseUrl = cmsUrl('/en/form/styling?iframe=true&no_css=true');
 
   await page.goto(baseUrl);
+  await expect(page.locator(iframeResizerSelector)).toHaveCount(1);
   await savePage(page, 'idle');
 
   await page.getByLabel('Email with a confirmation').fill('asd@asd');
@@ -19,6 +22,7 @@ test('Export webforms for styling', async ({ page }) => {
   await expect(
     page.locator('[data-drupal-messages] [role="alert"]'),
   ).toBeVisible();
+  await expect(page.locator(iframeResizerSelector)).toHaveCount(1);
   await savePage(page, 'error');
 });
 
