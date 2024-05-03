@@ -248,7 +248,7 @@ type BlockImageTeaser @default @value {
 }
 
 type BlockAccordion @type(id: "custom/accordion") {
-  items: [BlockAccordionItemText]! @resolveEditorBlockChildren
+  items: [BlockAccordionItemText!]! @resolveEditorBlockChildren
 }
 
 type BlockAccordionItemText @default @value {
