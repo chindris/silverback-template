@@ -1,5 +1,6 @@
 /* Import all atom stylesheets. */
 @import './components/Atoms/Container.css';
+@import './components/Atoms/List.css';
 
 @tailwind base;
 @tailwind components;
@@ -33,53 +34,4 @@
     :where([class~='not-prose'], [class~='not-prose'] *)
   )::after {
   content: '' !important;
-}
-
-ul li {
-  @apply !text-base !font-medium !text-gray-900;
-}
-
-ul {
-  @apply  !pl-4;
-
-}
-
-.list-style--arrows li,
-.list-style--checkmarks li,
-.list-style--question-marks li {
-  list-style-type: none;
-  position: relative;
-  padding-left: 0.625rem;
-  margin-left:0;
-}
-
-.list-style--arrows li::before {
-  position: absolute;
-  left:-1rem;
-  vertical-align: middle;
-  line-height: 1.5rem;
-  margin-top: 2px;
-  content: url('../static/icons/arrow.svg');
-  list-style-position: inside;
-  /* width: 14px;
-  margin-left: -14px; */
-
-}
-
-.list-style--checkmarks li::before {
-  position: absolute;
-  left:-1.125rem;
-  vertical-align: middle;
-  line-height: 1.5rem;
-  margin-top: 2px;
-  content: url('../static/icons/check.svg');
-}
-
-.list-style--question-marks li::before {
-  position: absolute;
-  left:-1.125rem;
-  vertical-align: middle;
-  line-height: 1.5rem;
-  margin-top: 1px;
-  content: url('../static/icons/question-mark-circle.svg');
 }
