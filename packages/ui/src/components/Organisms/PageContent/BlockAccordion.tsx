@@ -21,8 +21,8 @@ const accordionTheme: CustomFlowbiteTheme['accordion'] = {
   root: {
     base: 'divide-y divide-gray-200 border-gray-200 dark:divide-gray-700 dark:border-gray-700',
     flush: {
-      off: 'border-b',
-      on: 'border-b',
+      off: 'border-b last:border-0',
+      on: 'border-b last:border-0',
     },
   },
   content: {
@@ -32,7 +32,7 @@ const accordionTheme: CustomFlowbiteTheme['accordion'] = {
     arrow: {
       base: 'h-0 w-0',
     },
-    base: 'flex w-full items-center justify-between p-5 text-left font-medium text-gray-500 dark:text-gray-400',
+    base: 'flex w-full items-center justify-between p-4 pl-1 text-left font-normal text-lg text-gray-500 dark:text-gray-400',
     flush: {
       off: 'hover:bg-gray-100 dark:hover:bg-gray-800 dark:focus:ring-gray-800',
       on: 'bg-transparent dark:bg-transparent',
@@ -62,7 +62,7 @@ export function BlockAccordion(props: BlockAccordionFragment) {
                 {item.icon && <AccordionIcon icon={item.icon} />} {item.title}
               </span>
             </Accordion.Title>
-            <Accordion.Content>
+            <Accordion.Content className="space-y-2">
               {item.textContent?.markup && (
                 <Html
                   plugins={[unorderedItems]}
