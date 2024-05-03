@@ -29,7 +29,7 @@ export const AccordionItemText = {
         textContent: {
           markup: `
           <p>Rösti is a kind of fried potato cake served as a main course or side dish.</p>
-          <p> As a main dish, rösti is usually accompanied with cheese, onions and cold meat or eggs. This dish, originally from Zürich, was first simply made by frying grated raw potatoes in a pan. It has then spread towards Bern where it is made with boiled potatoes instead. This is where it took the name Rösti.[20] There are many variants in Switzerland and outside the borders.[21] This culinary specialty gives its name to the röstigraben, which designates the cultural differences between the German- and French-speaking parts of the country.</p>
+          <p> As a main dish, rösti is usually accompanied with cheese, onions and cold meat or eggs. This dish, originally from Zürich, was first simply made by frying grated raw potatoes in a pan. It has then spread towards Bern where it is made with boiled potatoes instead. This is where it took the name Rösti. There are many variants in Switzerland and outside the borders. This culinary specialty gives its name to the röstigraben, which designates the cultural differences between the German- and French-speaking parts of the country.</p>
         ` as Markup,
         },
       },
