@@ -17,11 +17,7 @@ export function BlockMarkup(props: BlockMarkupFragment) {
     <div
       className={clsx([
         'mx-auto max-w-3xl prose lg:prose-xl mt-10',
-        'prose-a:text-indigo-600',
-        'prose-em:text-indigo-600',
-        'prose-strong:text-indigo-600',
-        'marker:text-indigo-600 marker:font-bold',
-        'prose-h2:text-indigo-600 prose-h2:font-bold',
+        'marker:text-gray-900',
       ])}
     >
       <Html
@@ -42,7 +38,7 @@ export function BlockMarkup(props: BlockMarkupFragment) {
                 className={clsx(className, { 'list-none relative': unordered })}
               >
                 {unordered ? (
-                  <ArrowRightCircleIcon className="not-prose w-6 h-6 absolute mt-1.5 left-[-1.5em] text-indigo-600" />
+                  <ArrowRightCircleIcon className="not-prose w-6 h-6 absolute mt-1.5 left-[-1.5em] text-gray-900" />
                 ) : null}
                 {children}
               </li>
