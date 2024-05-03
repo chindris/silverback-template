@@ -27,6 +27,7 @@ module.exports = {
               },
               '.prose a, .prose p a': {
                 color: theme('colors.blue.600'),
+                fontWeight: '400',
               },
               '.prose em': {
                 color: theme('colors.gray.900'),
