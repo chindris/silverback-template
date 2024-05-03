@@ -35,6 +35,9 @@
   content: '' !important;
 }
 
+/* Selects the .block-background-image-cards only when it is the first child of the <div>
+   element immediately following the .default-hero section.
+ */
 .default-hero + div > :first-child.block-background-image-cards {
   @apply mt-2 px-0;
 }
