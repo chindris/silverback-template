@@ -67,6 +67,10 @@ export function PageDisplay(page: PageFragment) {
                   return <BlockQuote key={index} {...block} />;
                 case 'BlockHorizontalSeparator':
                   return <BlockHorizontalSeparator key={index} {...block} />;
+                case 'BlockAccordion':
+                  // @todo implement.
+                  // eslint-disable-next-line react/jsx-no-literals
+                  return <div key={index}>BlockAccordion goes here</div>;
                 default:
                   throw new UnreachableCaseError(block);
               }
