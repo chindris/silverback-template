@@ -10,7 +10,7 @@ import { BlockMarkup } from './BlockMarkup';
 
 export function BlockImageWithText(props: BlockImageWithTextFragment) {
   return (
-    <div className="container-page my-12 lg:my-16">
+    <div className="my-12 lg:my-16">
       <div
         className={clsx(
           'flex flex-col lg:flex-row gap-2 lg:gap-16 items-start lg:items-center',
