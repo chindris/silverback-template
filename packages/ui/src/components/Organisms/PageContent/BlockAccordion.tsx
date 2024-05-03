@@ -1,13 +1,21 @@
-import { BlockAccordionFragment } from '@custom/schema';
+import { BlockAccordionFragment, Html } from '@custom/schema';
 import {
   ArrowRightCircleIcon,
   CheckCircleIcon,
   QuestionMarkCircleIcon,
 } from '@heroicons/react/20/solid';
+import clsx from 'clsx';
 import { Accordion, CustomFlowbiteTheme, Flowbite } from 'flowbite-react';
-import React from 'react';
+import type { Element } from 'hast';
+import { selectAll } from 'hast-util-select';
+import React, { PropsWithChildren } from 'react';
+import { Plugin } from 'unified';
 
-import { BlockMarkup } from './BlockMarkup';
+const unorderedItems: Plugin<[], Element> = () => (tree) => {
+  selectAll('ul > li', tree).forEach((node) => {
+    node.properties!.unordered = true;
+  });
+};
 
 const accordionTheme: CustomFlowbiteTheme['accordion'] = {
   root: {
@@ -18,7 +26,7 @@ const accordionTheme: CustomFlowbiteTheme['accordion'] = {
     },
   },
   content: {
-    base: 'p-2 m-0 text-gray-200 dark:bg-gray-900',
+    base: 'pb-5 pt-5 text-base font-normal text-gray-500 dark:bg-gray-900 dark:text-gray-100',
   },
   title: {
     arrow: {
@@ -56,7 +64,32 @@ export function BlockAccordion(props: BlockAccordionFragment) {
             </Accordion.Title>
             <Accordion.Content>
               {item.textContent?.markup && (
-                <BlockMarkup {...item.textContent} />
+                <Html
+                  plugins={[unorderedItems]}
+                  components={{
+                    li: ({
+                      unordered,
+                      children,
+                      className,
+                      ...props
+                    }: PropsWithChildren<{
+                      unordered?: boolean;
+                      className?: string;
+                    }>) => {
+                      return (
+                        <li
+                          {...props}
+                          className={clsx(className, {
+                            'ml-5 mt-1 mb-1 list-disc': unordered,
+                          })}
+                        >
+                          {children}
+                        </li>
+                      );
+                    },
+                  }}
+                  markup={item.textContent.markup}
+                />
               )}
             </Accordion.Content>
           </Accordion.Panel>
