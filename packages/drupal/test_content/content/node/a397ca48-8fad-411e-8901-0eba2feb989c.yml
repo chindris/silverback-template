@@ -120,9 +120,23 @@ default:
 
         <!-- wp:custom/quote {"quote":"Lorem ipsum dolor sit amet, \u003cstrong\u003econsectetur\u003c/strong\u003e adipiscing elit. Vivamus sagittis nisi nec neque porta, a ornare ligula efficitur.","author":"John Doe","role":"Project manager","mediaEntityIds":["5dfc1856-e9e4-4f02-9cd6-9d888870ce1a"]} /-->
 
+        <!-- wp:custom/accordion -->
+        <!-- wp:custom/accordion-item-text {"title":"With a single paragraph and no icon","icon":""} -->
         <!-- wp:paragraph -->
-        <p></p>
+        <p>Incididunt laborum velit non proident nostrud velit. Minim excepteur ut aliqua nisi. Culpa laboris consectetur proident. Tempor esse ullamco et dolor proident id officia laborum voluptate nostrud elit dolore qui amet. Ex Lorem irure eu anim ipsum officia.</p>
         <!-- /wp:paragraph -->
+        <!-- /wp:custom/accordion-item-text -->
+
+        <!-- wp:custom/accordion-item-text {"title":"With a list and a paragraph and arrow icon","icon":"arrow"} -->
+        <!-- wp:list -->
+        <ul><li>Moitié-moitié</li><li>Fribourgeoise</li></ul>
+        <!-- /wp:list -->
+
+        <!-- wp:paragraph -->
+        <p>Incididunt laborum velit non proident nostrud velit. Minim excepteur ut aliqua nisi. Culpa laboris consectetur proident. Tempor esse ullamco et dolor proident id officia laborum voluptate nostrud elit dolore qui amet. Ex Lorem irure eu anim ipsum officia.</p>
+        <!-- /wp:paragraph -->
+        <!-- /wp:custom/accordion-item-text -->
+        <!-- /wp:custom/accordion -->
         <!-- /wp:custom/content -->
       format: gutenberg
       summary: ''
