@@ -26,7 +26,7 @@ const accordionTheme: CustomFlowbiteTheme['accordion'] = {
     },
   },
   content: {
-    base: 'pb-5 pt-5 text-base font-normal text-gray-500 dark:bg-gray-900 dark:text-gray-100',
+    base: 'pb-5 pt-5 text-base font-light text-gray-500 dark:bg-gray-900 dark:text-gray-100',
   },
   title: {
     arrow: {
