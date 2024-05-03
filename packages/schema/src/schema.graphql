@@ -247,17 +247,10 @@ type BlockImageTeaser @default @value {
 }
 
 type BlockAccordion @type(id: "custom/accordion") {
-  items: [BlockAccordionItem]! @resolveEditorBlockChildren
+  items: [BlockAccordionItemText]! @resolveEditorBlockChildren
 }
 
-interface BlockAccordionItemInterface {
-  title: String!
-}
-
-union BlockAccordionItem @resolveEditorBlockType = BlockAccordionItemText
-
-type BlockAccordionItemText implements BlockAccordionItemInterface
-  @type(id: "custom/accordion-item-text") {
+type BlockAccordionItemText @default @value {
   title: String! @resolveEditorBlockAttribute(key: "title")
   icon: String! @resolveEditorBlockAttribute(key: "icon")
   # @todo check if we want inner blocks here.
