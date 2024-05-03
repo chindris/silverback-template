@@ -13,8 +13,8 @@ module.exports = {
               'ul, ol': {
                 fontSize: '1.125rem',
                 lineHeight: '1.688rem',
+                paddingLeft: '2.5rem'
               },
-              ol: {},
               'ul>li::marker, ol>li::marker': {},
               strong: {
                 color: theme('colors.gray.900'),
