@@ -249,6 +249,19 @@ type BlockCta @type(id: "custom/cta") {
   url: Url @resolveEditorBlockAttribute(key: "url")
   text: String @resolveEditorBlockAttribute(key: "text")
   openInNewTab: Boolean @resolveEditorBlockAttribute(key: "openInNewTab")
+  icon: CTAIconType @resolveEditorBlockAttribute(key: "icon")
+  iconPosition: CTAIconPosition
+    @resolveEditorBlockAttribute(key: "iconPosition")
+}
+
+enum CTAIconType {
+  NONE
+  ARROW
+}
+
+enum CTAIconPosition {
+  AFTER
+  BEFORE
 }
 
 type BlockImageWithText @type(id: "custom/image-with-text") {
