@@ -63,34 +63,36 @@ export function BlockAccordion(props: BlockAccordionFragment) {
               </span>
             </Accordion.Title>
             <Accordion.Content className="space-y-2">
-              {item.textContent?.markup && (
-                <Html
-                  plugins={[unorderedItems]}
-                  components={{
-                    li: ({
-                      unordered,
-                      children,
-                      className,
-                      ...props
-                    }: PropsWithChildren<{
-                      unordered?: boolean;
-                      className?: string;
-                    }>) => {
-                      return (
-                        <li
-                          {...props}
-                          className={clsx(className, {
-                            'ml-5 mt-1 mb-1 list-disc': unordered,
-                          })}
-                        >
-                          {children}
-                        </li>
-                      );
-                    },
-                  }}
-                  markup={item.textContent.markup}
-                />
-              )}
+              <div className="sm:w-full md:w-4/5 lg:w-3/5">
+                {item.textContent?.markup && (
+                  <Html
+                    plugins={[unorderedItems]}
+                    components={{
+                      li: ({
+                        unordered,
+                        children,
+                        className,
+                        ...props
+                      }: PropsWithChildren<{
+                        unordered?: boolean;
+                        className?: string;
+                      }>) => {
+                        return (
+                          <li
+                            {...props}
+                            className={clsx(className, {
+                              'ml-5 mt-1 mb-1 list-disc': unordered,
+                            })}
+                          >
+                            {children}
+                          </li>
+                        );
+                      },
+                    }}
+                    markup={item.textContent.markup}
+                  />
+                )}
+              </div>
             </Accordion.Content>
           </Accordion.Panel>
         ))}
