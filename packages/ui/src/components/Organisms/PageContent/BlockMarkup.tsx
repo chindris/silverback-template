@@ -17,7 +17,8 @@ export function BlockMarkup(props: BlockMarkupFragment) {
     <div
       className={clsx([
         'mx-auto max-w-3xl prose lg:prose-xl mt-10',
-        'marker:text-gray-900',
+        'marker:text-[#111928]',
+        'marker:font-bold',
       ])}
     >
       <Html
