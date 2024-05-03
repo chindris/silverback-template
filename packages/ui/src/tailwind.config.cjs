@@ -4,21 +4,18 @@ const stylingAssets = require('./stylingAssets.json');
 module.exports = {
   content: ['./src/**/*.{tsx, mdx}'],
   theme: {
-    "extend": {
-      "typography": ({theme}) => ({
-        "DEFAULT": {
+    extend: {
+      typography: ({ theme }) => ({
+        DEFAULT: {
           css: [
             {
-              'a, p a': {
-              },
+              'a, p a': {},
               'ul, ol': {
                 fontSize: '1.125rem',
-                lineHeight: '1.688rem'
+                lineHeight: '1.688rem',
               },
-              ol: {
-              },
-              'ul>li::marker, ol>li::marker': {
-              },
+              ol: {},
+              'ul>li::marker, ol>li::marker': {},
               strong: {
                 color: theme('colors.gray.900'),
                 fontWeight: '700',
@@ -26,7 +23,7 @@ module.exports = {
               '.prose p': {
                 color: theme('colors.gray.500'),
                 fontSize: '1.125rem',
-                lineHeight: '1.688rem'
+                lineHeight: '1.688rem',
               },
               '.prose a, .prose p a': {
                 color: theme('colors.blue.600'),
@@ -37,29 +34,23 @@ module.exports = {
               'prose marker': {
                 fontWeight: '700',
               },
-              'blockquote': {
-              },
+              blockquote: {},
               '.prose blockquote p': {
                 fontWeight: '700',
-                color: '#111928'
+                color: '#111928',
               },
-              cite: {
-              },
-              'h1, h2, h3, h4, h5, h6': {
-              },
-              '.prose h1': {
-              },
+              cite: {},
+              'h1, h2, h3, h4, h5, h6': {},
+              '.prose h1': {},
               '.prose h2': {
                 fontWeight: '700',
                 color: theme('colors.gray.900'),
               },
-              '.prose h3': {
-              },
-              '.prose h4': {
-              }
+              '.prose h3': {},
+              '.prose h4': {},
             },
-          ]
-        }
+          ],
+        },
       }),
     },
     ...stylingAssets.theme,
