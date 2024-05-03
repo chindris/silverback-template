@@ -13,7 +13,7 @@ module.exports = {
               'ul, ol': {
                 fontSize: '1.125rem',
                 lineHeight: '1.688rem',
-                paddingLeft: '2.5rem'
+                paddingLeft: '2.5rem',
               },
               'ul>li::marker, ol>li::marker': {},
               strong: {
