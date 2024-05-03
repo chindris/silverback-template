@@ -1,5 +1,9 @@
 import React, { Fragment } from 'react';
-import { InspectorControls, RichText } from 'wordpress__block-editor';
+import {
+  InnerBlocks,
+  InspectorControls,
+  RichText,
+} from 'wordpress__block-editor';
 import { registerBlockType } from 'wordpress__blocks';
 import { PanelBody, SelectControl } from 'wordpress__components';
 import { compose, withState } from 'wordpress__compose';
@@ -14,9 +18,6 @@ registerBlockType('custom/accordion-item-text', {
   parent: ['custom/accordion'],
   attributes: {
     title: {
-      type: 'string',
-    },
-    text: {
       type: 'string',
     },
     icon: {
@@ -67,16 +68,10 @@ registerBlockType('custom/accordion-item-text', {
                 setAttributes({ title: newValue });
               }}
             />
-            <RichText
-              identifier="text"
-              tagName="p"
-              value={attributes.text}
-              allowedFormats={['core/bold', 'core/italic']}
-              placeholder={__('Text')}
-              keepPlaceholderOnFocus={true}
-              onChange={(newValue) => {
-                setAttributes({ text: newValue });
-              }}
+            <InnerBlocks
+              templateLock={false}
+              allowedBlocks={['core/paragraph', 'core/list', 'core/heading']}
+              template={[['core/paragraph', {}]]}
             />
           </div>
         </div>
@@ -84,7 +79,7 @@ registerBlockType('custom/accordion-item-text', {
     );
   }),
 
-  save() {
-    return null;
+  save: () => {
+    return <InnerBlocks.Content />;
   },
 });
