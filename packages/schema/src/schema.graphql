@@ -207,6 +207,7 @@ union PageContent @resolveEditorBlockType =
   | BlockImageWithText
   | BlockQuote
   | BlockHorizontalSeparator
+  | BlockAccordion
 
 type BlockForm @type(id: "custom/form") {
   url: Url @resolveEditorBlockAttribute(key: "formId") @webformIdToUrl(id: "$")
@@ -244,6 +245,24 @@ type BlockImageTeaser @default @value {
   title: String @resolveEditorBlockAttribute(key: "title")
   ctaText: String @resolveEditorBlockAttribute(key: "ctaText")
   ctaUrl: Url @resolveEditorBlockAttribute(key: "ctaUrl")
+}
+
+type BlockAccordion @type(id: "custom/accordion") {
+  items: [BlockAccordionItem]! @resolveEditorBlockChildren
+}
+
+interface BlockAccordionItemInterface {
+  title: String!
+}
+
+union BlockAccordionItem @resolveEditorBlockType = BlockAccordionItemText
+
+type BlockAccordionItemText implements BlockAccordionItemInterface
+  @type(id: "custom/accordion-item-text") {
+  title: String! @resolveEditorBlockAttribute(key: "title")
+  icon: String! @resolveEditorBlockAttribute(key: "icon")
+  # @todo check if we want inner blocks here.
+  text: String! @resolveEditorBlockAttribute(key: "text")
 }
 
 type BlockCta @type(id: "custom/cta") {
