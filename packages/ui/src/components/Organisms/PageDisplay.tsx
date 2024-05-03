@@ -5,6 +5,7 @@ import { isTruthy } from '../../utils/isTruthy';
 import { UnreachableCaseError } from '../../utils/unreachable-case-error';
 import { BreadCrumbs } from '../Molecules/Breadcrumbs';
 import { PageTransition } from '../Molecules/PageTransition';
+import { BlockAccordion } from './PageContent/BlockAccordion';
 import { BlockCta } from './PageContent/BlockCta';
 import { BlockForm } from './PageContent/BlockForm';
 import { BlockHorizontalSeparator } from './PageContent/BlockHorizontalSeparator';
@@ -68,9 +69,7 @@ export function PageDisplay(page: PageFragment) {
                 case 'BlockHorizontalSeparator':
                   return <BlockHorizontalSeparator key={index} {...block} />;
                 case 'BlockAccordion':
-                  // @todo implement.
-                  // eslint-disable-next-line react/jsx-no-literals
-                  return <div key={index}>BlockAccordion goes here</div>;
+                  return <BlockAccordion key={index} {...block} />;
                 default:
                   throw new UnreachableCaseError(block);
               }
