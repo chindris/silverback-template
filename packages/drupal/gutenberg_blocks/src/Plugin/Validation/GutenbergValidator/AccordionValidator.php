@@ -24,6 +24,9 @@ class AccordionValidator extends GutenbergValidatorBase {
     return $block['blockName'] === 'custom/accordion';
   }
 
+  /**
+   * {@inheritDoc}
+   */
   public function validateContent($block = []): array {
     $expectedChildren = [
       [

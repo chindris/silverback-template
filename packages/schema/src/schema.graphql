@@ -253,8 +253,7 @@ type BlockAccordion @type(id: "custom/accordion") {
 type BlockAccordionItemText @default @value {
   title: String! @resolveEditorBlockAttribute(key: "title")
   icon: String! @resolveEditorBlockAttribute(key: "icon")
-  # @todo check if we want inner blocks here.
-  text: String! @resolveEditorBlockAttribute(key: "text")
+  textContent: BlockMarkup @resolveEditorBlockChildren @seek(pos: 0)
 }
 
 type BlockCta @type(id: "custom/cta") {
