@@ -34,6 +34,9 @@ registerBlockType('custom/slider-item', {
       type: 'string',
       default: 'LEFT',
     },
+    mediaEntityIds: {
+      type: 'array',
+    },
   },
   // @ts-ignore
   edit: compose(withState({}))((props) => {
