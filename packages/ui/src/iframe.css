@@ -7,6 +7,11 @@ h1 {
   @apply hidden;
 }
 
+/* Horizontal padding to avoid focus style to be cropped by the iframe */
+.webform-submission-form {
+  @apply px-1 text-gray-900;
+}
+
 /* Vertical spacing */
 .webform-submission-form > *:not(:last-child) {
   @apply mb-10;
