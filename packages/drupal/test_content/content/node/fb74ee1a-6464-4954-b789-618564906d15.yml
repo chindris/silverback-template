@@ -5,12 +5,12 @@ _meta:
   bundle: blog
   default_langcode: en
   depends:
-    9d319586-f3a8-4f3d-8299-632748e2bcc5: taxonomy_term
-    c275a57d-f6ca-41ce-8f33-722ccf00411d: taxonomy_term
-    a5fb1d1c-74d6-4d70-a055-1035221da57c: media
-    c414cc0a-0687-4166-bba4-e44dd4476c36: media
+    f98dcb5e-ea31-4248-8d0e-66f0120c2b7e: taxonomy_term
+    a715c0e8-7162-44f1-99ab-f42d24c3d774: taxonomy_term
+    7b737603-c1d0-4c0a-a7d4-d503b592c121: taxonomy_term
     28ac124d-2e71-4ddf-a1ba-a535709b41a8: media
     7d249268-74d0-4fe4-a84d-484d16515abe: media
+    a5fb1d1c-74d6-4d70-a055-1035221da57c: media
 default:
   revision_uid:
     -
@@ -72,6 +72,10 @@ default:
         <p>Generation of OpenQASM code can be simplified through a higher level language such as Qiskit. Below we use the <a href="https://qiskit-extensions.github.io/qiskit-experiments/apidocs/library.html">Qiskit experiment library</a> to create a standard two-qubit RB experiment with varying Clifford lengths – a short example of length two is shown in Figure 1. Other languages such as <a href="https://www.pygsti.info/">pyGSTi</a> can also be used to create an OpenQASM experiment with same functionality (an example from our GitHub can be found <a href="https://github.com/zhinst/laboneq/blob/main/examples/06_qasm/03_Two_Qubit_RB_pyGSTi_OpenQASM.ipynb">here</a>).</p>
         <!-- /wp:paragraph -->
 
+        <!-- wp:custom/mathjax -->
+        <div class="wp-block-custom-mathjax">$$\text{The quadratic formula: } x = \frac {-b \pm \sqrt {b^2 - 4ac}}{2a}$$</div>
+        <!-- /wp:custom/mathjax -->
+
         <!-- wp:code -->
         <pre class="wp-block-code"><code># Use Qiskit Experiment Library to Generate RB
         qiskit_experiment = randomized_benchmarking.StandardRB(
@@ -80,7 +84,7 @@ default:
         qiskit_experiment[0].draw("mpl")</code></pre>
         <!-- /wp:code -->
 
-        <!-- wp:custom/image-with-caption {"mediaEntityIds":["a5fb1d1c-74d6-4d70-a055-1035221da57c"]} -->
+        <!-- wp:custom/image-with-caption {"mediaEntityIds":["28ac124d-2e71-4ddf-a1ba-a535709b41a8"]} -->
         <!-- wp:paragraph -->
         <p>Figure 1: A two-qubit RB experiment of length two. The experiment consists of two randomly chosen Clifford gates, followed by a recovery gate and a measurement of either qubit.</p>
         <!-- /wp:paragraph -->
@@ -94,6 +98,10 @@ default:
         <p>After generating our circuit, we only need two additional tools from Qiskit. The first is Qiskit’s <a href="https://docs.quantum.ibm.com/api/qiskit/transpiler">transpiler</a>. Using the <samp>transpile()</samp> function, the Clifford gates shown in Figure 1 are expressed in terms of a chosen basis. Here we have chosen the Identity (id), √X (sx), X (x), R<sub>Z</sub> (rz) and Controlled-X (cx) gates to be our basis but you can choose any set of basis gates so long as the set is universal. The transpiled circuit is shown in the top half of Figure 2.</p>
         <!-- /wp:paragraph -->
 
+        <!-- wp:custom/mathjax -->
+        <div class="wp-block-custom-mathjax">$$\sum_{i=0}^n i^2 = \frac{(n^2+n)(2n+1)}{6}$$</div>
+        <!-- /wp:custom/mathjax -->
+
         <!-- wp:code -->
         <pre class="wp-block-code"><code># Choose basis gates
         transpiled_circuit = transpile(
@@ -102,7 +110,7 @@ default:
         transpiled_circuit[0].draw("mpl")</code></pre>
         <!-- /wp:code -->
 
-        <!-- wp:custom/image-with-caption {"mediaEntityIds":["c414cc0a-0687-4166-bba4-e44dd4476c36"]} -->
+        <!-- wp:custom/image-with-caption {"mediaEntityIds":["28ac124d-2e71-4ddf-a1ba-a535709b41a8"]} -->
         <!-- wp:paragraph -->
         <p>Figure 2: The two-qubit RB experiment from Figure 1 expressed in our chosen basis as a circuit diagram from Qiskit (top) and as OpenQASM 3 code (bottom).</p>
         <!-- /wp:paragraph -->
@@ -153,7 +161,7 @@ default:
         <p>Once the LabOne Q backend has been established, we need to map individual objects in the backend to their OpenQASM definitions. The process of mapping OpenQASM code to the LabOne Q backend is depicted in Figure 3.</p>
         <!-- /wp:paragraph -->
 
-        <!-- wp:custom/image-with-caption {"mediaEntityIds":["28ac124d-2e71-4ddf-a1ba-a535709b41a8"]} -->
+        <!-- wp:custom/image-with-caption {"mediaEntityIds":["7d249268-74d0-4fe4-a84d-484d16515abe"]} -->
         <!-- wp:paragraph -->
         <p>Figure 3: Every line of the OpenQASM code corresponding to the two-qubit RB experiment seen in Figure 2 is mapped (colored arrows) to an object in the LabOne Q backend prior to execution of the experiment on a QCCS.</p>
         <!-- /wp:paragraph -->
@@ -228,7 +236,7 @@ default:
         <p>Once the experiment has been generated, it can be compiled through the LabOne Q compiler, and then executed via the QCCS hardware. Using LabOne Q's built-in simulation tool, we can preview the expected flux, drive, and measurement pulses produced by the SHFQC and HDAWG. Figure 4 shows the pulse simulation for the two-qubit RB experiment from Figure 2.</p>
         <!-- /wp:paragraph -->
 
-        <!-- wp:custom/image-with-caption {"mediaEntityIds":["7d249268-74d0-4fe4-a84d-484d16515abe"]} -->
+        <!-- wp:custom/image-with-caption {"mediaEntityIds":["a5fb1d1c-74d6-4d70-a055-1035221da57c"]} -->
         <!-- wp:paragraph -->
         <p>Figure 4: Simulated output of the two-qubit RB experiment shown in Figure 2. Two red dashed lines are shown for timing context, the left dashed line marks the end of the first Controlled-X gate, the right dashed line corresponds to the start of the final X and √X gates on qubits 0 and 1, respectively, followed by the measurement section.</p>
         <!-- /wp:paragraph -->
@@ -262,6 +270,8 @@ default:
       summary: ''
   field_blog_tags:
     -
-      entity: 9d319586-f3a8-4f3d-8299-632748e2bcc5
+      entity: f98dcb5e-ea31-4248-8d0e-66f0120c2b7e
     -
-      entity: c275a57d-f6ca-41ce-8f33-722ccf00411d
+      entity: a715c0e8-7162-44f1-99ab-f42d24c3d774
+    -
+      entity: 7b737603-c1d0-4c0a-a7d4-d503b592c121
