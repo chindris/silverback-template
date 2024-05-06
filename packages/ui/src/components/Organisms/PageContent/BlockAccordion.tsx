@@ -19,7 +19,7 @@ const unorderedItems: Plugin<[], Element> = () => (tree) => {
 
 const accordionTheme: CustomFlowbiteTheme['accordion'] = {
   root: {
-    base: 'divide-y divide-gray-200 border-gray-200 dark:divide-gray-700 dark:border-gray-700',
+    base: 'mt-10 divide-y divide-gray-200 border-gray-200 dark:divide-gray-700 dark:border-gray-700',
     flush: {
       off: 'border-b last:border-0',
       on: 'border-b last:border-0',
@@ -63,7 +63,7 @@ export function BlockAccordion(props: BlockAccordionFragment) {
               </span>
             </Accordion.Title>
             <Accordion.Content className="space-y-2">
-              <div className="sm:w-full md:w-4/5 lg:w-3/5">
+              <div className="sm:w-full md:w-4/5">
                 {item.textContent?.markup && (
                   <Html
                     plugins={[unorderedItems]}

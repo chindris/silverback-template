@@ -10,6 +10,7 @@ import { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
 import { image } from '../../helpers/image';
+import { AccordionItemText } from '../Organisms/PageContent/BlockAccordion.stories';
 import { Mixed, Paragraph } from '../Organisms/PageContent/BlockMarkup.stories';
 import { WithCaption } from '../Organisms/PageContent/BlockMedia.stories';
 import { Default as FrameStory } from './Frame.stories';
@@ -52,6 +53,10 @@ export const Default = {
         {
           __typename: 'BlockMarkup',
           ...Paragraph.args,
+        },
+        {
+          __typename: 'BlockAccordion',
+          ...AccordionItemText.args,
         },
       ] as Exclude<ViewPageQuery['page'], undefined>['content'],
     },
