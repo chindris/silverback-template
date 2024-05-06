@@ -36,7 +36,7 @@ h1 {
 
 /* field description */
 .form-item .webform-element-description {
-  @apply text-sm text-gray-600;
+  @apply text-sm text-gray-500;
 }
 
 .form-item .description {
@@ -68,7 +68,7 @@ h1 {
 
 /* checkbox  */
 .form-item input[type="checkbox"] {
-  @apply rounded;
+  @apply rounded -mt-1;
 }
 
 .form-item input[type="checkbox"]:not(:checked), .form-item input[type="radio"]:not(:checked)  {
