@@ -1,6 +1,11 @@
-import { BlockControls, InnerBlocks, InspectorControls, RichText } from 'wordpress__block-editor';
+import {
+  BlockControls,
+  InnerBlocks,
+  InspectorControls,
+  RichText,
+} from 'wordpress__block-editor';
 import { registerBlockType } from 'wordpress__blocks';
-import { PanelBody, SelectControl, ToolbarGroup } from "wordpress__components";
+import { PanelBody, SelectControl, ToolbarGroup } from 'wordpress__components';
 import { compose, withState } from 'wordpress__compose';
 import { dispatch } from 'wordpress__data';
 
@@ -25,13 +30,6 @@ registerBlockType('custom/slider-item', {
       type: 'number',
       default: 2,
     },
-    mediaEntityIds: {
-      type: 'array',
-    },
-    imageCaption: {
-      type: 'string',
-      default: '',
-    },
     contentAlignment: {
       type: 'string',
       default: 'LEFT',
@@ -40,7 +38,7 @@ registerBlockType('custom/slider-item', {
   // @ts-ignore
   edit: compose(withState({}))((props) => {
     const { attributes, setAttributes, className } = props;
-    const { title, headingLevel, mediaEntityIds, imageCaption, contentAlignment } = attributes;
+    const { title, headingLevel, contentAlignment } = attributes;
     return (
       <div className={'container-wrapper'}>
         <InspectorControls>
@@ -60,8 +58,8 @@ registerBlockType('custom/slider-item', {
             />
           </PanelBody>
         </InspectorControls>
-        <div className={"container-label"}>{__('Slider item')}</div>
-        <div className={"two-columns"}>
+        <div className={'container-label'}>{__('Slider item')}</div>
+        <div className={'two-columns'}>
           {contentAlignment === 'RIGHT' && (
             <>
               <div>
@@ -70,15 +68,15 @@ registerBlockType('custom/slider-item', {
                     attributes={{
                       ...attributes,
                       lockViewMode: true,
-                      viewMode: "default",
-                      allowedTypes: ["image"]
+                      viewMode: 'default',
+                      allowedTypes: ['image'],
                     }}
                     setAttributes={setAttributes}
                     isMediaLibraryEnabled={true}
                     onError={(error) => {
                       // @ts-ignore
-                      error = typeof error === "string" ? error : error[2];
-                      dispatch("core/notices").createWarningNotice(error);
+                      error = typeof error === 'string' ? error : error[2];
+                      dispatch('core/notices').createWarningNotice(error);
                     }}
                   />
                 </figure>
@@ -89,8 +87,10 @@ registerBlockType('custom/slider-item', {
                     controls={[2, 3, 4].map((level) => {
                       const isActive = level === headingLevel;
                       return {
-                        icon: <HeadingLevelIcon level={level} isPressed={false} />,
-                        title: __("Heading @level", { '@level': level }),
+                        icon: (
+                          <HeadingLevelIcon level={level} isPressed={false} />
+                        ),
+                        title: __('Heading @level', { '@level': level }),
                         isActive,
                         onClick: () => {
                           setAttributes({
@@ -118,16 +118,12 @@ registerBlockType('custom/slider-item', {
                 <InnerBlocks
                   templateLock={false}
                   template={[['core/paragraph', {}]]}
-                  allowedBlocks={[
-                    'core/list',
-                    'core/paragraph',
-                    'custom/cta',
-                  ]}
+                  allowedBlocks={['core/list', 'core/paragraph', 'custom/cta']}
                 />
               </div>
             </>
           )}
-          {contentAlignment === "LEFT" && (
+          {contentAlignment === 'LEFT' && (
             <>
               <div>
                 <BlockControls>
@@ -135,8 +131,10 @@ registerBlockType('custom/slider-item', {
                     controls={[2, 3, 4].map((level) => {
                       const isActive = level === headingLevel;
                       return {
-                        icon: <HeadingLevelIcon level={level} isPressed={false} />,
-                        title: __("Heading @level", { '@level': level }),
+                        icon: (
+                          <HeadingLevelIcon level={level} isPressed={false} />
+                        ),
+                        title: __('Heading @level', { '@level': level }),
                         isActive,
                         onClick: () => {
                           setAttributes({
@@ -164,11 +162,7 @@ registerBlockType('custom/slider-item', {
                 <InnerBlocks
                   templateLock={false}
                   template={[['core/paragraph', {}]]}
-                  allowedBlocks={[
-                    'core/list',
-                    'core/paragraph',
-                    'custom/cta',
-                  ]}
+                  allowedBlocks={['core/list', 'core/paragraph', 'custom/cta']}
                 />
               </div>
               <div>
@@ -177,15 +171,15 @@ registerBlockType('custom/slider-item', {
                     attributes={{
                       ...attributes,
                       lockViewMode: true,
-                      viewMode: "default",
-                      allowedTypes: ["image"]
+                      viewMode: 'default',
+                      allowedTypes: ['image'],
                     }}
                     setAttributes={setAttributes}
                     isMediaLibraryEnabled={true}
                     onError={(error) => {
                       // @ts-ignore
-                      error = typeof error === "string" ? error : error[2];
-                      dispatch("core/notices").createWarningNotice(error);
+                      error = typeof error === 'string' ? error : error[2];
+                      dispatch('core/notices').createWarningNotice(error);
                     }}
                   />
                 </figure>
@@ -199,7 +193,5 @@ registerBlockType('custom/slider-item', {
 
   save: () => {
     return <InnerBlocks.Content />;
-  }
+  },
 });
-
-

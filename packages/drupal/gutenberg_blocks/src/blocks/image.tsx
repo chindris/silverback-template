@@ -1,12 +1,5 @@
-import {
-  // @ts-ignore
-  __experimentalLinkControl as LinkControl,
-  InnerBlocks,
-  InspectorControls,
-  RichText,
-} from 'wordpress__block-editor';
+import { InnerBlocks } from 'wordpress__block-editor';
 import { registerBlockType } from 'wordpress__blocks';
-import { PanelBody, ToggleControl } from 'wordpress__components';
 import { dispatch } from 'wordpress__data';
 
 import { DrupalMediaEntity } from '../utils/drupal-media';

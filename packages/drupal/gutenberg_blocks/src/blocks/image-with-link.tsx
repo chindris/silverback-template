@@ -3,10 +3,9 @@ import {
   __experimentalLinkControl as LinkControl,
   InnerBlocks,
   InspectorControls,
-  RichText,
 } from 'wordpress__block-editor';
 import { registerBlockType } from 'wordpress__blocks';
-import { PanelBody, ToggleControl } from 'wordpress__components';
+import { PanelBody } from 'wordpress__components';
 import { dispatch } from 'wordpress__data';
 
 import { DrupalMediaEntity } from '../utils/drupal-media';
@@ -35,13 +34,13 @@ registerBlockType('custom/image-with-link', {
         <InspectorControls>
           <PanelBody title={__('Settings')}>
             <LinkControl
-              value={{url: props.attributes.link}}
+              value={{ url: props.attributes.link }}
               settings={{}}
               onChange={(link: any) => {
                 props.setAttributes({
                   link: link.url,
                   uuid: link.id,
-                })
+                });
               }}
             />
           </PanelBody>

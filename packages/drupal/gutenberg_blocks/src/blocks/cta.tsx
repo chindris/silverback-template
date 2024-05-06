@@ -51,7 +51,9 @@ registerBlockType('custom/cta', {
   },
   // @ts-ignore
   edit: compose(withState({}))((props) => {
-    const buttonType = props.attributes.primary ? 'button--primary' : 'button--secondary';
+    const buttonType = props.attributes.primary
+      ? 'button--primary'
+      : 'button--secondary';
     return (
       <div>
         <RichText

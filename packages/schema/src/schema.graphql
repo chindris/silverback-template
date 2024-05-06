@@ -238,7 +238,7 @@ type Hero {
 }
 
 union PageContent @resolveEditorBlockType =
-    BlockMarkup
+  | BlockMarkup
   | BlockMedia
   | BlockForm
   | BlockImageTeasers

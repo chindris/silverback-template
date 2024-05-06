@@ -1,6 +1,5 @@
 import { registerBlockType } from 'wordpress__blocks';
 import { compose, withState } from 'wordpress__compose';
-import { useEffect, useState } from 'react';
 
 // @ts-ignore
 const { t: __ } = Drupal;
@@ -22,28 +21,27 @@ registerBlockType(`custom/mathjax`, {
     const { formula } = attributes;
     const id = `mathjax-${Math.random().toString(36).substr(2, 9)}`;
 
-    if ( isSelected ) {
+    if (isSelected) {
       return (
-        <div className={ className }>
-          <label htmlFor={ id }>{ __( 'Insert equation in TeX format', 'mathml-block' ) }</label>
+        <div className={className}>
+          <label htmlFor={id}>
+            {__('Insert equation in TeX format', 'mathml-block')}
+          </label>
           <textarea
-            id={ id }
+            id={id}
             className="mathml-formula"
-            onChange={ ( event ) => {
-              setAttributes( { formula: event.target.value } );
-            } }
-            value={ formula }
-            style={ { width: '100%' } }
+            onChange={(event) => {
+              setAttributes({ formula: event.target.value });
+            }}
+            value={formula}
+            style={{ width: '100%' }}
           />
         </div>
       );
     } else {
       return (
-        <div
-          id={ id }
-          className="mathjax"
-        >
-          { formula }
+        <div id={id} className="mathjax">
+          {formula}
         </div>
       );
     }
@@ -52,10 +50,6 @@ registerBlockType(`custom/mathjax`, {
   save: function save({ attributes, className }) {
     const { formula } = attributes;
 
-    return (
-      <div className={className}>
-        {formula as string}
-      </div>
-    );
+    return <div className={className}>{formula as string}</div>;
   },
 });
