@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: ed4185b6-8e75-4899-9c85-1ca7613b6e0f
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: finalfigqasm_v1.jpg
+  uri:
+    -
+      value: 'public://2024-04/finalfigqasm_v1.jpg'
+  filemime:
+    -
+      value: image/jpeg
+  filesize:
+    -
+      value: 485068
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1713538082

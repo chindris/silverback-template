@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 1ee434f2-f813-45b2-84ef-a516b8e6e445
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: fig2_qasm_blog.png
+  uri:
+    -
+      value: 'public://2024-04/fig2_qasm_blog.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 20817
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1713537760

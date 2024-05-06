@@ -1,0 +1,39 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 7d249268-74d0-4fe4-a84d-484d16515abe
+  bundle: image
+  default_langcode: en
+  depends:
+    ed4185b6-8e75-4899-9c85-1ca7613b6e0f: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: finalfigqasm_v1.jpg
+  created:
+    -
+      value: 1713538082
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_media_image:
+    -
+      entity: ed4185b6-8e75-4899-9c85-1ca7613b6e0f
+      alt: 'Output simulator'
+      title: ''
+      width: 1620
+      height: 2940

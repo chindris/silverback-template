@@ -34,6 +34,9 @@ registerBlockType('custom/cta', {
     'data-entity-type': {
       type: 'string',
     },
+    primary: {
+      type: 'boolean',
+    },
     openInNewTab: {
       type: 'boolean',
     },
@@ -48,11 +51,12 @@ registerBlockType('custom/cta', {
   },
   // @ts-ignore
   edit: compose(withState({}))((props) => {
+    const buttonType = props.attributes.primary ? 'button--primary' : 'button--secondary';
     return (
       <div>
         <RichText
           identifier="text"
-          className={`button`}
+          className={`button ${buttonType}`}
           tagName="p"
           value={props.attributes.text}
           allowedFormats={[]}
@@ -107,6 +111,15 @@ registerBlockType('custom/cta', {
                       : link.type !== 'URL'
                         ? 'node'
                         : '',
+                });
+              }}
+            />
+            <ToggleControl
+              label={__('Primary')}
+              checked={props.attributes.primary as boolean}
+              onChange={(primary) => {
+                props.setAttributes({
+                  primary,
                 });
               }}
             />

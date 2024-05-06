@@ -1,10 +1,16 @@
 /* We can put any editor specific styling in here */
+/* We can put any editor specific styling in here */
 .gutenberg__editor .editor-styles-wrapper {
-  font-family:inherit;
+  font-family: inherit;
 }
 
 .gutenberg__editor blockquote {
-  margin:0;
+  margin: 0;
+}
+
+/* We do not want the preview button in the editor, we have the external preview feature. */
+.block-editor-post-preview__dropdown {
+  display: none;
 }
 
 .gutenberg__editor blockquote .quote-image img {
@@ -18,13 +24,30 @@
   content: '';
 }
 
+.components-toolbar-group button[aria-label='Align'] {
+  display: none;
+}
+
+body a {
+  color: inherit;
+}
+
+body a:hover,
+body a:focus {
+  color: inherit;
+}
+
 .gutenberg__editor .container-wrapper {
   display: block;
   position: relative;
   margin: 40px 0;
-  border-left: 34px solid #666666;
+  border-left: 34px solid #373530;
   padding-left: 10px;
-  min-height: 250px;
+  min-height: 200px;
+}
+
+.gutenberg__editor .container-wrapper.container-wrapper-long {
+  min-height: 300px;
 }
 
 .gutenberg__editor .container-wrapper .container-label {
@@ -40,4 +63,83 @@
   left: 0;
   transform-origin: 0 0;
   transform: rotate(90deg);
+}
+
+.gutenberg__editor .circle-wrapper {
+  height: 29px;
+  width: 29px;
+  float: right;
+  border-radius: 50%;
+  background-color: #fff;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+.gutenberg__editor .circle {
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  float: right;
+  margin-top: 2px;
+  margin-right: 2px;
+}
+
+div[data-type='custom/remote-video'] iframe {
+  max-width: 100%;
+}
+
+.components-panel .indent-0 {
+  margin-left: 0;
+}
+
+.components-panel .indent-2 {
+  margin-left: 20px;
+}
+
+.components-panel .indent-4 {
+  margin-left: 40px;
+}
+
+.components-panel .components-base-control.components-checkbox-control {
+  margin-bottom: 0;
+}
+
+.link-hidden span.block-editor-link-control__search-item-info {
+  display: none !important;
+}
+
+.gutenberg__editor .edit-post-visual-editor__content-area hr {
+  border-color: #373530;
+}
+
+@media (min-width: 1024px) {
+  .gutenberg__editor blockquote .lg\:text-3xl {
+    font-size: 2rem !important;
+  }
+}
+
+.page-node-type-blog .gutenberg__editor .edit-post-visual-editor__content-area .lg\:prose-xl {
+  font-size: inherit;
+  line-height: inherit;
+}
+
+/*
+.gutenberg__editor .wp-block-custom-heading .block-editor-rich-text__editable {
+  color: #009ee0;
+}
+*/
+
+.gutenberg__editor div[data-type="custom/image-with-caption"] .wp-block-paragraph {
+  color: #2e2e2e;
+  font-style: italic;
+}
+
+.gutenberg__editor .two-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+}
+
+.gutenberg__editor .button--primary {
+  background-color: #009ee0;
 }
