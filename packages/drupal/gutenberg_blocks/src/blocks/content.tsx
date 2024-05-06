@@ -23,7 +23,24 @@ registerBlockType(`custom/content`, {
   edit() {
     return (
       <main style={style} className="prose lg:prose-xl">
-        <InnerBlocks templateLock={false} template={[['core/paragraph', {}]]} />
+        <InnerBlocks
+          templateLock={false}
+          template={[['core/paragraph', {}]]}
+          allowedBlocks={[
+            'core/paragraph',
+            'core/list',
+            'core/table',
+            'core/quote',
+            'core/code',
+            'custom/heading',
+            'custom/cta',
+            'custom/image-with-link',
+            'custom/mathjax',
+            'custom/slider',
+            'custom/teasers',
+            'custom/form',
+          ]}
+        />
       </main>
     );
   },
