@@ -139,6 +139,20 @@ h1 {
   @apply right-5;
 }
 
+.ui-dialog .ui-button .ui-icon-closethick, .ui-dialog .ui-button:hover .ui-icon-closethick {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 53.7 53.7'><path fill='%23999E6E' d='M35.6 34.4L28 26.8l7.6-7.6c.2-.2.2-.5 0-.7l-.5-.5c-.2-.2-.5-.2-.7 0l-7.6 7.6-7.5-7.6c-.2-.2-.5-.2-.7 0l-.6.6c-.2.2-.2.5 0 .7l7.6 7.6-7.6 7.5c-.2.2-.2.5 0 .7l.5.5c.2.2.5.2.7 0l7.6-7.6 7.6 7.6c.2.2.5.2.7 0l.5-.5c.2-.2.2-.5 0-.7z'/></svg>");
+  @apply bg-no-repeat bg-center h-10 w-10 -left-0.5 -top-0.5 rounded-lg;
+}
+
+.ui-dialog .ui-button:hover .ui-icon-closethick {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 53.7 53.7'><path fill='currentColor' d='M35.6 34.4L28 26.8l7.6-7.6c.2-.2.2-.5 0-.7l-.5-.5c-.2-.2-.5-.2-.7 0l-7.6 7.6-7.5-7.6c-.2-.2-.5-.2-.7 0l-.6.6c-.2.2-.2.5 0 .7l7.6 7.6-7.6 7.5c-.2.2-.2.5 0 .7l.5.5c.2.2.5.2.7 0l7.6-7.6 7.6 7.6c.2.2.5.2.7 0l.5-.5c.2-.2.2-.5 0-.7z'/></svg>");
+  @apply text-red-600 bg-gray-100;
+}
+
+.ui-dialog .ui-button:focus {
+  @apply bg-white;
+}
+
 /* terms of service field - Dropdown */
 .webform-terms-of-service-details {
   @apply text-gray-900 border-gray-300 border rounded-lg p-5 leading-relaxed;
