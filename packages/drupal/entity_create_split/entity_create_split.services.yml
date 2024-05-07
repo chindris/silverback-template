@@ -1,3 +1,9 @@
 services:
-  entity_create_split.form_operations:
-    class: Drupal\entity_create_split\FormOperations
+  entity_create_split.route_subscriber:
+    class: Drupal\entity_create_split\EventSubscriber\EntityCreateSplitRequestSubscriber
+    arguments:
+      - "@current_route_match"
+      - "@entity_type.manager"
+      - "@entity_display.repository"
+    tags:
+      - { name: event_subscriber }

@@ -23,8 +23,7 @@ class EntityCreateSplitController extends ControllerBase {
     $bundleKey = $entityTypeDefinition->getKey('bundle');
     $entity = $this->entityTypeManager()->getStorage($entity_type)->create([$bundleKey => $bundle]);
     $entity->disableGutenberg = TRUE;
-    $entity->hideOptionalFormFields = TRUE;
-    $editForm = $this->entityTypeManager()->getFormObject($entity_type, 'default')->setEntity($entity);
+    $editForm = $this->entityTypeManager()->getFormObject($entity_type, 'split')->setEntity($entity);
     return \Drupal::formBuilder()->getForm($editForm);
   }
 
