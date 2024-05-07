@@ -8,6 +8,6 @@ To enable this feature, you must create a form mode with the machine name "split
 
 ## Special case for the Gutenberg editor
 
-The Gutenberg editor does a lot of alterations on the create form. For this reason, it is better that the form alter hook of the gutenberg module to not run at all. This is not easy possible, so right now the easiest approach is to just patch the module. The patch is included in the _patches/gutenberg_ folder.
+The Gutenberg editor does a lot of alterations on the create form. For this reason, it is better that the form alter hook of the gutenberg module to not run at all. This is not easy possible, so right now the easiest approach is to just patch the module with the patch from https://www.drupal.org/project/gutenberg/issues/3445677/
 
 The functionality should also work without the patch, but the initial form will not look that nice.
