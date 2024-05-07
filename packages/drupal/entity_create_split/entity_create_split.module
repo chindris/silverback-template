@@ -8,6 +8,7 @@
  */
 
 use Drupal\Core\Entity\ContentEntityType;
+use Drupal\Core\Entity\EntityInterface;
 
 /**
  * Implements hook_entity_type_build().
@@ -17,5 +18,14 @@ function entity_create_split_entity_type_build(array &$entity_types) {
     if ($entity_type instanceof ContentEntityType) {
       $entity_type->setFormClass('split', $entity_type->getFormClass('default'));
     }
+  }
+}
+
+/**
+ * Implements hook_gutenberg_enabled().
+ */
+function entity_create_split_gutenberg_enabled(EntityInterface $entity) {
+  if (isset($entity->disableGutenberg) && $entity->disableGutenberg === TRUE) {
+    return FALSE;
   }
 }
