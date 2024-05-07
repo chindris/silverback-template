@@ -6,19 +6,10 @@ import React from 'react';
 import { isTruthy } from '../../utils/isTruthy';
 import { useBreadcrumbs } from '../Routes/Menu';
 
-export default function BreadCrumbs({
-  bgCol = 'gray-50',
-  className,
-}: {
-  bgCol?: string;
-  className?: string;
-}) {
+export default function BreadCrumbs({ className }: { className?: string }) {
   const breadcrumbs = useBreadcrumbs();
 
-  console.log('breadcrumbs:', breadcrumbs);
-
   if (!breadcrumbs.length) {
-    console.log('breadcrumbs null:');
     return null;
   }
 
@@ -27,7 +18,7 @@ export default function BreadCrumbs({
       className={clsx('pt-5 max-w-screen-xl mx-auto', className)}
       aria-label="Breadcrumb"
     >
-      <ol className={clsx('rounded-lg inline-block p-2.5', `bg-${bgCol}`)}>
+      <ol className={'rounded-lg inline-block p-2.5'}>
         {breadcrumbs?.filter(isTruthy).map(({ title, target, id }, index) => (
           <li className="inline-flex items-center" key={id}>
             {index > 0 ? (
