@@ -206,6 +206,7 @@ union PageContent @resolveEditorBlockType =
   | BlockCta
   | BlockImageWithText
   | BlockQuote
+  | BlockInfoGrid
 
 type BlockForm @type(id: "custom/form") {
   url: Url @resolveEditorBlockAttribute(key: "formId") @webformIdToUrl(id: "$")
@@ -268,6 +269,15 @@ type BlockQuote @type(id: "custom/quote") {
   author: String @resolveEditorBlockAttribute(key: "author")
   role: String @resolveEditorBlockAttribute(key: "role")
   image: MediaImage @resolveEditorBlockMedia
+}
+
+type BlockInfoGrid @type(id: "custom/info-grid") {
+  items: [BlockInfoGridItem]! @resolveEditorBlockChildren
+}
+
+type BlockInfoGridItem @default @value {
+  icon: String! @resolveEditorBlockAttribute(key: "icon")
+  textContent: BlockMarkup @resolveEditorBlockChildren @seek(pos: 0)
 }
 
 input PaginationInput {

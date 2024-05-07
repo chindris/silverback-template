@@ -60,6 +60,21 @@ export function PageDisplay(page: PageFragment) {
                   );
                 case 'BlockQuote':
                   return <BlockQuote key={index} {...block} />;
+                case 'BlockInfoGrid':
+                  return (
+                    // TODO: Implement BlockImageTeasers
+                    <div
+                      style={{
+                        color: 'red',
+                        border: 'solid 3px red',
+                        padding: '3px',
+                        margin: '5px 0',
+                      }}
+                      // eslint-disable-next-line react/jsx-no-literals
+                    >
+                      BlockInfoGrid goes here
+                    </div>
+                  );
                 default:
                   throw new UnreachableCaseError(block);
               }

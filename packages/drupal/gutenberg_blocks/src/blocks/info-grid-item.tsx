@@ -1,20 +1,21 @@
-import { InnerBlocks, InspectorControls } from "wordpress__block-editor";
-import { registerBlockType } from "wordpress__blocks";
+import { InnerBlocks, InspectorControls } from 'wordpress__block-editor';
+import { registerBlockType } from 'wordpress__blocks';
 import { PanelBody, SelectControl } from 'wordpress__components';
-import { iconImagePreview, iconListOptions } from "../utils/icon-list";
+
+import { iconImagePreview, iconListOptions } from '../utils/icon-list';
 
 // @ts-ignore
 const { t: __ } = Drupal;
 
-registerBlockType("custom/info-grid-item", {
-  title: __("Info Grid Item"),
-  icon: "align-wide",
-  category: "layout",
+registerBlockType('custom/info-grid-item', {
+  title: __('Info Grid Item'),
+  icon: 'align-wide',
+  category: 'layout',
   attributes: {
     icon: {
-      type: "string",
-      default: "EMAIL"
-    }
+      type: 'string',
+      default: 'EMAIL',
+    },
   },
   edit: (props) => {
     const { setAttributes } = props;
@@ -24,7 +25,7 @@ registerBlockType("custom/info-grid-item", {
     return (
       <>
         <InspectorControls>
-          <PanelBody title={__("Select an icon")}>
+          <PanelBody title={__('Select an icon')}>
             <SelectControl
               value={props.attributes.icon as string}
               options={iconListOptions}
@@ -35,21 +36,18 @@ registerBlockType("custom/info-grid-item", {
           </PanelBody>
         </InspectorControls>
 
-        <div className={"container-wrapper"}>
-          <div className={"container-label"}>{__("Info Grid Item")}</div>
-          <div className={"info-grid-icon"} style={iconPreviewStyle}>
+        <div className={'container-wrapper'}>
+          <div className={'container-label'}>{__('Info Grid Item')}</div>
+          <div className={'info-grid-icon'} style={iconPreviewStyle}>
             <img src={iconPreview} alt={props.attributes.icon as string} />
           </div>
           <InnerBlocks
             templateLock={false}
-            allowedBlocks={[
-              "custom/heading",
-              "core/paragraph"
-            ]}
+            allowedBlocks={['custom/heading', 'core/paragraph']}
           />
         </div>
       </>
     );
   },
-  save: () => <InnerBlocks.Content />
+  save: () => <InnerBlocks.Content />,
 });
