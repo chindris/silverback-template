@@ -16,6 +16,10 @@ drupalSettings.gutenberg._listeners.init.push(
     const paragraphBlock = wp.blocks.getBlockType('core/paragraph');
     paragraphBlock.supports.typography.fontSize = false;
     paragraphBlock.supports.typography.dropCap = false;
+    // @ts-ignore
+    const listBlock = wp.blocks.getBlockType('core/list');
+    listBlock.supports.color = false;
+    listBlock.supports.typography = false;
   },
 
   // Allow common blocks to be placed only in the Content block.

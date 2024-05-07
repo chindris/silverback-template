@@ -35,10 +35,6 @@ runs:
       shell: bash
       run: PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 pnpm i
 
-    - name: Check formatting
-      shell: bash
-      run: pnpm test:format
-
     - name: Cache playwright binaries
       uses: actions/cache@v3
       id: playwright-cache

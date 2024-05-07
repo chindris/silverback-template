@@ -52,6 +52,42 @@ test('Blocks', async () => {
           url
           text
           openInNewTab
+          icon
+          iconPosition
+        }
+        ... on BlockImageWithText {
+          image {
+            __typename
+          }
+          imagePosition
+          textContent {
+            __typename
+            markup
+          }
+        }
+        ... on BlockQuote {
+          quote
+          author
+          role
+          image {
+            __typename
+          }
+        }
+        ... on BlockHorizontalSeparator {
+          __typename
+        }
+        ... on BlockAccordion {
+          items {
+            __typename
+            ... on BlockAccordionItemText {
+              __typename
+              title
+              icon
+              textContent {
+                markup
+              }
+            }
+          }
         }
       }
     }
@@ -89,6 +125,9 @@ test('Blocks', async () => {
     ",
             },
             {
+              "__typename": "BlockHorizontalSeparator",
+            },
+            {
               "__typename": "BlockMedia",
               "caption": "Media image",
               "media": {
@@ -107,6 +146,27 @@ test('Blocks', async () => {
               "url": "http://127.0.0.1:8000/en/form/contact",
             },
             {
+              "__typename": "BlockImageWithText",
+              "image": {
+                "__typename": "MediaImage",
+              },
+              "imagePosition": "right",
+              "textContent": {
+                "__typename": "BlockMarkup",
+                "markup": "
+    <p>All kinds of allowed blocks</p>
+
+    <ul><li>bla</li></ul>
+
+    <h2 class="wp-block-custom-heading">Heading</h2>
+
+    <blockquote class="wp-block-quote"><p>Quote</p><cite>Citation</cite></blockquote>
+
+    <p></p>
+    ",
+              },
+            },
+            {
               "__typename": "BlockMarkup",
               "markup": "
     <p>Starting from this paragraph, all the following blocks should be aggregated, as they are just HTML</p>
@@ -116,8 +176,6 @@ test('Blocks', async () => {
     <ul><li>list 1</li><li>list 2<ol><li>list 2.2</li></ol></li></ul>
 
     <h3 class="wp-block-custom-heading">Heading 3</h3>
-
-    <blockquote class="wp-block-quote"><p>Quote</p><cite>Citation</cite></blockquote>
     ",
             },
             {
@@ -145,27 +203,63 @@ test('Blocks', async () => {
             },
             {
               "__typename": "BlockCta",
+              "icon": null,
+              "iconPosition": null,
               "openInNewTab": null,
               "text": "Internal CTA",
               "url": "/en/drupal",
             },
             {
               "__typename": "BlockCta",
+              "icon": "ARROW",
+              "iconPosition": null,
               "openInNewTab": true,
               "text": "External CTA",
               "url": "https://www.google.com",
             },
             {
               "__typename": "BlockCta",
+              "icon": "ARROW",
+              "iconPosition": "BEFORE",
               "openInNewTab": null,
               "text": "CTA with link to media",
               "url": "/media/[numeric]",
             },
             {
-              "__typename": "BlockMarkup",
-              "markup": "
-    <p></p>
+              "__typename": "BlockQuote",
+              "author": "John Doe",
+              "image": {
+                "__typename": "MediaImage",
+              },
+              "quote": "Lorem ipsum dolor sit amet, <strong>consectetur</strong> adipiscing elit. Vivamus sagittis nisi nec neque porta, a ornare ligula efficitur.",
+              "role": "Project manager",
+            },
+            {
+              "__typename": "BlockAccordion",
+              "items": [
+                {
+                  "__typename": "BlockAccordionItemText",
+                  "icon": "",
+                  "textContent": {
+                    "markup": "
+    <p>Incididunt laborum velit non proident nostrud velit. Minim excepteur ut aliqua nisi. Culpa laboris consectetur proident. Tempor esse ullamco et dolor proident id officia laborum voluptate nostrud elit dolore qui amet. Ex Lorem irure eu anim ipsum officia.</p>
     ",
+                  },
+                  "title": "With a single paragraph and no icon",
+                },
+                {
+                  "__typename": "BlockAccordionItemText",
+                  "icon": "arrow",
+                  "textContent": {
+                    "markup": "
+    <ul><li>Moitié-moitié</li><li>Fribourgeoise</li></ul>
+    
+    <p>Incididunt laborum velit non proident nostrud velit. Minim excepteur ut aliqua nisi. Culpa laboris consectetur proident. Tempor esse ullamco et dolor proident id officia laborum voluptate nostrud elit dolore qui amet. Ex Lorem irure eu anim ipsum officia.</p>
+    ",
+                  },
+                  "title": "With a list and a paragraph and arrow icon",
+                },
+              ],
             },
           ],
           "hero": {
@@ -198,16 +292,34 @@ test('Blocks', async () => {
 
     <figure class="wp-block-table"><table><tbody><tr><td></td><td></td></tr><tr><td></td><td></td></tr></tbody></table></figure>
 
-    <blockquote class="wp-block-quote"><p></p></blockquote>
-
     <h2 class="wp-block-custom-heading"></h2>
     ",
             },
             {
               "__typename": "BlockCta",
+              "icon": null,
+              "iconPosition": null,
               "openInNewTab": null,
               "text": null,
               "url": null,
+            },
+            {
+              "__typename": "BlockImageWithText",
+              "image": null,
+              "imagePosition": "left",
+              "textContent": {
+                "__typename": "BlockMarkup",
+                "markup": "
+    <p></p>
+    ",
+              },
+            },
+            {
+              "__typename": "BlockQuote",
+              "author": "Jane Doe",
+              "image": null,
+              "quote": "In vitae diam quis odio tincidunt faucibus eget ut libero",
+              "role": null,
             },
           ],
           "hero": {

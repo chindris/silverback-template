@@ -22,6 +22,7 @@ module:
   dropzonejs: 0
   dynamic_page_cache: 0
   editor: 0
+  entity_create_split: 0
   entity_usage: 0
   environment_indicator: 0
   field: 0
@@ -59,6 +60,7 @@ module:
   role_delegation: 0
   serialization: 0
   shortcut: 0
+  silverback_autosave: 0
   silverback_campaign_urls: 0
   silverback_cloudinary: 0
   silverback_external_preview: 0
