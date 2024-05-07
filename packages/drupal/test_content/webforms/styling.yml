@@ -25,11 +25,17 @@ elements: |-
       Foo: Foo
       Bar: 'Bar -- Bar has a description.'
       Baz: Baz
-  textfield:
-    '#type': textfield
-    '#title': Textfield
-    '#description': 'Textfield description.'
-    '#placeholder': 'Placeholder goes here'
+  flexbox:
+    '#type': webform_flexbox
+    textfield:
+      '#type': textfield
+      '#title': 'First name'
+      '#description': 'Textfield description.'
+      '#placeholder': 'Placeholder goes here'
+      '#required': true
+    last_name:
+      '#type': textfield
+      '#title': 'Last name'
   email_with_a_conformation:
     '#type': webform_email_confirm
     '#title': 'Email with a confirmation'
@@ -56,6 +62,22 @@ elements: |-
       Foo: Foo
       Bar: Bar
       Baz: Baz
+  terms_of_service:
+    '#type': webform_terms_of_service
+    '#title': 'I agree to the {terms of service} in modal'
+    '#required': true
+    '#terms_content': |-
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a felis convallis, pharetra mauris a, eleifend justo. Sed massa ipsum, suscipit sit amet varius a, dignissim at ex. Integer euismod a sapien id auctor. Etiam dignissim scelerisque nunc in porttitor. Nam rutrum molestie mauris, a bibendum ligula. Etiam eget posuere enim. Quisque id condimentum ligula.
+
+      Duis sit amet sapien justo. Suspendisse potenti. Aliquam venenatis congue quam, quis eleifend tellus. Duis aliquam sollicitudin purus sed rutrum. Nullam vitae ante lorem. Curabitur malesuada nibh lectus, ut ultricies elit mattis sed. Ut pharetra urna nec lacus pellentesque vestibulum. Nulla turpis sem, aliquam finibus pharetra at, interdum sit amet ligula. In hac habitasse platea dictumst. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce ullamcorper justo in risus condimentum suscipit. Nam in nunc sit amet neque fringilla suscipit. Sed nec metus tempus, rhoncus dolor et, vehicula urna. Donec ultricies leo pharetra ante vulputate vulputate. Nullam tincidunt pharetra nisi eu faucibus. Duis efficitur, massa eget sagittis sodales, magna dolor dapibus justo, et facilisis tellus augue et est.
+  terms_of_service_01:
+    '#type': webform_terms_of_service
+    '#title': 'I agree to the {terms of service} in slideout'
+    '#terms_type': slideout
+    '#terms_content': |-
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a felis convallis, pharetra mauris a, eleifend justo. Sed massa ipsum, suscipit sit amet varius a, dignissim at ex. Integer euismod a sapien id auctor. Etiam dignissim scelerisque nunc in porttitor. Nam rutrum molestie mauris, a bibendum ligula. Etiam eget posuere enim. Quisque id condimentum ligula.
+
+      Duis sit amet sapien justo. Suspendisse potenti. Aliquam venenatis congue quam, quis eleifend tellus. Duis aliquam sollicitudin purus sed rutrum. Nullam vitae ante lorem. Curabitur malesuada nibh lectus, ut ultricies elit mattis sed. Ut pharetra urna nec lacus pellentesque vestibulum. Nulla turpis sem, aliquam finibus pharetra at, interdum sit amet ligula. In hac habitasse platea dictumst. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce ullamcorper justo in risus condimentum suscipit. Nam in nunc sit amet neque fringilla suscipit. Sed nec metus tempus, rhoncus dolor et, vehicula urna. Donec ultricies leo pharetra ante vulputate vulputate. Nullam tincidunt pharetra nisi eu faucibus. Duis efficitur, massa eget sagittis sodales, magna dolor dapibus justo, et facilisis tellus augue et est.
   actions:
     '#type': webform_actions
     '#title': 'Submit button(s)'

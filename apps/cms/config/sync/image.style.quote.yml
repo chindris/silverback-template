@@ -1,0 +1,15 @@
+uuid: 983e88dc-78f8-463d-b088-026d7d96bcc0
+langcode: en
+status: true
+dependencies: {  }
+name: quote
+label: 'Quote (24x24)'
+effects:
+  3ac18111-aeda-4cd7-aafc-5cd66d0cbf7e:
+    uuid: 3ac18111-aeda-4cd7-aafc-5cd66d0cbf7e
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 24
+      height: 24
+      anchor: center-center

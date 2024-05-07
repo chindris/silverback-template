@@ -19,6 +19,26 @@ export const Error = {
   args: {
     url: 'webforms/error/index.html' as Url,
     cssStylesToInject: cmsCss,
-    className: 'mt-16',
+  },
+} satisfies StoryObj<typeof BlockForm>;
+
+export const TermsOfServiceModal = {
+  args: {
+    url: 'webforms/terms-of-service-modal/index.html' as Url,
+    cssStylesToInject: cmsCss,
+  },
+  parameters: {
+    chromatic: {
+      // Makes no sense to test on different viewports because the modal size
+      // and position are hardcoded in the form snapshot.
+      viewports: [1440],
+    },
+  },
+} satisfies StoryObj<typeof BlockForm>;
+
+export const TermsOfServiceSlideout = {
+  args: {
+    url: 'webforms/terms-of-service-slideout/index.html' as Url,
+    cssStylesToInject: cmsCss,
   },
 } satisfies StoryObj<typeof BlockForm>;

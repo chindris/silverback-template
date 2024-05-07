@@ -1,6 +1,6 @@
 tasks:
   - name: Setup
-    init: pnpm install && pnpm turbo build --no-daemon --go-fallback && gp sync-done setup
+    init: pnpm install && pnpm turbo build gp sync-done setup
     env:
       NETLIFY_URL: http://localhost:8000
       DRUPAL_EXTERNAL_URL: http://localhost:8888

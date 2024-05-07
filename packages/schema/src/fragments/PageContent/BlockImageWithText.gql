@@ -1,0 +1,10 @@
+fragment BlockImageWithText on BlockImageWithText {
+  image {
+    source(width: 1536, height: 1336)
+    alt
+  }
+  textContent {
+    markup
+  }
+  imagePosition
+}

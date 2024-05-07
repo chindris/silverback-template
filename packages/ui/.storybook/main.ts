@@ -1,5 +1,4 @@
 import type { StorybookConfig } from '@storybook/react-vite';
-import pluginTurbosnap from 'vite-plugin-turbosnap';
 import { mergeConfig, UserConfig } from 'vite';
 import { imagetools } from 'vite-imagetools';
 import { resolve, dirname } from 'path';
@@ -21,18 +20,16 @@ const config: StorybookConfig = {
           ),
         },
       },
-      plugins: [
-        pluginTurbosnap({ rootDir: config.root ?? process.cwd() }),
-        imagetools(),
-      ],
+      plugins: [imagetools()],
     } satisfies UserConfig),
   staticDirs: ['../static/public', '../static/stories'],
-  stories: ['../src/**/*.stories.@(ts|tsx|mdx)'],
+  stories: ['../src/**/*.@(mdx|stories.@(ts|tsx))'],
   addons: [
     '@storybook/addon-links',
     '@storybook/addon-essentials',
     '@storybook/addon-interactions',
     '@storybook/addon-coverage',
+    '@storybook/addon-a11y',
   ],
   framework: {
     name: '@storybook/react-vite',
