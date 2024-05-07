@@ -1,0 +1,11 @@
+uuid: 5f26940d-fd06-41e0-8e59-9dfcdc9c86df
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.split
+label: Split
+description: ''
+targetEntityType: node
+cache: true

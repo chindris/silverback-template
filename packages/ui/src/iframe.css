@@ -7,6 +7,20 @@ h1 {
   @apply hidden;
 }
 
+/* Skip to main content link on iframe  */
+.visually-hidden.focusable {
+  @apply sr-only;
+}
+
+.visually-hidden.focusable:active, .visually-hidden.focusable:focus {
+  @apply not-sr-only ml-1;
+}
+
+/* Horizontal padding to avoid focus style to be cropped by the iframe */
+.webform-submission-form {
+  @apply px-1 text-gray-900;
+}
+
 /* Vertical spacing */
 .webform-submission-form > *:not(:last-child) {
   @apply mb-10;
@@ -31,7 +45,7 @@ h1 {
 
 /* field description */
 .form-item .webform-element-description {
-  @apply text-sm text-gray-600;
+  @apply text-sm text-gray-500;
 }
 
 .form-item .description {
@@ -63,7 +77,7 @@ h1 {
 
 /* checkbox  */
 .form-item input[type="checkbox"] {
-  @apply rounded;
+  @apply rounded -mt-1;
 }
 
 .form-item input[type="checkbox"]:not(:checked), .form-item input[type="radio"]:not(:checked)  {
@@ -83,9 +97,14 @@ h1 {
   @apply text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center;
 }
 
-.form-item input.error {
+.form-item input.error, .form-item textarea.error, .form-item select.error, .form-item input[type="checkbox"].error {
   @apply border-red-500;
 }
+
+.form-required:after {
+  @apply content-['*'] text-gray-900 pl-1;
+}
+
 
 .fieldset-legend {
   @apply font-bold mb-2 block;
@@ -93,4 +112,57 @@ h1 {
 
 [data-drupal-messages] [role="alert"] {
   @apply text-red-500;
+}
+
+/* terms of service field */
+.form-type-webform-terms-of-service {
+  @apply text-gray-500 text-sm;
+}
+
+.form-type-webform-terms-of-service a {
+  @apply text-gray-900 underline;
+}
+
+.form-type-webform-terms-of-service a:hover {
+  @apply text-gray-900 no-underline;
+}
+
+/* terms of service field - Modal */
+.ui-widget-overlay {
+  @apply opacity-0 pointer-events-none;
+}
+
+.ui-widget.ui-widget-content {
+  @apply bg-white border border-gray-300 rounded-lg px-0;
+}
+
+.ui-widget.ui-widget-content .ui-widget-header {
+  @apply bg-white border-0 border-b border-gray-300 py-3 px-10;
+}
+
+.ui-widget.ui-widget-content .ui-button {
+  @apply border-0;
+}
+
+.ui-dialog .ui-dialog-titlebar-close {
+  @apply right-5;
+}
+
+.ui-dialog .ui-button .ui-icon-closethick, .ui-dialog .ui-button:hover .ui-icon-closethick {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 53.7 53.7'><path fill='%23999E6E' d='M35.6 34.4L28 26.8l7.6-7.6c.2-.2.2-.5 0-.7l-.5-.5c-.2-.2-.5-.2-.7 0l-7.6 7.6-7.5-7.6c-.2-.2-.5-.2-.7 0l-.6.6c-.2.2-.2.5 0 .7l7.6 7.6-7.6 7.5c-.2.2-.2.5 0 .7l.5.5c.2.2.5.2.7 0l7.6-7.6 7.6 7.6c.2.2.5.2.7 0l.5-.5c.2-.2.2-.5 0-.7z'/></svg>");
+  @apply bg-no-repeat bg-center h-10 w-10 -left-0.5 -top-0.5 rounded-lg;
+}
+
+.ui-dialog .ui-button:hover .ui-icon-closethick {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 53.7 53.7'><path fill='currentColor' d='M35.6 34.4L28 26.8l7.6-7.6c.2-.2.2-.5 0-.7l-.5-.5c-.2-.2-.5-.2-.7 0l-7.6 7.6-7.5-7.6c-.2-.2-.5-.2-.7 0l-.6.6c-.2.2-.2.5 0 .7l7.6 7.6-7.6 7.5c-.2.2-.2.5 0 .7l.5.5c.2.2.5.2.7 0l7.6-7.6 7.6 7.6c.2.2.5.2.7 0l.5-.5c.2-.2.2-.5 0-.7z'/></svg>");
+  @apply text-red-600 bg-gray-100;
+}
+
+.ui-dialog .ui-button:focus {
+  @apply bg-white;
+}
+
+/* terms of service field - Dropdown */
+.webform-terms-of-service-details {
+  @apply text-gray-900 border-gray-300 border rounded-lg p-5 leading-relaxed;
 }
