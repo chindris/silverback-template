@@ -7,23 +7,15 @@
  * the rest of the fields.
  */
 
-use Drupal\Core\Entity\EntityFormInterface;
-use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Entity\ContentEntityType;
 
 /**
- * Implements hook_form_alter().
+ * Implements hook_entity_type_build().
  */
-function entity_create_split_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-  // We are only interested in entity forms, and only when the
-  // hideOptionalFormFields flag is set on the entity (which means the form was
-  // requested from the entity_create_split.create route).
-  if ($form_state->getFormObject() instanceof EntityFormInterface) {
-    $entity = $form_state->getFormObject()->getEntity();
-    if (!$entity->hideOptionalFormFields) {
-      return;
+function entity_create_split_entity_type_build(array &$entity_types) {
+  foreach ($entity_types as $entity_type) {
+    if ($entity_type instanceof ContentEntityType) {
+      $entity_type->setFormClass('split', $entity_type->getFormClass('default'));
     }
-    /* @var \Drupal\entity_create_split\FormOperationsInterface $formOperations */
-    $formOperations = \Drupal::service('entity_create_split.form_operations');
-    $formOperations->hideOptionalFields($form);
   }
 }
