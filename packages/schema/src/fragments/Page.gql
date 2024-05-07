@@ -36,6 +36,7 @@ fragment Page on Page {
     ...BlockImageWithText
     ...BlockQuote
     ...BlockHorizontalSeparator
+    ...BlockAccordion
   }
   metaTags {
     tag

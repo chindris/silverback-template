@@ -4,6 +4,7 @@ import React from 'react';
 import { isTruthy } from '../../utils/isTruthy';
 import { UnreachableCaseError } from '../../utils/unreachable-case-error';
 import { PageTransition } from '../Molecules/PageTransition';
+import { BlockAccordion } from './PageContent/BlockAccordion';
 import { BlockCta } from './PageContent/BlockCta';
 import { BlockForm } from './PageContent/BlockForm';
 import { BlockHorizontalSeparator } from './PageContent/BlockHorizontalSeparator';
@@ -63,6 +64,8 @@ export function PageDisplay(page: PageFragment) {
                   return <BlockQuote key={index} {...block} />;
                 case 'BlockHorizontalSeparator':
                   return <BlockHorizontalSeparator key={index} {...block} />;
+                case 'BlockAccordion':
+                  return <BlockAccordion key={index} {...block} />;
                 default:
                   throw new UnreachableCaseError(block);
               }
