@@ -4,6 +4,8 @@ import { mergeConfig, UserConfig } from 'vite';
 import { imagetools } from 'vite-imagetools';
 import { resolve, dirname } from 'path';
 
+import fonts from '../build/preloaded-fonts.json';
+
 const config: StorybookConfig = {
   viteFinal: (config, { configType }) =>
     mergeConfig(config, {
@@ -39,5 +41,14 @@ const config: StorybookConfig = {
   docs: {
     autodocs: 'tag',
   },
+  previewHead: (head) => `
+    ${head}
+    ${fonts
+      .map(
+        (font: string) =>
+          `<link rel="preload" href="${font}" as="font" type="font/woff2" crossOrigin="anonymous" />`,
+      )
+      .join('\n')}
+  `,
 };
 export default config;
