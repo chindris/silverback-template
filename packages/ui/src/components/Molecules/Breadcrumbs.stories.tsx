@@ -1,5 +1,5 @@
 import { FrameQuery, OperationExecutor } from '@custom/schema';
-import { Meta, StoryObj } from '@storybook/react';
+import { Meta } from '@storybook/react';
 import React from 'react';
 
 import { Default as FrameStory } from '../Routes/Frame.stories';
@@ -9,9 +9,9 @@ export default {
   component: BreadCrumbs,
   parameters: {
     layout: 'fullscreen',
-    location: { pathname: '/gatsby-turbo' },
+    location: new URL('local:/gatsby-turbo'),
   },
-} satisfies StoryObj<typeof BreadCrumbs>;
+} satisfies Meta<typeof BreadCrumbs>;
 
 export const Default = {
   render: () => {
