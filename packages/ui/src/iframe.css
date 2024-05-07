@@ -7,6 +7,15 @@ h1 {
   @apply hidden;
 }
 
+/* Skip to main content link on iframe  */
+.visually-hidden.focusable {
+  @apply sr-only;
+}
+
+.visually-hidden.focusable:active, .visually-hidden.focusable:focus {
+  @apply not-sr-only ml-1;
+}
+
 /* Horizontal padding to avoid focus style to be cropped by the iframe */
 .webform-submission-form {
   @apply px-1 text-gray-900;
@@ -107,7 +116,7 @@ h1 {
 
 /* terms of service field */
 .form-type-webform-terms-of-service {
-  @apply text-gray-500;
+  @apply text-gray-500 text-sm;
 }
 
 .form-type-webform-terms-of-service a {
