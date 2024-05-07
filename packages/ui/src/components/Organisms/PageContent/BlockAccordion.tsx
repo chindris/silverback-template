@@ -21,8 +21,8 @@ const accordionTheme: CustomFlowbiteTheme['accordion'] = {
   root: {
     base: 'mt-10 divide-y divide-gray-200 border-gray-200 dark:divide-gray-700 dark:border-gray-700',
     flush: {
-      off: 'border-b last:border-0',
-      on: 'border-b last:border-0',
+      off: 'last:border-0',
+      on: 'last:border-0',
     },
   },
   content: {
