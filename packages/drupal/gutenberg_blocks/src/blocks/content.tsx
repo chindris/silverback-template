@@ -39,6 +39,7 @@ registerBlockType(`custom/content`, {
             'custom/slider',
             'custom/teasers',
             'custom/form',
+            'custom/accordion',
           ]}
         />
       </main>
