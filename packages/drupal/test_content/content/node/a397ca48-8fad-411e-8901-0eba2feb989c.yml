@@ -8,6 +8,7 @@ _meta:
     3a0fe860-a6d6-428a-9474-365bd57509aa: media
     478c4289-961d-4ce8-85d6-578ae05f3019: media
     72187a1f-3e48-4b45-a9b7-189c6fd7ee26: media
+    5dfc1856-e9e4-4f02-9cd6-9d888870ce1a: media
 default:
   revision_uid:
     -
@@ -92,9 +93,8 @@ default:
 
         <!-- wp:custom/cta {"url":"/media/1","text":"CTA with link to media","data-id":"b998ae5e-8b56-40ca-8f80-fd4404e7e716","data-entity-type":"media","icon":"ARROW","iconPosition":"BEFORE"} /-->
 
-
         <!-- wp:custom/quote {"quote":"Lorem ipsum dolor sit amet, \u003cstrong\u003econsectetur\u003c/strong\u003e adipiscing elit. Vivamus sagittis nisi nec neque porta, a ornare ligula efficitur.","author":"John Doe","role":"Project manager","mediaEntityIds":["5dfc1856-e9e4-4f02-9cd6-9d888870ce1a"]} /-->
-        
+
         <!-- wp:custom/info-grid -->
         <!-- wp:custom/info-grid-item {"icon":"EMAIL"} -->
         <!-- wp:custom/heading {"level":3,"text":"Email us:"} -->
@@ -108,6 +108,8 @@ default:
         <!-- wp:paragraph -->
         <p><a href="mailto:hello@company.com">hello@company.com</a></p>
         <!-- /wp:paragraph -->
+
+        <!-- wp:custom/cta {"url":"/en/page-links","text":"Nullam dictum felis","data-id":"25086be7-ca5f-4ff8-9695-b9c71a676d4e","data-entity-type":"node","icon":"ARROW"} /-->
         <!-- /wp:custom/info-grid-item -->
 
         <!-- wp:custom/info-grid-item {"icon":"PHONE"} -->
@@ -122,6 +124,8 @@ default:
         <!-- wp:paragraph -->
         <p><a href="tel:+16467865060">+1 (646) 786-5060</a></p>
         <!-- /wp:paragraph -->
+
+        <!-- wp:custom/cta {"url":"/en/technologies","text":"Duis lobortis massa","data-id":"3a026abf-39d5-4c81-a76e-6f30593f114d","data-entity-type":"node"} /-->
         <!-- /wp:custom/info-grid-item -->
 
         <!-- wp:custom/info-grid-item {"icon":"LIFE-RING"} -->
@@ -132,6 +136,8 @@ default:
         <!-- wp:paragraph -->
         <p>Check out helpful resources, FAQs and developer tools.</p>
         <!-- /wp:paragraph -->
+
+        <!-- wp:custom/cta {"url":"http://www.google.com","text":"Nunc nulla","data-id":"http://www.google.com","data-entity-type":"","openInNewTab":true} /-->
         <!-- /wp:custom/info-grid-item -->
         <!-- /wp:custom/info-grid -->
         <!-- /wp:custom/content -->
