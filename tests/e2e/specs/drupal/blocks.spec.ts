@@ -30,7 +30,7 @@ test('All blocks are rendered', async ({ page }) => {
     page.locator(
       'img:not([data-test-id=hero-image])[alt="A beautiful landscape."]',
     ),
-  ).toHaveCount(1);
+  ).toHaveCount(2);
   await expect(page.locator('figcaption:text("Media image")')).toHaveCount(1);
 
   // Video

@@ -6,4 +6,5 @@ fragment BlockImageWithText on BlockImageWithText {
   textContent {
     markup
   }
+  imagePosition
 }
