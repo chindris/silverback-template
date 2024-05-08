@@ -14,7 +14,7 @@ registerBlockType('custom/info-grid-item', {
   attributes: {
     icon: {
       type: 'string',
-      default: 'EMAIL',
+      default: '',
     },
   },
   edit: (props) => {

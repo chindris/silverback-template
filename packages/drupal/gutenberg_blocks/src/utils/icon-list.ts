@@ -5,6 +5,7 @@ const ICON_PATH = "/modules/custom/gutenberg_blocks/images/icons/";
 
 // Icon list options
 export const iconListOptions: { label: any, value: string }[] = [
+  { label: __("Select an icon"), value: "" },
   { label: __("Email"), value: "EMAIL" },
   { label: __("Telephone"), value: "PHONE" },
   { label: __("Life Ring"), value: "LIFE-RING" }

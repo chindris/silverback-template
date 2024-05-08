@@ -87,7 +87,7 @@ default:
         <!-- /wp:custom/image-teasers -->
 
         <!-- wp:custom/info-grid -->
-        <!-- wp:custom/info-grid-item -->
+        <!-- wp:custom/info-grid-item {"icon":"EMAIL"} -->
         <!-- wp:custom/heading {"level":3,"text":"Email us:"} -->
         <h3 class="wp-block-custom-heading">Email us:</h3>
         <!-- /wp:custom/heading -->
@@ -115,7 +115,7 @@ default:
         <!-- /wp:paragraph -->
         <!-- /wp:custom/info-grid-item -->
 
-        <!-- wp:custom/info-grid-item -->
+        <!-- wp:custom/info-grid-item {"icon":"LIFE-RING"} -->
         <!-- wp:custom/heading {"level":3,"text":"Support"} -->
         <h3 class="wp-block-custom-heading">Support</h3>
         <!-- /wp:custom/heading -->
