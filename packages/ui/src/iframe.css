@@ -21,6 +21,11 @@ h1 {
   @apply px-1 text-gray-900;
 }
 
+/* add style to visually-hidden class globally  */
+.webform-submission-form .visually-hidden {
+  @apply sr-only;
+}
+
 /* Vertical spacing */
 .webform-submission-form > *:not(:last-child) {
   @apply mb-10;
