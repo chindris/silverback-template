@@ -10,7 +10,7 @@ const style = {
   padding: '0 40px',
 };
 
-registerBlockType(`custom/content`, {
+registerBlockType(`custom/content-blog`, {
   title: __('Content'),
   category: 'layout',
   icon: 'media-document',
@@ -34,11 +34,8 @@ registerBlockType(`custom/content`, {
             'core/code',
             'custom/heading',
             'custom/cta',
-            'custom/image-with-link',
+            'custom/image-with-caption',
             'custom/mathjax',
-            'custom/slider',
-            'custom/teasers',
-            'custom/form',
           ]}
         />
       </main>

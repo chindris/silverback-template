@@ -1,0 +1,39 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 28ac124d-2e71-4ddf-a1ba-a535709b41a8
+  bundle: image
+  default_langcode: en
+  depends:
+    86b7ab11-44d7-4d3d-b521-67a932317af1: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: fig3_qasm_blog.png
+  created:
+    -
+      value: 1713537883
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_media_image:
+    -
+      entity: 86b7ab11-44d7-4d3d-b521-67a932317af1
+      alt: Mapping
+      title: ''
+      width: 1000
+      height: 637

@@ -1,0 +1,39 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: c414cc0a-0687-4166-bba4-e44dd4476c36
+  bundle: image
+  default_langcode: en
+  depends:
+    1ee434f2-f813-45b2-84ef-a516b8e6e445: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: fig2_qasm_blog.png
+  created:
+    -
+      value: 1713537760
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_media_image:
+    -
+      entity: 1ee434f2-f813-45b2-84ef-a516b8e6e445
+      alt: 'Transpiled circuit'
+      title: ''
+      width: 1000
+      height: 309

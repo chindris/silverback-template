@@ -1,0 +1,39 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: a5fb1d1c-74d6-4d70-a055-1035221da57c
+  bundle: image
+  default_langcode: en
+  depends:
+    c160f499-b758-4511-808e-50bdc2f62c77: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: qiskit_circuit.png
+  created:
+    -
+      value: 1713537617
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_media_image:
+    -
+      entity: c160f499-b758-4511-808e-50bdc2f62c77
+      alt: 'Randomized benchmarking circuit'
+      title: ''
+      width: 2296
+      height: 498

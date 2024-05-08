@@ -1,0 +1,277 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: fb74ee1a-6464-4954-b789-618564906d15
+  bundle: blog
+  default_langcode: en
+  depends:
+    f98dcb5e-ea31-4248-8d0e-66f0120c2b7e: taxonomy_term
+    a715c0e8-7162-44f1-99ab-f42d24c3d774: taxonomy_term
+    7b737603-c1d0-4c0a-a7d4-d503b592c121: taxonomy_term
+    28ac124d-2e71-4ddf-a1ba-a535709b41a8: media
+    7d249268-74d0-4fe4-a84d-484d16515abe: media
+    a5fb1d1c-74d6-4d70-a055-1035221da57c: media
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Run OpenQASM Circuits on Your Quantum Chip'
+  created:
+    -
+      value: 1713537182
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  path:
+    -
+      alias: /blogs/run-openqasm-circuits-on-your-quantum-chip
+      langcode: en
+      pathauto: 0
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  body:
+    -
+      value: |-
+        <!-- wp:custom/content-blog -->
+        <!-- wp:paragraph -->
+        <p>In this blog post, we present an efficient way to convert your OpenQASM3-based quantum circuits to pulse generation from your quantum control hardware through LabOne Q.</p>
+        <!-- /wp:paragraph -->
+
+        <!-- wp:paragraph -->
+        <p>Recent advancements in qubit architectures (i.e. long qubit lifetimes, short gate times and high gate fidelities) enable modern quantum processors to run longer and more complicated quantum algorithms than what was previously possible. OpenQASM is a quantum assembly language that provides users a convenient interface to design their quantum experiments and algorithms by programming sequences of parameterized quantum operations (i.e. gates, measurements, and resets) using the quantum circuit model <a href="#footnote-1">[1,2]</a>. To implement experiments with a quantum processor, the quantum circuits defined through OpenQASM need to be effectively converted into language that FPGA based control electronics can understand.</p>
+        <!-- /wp:paragraph -->
+
+        <!-- wp:paragraph -->
+        <p><a href="/quantum-computing-systems/labone-q">LabOne Q</a>, our software framework for quantum computing, provides the functionality for this conversion out of the box. LabOne Q assumes the role of a backend for QASM, in that the qubits and gates are defined within LabOne Q. Importing an OpenQASM program then amounts to mapping the QASM expressions to the LabOne Q objects, thus creating a pulse sequence from the QASM code that is directly executable through Zurich Instruments' Quantum Computing Control System (QCCS).</p>
+        <!-- /wp:paragraph -->
+
+        <!-- wp:paragraph -->
+        <p>In this blog post, we walk you through the process of importing your OpenQASM quantum circuit into LabOne Q. &nbsp;As an example we will work with a quantum protocol essential for quantum operations: two-qubit Randomized Benchmarking (RB). Using LabOneQ, we demonstrate how a two-qubit RB experiment is converted from OpenQASM 3 code into a pulse sequence played on an SHFQC and HDAWG. The concepts used for this example can be readily applied to other use cases, such as implementing variational quantum eigensolvers, or running custom algorithms. The full code for this example is available on our <a href="https://github.com/zhinst/laboneq/blob/main/examples/06_qasm/02_RandomizedBenchmarking_from_Qiskit.ipynb">GitHub</a>.</p>
+        <!-- /wp:paragraph -->
+
+        <!-- wp:custom/heading {"text":"Starting point: the quantum circuit"} -->
+        <h2 class="wp-block-custom-heading">Starting point: the quantum circuit</h2>
+        <!-- /wp:custom/heading -->
+
+        <!-- wp:paragraph -->
+        <p>Generation of OpenQASM code can be simplified through a higher level language such as Qiskit. Below we use the <a href="https://qiskit-extensions.github.io/qiskit-experiments/apidocs/library.html">Qiskit experiment library</a> to create a standard two-qubit RB experiment with varying Clifford lengths – a short example of length two is shown in Figure 1. Other languages such as <a href="https://www.pygsti.info/">pyGSTi</a> can also be used to create an OpenQASM experiment with same functionality (an example from our GitHub can be found <a href="https://github.com/zhinst/laboneq/blob/main/examples/06_qasm/03_Two_Qubit_RB_pyGSTi_OpenQASM.ipynb">here</a>).</p>
+        <!-- /wp:paragraph -->
+
+        <!-- wp:custom/mathjax -->
+        <div class="wp-block-custom-mathjax">$$\text{The quadratic formula: } x = \frac {-b \pm \sqrt {b^2 - 4ac}}{2a}$$</div>
+        <!-- /wp:custom/mathjax -->
+
+        <!-- wp:code -->
+        <pre class="wp-block-code"><code># Use Qiskit Experiment Library to Generate RB
+        qiskit_experiment = randomized_benchmarking.StandardRB(
+            physical_qubits=[0, 1], lengths=[2, 4, 8, 12]
+        ).circuits()
+        qiskit_experiment[0].draw("mpl")</code></pre>
+        <!-- /wp:code -->
+
+        <!-- wp:custom/image-with-caption {"mediaEntityIds":["28ac124d-2e71-4ddf-a1ba-a535709b41a8"]} -->
+        <!-- wp:paragraph -->
+        <p>Figure 1: A two-qubit RB experiment of length two. The experiment consists of two randomly chosen Clifford gates, followed by a recovery gate and a measurement of either qubit.</p>
+        <!-- /wp:paragraph -->
+        <!-- /wp:custom/image-with-caption -->
+
+        <!-- wp:custom/heading {"text":"Qiskit Tools"} -->
+        <h2 class="wp-block-custom-heading">Qiskit Tools</h2>
+        <!-- /wp:custom/heading -->
+
+        <!-- wp:paragraph -->
+        <p>After generating our circuit, we only need two additional tools from Qiskit. The first is Qiskit’s <a href="https://docs.quantum.ibm.com/api/qiskit/transpiler">transpiler</a>. Using the <samp>transpile()</samp> function, the Clifford gates shown in Figure 1 are expressed in terms of a chosen basis. Here we have chosen the Identity (id), √X (sx), X (x), R<sub>Z</sub> (rz) and Controlled-X (cx) gates to be our basis but you can choose any set of basis gates so long as the set is universal. The transpiled circuit is shown in the top half of Figure 2.</p>
+        <!-- /wp:paragraph -->
+
+        <!-- wp:custom/mathjax -->
+        <div class="wp-block-custom-mathjax">$$\sum_{i=0}^n i^2 = \frac{(n^2+n)(2n+1)}{6}$$</div>
+        <!-- /wp:custom/mathjax -->
+
+        <!-- wp:code -->
+        <pre class="wp-block-code"><code># Choose basis gates
+        transpiled_circuit = transpile(
+            qiskit_experiment, basis_gates=["id", "sx", "rz", "x", "cx"]
+        )
+        transpiled_circuit[0].draw("mpl")</code></pre>
+        <!-- /wp:code -->
+
+        <!-- wp:custom/image-with-caption {"mediaEntityIds":["28ac124d-2e71-4ddf-a1ba-a535709b41a8"]} -->
+        <!-- wp:paragraph -->
+        <p>Figure 2: The two-qubit RB experiment from Figure 1 expressed in our chosen basis as a circuit diagram from Qiskit (top) and as OpenQASM 3 code (bottom).</p>
+        <!-- /wp:paragraph -->
+        <!-- /wp:custom/image-with-caption -->
+
+        <!-- wp:paragraph -->
+        <p>Finally, we convert our transpiled circuit into an OpenQASM 3 program. We will work with the two-qubit RB experiment seen in Figure 1 (corresponding to <samp>program_list[0]</samp> from the code below). The bottom half of Figure 2 shows the OpenQASM code that corresponds to the section of the circuit directly above it in the figure.</p>
+        <!-- /wp:paragraph -->
+
+        <!-- wp:code -->
+        <pre class="wp-block-code"><code>program_list = []
+        for circuit in transpiled_circuit:
+            program_list.append(qasm3.dumps(circuit))
+        print(program_list[0])</code></pre>
+        <!-- /wp:code -->
+
+        <!-- wp:paragraph -->
+        <p>Almost all other backend objects (multi-qubit gates, single-qubit gates composed of more than one pulse, measurements, etc.) will be section factories. These objects leverage LabOne Q’s section functionalities to control the relative timings of pulses, ensure line synchronization and implement classical feedback. The measurement object shown below is an example of a section factory.</p>
+        <!-- /wp:paragraph -->
+
+        <!-- wp:code -->
+        <pre class="wp-block-code"><code>def measurement(qubit: Qubit):
+            """Return a measurement operation of the specified qubit."""
+
+            def measurement_gate(handle: str):
+                """Perform a measurement.
+
+                Handle is the name of where to store the measurement result. E.g. "meas[0]".
+                """
+                gate = Section(uid=id_generator(f"meas_{qubit.uid}_{handle}"))
+                gate.reserve(signal=qubit.signals["drive"])
+                gate.play(signal=qubit.signals["measure"], pulse=measure_pulse)
+                gate.acquire(
+                    signal=qubit.signals["acquire"],
+                    handle=handle,
+                    kernel=integration_kernel,
+                )
+                return gate
+
+            return measurement_gate</code></pre>
+        <!-- /wp:code -->
+
+        <!-- wp:custom/heading {"text":"Mapping Between LabOne Q and OpenQASM"} -->
+        <h2 class="wp-block-custom-heading">Mapping Between LabOne Q and OpenQASM</h2>
+        <!-- /wp:custom/heading -->
+
+        <!-- wp:paragraph -->
+        <p>Once the LabOne Q backend has been established, we need to map individual objects in the backend to their OpenQASM definitions. The process of mapping OpenQASM code to the LabOne Q backend is depicted in Figure 3.</p>
+        <!-- /wp:paragraph -->
+
+        <!-- wp:custom/image-with-caption {"mediaEntityIds":["7d249268-74d0-4fe4-a84d-484d16515abe"]} -->
+        <!-- wp:paragraph -->
+        <p>Figure 3: Every line of the OpenQASM code corresponding to the two-qubit RB experiment seen in Figure 2 is mapped (colored arrows) to an object in the LabOne Q backend prior to execution of the experiment on a QCCS.</p>
+        <!-- /wp:paragraph -->
+        <!-- /wp:custom/image-with-caption -->
+
+        <!-- wp:paragraph -->
+        <p>Mapping the qubits (shown in purple in Figure 3) is done using a <samp>qubit_map</samp> - a dictionary specifying which OpenQASM qubit corresponds to which LabOne Q qubit object.</p>
+        <!-- /wp:paragraph -->
+
+        <!-- wp:code -->
+        <pre class="wp-block-code"><code>qubit_map = {"q[0]": q0, "q[1]": q1}</code></pre>
+        <!-- /wp:code -->
+
+        <!-- wp:paragraph -->
+        <p>To map gates we will use the <samp>GateStore()</samp> – LabOne Q’s class designed to hold the individual pulses and section factories we defined in our backend and the mappings of these objects to the corresponding OpenQASM circuit elements. The <samp>GateStore()</samp> is instantiated like any normal class:</p>
+        <!-- /wp:paragraph -->
+
+        <!-- wp:code -->
+        <pre class="wp-block-code"><code>gate_store = GateStore()</code></pre>
+        <!-- /wp:code -->
+
+        <!-- wp:paragraph -->
+        <p>To map individual pulses we use the <samp>register_gate()</samp> method. We can use the <samp>q0_sx_gate()</samp> we defined previously to see how this method works. This mapping is shown in blue in Figure 3.&nbsp;</p>
+        <!-- /wp:paragraph -->
+
+        <!-- wp:code -->
+        <pre class="wp-block-code"><code>gate_store.register_gate(
+        		"sx",
+        		"q[0]",
+        		q0_sx_gate(),
+        		signal=q0.signals["drive"],
+        	)</code></pre>
+        <!-- /wp:code -->
+
+        <!-- wp:paragraph -->
+        <p>The first argument in the <samp>register_gate()</samp> method is the name of the OpenQASM circuit element we want to map our pulse to. The second argument is the OpenQASM qubit the pulse is played on. The third and fourth arguments are: the pulse we defined in our backend and the experimental signal line we want that pulse to be played on, respectively.</p>
+        <!-- /wp:paragraph -->
+
+        <!-- wp:paragraph -->
+        <p>We use the <samp>register_gate_section()</samp> method to register a section factory in our <samp>gate_store</samp> (shown in gray in Figure 3). Using our <samp>measurement()</samp> object as an example:</p>
+        <!-- /wp:paragraph -->
+
+        <!-- wp:code -->
+        <pre class="wp-block-code"><code>gate_store.register_gate_section("measure", "q[0]", measurement(q0))</code></pre>
+        <!-- /wp:code -->
+
+        <!-- wp:paragraph -->
+        <p>We see that the <samp>register_gate_section()</samp> method takes three arguments. Similar to the <samp>register_gate()</samp> method, the first two arguments are the OpenQASM circuit element and qubit we wish to map to. The third argument is the section factory we are assigning to the circuit element. Section factories already contain information about experimental signal lines and relative timings of experimental pulses so we don’t need to specify any of that information here.</p>
+        <!-- /wp:paragraph -->
+
+        <!-- wp:custom/heading {"text":"Running your experiment"} -->
+        <h2 class="wp-block-custom-heading">Running your experiment</h2>
+        <!-- /wp:custom/heading -->
+
+        <!-- wp:paragraph -->
+        <p>The final step is to generate your experiment and run it! Experiment generation is done using using the function <samp>exp_from_qasm()</samp>:</p>
+        <!-- /wp:paragraph -->
+
+        <!-- wp:code -->
+        <pre class="wp-block-code"><code>exp = exp_from_qasm(program_list[0], qubits=qubit_map, gate_store=gate_store)</code></pre>
+        <!-- /wp:code -->
+
+        <!-- wp:paragraph -->
+        <p>This function takes three arguments and returns a LabOne Q experiment object. The first input argument is the name of the OpenQASM program you want to convert into a LabOne Q experiment object. The second is the qubit map and the third is the GateStore for that particular program.</p>
+        <!-- /wp:paragraph -->
+
+        <!-- wp:paragraph -->
+        <p>If you are interested in batch processing a list of OpenQASM programs, the function <samp>exp_from_qasm_list()</samp> can be used instead. This function is similar to <samp>exp_from_qasm()</samp> but takes a list of OpenQASM programs as the first argument. The list is processed into a single LabOne Q experiment that executes the QASM snippets sequentially. For full details on this function, see our <a href="https://github.com/zhinst/laboneq/blob/main/laboneq/openqasm3/openqasm3_importer.py">documentation</a>.</p>
+        <!-- /wp:paragraph -->
+
+        <!-- wp:paragraph -->
+        <p>Once the experiment has been generated, it can be compiled through the LabOne Q compiler, and then executed via the QCCS hardware. Using LabOne Q's built-in simulation tool, we can preview the expected flux, drive, and measurement pulses produced by the SHFQC and HDAWG. Figure 4 shows the pulse simulation for the two-qubit RB experiment from Figure 2.</p>
+        <!-- /wp:paragraph -->
+
+        <!-- wp:custom/image-with-caption {"mediaEntityIds":["a5fb1d1c-74d6-4d70-a055-1035221da57c"]} -->
+        <!-- wp:paragraph -->
+        <p>Figure 4: Simulated output of the two-qubit RB experiment shown in Figure 2. Two red dashed lines are shown for timing context, the left dashed line marks the end of the first Controlled-X gate, the right dashed line corresponds to the start of the final X and √X gates on qubits 0 and 1, respectively, followed by the measurement section.</p>
+        <!-- /wp:paragraph -->
+        <!-- /wp:custom/image-with-caption -->
+
+        <!-- wp:custom/heading {"text":"Summary"} -->
+        <h2 class="wp-block-custom-heading">Summary</h2>
+        <!-- /wp:custom/heading -->
+
+        <!-- wp:paragraph -->
+        <p>In this blog post we have used a two-qubit RB experiment written in OpenQASM code to demonstrate the quantum circuit import features of LabOne Q. LabOne Q’s qubit objects, pulse library, and section functionalities make establishing a backend for your experiment straightforward. After mapping your OpenQASM code onto the LabOne Q backend, generation, simulation and execution of your experiment on Zurich Instruments' QCCS can be completed in seconds.</p>
+        <!-- /wp:paragraph -->
+
+        <!-- wp:paragraph -->
+        <p>Further OpenQASM support from LabOne Q, including sweep functionalities and openPulse integration, will be discussed future blog posts, so stay tuned!</p>
+        <!-- /wp:paragraph -->
+
+        <!-- wp:paragraph -->
+        <p>Do you have a quantum circuit you want to run in your lab? We are excited to help make that happen! Write to us at <a href="mailto:Linsey.Rodenbach@zhinst.com">Linsey.Rodenbach@zhinst.com</a> and <a href="mailto:Taekwan.Yoon@zhinst.com">Taekwan.Yoon@zhinst.com</a>.</p>
+        <!-- /wp:paragraph -->
+
+        <!-- wp:custom/heading {"text":"References"} -->
+        <h2 class="wp-block-custom-heading">References</h2>
+        <!-- /wp:custom/heading -->
+
+        <!-- wp:list {"ordered":true} -->
+        <ol><li>Andrew W. Cross, Ali Javadi-Abhari, Thomas Alexander, Niel de Beaudrap, Lev S. Bishop, Steven Heidel, Colm A. Ryan, John Smolin, Jay M. Gambetta, Blake R. Johnson "<a href="https://dl.acm.org/doi/10.1145/3505636">OpenQASM 3: A broader and deeper quantum assembly language</a>", ACM Transactions on Quantum Computing, 3, 3 (2022), pp 1-50</li><li><a href="https://docs.quantum.ibm.com/build/introduction-to-qasm">Introduction to OpenQASM | IBM Quantum Documentation</a></li></ol>
+        <!-- /wp:list -->
+        <!-- /wp:custom/content-blog -->
+      format: gutenberg
+      summary: ''
+  field_blog_tags:
+    -
+      entity: f98dcb5e-ea31-4248-8d0e-66f0120c2b7e
+    -
+      entity: a715c0e8-7162-44f1-99ab-f42d24c3d774
+    -
+      entity: 7b737603-c1d0-4c0a-a7d4-d503b592c121

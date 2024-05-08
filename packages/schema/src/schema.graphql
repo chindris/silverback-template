@@ -140,6 +140,16 @@ interface Page implements ContentHubResultItem @resolveEntityBundle {
   metaTags: [MetaTag]
 }
 
+interface Blog {
+  id: ID!
+  translations: [Blog]
+  locale: Locale!
+  path: Url!
+  title: String!
+  content: [BlogContent]
+  metaTags: [MetaTag]
+}
+
 type DecapPage implements ContentHubResultItem & Page
   @sourceFrom(fn: "getPages") {
   id: ID!
@@ -187,6 +197,35 @@ type DrupalPage implements ContentHubResultItem & Page
   metaTags: [MetaTag] @resolveProperty(path: "metatag")
 }
 
+"""
+Blog.
+"""
+type DrupalBlog implements Blog
+  @entity(type: "node", bundle: "blog")
+  @type(id: "page") {
+  id: ID! @resolveEntityUuid
+  locale: Locale! @resolveEntityLanguage
+  translations: [Blog] @resolveEntityTranslations
+  path: Url! @resolveEntityPath
+  title: String! @resolveProperty(path: "title.value")
+  content: [BlogContent]
+    @lang
+    @resolveEditorBlocks(
+      path: "body.value"
+      aggregated: [
+        "core/paragraph"
+        "core/list"
+        "core/table"
+        "core/quote"
+        "custom/heading"
+      ]
+      ignored: ["core/group"]
+    )
+    @seek(pos: 1)
+    @resolveEditorBlockChildren
+  metaTags: [MetaTag] @resolveProperty(path: "metatag")
+}
+
 type Hero {
   headline: String! @resolveEditorBlockAttribute(key: "headline")
   lead: String @resolveEditorBlockAttribute(key: "lead")
@@ -206,6 +245,8 @@ union PageContent @resolveEditorBlockType =
   | BlockCta
   | BlockImageWithText
   | BlockQuote
+
+union BlogContent @resolveEditorBlockType = BlockMarkup | BlockMedia
 
 type BlockForm @type(id: "custom/form") {
   url: Url @resolveEditorBlockAttribute(key: "formId") @webformIdToUrl(id: "$")
@@ -293,6 +334,9 @@ type Query {
   previewDrupalPage(id: ID!, rid: ID, locale: String!): DrupalPage
     @fetchEntity(type: "node", id: "$id", rid: "$rid", language: "$locale")
 
+  previewBlogPage(id: ID!, rid: ID, locale: String!): DrupalBlog
+    @fetchEntity(type: "node", id: "$id", rid: "$rid", language: "$locale")
+
   mainNavigations: [MainNavigation]
     @gatsbyNodes(type: "MainNavigation")
     @menuTranslations(menu_id: "main")
@@ -302,8 +346,10 @@ type Query {
     @menuTranslations(menu_id: "footer")
 
   allPages: [Page] @gatsbyNodes(type: "Page")
+  allBlogs: [Blog] @gatsbyNodes(type: "Blog")
   websiteSettings: WebsiteSettings
   viewPage(path: String!): Page @route(path: "$path") @loadEntity
+  viewBlog(path: String!): Blog @route(path: "$path") @loadEntity
 
   contentHub(locale: Locale!, args: String): ContentHubResult!
     @lang(code: "$locale")

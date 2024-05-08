@@ -1,20 +1,22 @@
-uuid: 200d2a02-994b-47ba-a778-aa716348bf40
+uuid: 04c755ba-8a45-464c-8050-931066d30d22
 langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.page.body
-    - field.field.node.page.field_metatags
-    - node.type.page
-    - workflows.workflow.basic
+    - field.field.node.blog.body
+    - field.field.node.blog.field_blog_tags
+    - field.field.node.blog.field_metatags
+    - field.field.node.blog.field_teaser_image
+    - node.type.blog
   module:
     - content_moderation
+    - media_library
     - metatag
     - path
     - text
-id: node.page.default
+id: node.blog.default
 targetEntityType: node
-bundle: page
+bundle: blog
 mode: default
 content:
   body:
@@ -33,13 +35,26 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_blog_tags:
+    type: options_buttons
+    weight: 13
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   field_metatags:
     type: metatag_firehose
-    weight: 13
+    weight: 14
     region: content
     settings:
       sidebar: true
       use_details: true
+    third_party_settings: {  }
+  field_teaser_image:
+    type: media_library_widget
+    weight: 12
+    region: content
+    settings:
+      media_types: {  }
     third_party_settings: {  }
   langcode:
     type: language_select

@@ -119,7 +119,7 @@ registerBlockType('custom/heading', {
   },
 });
 
-function HeadingLevelIcon({
+export function HeadingLevelIcon({
   level,
   isPressed = false,
 }: {

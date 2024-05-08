@@ -19,8 +19,8 @@ $config['graphql.graphql_servers.main']['schema_configuration']['directable']['b
 $settings['silverback_graphql_persisted_map'] = '../node_modules/@custom/schema/build/operations.json';
 
 // Environment indicator.
-$config['environment_indicator.indicator']['name'] = 'Local Silverback';
-$config['environment_indicator.indicator']['bg_color'] = '#42a877';
+$config['environment_indicator.indicator']['name'] = 'Gutenberg demo';
+$config['environment_indicator.indicator']['bg_color'] = '#009ee0';
 $config['environment_indicator.indicator']['fg_color'] = '#ffffff';
 
 if (getenv('LAGOON')) {
