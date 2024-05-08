@@ -73,6 +73,19 @@ export function PageDisplay(page: PageFragment) {
                       // eslint-disable-next-line react/jsx-no-literals
                     >
                       BlockInfoGrid goes here
+                      <br />
+                      ---
+                      <br />
+                      {block.items.map((item, index) => {
+                        return (
+                          <>
+                            <div key={index}>
+                              <p>Icon: {item?.icon}</p>
+                              <p>Markup: {item?.textContent?.markup}</p>
+                            </div>
+                          </>
+                        );
+                      })}
                     </div>
                   );
                 default:
