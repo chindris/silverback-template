@@ -3,7 +3,11 @@ import { mergeConfig, UserConfig } from 'vite';
 import { imagetools } from 'vite-imagetools';
 import { resolve, dirname } from 'path';
 
-import fonts from '../build/preloaded-fonts.json';
+import { readdirSync } from 'fs';
+
+const fonts = readdirSync(`static/public/fonts/preload`).map((font) => {
+  return `/fonts/preload/${font}`;
+});
 
 const config: StorybookConfig = {
   viteFinal: (config, { configType }) =>

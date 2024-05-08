@@ -70,6 +70,7 @@
   src: url('/fonts/preload/Inter-BoldItalic.woff2') format('woff2');
 }
 
-html, body {
+html,
+body {
   font-family: 'Inter', sans-serif;
 }
