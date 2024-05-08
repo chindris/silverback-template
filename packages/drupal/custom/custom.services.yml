@@ -8,5 +8,9 @@ services:
     class: Drupal\custom\Webform
     arguments: ['@renderer', '@entity_type.manager', '@serializer']
 
+  custom.directives:
+    class: Drupal\custom\Directives
+    arguments: ['@current_user', '@date.formatter']
+
   custom.menus:
     class: Drupal\custom\Menus

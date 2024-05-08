@@ -14,8 +14,6 @@ function custom_deploy_set_consumers(array &$sandbox): string {
   }
 
   // Check requirements.
-  $entityTypeManager = \Drupal::entityTypeManager();
-
   $publisherUrl = getenv('PUBLISHER_URL');
   if (!$publisherUrl) {
     throw new \Exception('PUBLISHER_URL environment variable is not set. It is required to setup the Publisher OAuth Consumer.');
@@ -26,11 +24,12 @@ function custom_deploy_set_consumers(array &$sandbox): string {
     throw new \Exception('PUBLISHER_OAUTH2_CLIENT_SECRET environment variable is not set. It is required to setup the Publisher OAuth Consumer.');
   }
 
+  $entityTypeManager = \Drupal::entityTypeManager();
   $consumersStorage = $entityTypeManager->getStorage('consumer');
   $existingConsumers = $consumersStorage->loadMultiple();
   $hasPublisherConsumer = FALSE;
   /** @var \Drupal\consumers\Entity\ConsumerInterface $consumer */
-  foreach($existingConsumers as $consumer) {
+  foreach ($existingConsumers as $consumer) {
     // As a side effect, delete the default consumer.
     // It is installed by the Consumers module.
     if ($consumer->getClientId() === 'default_consumer') {
@@ -55,4 +54,51 @@ function custom_deploy_set_consumers(array &$sandbox): string {
   }
 
   return t('Publisher OAuth Consumer already exists.');
+}
+
+/**
+ * Set up the Website OAuth Consumer.
+ */
+function custom_deploy_set_website_consumer(array &$sandbox): string {
+  // Skip for Silverback environments.
+  if (getenv('SB_ENVIRONMENT')) {
+    return t('Skipping for Silverback environment.');
+  }
+
+  // Check requirements.
+  $websiteUrl = getenv('NETLIFY_URL');
+  if (!$websiteUrl) {
+    throw new \Exception('NETLIFY_URL environment variable is not set. It is required to setup the Website OAuth Consumer.');
+  }
+
+  $clientSecret = getenv('WEBSITE_OAUTH2_CLIENT_SECRET');
+  if (!$clientSecret) {
+    throw new \Exception('WEBSITE_OAUTH2_CLIENT_SECRET environment variable is not set. It is required to setup the Website OAuth Consumer.');
+  }
+
+  $entityTypeManager = \Drupal::entityTypeManager();
+  $consumersStorage = $entityTypeManager->getStorage('consumer');
+  $existingConsumers = $consumersStorage->loadMultiple();
+  $hasWebsiteConsumer = FALSE;
+  /** @var \Drupal\consumers\Entity\ConsumerInterface $consumer */
+  foreach ($existingConsumers as $consumer) {
+    if ($consumer->getClientId() === 'website') {
+      $hasWebsiteConsumer = TRUE;
+    }
+  }
+
+  // Create the Website Consumer if it does not exist.
+  if (!$hasWebsiteConsumer) {
+    $oAuthCallback = $websiteUrl . '/api/auth/callback/drupal';
+    $consumersStorage->create([
+      'label' => 'Website',
+      'client_id' => 'website',
+      'is_default' => FALSE,
+      'secret' => $clientSecret,
+      'redirect' => $oAuthCallback,
+    ])->save();
+    return t('Created Website OAuth Consumer.');
+  }
+
+  return t('Website OAuth Consumer already exists.');
 }

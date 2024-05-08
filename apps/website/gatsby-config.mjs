@@ -6,8 +6,6 @@
 // TS file name should be different from gastby-config.ts, otherwise Gatsby will
 // pick it up instead of the JS file.
 
-import { existsSync } from 'fs';
-
 process.env.NETLIFY_URL = process.env.NETLIFY_URL || 'http://127.0.0.1:8000';
 
 process.env.CLOUDINARY_API_KEY = process.env.CLOUDINARY_API_KEY || 'test';

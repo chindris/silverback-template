@@ -97,6 +97,14 @@ export const createPages = async ({ actions }) => {
     });
   });
 
+  // Create a profile page in each language.
+  Object.values(Locale).forEach((locale) => {
+    actions.createPage({
+      path: `/${locale}/profile`,
+      component: resolve(`./src/templates/profile.tsx`),
+    });
+  });
+
   // Broken Gatsby links will attempt to load page-data.json files, which don't exist
   // and also should not be piped into the strangler function. Thats why they
   // are caught right here.

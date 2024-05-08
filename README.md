@@ -23,6 +23,8 @@ Other steps
 
 - [Create a new Lagoon project](https://amazeelabs.atlassian.net/wiki/spaces/ALU/pages/368115717/Create+a+new+Lagoon+project)
 - [Create a new Netlify project](https://amazeelabs.atlassian.net/wiki/spaces/ALU/pages/368017428/Create+a+new+Netlify+project)
+- Set `AUTH_DRUPAL_ID` and `AUTH_DRUPAL_SECRET` in
+  [Netlify environment variables](#gatsby-authentication--sso)
 - Check the [Environment overrides](#environment-overrides) section below
 - Check the [Choose a CMS](#choose-a-cms) section below
 - Create `dev` and `prod` branches (and optionally `stage`) from `release`
@@ -216,6 +218,63 @@ lagoon runtime configuration.
 ```shell
 lagoon add variable -p [project name] -e dev -N NETLIFY_SITE_ID -V [netlify site id]
 ```
+
+### Gatsby authentication / SSO
+
+Authentication providers are relying on Auth.js (formerly Next-Auth) and can be
+configured in `/apps/website/nextauth.config.js`
+
+An example provider is available for Drupal.
+
+On Netlify, several environment variables are required to be set:
+
+#### For all providers
+
+- `NEXTAUTH_URL` The URL of the frontend. This is used for the callback.
+- `NEXTAUTH_SECRET` A random string used for encryption.
+
+Generate the secret with e.g. `openssl rand -base64 32`
+
+#### For Drupal
+
+- `AUTH_DRUPAL_ID` The client ID of the Drupal Consumer
+- `AUTH_DRUPAL_SECRET` The client secret of the Drupal Consumer
+
+Drupal environment variables are displayed in the console when running
+`pnpx @amazeelabs/mzx run INIT.md`.
+
+<details>
+  <summary>How it works</summary>
+A `Website` consumer is created in Drupal `/admin/config/services/consumer` with
+
+- Label: `Website`
+- Client ID: `website`
+- Secret: a random string matching `AUTH_DRUPAL_SECRET`
+- Redirect URI: `[netlify-gatsby-site-url]/api/auth/callback/drupal`
+
+#### Other providers
+
+Refer to [Auth.js documentation](https://next-auth.js.org/providers/).
+
+</details>
+
+<details>
+  <summary>Local development</summary>
+
+#### Start Drupal and Gatsby
+
+- Drupal: in `/apps/cms` - `pnpm start` use http://127.0.0.1:8888
+- Gatsby: in `/apps/website` - `pnpm gatsby:develop` use
+  http://localhost:8000/en
+
+#### Basic troubleshooting
+
+- Make sure to have keys generated
+  http://127.0.0.1:8888/en/admin/config/people/simple_oauth
+- Make sure to have the correct client id and secret set
+  http://127.0.0.1:8888/en/admin/config/services/consumer/2/edit
+
+</details>
 
 ### Publisher authentication with Drupal
 

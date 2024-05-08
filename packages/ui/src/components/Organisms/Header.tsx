@@ -18,6 +18,7 @@ import {
   MobileMenuProvider,
 } from '../Client/MobileMenu';
 import { LanguageSwitcher } from '../Molecules/LanguageSwitcher';
+import { UserButton } from '../Molecules/UserButton';
 
 function useHeaderNavigation(lang: string = 'en') {
   return (
@@ -180,6 +181,9 @@ function UserActions({
       )}
     >
       <LanguageSwitcher />
+      <div className="ml-6">
+        <UserButton />
+      </div>
     </div>
   );
 }

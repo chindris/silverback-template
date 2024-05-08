@@ -73,6 +73,14 @@ directive @route(
   path: String!
 ) repeatable on FIELD_DEFINITION | SCALAR | UNION | ENUM | INTERFACE | OBJECT
 
+"""
+Retrieve the properties of the current user.
+
+Provided by the "silverback_gatsby" module.
+implementation(drupal): custom.directives::currentUser
+"""
+directive @currentUser repeatable on FIELD_DEFINITION | SCALAR | UNION | ENUM | INTERFACE | OBJECT
+
 enum Locale @default @value(string: "en") {
   en
   de
@@ -311,6 +319,8 @@ type Query {
 
   stringTranslations: [TranslatableString!]
     @gatsbyNodes(type: "TranslatableString")
+
+  currentUser: User @currentUser
 }
 
 type Mutation {
@@ -333,6 +343,13 @@ type MutationError {
   message: String!
   key: String!
   field: String
+}
+
+type User {
+  id: ID!
+  name: String!
+  email: String!
+  memberFor: String!
 }
 
 type MetaTag {

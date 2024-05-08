@@ -13,6 +13,7 @@ $excluded = [
   // troubles if exported to the default content.
   'path_alias',
   'content_moderation_state',
+  'oauth2_token',
   'redirect',
   'webform_submission',
   'consumer',

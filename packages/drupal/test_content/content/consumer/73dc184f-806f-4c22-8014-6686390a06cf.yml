@@ -1,0 +1,38 @@
+_meta:
+  version: '1.0'
+  entity_type: consumer
+  uuid: 73dc184f-806f-4c22-8014-6686390a06cf
+  default_langcode: en
+default:
+  owner_id:
+    -
+      target_id: 1
+  client_id:
+    -
+      value: website
+  label:
+    -
+      value: Website
+  description:
+    -
+      value: banana
+  third_party:
+    -
+      value: true
+  is_default:
+    -
+      value: false
+  secret:
+    -
+      value: $2y$10$VFVObrn/AcLeb7Va.xcy8OUQTPYC3t7DzJsfwZK8DzHzlZ05njMSS
+      existing: ''
+      pre_hashed: false
+  confidential:
+    -
+      value: true
+  redirect:
+    -
+      value: 'http://localhost:8000/api/auth/callback/drupal'
+  pkce:
+    -
+      value: false
