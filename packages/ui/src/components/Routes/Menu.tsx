@@ -9,6 +9,8 @@ export function useMenus() {
   const intl = useIntl();
   const locale = intl.locale;
   const settings = useOperation(FrameQuery).data;
+
+  console.log('settings:', settings);
   return {
     main: settings?.mainNavigation
       ?.filter((nav) => nav?.locale === locale)
@@ -88,5 +90,6 @@ export function useMenuAncestors(path: string, menuName: MenuNameType) {
 
 export const useBreadcrumbs = (menuName?: MenuNameType, path?: string) => {
   const currentPath = useCurrentPath();
+  console.log('currentPath', currentPath);
   return useMenuAncestors(path || currentPath || '', menuName || 'main');
 };
