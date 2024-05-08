@@ -11,7 +11,6 @@ test.describe('instant preview', () => {
       .getByLabel('Title', { exact: true })
       .fill('Instant preview test');
     await page.locator('#edit-submit').click();
-    await page.locator('li.tabs__tab a:text("Edit")').click();
     await page
       .locator('#editor-edit-body-0-value h1 span')
       .first()

@@ -7,6 +7,7 @@
  * the rest of the fields.
  */
 
+use Drupal\Core\Entity\ContentEntityForm;
 use Drupal\Core\Entity\ContentEntityType;
 use Drupal\Core\Entity\EntityInterface;
 
@@ -27,5 +28,40 @@ function entity_create_split_entity_type_build(array &$entity_types) {
 function entity_create_split_gutenberg_enabled(EntityInterface $entity) {
   if (isset($entity->disableGutenberg) && $entity->disableGutenberg === TRUE) {
     return FALSE;
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function entity_create_split_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  $formObject = $form_state->getFormObject();
+  if ($formObject instanceof ContentEntityForm && $formObject->getFormDisplay($form_state)->getMode() === 'split') {
+    if (empty($form['#submit'])) {
+      $form['#submit'] = [];
+    }
+    $form['#submit'][] = 'entity_create_split_submit_redirect';
+    if (!empty($form['actions']['submit']['#submit'])) {
+      $form['actions']['submit']['#submit'][] = 'entity_create_split_submit_redirect';
+    }
+  }
+}
+
+/**
+ * Submit handler for the entity create from, to redirect the user to the entity
+ * edit form.
+ *
+ * @param array $form
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ *
+ * @return void
+ * @throws \Drupal\Core\Entity\EntityMalformedException
+ */
+function entity_create_split_submit_redirect(array &$form, \Drupal\Core\Form\FormStateInterface $form_state) {
+  /* @var \Drupal\Core\Entity\EntityInterface $entity */
+  $entity = $form_state->getFormObject()->getEntity();
+  if (!empty($entity) && $entity->id()) {
+    $url = $entity->toUrl('edit-form');
+    $form_state->setRedirectUrl($url);
   }
 }
