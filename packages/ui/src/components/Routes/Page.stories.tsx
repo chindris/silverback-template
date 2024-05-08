@@ -62,7 +62,7 @@ export const Default = {
     },
   },
   parameters: {
-    location: new URL('local:/drupal'),
+    location: new URL('local:/gatsby-turbo'),
   },
 } satisfies StoryObj<ViewPageQuery>;
 
