@@ -26,6 +26,7 @@ export function useCurrentPath() {
 
 export function useMenuItem(path: string, menuName: MenuNameType) {
   const menus = useMenus();
+
   return (
     menus &&
     menus[menuName]?.items.find((menuItem) => menuItem?.target === path)
@@ -61,7 +62,8 @@ export function useMenuAncestors(path: string, menuName: MenuNameType) {
 
   // Set current page breadcrumb
   if (typeof processingMenuItem !== 'undefined') {
-    ancestors.push(processingMenuItem);
+    // If not home path then only push into breadcrumbs array
+    processingMenuItem.target !== '/' && ancestors.push(processingMenuItem);
   }
 
   while (

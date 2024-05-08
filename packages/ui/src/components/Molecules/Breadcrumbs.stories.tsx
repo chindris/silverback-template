@@ -3,7 +3,7 @@ import { Meta } from '@storybook/react';
 import React from 'react';
 
 import { Default as FrameStory } from '../Routes/Frame.stories';
-import BreadCrumbs from './Breadcrumbs';
+import { BreadCrumbs } from './Breadcrumbs';
 
 export default {
   component: BreadCrumbs,
