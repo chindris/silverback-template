@@ -16,7 +16,7 @@ export default defineConfig({
           // cannot report it.
           // Workaround: Do a double build on the first build.
           'if test -d public; then echo "Single build" && pnpm build:gatsby; else echo "Double build" && pnpm build:gatsby && pnpm build:gatsby; fi'
-        : 'pnpm build:gatsby',
+        : 'DRUPAL_EXTERNAL_URL=http://127.0.0.1:8888 pnpm build:gatsby',
       outputTimeout: 1000 * 60 * 10,
     },
     clean: 'pnpm clean',

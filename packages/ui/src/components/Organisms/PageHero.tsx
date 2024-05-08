@@ -107,7 +107,7 @@ function FormHero(props: NonNullable<PageFragment['hero']>) {
       </div>
       {props.formUrl ? (
         <div className="px-4 mx-auto mt-[-22rem] lg:-mt-96 max-w-screen-xl lg:px-6 relative">
-          <div className="p-6 mx-auto max-w-screen-md bg-white rounded-lg border border-gray-200 shadow-sm">
+          <div className="p-6 mx-auto max-w-[52rem] bg-white rounded-lg border border-gray-200 shadow-sm">
             <BlockForm url={props.formUrl} />
           </div>
         </div>

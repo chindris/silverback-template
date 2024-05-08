@@ -111,9 +111,10 @@ default:
 
         <!-- wp:custom/cta {"url":"/en/drupal","text":"Internal CTA","data-id":"f1f827c9-ed06-4e7d-b89d-a169e70a459c","data-entity-type":"node"} /-->
 
-        <!-- wp:custom/cta {"url":"https://www.google.com","text":"External CTA","data-id":"https://www.google.com","data-entity-type":"","openInNewTab":true} /-->
+        <!-- wp:custom/cta {"url":"https://www.google.com","text":"External CTA","data-id":"https://www.google.com","data-entity-type":"","openInNewTab":true,"icon":"ARROW"} /-->
 
-        <!-- wp:custom/cta {"url":"/media/1","text":"CTA with link to media","data-id":"b998ae5e-8b56-40ca-8f80-fd4404e7e716","data-entity-type":"media"} /-->
+        <!-- wp:custom/cta {"url":"/media/1","text":"CTA with link to media","data-id":"b998ae5e-8b56-40ca-8f80-fd4404e7e716","data-entity-type":"media","icon":"ARROW","iconPosition":"BEFORE"} /-->
+
 
         <!-- wp:custom/quote {"quote":"Lorem ipsum dolor sit amet, \u003cstrong\u003econsectetur\u003c/strong\u003e adipiscing elit. Vivamus sagittis nisi nec neque porta, a ornare ligula efficitur.","author":"John Doe","role":"Project manager","mediaEntityIds":["5dfc1856-e9e4-4f02-9cd6-9d888870ce1a"]} /-->
 

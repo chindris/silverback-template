@@ -52,6 +52,8 @@ test('Blocks', async () => {
           url
           text
           openInNewTab
+          icon
+          iconPosition
         }
         ... on BlockImageWithText {
           image {
@@ -184,18 +186,24 @@ test('Blocks', async () => {
             },
             {
               "__typename": "BlockCta",
+              "icon": null,
+              "iconPosition": null,
               "openInNewTab": null,
               "text": "Internal CTA",
               "url": "/en/drupal",
             },
             {
               "__typename": "BlockCta",
+              "icon": "ARROW",
+              "iconPosition": null,
               "openInNewTab": true,
               "text": "External CTA",
               "url": "https://www.google.com",
             },
             {
               "__typename": "BlockCta",
+              "icon": "ARROW",
+              "iconPosition": "BEFORE",
               "openInNewTab": null,
               "text": "CTA with link to media",
               "url": "/media/[numeric]",
@@ -251,6 +259,8 @@ test('Blocks', async () => {
             },
             {
               "__typename": "BlockCta",
+              "icon": null,
+              "iconPosition": null,
               "openInNewTab": null,
               "text": null,
               "url": null,
