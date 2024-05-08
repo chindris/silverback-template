@@ -32,7 +32,7 @@ h1 {
 
 /* Label */
 .form-item label {
-  @apply block mb-2;
+  @apply block mb-2 text-sm;
 }
 
 .form-item input[type="checkbox"] + label, .form-item input[type="radio"] + label {
@@ -72,7 +72,7 @@ h1 {
 .form-item input[type="color"],
 .form-item textarea,
 .form-item select {
-  @apply bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5;
+  @apply bg-gray-50 border border-gray-300 text-base rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5;
 }
 
 /* checkbox  */
