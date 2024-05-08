@@ -6,7 +6,7 @@ import React from 'react';
 import { isTruthy } from '../../utils/isTruthy';
 import { useBreadcrumbs } from '../Routes/Menu';
 
-export default function BreadCrumbs({ className }: { className?: string }) {
+export function BreadCrumbs({ className }: { className?: string }) {
   const breadcrumbs = useBreadcrumbs();
 
   if (!breadcrumbs.length) {
@@ -14,11 +14,8 @@ export default function BreadCrumbs({ className }: { className?: string }) {
   }
 
   return (
-    <nav
-      className={clsx('pt-5 max-w-screen-xl mx-auto', className)}
-      aria-label="Breadcrumb"
-    >
-      <ol className={'rounded-lg inline-block p-2.5'}>
+    <nav className={clsx('pt-5', className)} aria-label="Breadcrumb">
+      <ol className={'rounded-lg inline-block py-2.5'}>
         {breadcrumbs?.filter(isTruthy).map(({ title, target, id }, index) => (
           <li className="inline-flex items-center" key={id}>
             {index > 0 ? (
