@@ -13,6 +13,7 @@ registerBlockType('custom/info-grid', {
   category: 'layout',
   attributes: {},
   edit: (props) => {
+    /* eslint-disable-next-line */
     const { blockCount } = useSelect((select) => ({
       blockCount: select('core/block-editor').getBlockCount(props.clientId),
     }));
