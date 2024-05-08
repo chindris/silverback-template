@@ -40,6 +40,10 @@ h1 {
   @apply mb-5;
 }
 
+.webform-address {
+  @apply flex flex-col gap-y-4 md:gap-y-6;
+}
+
 /* Label */
 .form-item label {
   @apply block mb-2 text-sm;
