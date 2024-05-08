@@ -21,10 +21,9 @@ export function PageDisplay(page: PageFragment) {
             <PageHero {...page.hero} />
             <BreadCrumbs className="mx-auto max-w-3xl" />
           </>
-        ) : (
-          <BreadCrumbs />
-        )}
+        ) : null}
         <div className="bg-white pt-5 pb-12 lg:px-8">
+          <BreadCrumbs />
           <div className="mx-auto max-w-3xl text-base leading-7 text-gray-700">
             {page?.content?.filter(isTruthy).map((block, index) => {
               switch (block.__typename) {
