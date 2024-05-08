@@ -18,3 +18,5 @@ import './blocks/mathjax';
 import './blocks/quote';
 import './blocks/slider';
 import './blocks/slider-item';
+import './blocks/accordion';
+import './blocks/accordion-item-text';
