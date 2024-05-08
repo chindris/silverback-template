@@ -21,10 +21,20 @@ h1 {
   @apply px-1 text-gray-900;
 }
 
-/* Vertical spacing */
-.webform-submission-form > *:not(:last-child) {
-  @apply mb-10;
+/* add style to visually-hidden class globally  */
+.webform-submission-form .visually-hidden {
+  @apply sr-only;
 }
+
+/* Vertical spacing */
+.webform-submission-form .webform-flexbox {
+  @apply md:my-0 gap-y-4 md:gap-y-0 flex flex-col md:flex-row;
+}
+
+.webform-submission-form > *:not(:last-child) {
+  @apply mb-4 md:mb-6;
+}
+
 
 .fieldset-wrapper > *:not(:last-child) {
   @apply mb-5;
@@ -32,7 +42,7 @@ h1 {
 
 /* Label */
 .form-item label {
-  @apply block mb-2;
+  @apply block mb-2 text-sm;
 }
 
 .form-item input[type="checkbox"] + label, .form-item input[type="radio"] + label {
@@ -72,7 +82,7 @@ h1 {
 .form-item input[type="color"],
 .form-item textarea,
 .form-item select {
-  @apply bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5;
+  @apply bg-gray-50 border border-gray-300 text-base rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5;
 }
 
 /* checkbox  */
@@ -164,5 +174,5 @@ h1 {
 
 /* terms of service field - Dropdown */
 .webform-terms-of-service-details {
-  @apply text-gray-900 border-gray-300 border rounded-lg p-5 leading-relaxed;
+  @apply text-gray-900 border-gray-300 border rounded-lg p-5 leading-relaxed hidden;
 }
