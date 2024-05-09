@@ -291,6 +291,7 @@ type BlockInfoGrid @type(id: "custom/info-grid") {
 type BlockInfoGridItem @default @value {
   icon: String! @resolveEditorBlockAttribute(key: "icon")
   textContent: BlockMarkup @resolveEditorBlockChildren @seek(pos: 0)
+  cta: BlockCta @resolveEditorBlockChildren @seek(pos: 1)
 }
 
 input PaginationInput {

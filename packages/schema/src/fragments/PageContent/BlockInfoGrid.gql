@@ -6,6 +6,9 @@ fragment BlockInfoGrid on BlockInfoGrid {
 
 fragment BlockInfoGridItem on BlockInfoGridItem {
   icon
+  cta {
+    ...BlockCta
+  }
   textContent {
     markup
   }

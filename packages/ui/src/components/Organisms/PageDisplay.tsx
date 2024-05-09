@@ -82,7 +82,17 @@ export function PageDisplay(page: PageFragment) {
                             <div key={index}>
                               <p>Icon: {item?.icon}</p>
                               <p>Markup: {item?.textContent?.markup}</p>
+                              <p>CTA Url: {item?.cta?.url}</p>
+                              <p>CTA Icon: {item?.cta?.icon}</p>
+                              <p>
+                                CTA Icon Position: {item?.cta?.iconPosition}
+                              </p>
+                              <p>CTA Text: {item?.cta?.text}</p>
+                              <p>
+                                CTA Open in New Tab: {item?.cta?.openInNewTab}
+                              </p>
                             </div>
+                            <br />
                           </>
                         );
                       })}
