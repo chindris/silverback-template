@@ -35,7 +35,9 @@ jobs:
         run: pnpm --filter "@custom/website" clean
 
       - name: 'Drupal: Create content'
-        run: pnpm --filter "@custom/cms" drush php:script scripts/create-lots-of-content/run.php
+        run:
+          pnpm --filter "@custom/cms" drush php:script
+          scripts/create-lots-of-content/run.php
 
       - name: 'Gatsby: Full build'
         run: pnpm --filter "@custom/website" build:gatsby
@@ -44,7 +46,9 @@ jobs:
         run: pnpm --filter "@custom/website" build:gatsby
 
       - name: 'Drupal: Create more content'
-        run: pnpm --filter "@custom/cms" drush php:script scripts/create-lots-of-content/create-100-pages.php
+        run:
+          pnpm --filter "@custom/cms" drush php:script
+          scripts/create-lots-of-content/create-100-pages.php
 
       - name: 'Gatsby: Incremental build with new content'
         run: pnpm --filter "@custom/website" build:gatsby

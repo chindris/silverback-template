@@ -27,7 +27,7 @@
 }
 
 .nested-container .container-page:first-child .container-text,
-.nested-container .container-page:first-child .container-text *:first-child{
+.nested-container .container-page:first-child .container-text *:first-child {
   @apply mt-0;
 }
 .nested-container .container-page:last-child .container-text,
@@ -35,6 +35,7 @@
   @apply mb-0;
 }
 
-.container-nested .prose ul:not(ul ul), .container-nested .prose ol:not(ol ol) {
+.container-nested .prose ul:not(ul ul),
+.container-nested .prose ol:not(ol ol) {
   @apply mt-0;
 }
