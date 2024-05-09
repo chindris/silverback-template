@@ -21,6 +21,9 @@ jobs:
       - name: Setup
         uses: ./.github/actions/setup
 
+      - name: Check formatting
+        run: pnpm test:format
+
       - name: TurboRepo local server
         uses: felixmosh/turborepo-gh-artifacts@v2
         with:
