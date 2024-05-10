@@ -107,7 +107,7 @@ test('Blocks', async () => {
           }
         }
         ... on BlockInfoGrid {
-          gridItems: items {
+          gridItems {
             icon
             textContent {
               markup
@@ -157,6 +157,9 @@ test('Blocks', async () => {
     ",
             },
             {
+              "__typename": "BlockHorizontalSeparator",
+            },
+            {
               "__typename": "BlockMedia",
               "caption": "Media image",
               "media": {
@@ -173,6 +176,27 @@ test('Blocks', async () => {
             {
               "__typename": "BlockForm",
               "url": "http://127.0.0.1:8000/en/form/contact",
+            },
+            {
+              "__typename": "BlockImageWithText",
+              "image": {
+                "__typename": "MediaImage",
+              },
+              "imagePosition": "right",
+              "textContent": {
+                "__typename": "BlockMarkup",
+                "markup": "
+    <p>All kinds of allowed blocks</p>
+
+    <ul><li>bla</li></ul>
+
+    <h2 class="wp-block-custom-heading">Heading</h2>
+
+    <blockquote class="wp-block-quote"><p>Quote</p><cite>Citation</cite></blockquote>
+
+    <p></p>
+    ",
+              },
             },
             {
               "__typename": "BlockMarkup",
@@ -243,6 +267,33 @@ test('Blocks', async () => {
               },
               "quote": "Lorem ipsum dolor sit amet, <strong>consectetur</strong> adipiscing elit. Vivamus sagittis nisi nec neque porta, a ornare ligula efficitur.",
               "role": "Project manager",
+            },
+            {
+              "__typename": "BlockAccordion",
+              "items": [
+                {
+                  "__typename": "BlockAccordionItemText",
+                  "icon": "",
+                  "textContent": {
+                    "markup": "
+    <p>Incididunt laborum velit non proident nostrud velit. Minim excepteur ut aliqua nisi. Culpa laboris consectetur proident. Tempor esse ullamco et dolor proident id officia laborum voluptate nostrud elit dolore qui amet. Ex Lorem irure eu anim ipsum officia.</p>
+    ",
+                  },
+                  "title": "With a single paragraph and no icon",
+                },
+                {
+                  "__typename": "BlockAccordionItemText",
+                  "icon": "arrow",
+                  "textContent": {
+                    "markup": "
+    <ul><li>Moitié-moitié</li><li>Fribourgeoise</li></ul>
+
+    <p>Incididunt laborum velit non proident nostrud velit. Minim excepteur ut aliqua nisi. Culpa laboris consectetur proident. Tempor esse ullamco et dolor proident id officia laborum voluptate nostrud elit dolore qui amet. Ex Lorem irure eu anim ipsum officia.</p>
+    ",
+                  },
+                  "title": "With a list and a paragraph and arrow icon",
+                },
+              ],
             },
             {
               "__typename": "BlockInfoGrid",
