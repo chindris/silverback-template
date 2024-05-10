@@ -106,6 +106,21 @@ test('Blocks', async () => {
             }
           }
         }
+        ... on BlockInfoGrid {
+          items {
+            icon
+            textContent {
+              markup
+            }
+            cta {
+              url
+              icon
+              iconPosition
+              text
+              openInNewTab
+            }
+          }
+        }
       }
     }
     {
@@ -193,6 +208,8 @@ test('Blocks', async () => {
     <ul><li>list 1</li><li>list 2<ol><li>list 2.2</li></ol></li></ul>
 
     <h3 class="wp-block-custom-heading">Heading 3</h3>
+
+    <blockquote class="wp-block-quote"><p>Quote</p><cite>Citation</cite></blockquote>
     ",
             },
             {
@@ -252,6 +269,43 @@ test('Blocks', async () => {
               "role": "Project manager",
             },
             {
+              "__typename": "BlockInfoGrid",
+              "items": [
+                {
+                  "cta": {
+                    "icon": "ARROW",
+                    "iconPosition": null,
+                    "openInNewTab": null,
+                    "text": "Nullam dictum felis",
+                    "url": "/en/page-links",
+                  },
+                  "icon": "EMAIL",
+                  "textContent": {
+                    "markup": "
+    <h3 class="wp-block-custom-heading">Email us:</h3>
+
+    <p>Email us for general queries, including marketing and partnership opportunities.</p>
+
+    <p><a href="mailto:hello@company.com">hello@company.com</a></p>
+    ",
+                  },
+                },
+                {
+                  "cta": {
+                    "icon": null,
+                    "iconPosition": null,
+                    "openInNewTab": null,
+                    "text": "Duis lobortis massa",
+                    "url": "/en/technologies",
+                  },
+                  "icon": "PHONE",
+                  "textContent": {
+                    "markup": "
+    <h3 class="wp-block-custom-heading">Call us:</h3>
+
+    <p>Call us to speak to a member of our team. We are always happy to help.</p>
+
+    <p><a href="tel:+16467865060">+1 (646) 786-5060</a></p>
               "__typename": "BlockAccordion",
               "items": [
                 {
@@ -275,6 +329,26 @@ test('Blocks', async () => {
     ",
                   },
                   "title": "With a list and a paragraph and arrow icon",
+                },
+              ],
+                  },
+                },
+                {
+                  "cta": {
+                    "icon": null,
+                    "iconPosition": null,
+                    "openInNewTab": true,
+                    "text": "Nunc nulla",
+                    "url": "http://www.google.com",
+                  },
+                  "icon": "LIFE-RING",
+                  "textContent": {
+                    "markup": "
+    <h3 class="wp-block-custom-heading">Support</h3>
+
+    <p>Check out helpful resources, FAQs and developer tools.</p>
+    ",
+                  },
                 },
               ],
             },

@@ -208,6 +208,7 @@ union PageContent @resolveEditorBlockType =
   | BlockQuote
   | BlockHorizontalSeparator
   | BlockAccordion
+  | BlockInfoGrid
 
 type BlockForm @type(id: "custom/form") {
   url: Url @resolveEditorBlockAttribute(key: "formId") @webformIdToUrl(id: "$")
@@ -309,6 +310,16 @@ type BlockQuote @type(id: "custom/quote") {
 
 type BlockHorizontalSeparator @type(id: "custom/horizontal-separator") {
   markup: Markup! @resolveEditorBlockMarkup
+}
+
+type BlockInfoGrid @type(id: "custom/info-grid") {
+  items: [BlockInfoGridItem]! @resolveEditorBlockChildren
+}
+
+type BlockInfoGridItem @default @value {
+  icon: String! @resolveEditorBlockAttribute(key: "icon")
+  textContent: BlockMarkup @resolveEditorBlockChildren @seek(pos: 0)
+  cta: BlockCta @resolveEditorBlockChildren @seek(pos: 1)
 }
 
 input PaginationInput {

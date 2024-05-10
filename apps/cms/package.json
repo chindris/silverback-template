@@ -24,8 +24,6 @@
     "content:import": "pnpm drush php-script web/modules/custom/test_content/import.php",
     "config:export": "pnpm drush cex -y",
     "config:import": "pnpm drush -y cim",
-    "schema:test": "pnpm jest --testMatch '<rootDir>/generated/__tests__/test-queries.js' --passWithNoTests",
-    "schema:test:update": "pnpm schema:test -u",
     "import-translations": "pnpm drush scr scripts/translations-import.php"
   },
   "peerDependencies": {
