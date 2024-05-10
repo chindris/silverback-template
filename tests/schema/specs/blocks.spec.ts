@@ -73,6 +73,21 @@ test('Blocks', async () => {
             __typename
           }
         }
+        ... on BlockInfoGrid {
+          items {
+            icon
+            textContent {
+              markup
+            }
+            cta {
+              url
+              icon
+              iconPosition
+              text
+              openInNewTab
+            }
+          }
+        }
       }
     }
     {
@@ -127,29 +142,6 @@ test('Blocks', async () => {
               "url": "http://127.0.0.1:8000/en/form/contact",
             },
             {
-              "__typename": "BlockImageWithText",
-              "image": {
-                "__typename": "MediaImage",
-              },
-              "imagePosition": "right",
-              "textContent": {
-                "__typename": "BlockMarkup",
-                "markup": "
-    <p>All kinds of allowed blocks</p>
-
-    <ul><li>bla</li></ul>
-
-    <h2 class="wp-block-custom-heading">Heading</h2>
-
-    <figure class="wp-block-table"><table><tbody><tr><td>1</td><td>2</td></tr><tr><td>3</td><td>4</td></tr></tbody></table><figcaption>Caption</figcaption></figure>
-
-    <blockquote class="wp-block-quote"><p>Quote</p><cite>Citation</cite></blockquote>
-
-    <p></p>
-    ",
-              },
-            },
-            {
               "__typename": "BlockMarkup",
               "markup": "
     <p>Starting from this paragraph, all the following blocks should be aggregated, as they are just HTML</p>
@@ -159,6 +151,8 @@ test('Blocks', async () => {
     <ul><li>list 1</li><li>list 2<ol><li>list 2.2</li></ol></li></ul>
 
     <h3 class="wp-block-custom-heading">Heading 3</h3>
+
+    <blockquote class="wp-block-quote"><p>Quote</p><cite>Citation</cite></blockquote>
     ",
             },
             {
@@ -218,10 +212,64 @@ test('Blocks', async () => {
               "role": "Project manager",
             },
             {
-              "__typename": "BlockMarkup",
-              "markup": "
-    <p></p>
+              "__typename": "BlockInfoGrid",
+              "items": [
+                {
+                  "cta": {
+                    "icon": "ARROW",
+                    "iconPosition": null,
+                    "openInNewTab": null,
+                    "text": "Nullam dictum felis",
+                    "url": "/en/page-links",
+                  },
+                  "icon": "EMAIL",
+                  "textContent": {
+                    "markup": "
+    <h3 class="wp-block-custom-heading">Email us:</h3>
+
+    <p>Email us for general queries, including marketing and partnership opportunities.</p>
+
+    <p><a href="mailto:hello@company.com">hello@company.com</a></p>
     ",
+                  },
+                },
+                {
+                  "cta": {
+                    "icon": null,
+                    "iconPosition": null,
+                    "openInNewTab": null,
+                    "text": "Duis lobortis massa",
+                    "url": "/en/technologies",
+                  },
+                  "icon": "PHONE",
+                  "textContent": {
+                    "markup": "
+    <h3 class="wp-block-custom-heading">Call us:</h3>
+
+    <p>Call us to speak to a member of our team. We are always happy to help.</p>
+
+    <p><a href="tel:+16467865060">+1 (646) 786-5060</a></p>
+    ",
+                  },
+                },
+                {
+                  "cta": {
+                    "icon": null,
+                    "iconPosition": null,
+                    "openInNewTab": true,
+                    "text": "Nunc nulla",
+                    "url": "http://www.google.com",
+                  },
+                  "icon": "LIFE-RING",
+                  "textContent": {
+                    "markup": "
+    <h3 class="wp-block-custom-heading">Support</h3>
+
+    <p>Check out helpful resources, FAQs and developer tools.</p>
+    ",
+                  },
+                },
+              ],
             },
           ],
           "hero": {
