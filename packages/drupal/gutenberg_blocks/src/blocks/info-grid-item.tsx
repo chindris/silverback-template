@@ -4,8 +4,8 @@ import { PanelBody, SelectControl } from 'wordpress__components';
 
 import {
   iconImagePreview,
-  limitedIconListOption,
   Icons,
+  limitedIconListOption,
 } from '../utils/icon-list';
 
 // @ts-ignore
