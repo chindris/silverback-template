@@ -2,7 +2,11 @@ import { InnerBlocks, InspectorControls } from 'wordpress__block-editor';
 import { registerBlockType } from 'wordpress__blocks';
 import { PanelBody, SelectControl } from 'wordpress__components';
 
-import { iconImagePreview, iconListOptions } from '../utils/icon-list';
+import {
+  iconImagePreview,
+  limitedIconListOption,
+  Icons,
+} from '../utils/icon-list';
 
 // @ts-ignore
 const { t: __ } = Drupal;
@@ -28,7 +32,11 @@ registerBlockType('custom/info-grid-item', {
           <PanelBody title={__('Select an icon')}>
             <SelectControl
               value={props.attributes.icon as string}
-              options={iconListOptions}
+              options={limitedIconListOption([
+                Icons.EMAIL,
+                Icons.PHONE,
+                Icons.LIFE_RING,
+              ])}
               onChange={(icon: string) => {
                 setAttributes({ icon });
               }}
@@ -39,7 +47,9 @@ registerBlockType('custom/info-grid-item', {
         <div className={'container-wrapper'}>
           <div className={'container-label'}>{__('Info Grid Item')}</div>
           <div className={'info-grid-icon'} style={iconPreviewStyle}>
-            <img src={iconPreview} alt={props.attributes.icon as string} />
+            {iconPreview && (
+              <img src={iconPreview} alt={props.attributes.icon as string} />
+            )}
           </div>
           <InnerBlocks
             templateLock={false}
