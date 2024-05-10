@@ -9,7 +9,9 @@ jobs:
     steps:
       - name: Init check
         if: ${{ github.repository != 'AmazeeLabs/silverback-template'}}
-        run: echo 'Please run the INIT script. See the root README.md for instructions.' && false
+        run:
+          echo 'Please run the INIT script. See the root README.md for
+          instructions.' && false
 
       - name: Checkout
         uses: actions/checkout@v3
