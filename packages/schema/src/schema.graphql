@@ -313,7 +313,7 @@ type BlockHorizontalSeparator @type(id: "custom/horizontal-separator") {
 }
 
 type BlockInfoGrid @type(id: "custom/info-grid") {
-  items: [BlockInfoGridItem]! @resolveEditorBlockChildren
+  gridItems: [BlockInfoGridItem]! @resolveEditorBlockChildren
 }
 
 type BlockInfoGridItem @default @value {

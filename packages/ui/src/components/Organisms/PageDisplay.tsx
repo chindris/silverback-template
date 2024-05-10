@@ -72,7 +72,7 @@ export function PageDisplay(page: PageFragment) {
                       <br />
                       ---
                       <br />
-                      {block.items.map((item, index) => {
+                      {block.gridItems.map((item, index) => {
                         return (
                           <>
                             <div key={index}>
