@@ -10,6 +10,7 @@ import { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
 import { image } from '../../helpers/image';
+import { ImageRight } from '../Organisms/PageContent/BlockImageWithText.stories';
 import { Mixed, Paragraph } from '../Organisms/PageContent/BlockMarkup.stories';
 import { WithCaption } from '../Organisms/PageContent/BlockMedia.stories';
 import { Default as FrameStory } from './Frame.stories';
@@ -58,6 +59,10 @@ export const Default = {
         {
           __typename: 'BlockMarkup',
           ...Paragraph.args,
+        },
+        {
+          __typename: 'BlockImageWithText',
+          ...ImageRight.args,
         },
       ] as Exclude<ViewPageQuery['page'], undefined>['content'],
     },
