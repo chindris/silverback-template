@@ -51,7 +51,7 @@ const theme: CustomFlowbiteTheme = {
 export function BlockAccordion(props: BlockAccordionFragment) {
   return (
     <Flowbite theme={{ theme }}>
-      <Accordion>
+      <Accordion collapseAll>
         {props.items.map((item, index) => (
           <Accordion.Panel key={index}>
             <Accordion.Title>
