@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import React, { Fragment } from 'react';
 import {
   InnerBlocks,
@@ -54,7 +55,12 @@ registerBlockType('custom/accordion-item-text', {
         </InspectorControls>
         <div className={'container-wrapper'}>
           <div className={'container-label'}>{__('Accordion Item Text')}</div>
-          <div className="custom-block-accordion-item-text">
+          <div
+            className={clsx(
+              'custom-block-accordion-item-text',
+              attributes.icon,
+            )}
+          >
             <RichText
               identifier="title"
               tagName="h3"
