@@ -1,0 +1,15 @@
+fragment BlockInfoGrid on BlockInfoGrid {
+  gridItems {
+    ...BlockInfoGridItem
+  }
+}
+
+fragment BlockInfoGridItem on BlockInfoGridItem {
+  icon
+  cta {
+    ...BlockCta
+  }
+  textContent {
+    markup
+  }
+}
