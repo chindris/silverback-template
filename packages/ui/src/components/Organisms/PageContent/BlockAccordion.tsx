@@ -29,9 +29,6 @@ const accordionTheme: CustomFlowbiteTheme['accordion'] = {
     base: 'pb-5 pt-5 text-base font-light text-gray-500',
   },
   title: {
-    arrow: {
-      base: 'h-0 w-0',
-    },
     base: 'flex w-full items-center justify-between p-4 pl-1 text-left font-normal text-lg text-gray-500',
     flush: {
       off: 'hover:bg-gray-100',
