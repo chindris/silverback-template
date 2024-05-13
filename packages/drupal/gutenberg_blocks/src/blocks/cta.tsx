@@ -5,7 +5,7 @@ import {
   RichText,
 } from 'wordpress__block-editor';
 import { registerBlockType } from 'wordpress__blocks';
-import { PanelBody, ToggleControl } from 'wordpress__components';
+import { PanelBody, SelectControl, ToggleControl } from 'wordpress__components';
 import { compose, withState } from 'wordpress__compose';
 
 // @ts-ignore
@@ -36,6 +36,14 @@ registerBlockType('custom/cta', {
     },
     openInNewTab: {
       type: 'boolean',
+    },
+    icon: {
+      type: 'string',
+      default: 'NONE',
+    },
+    iconPosition: {
+      type: 'string',
+      default: 'AFTER',
     },
   },
   // @ts-ignore
@@ -116,6 +124,35 @@ registerBlockType('custom/cta', {
                 });
               }}
             />
+            <SelectControl
+              label={__('Icon')}
+              value={props.attributes.icon}
+              options={[
+                { label: __('- None -'), value: 'NONE' },
+                { label: __('Arrow'), value: 'ARROW' },
+              ]}
+              onChange={(icon) => {
+                props.setAttributes({
+                  icon,
+                });
+              }}
+            />
+            {typeof props.attributes.icon !== 'undefined' &&
+              props.attributes.icon !== 'NONE' && (
+                <SelectControl
+                  label={__('Icon position')}
+                  value={props.attributes.iconPosition}
+                  options={[
+                    { label: __('After button text'), value: 'AFTER' },
+                    { label: __('Before button text'), value: 'BEFORE' },
+                  ]}
+                  onChange={(iconPosition) => {
+                    props.setAttributes({
+                      iconPosition,
+                    });
+                  }}
+                />
+              )}
           </PanelBody>
         </InspectorControls>
       </div>

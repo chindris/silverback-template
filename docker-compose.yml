@@ -1,14 +1,12 @@
 version: '2.3'
 
 x-volumes:
-  &default-volumes
-  # Define all volumes you would like to have real-time mounted into the docker containers
+  &default-volumes # Define all volumes you would like to have real-time mounted into the docker containers
   volumes:
     - ./packages/drupal:/app/web/modules/custom:delegated
     - ./apps/cms:/app:delegated
 
-x-environment:
-  &default-environment
+x-environment: &default-environment
   LAGOON_PROJECT: &lagoon-project ${COMPOSE_PROJECT_NAME:-slbtemplate}
   # Route that should be used locally, if you are using pygmy, this route *must* end with .docker.amazee.io
   LAGOON_ROUTE: &default-url http://${COMPOSE_PROJECT_NAME:-slbtemplate}.docker.amazee.io
@@ -17,8 +15,7 @@ x-environment:
   # See example.docker-compose.override.yml for XDEBUG_ENABLE option
 
 x-user:
-  &default-user
-  # The default user under which the containers should run. Change this if you are on linux and run with another user than id `1000`
+  &default-user # The default user under which the containers should run. Change this if you are on linux and run with another user than id `1000`
   user: '1000'
 
 services:
@@ -58,7 +55,7 @@ services:
     depends_on:
       - cli # basically just tells docker-compose to build the cli first
     environment:
-      << : *default-environment # loads the defined environment variables from the top
+      <<: *default-environment # loads the defined environment variables from the top
     networks:
       - amazeeio-network
       - default
