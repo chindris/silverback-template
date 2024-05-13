@@ -19,28 +19,28 @@ const unorderedItems: Plugin<[], Element> = () => (tree) => {
 
 const accordionTheme: CustomFlowbiteTheme['accordion'] = {
   root: {
-    base: 'mt-10 divide-y divide-gray-200 border-gray-200 dark:divide-gray-700 dark:border-gray-700',
+    base: 'mt-10 divide-y divide-gray-200 border-gray-200',
     flush: {
       off: 'last:border-0',
       on: 'last:border-0',
     },
   },
   content: {
-    base: 'pb-5 pt-5 text-base font-light text-gray-500 dark:bg-gray-900 dark:text-gray-100',
+    base: 'pb-5 pt-5 text-base font-light text-gray-500',
   },
   title: {
     arrow: {
       base: 'h-0 w-0',
     },
-    base: 'flex w-full items-center justify-between p-4 pl-1 text-left font-normal text-lg text-gray-500 dark:text-gray-400',
+    base: 'flex w-full items-center justify-between p-4 pl-1 text-left font-normal text-lg text-gray-500',
     flush: {
-      off: 'hover:bg-gray-100 dark:hover:bg-gray-800 dark:focus:ring-gray-800',
-      on: 'bg-transparent dark:bg-transparent',
+      off: 'hover:bg-gray-100',
+      on: 'bg-transparent',
     },
     heading: '',
     open: {
       off: '',
-      on: 'text-gray-900 dark:text-gray-100',
+      on: 'text-gray-900',
     },
   },
 };
