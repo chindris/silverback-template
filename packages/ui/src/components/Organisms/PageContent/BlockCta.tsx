@@ -10,18 +10,20 @@ import React from 'react';
 
 export function BlockCta(props: BlockCtaFragment) {
   return (
-    <Link
-      className={clsx(
-        { 'flex-row-reverse': props.iconPosition === CtaIconPosition.Before },
-        'text-blue-600 hover:text-white border border-blue-600 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg  py-2 px-3 gap-2 flex flex-row items-center text-xs font-medium text-center w-fit transition-all duration-200 ease-in-out group',
-      )}
-      href={props.url ?? ('/' as Url)}
-      target={props.openInNewTab ? '_blank' : '_self'}
-      rel="noreferrer"
-    >
-      {props.text}
-      {!!props.icon && props.icon === CtaIconType.Arrow && <ArrowRightIcon />}
-    </Link>
+    <div className="container-content">
+      <Link
+        className={clsx(
+          { 'flex-row-reverse': props.iconPosition === CtaIconPosition.Before },
+          'text-blue-600 hover:text-white border border-blue-600 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg  py-2 px-3 gap-2 flex flex-row items-center text-xs font-medium text-center w-fit transition-all duration-200 ease-in-out group',
+        )}
+        href={props.url ?? ('/' as Url)}
+        target={props.openInNewTab ? '_blank' : '_self'}
+        rel="noreferrer"
+      >
+        {props.text}
+        {!!props.icon && props.icon === CtaIconType.Arrow && <ArrowRightIcon />}
+      </Link>
+    </div>
   );
 }
 

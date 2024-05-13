@@ -17,8 +17,8 @@ export function PageDisplay(page: PageFragment) {
     <PageTransition>
       <div>
         {page.hero ? <PageHero {...page.hero} /> : null}
-        <div className="bg-white pt-5 pb-12 lg:px-8">
-          <div className="mx-auto max-w-3xl text-base leading-7 text-gray-700">
+        <div className="bg-white pt-5 pb-12 lg:px-8 container-page">
+          <div className="text-base leading-7 text-gray-700">
             {page?.content?.filter(isTruthy).map((block, index) => {
               switch (block.__typename) {
                 case 'BlockMedia':
