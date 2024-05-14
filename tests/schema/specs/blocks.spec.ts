@@ -59,6 +59,23 @@ test('Blocks', async () => {
           image {
             __typename
           }
+          textContent {
+            __typename
+            markup
+          }
+        }
+        ... on BlockQuote {
+          quote
+          author
+          role
+          image {
+            __typename
+          }
+        }
+        ... on BlockImageWithText {
+          image {
+            __typename
+          }
           imagePosition
           textContent {
             __typename
@@ -71,6 +88,37 @@ test('Blocks', async () => {
           role
           image {
             __typename
+          }
+        }
+        ... on BlockHorizontalSeparator {
+          __typename
+        }
+        ... on BlockAccordion {
+          items {
+            __typename
+            ... on BlockAccordionItemText {
+              __typename
+              title
+              icon
+              textContent {
+                markup
+              }
+            }
+          }
+        }
+        ... on BlockInfoGrid {
+          gridItems {
+            icon
+            textContent {
+              markup
+            }
+            cta {
+              url
+              icon
+              iconPosition
+              text
+              openInNewTab
+            }
           }
         }
       }
@@ -107,6 +155,9 @@ test('Blocks', async () => {
               "markup": "
     <p>A standalone paragraph with <strong><em>markup</em></strong> and <a href="/en/architecture" data-type="Content: Basic page" data-id="[numeric]" data-entity-type="node">link</a></p>
     ",
+            },
+            {
+              "__typename": "BlockHorizontalSeparator",
             },
             {
               "__typename": "BlockMedia",
@@ -157,6 +208,8 @@ test('Blocks', async () => {
     <ul><li>list 1</li><li>list 2<ol><li>list 2.2</li></ol></li></ul>
 
     <h3 class="wp-block-custom-heading">Heading 3</h3>
+
+    <blockquote class="wp-block-quote"><p>Quote</p><cite>Citation</cite></blockquote>
     ",
             },
             {
@@ -216,10 +269,91 @@ test('Blocks', async () => {
               "role": "Project manager",
             },
             {
-              "__typename": "BlockMarkup",
-              "markup": "
-    <p></p>
+              "__typename": "BlockAccordion",
+              "items": [
+                {
+                  "__typename": "BlockAccordionItemText",
+                  "icon": "",
+                  "textContent": {
+                    "markup": "
+    <p>Incididunt laborum velit non proident nostrud velit. Minim excepteur ut aliqua nisi. Culpa laboris consectetur proident. Tempor esse ullamco et dolor proident id officia laborum voluptate nostrud elit dolore qui amet. Ex Lorem irure eu anim ipsum officia.</p>
     ",
+                  },
+                  "title": "With a single paragraph and no icon",
+                },
+                {
+                  "__typename": "BlockAccordionItemText",
+                  "icon": "arrow",
+                  "textContent": {
+                    "markup": "
+    <ul><li>Moitié-moitié</li><li>Fribourgeoise</li></ul>
+
+    <p>Incididunt laborum velit non proident nostrud velit. Minim excepteur ut aliqua nisi. Culpa laboris consectetur proident. Tempor esse ullamco et dolor proident id officia laborum voluptate nostrud elit dolore qui amet. Ex Lorem irure eu anim ipsum officia.</p>
+    ",
+                  },
+                  "title": "With a list and a paragraph and arrow icon",
+                },
+              ],
+            },
+            {
+              "__typename": "BlockInfoGrid",
+              "gridItems": [
+                {
+                  "cta": {
+                    "icon": "ARROW",
+                    "iconPosition": null,
+                    "openInNewTab": null,
+                    "text": "Nullam dictum felis",
+                    "url": "/en/page-links",
+                  },
+                  "icon": "EMAIL",
+                  "textContent": {
+                    "markup": "
+    <h3 class="wp-block-custom-heading">Email us:</h3>
+
+    <p>Email us for general queries, including marketing and partnership opportunities.</p>
+
+    <p><a href="mailto:hello@company.com">hello@company.com</a></p>
+    ",
+                  },
+                },
+                {
+                  "cta": {
+                    "icon": null,
+                    "iconPosition": null,
+                    "openInNewTab": null,
+                    "text": "Duis lobortis massa",
+                    "url": "/en/technologies",
+                  },
+                  "icon": "PHONE",
+                  "textContent": {
+                    "markup": "
+    <h3 class="wp-block-custom-heading">Call us:</h3>
+
+    <p>Call us to speak to a member of our team. We are always happy to help.</p>
+
+    <p><a href="tel:+16467865060">+1 (646) 786-5060</a></p>
+    ",
+                  },
+                },
+                {
+                  "cta": {
+                    "icon": null,
+                    "iconPosition": null,
+                    "openInNewTab": true,
+                    "text": "Nunc nulla",
+                    "url": "http://www.google.com",
+                  },
+                  "icon": "LIFE-RING",
+                  "textContent": {
+                    "markup": "
+    <h3 class="wp-block-custom-heading">Support</h3>
+
+    <p>Check out helpful resources, FAQs and developer tools.</p>
+    ",
+                  },
+                },
+              ],
             },
           ],
           "hero": {
