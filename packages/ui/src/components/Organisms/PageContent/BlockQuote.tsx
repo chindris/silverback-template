@@ -3,7 +3,7 @@ import React from 'react';
 
 export function BlockQuote(props: BlockQuoteFragment) {
   return (
-    <div className="prose lg:prose-xl prose-p:text-xl prose-p:font-bold prose-p:leading-8 prose-p:text-[#111928]">
+    <div className="prose lg:prose-xl prose-p:text-xl prose-p:font-bold prose-p:leading-8 prose-p:text-[#111928] container-content">
       <blockquote className="border-l-0 relative pl-0 pb-8 pt-16">
         <svg
           width="32"
