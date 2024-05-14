@@ -1,0 +1,5 @@
+fragment BlockHorizontalSeparator on BlockHorizontalSeparator {
+  # This is not really used, but until we have other real setting fields, we
+  # have to provide a dummy one.
+  markup
+}
