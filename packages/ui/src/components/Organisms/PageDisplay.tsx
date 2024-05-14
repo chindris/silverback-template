@@ -16,7 +16,9 @@ export function PageDisplay(page: PageFragment) {
   return (
     <PageTransition>
       <div>
-        {!page.hero && <BreadCrumbs className="pt-5 mx-auto px-3.5" />}
+        {!page.hero && (
+          <BreadCrumbs className="pt-5 mx-auto max-w-screen-xl px-3.5" />
+        )}
         {page.hero && <PageHero {...page.hero} />}
         <div className="bg-white pt-5 pb-12 px-6 lg:px-8">
           {page.hero && <BreadCrumbs className="mx-auto max-w-3xl" />}
