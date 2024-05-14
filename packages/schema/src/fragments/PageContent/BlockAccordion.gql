@@ -1,0 +1,13 @@
+fragment BlockAccordion on BlockAccordion {
+  items {
+    ...BlockAccordionItemText
+  }
+}
+
+fragment BlockAccordionItemText on BlockAccordionItemText {
+  title
+  icon
+  textContent {
+    markup
+  }
+}
