@@ -58,6 +58,8 @@ export const Default = {
         {
           __typename: 'BlockImageWithText',
           ...ImageRight.args,
+        },
+        {
           __typename: 'BlockAccordion',
           ...AccordionItemText.args,
         },
