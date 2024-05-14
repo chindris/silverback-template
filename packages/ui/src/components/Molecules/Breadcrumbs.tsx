@@ -9,8 +9,6 @@ import { useBreadcrumbs } from '../Routes/Menu';
 export function BreadCrumbs({ className }: { className?: string }) {
   const breadcrumbs = useBreadcrumbs();
 
-  console.log('breadcrumbs:', breadcrumbs);
-
   if (!breadcrumbs.length) {
     return null;
   }
