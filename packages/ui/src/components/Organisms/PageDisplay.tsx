@@ -18,7 +18,7 @@ export function PageDisplay(page: PageFragment) {
     <PageTransition>
       <div>
         {page.hero && <PageHero {...page.hero} />}
-        <div className="bg-white pt-5 pb-12 lg:px-8">
+        <div className="bg-white pt-5 pb-12 px-6 lg:px-8">
           <BreadCrumbs className="mx-auto max-w-3xl" />
           <div className="mx-auto max-w-3xl text-base leading-7 text-gray-700">
             {page?.content?.filter(isTruthy).map((block, index) => {
