@@ -126,36 +126,40 @@ function FormHero(props: NonNullable<PageFragment['hero']>) {
 
 function NoImageHero(props: NonNullable<PageFragment['hero']>) {
   return (
-    <section className="relative isolate overflow-hidden pt-12 sm:pt-20 px-6 lg:px-8">
-      <div className="mx-auto max-w-3xl">
+    <>
+      <div className="mx-auto max-w-screen-xl px-3.5">
         <BreadCrumbs />
-        <h1 className="text-4xl font-extrabold tracking-tight leading-tight">
-          {props.headline}
-        </h1>
-        {props.lead ? (
-          <p className="mt-4 text-lg leading-8 text-gray-500">{props.lead}</p>
-        ) : null}
-        {props.ctaText && props.ctaUrl ? (
-          <Link
-            href={props.ctaUrl}
-            className="mt-5 px-5 py-2.5 text-sm font-medium text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-          >
-            <svg
-              className="mr-2 -ml-1 w-4 h-4"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fillRule="evenodd"
-                d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                clipRule="evenodd"
-              ></path>
-            </svg>
-            {props.ctaText}
-          </Link>
-        ) : null}
       </div>
-    </section>
+      <section className="relative isolate overflow-hidden pt-12 sm:pt-20 px-6 lg:px-8">
+        <div className="mx-auto max-w-3xl">
+          <h1 className="text-4xl font-extrabold tracking-tight leading-tight">
+            {props.headline}
+          </h1>
+          {props.lead ? (
+            <p className="mt-4 text-lg leading-8 text-gray-500">{props.lead}</p>
+          ) : null}
+          {props.ctaText && props.ctaUrl ? (
+            <Link
+              href={props.ctaUrl}
+              className="mt-5 px-5 py-2.5 text-sm font-medium text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            >
+              <svg
+                className="mr-2 -ml-1 w-4 h-4"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                  clipRule="evenodd"
+                ></path>
+              </svg>
+              {props.ctaText}
+            </Link>
+          ) : null}
+        </div>
+      </section>
+    </>
   );
 }
