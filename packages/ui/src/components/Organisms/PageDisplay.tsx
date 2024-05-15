@@ -21,8 +21,8 @@ export function PageDisplay(page: PageFragment) {
           <BreadCrumbs className="pt-5 mx-auto max-w-screen-xl px-3.5" />
         )}
         {page.hero && <PageHero {...page.hero} />}
-        <div className="bg-white pt-5 pb-12 px-6 lg:px-8">
-          <div className="mx-auto max-w-3xl text-base leading-7 text-gray-700">
+        <div className="bg-white pt-5 pb-12 lg:px-8">
+          <div className="text-base leading-7 text-gray-700">
             {page?.content?.filter(isTruthy).map((block, index) => {
               switch (block.__typename) {
                 case 'BlockMedia':
