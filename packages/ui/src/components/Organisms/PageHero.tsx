@@ -60,9 +60,7 @@ function DefaultHero(props: NonNullable<PageFragment['hero']>) {
           </div>
         </div>
       </section>
-      <div className="mx-auto max-w-screen-xl px-3.5">
-        <BreadCrumbs />
-      </div>
+      <BreadCrumbs />
     </>
   );
 }
@@ -115,7 +113,7 @@ function FormHero(props: NonNullable<PageFragment['hero']>) {
       </div>
       {props.formUrl ? (
         <div className="px-4 mx-auto mt-[-22rem] lg:-mt-96 max-w-screen-xl lg:px-6 relative">
-          <div className="p-6 mx-auto max-w-[52rem] bg-white rounded-lg border border-gray-200 shadow-sm">
+          <div className="p-6 mx-auto max-w-[52rem] bg-white rounded-lg border border-gray-200 shadow-sm nested-container">
             <BlockForm url={props.formUrl} />
           </div>
         </div>
@@ -127,9 +125,7 @@ function FormHero(props: NonNullable<PageFragment['hero']>) {
 function NoImageHero(props: NonNullable<PageFragment['hero']>) {
   return (
     <>
-      <div className="mx-auto max-w-screen-xl px-3.5">
-        <BreadCrumbs />
-      </div>
+      <BreadCrumbs />
       <section className="relative isolate overflow-hidden pt-12 sm:pt-20 px-6 lg:px-8">
         <div className="mx-auto max-w-3xl">
           <h1 className="text-4xl font-extrabold tracking-tight leading-tight">
