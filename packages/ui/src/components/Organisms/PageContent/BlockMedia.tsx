@@ -11,14 +11,16 @@ export function BlockMedia(props: BlockMediaFragment) {
   return (
     <ScrollPop>
       <div className="container-page">
-        <figure className="mt-16 container-content">
-          <Media {...props.media} />
-          {props.caption ? (
-            <figcaption className="mt-3 flex justify-center gap-x-2 text-sm leading-6 text-gray-500">
-              <Html markup={props.caption} />
-            </figcaption>
-          ) : null}
-        </figure>
+        <div className="container-content">
+          <figure className="mt-16 container-text">
+            <Media {...props.media} />
+            {props.caption ? (
+              <figcaption className="mt-3 flex justify-center gap-x-2 text-sm leading-6 text-gray-500">
+                <Html markup={props.caption} />
+              </figcaption>
+            ) : null}
+          </figure>
+        </div>
       </div>
     </ScrollPop>
   );
