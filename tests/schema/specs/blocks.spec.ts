@@ -52,6 +52,8 @@ test('Blocks', async () => {
           url
           text
           openInNewTab
+          icon
+          iconPosition
         }
         ... on BlockImageWithText {
           image {
@@ -70,6 +72,9 @@ test('Blocks', async () => {
           image {
             __typename
           }
+        }
+        ... on BlockHorizontalSeparator {
+          __typename
         }
         ... on BlockAccordion {
           items {
@@ -118,6 +123,9 @@ test('Blocks', async () => {
               "markup": "
     <p>A standalone paragraph with <strong><em>markup</em></strong> and <a href="/en/architecture" data-type="Content: Basic page" data-id="[numeric]" data-entity-type="node">link</a></p>
     ",
+            },
+            {
+              "__typename": "BlockHorizontalSeparator",
             },
             {
               "__typename": "BlockMedia",
@@ -197,18 +205,24 @@ test('Blocks', async () => {
             },
             {
               "__typename": "BlockCta",
+              "icon": null,
+              "iconPosition": null,
               "openInNewTab": null,
               "text": "Internal CTA",
               "url": "/en/drupal",
             },
             {
               "__typename": "BlockCta",
+              "icon": "ARROW",
+              "iconPosition": null,
               "openInNewTab": true,
               "text": "External CTA",
               "url": "https://www.google.com",
             },
             {
               "__typename": "BlockCta",
+              "icon": "ARROW",
+              "iconPosition": "BEFORE",
               "openInNewTab": null,
               "text": "CTA with link to media",
               "url": "/media/[numeric]",
@@ -285,6 +299,8 @@ test('Blocks', async () => {
             },
             {
               "__typename": "BlockCta",
+              "icon": null,
+              "iconPosition": null,
               "openInNewTab": null,
               "text": null,
               "url": null,

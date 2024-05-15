@@ -22,6 +22,9 @@ test('All blocks are rendered', async ({ page }) => {
     page.locator('a:text("link")[href="/en/architecture"]'),
   ).toHaveCount(1);
 
+  // Horizontal separator.
+  await expect(page.locator('hr')).toHaveCount(1);
+
   // Image
   await expect(
     page.locator(
@@ -64,6 +67,11 @@ test('All blocks are rendered', async ({ page }) => {
   await expect(
     page.locator('blockquote img[alt="The silverback"]'),
   ).toHaveCount(1);
+
+  // CTA blocks
+  await expect(page.locator('a:text("Internal CTA")')).toHaveCount(1);
+  await expect(page.locator('a:text("External CTA")')).toHaveCount(1);
+  await expect(page.locator('a:text("CTA with link to media")')).toHaveCount(1);
 
   // Form
   await expect(

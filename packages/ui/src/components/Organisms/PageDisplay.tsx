@@ -3,10 +3,12 @@ import React from 'react';
 
 import { isTruthy } from '../../utils/isTruthy';
 import { UnreachableCaseError } from '../../utils/unreachable-case-error';
+import { BreadCrumbs } from '../Molecules/Breadcrumbs';
 import { PageTransition } from '../Molecules/PageTransition';
 import { BlockAccordion } from './PageContent/BlockAccordion';
 import { BlockCta } from './PageContent/BlockCta';
 import { BlockForm } from './PageContent/BlockForm';
+import { BlockHorizontalSeparator } from './PageContent/BlockHorizontalSeparator';
 import { BlockMarkup } from './PageContent/BlockMarkup';
 import { BlockMedia } from './PageContent/BlockMedia';
 import { BlockQuote } from './PageContent/BlockQuote';
@@ -16,8 +18,11 @@ export function PageDisplay(page: PageFragment) {
   return (
     <PageTransition>
       <div>
-        {page.hero ? <PageHero {...page.hero} /> : null}
-        <div className="bg-white pt-5 pb-12 lg:px-8">
+        {!page.hero && (
+          <BreadCrumbs className="pt-5 mx-auto max-w-screen-xl px-3.5" />
+        )}
+        {page.hero && <PageHero {...page.hero} />}
+        <div className="bg-white pt-5 pb-12 px-6 lg:px-8">
           <div className="mx-auto max-w-3xl text-base leading-7 text-gray-700">
             {page?.content?.filter(isTruthy).map((block, index) => {
               switch (block.__typename) {
@@ -61,6 +66,8 @@ export function PageDisplay(page: PageFragment) {
                   );
                 case 'BlockQuote':
                   return <BlockQuote key={index} {...block} />;
+                case 'BlockHorizontalSeparator':
+                  return <BlockHorizontalSeparator key={index} {...block} />;
                 case 'BlockAccordion':
                   return <BlockAccordion key={index} {...block} />;
                 default:

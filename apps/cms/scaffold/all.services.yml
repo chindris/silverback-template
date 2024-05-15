@@ -3,10 +3,10 @@
 # To activate this feature, follow the instructions at the top of the
 # 'example.settings.local.php' file, which sits next to this file.
 parameters:
-    # Configure Cross-Site HTTP requests (CORS).
-    # Read https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS
-    # for more information about the topic in general.
-    # Note: By default the configuration is disabled.
+  # Configure Cross-Site HTTP requests (CORS).
+  # Read https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS
+  # for more information about the topic in general.
+  # Note: By default the configuration is disabled.
   cors.config:
     enabled: true
     # Specify allowed headers, like 'x-allowed-header'.
