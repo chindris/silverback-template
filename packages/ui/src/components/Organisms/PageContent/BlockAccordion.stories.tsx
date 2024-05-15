@@ -12,7 +12,7 @@ export const AccordionItemText = {
     items: [
       {
         title: 'Cheese Fondue',
-        icon: '',
+        icon: 'arrow',
         textContent: {
           markup: `
           <p>The earliest known recipe for the modern form of cheese fondue comes from a 1699 book published in Zürich, under the name "Käss mit Wein zu kochen" 'to cook cheese with wine'.</p>
@@ -44,8 +44,9 @@ export const AccordionItemText = {
         },
       },
       {
-        title: 'Meringue with double cream',
-        icon: 'arrow',
+        title:
+          'Meringue with double cream, a dessert made of whipped egg whites, traditionally accompanied by double Gruyère cream',
+        icon: '',
         textContent: {
           markup: `
           <p>The Oxford English Dictionary states that the French word is of unknown origin. The name meringue for this confection first appeared in print in François Massialot's cookbook of 1692.</p>
