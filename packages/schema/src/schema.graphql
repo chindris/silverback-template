@@ -206,6 +206,7 @@ union PageContent @resolveEditorBlockType =
   | BlockCta
   | BlockImageWithText
   | BlockQuote
+  | BlockHorizontalSeparator
 
 type BlockForm @type(id: "custom/form") {
   url: Url @resolveEditorBlockAttribute(key: "formId") @webformIdToUrl(id: "$")
@@ -281,6 +282,10 @@ type BlockQuote @type(id: "custom/quote") {
   author: String @resolveEditorBlockAttribute(key: "author")
   role: String @resolveEditorBlockAttribute(key: "role")
   image: MediaImage @resolveEditorBlockMedia
+}
+
+type BlockHorizontalSeparator @type(id: "custom/horizontal-separator") {
+  markup: Markup! @resolveEditorBlockMarkup
 }
 
 input PaginationInput {
