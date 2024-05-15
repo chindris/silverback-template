@@ -3,7 +3,7 @@
 }
 
 .container-content {
-  @apply mx-auto max-w-7xl;
+  @apply mx-auto max-w-3xl;
 }
 
 .container-text {
