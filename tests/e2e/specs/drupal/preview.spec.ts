@@ -10,6 +10,7 @@ test.describe('instant preview', () => {
     await page
       .getByLabel('Title', { exact: true })
       .fill('Instant preview test');
+    await page.locator('#edit-submit').click();
     await page
       .locator('#editor-edit-body-0-value h1 span')
       .first()
