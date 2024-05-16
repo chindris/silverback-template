@@ -1,5 +1,11 @@
 import React from 'react';
 
 export function BlockHorizontalSeparator() {
-  return <hr className="mx-auto max-w-3xl my-8 text-gray-200" />;
+  return (
+    <div className="container-page">
+      <div className="container-content">
+        <hr className="container-text my-8 text-gray-200" />
+      </div>
+    </div>
+  );
 }

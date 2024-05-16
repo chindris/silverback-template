@@ -50,52 +50,57 @@ const theme: CustomFlowbiteTheme = {
 
 export function BlockAccordion(props: BlockAccordionFragment) {
   return (
-    <div className="container-content">
-      <Flowbite theme={{ theme }}>
-        <Accordion collapseAll>
-          {props.items.map((item, index) => (
-            <Accordion.Panel key={index}>
-              <Accordion.Title>
-                <span className="flex items-center">
-                  {item.icon && <AccordionIcon icon={item.icon} />} {item.title}
-                </span>
-              </Accordion.Title>
-              <Accordion.Content className="space-y-2">
-                <div className="sm:w-full md:w-4/5">
-                  {item.textContent?.markup && (
-                    <Html
-                      plugins={[unorderedItems]}
-                      components={{
-                        li: ({
-                          unordered,
-                          children,
-                          className,
-                          ...props
-                        }: PropsWithChildren<{
-                          unordered?: boolean;
-                          className?: string;
-                        }>) => {
-                          return (
-                            <li
-                              {...props}
-                              className={clsx(className, {
-                                'ml-5 mt-1 mb-1 list-disc': unordered,
-                              })}
-                            >
-                              {children}
-                            </li>
-                          );
-                        },
-                      }}
-                      markup={item.textContent.markup}
-                    />
-                  )}
-                </div>
-              </Accordion.Content>
-            </Accordion.Panel>
-          ))}
-        </Accordion>
-      </Flowbite>
+    <div className="container-page">
+      <div className="container-content">
+        <div className="container-text">
+          <Flowbite theme={{ theme }}>
+            <Accordion collapseAll>
+              {props.items.map((item, index) => (
+                <Accordion.Panel key={index}>
+                  <Accordion.Title>
+                    <span className="flex items-center">
+                      {item.icon && <AccordionIcon icon={item.icon} />}{' '}
+                      {item.title}
+                    </span>
+                  </Accordion.Title>
+                  <Accordion.Content className="space-y-2">
+                    <div className="sm:w-full md:w-4/5">
+                      {item.textContent?.markup && (
+                        <Html
+                          plugins={[unorderedItems]}
+                          components={{
+                            li: ({
+                              unordered,
+                              children,
+                              className,
+                              ...props
+                            }: PropsWithChildren<{
+                              unordered?: boolean;
+                              className?: string;
+                            }>) => {
+                              return (
+                                <li
+                                  {...props}
+                                  className={clsx(className, {
+                                    'ml-5 mt-1 mb-1 list-disc': unordered,
+                                  })}
+                                >
+                                  {children}
+                                </li>
+                              );
+                            },
+                          }}
+                          markup={item.textContent.markup}
+                        />
+                      )}
+                    </div>
+                  </Accordion.Content>
+                </Accordion.Panel>
+              ))}
+            </Accordion>
+          </Flowbite>
+        </div>
+      </div>
     </div>
   );
 }
