@@ -19,7 +19,7 @@ export function BlockForm(
   }
 
   return (
-    <div className={clsx('mx-auto max-w-3xl', props.className)}>
+    <div className={clsx('container-content', props.className)}>
       <SilverbackIframe
         src={props.url}
         buildMessages={buildMessages}
