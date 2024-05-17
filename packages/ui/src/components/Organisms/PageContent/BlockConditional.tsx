@@ -27,13 +27,13 @@ export function BlockConditional(props: BlockConditionalFragment) {
     setIsVisible(Object.values(visible).every(Boolean));
   }, []);
 
-  return (
-    <div style={{ display: isVisible ? 'block' : 'none' }}>
+  return isVisible ? (
+    <>
       {props.content?.filter(isTruthy).map((block, index) => {
         return <CommonContent key={index} {...block} />;
       })}
-    </div>
-  );
+    </>
+  ) : null;
 }
 
 type CommonContentBlock = NonNullable<
