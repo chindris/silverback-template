@@ -59,6 +59,23 @@ test('Blocks', async () => {
           image {
             __typename
           }
+          textContent {
+            __typename
+            markup
+          }
+        }
+        ... on BlockQuote {
+          quote
+          author
+          role
+          image {
+            __typename
+          }
+        }
+        ... on BlockImageWithText {
+          image {
+            __typename
+          }
           imagePosition
           textContent {
             __typename
@@ -86,6 +103,21 @@ test('Blocks', async () => {
               textContent {
                 markup
               }
+            }
+          }
+        }
+        ... on BlockInfoGrid {
+          gridItems {
+            icon
+            textContent {
+              markup
+            }
+            cta {
+              url
+              icon
+              iconPosition
+              text
+              openInNewTab
             }
           }
         }
@@ -176,6 +208,8 @@ test('Blocks', async () => {
     <ul><li>list 1</li><li>list 2<ol><li>list 2.2</li></ol></li></ul>
 
     <h3 class="wp-block-custom-heading">Heading 3</h3>
+
+    <blockquote class="wp-block-quote"><p>Quote</p><cite>Citation</cite></blockquote>
     ",
             },
             {
