@@ -4,8 +4,8 @@ first_day: 0
 country:
   default: ''
 timezone:
-  default: UTC
+  default: Europe/Zurich
   user:
-    configurable: true
+    configurable: false
     default: 0
     warn: false
