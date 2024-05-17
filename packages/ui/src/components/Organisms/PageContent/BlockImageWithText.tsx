@@ -13,7 +13,7 @@ export function BlockImageWithText(props: BlockImageWithTextFragment) {
     <div className="my-12 lg:my-16">
       <div
         className={clsx(
-          'flex flex-col lg:flex-row gap-2 lg:gap-16 items-start lg:items-center',
+          'flex flex-col lg:flex-row gap-8 lg:gap-16 items-start lg:items-center',
           {
             'lg:flex-row-reverse': props.imagePosition === ImagePosition.Right,
           },
