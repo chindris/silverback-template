@@ -73,6 +73,22 @@ test('Blocks', async () => {
             __typename
           }
         }
+        ... on BlockHorizontalSeparator {
+          __typename
+        }
+        ... on BlockAccordion {
+          items {
+            __typename
+            ... on BlockAccordionItemText {
+              __typename
+              title
+              icon
+              textContent {
+                markup
+              }
+            }
+          }
+        }
       }
     }
     {
@@ -107,6 +123,9 @@ test('Blocks', async () => {
               "markup": "
     <p>A standalone paragraph with <strong><em>markup</em></strong> and <a href="/en/architecture" data-type="Content: Basic page" data-id="[numeric]" data-entity-type="node">link</a></p>
     ",
+            },
+            {
+              "__typename": "BlockHorizontalSeparator",
             },
             {
               "__typename": "BlockMedia",
@@ -218,10 +237,31 @@ test('Blocks', async () => {
               "role": "Project manager",
             },
             {
-              "__typename": "BlockMarkup",
-              "markup": "
-    <p></p>
+              "__typename": "BlockAccordion",
+              "items": [
+                {
+                  "__typename": "BlockAccordionItemText",
+                  "icon": "",
+                  "textContent": {
+                    "markup": "
+    <p>Incididunt laborum velit non proident nostrud velit. Minim excepteur ut aliqua nisi. Culpa laboris consectetur proident. Tempor esse ullamco et dolor proident id officia laborum voluptate nostrud elit dolore qui amet. Ex Lorem irure eu anim ipsum officia.</p>
     ",
+                  },
+                  "title": "With a single paragraph and no icon",
+                },
+                {
+                  "__typename": "BlockAccordionItemText",
+                  "icon": "arrow",
+                  "textContent": {
+                    "markup": "
+    <ul><li>Moitié-moitié</li><li>Fribourgeoise</li></ul>
+    
+    <p>Incididunt laborum velit non proident nostrud velit. Minim excepteur ut aliqua nisi. Culpa laboris consectetur proident. Tempor esse ullamco et dolor proident id officia laborum voluptate nostrud elit dolore qui amet. Ex Lorem irure eu anim ipsum officia.</p>
+    ",
+                  },
+                  "title": "With a list and a paragraph and arrow icon",
+                },
+              ],
             },
           ],
           "hero": {

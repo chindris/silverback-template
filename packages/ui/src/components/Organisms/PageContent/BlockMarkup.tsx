@@ -14,59 +14,67 @@ const unorderedItems: Plugin<[], Element> = () => (tree) => {
 
 export function BlockMarkup(props: BlockMarkupFragment) {
   return (
-    <div
-      className={clsx([
-        'mx-auto max-w-3xl prose lg:prose-xl mt-10',
-        'marker:text-[#111928]',
-        'marker:font-bold',
-      ])}
-    >
-      <Html
-        plugins={[unorderedItems]}
-        components={{
-          li: ({
-            unordered,
-            children,
-            className,
-            ...props
-          }: PropsWithChildren<{
-            unordered?: boolean;
-            className?: string;
-          }>) => {
-            return (
-              <li
-                {...props}
-                className={clsx(className, { 'list-none relative': unordered })}
-              >
-                {unordered ? (
-                  <ArrowRightCircleIcon className="not-prose w-6 h-6 absolute mt-1.5 left-[-1.5em] text-gray-900" />
-                ) : null}
-                {children}
-              </li>
-            );
-          },
-          blockquote: ({ children }: PropsWithChildren<{}>) => {
-            return (
-              <blockquote className="border-l-0 relative pl-0">
-                <svg
-                  width="32"
-                  height="24"
-                  viewBox="0 0 32 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M18.6893 24V14.1453C18.6893 6.54 23.664 1.38533 30.6667 0L31.9933 2.868C28.7507 4.09066 26.6667 7.71867 26.6667 10.6667H32V24H18.6893ZM0 24V14.1453C0 6.54 4.99733 1.384 12 0L13.328 2.868C10.084 4.09066 8 7.71867 8 10.6667L13.3107 10.6667V24H0Z"
-                    fill="#9CA3AF"
-                  />
-                </svg>
-                {children}
-              </blockquote>
-            );
-          },
-        }}
-        markup={props.markup}
-      />
+    <div className="container-page">
+      <div className="container-content">
+        <div className="container-text">
+          <div
+            className={clsx([
+              'prose lg:prose-xl mt-10',
+              'marker:text-[#111928]',
+              'marker:font-bold',
+            ])}
+          >
+            <Html
+              plugins={[unorderedItems]}
+              components={{
+                li: ({
+                  unordered,
+                  children,
+                  className,
+                  ...props
+                }: PropsWithChildren<{
+                  unordered?: boolean;
+                  className?: string;
+                }>) => {
+                  return (
+                    <li
+                      {...props}
+                      className={clsx(className, {
+                        'list-none relative': unordered,
+                      })}
+                    >
+                      {unordered ? (
+                        <ArrowRightCircleIcon className="not-prose w-6 h-6 absolute mt-1.5 left-[-1.5em] text-gray-900" />
+                      ) : null}
+                      {children}
+                    </li>
+                  );
+                },
+                blockquote: ({ children }: PropsWithChildren<{}>) => {
+                  return (
+                    <blockquote className="border-l-0 relative pl-0">
+                      <svg
+                        width="32"
+                        height="24"
+                        viewBox="0 0 32 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M18.6893 24V14.1453C18.6893 6.54 23.664 1.38533 30.6667 0L31.9933 2.868C28.7507 4.09066 26.6667 7.71867 26.6667 10.6667H32V24H18.6893ZM0 24V14.1453C0 6.54 4.99733 1.384 12 0L13.328 2.868C10.084 4.09066 8 7.71867 8 10.6667L13.3107 10.6667V24H0Z"
+                          fill="#9CA3AF"
+                        />
+                      </svg>
+                      {children}
+                    </blockquote>
+                  );
+                },
+              }}
+              markup={props.markup}
+            />
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

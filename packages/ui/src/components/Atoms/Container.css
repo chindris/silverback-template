@@ -1,5 +1,5 @@
 .container-page {
-  @apply max-w-full px-[1.25rem] md:px-[3.75rem];
+  @apply max-w-full px-[1.25rem] md:px-[3.75rem] lg:px-[5rem];
 }
 
 .container-content {
@@ -7,7 +7,7 @@
 }
 
 .container-text {
-  @apply max-w-[40.75rem] xl:ml-[11rem] lg:ml-[7rem];
+  @apply max-w-3xl mx-auto;
 }
 
 .nested-container .container-page {
