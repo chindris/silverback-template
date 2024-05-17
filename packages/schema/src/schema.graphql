@@ -73,6 +73,15 @@ directive @route(
   path: String!
 ) repeatable on FIELD_DEFINITION | SCALAR | UNION | ENUM | INTERFACE | OBJECT
 
+"""
+Converts JS datetime-local value (YYYY-MM-DDThh:mm) to an ISO datetime string.
+
+Drupal's timezone is used as the original timezone.
+
+implementation(drupal): \Drupal\custom\SimpleDirectives::fromJsDatetime
+"""
+directive @fromJsDatetime(datetime: String) on FIELD_DEFINITION
+
 enum Locale @default @value(string: "en") {
   en
   de
@@ -198,6 +207,17 @@ type Hero {
     @webformIdToUrl(id: "$")
 }
 
+union CommonContent @resolveEditorBlockType =
+  | BlockMarkup
+  | BlockMedia
+  | BlockForm
+  | BlockImageTeasers
+  | BlockCta
+  | BlockImageWithText
+  | BlockQuote
+  | BlockHorizontalSeparator
+  | BlockAccordion
+
 union PageContent @resolveEditorBlockType =
   | BlockMarkup
   | BlockMedia
@@ -208,6 +228,7 @@ union PageContent @resolveEditorBlockType =
   | BlockQuote
   | BlockHorizontalSeparator
   | BlockAccordion
+  | BlockConditional
 
 type BlockForm @type(id: "custom/form") {
   url: Url @resolveEditorBlockAttribute(key: "formId") @webformIdToUrl(id: "$")
@@ -297,6 +318,16 @@ type BlockQuote @type(id: "custom/quote") {
 
 type BlockHorizontalSeparator @type(id: "custom/horizontal-separator") {
   markup: Markup! @resolveEditorBlockMarkup
+}
+
+type BlockConditional @type(id: "custom/conditional") {
+  displayFrom: String
+    @resolveEditorBlockAttribute(key: "displayFrom")
+    @fromJsDatetime(datetime: "$")
+  displayTo: String
+    @resolveEditorBlockAttribute(key: "displayTo")
+    @fromJsDatetime(datetime: "$")
+  content: [CommonContent] @resolveEditorBlockChildren
 }
 
 input PaginationInput {

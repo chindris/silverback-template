@@ -355,3 +355,58 @@ test('Blocks', async () => {
   );
   expect(germanForm.url).toBe('http://127.0.0.1:8000/de/form/contact');
 });
+
+test('Conditional', async () => {
+  const result = await fetch(gql`
+    {
+      _loadDrupalPage(id: "52ee5cc7-0ac5-49b5-8550-ce59476bd4ac") {
+        content {
+          __typename
+          ... on BlockConditional {
+            content {
+              ... on BlockMarkup {
+                markup
+              }
+            }
+            displayFrom
+            displayTo
+          }
+        }
+      }
+    }
+  `);
+  expect(result).toMatchInlineSnapshot(`
+    {
+      "data": {
+        "_loadDrupalPage": {
+          "content": [
+            {
+              "__typename": "BlockConditional",
+              "content": [
+                {
+                  "markup": "
+    <p>Complete</p>
+    ",
+                },
+              ],
+              "displayFrom": "2024-05-16T15:05:00+02:00",
+              "displayTo": "2024-05-23T17:03:00+02:00",
+            },
+            {
+              "__typename": "BlockConditional",
+              "content": [
+                {
+                  "markup": "
+    <p>No conditions</p>
+    ",
+                },
+              ],
+              "displayFrom": null,
+              "displayTo": null,
+            },
+          ],
+        },
+      },
+    }
+  `);
+});

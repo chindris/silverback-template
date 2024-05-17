@@ -1,0 +1,16 @@
+fragment BlockConditional on BlockConditional {
+  displayFrom
+  displayTo
+  content {
+    __typename
+    ...BlockMarkup
+    ...BlockMedia
+    ...BlockForm
+    ...BlockImageTeasers
+    ...BlockCta
+    ...BlockImageWithText
+    ...BlockQuote
+    ...BlockHorizontalSeparator
+    ...BlockAccordion
+  }
+}
