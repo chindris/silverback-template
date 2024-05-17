@@ -29,7 +29,7 @@ export function BlockImageWithText(props: BlockImageWithTextFragment) {
           </div>
         )}
 
-        <div className={'lg:w-1/2'}>
+        <div className={'lg:w-1/2 nested-container'}>
           {props.textContent?.markup && <BlockMarkup {...props.textContent} />}
         </div>
       </div>
