@@ -160,8 +160,6 @@ test('Blocks', async () => {
 
     <h2 class="wp-block-custom-heading">Heading</h2>
 
-    <figure class="wp-block-table"><table><tbody><tr><td>1</td><td>2</td></tr><tr><td>3</td><td>4</td></tr></tbody></table><figcaption>Caption</figcaption></figure>
-
     <blockquote class="wp-block-quote"><p>Quote</p><cite>Citation</cite></blockquote>
 
     <p></p>
