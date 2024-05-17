@@ -54,6 +54,40 @@ export function PageDisplay(page: PageFragment) {
               return <BlockHorizontalSeparator key={index} {...block} />;
             case 'BlockAccordion':
               return <BlockAccordion key={index} {...block} />;
+            case 'BlockInfoGrid':
+              return (
+                // TODO: Implement BlockImageTeasers
+                <div
+                  style={{
+                    color: 'red',
+                    border: 'solid 3px red',
+                    padding: '3px',
+                    margin: '5px 0',
+                  }}
+                  // eslint-disable-next-line react/jsx-no-literals
+                >
+                  BlockInfoGrid goes here
+                  <br />
+                  ---
+                  <br />
+                  {block.gridItems.map((item, index) => {
+                    return (
+                      <>
+                        <div key={index}>
+                          <p>Icon: {item?.icon}</p>
+                          <p>Markup: {item?.textContent?.markup}</p>
+                          <p>CTA Url: {item?.cta?.url}</p>
+                          <p>CTA Icon: {item?.cta?.icon}</p>
+                          <p>CTA Icon Position: {item?.cta?.iconPosition}</p>
+                          <p>CTA Text: {item?.cta?.text}</p>
+                          <p>CTA Open in New Tab: {item?.cta?.openInNewTab}</p>
+                        </div>
+                        <br />
+                      </>
+                    );
+                  })}
+                </div>
+              );
             default:
               throw new UnreachableCaseError(block);
           }
