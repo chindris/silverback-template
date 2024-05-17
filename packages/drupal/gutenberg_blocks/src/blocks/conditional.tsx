@@ -2,6 +2,12 @@ import { InnerBlocks, InspectorControls } from 'wordpress__block-editor';
 import { registerBlockType } from 'wordpress__blocks';
 import { BaseControl, PanelBody } from 'wordpress__components';
 
+declare const drupalSettings: {
+  customGutenbergBlocks: {
+    timezone: string;
+  };
+};
+
 // @ts-ignore
 const { t: __ } = Drupal;
 
@@ -82,6 +88,16 @@ registerBlockType(`custom/conditional`, {
                   setAttributes({ displayTo: event.target.value });
                 }}
               />
+            </BaseControl>
+            <BaseControl
+              id="decription"
+              label={__(
+                __('Time zone') +
+                  ': ' +
+                  drupalSettings.customGutenbergBlocks.timezone,
+              )}
+            >
+              <div />
             </BaseControl>
           </PanelBody>
         </InspectorControls>
