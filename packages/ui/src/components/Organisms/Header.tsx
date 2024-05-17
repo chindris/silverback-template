@@ -34,147 +34,157 @@ export function Header() {
 
   return (
     <MobileMenuProvider>
-      <header className="max-w-screen-xl mx-auto">
-        <div className="hidden md:flex">
-          <UserActions iconWidth="16" iconHeight="16" />
-        </div>
-        <nav
-          className="border-b border-b-gray-200 z-20 relative mx-auto flex items-center justify-between py-6 px-3.5"
-          aria-label="Global"
-        >
-          <div className="flex lg:flex-1">
-            <Link href={'/' as Url} className="-ml-1 mt-1 md:-mt-2.5">
-              <span className="sr-only">
-                {intl.formatMessage({
-                  defaultMessage: 'Company name',
-                  id: 'FPGwAt',
-                })}
-              </span>
-              <SiteLogo width={213} height={59} className={'hidden lg:block'} />
-              <SiteLogo width={160} height={40} className={'block lg:hidden'} />
-            </Link>
+      <div className="container-page">
+        <header className="container-content">
+          <div className="hidden md:flex">
+            <UserActions iconWidth="16" iconHeight="16" />
           </div>
-          <div className="flex md:hidden">
-            <UserActions
-              iconWidth="23"
-              iconHeight="23"
-              showIconText={false}
-              isDesktop={false}
-            />
-            <MobileMenuButton className="inline-flex items-center justify-center rounded-md text-gray-700 ml-5 sm:ml-7 cursor-pointer"></MobileMenuButton>
-          </div>
-          <div className={'hidden md:flex'}>
-            {items.map((item, key) =>
-              item.children.length === 0 ? (
-                <Link
-                  key={key}
-                  href={item.target}
-                  className="text-base font-medium text-gray-600 ml-8 hover:text-blue-600"
-                  activeClassName={'font-bold text-blue-200'}
-                >
-                  {item.title}
-                </Link>
-              ) : (
-                <DesktopMenuDropDown title={item.title} key={item.title}>
+          <nav
+            className="border-b border-b-gray-200 z-20 relative mx-auto flex items-center justify-between py-6"
+            aria-label="Global"
+          >
+            <div className="flex lg:flex-1">
+              <Link href={'/' as Url} className="-ml-1 mt-1 md:-mt-2.5">
+                <span className="sr-only">
+                  {intl.formatMessage({
+                    defaultMessage: 'Company name',
+                    id: 'FPGwAt',
+                  })}
+                </span>
+                <SiteLogo
+                  width={213}
+                  height={59}
+                  className={'hidden lg:block'}
+                />
+                <SiteLogo
+                  width={160}
+                  height={40}
+                  className={'block lg:hidden'}
+                />
+              </Link>
+            </div>
+            <div className="flex md:hidden">
+              <UserActions
+                iconWidth="23"
+                iconHeight="23"
+                showIconText={false}
+                isDesktop={false}
+              />
+              <MobileMenuButton className="inline-flex items-center justify-center rounded-md text-gray-700 ml-5 sm:ml-7 cursor-pointer"></MobileMenuButton>
+            </div>
+            <div className={'hidden md:flex'}>
+              {items.map((item, key) =>
+                item.children.length === 0 ? (
                   <Link
-                    key={item.target}
+                    key={key}
                     href={item.target}
-                    className="m-1.5 block hover:text-blue-600 p-2 text-sm leading-[1.25rem] text-gray-900 font-bold"
+                    className="text-base font-medium text-gray-600 ml-8 hover:text-blue-600"
+                    activeClassName={'font-bold text-blue-200'}
                   >
                     {item.title}
                   </Link>
-                  {item.children.map((child) =>
-                    child.children.length === 0 ? (
-                      <Link
-                        key={child.target}
-                        href={child.target}
-                        className="m-1.5 block hover:text-blue-600 p-2 text-sm leading-[1.25rem] text-gray-500"
-                      >
-                        {child.title}
-                      </Link>
-                    ) : (
-                      <DesktopMenuDropdownDisclosure
-                        title={child.title}
-                        key={child.title}
-                      >
-                        {child.children.map((grandChild) => (
-                          <Link
-                            key={grandChild.target}
-                            href={grandChild.target}
-                            className="block p-2 pl-5 text-sm leading-[1.25rem] text-gray-500 hover:text-blue-600"
-                          >
-                            {grandChild.title}
-                          </Link>
-                        ))}
-                      </DesktopMenuDropdownDisclosure>
-                    ),
-                  )}
-                </DesktopMenuDropDown>
-              ),
-            )}
-          </div>
-        </nav>
-        <MobileMenu>
-          <div className="mt-6 flow-root">
-            <div className="-my-6 divide-y divide-gray-500/10">
-              <div>
-                {items.map((item) =>
-                  item.children.length === 0 ? (
+                ) : (
+                  <DesktopMenuDropDown title={item.title} key={item.title}>
                     <Link
-                      key={item.title}
+                      key={item.target}
                       href={item.target}
-                      className="block hover:text-blue-600 py-4 px-8 text-lg text-gray-600 border-b border-b-solid border-b-blue-100"
+                      className="m-1.5 block hover:text-blue-600 p-2 text-sm leading-[1.25rem] text-gray-900 font-bold"
                     >
                       {item.title}
                     </Link>
-                  ) : (
-                    <MobileMenuDropdown
-                      title={item.title}
-                      key={item.title}
-                      nestLevel={1}
-                    >
+                    {item.children.map((child) =>
+                      child.children.length === 0 ? (
+                        <Link
+                          key={child.target}
+                          href={child.target}
+                          className="m-1.5 block hover:text-blue-600 p-2 text-sm leading-[1.25rem] text-gray-500"
+                        >
+                          {child.title}
+                        </Link>
+                      ) : (
+                        <DesktopMenuDropdownDisclosure
+                          title={child.title}
+                          key={child.title}
+                        >
+                          {child.children.map((grandChild) => (
+                            <Link
+                              key={grandChild.target}
+                              href={grandChild.target}
+                              className="block p-2 pl-5 text-sm leading-[1.25rem] text-gray-500 hover:text-blue-600"
+                            >
+                              {grandChild.title}
+                            </Link>
+                          ))}
+                        </DesktopMenuDropdownDisclosure>
+                      ),
+                    )}
+                  </DesktopMenuDropDown>
+                ),
+              )}
+            </div>
+          </nav>
+          <MobileMenu>
+            <div className="mt-6 flow-root">
+              <div className="-my-6 divide-y divide-gray-500/10">
+                <div>
+                  {items.map((item) =>
+                    item.children.length === 0 ? (
                       <Link
-                        key={item.target}
+                        key={item.title}
                         href={item.target}
-                        title={item.title}
-                        className="block hover:text-blue-600 py-4 pr-8 pl-10 text-base text-gray-600"
+                        className="block hover:text-blue-600 py-4 px-8 text-lg text-gray-600 border-b border-b-solid border-b-blue-100"
                       >
                         {item.title}
                       </Link>
-                      {item.children.map((child) =>
-                        child.children.length === 0 ? (
-                          <Link
-                            key={child.target}
-                            href={child.target}
-                            title={child.title}
-                            className="block hover:text-blue-600 py-4 pr-8 pl-10 text-base text-gray-600"
-                          >
-                            {child.title}
-                          </Link>
-                        ) : (
-                          <MobileMenuDropdown
-                            title={child.title}
-                            key={child.title}
-                            nestLevel={2}
-                          >
-                            {child.children.map((grandChild) => (
-                              <MobileMenuLink
-                                key={grandChild.target}
-                                href={grandChild.target}
-                                title={grandChild.title}
-                              />
-                            ))}
-                          </MobileMenuDropdown>
-                        ),
-                      )}
-                    </MobileMenuDropdown>
-                  ),
-                )}
+                    ) : (
+                      <MobileMenuDropdown
+                        title={item.title}
+                        key={item.title}
+                        nestLevel={1}
+                      >
+                        <Link
+                          key={item.target}
+                          href={item.target}
+                          title={item.title}
+                          className="block hover:text-blue-600 py-4 pr-8 pl-10 text-base text-gray-600"
+                        >
+                          {item.title}
+                        </Link>
+                        {item.children.map((child) =>
+                          child.children.length === 0 ? (
+                            <Link
+                              key={child.target}
+                              href={child.target}
+                              title={child.title}
+                              className="block hover:text-blue-600 py-4 pr-8 pl-10 text-base text-gray-600"
+                            >
+                              {child.title}
+                            </Link>
+                          ) : (
+                            <MobileMenuDropdown
+                              title={child.title}
+                              key={child.title}
+                              nestLevel={2}
+                            >
+                              {child.children.map((grandChild) => (
+                                <MobileMenuLink
+                                  key={grandChild.target}
+                                  href={grandChild.target}
+                                  title={grandChild.title}
+                                />
+                              ))}
+                            </MobileMenuDropdown>
+                          ),
+                        )}
+                      </MobileMenuDropdown>
+                    ),
+                  )}
+                </div>
               </div>
             </div>
-          </div>
-        </MobileMenu>
-      </header>
+          </MobileMenu>
+        </header>
+      </div>
     </MobileMenuProvider>
   );
 }
