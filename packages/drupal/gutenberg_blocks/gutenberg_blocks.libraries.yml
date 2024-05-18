@@ -13,4 +13,3 @@ customisations:
       /gutenberg.css: { preprocess: false }
   dependencies:
     - core/drupalSettings
-

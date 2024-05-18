@@ -22,12 +22,15 @@ test('All blocks are rendered', async ({ page }) => {
     page.locator('a:text("link")[href="/en/architecture"]'),
   ).toHaveCount(1);
 
-  // Image
+  // Horizontal separator.
+  await expect(page.locator('hr')).toHaveCount(1);
+
+  // Image and ImageWithText block
   await expect(
     page.locator(
       'img:not([data-test-id=hero-image])[alt="A beautiful landscape."]',
     ),
-  ).toHaveCount(1);
+  ).toHaveCount(2);
   await expect(page.locator('figcaption:text("Media image")')).toHaveCount(1);
 
   // Video
@@ -64,6 +67,11 @@ test('All blocks are rendered', async ({ page }) => {
   await expect(
     page.locator('blockquote img[alt="The silverback"]'),
   ).toHaveCount(1);
+
+  // CTA blocks
+  await expect(page.locator('a:text("Internal CTA")')).toHaveCount(1);
+  await expect(page.locator('a:text("External CTA")')).toHaveCount(1);
+  await expect(page.locator('a:text("CTA with link to media")')).toHaveCount(1);
 
   // Form
   await expect(

@@ -1,5 +1,6 @@
 /* Import all atom stylesheets. */
 @import './components/Atoms/Container.css';
+@import './components/Atoms/List.css';
 
 @tailwind base;
 @tailwind components;

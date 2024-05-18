@@ -1,9 +1,10 @@
 fragment BlockImageWithText on BlockImageWithText {
   image {
-    source(width: 1536, sizes: [[768, 768], [1536, 1536]])
+    source(width: 1536, height: 1336)
     alt
   }
   textContent {
     markup
   }
+  imagePosition
 }

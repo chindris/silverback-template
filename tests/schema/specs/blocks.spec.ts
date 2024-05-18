@@ -52,6 +52,8 @@ test('Blocks', async () => {
           url
           text
           openInNewTab
+          icon
+          iconPosition
         }
         ... on BlockImageWithText {
           image {
@@ -69,6 +71,22 @@ test('Blocks', async () => {
           role
           image {
             __typename
+          }
+        }
+        ... on BlockHorizontalSeparator {
+          __typename
+        }
+        ... on BlockAccordion {
+          items {
+            __typename
+            ... on BlockAccordionItemText {
+              __typename
+              title
+              icon
+              textContent {
+                markup
+              }
+            }
           }
         }
       }
@@ -107,6 +125,9 @@ test('Blocks', async () => {
     ",
             },
             {
+              "__typename": "BlockHorizontalSeparator",
+            },
+            {
               "__typename": "BlockMedia",
               "caption": "Media image",
               "media": {
@@ -138,8 +159,6 @@ test('Blocks', async () => {
     <ul><li>bla</li></ul>
 
     <h2 class="wp-block-custom-heading">Heading</h2>
-
-    <figure class="wp-block-table"><table><tbody><tr><td>1</td><td>2</td></tr><tr><td>3</td><td>4</td></tr></tbody></table><figcaption>Caption</figcaption></figure>
 
     <blockquote class="wp-block-quote"><p>Quote</p><cite>Citation</cite></blockquote>
 
@@ -184,18 +203,24 @@ test('Blocks', async () => {
             },
             {
               "__typename": "BlockCta",
+              "icon": null,
+              "iconPosition": null,
               "openInNewTab": null,
               "text": "Internal CTA",
               "url": "/en/drupal",
             },
             {
               "__typename": "BlockCta",
+              "icon": "ARROW",
+              "iconPosition": null,
               "openInNewTab": true,
               "text": "External CTA",
               "url": "https://www.google.com",
             },
             {
               "__typename": "BlockCta",
+              "icon": "ARROW",
+              "iconPosition": "BEFORE",
               "openInNewTab": null,
               "text": "CTA with link to media",
               "url": "/media/[numeric]",
@@ -210,10 +235,31 @@ test('Blocks', async () => {
               "role": "Project manager",
             },
             {
-              "__typename": "BlockMarkup",
-              "markup": "
-    <p></p>
+              "__typename": "BlockAccordion",
+              "items": [
+                {
+                  "__typename": "BlockAccordionItemText",
+                  "icon": "",
+                  "textContent": {
+                    "markup": "
+    <p>Incididunt laborum velit non proident nostrud velit. Minim excepteur ut aliqua nisi. Culpa laboris consectetur proident. Tempor esse ullamco et dolor proident id officia laborum voluptate nostrud elit dolore qui amet. Ex Lorem irure eu anim ipsum officia.</p>
     ",
+                  },
+                  "title": "With a single paragraph and no icon",
+                },
+                {
+                  "__typename": "BlockAccordionItemText",
+                  "icon": "arrow",
+                  "textContent": {
+                    "markup": "
+    <ul><li>Moitié-moitié</li><li>Fribourgeoise</li></ul>
+    
+    <p>Incididunt laborum velit non proident nostrud velit. Minim excepteur ut aliqua nisi. Culpa laboris consectetur proident. Tempor esse ullamco et dolor proident id officia laborum voluptate nostrud elit dolore qui amet. Ex Lorem irure eu anim ipsum officia.</p>
+    ",
+                  },
+                  "title": "With a list and a paragraph and arrow icon",
+                },
+              ],
             },
           ],
           "hero": {
@@ -251,6 +297,8 @@ test('Blocks', async () => {
             },
             {
               "__typename": "BlockCta",
+              "icon": null,
+              "iconPosition": null,
               "openInNewTab": null,
               "text": null,
               "url": null,

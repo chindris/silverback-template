@@ -10,6 +10,8 @@ import { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
 import { image } from '../../helpers/image';
+import { AccordionItemText } from '../Organisms/PageContent/BlockAccordion.stories';
+import { ImageRight } from '../Organisms/PageContent/BlockImageWithText.stories';
 import { Default as BlockBackgroundImageCards } from '../Organisms/PageContent/BlockBackgroundImageCards.stories';
 import { Mixed, Paragraph } from '../Organisms/PageContent/BlockMarkup.stories';
 import { WithCaption } from '../Organisms/PageContent/BlockMedia.stories';
@@ -41,12 +43,6 @@ export const Default = {
         },
       ],
       path: '/test' as Url,
-      hero: {
-        headline: 'Page Hero Headline',
-        lead: 'A longer lead text that even might break into multiple lines.',
-        ctaUrl: '/test' as Url,
-        ctaText: 'Call to action',
-      },
       content: [
         {
           __typename: 'BlockImageTeasers',
@@ -65,10 +61,37 @@ export const Default = {
           ...Paragraph.args,
         },
         {
+          __typename: 'BlockImageWithText',
+          ...ImageRight.args,
+        },
+        {
+          __typename: 'BlockAccordion',
+          ...AccordionItemText.args,
+        },
+        {
           __typename: 'BlockImageTeasers',
           ...BlockBackgroundImageCards.args,
         },
       ] as Exclude<ViewPageQuery['page'], undefined>['content'],
+    },
+  },
+  parameters: {
+    location: new URL('local:/gatsby-turbo'),
+  },
+} satisfies StoryObj<ViewPageQuery>;
+
+export const Hero = {
+  ...Default,
+  args: {
+    ...Default.args,
+    page: {
+      ...Default.args.page,
+      hero: {
+        headline: 'Page Hero Headline',
+        lead: 'A longer lead text that even might break into multiple lines.',
+        ctaUrl: '/test' as Url,
+        ctaText: 'Call to action',
+      },
     },
   },
 } satisfies StoryObj<ViewPageQuery>;
