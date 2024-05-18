@@ -4,11 +4,11 @@ import Portrait from '@stories/portrait.jpg?as=metadata';
 import { Meta, StoryObj } from '@storybook/react';
 
 import { image } from '../../../helpers/image';
-import { BlockBackgroundImageCards } from './BlockBackgroundImageCards';
+import { BlockImageTeasers } from './BlockImageTeasers';
 
 export default {
-  component: BlockBackgroundImageCards,
-} satisfies Meta<typeof BlockBackgroundImageCards>;
+  component: BlockImageTeasers,
+} satisfies Meta<typeof BlockImageTeasers>;
 
 export const Default = {
   args: {
@@ -33,4 +33,4 @@ export const Default = {
       },
     ],
   },
-} satisfies StoryObj<typeof BlockBackgroundImageCards>;
+} satisfies StoryObj<typeof BlockImageTeasers>;

@@ -1,21 +1,16 @@
-import {
-  BlockImageTeaser,
-  BlockImageTeasers,
-  Image,
-  Link,
-} from '@custom/schema';
+import { BlockImageTeasersFragment, Image, Link } from '@custom/schema';
 import React from 'react';
 
 import { isTruthy } from '../../../utils/isTruthy';
 
-export function BlockBackgroundImageCards(props: BlockImageTeasers) {
+export function BlockImageTeasers(props: BlockImageTeasersFragment) {
   return (
     // eslint-disable-next-line tailwindcss/no-custom-classname
     <section className="container-page my-16 block-background-image-cards">
       <div className="container-content text-center">
         <div className="grid grid-cols-2 gap-2">
           {props.teasers.filter(isTruthy).map((teaser, index) => (
-            <BlockBackgroundImageCard key={index} {...teaser} />
+            <BlockImageTeaser key={index} {...teaser} />
           ))}
         </div>
       </div>
@@ -23,9 +18,13 @@ export function BlockBackgroundImageCards(props: BlockImageTeasers) {
   );
 }
 
-export function BlockBackgroundImageCard(props: BlockImageTeaser) {
+// This component uses the following Flowbite component:
+// https://flowbite.com/blocks/marketing/hero/#background-image-cards
+export function BlockImageTeaser(
+  props: BlockImageTeasersFragment['teasers'][0],
+) {
   return (
-    <div className="p-8 col-span-2 md:col-span-1 text-left h-72 lg:h-96 relative bg-gray-900">
+    <div className="p-8 col-span-2 lg:col-span-1 text-left h-72 lg:h-96 relative bg-gray-900">
       {props.image ? (
         <Image
           className="object-cover w-full h-72 lg:h-96 mb-5 absolute top-0 left-0"
@@ -36,7 +35,7 @@ export function BlockBackgroundImageCard(props: BlockImageTeaser) {
 
       <div className={'relative'}>
         {props.title ? (
-          <h2 className="mb-5 max-w-xl text-4xl font-extrabold tracking-tight leading-tight text-white">
+          <h2 className="mb-6 max-w-xl text-4xl font-bold tracking-tight leading-tight text-white">
             {props.title}
           </h2>
         ) : null}
@@ -45,7 +44,7 @@ export function BlockBackgroundImageCard(props: BlockImageTeaser) {
           <Link
             href={props.ctaUrl}
             type="button"
-            className="inline-flex items-center px-4 py-2.5 font-medium text-center text-white border border-white rounded-lg hover:bg-white hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-700"
+            className="inline-flex text-base items-center px-5 py-3 font-medium text-center text-white border border-white rounded-lg hover:bg-white hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-700"
           >
             {props.ctaText}
           </Link>

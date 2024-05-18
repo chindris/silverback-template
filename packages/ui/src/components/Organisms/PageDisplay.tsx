@@ -5,11 +5,11 @@ import { isTruthy } from '../../utils/isTruthy';
 import { UnreachableCaseError } from '../../utils/unreachable-case-error';
 import { BreadCrumbs } from '../Molecules/Breadcrumbs';
 import { PageTransition } from '../Molecules/PageTransition';
-import { BlockBackgroundImageCards } from './PageContent/BlockBackgroundImageCards';
 import { BlockAccordion } from './PageContent/BlockAccordion';
 import { BlockCta } from './PageContent/BlockCta';
 import { BlockForm } from './PageContent/BlockForm';
 import { BlockHorizontalSeparator } from './PageContent/BlockHorizontalSeparator';
+import { BlockImageTeasers } from './PageContent/BlockImageTeasers';
 import { BlockImageWithText } from './PageContent/BlockImageWithText';
 import { BlockMarkup } from './PageContent/BlockMarkup';
 import { BlockMedia } from './PageContent/BlockMedia';
@@ -31,7 +31,7 @@ export function PageDisplay(page: PageFragment) {
             case 'BlockForm':
               return <BlockForm key={index} {...block} />;
             case 'BlockImageTeasers':
-              return <BlockBackgroundImageCards key={index} {...block} />;
+              return <BlockImageTeasers key={index} {...block} />;
             case 'BlockCta':
               return <BlockCta key={index} {...block} />;
             case 'BlockImageWithText':
