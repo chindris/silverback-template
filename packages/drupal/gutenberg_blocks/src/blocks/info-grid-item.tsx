@@ -15,6 +15,7 @@ registerBlockType('custom/info-grid-item', {
   title: __('Info Grid Item'),
   icon: 'align-wide',
   category: 'layout',
+  parent: ['custom/info-grid'],
   attributes: {
     icon: {
       type: 'string',
