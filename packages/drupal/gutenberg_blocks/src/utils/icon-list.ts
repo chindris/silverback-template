@@ -41,7 +41,7 @@ const ICON_IMAGE_PATH = '/modules/custom/gutenberg_blocks/images/icons/';
  */
 export const allIconListOptions = (
   addDefault: boolean = true,
-  defaultLabel: string = 'Select an icon',
+  defaultLabel: string = __('Select an icon'),
   defaultValue: string = '',
 ): Icon[] => {
   // Empty array of icons.
@@ -66,7 +66,7 @@ export const allIconListOptions = (
   // If using default add to first place.
   if (addDefault) {
     allIcons.unshift({
-      label: __(defaultLabel),
+      label: defaultLabel,
       value: defaultValue,
     });
   }
@@ -117,7 +117,7 @@ export const iconImagePreview = (icon: string): string => {
 export const limitedIconListOption = (
   icons: Icons[],
   addDefault: boolean = true,
-  defaultLabel: string = 'Select an icon',
+  defaultLabel: string = __('Select an icon'),
   defaultValue: string = '',
 ): Icon[] => {
   if (addDefault) {
