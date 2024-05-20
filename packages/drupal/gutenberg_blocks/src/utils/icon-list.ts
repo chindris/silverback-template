@@ -95,7 +95,7 @@ export const iconImagePreview = (icon: string): string => {
       break;
   }
 
-  if (!iconFileName || iconFileName === '') {
+  if (!iconFileName) {
     return '';
   }
 
