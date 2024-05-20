@@ -25,7 +25,6 @@ registerBlockType('custom/info-grid-item', {
   edit: (props) => {
     const { setAttributes } = props;
     const iconPreview = iconImagePreview(props.attributes.icon as string);
-    const iconPreviewStyle = { maxWidth: '50px' };
 
     return (
       <>
@@ -47,7 +46,7 @@ registerBlockType('custom/info-grid-item', {
 
         <div className={'container-wrapper'}>
           <div className={'container-label'}>{__('Info Grid Item')}</div>
-          <div className={'info-grid-icon'} style={iconPreviewStyle}>
+          <div className={'info-grid-icon'} style={{ maxWidth: '50px' }}>
             {iconPreview && (
               <img src={iconPreview} alt={props.attributes.icon as string} />
             )}
