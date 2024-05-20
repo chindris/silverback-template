@@ -70,7 +70,7 @@ export function PageDisplay(page: PageFragment) {
                   <br />
                   ---
                   <br />
-                  {block.items.map((item, index) => {
+                  {block.gridItems.map((item, index) => {
                     return (
                       <>
                         <div key={index}>
@@ -78,13 +78,9 @@ export function PageDisplay(page: PageFragment) {
                           <p>Markup: {item?.textContent?.markup}</p>
                           <p>CTA Url: {item?.cta?.url}</p>
                           <p>CTA Icon: {item?.cta?.icon}</p>
-                          <p>
-                            CTA Icon Position: {item?.cta?.iconPosition}
-                          </p>
+                          <p>CTA Icon Position: {item?.cta?.iconPosition}</p>
                           <p>CTA Text: {item?.cta?.text}</p>
-                          <p>
-                            CTA Open in New Tab: {item?.cta?.openInNewTab}
-                          </p>
+                          <p>CTA Open in New Tab: {item?.cta?.openInNewTab}</p>
                         </div>
                         <br />
                       </>

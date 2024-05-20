@@ -297,7 +297,7 @@ type BlockQuote @type(id: "custom/quote") {
 }
 
 type BlockInfoGrid @type(id: "custom/info-grid") {
-  items: [BlockInfoGridItem]! @resolveEditorBlockChildren
+  gridItems: [BlockInfoGridItem]! @resolveEditorBlockChildren
 }
 
 type BlockInfoGridItem {

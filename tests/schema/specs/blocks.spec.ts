@@ -90,7 +90,7 @@ test('Blocks', async () => {
           }
         }
         ... on BlockInfoGrid {
-          items {
+          gridItems {
             icon
             textContent {
               markup
