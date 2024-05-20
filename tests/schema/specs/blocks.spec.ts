@@ -270,68 +270,11 @@ test('Blocks', async () => {
                   "textContent": {
                     "markup": "
     <ul><li>Moitié-moitié</li><li>Fribourgeoise</li></ul>
-    
+
     <p>Incididunt laborum velit non proident nostrud velit. Minim excepteur ut aliqua nisi. Culpa laboris consectetur proident. Tempor esse ullamco et dolor proident id officia laborum voluptate nostrud elit dolore qui amet. Ex Lorem irure eu anim ipsum officia.</p>
-              "__typename": "BlockInfoGrid",
-              "items": [
-                {
-                  "cta": {
-                    "icon": "ARROW",
-                    "iconPosition": null,
-                    "openInNewTab": null,
-                    "text": "Nullam dictum felis",
-                    "url": "/en/page-links",
-                  },
-                  "icon": "EMAIL",
-                  "textContent": {
-                    "markup": "
-    <h3 class="wp-block-custom-heading">Email us:</h3>
-
-    <p>Email us for general queries, including marketing and partnership opportunities.</p>
-
-    <p><a href="mailto:hello@company.com">hello@company.com</a></p>
-    ",
-                  },
-                },
-                {
-                  "cta": {
-                    "icon": null,
-                    "iconPosition": null,
-                    "openInNewTab": null,
-                    "text": "Duis lobortis massa",
-                    "url": "/en/technologies",
-                  },
-                  "icon": "PHONE",
-                  "textContent": {
-                    "markup": "
-    <h3 class="wp-block-custom-heading">Call us:</h3>
-
-    <p>Call us to speak to a member of our team. We are always happy to help.</p>
-
-    <p><a href="tel:+16467865060">+1 (646) 786-5060</a></p>
     ",
                   },
                   "title": "With a list and a paragraph and arrow icon",
-                },
-              ],
-                  },
-                },
-                {
-                  "cta": {
-                    "icon": null,
-                    "iconPosition": null,
-                    "openInNewTab": true,
-                    "text": "Nunc nulla",
-                    "url": "http://www.google.com",
-                  },
-                  "icon": "LIFE-RING",
-                  "textContent": {
-                    "markup": "
-    <h3 class="wp-block-custom-heading">Support</h3>
-
-    <p>Check out helpful resources, FAQs and developer tools.</p>
-    ",
-                  },
                 },
               ],
             },
