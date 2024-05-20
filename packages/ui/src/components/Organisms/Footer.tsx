@@ -21,11 +21,13 @@ export function Footer() {
   return (
     <footer
       id="footer"
-      className={'relative z-10 bg-gray-100 text-gray-500 p-4 lg:py-16'}
+      className={
+        'container-page relative z-10 bg-gray-100 text-gray-500 py-4 lg:py-16'
+      }
     >
       <h2 className={'sr-only'}>Footer</h2>
-      <div className="container mx-auto pb-8">
-        <div className="lg:px-6 flex flex-wrap justify-between">
+      <div className="pb-8 container-content">
+        <div className="flex flex-wrap justify-between">
           <div className={'w-full mb-8 md:mb-0 md:w-1/4'}>
             <a href="/" className={'mb-4 block'}>
               <svg
