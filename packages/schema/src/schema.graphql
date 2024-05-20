@@ -300,7 +300,7 @@ type BlockInfoGrid @type(id: "custom/info-grid") {
   items: [BlockInfoGridItem]! @resolveEditorBlockChildren
 }
 
-type BlockInfoGridItem @default @value {
+type BlockInfoGridItem {
   icon: String! @resolveEditorBlockAttribute(key: "icon")
   textContent: BlockMarkup @resolveEditorBlockChildren @seek(pos: 0)
   cta: BlockCta @resolveEditorBlockChildren @seek(pos: 1)
