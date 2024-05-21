@@ -7,8 +7,8 @@ _meta:
   depends:
     3a0fe860-a6d6-428a-9474-365bd57509aa: media
     478c4289-961d-4ce8-85d6-578ae05f3019: media
-    72187a1f-3e48-4b45-a9b7-189c6fd7ee26: media
     5dfc1856-e9e4-4f02-9cd6-9d888870ce1a: media
+    72187a1f-3e48-4b45-a9b7-189c6fd7ee26: media
 default:
   revision_uid:
     -
@@ -103,7 +103,7 @@ default:
         <!-- /wp:custom/heading -->
 
         <!-- wp:custom/image-teasers -->
-        <!-- wp:custom/image-teaser {"mediaEntityIds":["3a0fe860-a6d6-428a-9474-365bd57509aa"],"title":"Teaser 1","ctaUrl":"https://google.com","ctaText":"Foo"} /-->
+        <!-- wp:custom/image-teaser {"mediaEntityIds":["5dfc1856-e9e4-4f02-9cd6-9d888870ce1a"],"title":"Teaser 1","ctaUrl":"https://google.com","ctaText":"Foo"} /-->
 
         <!-- wp:custom/image-teaser {"mediaEntityIds":["72187a1f-3e48-4b45-a9b7-189c6fd7ee26"],"title":"Teaser 2","ctaUrl":"https://google.com","ctaText":"Bar"} /-->
         <!-- /wp:custom/image-teasers -->
@@ -113,7 +113,6 @@ default:
         <!-- wp:custom/cta {"url":"https://www.google.com","text":"External CTA","data-id":"https://www.google.com","data-entity-type":"","openInNewTab":true,"icon":"ARROW"} /-->
 
         <!-- wp:custom/cta {"url":"/media/1","text":"CTA with link to media","data-id":"b998ae5e-8b56-40ca-8f80-fd4404e7e716","data-entity-type":"media","icon":"ARROW","iconPosition":"BEFORE"} /-->
-
 
         <!-- wp:custom/quote {"quote":"Lorem ipsum dolor sit amet, \u003cstrong\u003econsectetur\u003c/strong\u003e adipiscing elit. Vivamus sagittis nisi nec neque porta, a ornare ligula efficitur.","author":"John Doe","role":"Project manager","mediaEntityIds":["5dfc1856-e9e4-4f02-9cd6-9d888870ce1a"]} /-->
 
