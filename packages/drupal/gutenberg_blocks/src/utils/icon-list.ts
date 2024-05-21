@@ -17,7 +17,7 @@ const { t: __ } = Drupal;
 export enum Icons {
   EMAIL = 'EMAIL',
   PHONE = 'PHONE',
-  LIFE_RING = 'LIFE-RING',
+  LIFE_RING = 'LIFE_RING',
 }
 
 // Single icon type.
