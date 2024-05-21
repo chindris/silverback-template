@@ -23,7 +23,7 @@ export function Footer() {
     <footer
       id="footer"
       className={
-        'container-page relative z-10 bg-gray-100 text-gray-500 py-4 lg:py-16'
+        'container-page relative z-10 bg-gray-100 text-gray-500 py-12 lg:py-16'
       }
     >
       <h2 className={'sr-only'}>Footer</h2>
@@ -131,7 +131,7 @@ export function Footer() {
           </div>
           <nav>
             <ul
-              className={'md:ml-[5.625rem] flex flex-wrap justify-between grow'}
+              className={'!pl-0 md:ml-[5.625rem] flex flex-wrap justify-between grow'}
               aria-label="Footer Primary"
             >
               {items.map((item, key) => (
@@ -165,7 +165,7 @@ export function Footer() {
                           <Link
                             key={child.target}
                             href={child.target}
-                            className="block transition-all text-base mb-4 hover:underline"
+                            className="text-gray-500 font-normal block transition-all text-base mb-4 hover:underline"
                           >
                             {child.title}
                           </Link>
