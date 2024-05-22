@@ -95,4 +95,5 @@ const iconMap = {
   [InfoGridIcon.Email]: <MailIcon />,
   [InfoGridIcon.Phone]: <PhoneIcon />,
   [InfoGridIcon.LifeRing]: <LifeRing />,
-};
+  [InfoGridIcon.None]: null,
+} as const;

@@ -296,10 +296,11 @@ type BlockQuote @type(id: "custom/quote") {
   image: MediaImage @resolveEditorBlockMedia
 }
 
-enum InfoGridIcon @default @value(string: "EMAIL") {
+enum InfoGridIcon @default @value(string: "NONE") {
   EMAIL
   PHONE
   LIFE_RING
+  NONE
 }
 type BlockInfoGrid @type(id: "custom/info-grid") {
   gridItems: [BlockInfoGridItem]! @resolveEditorBlockChildren
