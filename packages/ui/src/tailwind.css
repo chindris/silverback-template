@@ -35,3 +35,11 @@
   )::after {
   content: '' !important;
 }
+
+/*
+  Selects the .block-background-image-cards only when it is the direct
+   sibling of .default-hero section.
+ */
+.default-hero + .block-background-image-cards {
+  @apply mt-2 px-0;
+}
