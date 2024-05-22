@@ -11,6 +11,7 @@ import React from 'react';
 
 import { image } from '../../helpers/image';
 import { AccordionItemText } from '../Organisms/PageContent/BlockAccordion.stories';
+import { Default as BlockImageTeasers } from '../Organisms/PageContent/BlockImageTeasers.stories';
 import { ImageRight } from '../Organisms/PageContent/BlockImageWithText.stories';
 import { Mixed, Paragraph } from '../Organisms/PageContent/BlockMarkup.stories';
 import { WithCaption } from '../Organisms/PageContent/BlockMedia.stories';
@@ -44,6 +45,10 @@ export const Default = {
       path: '/test' as Url,
       content: [
         {
+          __typename: 'BlockImageTeasers',
+          ...BlockImageTeasers.args,
+        },
+        {
           __typename: 'BlockMarkup',
           ...Mixed.args,
         },
@@ -62,6 +67,10 @@ export const Default = {
         {
           __typename: 'BlockAccordion',
           ...AccordionItemText.args,
+        },
+        {
+          __typename: 'BlockImageTeasers',
+          ...BlockImageTeasers.args,
         },
       ] as Exclude<ViewPageQuery['page'], undefined>['content'],
     },

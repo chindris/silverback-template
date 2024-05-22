@@ -59,6 +59,23 @@ test('Blocks', async () => {
           image {
             __typename
           }
+          textContent {
+            __typename
+            markup
+          }
+        }
+        ... on BlockQuote {
+          quote
+          author
+          role
+          image {
+            __typename
+          }
+        }
+        ... on BlockImageWithText {
+          image {
+            __typename
+          }
           imagePosition
           textContent {
             __typename
