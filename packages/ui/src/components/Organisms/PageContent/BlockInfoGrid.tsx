@@ -6,11 +6,11 @@ import { BlockMarkup } from './BlockMarkup';
 
 export function BlockInfoGrid(props: BlockInfoGridFragment) {
   return (
-    <div className="container-page">
+    <div className="container-page my-12 md:my-20">
       <div className="container-content">
         <div
           className={
-            'flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 justify-center gap-10 md:gap-16 items-center my-10'
+            'flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 justify-center gap-12 md:gap-16 items-center py-12 md:py-20'
           }
         >
           {props.gridItems.map((item, index) => (
@@ -19,7 +19,7 @@ export function BlockInfoGrid(props: BlockInfoGridFragment) {
               className="flex flex-col items-center justify-center gap-4 px-3 md:px-4 text-center "
             >
               {item?.icon && iconMap[item?.icon]}
-              <div className="flex flex-col items-center justify-center gap-2.5">
+              <div className="flex flex-col items-center justify-center gap-3">
                 <div className="nested-container *:m-0 consistent-margin">
                   {item?.textContent?.markup && (
                     <BlockMarkup markup={item?.textContent?.markup} />
