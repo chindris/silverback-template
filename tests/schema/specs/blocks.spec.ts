@@ -89,21 +89,6 @@ test('Blocks', async () => {
             }
           }
         }
-        ... on BlockInfoGrid {
-          gridItems {
-            icon
-            textContent {
-              markup
-            }
-            cta {
-              url
-              icon
-              iconPosition
-              text
-              openInNewTab
-            }
-          }
-        }
       }
     }
     {
@@ -369,4 +354,175 @@ test('Blocks', async () => {
     (it: any) => it.__typename === 'BlockForm',
   );
   expect(germanForm.url).toBe('http://127.0.0.1:8000/de/form/contact');
+});
+
+test('Block - info grid', async () => {
+  const result = await fetch(gql`
+    {
+      _loadDrupalPage(id: "3164a225-df20-4794-8cfc-b7cd81cfde58") {
+        content {
+          __typename
+          ... on BlockInfoGrid {
+            gridItems {
+              icon
+              textContent {
+                markup
+              }
+              cta {
+                url
+                icon
+                iconPosition
+                text
+                openInNewTab
+              }
+            }
+          }
+        }
+      }
+    }
+  `);
+  expect(result).toMatchInlineSnapshot(`
+    {
+      "data": {
+        "_loadDrupalPage": {
+          "content": [
+            {
+              "__typename": "BlockInfoGrid",
+              "gridItems": [
+                {
+                  "cta": {
+                    "icon": null,
+                    "iconPosition": null,
+                    "openInNewTab": null,
+                    "text": "Link text",
+                    "url": null,
+                  },
+                  "icon": "EMAIL",
+                  "textContent": {
+                    "markup": "
+    <h2 class="wp-block-custom-heading">I am a heading</h2>
+
+    <p>I am the body</p>
+    ",
+                  },
+                },
+                {
+                  "cta": {
+                    "icon": null,
+                    "iconPosition": null,
+                    "openInNewTab": null,
+                    "text": "Second link text",
+                    "url": null,
+                  },
+                  "icon": "PHONE",
+                  "textContent": {
+                    "markup": "
+    <h2 class="wp-block-custom-heading">I am second heading</h2>
+
+    <p>I am the second body</p>
+    ",
+                  },
+                },
+                {
+                  "cta": {
+                    "icon": null,
+                    "iconPosition": null,
+                    "openInNewTab": null,
+                    "text": "third link text",
+                    "url": null,
+                  },
+                  "icon": "LIFE-RING",
+                  "textContent": {
+                    "markup": "
+    <h2 class="wp-block-custom-heading">I am the third heading</h2>
+
+    <p>I am the third body</p>
+    ",
+                  },
+                },
+              ],
+            },
+            {
+              "__typename": "BlockInfoGrid",
+              "gridItems": [
+                {
+                  "cta": {
+                    "icon": null,
+                    "iconPosition": null,
+                    "openInNewTab": null,
+                    "text": null,
+                    "url": null,
+                  },
+                  "icon": "",
+                  "textContent": {
+                    "markup": "
+    <h2 class="wp-block-custom-heading">Just one info grid</h2>
+
+    <p></p>
+    ",
+                  },
+                },
+              ],
+            },
+            {
+              "__typename": "BlockInfoGrid",
+              "gridItems": [
+                {
+                  "cta": {
+                    "icon": null,
+                    "iconPosition": null,
+                    "openInNewTab": null,
+                    "text": null,
+                    "url": null,
+                  },
+                  "icon": "",
+                  "textContent": {
+                    "markup": "
+    <h2 class="wp-block-custom-heading"></h2>
+
+    <p></p>
+    ",
+                  },
+                },
+                {
+                  "cta": {
+                    "icon": null,
+                    "iconPosition": null,
+                    "openInNewTab": null,
+                    "text": null,
+                    "url": null,
+                  },
+                  "icon": "",
+                  "textContent": {
+                    "markup": "
+    <h2 class="wp-block-custom-heading"></h2>
+
+    <p></p>
+    ",
+                  },
+                },
+                {
+                  "cta": {
+                    "icon": null,
+                    "iconPosition": null,
+                    "openInNewTab": null,
+                    "text": null,
+                    "url": null,
+                  },
+                  "icon": "",
+                  "textContent": {
+                    "markup": "
+    <h2 class="wp-block-custom-heading"></h2>
+
+    <p></p>
+    ",
+                  },
+                },
+              ],
+            },
+          ],
+        },
+      },
+    }
+  `);
 });
