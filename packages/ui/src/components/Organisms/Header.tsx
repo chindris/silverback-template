@@ -200,7 +200,7 @@ function UserActions({
   return (
     <div
       className={clsx(
-        'flex w-full justify-end md:py-3.5 md:px-3 0',
+        'flex w-full justify-end md:py-3',
         isDesktop && 'border-b border-gray-300 border-opacity-30',
       )}
     >
