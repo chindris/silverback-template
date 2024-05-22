@@ -130,7 +130,9 @@ export function Footer() {
           </div>
           <nav>
             <ul
-              className={'!pl-0 md:ml-[5.625rem] flex flex-wrap justify-between grow'}
+              className={
+                '!pl-0 md:ml-[5.625rem] flex flex-wrap justify-between grow'
+              }
               aria-label="Footer Primary"
             >
               {items.map((item, key) => (
