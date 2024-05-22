@@ -279,6 +279,18 @@ enum CTAIconPosition {
 
 type BlockImageWithText @type(id: "custom/image-with-text") {
   image: MediaImage @resolveEditorBlockMedia
+  textContent: BlockMarkup @resolveEditorBlockChildren @seek(pos: 0)
+}
+
+type BlockQuote @type(id: "custom/quote") {
+  quote: Markup @resolveEditorBlockAttribute(key: "quote")
+  author: String @resolveEditorBlockAttribute(key: "author")
+  role: String @resolveEditorBlockAttribute(key: "role")
+  image: MediaImage @resolveEditorBlockMedia
+}
+
+type BlockImageWithText @type(id: "custom/image-with-text") {
+  image: MediaImage @resolveEditorBlockMedia
   imagePosition: ImagePosition!
     @resolveEditorBlockAttribute(key: "imagePosition")
   textContent: BlockMarkup @resolveEditorBlockChildren @seek(pos: 0)
@@ -301,6 +313,7 @@ enum InfoGridIcon @default @value(string: "EMAIL") {
   PHONE
   LIFE_RING
 }
+
 type BlockInfoGrid @type(id: "custom/info-grid") {
   gridItems: [BlockInfoGridItem]! @resolveEditorBlockChildren
 }
