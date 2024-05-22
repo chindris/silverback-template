@@ -1,5 +1,6 @@
 /* Import all atom stylesheets. */
 @import './components/Atoms/Container.css';
+@import './components/Atoms/List.css';
 
 @tailwind base;
 @tailwind components;
@@ -33,4 +34,12 @@
     :where([class~='not-prose'], [class~='not-prose'] *)
   )::after {
   content: '' !important;
+}
+
+/*
+  Selects the .block-background-image-cards only when it is the direct
+   sibling of .default-hero section.
+ */
+.default-hero + .block-background-image-cards {
+  @apply mt-2 px-0;
 }

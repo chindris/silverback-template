@@ -10,6 +10,9 @@ import { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
 import { image } from '../../helpers/image';
+import { AccordionItemText } from '../Organisms/PageContent/BlockAccordion.stories';
+import { Default as BlockImageTeasers } from '../Organisms/PageContent/BlockImageTeasers.stories';
+import { ImageRight } from '../Organisms/PageContent/BlockImageWithText.stories';
 import { Mixed, Paragraph } from '../Organisms/PageContent/BlockMarkup.stories';
 import { WithCaption } from '../Organisms/PageContent/BlockMedia.stories';
 import { Default as FrameStory } from './Frame.stories';
@@ -40,13 +43,11 @@ export const Default = {
         },
       ],
       path: '/test' as Url,
-      hero: {
-        headline: 'Page Hero Headline',
-        lead: 'A longer lead text that even might break into multiple lines.',
-        ctaUrl: '/test' as Url,
-        ctaText: 'Call to action',
-      },
       content: [
+        {
+          __typename: 'BlockImageTeasers',
+          ...BlockImageTeasers.args,
+        },
         {
           __typename: 'BlockMarkup',
           ...Mixed.args,
@@ -59,7 +60,38 @@ export const Default = {
           __typename: 'BlockMarkup',
           ...Paragraph.args,
         },
+        {
+          __typename: 'BlockImageWithText',
+          ...ImageRight.args,
+        },
+        {
+          __typename: 'BlockAccordion',
+          ...AccordionItemText.args,
+        },
+        {
+          __typename: 'BlockImageTeasers',
+          ...BlockImageTeasers.args,
+        },
       ] as Exclude<ViewPageQuery['page'], undefined>['content'],
+    },
+  },
+  parameters: {
+    location: new URL('local:/gatsby-turbo'),
+  },
+} satisfies StoryObj<ViewPageQuery>;
+
+export const Hero = {
+  ...Default,
+  args: {
+    ...Default.args,
+    page: {
+      ...Default.args.page,
+      hero: {
+        headline: 'Page Hero Headline',
+        lead: 'A longer lead text that even might break into multiple lines.',
+        ctaUrl: '/test' as Url,
+        ctaText: 'Call to action',
+      },
     },
   },
 } satisfies StoryObj<ViewPageQuery>;

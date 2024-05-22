@@ -1,5 +1,14 @@
 'use client';
-import { Disclosure, Popover, Transition } from '@headlessui/react';
+import {
+  Disclosure,
+  DisclosureButton,
+  DisclosurePanel,
+  Popover,
+  PopoverButton,
+  PopoverGroup,
+  PopoverPanel,
+  Transition,
+} from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import clsx from 'clsx';
 import React, { PropsWithChildren } from 'react';
@@ -8,9 +17,9 @@ import { avoidFocusOnClick } from '../../utils/avoidFocusOnClick';
 
 export function DesktopMenu({ children }: PropsWithChildren<{}>) {
   return (
-    <Popover.Group className="hidden lg:flex lg:gap-x-12">
+    <PopoverGroup className="hidden lg:flex lg:gap-x-12">
       {children}
-    </Popover.Group>
+    </PopoverGroup>
   );
 }
 
@@ -21,8 +30,8 @@ export function DesktopMenuDropDown({
   return (
     <Popover className="relative">
       {({ open }) => (
-        <React.Fragment>
-          <Popover.Button
+        <>
+          <PopoverButton
             className={clsx(
               'flex items-center text-base font-medium ml-8 hover:text-blue-600',
               open ? 'text-blue-600' : 'text-gray-600',
@@ -37,7 +46,7 @@ export function DesktopMenuDropDown({
               )}
               aria-hidden="true"
             />
-          </Popover.Button>
+          </PopoverButton>
           <Transition
             as={React.Fragment}
             enter="transition ease-out duration-200"
@@ -47,14 +56,11 @@ export function DesktopMenuDropDown({
             leaveFrom="opacity-100 translate-y-0"
             leaveTo="opacity-0 translate-y-1"
           >
-            <Popover.Panel
-              static
-              className="absolute left-8 top-full z-10 mt-3 w-56 rounded bg-white shadow-md ring-1 ring-gray-100"
-            >
+            <PopoverPanel className="absolute left-8 top-full z-10 mt-3 w-56 rounded bg-white shadow-md ring-1 ring-gray-100">
               {children}
-            </Popover.Panel>
+            </PopoverPanel>
           </Transition>
-        </React.Fragment>
+        </>
       )}
     </Popover>
   );
@@ -68,7 +74,7 @@ export function DesktopMenuDropdownDisclosure({
     <Disclosure as="div" className="">
       {({ open }) => (
         <div className={clsx('m-1.5 rounded', open && 'bg-gray-100')}>
-          <Disclosure.Button
+          <DisclosureButton
             className={clsx(
               'flex w-full items-center justify-between px-2 py-1 text-sm leading-[1.25rem] hover:text-blue-600',
               open ? 'text-blue-600 font-medium' : 'text-gray-500',
@@ -81,8 +87,8 @@ export function DesktopMenuDropdownDisclosure({
               })}
               aria-hidden="true"
             />
-          </Disclosure.Button>
-          <Disclosure.Panel className="">{children}</Disclosure.Panel>
+          </DisclosureButton>
+          <DisclosurePanel className="">{children}</DisclosurePanel>
         </div>
       )}
     </Disclosure>
