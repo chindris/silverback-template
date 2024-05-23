@@ -9,6 +9,7 @@ import { BlockAccordion } from './PageContent/BlockAccordion';
 import { BlockCta } from './PageContent/BlockCta';
 import { BlockForm } from './PageContent/BlockForm';
 import { BlockHorizontalSeparator } from './PageContent/BlockHorizontalSeparator';
+import { BlockImageTeasers } from './PageContent/BlockImageTeasers';
 import { BlockImageWithText } from './PageContent/BlockImageWithText';
 import { BlockMarkup } from './PageContent/BlockMarkup';
 import { BlockMedia } from './PageContent/BlockMedia';
@@ -30,20 +31,7 @@ export function PageDisplay(page: PageFragment) {
             case 'BlockForm':
               return <BlockForm key={index} {...block} />;
             case 'BlockImageTeasers':
-              return (
-                // TODO: Implement BlockImageTeasers
-                <div
-                  style={{
-                    color: 'red',
-                    border: 'solid 3px red',
-                    padding: '3px',
-                    margin: '5px 0',
-                  }}
-                  // eslint-disable-next-line react/jsx-no-literals
-                >
-                  BlockImageTeasers goes here
-                </div>
-              );
+              return <BlockImageTeasers key={index} {...block} />;
             case 'BlockCta':
               return <BlockCta key={index} {...block} />;
             case 'BlockImageWithText':
