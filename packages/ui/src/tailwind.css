@@ -49,9 +49,13 @@
   This component uses the following Table Flowbite styling ported over the tailwind css:
   https://flowbite.com/docs/components/tables/#default-table
  */
+.wp-block-table {
+  @apply w-full block overflow-x-auto;
+}
+
 .wp-block-table table,
 .prose table {
-  @apply w-full text-sm text-left rtl:text-right text-gray-500 block overflow-x-auto;
+  @apply w-full text-sm text-left rtl:text-right text-gray-500;
 
   thead {
     @apply text-xs text-gray-700 uppercase bg-gray-50;
