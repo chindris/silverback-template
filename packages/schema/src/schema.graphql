@@ -296,12 +296,18 @@ type BlockQuote @type(id: "custom/quote") {
   image: MediaImage @resolveEditorBlockMedia
 }
 
+enum InfoGridIcon @default @value(string: "NONE") {
+  EMAIL
+  PHONE
+  LIFE_RING
+  NONE
+}
 type BlockInfoGrid @type(id: "custom/info-grid") {
   gridItems: [BlockInfoGridItem]! @resolveEditorBlockChildren
 }
 
 type BlockInfoGridItem {
-  icon: String! @resolveEditorBlockAttribute(key: "icon")
+  icon: InfoGridIcon! @resolveEditorBlockAttribute(key: "icon")
   textContent: BlockMarkup @resolveEditorBlockChildren @seek(pos: 0)
   cta: BlockCta @resolveEditorBlockChildren @seek(pos: 1)
 }
