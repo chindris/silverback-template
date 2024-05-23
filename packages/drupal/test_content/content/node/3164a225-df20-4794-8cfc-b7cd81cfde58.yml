@@ -73,7 +73,7 @@ default:
         <!-- wp:custom/cta {"text":"Second link text"} /-->
         <!-- /wp:custom/info-grid-item -->
 
-        <!-- wp:custom/info-grid-item {"icon":"LIFE-RING"} -->
+        <!-- wp:custom/info-grid-item {"icon":"LIFE_RING"} -->
         <!-- wp:custom/heading {"text":"I am the third heading"} -->
         <h2 class="wp-block-custom-heading">I am the third heading</h2>
         <!-- /wp:custom/heading -->

@@ -4,8 +4,6 @@ _meta:
   uuid: 25086be7-ca5f-4ff8-9695-b9c71a676d4e
   bundle: page
   default_langcode: en
-  depends:
-    b998ae5e-8b56-40ca-8f80-fd4404e7e716: media
 default:
   revision_uid:
     -
@@ -49,7 +47,7 @@ default:
 
         <!-- wp:custom/content -->
         <!-- wp:paragraph -->
-        <p><a href="/sites/default/files/2023-04/document_docx.docx" data-type="Media: Document" data-id="1" data-entity-type="media">link to file</a></p>
+        <p><a href="/media/b998ae5e-8b56-40ca-8f80-fd4404e7e716/edit" data-type="Media: Document" data-id="b998ae5e-8b56-40ca-8f80-fd4404e7e716" data-entity-type="media">link to file</a></p>
         <!-- /wp:paragraph -->
 
         <!-- wp:paragraph -->
