@@ -43,16 +43,6 @@ export function PageDisplay(page: PageFragment) {
               return <BlockHorizontalSeparator key={index} {...block} />;
             case 'BlockAccordion':
               return <BlockAccordion key={index} {...block} />;
-            case 'BlockCta':
-              return <BlockCta key={index} {...block} />;
-            case 'BlockImageWithText':
-              return <BlockImageWithText key={index} {...block} />;
-            case 'BlockQuote':
-              return <BlockQuote key={index} {...block} />;
-            case 'BlockHorizontalSeparator':
-              return <BlockHorizontalSeparator key={index} {...block} />;
-            case 'BlockAccordion':
-              return <BlockAccordion key={index} {...block} />;
             case 'BlockInfoGrid':
               return <BlockInfoGrid key={index} {...block} />;
             default:
