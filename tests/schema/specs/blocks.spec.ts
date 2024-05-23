@@ -263,20 +263,9 @@ test('Block - info grid', async () => {
   `);
   expect(result).toMatchInlineSnapshot(`
     {
-      "errors": [
-        {
-          "extensions": {
-            "category": "graphql",
-          },
-          "locations": [
-            {
-              "column": 18,
-              "line": 6,
-            },
-          ],
-          "message": "Unknown type "BlockInfoGrid". Did you mean "BlockForm"?",
-        },
-      ],
+      "data": {
+        "_loadDrupalPage": null,
+      },
     }
   `);
 });
