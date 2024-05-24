@@ -1,4 +1,5 @@
 import { BlockImageTeasersFragment, Image, Link } from '@custom/schema';
+import clsx from 'clsx';
 import React from 'react';
 
 import { isTruthy } from '../../../utils/isTruthy';
@@ -6,9 +7,13 @@ import { isTruthy } from '../../../utils/isTruthy';
 export function BlockImageTeasers(props: BlockImageTeasersFragment) {
   return (
     // eslint-disable-next-line tailwindcss/no-custom-classname
-    <section className="container-page my-16 block-background-image-cards">
-      <div className="container-content text-center">
-        <div className="grid grid-cols-2 gap-2">
+    <section className="my-16 block-background-image-cards">
+      <div className="text-center">
+        <div
+          className={clsx('grid gap-2', {
+            'grid-cols-2': props.teasers.filter(isTruthy).length > 1,
+          })}
+        >
           {props.teasers.filter(isTruthy).map((teaser, index) => (
             <BlockImageTeaser key={index} {...teaser} />
           ))}
