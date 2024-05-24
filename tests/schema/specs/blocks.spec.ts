@@ -365,15 +365,17 @@ test('Block - info grid', async () => {
           ... on BlockInfoGrid {
             gridItems {
               icon
-              textContent {
-                markup
-              }
-              cta {
-                url
-                icon
-                iconPosition
-                text
-                openInNewTab
+              infoGridContent {
+                ... on BlockMarkup {
+                  markup
+                }
+                ... on BlockCta {
+                  url
+                  icon
+                  iconPosition
+                  text
+                  openInNewTab
+                }
               }
             }
           }
@@ -390,55 +392,61 @@ test('Block - info grid', async () => {
               "__typename": "BlockInfoGrid",
               "gridItems": [
                 {
-                  "cta": {
-                    "icon": null,
-                    "iconPosition": null,
-                    "openInNewTab": null,
-                    "text": "Link text",
-                    "url": null,
-                  },
                   "icon": "EMAIL",
-                  "textContent": {
-                    "markup": "
+                  "infoGridContent": [
+                    {
+                      "markup": "
     <h2 class="wp-block-custom-heading">I am a heading</h2>
 
     <p>I am the body</p>
     ",
-                  },
+                    },
+                    {
+                      "icon": null,
+                      "iconPosition": null,
+                      "openInNewTab": null,
+                      "text": "Link text",
+                      "url": null,
+                    },
+                  ],
                 },
                 {
-                  "cta": {
-                    "icon": null,
-                    "iconPosition": null,
-                    "openInNewTab": null,
-                    "text": "Second link text",
-                    "url": null,
-                  },
                   "icon": "PHONE",
-                  "textContent": {
-                    "markup": "
+                  "infoGridContent": [
+                    {
+                      "markup": "
     <h2 class="wp-block-custom-heading">I am second heading</h2>
 
     <p>I am the second body</p>
     ",
-                  },
+                    },
+                    {
+                      "icon": null,
+                      "iconPosition": null,
+                      "openInNewTab": null,
+                      "text": "Second link text",
+                      "url": null,
+                    },
+                  ],
                 },
                 {
-                  "cta": {
-                    "icon": null,
-                    "iconPosition": null,
-                    "openInNewTab": null,
-                    "text": "third link text",
-                    "url": null,
-                  },
                   "icon": "LIFE_RING",
-                  "textContent": {
-                    "markup": "
+                  "infoGridContent": [
+                    {
+                      "markup": "
     <h2 class="wp-block-custom-heading">I am the third heading</h2>
 
     <p>I am the third body</p>
     ",
-                  },
+                    },
+                    {
+                      "icon": null,
+                      "iconPosition": null,
+                      "openInNewTab": null,
+                      "text": "third link text",
+                      "url": null,
+                    },
+                  ],
                 },
               ],
             },
@@ -446,21 +454,23 @@ test('Block - info grid', async () => {
               "__typename": "BlockInfoGrid",
               "gridItems": [
                 {
-                  "cta": {
-                    "icon": null,
-                    "iconPosition": null,
-                    "openInNewTab": null,
-                    "text": null,
-                    "url": null,
-                  },
                   "icon": "NONE",
-                  "textContent": {
-                    "markup": "
+                  "infoGridContent": [
+                    {
+                      "markup": "
     <h2 class="wp-block-custom-heading">Just one info grid</h2>
 
     <p></p>
     ",
-                  },
+                    },
+                    {
+                      "icon": null,
+                      "iconPosition": null,
+                      "openInNewTab": null,
+                      "text": null,
+                      "url": null,
+                    },
+                  ],
                 },
               ],
             },
@@ -468,55 +478,162 @@ test('Block - info grid', async () => {
               "__typename": "BlockInfoGrid",
               "gridItems": [
                 {
-                  "cta": {
-                    "icon": null,
-                    "iconPosition": null,
-                    "openInNewTab": null,
-                    "text": null,
-                    "url": null,
-                  },
                   "icon": "NONE",
-                  "textContent": {
-                    "markup": "
+                  "infoGridContent": [
+                    {
+                      "markup": "
     <h2 class="wp-block-custom-heading"></h2>
 
     <p></p>
     ",
-                  },
+                    },
+                    {
+                      "icon": null,
+                      "iconPosition": null,
+                      "openInNewTab": null,
+                      "text": null,
+                      "url": null,
+                    },
+                  ],
                 },
                 {
-                  "cta": {
-                    "icon": null,
-                    "iconPosition": null,
-                    "openInNewTab": null,
-                    "text": null,
-                    "url": null,
-                  },
                   "icon": "NONE",
-                  "textContent": {
-                    "markup": "
+                  "infoGridContent": [
+                    {
+                      "markup": "
     <h2 class="wp-block-custom-heading"></h2>
 
     <p></p>
     ",
-                  },
+                    },
+                    {
+                      "icon": null,
+                      "iconPosition": null,
+                      "openInNewTab": null,
+                      "text": null,
+                      "url": null,
+                    },
+                  ],
                 },
                 {
-                  "cta": {
-                    "icon": null,
-                    "iconPosition": null,
-                    "openInNewTab": null,
-                    "text": null,
-                    "url": null,
-                  },
                   "icon": "NONE",
-                  "textContent": {
-                    "markup": "
+                  "infoGridContent": [
+                    {
+                      "markup": "
     <h2 class="wp-block-custom-heading"></h2>
 
     <p></p>
     ",
-                  },
+                    },
+                    {
+                      "icon": null,
+                      "iconPosition": null,
+                      "openInNewTab": null,
+                      "text": null,
+                      "url": null,
+                    },
+                    {
+                      "markup": "
+    <p></p>
+    ",
+                    },
+                  ],
+                },
+              ],
+            },
+            {
+              "__typename": "BlockInfoGrid",
+              "gridItems": [
+                {
+                  "icon": "NONE",
+                  "infoGridContent": [
+                    {
+                      "icon": null,
+                      "iconPosition": null,
+                      "openInNewTab": true,
+                      "text": "CTA",
+                      "url": "https://www.google.com",
+                    },
+                    {
+                      "markup": "
+    <p>test</p>
+
+    <h2 class="wp-block-custom-heading">Heading</h2>
+    ",
+                    },
+                  ],
+                },
+                {
+                  "icon": "NONE",
+                  "infoGridContent": [
+                    {
+                      "markup": "
+    <p>I am p tag</p>
+    ",
+                    },
+                    {
+                      "icon": null,
+                      "iconPosition": null,
+                      "openInNewTab": null,
+                      "text": "CTA",
+                      "url": "https://www.google.com",
+                    },
+                    {
+                      "markup": "
+    <p>Testing</p>
+
+    <h2 class="wp-block-custom-heading">Testing</h2>
+
+    <h2 class="wp-block-custom-heading">Testing</h2>
+    ",
+                    },
+                    {
+                      "icon": null,
+                      "iconPosition": null,
+                      "openInNewTab": null,
+                      "text": "CTA",
+                      "url": null,
+                    },
+                  ],
+                },
+                {
+                  "icon": "NONE",
+                  "infoGridContent": [
+                    {
+                      "markup": "
+    <h2 class="wp-block-custom-heading">Heading</h2>
+
+    <h3 class="wp-block-custom-heading">Heading</h3>
+    ",
+                    },
+                    {
+                      "icon": null,
+                      "iconPosition": null,
+                      "openInNewTab": null,
+                      "text": "CTA",
+                      "url": null,
+                    },
+                    {
+                      "markup": "
+    <h4 class="wp-block-custom-heading">Heading</h4>
+
+    <p>TEst</p>
+
+    <p>est</p>
+
+    <p>test</p>
+
+    <p>test</p>
+    ",
+                    },
+                    {
+                      "icon": null,
+                      "iconPosition": null,
+                      "openInNewTab": null,
+                      "text": null,
+                      "url": null,
+                    },
+                  ],
                 },
               ],
             },

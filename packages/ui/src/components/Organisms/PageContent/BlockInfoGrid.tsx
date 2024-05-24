@@ -20,14 +20,24 @@ export function BlockInfoGrid(props: BlockInfoGridFragment) {
             >
               {item?.icon && iconMap[item?.icon]}
               <div className="flex flex-col items-center justify-center gap-3">
-                <div className="nested-container *:m-0 consistent-margin">
-                  {item?.textContent?.markup && (
-                    <BlockMarkup markup={item?.textContent?.markup} />
-                  )}
-                </div>
-                <div className="nested-container w-fit mx-auto *:m-0">
-                  {item?.cta && <BlockCta {...item?.cta} />}
-                </div>
+                {item?.infoGridContent &&
+                  item?.infoGridContent.map((content, contentIndex) => (
+                    <div key={contentIndex}>
+                      <div className="nested-container *:m-0 consistent-margin">
+                        {content?.__typename &&
+                          content?.__typename === 'BlockMarkup' && (
+                            <BlockMarkup markup={content.markup} />
+                          )}
+                      </div>
+
+                      <div className="nested-container w-fit mx-auto *:m-0">
+                        {content?.__typename &&
+                          content?.__typename === 'BlockCta' && (
+                            <BlockCta {...content} />
+                          )}
+                      </div>
+                    </div>
+                  ))}
               </div>
             </div>
           ))}

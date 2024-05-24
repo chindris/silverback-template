@@ -302,14 +302,16 @@ enum InfoGridIcon @default @value(string: "NONE") {
   LIFE_RING
   NONE
 }
+
+union InfoGridContent @resolveEditorBlockType = BlockMarkup | BlockCta
+
 type BlockInfoGrid @type(id: "custom/info-grid") {
   gridItems: [BlockInfoGridItem]! @resolveEditorBlockChildren
 }
 
 type BlockInfoGridItem {
   icon: InfoGridIcon! @resolveEditorBlockAttribute(key: "icon")
-  textContent: BlockMarkup @resolveEditorBlockChildren @seek(pos: 0)
-  cta: BlockCta @resolveEditorBlockChildren @seek(pos: 1)
+  infoGridContent: [InfoGridContent] @resolveEditorBlockChildren
 }
 
 type BlockHorizontalSeparator @type(id: "custom/horizontal-separator") {

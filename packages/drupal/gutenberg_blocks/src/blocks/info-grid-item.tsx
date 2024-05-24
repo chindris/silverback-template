@@ -52,9 +52,8 @@ registerBlockType('custom/info-grid-item', {
             )}
           </div>
           <InnerBlocks
-            templateLock={'all'}
+            templateLock={false}
             allowedBlocks={['custom/heading', 'core/paragraph', 'custom/cta']}
-            template={[['custom/heading'], ['core/paragraph'], ['custom/cta']]}
           />
         </div>
       </>
