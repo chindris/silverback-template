@@ -431,7 +431,7 @@ test('Block - info grid', async () => {
                     "text": "third link text",
                     "url": null,
                   },
-                  "icon": "LIFE-RING",
+                  "icon": "LIFE_RING",
                   "textContent": {
                     "markup": "
     <h2 class="wp-block-custom-heading">I am the third heading</h2>
@@ -453,7 +453,7 @@ test('Block - info grid', async () => {
                     "text": null,
                     "url": null,
                   },
-                  "icon": "",
+                  "icon": "NONE",
                   "textContent": {
                     "markup": "
     <h2 class="wp-block-custom-heading">Just one info grid</h2>
@@ -475,7 +475,7 @@ test('Block - info grid', async () => {
                     "text": null,
                     "url": null,
                   },
-                  "icon": "",
+                  "icon": "NONE",
                   "textContent": {
                     "markup": "
     <h2 class="wp-block-custom-heading"></h2>
@@ -492,7 +492,7 @@ test('Block - info grid', async () => {
                     "text": null,
                     "url": null,
                   },
-                  "icon": "",
+                  "icon": "NONE",
                   "textContent": {
                     "markup": "
     <h2 class="wp-block-custom-heading"></h2>
@@ -509,7 +509,7 @@ test('Block - info grid', async () => {
                     "text": null,
                     "url": null,
                   },
-                  "icon": "",
+                  "icon": "NONE",
                   "textContent": {
                     "markup": "
     <h2 class="wp-block-custom-heading"></h2>
