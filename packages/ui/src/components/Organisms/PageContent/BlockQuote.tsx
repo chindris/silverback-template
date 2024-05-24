@@ -5,7 +5,7 @@ import { FadeUp } from '../../Molecules/FadeUp';
 
 export function BlockQuote(props: BlockQuoteFragment) {
   return (
-    <FadeUp yGap={50}>
+    <FadeUp yGap={50} className="container-page mt-16 mb-8">
       <div className="container-page">
         <div className="container-content">
           <div className="container-text">

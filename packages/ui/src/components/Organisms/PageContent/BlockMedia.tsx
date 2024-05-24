@@ -9,18 +9,16 @@ export function BlockMedia(props: BlockMediaFragment) {
     return null;
   }
   return (
-    <FadeUp yGap={50}>
-      <div className="container-page">
-        <div className="container-content">
-          <figure className="mt-16 container-text">
-            <Media {...props.media} />
-            {props.caption ? (
-              <figcaption className="mt-3 flex justify-center gap-x-2 text-sm leading-6 text-gray-500">
-                <Html markup={props.caption} />
-              </figcaption>
-            ) : null}
-          </figure>
-        </div>
+    <FadeUp yGap={50} className="container-page my-10">
+      <div className="container-content">
+        <figure className="container-text">
+          <Media {...props.media} />
+          {props.caption ? (
+            <figcaption className="mt-3 flex justify-center gap-x-2 text-sm leading-6 text-gray-500">
+              <Html markup={props.caption} />
+            </figcaption>
+          ) : null}
+        </figure>
       </div>
     </FadeUp>
   );
