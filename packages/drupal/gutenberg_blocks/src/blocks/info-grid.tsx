@@ -27,7 +27,7 @@ registerBlockType('custom/info-grid', {
             if (blockCount >= MAX_BLOCKS) {
               return null;
             } else {
-              return <InnerBlocks.ButtonBlockAppender />;
+              return <InnerBlocks.DefaultBlockAppender />;
             }
           }}
           allowedBlocks={['custom/info-grid-item']}
