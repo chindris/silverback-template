@@ -1,9 +1,12 @@
 import { expect, test } from '@playwright/test';
 
 import { websiteUrl } from '../../helpers/url';
+import { QuickActions, SiteLanguage } from '../../helpers/quick-actions';
 
 test.describe('decap pages', () => {
   test('example decap page is rendered', async ({ page }) => {
+    const quickActions = new QuickActions(page);
+
     await page.goto(websiteUrl('/en/decap-example'));
     const content = page.getByRole('main');
     await expect(
@@ -13,10 +16,8 @@ test.describe('decap pages', () => {
       content.getByText('This page was created with Decap CMS'),
     ).toBeVisible();
 
-    // Open the language switcher and click on the German language
-    await page.getByRole('button', { name: 'English' }).click();
-    // Think 'getByRole' does not work as item gets removed from the DOM.
-    await page.locator("//a[contains(text(),'Deutsch')]").click();
+    // Change language to German.
+    await quickActions.changeLanguageTo(SiteLanguage.Deutsch);
 
     await expect(
       content.getByRole('heading', { name: 'Decap Beispiel' }),

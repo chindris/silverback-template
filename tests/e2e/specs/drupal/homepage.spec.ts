@@ -1,6 +1,7 @@
 import { expect, test } from '@playwright/test';
 
 import { websiteUrl } from '../../helpers/url';
+import { QuickActions, SiteLanguage } from '../../helpers/quick-actions';
 
 test.describe('the homepage', () => {
   test('exists in english', async ({ page }) => {
@@ -12,9 +13,10 @@ test.describe('the homepage', () => {
   });
 
   test('exists in german', async ({ page }) => {
+    const quickActions = new QuickActions(page);
     await page.goto(websiteUrl('/en'));
     const content = await page.getByRole('main');
-    await page.getByRole('link', { name: 'de' }).click();
+    await quickActions.changeLanguageTo(SiteLanguage.Deutsch);
     await expect(
       content.getByRole('heading', { name: 'Architektur' }),
     ).toBeVisible();
