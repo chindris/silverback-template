@@ -7,7 +7,7 @@ import { isTruthy } from '../../../utils/isTruthy';
 export function BlockImageTeasers(props: BlockImageTeasersFragment) {
   return (
     // eslint-disable-next-line tailwindcss/no-custom-classname
-    <section className="my-16 block-background-image-cards">
+    <section className="my-10 block-background-image-cards">
       <div className="text-center">
         <div
           className={clsx('grid gap-2', {
@@ -32,7 +32,7 @@ export function BlockImageTeaser(
     <div className="p-8 col-span-2 lg:col-span-1 text-left h-72 lg:h-96 relative bg-gray-900">
       {props.image ? (
         <Image
-          className="object-cover w-full h-72 lg:h-96 mb-5 absolute top-0 left-0"
+          className="object-cover w-full h-72 lg:h-96 absolute top-0 left-0"
           source={props.image.source}
           alt={props.image.alt}
         />
