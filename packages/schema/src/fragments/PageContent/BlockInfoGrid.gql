@@ -10,4 +10,5 @@ fragment BlockInfoGridItem on BlockInfoGridItem {
     __typename
     ...BlockCta
     ...BlockMarkup
-  }}
+  }
+}
