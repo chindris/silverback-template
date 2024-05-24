@@ -20,6 +20,9 @@ import { Page } from './Page';
 
 export default {
   component: Page,
+  parameters: {
+    layout: 'fullscreen',
+  },
 } satisfies Meta<typeof Page>;
 
 export const Default = {
