@@ -17,6 +17,7 @@ import { Default as PageStory } from './components/Routes/Page.stories';
 export default {
   title: 'Pages',
   parameters: {
+    layout: 'fullscreen',
     chromatic: {
       // We don't want to snapshot page examples, that just causes a lot of noise.
       disableSnapshot: true,
