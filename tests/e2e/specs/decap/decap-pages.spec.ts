@@ -12,7 +12,12 @@ test.describe('decap pages', () => {
     await expect(
       content.getByText('This page was created with Decap CMS'),
     ).toBeVisible();
-    await page.getByRole('link', { name: 'de' }).click();
+
+    // Open the language switcher and click on the German language
+    await page.getByRole('button', { name: 'English' }).click();
+    // Think 'getByRole' does not work as item gets removed from the DOM.
+    await page.locator("//a[contains(text(),'Deutsch')]").click();
+
     await expect(
       content.getByRole('heading', { name: 'Decap Beispiel' }),
     ).toBeVisible();
