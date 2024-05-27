@@ -11,43 +11,31 @@ _meta:
     72187a1f-3e48-4b45-a9b7-189c6fd7ee26: media
 default:
   revision_uid:
-    -
-      target_id: 1
+    - target_id: 1
   status:
-    -
-      value: true
+    - value: true
   uid:
-    -
-      target_id: 1
+    - target_id: 1
   title:
-    -
-      value: 'Blocks: complete'
+    - value: 'Blocks: complete'
   created:
-    -
-      value: 1686759493
+    - value: 1686759493
   promote:
-    -
-      value: false
+    - value: false
   sticky:
-    -
-      value: false
+    - value: false
   moderation_state:
-    -
-      value: published
+    - value: published
   path:
-    -
-      alias: /blocks-complete
+    - alias: /blocks-complete
       langcode: en
       pathauto: 0
   content_translation_source:
-    -
-      value: und
+    - value: und
   content_translation_outdated:
-    -
-      value: false
+    - value: false
   body:
-    -
-      value: |-
+    - value: |-
         <!-- wp:custom/hero {"mediaEntityIds":["3a0fe860-a6d6-428a-9474-365bd57509aa"],"headline":"All kinds of blocks with maximum data","lead":"Lead text","ctaUrl":"https://example.com","ctaText":"CTA text","formId":"contact"} /-->
 
         <!-- wp:custom/content -->
@@ -137,46 +125,82 @@ default:
         <!-- /wp:paragraph -->
         <!-- /wp:custom/accordion-item-text -->
         <!-- /wp:custom/accordion -->
+
+        <!-- wp:custom/info-grid -->
+        <!-- wp:custom/info-grid-item {"icon":"EMAIL"} -->
+        <!-- wp:custom/heading {"level":3,"text":"Email us:"} -->
+        <h3 class="wp-block-custom-heading">Email us:</h3>
+        <!-- /wp:custom/heading -->
+
+        <!-- wp:paragraph -->
+        <p>Email us for general queries, including marketing and partnership opportunities.</p>
+        <!-- /wp:paragraph -->
+
+        <!-- wp:paragraph -->
+        <p><a href="mailto:hello@company.com">hello@company.com</a></p>
+        <!-- /wp:paragraph -->
+
+        <!-- wp:custom/cta {"url":"/en/page-links","text":"Nullam dictum felis","data-id":"25086be7-ca5f-4ff8-9695-b9c71a676d4e","data-entity-type":"node","icon":"ARROW"} /-->
+        <!-- /wp:custom/info-grid-item -->
+
+        <!-- wp:custom/info-grid-item {"icon":"PHONE"} -->
+        <!-- wp:custom/heading {"level":3,"text":"Call us:"} -->
+        <h3 class="wp-block-custom-heading">Call us:</h3>
+        <!-- /wp:custom/heading -->
+
+        <!-- wp:paragraph -->
+        <p>Call us to speak to a member of our team. We are always happy to help.</p>
+        <!-- /wp:paragraph -->
+
+        <!-- wp:paragraph -->
+        <p><a href="tel:+16467865060">+1 (646) 786-5060</a></p>
+        <!-- /wp:paragraph -->
+
+        <!-- wp:custom/cta {"url":"/en/technologies","text":"Duis lobortis massa","data-id":"3a026abf-39d5-4c81-a76e-6f30593f114d","data-entity-type":"node"} /-->
+        <!-- /wp:custom/info-grid-item -->
+
+        <!-- wp:custom/info-grid-item {"icon":"LIFE-RING"} -->
+        <!-- wp:custom/heading {"level":3,"text":"Support"} -->
+        <h3 class="wp-block-custom-heading">Support</h3>
+        <!-- /wp:custom/heading -->
+
+        <!-- wp:paragraph -->
+        <p>Check out helpful resources, FAQs and developer tools.</p>
+        <!-- /wp:paragraph -->
+
+        <!-- wp:custom/cta {"url":"http://www.google.com","text":"Nunc nulla","data-id":"http://www.google.com","data-entity-type":"","openInNewTab":true} /-->
+        <!-- /wp:custom/info-grid-item -->
+        <!-- /wp:custom/info-grid -->
+
         <!-- /wp:custom/content -->
       format: gutenberg
       summary: ''
 translations:
   de:
     status:
-      -
-        value: true
+      - value: true
     uid:
-      -
-        target_id: 1
+      - target_id: 1
     title:
-      -
-        value: 'Blocks: complete DE'
+      - value: 'Blocks: complete DE'
     created:
-      -
-        value: 1687338353
+      - value: 1687338353
     promote:
-      -
-        value: false
+      - value: false
     sticky:
-      -
-        value: false
+      - value: false
     moderation_state:
-      -
-        value: published
+      - value: published
     path:
-      -
-        alias: /blocks-complete
+      - alias: /blocks-complete
         langcode: de
         pathauto: 0
     content_translation_source:
-      -
-        value: en
+      - value: en
     content_translation_outdated:
-      -
-        value: false
+      - value: false
     body:
-      -
-        value: |-
+      - value: |-
           <!-- wp:custom/hero {"mediaEntityIds":["3a0fe860-a6d6-428a-9474-365bd57509aa"],"headline":"All kinds of blocks with maximum data DE","lead":"Lead text DE"} /-->
 
           <!-- wp:custom/content -->
