@@ -11,13 +11,13 @@ export function BlockInfoGrid(props: BlockInfoGridFragment) {
       <div className="container-content">
         <div
           className={
-            'flex flex-col md:flex-row flex-wrap justify-center gap-12 md:gap-16 items-center md:items-start'
+            'flex flex-col md:flex-row flex-wrap justify-center gap-12 lg:gap-16 items-center md:items-start'
           }
         >
           {props.gridItems.map((item, index) => (
             <div
               key={index}
-              className="flex flex-col items-center justify-start gap-4 px-3 md:px-4 text-center md:max-w-[24rem] "
+              className="flex flex-col items-center justify-start gap-4 px-3 md:px-4 text-center md:max-w-[20rem] lg:max-w-[24rem]"
             >
               {item?.icon && iconMap[item?.icon]}
               <div className="flex flex-col items-center justify-center gap-3">
