@@ -48,4 +48,8 @@
   a {
     @apply my-2;
   }
+  p,
+  a {
+    @apply text-base;
+  }
 }

@@ -1,43 +1,42 @@
 import { BlockInfoGridFragment, InfoGridIcon } from '@custom/schema';
 import React from 'react';
 
+import { isTruthy } from '../../../utils/isTruthy';
 import { BlockCta } from './BlockCta';
 import { BlockMarkup } from './BlockMarkup';
 
 export function BlockInfoGrid(props: BlockInfoGridFragment) {
   return (
-    <div className="container-page my-12 md:my-20">
+    <div className="container-page my-12 md:my-24">
       <div className="container-content">
         <div
           className={
-            'flex flex-col md:flex-row flex-wrap justify-center gap-12 md:gap-16 items-center py-12 md:py-20'
+            'flex flex-col md:flex-row flex-wrap justify-center gap-12 md:gap-16 items-start'
           }
         >
           {props.gridItems.map((item, index) => (
             <div
               key={index}
-              className="flex flex-col items-center justify-center gap-4 px-3 md:px-4 text-center md:max-w-[24rem] "
+              className="flex flex-col items-center justify-start gap-4 px-3 md:px-4 text-center md:max-w-[24rem] "
             >
               {item?.icon && iconMap[item?.icon]}
               <div className="flex flex-col items-center justify-center gap-3">
-                {item?.infoGridContent &&
-                  item?.infoGridContent.map((content, contentIndex) => (
-                    <div key={contentIndex}>
-                      <div className="nested-container *:m-0 consistent-margin">
-                        {content?.__typename &&
-                          content?.__typename === 'BlockMarkup' && (
-                            <BlockMarkup markup={content.markup} />
-                          )}
-                      </div>
-
-                      <div className="nested-container w-fit mx-auto *:m-0">
-                        {content?.__typename &&
-                          content?.__typename === 'BlockCta' && (
-                            <BlockCta {...content} />
-                          )}
-                      </div>
-                    </div>
-                  ))}
+                {item?.infoGridContent?.filter(isTruthy).map((block, index) => {
+                  switch (block?.__typename) {
+                    case 'BlockCta':
+                      return (
+                        <div className="nested-container w-fit mx-auto">
+                          <BlockCta key={index} {...block} />
+                        </div>
+                      );
+                    case 'BlockMarkup':
+                      return (
+                        <div className="nested-container *:m-0 consistent-margin">
+                          <BlockMarkup key={index} {...block} />
+                        </div>
+                      );
+                  }
+                })}
               </div>
             </div>
           ))}
