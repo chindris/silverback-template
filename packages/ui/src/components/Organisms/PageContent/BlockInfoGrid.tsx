@@ -11,7 +11,7 @@ export function BlockInfoGrid(props: BlockInfoGridFragment) {
       <div className="container-content">
         <div
           className={
-            'flex flex-col md:flex-row flex-wrap justify-center gap-12 md:gap-16 items-start'
+            'flex flex-col md:flex-row flex-wrap justify-center gap-12 md:gap-16 items-center md:items-start'
           }
         >
           {props.gridItems.map((item, index) => (
