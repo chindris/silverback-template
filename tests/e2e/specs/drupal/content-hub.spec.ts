@@ -1,6 +1,7 @@
 import { expect, test } from '@playwright/test';
 
 import { websiteUrl } from '../../helpers/url';
+import { QuickActions, SiteLanguage } from '../../helpers/quick-actions';
 
 test.describe('content hub', () => {
   test.beforeEach(async ({ page }) => {
@@ -33,8 +34,10 @@ test.describe('content hub', () => {
   });
 
   test('returns language specific results', async ({ page }) => {
+    const quickActions = new QuickActions(page);
     await page.goto(websiteUrl('/en/content-hub'));
-    await page.getByRole('link', { name: 'de' }).click();
+    // Change language to German.
+    await quickActions.changeLanguageTo(SiteLanguage.Deutsch);
     const content = await page.getByRole('main');
     await expect(content.getByText('Architektur')).toBeVisible();
     await expect(content.getByText('Architecture')).not.toBeVisible();

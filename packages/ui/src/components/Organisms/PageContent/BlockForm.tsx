@@ -19,7 +19,7 @@ export function BlockForm(
   }
 
   return (
-    <div className="container-page">
+    <div className="container-page my-10">
       <div className="container-content">
         <div className={clsx('container-text', props.className)}>
           <SilverbackIframe

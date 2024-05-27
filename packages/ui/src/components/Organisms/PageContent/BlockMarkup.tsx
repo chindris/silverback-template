@@ -13,7 +13,7 @@ const unorderedItems: Plugin<[], Element> = () => (tree) => {
 
 export function BlockMarkup(props: BlockMarkupFragment) {
   return (
-    <div className="container-page mt-10">
+    <div className="container-page my-10">
       <div className="container-content">
         <div className="container-text">
           <div
