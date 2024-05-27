@@ -40,7 +40,7 @@ const plugins = [
     },
   },
   {
-    resolve: 'gatsby-plugin-netlify',
+    resolve: 'gatsby-plugin-cloudflare-pages',
     options: {
       // To avoid "X-Frame-Options: DENY" in Drupal iframes.
       mergeSecurityHeaders: false,

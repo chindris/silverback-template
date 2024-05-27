@@ -16,6 +16,7 @@
     "@custom/schema": "workspace:*",
     "@custom/ui": "workspace:*",
     "gatsby": "^5.13.1",
+    "gatsby-plugin-cloudflare-pages": "^1.0.3",
     "gatsby-plugin-layout": "^4.13.0",
     "gatsby-plugin-manifest": "^5.13.0",
     "gatsby-plugin-netlify": "^5.1.1",

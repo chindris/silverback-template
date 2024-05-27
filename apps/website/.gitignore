@@ -2,6 +2,7 @@
 .netlify
 .cache
 .turbo
+.wrangler
 public
 styles.css
 persisted-store
