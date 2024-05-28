@@ -2,14 +2,14 @@ import { BlockMediaFragment, Html, Image } from '@custom/schema';
 import React from 'react';
 
 import { UnreachableCaseError } from '../../../utils/unreachable-case-error';
-import { ScrollPop } from '../../Client/ScrollPop';
+import { FadeUp } from '../../Molecules/FadeUp';
 
 export function BlockMedia(props: BlockMediaFragment) {
   if (!props.media) {
     return null;
   }
   return (
-    <ScrollPop>
+    <FadeUp yGap={50}>
       <div className="container-page">
         <div className="container-content">
           <figure className="mt-16 container-text">
@@ -22,7 +22,7 @@ export function BlockMedia(props: BlockMediaFragment) {
           </figure>
         </div>
       </div>
-    </ScrollPop>
+    </FadeUp>
   );
 }
 
