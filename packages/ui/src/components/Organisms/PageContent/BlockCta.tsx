@@ -8,31 +8,35 @@ import {
 import clsx from 'clsx';
 import React from 'react';
 
+import { FadeUp } from '../../Molecules/FadeUp';
+
 export function BlockCta(props: BlockCtaFragment) {
   return (
-    <div className="container-page">
-      <div className="container-content">
-        <div className="container-text my-2 lg:my-3">
-          <Link
-            className={clsx(
-              {
-                'flex-row-reverse':
-                  props.iconPosition === CtaIconPosition.Before,
-              },
-              'text-blue-600 hover:text-white border border-blue-600 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg  py-2 px-3 gap-2 flex flex-row items-center text-xs leading-[1.125rem] font-medium text-center w-fit transition-all duration-200 ease-in-out group',
-            )}
-            href={props.url ?? ('/' as Url)}
-            target={props.openInNewTab ? '_blank' : '_self'}
-            rel="noreferrer"
-          >
-            {props.text}
-            {!!props.icon && props.icon === CtaIconType.Arrow && (
-              <ArrowRightIcon />
-            )}
-          </Link>
+    <FadeUp yGap={50}>
+      <div className="container-page">
+        <div className="container-content">
+          <div className="container-text my-2 lg:my-3">
+            <Link
+              className={clsx(
+                {
+                  'flex-row-reverse':
+                    props.iconPosition === CtaIconPosition.Before,
+                },
+                'text-blue-600 hover:text-white border border-blue-600 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg  py-2 px-3 gap-2 flex flex-row items-center text-xs leading-[1.125rem] font-medium text-center w-fit transition-all duration-200 ease-in-out group',
+              )}
+              href={props.url ?? ('/' as Url)}
+              target={props.openInNewTab ? '_blank' : '_self'}
+              rel="noreferrer"
+            >
+              {props.text}
+              {!!props.icon && props.icon === CtaIconType.Arrow && (
+                <ArrowRightIcon />
+              )}
+            </Link>
+          </div>
         </div>
       </div>
-    </div>
+    </FadeUp>
   );
 }
 
