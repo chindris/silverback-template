@@ -58,10 +58,10 @@
   @apply w-full text-sm text-left rtl:text-right text-gray-500;
 
   thead {
-    @apply text-xs text-gray-700 uppercase bg-gray-50;
+    @apply text-xs uppercase bg-gray-50;
 
     th {
-      @apply px-6 py-3;
+      @apply px-6 py-3 text-gray-500 leading-[1.125rem];
     }
   }
 
@@ -82,4 +82,9 @@
       }
     }
   }
+}
+
+.wp-block-table table + figcaption,
+.prose table + figcaption {
+  @apply mt-3 flex justify-center gap-x-2 text-sm leading-6 text-gray-500;
 }
