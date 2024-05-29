@@ -23,14 +23,3 @@ export const plugins = [
     },
   },
 ];
-
-/**
- * @type {import('gatsby').GatsbyConfig}
- */
-export default {
-  proxy: {
-    prefix: '/sites/default/files',
-    url: process.env.DRUPAL_EXTERNAL_URL || 'http://127.0.0.1:8888',
-  },
-  plugins,
-};

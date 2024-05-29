@@ -33,6 +33,7 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@cloudflare/workers-types": "^4.20240524.0",
     "@netlify/edge-functions": "^2.3.1",
     "@netlify/functions": "^2.6.0",
     "@testing-library/react": "^14.1.2",
@@ -41,7 +42,8 @@
     "@types/serve-static": "^1.15.5",
     "happy-dom": "^12.10.3",
     "start-server-and-test": "^2.0.3",
-    "vitest": "^1.1.1"
+    "vitest": "^1.1.1",
+    "wrangler": "^3.57.2"
   },
   "scripts": {
     "test:static": "tsc --noEmit && eslint '**/*.{ts,tsx,js,jsx}' --ignore-path='./.gitignore'",
@@ -51,7 +53,9 @@
     "build:gatsby": "gatsby build",
     "build": "if node has-drupal.mjs; then pnpm build:drupal; else pnpm build:gatsby; fi",
     "start": "publisher",
-    "serve": "netlify dev --cwd=. --dir=public --port=8000",
+    "serve": "pnpm serve:netlify",
+    "serve:netlify": "netlify dev --cwd=. --dir=public --port=8000",
+    "serve:cloudflare": "wrangler pages dev public",
     "dev": "pnpm clean && publisher",
     "open": "open http://127.0.0.1:8000/___status/",
     "gatsby:develop": "ENABLE_GATSBY_REFRESH_ENDPOINT=true pnpm gatsby develop",

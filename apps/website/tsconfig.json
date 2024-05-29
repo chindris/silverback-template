@@ -14,7 +14,8 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "checkJs": true,
-    "jsx": "react"
+    "jsx": "react",
+    "types": ["@cloudflare/workers-types"]
   },
   "exclude": ["netlify", "node_modules", "public"]
 }
