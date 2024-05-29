@@ -14,15 +14,6 @@ export const createPages = async ({ actions }) => {
     });
   });
 
-  // Broken Gatsby links will attempt to load page-data.json files, which don't exist
-  // and also should not be piped into the strangler function. Thats why they
-  // are caught right here.
-  actions.createRedirect({
-    fromPath: '/page-data/*',
-    toPath: '/404',
-    statusCode: 404,
-  });
-
   // @todo port Drupal webforms and other assets proxy with Cloudflare Functions.
   // // Proxy Drupal webforms.
   // Object.values(Locale).forEach((locale) => {
