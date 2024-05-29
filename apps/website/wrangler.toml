@@ -1,2 +1,5 @@
 name = "example-amazeelabs"
 pages_build_output_dir = "./public"
+
+[vars]
+DRUPAL_EXTERNAL_URL="https://example.cms.amazeelabs.dev"
