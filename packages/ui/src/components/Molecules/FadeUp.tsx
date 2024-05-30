@@ -9,8 +9,6 @@ export function FadeUp({
 }: PropsWithChildren<{ yGap: number; className?: string }>) {
   const reducedMotion = useReducedMotion();
 
-  console.log("reducedMotion:", reducedMotion)
-
   return (
     <motion.div
       className={className}
