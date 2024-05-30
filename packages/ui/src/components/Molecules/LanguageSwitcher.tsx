@@ -37,7 +37,7 @@ export function LanguageSwitcher() {
     <div className="relative inline-block text-left">
       <Menu as="div" className="relative inline-block text-left">
         <div>
-          <Menu.Button className="inline-flex justify-center w-full rounded-md bg-white text-sm hover:text-blue-600">
+          <Menu.Button className="inline-flex justify-center w-full rounded-md bg-white text-sm font-medium hover:text-blue-600">
             {getLanguageName(currentLocale as string)}
             <ChevronDownIcon className="ml-1 h-5 w-5" aria-hidden="true" />
           </Menu.Button>
@@ -52,7 +52,7 @@ export function LanguageSwitcher() {
           leaveFrom="opacity-100 translate-y-0"
           leaveTo="opacity-0 translate-y-1"
         >
-          <Menu.Items className="origin-top-right absolute z-50 right-0 mt-3 w-48 rounded bg-white shadow-md ring-1 ring-gray-100">
+          <Menu.Items className="origin-top-right absolute z-50 right-0 mt-2 w-48 rounded bg-white shadow-md ring-1 ring-gray-100">
             <div className="py-1">
               {otherLocales.map((locale) => (
                 <Menu.Item key={locale}>

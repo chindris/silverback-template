@@ -34,7 +34,7 @@ export function DesktopMenuDropDown({
           <PopoverButton
             className={clsx(
               'flex items-center text-base font-medium ml-8 hover:text-blue-600',
-              open ? 'text-blue-600' : 'text-gray-600',
+              open ? 'text-blue-600' : 'text-gray-900',
             )}
             onClick={() => avoidFocusOnClick()}
           >
