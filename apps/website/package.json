@@ -56,7 +56,7 @@
     "serve": "pnpm serve:netlify",
     "serve:netlify": "netlify dev --cwd=. --dir=public --port=8000",
     "serve:cloudflare": "wrangler pages dev public --port=8000",
-    "deploy:cloudflare:preview": "wrangler pages deploy",
+    "deploy:cloudflare": "wrangler pages deploy",
     "dev": "pnpm clean && publisher",
     "open": "open http://127.0.0.1:8000/___status/",
     "gatsby:develop": "ENABLE_GATSBY_REFRESH_ENDPOINT=true pnpm gatsby develop",
