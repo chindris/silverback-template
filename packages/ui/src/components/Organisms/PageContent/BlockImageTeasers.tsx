@@ -29,7 +29,7 @@ export function BlockImageTeaser(
   props: BlockImageTeasersFragment['teasers'][0],
 ) {
   return (
-    <div className="p-8 col-span-2 lg:col-span-1 text-left h-72 lg:h-96 relative bg-gray-900">
+    <div className="p-8 pl-5 md:pl-14 lg:pl-20 col-span-2 lg:col-span-1 text-left h-72 lg:h-96 relative bg-gray-900">
       {props.image ? (
         <Image
           className="object-cover w-full h-72 lg:h-96 absolute top-0 left-0"
