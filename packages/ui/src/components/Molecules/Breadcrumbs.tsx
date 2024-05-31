@@ -1,5 +1,8 @@
 import { Link } from '@custom/schema';
-import { ChevronRightIcon, EllipsisHorizontalIcon } from '@heroicons/react/24/outline';
+import {
+  ChevronRightIcon,
+  EllipsisHorizontalIcon,
+} from '@heroicons/react/24/outline';
 import clsx from 'clsx';
 import React, { useEffect, useState } from 'react';
 
@@ -11,9 +14,11 @@ export function BreadCrumbs() {
   const [hideInnerBreadcrumbs, setHideInnerBreadcrumbs] = useState(false);
   const [toggleMoreBreadcrumbs, setToggleMoreBreadcrumbs] = useState(false);
 
-  useEffect(()=> {
-    breadcrumbs.length > 5 && toggleMoreBreadcrumbs === false  && setHideInnerBreadcrumbs(true)
-  }, [hideInnerBreadcrumbs, breadcrumbs, toggleMoreBreadcrumbs])
+  useEffect(() => {
+    breadcrumbs.length > 5 &&
+      toggleMoreBreadcrumbs === false &&
+      setHideInnerBreadcrumbs(true);
+  }, [hideInnerBreadcrumbs, breadcrumbs, toggleMoreBreadcrumbs]);
 
   if (!breadcrumbs.length) {
     return null;
@@ -22,24 +27,60 @@ export function BreadCrumbs() {
   return (
     <div className="container-page">
       <nav className="pt-5 container-content" aria-label="Breadcrumb">
-        <ol className={'rounded-lg items-center overflow-x-scroll flex py-2.5 container'}>
+        <ol
+          className={
+            'rounded-lg items-center overflow-x-scroll flex py-2.5 container'
+          }
+        >
           {breadcrumbs?.filter(isTruthy).map(({ title, target, id }, index) => (
             <>
-              { hideInnerBreadcrumbs === true && index === 1 && <>
+              {hideInnerBreadcrumbs === true && index === 1 && (
+                <>
                   <div aria-hidden="true">
-                    <ChevronRightIcon className={'rotate-180 sm:rotate-0 w-4 h-4 text-gray-400 mr-4'} />
-                  </div><button className="mr-4 flex items-center rounded-sm px-1 py-2 bg-gray-100 hover:bg-gray-200 h-2" onClick={()=>{ setHideInnerBreadcrumbs(false); setToggleMoreBreadcrumbs(true) }}><EllipsisHorizontalIcon className='w-4 text-gray-900'/></button></> }
+                    <ChevronRightIcon
+                      className={
+                        'rotate-180 sm:rotate-0 w-4 h-4 text-gray-400 mr-4'
+                      }
+                    />
+                  </div>
+                  <button
+                    className="mr-4 flex items-center rounded-sm px-1 py-2 bg-gray-100 hover:bg-gray-200 h-2"
+                    onClick={() => {
+                      setHideInnerBreadcrumbs(false);
+                      setToggleMoreBreadcrumbs(true);
+                    }}
+                  >
+                    <EllipsisHorizontalIcon className="w-4 text-gray-900" />
+                  </button>
+                </>
+              )}
               <li className="inline-flex items-center" key={id}>
                 {index > 0 ? (
-                  <div aria-hidden="true" className={clsx(hideInnerBreadcrumbs === true && index > 0 && index < breadcrumbs.length - 1 && 'hidden')}>
-                    <ChevronRightIcon className={'rotate-180 sm:rotate-0 w-4 h-4 text-gray-400 mr-4'} />
+                  <div
+                    aria-hidden="true"
+                    className={clsx(
+                      hideInnerBreadcrumbs === true &&
+                        index > 0 &&
+                        index < breadcrumbs.length - 1 &&
+                        'hidden',
+                    )}
+                  >
+                    <ChevronRightIcon
+                      className={
+                        'rotate-180 sm:rotate-0 w-4 h-4 text-gray-400 mr-4'
+                      }
+                    />
                   </div>
                 ) : null}
                 <Link
                   href={target}
                   title={title}
                   className={clsx(
-                    'inline-flex items-center text-sm font-medium hover:text-blue-600 whitespace-nowrap', hideInnerBreadcrumbs === true && index > 0 && index < breadcrumbs.length - 1 && 'hidden'
+                    'inline-flex items-center text-sm font-medium hover:text-blue-600 whitespace-nowrap',
+                    hideInnerBreadcrumbs === true &&
+                      index > 0 &&
+                      index < breadcrumbs.length - 1 &&
+                      'hidden',
                   )}
                 >
                   {target === '/' && (
