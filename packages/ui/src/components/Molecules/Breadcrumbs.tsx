@@ -6,6 +6,7 @@ import {
 import clsx from 'clsx';
 import React, { useEffect, useState } from 'react';
 
+import { truncateString } from '../../helpers/string-truncation';
 import { isTruthy } from '../../utils/isTruthy';
 import { useBreadcrumbs } from '../Routes/Menu';
 
@@ -39,12 +40,12 @@ export function BreadCrumbs() {
                   <div aria-hidden="true">
                     <ChevronRightIcon
                       className={
-                        'rotate-180 sm:rotate-0 w-4 h-4 text-gray-400 mr-4'
+                        'hidden sm:flex rotate-180 sm:rotate-0 w-4 h-4 text-gray-400 mr-4'
                       }
                     />
                   </div>
                   <button
-                    className="mr-4 flex items-center rounded-sm px-1 py-2 bg-gray-100 hover:bg-gray-200 h-2"
+                    className="mr-4 hidden sm:flex items-center rounded-sm px-1 py-2 bg-gray-100 hover:bg-gray-200 h-2"
                     onClick={() => {
                       setHideInnerBreadcrumbs(false);
                       setToggleMoreBreadcrumbs(true);
@@ -54,7 +55,15 @@ export function BreadCrumbs() {
                   </button>
                 </>
               )}
-              <li className="inline-flex items-center" key={id}>
+              <li
+                className={clsx(
+                  '',
+                  index < breadcrumbs.length - 1
+                    ? 'hidden sm:inline-flex sm:items-center'
+                    : 'inline-flex items-center',
+                )}
+                key={id}
+              >
                 {index > 0 ? (
                   <div
                     aria-hidden="true"
@@ -77,6 +86,10 @@ export function BreadCrumbs() {
                   title={title}
                   className={clsx(
                     'inline-flex items-center text-sm font-medium hover:text-blue-600 whitespace-nowrap',
+                    index < breadcrumbs.length - 1 &&
+                      hideInnerBreadcrumbs !== true
+                      ? 'hidden sm:inline-flex sm:items-center'
+                      : 'inline-flex items-center',
                     hideInnerBreadcrumbs === true &&
                       index > 0 &&
                       index < breadcrumbs.length - 1 &&
@@ -94,7 +107,9 @@ export function BreadCrumbs() {
                       <path d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z" />
                     </svg>
                   )}
-                  <span className="mr-4">{title}</span>
+                  <span className="mr-4">
+                    {truncateString({ value: title, maxChar: 20 })}
+                  </span>
                 </Link>
               </li>
             </>
