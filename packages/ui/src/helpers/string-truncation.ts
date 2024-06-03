@@ -1,4 +1,10 @@
-export const truncateString = ({ value, maxChar }: { value: string; maxChar: number }): string => {
+export const truncateString = ({
+  value,
+  maxChar,
+}: {
+  value: string;
+  maxChar: number;
+}): string => {
   if (value.length <= maxChar) {
     return value;
   }
