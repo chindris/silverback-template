@@ -6,8 +6,8 @@ import {
 import clsx from 'clsx';
 import React, { useEffect, useState } from 'react';
 
-import { truncateString } from '../../helpers/string-truncation';
 import { isTruthy } from '../../utils/isTruthy';
+import { truncateString } from '../../utils/stringTruncation';
 import { useBreadcrumbs } from '../Routes/Menu';
 
 export function BreadCrumbs() {
