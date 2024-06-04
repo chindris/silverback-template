@@ -67,7 +67,7 @@ export const Idle = {
           {
             id: '8',
             title: 'Super Gatsby Turbo',
-            target: '/gatsby-turbo-more' as Url,
+            target: '/gatsby-turbo' as Url,
             parent: '7',
           },
           {
