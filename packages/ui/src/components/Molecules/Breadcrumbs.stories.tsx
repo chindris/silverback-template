@@ -9,7 +9,7 @@ export default {
   component: BreadCrumbs,
   parameters: {
     layout: 'fullscreen',
-    location: new URL('local:/gatsby-turbo'),
+    location: new URL('local:/gatsby-turbo-more-more-more'),
   },
 } satisfies Meta<typeof BreadCrumbs>;
 
