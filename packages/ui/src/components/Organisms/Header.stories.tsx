@@ -60,7 +60,7 @@ export const Idle = {
           },
           {
             id: '7',
-            title: 'Gatsby Turbo This is a little extra long dude man',
+            title: 'Gatsby Turbo',
             target: '/gatsby-turbo' as Url,
             parent: '6',
           },
