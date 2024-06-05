@@ -156,7 +156,7 @@ export function Footer() {
                     ) : (
                       <span
                         className={
-                          'block transition-all font-bold text-[0.875rem] leading-[1.313rem] uppercase mb-4'
+                          'block transition-all font-semibold text-[0.875rem] leading-[1.313rem] uppercase mb-4'
                         }
                       >
                         {item.title}
