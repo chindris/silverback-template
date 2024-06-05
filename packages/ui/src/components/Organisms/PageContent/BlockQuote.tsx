@@ -5,8 +5,8 @@ import { FadeUp } from '../../Molecules/FadeUp';
 
 export function BlockQuote(props: BlockQuoteFragment) {
   return (
-    <FadeUp yGap={50}>
-      <div className="container-page mb-8 mt-16">
+    <FadeUp yGap={50} className="container-page mt-16 mb-8">
+      <div className="container-page">
         <div className="container-content">
           <div className="container-text">
             <div className="prose lg:prose-xl prose-p:text-xl prose-p:font-bold prose-p:leading-8 prose-p:text-[#111928]">
