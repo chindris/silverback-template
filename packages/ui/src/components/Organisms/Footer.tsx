@@ -140,7 +140,7 @@ export function Footer() {
                   <li
                     key={key + 'header'}
                     className={
-                      'block mb-3 lg:mr-5 last:mr-0 md:mb-0 md:text-left w-1/2 lg:w-auto'
+                      'block mb-3 pr-5 lg:pr-8 last:pr-0 md:mb-0 md:text-left w-1/2 lg:w-auto'
                     }
                   >
                     {item.target ? (
