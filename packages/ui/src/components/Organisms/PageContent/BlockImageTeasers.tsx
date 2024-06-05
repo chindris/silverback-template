@@ -7,8 +7,8 @@ import { FadeUp } from '../../Molecules/FadeUp';
 
 export function BlockImageTeasers(props: BlockImageTeasersFragment) {
   return (
-    <FadeUp yGap={50}>
-      <section className="my-10 block-background-image-cards">
+    <FadeUp yGap={50} className="my-10 block-background-image-cards">
+      <section>
         <div className="text-center">
           <div
             className={clsx('grid gap-2', {
