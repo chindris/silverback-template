@@ -37,7 +37,7 @@ export function FadeUp({
         reducedMotion ? 'reducedMotion: On' : 'reducedMotion: Off',
       )}
       transition={{ duration: 0.8 }}
-      initial={{ opacity: reducedMotion ? 1 : 0, y: reducedMotion ? 0 : yGap }}
+      style={{ opacity: reducedMotion ? 1 : 0, y: reducedMotion ? 0 : yGap }}
       viewport={{ once: true }}
       whileInView={{ opacity: 1, y: 0 }}
     >
