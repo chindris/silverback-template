@@ -1,4 +1,5 @@
 'use client';
+import clsx from 'clsx';
 import { motion, useReducedMotion } from 'framer-motion';
 import React, { PropsWithChildren } from 'react';
 
@@ -9,9 +10,13 @@ export function FadeUp({
 }: PropsWithChildren<{ yGap: number; className?: string }>) {
   const reducedMotion = useReducedMotion();
 
+  console.log('reducedMotion:', reducedMotion);
   return (
     <motion.div
-      className={className}
+      className={clsx(
+        className,
+        reducedMotion ? 'reducedMotion: On' : 'reducedMotion: Off',
+      )}
       transition={{ duration: 0.8 }}
       style={{ opacity: reducedMotion ? 1 : 0, y: reducedMotion ? 0 : yGap }}
       viewport={{ once: true }}
