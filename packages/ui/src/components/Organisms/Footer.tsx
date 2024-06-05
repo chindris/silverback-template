@@ -147,7 +147,7 @@ export function Footer() {
                       <Link
                         href={item.target!}
                         className={
-                          'text-gray-900 block hover:underline transition-all font-bold text-[0.875rem] leading-[1.313rem] uppercase mb-4'
+                          'text-gray-900 block hover:underline transition-all font-semibold text-[0.875rem] leading-[1.313rem] uppercase mb-4'
                         }
                       >
                         {item.title}
