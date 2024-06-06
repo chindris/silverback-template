@@ -19,23 +19,27 @@ export function BlockForm(
   }
 
   return (
-    <div className={clsx('mx-auto max-w-3xl', props.className)}>
-      <SilverbackIframe
-        src={props.url}
-        buildMessages={buildMessages}
-        redirect={(url, messages) => {
-          if (messages) {
-            storeMessages(messages);
-          }
-          navigate(url as Url);
-        }}
-        style={{
-          width: '1px',
-          minWidth: '100%',
-        }}
-        heightCalculationMethod="lowestElement"
-        cssStylesToInject={props.cssStylesToInject}
-      />
+    <div className="container-page">
+      <div className="container-content">
+        <div className={clsx('container-text', props.className)}>
+          <SilverbackIframe
+            src={props.url}
+            buildMessages={buildMessages}
+            redirect={(url, messages) => {
+              if (messages) {
+                storeMessages(messages);
+              }
+              navigate(url as Url);
+            }}
+            style={{
+              width: '1px',
+              minWidth: '100%',
+            }}
+            heightCalculationMethod="lowestElement"
+            cssStylesToInject={props.cssStylesToInject}
+          />
+        </div>
+      </div>
     </div>
   );
 }

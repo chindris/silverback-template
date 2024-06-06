@@ -206,6 +206,8 @@ union PageContent @resolveEditorBlockType =
   | BlockCta
   | BlockImageWithText
   | BlockQuote
+  | BlockHorizontalSeparator
+  | BlockAccordion
 
 type BlockForm @type(id: "custom/form") {
   url: Url @resolveEditorBlockAttribute(key: "formId") @webformIdToUrl(id: "$")
@@ -245,6 +247,16 @@ type BlockImageTeaser @default @value {
   ctaUrl: Url @resolveEditorBlockAttribute(key: "ctaUrl")
 }
 
+type BlockAccordion @type(id: "custom/accordion") {
+  items: [BlockAccordionItemText!]! @resolveEditorBlockChildren
+}
+
+type BlockAccordionItemText @default @value {
+  title: String! @resolveEditorBlockAttribute(key: "title")
+  icon: String! @resolveEditorBlockAttribute(key: "icon")
+  textContent: BlockMarkup @resolveEditorBlockChildren @seek(pos: 0)
+}
+
 type BlockCta @type(id: "custom/cta") {
   url: Url @resolveEditorBlockAttribute(key: "url")
   text: String @resolveEditorBlockAttribute(key: "text")
@@ -281,6 +293,10 @@ type BlockQuote @type(id: "custom/quote") {
   author: String @resolveEditorBlockAttribute(key: "author")
   role: String @resolveEditorBlockAttribute(key: "role")
   image: MediaImage @resolveEditorBlockMedia
+}
+
+type BlockHorizontalSeparator @type(id: "custom/horizontal-separator") {
+  markup: Markup! @resolveEditorBlockMarkup
 }
 
 input PaginationInput {
