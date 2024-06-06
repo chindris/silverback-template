@@ -22,7 +22,7 @@ export function Footer() {
     <footer
       id="footer"
       className={
-        'container-page relative z-10 bg-gray-100 text-gray-500 py-4 lg:py-16'
+        'container-page relative z-10 bg-gray-100 text-gray-500 py-12 lg:py-16'
       }
     >
       <h2 className={'sr-only'}>Footer</h2>
@@ -130,7 +130,9 @@ export function Footer() {
           </div>
           <nav>
             <ul
-              className={'md:ml-[5.625rem] flex flex-wrap justify-between grow'}
+              className={
+                '!pl-0 md:ml-[5.625rem] flex flex-wrap justify-between grow'
+              }
               aria-label="Footer Primary"
             >
               {items.map((item, key) => (
@@ -138,14 +140,14 @@ export function Footer() {
                   <li
                     key={key + 'header'}
                     className={
-                      'block mb-3 lg:mr-5 last:mr-0 md:mb-0 md:text-left w-1/2 lg:w-auto'
+                      'block mb-3 pr-5 lg:pr-8 last:pr-0 md:mb-0 md:text-left w-1/2 lg:w-auto'
                     }
                   >
                     {item.target ? (
                       <Link
                         href={item.target!}
                         className={
-                          'text-gray-900 block hover:underline transition-all font-bold text-[0.875rem] leading-[1.313rem] uppercase mb-4'
+                          'text-gray-900 block hover:underline transition-all font-semibold text-[0.875rem] leading-[1.313rem] uppercase mb-4'
                         }
                       >
                         {item.title}
@@ -153,7 +155,7 @@ export function Footer() {
                     ) : (
                       <span
                         className={
-                          'block transition-all font-bold text-[0.875rem] leading-[1.313rem] uppercase mb-4'
+                          'block transition-all font-semibold text-[0.875rem] leading-[1.313rem] uppercase mb-4'
                         }
                       >
                         {item.title}
@@ -164,7 +166,7 @@ export function Footer() {
                           <Link
                             key={child.target}
                             href={child.target}
-                            className="block transition-all text-base mb-4 hover:underline"
+                            className="text-gray-500 font-normal block transition-all text-base mb-4 hover:underline"
                           >
                             {child.title}
                           </Link>

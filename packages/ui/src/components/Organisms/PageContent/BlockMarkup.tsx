@@ -5,6 +5,8 @@ import { selectAll } from 'hast-util-select';
 import React, { PropsWithChildren } from 'react';
 import { Plugin } from 'unified';
 
+import { FadeUp } from '../../Molecules/FadeUp';
+
 const unorderedItems: Plugin<[], Element> = () => (tree) => {
   selectAll('ul > li', tree).forEach((node) => {
     node.properties!.unordered = true;
@@ -13,7 +15,7 @@ const unorderedItems: Plugin<[], Element> = () => (tree) => {
 
 export function BlockMarkup(props: BlockMarkupFragment) {
   return (
-    <div className="container-page mt-10">
+    <FadeUp yGap={50} className="container-page my-10">
       <div className="container-content">
         <div className="container-text">
           <div
@@ -51,6 +53,6 @@ export function BlockMarkup(props: BlockMarkupFragment) {
           </div>
         </div>
       </div>
-    </div>
+    </FadeUp>
   );
 }

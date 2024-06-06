@@ -59,6 +59,23 @@ test('Blocks', async () => {
           image {
             __typename
           }
+          textContent {
+            __typename
+            markup
+          }
+        }
+        ... on BlockQuote {
+          quote
+          author
+          role
+          image {
+            __typename
+          }
+        }
+        ... on BlockImageWithText {
+          image {
+            __typename
+          }
           imagePosition
           textContent {
             __typename
@@ -100,19 +117,16 @@ test('Blocks', async () => {
       }
     }
   `);
-
   const firstParagraph = result.data.complete.content[0];
   firstParagraph.markup = firstParagraph.markup.replace(
     /data-id="\d+"/,
     'data-id="[numeric]"',
   );
-
   for (const block of result.data.complete.content) {
     if (block.__typename === 'BlockCta') {
       block.url = block.url.replace(/media\/\d+/, 'media/[numeric]');
     }
   }
-
   expect(result).toMatchInlineSnapshot(`
     {
       "data": {
@@ -337,7 +351,6 @@ test('Blocks', async () => {
       },
     }
   `);
-
   const german = await fetch(gql`
     {
       page: _loadDrupalPage(id: "a397ca48-8fad-411e-8901-0eba2feb989c:de") {
@@ -355,7 +368,6 @@ test('Blocks', async () => {
   );
   expect(germanForm.url).toBe('http://127.0.0.1:8000/de/form/contact');
 });
-
 test('Block - info grid', async () => {
   const result = await fetch(gql`
     {

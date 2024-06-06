@@ -1,20 +1,27 @@
 import { BlockImageTeasersFragment, Image, Link } from '@custom/schema';
+import clsx from 'clsx';
 import React from 'react';
 
 import { isTruthy } from '../../../utils/isTruthy';
+import { FadeUp } from '../../Molecules/FadeUp';
 
 export function BlockImageTeasers(props: BlockImageTeasersFragment) {
   return (
-    // eslint-disable-next-line tailwindcss/no-custom-classname
-    <section className="container-page my-16 block-background-image-cards">
-      <div className="container-content text-center">
-        <div className="grid grid-cols-2 gap-2">
-          {props.teasers.filter(isTruthy).map((teaser, index) => (
-            <BlockImageTeaser key={index} {...teaser} />
-          ))}
+    <FadeUp yGap={50} className="my-10 block-background-image-cards">
+      <section>
+        <div className="text-center">
+          <div
+            className={clsx('grid gap-2', {
+              'grid-cols-2': props.teasers.filter(isTruthy).length > 1,
+            })}
+          >
+            {props.teasers.filter(isTruthy).map((teaser, index) => (
+              <BlockImageTeaser key={index} {...teaser} />
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </FadeUp>
   );
 }
 
@@ -24,10 +31,10 @@ export function BlockImageTeaser(
   props: BlockImageTeasersFragment['teasers'][0],
 ) {
   return (
-    <div className="p-8 col-span-2 lg:col-span-1 text-left h-72 lg:h-96 relative bg-gray-900">
+    <div className="p-8 pl-5 md:pl-14 lg:pl-20 col-span-2 lg:col-span-1 text-left h-72 lg:h-96 relative bg-gray-900">
       {props.image ? (
         <Image
-          className="object-cover w-full h-72 lg:h-96 mb-5 absolute top-0 left-0"
+          className="object-cover w-full h-72 lg:h-96 absolute top-0 left-0"
           source={props.image.source}
           alt={props.image.alt}
         />

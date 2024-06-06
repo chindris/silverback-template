@@ -3,6 +3,7 @@ module.exports = {
     'postcss-import-ext-glob': {},
     'postcss-import': {},
     tailwindcss: require('./tailwind.config.cjs'),
+    'postcss-nested': {},
     autoprefixer: {},
     'postcss-prefix-selector': {
       prefix:
