@@ -81,7 +81,26 @@ export const parameters = {
           // Setting the enabled option to false will disable checks for this particular rule on all stories.
           id: 'color-contrast',
           reviewOnFail: true,
-          // enabled: false,
+        },
+        {
+          id: 'link-name',
+          reviewOnFail: true,
+        },
+        {
+          id: 'duplicate-id',
+          reviewOnFail: true,
+        },
+        {
+          id: 'landmark-no-duplicate-main',
+          reviewOnFail: true,
+        },
+        {
+          id: 'landmark-main-is-top-level',
+          reviewOnFail: true,
+        },
+        {
+          id: 'landmark-unique',
+          reviewOnFail: true,
         },
       ],
     },
