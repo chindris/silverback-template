@@ -65,6 +65,7 @@ export const parameters = {
   a11y: {
     // Optional selector to inspect
     element: '#storybook-root',
+    reviewOnFail: true,
     config: {
       rules: [
         {
@@ -81,8 +82,6 @@ export const parameters = {
     },
     // Axe's options parameter
     options: {},
-    // Optional flag to prevent the automatic check
-    manual: true,
   },
 };
 
