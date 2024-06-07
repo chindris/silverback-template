@@ -80,8 +80,8 @@ export const parameters = {
         {
           // Setting the enabled option to false will disable checks for this particular rule on all stories.
           id: 'color-contrast',
-          enabled: false,
-          // reviewOnFail: true,
+          reviewOnFail: true,
+          // enabled: false,
         },
       ],
     },
