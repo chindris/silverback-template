@@ -13,12 +13,12 @@ const unorderedItems: Plugin<[], Element> = () => (tree) => {
 
 export function BlockMarkup(props: BlockMarkupFragment) {
   return (
-    <div className="container-page">
+    <div className="container-page mt-10">
       <div className="container-content">
         <div className="container-text">
           <div
             className={clsx([
-              'prose lg:prose-xl mt-10',
+              'prose lg:prose-xl',
               'marker:text-[#111928]',
               'marker:font-bold',
             ])}
