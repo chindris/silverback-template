@@ -33,16 +33,8 @@ runs:
 
     - name: Install dependencies
       shell: bash
-      run: PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 pnpm i
+      run: pnpm i
 
-    - name: Cache playwright binaries
-      uses: actions/cache@v3
-      id: playwright-cache
-      with:
-        path: ~/.cache/ms-playwright
-        key: ${{ runner.os }}-playwright-${{ hashFiles('**/pnpm-lock.yaml') }}
-
-    - name: Install Playwright browsers
-      run: pnpm --filter "@custom-tests/e2e" download-browsers
+    - name: Check formatting
       shell: bash
-      if: steps.playwright-cache.outputs.cache-hit != 'true'
+      run: pnpm test:format

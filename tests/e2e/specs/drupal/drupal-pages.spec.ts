@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test';
 
-import { websiteUrl } from '../../helpers/url';
 import { QuickActions, SiteLanguage } from '../../helpers/quick-actions';
+import { websiteUrl } from '../../helpers/url';
 
 test.describe('drupal pages', () => {
   test('example drupal page is rendered', async ({ page }) => {
