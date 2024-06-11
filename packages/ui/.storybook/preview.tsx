@@ -62,6 +62,51 @@ const SWRCacheDecorator: Decorator = (Story) => {
 
 export const parameters = {
   chromatic: { viewports: [320, 840, 1440] },
+  a11y: {
+    // Optional selector to inspect
+    element: '#storybook-root',
+    config: {
+      rules: [
+        {
+          // The autocomplete rule will not run based on the CSS selector provided
+          id: 'autocomplete-valid',
+          selector: '*:not([autocomplete="nope"])',
+        },
+        {
+          // Setting the enabled option to false will disable checks for this particular rule on all stories.
+          id: 'image-alt',
+          enabled: false,
+        },
+        {
+          // Setting the enabled option to false will disable checks for this particular rule on all stories.
+          id: 'color-contrast',
+          reviewOnFail: true,
+        },
+        {
+          id: 'link-name',
+          reviewOnFail: true,
+        },
+        {
+          id: 'duplicate-id',
+          reviewOnFail: true,
+        },
+        {
+          id: 'landmark-no-duplicate-main',
+          reviewOnFail: true,
+        },
+        {
+          id: 'landmark-main-is-top-level',
+          reviewOnFail: true,
+        },
+        {
+          id: 'landmark-unique',
+          reviewOnFail: true,
+        },
+      ],
+    },
+    // Axe's options parameter
+    options: {},
+  },
 };
 
 export const decorators = [LocationDecorator, IntlDecorator, SWRCacheDecorator];

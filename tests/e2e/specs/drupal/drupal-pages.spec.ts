@@ -1,5 +1,6 @@
 import { expect, test } from '@playwright/test';
 
+import { QuickActions, SiteLanguage } from '../../helpers/quick-actions';
 import { websiteUrl } from '../../helpers/url';
 
 test.describe('drupal pages', () => {
@@ -11,8 +12,9 @@ test.describe('drupal pages', () => {
     ).toBeVisible();
   });
   test('example drupal page is translated', async ({ page }) => {
+    const quickActions = new QuickActions(page);
     await page.goto(websiteUrl('/en/privacy'));
-    await page.getByRole('link', { name: 'de' }).click();
+    await quickActions.changeLanguageTo(SiteLanguage.Deutsch);
     await expect(
       page.getByRole('heading', { name: 'Privatsphäre' }),
     ).toBeVisible();

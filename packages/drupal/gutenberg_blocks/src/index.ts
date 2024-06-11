@@ -10,3 +10,7 @@ import './filters/list';
 import './blocks/cta';
 import './blocks/quote';
 import './blocks/horizontal-separator';
+import './blocks/accordion';
+import './blocks/accordion-item-text';
+import './blocks/info-grid';
+import './blocks/info-grid-item';

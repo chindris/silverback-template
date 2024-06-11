@@ -1,5 +1,11 @@
 'use client';
-import { Dialog, Disclosure } from '@headlessui/react';
+import {
+  Dialog,
+  DialogPanel,
+  Disclosure,
+  DisclosureButton,
+  DisclosurePanel,
+} from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import clsx from 'clsx';
 import React, { createContext, PropsWithChildren } from 'react';
@@ -11,7 +17,7 @@ const MobileMenuContext = createContext({
   setIsOpen: (isOpen: boolean) => {},
 });
 
-export function MobileMenuProvider({ children }: PropsWithChildren) {
+export function MobileMenuProvider({ children }: PropsWithChildren<{}>) {
   const [isOpen, setIsOpen] = React.useState(false);
 
   return (
@@ -42,14 +48,15 @@ export function MobileMenuButton(
     </button>
   );
 }
+
 export function MobileMenu({ children }: PropsWithChildren<{}>) {
   const { isOpen, setIsOpen } = React.useContext(MobileMenuContext);
   return (
     <Dialog as="div" className="lg:hidden" open={isOpen} onClose={setIsOpen}>
       <div className="fixed inset-0 z-10" />
-      <Dialog.Panel className="fixed border-t border-t-solid border-t-blue-100 top-[5.75rem] inset-y-0 right-0 w-full overflow-y-auto bg-white py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10 z-20">
+      <DialogPanel className="fixed border-t border-t-blue-100 top-[5.75rem] inset-y-0 right-0 w-full overflow-y-auto bg-white py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10 z-20">
         {children}
-      </Dialog.Panel>
+      </DialogPanel>
     </Dialog>
   );
 }
@@ -62,13 +69,13 @@ export function MobileMenuLink({
   title: string;
 }) {
   return (
-    <Disclosure.Button
+    <DisclosureButton
       as="a"
       href={href}
       className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
     >
       {title}
-    </Disclosure.Button>
+    </DisclosureButton>
   );
 }
 
@@ -86,15 +93,13 @@ export function MobileMenuDropdown({
             open && nestLevel === 2 && 'bg-gray-100 rounded mx-8',
           )}
         >
-          <Disclosure.Button
+          <DisclosureButton
             className={clsx(
               'flex w-full items-center justify-between py-4 leading-[1.25rem]',
               open && 'text-blue-600',
               !open && 'text-gray-600',
               open && nestLevel === 1 && 'bg-blue-100',
-              !open &&
-                nestLevel === 1 &&
-                'border-b border-b-solid border-b-blue-100',
+              !open && nestLevel === 1 && 'border-b border-b-blue-100',
               nestLevel === 1 && 'px-8 text-lg',
               !open && nestLevel === 2 && 'px-10',
               open && nestLevel === 2 && 'px-2',
@@ -107,8 +112,8 @@ export function MobileMenuDropdown({
               })}
               aria-hidden="true"
             />
-          </Disclosure.Button>
-          <Disclosure.Panel className="">{children}</Disclosure.Panel>
+          </DisclosureButton>
+          <DisclosurePanel className="">{children}</DisclosurePanel>
         </div>
       )}
     </Disclosure>

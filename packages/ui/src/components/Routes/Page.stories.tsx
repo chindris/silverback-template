@@ -10,6 +10,9 @@ import { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
 import { image } from '../../helpers/image';
+import { AccordionItemText } from '../Organisms/PageContent/BlockAccordion.stories';
+import { Default as BlockImageTeasers } from '../Organisms/PageContent/BlockImageTeasers.stories';
+import { ImageRight } from '../Organisms/PageContent/BlockImageWithText.stories';
 import { Mixed, Paragraph } from '../Organisms/PageContent/BlockMarkup.stories';
 import { WithCaption } from '../Organisms/PageContent/BlockMedia.stories';
 import { Default as FrameStory } from './Frame.stories';
@@ -17,6 +20,9 @@ import { Page } from './Page';
 
 export default {
   component: Page,
+  parameters: {
+    layout: 'fullscreen',
+  },
 } satisfies Meta<typeof Page>;
 
 export const Default = {
@@ -42,6 +48,10 @@ export const Default = {
       path: '/test' as Url,
       content: [
         {
+          __typename: 'BlockImageTeasers',
+          ...BlockImageTeasers.args,
+        },
+        {
           __typename: 'BlockMarkup',
           ...Mixed.args,
         },
@@ -52,6 +62,18 @@ export const Default = {
         {
           __typename: 'BlockMarkup',
           ...Paragraph.args,
+        },
+        {
+          __typename: 'BlockImageWithText',
+          ...ImageRight.args,
+        },
+        {
+          __typename: 'BlockAccordion',
+          ...AccordionItemText.args,
+        },
+        {
+          __typename: 'BlockImageTeasers',
+          ...BlockImageTeasers.args,
         },
       ] as Exclude<ViewPageQuery['page'], undefined>['content'],
     },
