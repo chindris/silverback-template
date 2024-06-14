@@ -1,5 +1,11 @@
 import { Link, Locale, useLocation } from '@custom/schema';
-import { Menu, MenuButton, MenuItems, Transition } from '@headlessui/react';
+import {
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuItems,
+  Transition,
+} from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import clsx from 'clsx';
 import React, { Fragment } from 'react';
@@ -32,6 +38,7 @@ export function LanguageSwitcher() {
                 'inline-flex justify-center w-full rounded-md bg-white text-sm',
                 {
                   'hover:text-blue-600': isMultiLingual,
+                  'cursor-not-allowed opacity-70': !isMultiLingual,
                 },
               )}
               disabled={!isMultiLingual}
@@ -57,7 +64,7 @@ export function LanguageSwitcher() {
                 <React.Fragment key={locale}>
                   {translations[locale] &&
                   location.pathname !== translations[locale] ? (
-                    <Menu.Item>
+                    <MenuItem>
                       {({ focus }) =>
                         translations[locale] ? (
                           <Link
@@ -82,7 +89,7 @@ export function LanguageSwitcher() {
                           </span>
                         )
                       }
-                    </Menu.Item>
+                    </MenuItem>
                   ) : null}
                 </React.Fragment>
               ))}
