@@ -36,7 +36,7 @@ export function LanguageSwitcher() {
               )}
               disabled={!isMultiLingual}
             >
-              {currentLocale}
+              {getLanguageName(currentLocale ?? 'en')}
               <ChevronDownIcon className="ml-1 h-5 w-5" aria-hidden="true" />
             </MenuButton>
           </React.Fragment>
