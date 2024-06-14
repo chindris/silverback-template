@@ -1,5 +1,5 @@
 import { Link, Locale, useLocation } from '@custom/schema';
-import { Menu, Transition } from '@headlessui/react';
+import { Menu, MenuButton, MenuItems, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import clsx from 'clsx';
 import React, { Fragment } from 'react';
@@ -17,24 +17,29 @@ export function LanguageSwitcher() {
   const translations = useTranslations();
   const [location] = useLocation();
 
+  const currentLocale = Object.entries(translations).find(
+    ([, path]) => path === location.pathname,
+  )?.[0];
+  const isMultiLingual = Object.keys(translations).length > 1;
+
   return (
     <div className="relative inline-block text-left">
       <Menu as="div" className="relative inline-block text-left">
         <div>
-          {Object.values(Locale).map((locale) => (
-            <React.Fragment key={locale}>
-              {translations[locale] &&
-              location.pathname !== translations[locale] ? null : (
-                <Menu.Button className="inline-flex justify-center w-full rounded-md bg-white text-sm hover:text-blue-600">
-                  {getLanguageName(locale)}
-                  <ChevronDownIcon
-                    className="ml-1 h-5 w-5"
-                    aria-hidden="true"
-                  />
-                </Menu.Button>
+          <React.Fragment key={currentLocale}>
+            <MenuButton
+              className={clsx(
+                'inline-flex justify-center w-full rounded-md bg-white text-sm',
+                {
+                  'hover:text-blue-600': isMultiLingual,
+                },
               )}
-            </React.Fragment>
-          ))}
+              disabled={!isMultiLingual}
+            >
+              {currentLocale}
+              <ChevronDownIcon className="ml-1 h-5 w-5" aria-hidden="true" />
+            </MenuButton>
+          </React.Fragment>
         </div>
 
         <Transition
@@ -46,7 +51,7 @@ export function LanguageSwitcher() {
           leaveFrom="opacity-100 translate-y-0"
           leaveTo="opacity-0 translate-y-1"
         >
-          <Menu.Items className="origin-top-right absolute z-50 right-0 mt-3 w-48 rounded bg-white shadow-md ring-1 ring-gray-100">
+          <MenuItems className="origin-top-right absolute z-50 right-0 mt-3 w-48 rounded bg-white shadow-md ring-1 ring-gray-100">
             <div className="py-1">
               {Object.values(Locale).map((locale) => (
                 <React.Fragment key={locale}>
@@ -82,7 +87,7 @@ export function LanguageSwitcher() {
                 </React.Fragment>
               ))}
             </div>
-          </Menu.Items>
+          </MenuItems>
         </Transition>
       </Menu>
     </div>
