@@ -7,6 +7,7 @@ import './blocks/image-teaser';
 import './blocks/image-teasers';
 import './blocks/image-with-text';
 import './filters/list';
+import './plugins/preview';
 import './blocks/cta';
 import './blocks/quote';
 import './blocks/horizontal-separator';

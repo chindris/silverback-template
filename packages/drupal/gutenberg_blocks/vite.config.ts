@@ -21,6 +21,8 @@ export default defineConfig({
         'wordpress__editor',
         'wordpress__element',
         'wordpress__hooks',
+        'wordpress__plugins',
+        'wordpress__edit-post',
       ],
       output: {
         globals: {
@@ -33,6 +35,8 @@ export default defineConfig({
           wordpress__editor: 'wp.editor',
           wordpress__element: 'wp.element',
           wordpress__hooks: 'wp.hooks',
+          wordpress__plugins: 'wp.plugins',
+          'wordpress__edit-post': 'wp.editPost',
         },
       },
     },

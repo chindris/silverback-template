@@ -100,3 +100,17 @@
 .gutenberg__editor .edit-post-visual-editor__content-area a.no-underline {
   text-decoration: none;
 }
+
+.gutenberg__editor .drupal-preview-sidebar {
+}
+
+.gutenberg__editor .drupal-preview-sidebar--header button {
+  margin-right: 5px;
+}
+
+.gutenberg__editor .drupal-preview-sidebar--iframe-wrapper {
+}
+
+.gutenberg__editor .drupal-preview-sidebar--iframe-wrapper iframe {
+  border: none;
+}
