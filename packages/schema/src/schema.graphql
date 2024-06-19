@@ -208,6 +208,7 @@ union PageContent @resolveEditorBlockType =
   | BlockQuote
   | BlockHorizontalSeparator
   | BlockAccordion
+  | BlockInfoGrid
 
 type BlockForm @type(id: "custom/form") {
   url: Url @resolveEditorBlockAttribute(key: "formId") @webformIdToUrl(id: "$")
@@ -293,6 +294,24 @@ type BlockQuote @type(id: "custom/quote") {
   author: String @resolveEditorBlockAttribute(key: "author")
   role: String @resolveEditorBlockAttribute(key: "role")
   image: MediaImage @resolveEditorBlockMedia
+}
+
+enum InfoGridIcon @default @value(string: "NONE") {
+  EMAIL
+  PHONE
+  LIFE_RING
+  NONE
+}
+
+union InfoGridContent @resolveEditorBlockType = BlockMarkup | BlockCta
+
+type BlockInfoGrid @type(id: "custom/info-grid") {
+  gridItems: [BlockInfoGridItem]! @resolveEditorBlockChildren
+}
+
+type BlockInfoGridItem {
+  icon: InfoGridIcon! @resolveEditorBlockAttribute(key: "icon")
+  infoGridContent: [InfoGridContent] @resolveEditorBlockChildren
 }
 
 type BlockHorizontalSeparator @type(id: "custom/horizontal-separator") {

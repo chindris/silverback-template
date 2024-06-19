@@ -1,5 +1,6 @@
 node_modules
 .idea/inspectionProfiles
+.idea/git_toolbox_prj.xml
 build-storybook.log
 storybook-static
 coverage

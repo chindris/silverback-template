@@ -11,6 +11,7 @@ import { BlockForm } from './PageContent/BlockForm';
 import { BlockHorizontalSeparator } from './PageContent/BlockHorizontalSeparator';
 import { BlockImageTeasers } from './PageContent/BlockImageTeasers';
 import { BlockImageWithText } from './PageContent/BlockImageWithText';
+import { BlockInfoGrid } from './PageContent/BlockInfoGrid';
 import { BlockMarkup } from './PageContent/BlockMarkup';
 import { BlockMedia } from './PageContent/BlockMedia';
 import { BlockQuote } from './PageContent/BlockQuote';
@@ -42,6 +43,8 @@ export function PageDisplay(page: PageFragment) {
               return <BlockHorizontalSeparator key={index} {...block} />;
             case 'BlockAccordion':
               return <BlockAccordion key={index} {...block} />;
+            case 'BlockInfoGrid':
+              return <BlockInfoGrid key={index} {...block} />;
             default:
               throw new UnreachableCaseError(block);
           }
