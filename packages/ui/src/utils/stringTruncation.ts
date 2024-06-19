@@ -13,12 +13,17 @@ export const truncateString = ({
   const words = value.split(' ');
 
   let result = '';
-  for (const word of words) {
-    if (result.length + word.length + 1 > maxChar) {
-      break;
+  words.forEach((word, index) => {
+    if (index === 0) {
+      // Skip the first word
+      result = word;
+      return;
     }
-    result += (result ? ' ' : '') + word;
-  }
+    if (result.length + word.length + 1 > maxChar) {
+      return;
+    }
+    result += ' ' + word;
+  });
 
   return result + '...';
 };

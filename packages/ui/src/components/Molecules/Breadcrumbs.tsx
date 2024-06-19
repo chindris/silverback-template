@@ -40,12 +40,12 @@ export function BreadCrumbs() {
                   <div aria-hidden="true">
                     <ChevronRightIcon
                       className={
-                        'hidden sm:flex rotate-180 sm:rotate-0 w-4 h-4 text-gray-400 mr-4'
+                        'hidden xl:flex rotate-180 xl:rotate-0 w-4 h-4 text-gray-400 mr-4'
                       }
                     />
                   </div>
                   <button
-                    className="mr-4 hidden sm:flex items-center rounded-sm px-1 py-2 bg-gray-100 hover:bg-gray-200 h-2"
+                    className="mr-4 hidden xl:flex items-center rounded-sm px-1 py-2 bg-gray-100 hover:bg-gray-200 h-2"
                     onClick={() => {
                       setHideInnerBreadcrumbs(false);
                       setToggleMoreBreadcrumbs(true);
@@ -59,7 +59,7 @@ export function BreadCrumbs() {
                 className={clsx(
                   '',
                   index < breadcrumbs.length - 1
-                    ? 'hidden sm:inline-flex sm:items-center'
+                    ? 'hidden xl:inline-flex xl:items-center'
                     : 'inline-flex items-center',
                 )}
                 key={id}
@@ -76,7 +76,7 @@ export function BreadCrumbs() {
                   >
                     <ChevronRightIcon
                       className={
-                        'rotate-180 sm:rotate-0 w-4 h-4 text-gray-400 mr-4'
+                        'rotate-180 xl:rotate-0 w-4 h-4 text-gray-400 mr-4'
                       }
                     />
                   </div>
@@ -88,7 +88,7 @@ export function BreadCrumbs() {
                     'inline-flex items-center text-sm font-medium hover:text-blue-600 whitespace-nowrap',
                     index < breadcrumbs.length - 1 &&
                       hideInnerBreadcrumbs !== true
-                      ? 'hidden sm:inline-flex sm:items-center'
+                      ? 'hidden xl:inline-flex xl:items-center'
                       : 'inline-flex items-center',
                     hideInnerBreadcrumbs === true &&
                       index > 0 &&
@@ -108,7 +108,7 @@ export function BreadCrumbs() {
                     </svg>
                   )}
                   <span className="mr-4">
-                    {truncateString({ value: title, maxChar: 20 })}
+                    {truncateString({ value: title, maxChar: 25 })}
                   </span>
                 </Link>
               </li>
