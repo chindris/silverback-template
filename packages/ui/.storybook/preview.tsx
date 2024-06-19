@@ -102,6 +102,14 @@ export const parameters = {
           id: 'landmark-unique',
           reviewOnFail: true,
         },
+        {
+          id: 'button-name',
+          reviewOnFail: true,
+        },
+        {
+          id: 'list',
+          reviewOnFail: true,
+        },
       ],
     },
     // Axe's options parameter
