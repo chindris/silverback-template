@@ -26,6 +26,27 @@ function gutenberg_blocks_form_node_form_alter(&$form, FormStateInterface $form_
   /** @var \Drupal\node\NodeInterface $node */
   $node = $form_state->getFormObject()->getEntity();
   if (Utils::getGutenbergFields($node)) {
+    $form['actions']['decoupled_preview_link'] = [
+      '#type' => 'link',
+      '#title' => t('Preview'),
+      '#url' => \Drupal\Core\Url::fromRoute('gutenberg_blocks.preview', ['node' => $node->id()]),
+      '#attributes' => [
+        'class' => [
+          'use-ajax',
+          'button',
+          'button--primary',
+        ],
+        'data-dialog-type' => 'dialog',
+        'data-dialog-renderer' => 'off_canvas',
+        // @todo use "left" as a hack to fix styling.
+        'data-dialog-options' => '{"width":"40%", "drupalOffCanvasPosition":"side"}',
+      ],
+      '#attached' => [
+        'library' => [
+          'core/drupal.dialog.ajax',
+        ],
+      ],
+    ];
 
     // Load all open webforms and populate them into drupalSettings.
     $languageManager = \Drupal::languageManager();

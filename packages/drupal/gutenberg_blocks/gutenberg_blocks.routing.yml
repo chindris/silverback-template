@@ -1,0 +1,11 @@
+gutenberg_blocks.preview:
+  path: '/admin/gutenberg/preview/{node}'
+  defaults:
+    _title: 'Preview'
+    _controller: '\Drupal\gutenberg_blocks\Controller\PreviewController'
+  requirements:
+    _permission: 'use external preview'
+  options:
+    parameters:
+      node:
+        type: entity:node

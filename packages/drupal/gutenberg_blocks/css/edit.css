@@ -101,7 +101,11 @@
   text-decoration: none;
 }
 
-.gutenberg__editor .drupal-preview-sidebar {
+.gutenberg__editor .drupal-preview-sidebar,
+.gutenberg__editor
+  .drupal-preview-sidebar
+  .interface-complementary-area-header {
+  width: 500px;
 }
 
 .gutenberg__editor .drupal-preview-sidebar--header button {
@@ -113,4 +117,24 @@
 
 .gutenberg__editor .drupal-preview-sidebar--iframe-wrapper iframe {
   border: none;
+}
+
+.ui-dialog-off-canvas .ui-dialog-position-side {
+  /* @todo left */
+}
+
+.js-off-canvas-dialog-open
+  .gutenberg__editor
+  .interface-interface-skeleton__editor {
+  flex: 0 1 60% !important;
+}
+
+.ui-dialog-off-canvas {
+  background-color: #fff !important;
+}
+
+.ui-dialog-off-canvas iframe {
+  width: 100% !important;
+  height: 900px !important;
+  border: none !important;
 }
