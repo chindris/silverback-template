@@ -101,16 +101,6 @@
   text-decoration: none;
 }
 
-/* This is set by the Gutenberg module */
-/* Provide a patch to remove !important */
-/*
-@media screen and (min-width: 85.375rem) {
-  .interface-complementary-area.edit-post-sidebar {
-    width: 380px !important;
-  }
-}
-*/
-
 .gutenberg__editor .drupal-preview-sidebar {
   min-width: 350px;
   border-right: 1px solid #e0e0e0;

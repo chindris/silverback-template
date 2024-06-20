@@ -1,0 +1,16 @@
+diff --git a/css/claro.css b/css/claro.css
+index 720c3a8..9c5ad05 100644
+--- a/css/claro.css
++++ b/css/claro.css
+@@ -44,8 +44,8 @@
+ 
+ @media screen and (min-width: 85.375rem) {
+   .interface-complementary-area.edit-post-sidebar {
+-    width: 380px !important;
++    width: 380px;
+   }
+ }
+ 
+-/*# sourceMappingURL=claro.css.map */
+\ No newline at end of file
++/*# sourceMappingURL=claro.css.map */
