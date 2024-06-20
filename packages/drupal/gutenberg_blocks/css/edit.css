@@ -119,6 +119,13 @@
   flex-grow: 1;
 }
 
+.gutenberg__editor
+  .drupal-preview-sidebar
+  .drupal-preview-sidebar--iframe-wrapper
+  iframe {
+  height: 100vh;
+}
+
 .gutenberg__editor .drupal-preview-sidebar .interface-complementary-area-header,
 .gutenberg__editor
   .drupal-preview-sidebar
