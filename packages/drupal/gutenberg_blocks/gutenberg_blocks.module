@@ -48,6 +48,23 @@ function gutenberg_blocks_form_node_form_alter(&$form, FormStateInterface $form_
       ],
     ];
 
+    $form['actions']['preview_link'] = [
+      '#type' => 'link',
+      '#title' => t('Preview'),
+      '#url' => \Drupal\Core\Url::fromRoute('gutenberg_blocks.preview', ['node' => $node->id()]),
+      '#attributes' => [
+        'class' => [
+          'button',
+          'button--primary',
+        ],
+      ],
+      '#attached' => [
+        'library' => [
+          'gutenberg_blocks/preview',
+        ],
+      ],
+    ];
+
     // Load all open webforms and populate them into drupalSettings.
     $languageManager = \Drupal::languageManager();
     $originalLanguage = $languageManager->getConfigOverrideLanguage();

@@ -101,11 +101,33 @@
   text-decoration: none;
 }
 
-.gutenberg__editor .drupal-preview-sidebar,
+/* This is set by the Gutenberg module */
+/* Provide a patch to remove !important */
+/*
+@media screen and (min-width: 85.375rem) {
+  .interface-complementary-area.edit-post-sidebar {
+    width: 380px !important;
+  }
+}
+*/
+
+.gutenberg__editor .drupal-preview-sidebar {
+  min-width: 500px;
+  border-right: 1px solid #e0e0e0;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.gutenberg__editor .drupal-preview-sidebar .interface-complementary-area-header,
 .gutenberg__editor
   .drupal-preview-sidebar
-  .interface-complementary-area-header {
-  width: 500px;
+  .interface-complementary-area.edit-post-sidebar {
+  width: 100%;
+}
+
+.gutenberg__editor .drupal-preview-sidebar--header {
+  margin: 10px;
 }
 
 .gutenberg__editor .drupal-preview-sidebar--header button {
