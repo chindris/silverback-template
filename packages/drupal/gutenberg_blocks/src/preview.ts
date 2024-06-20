@@ -4,7 +4,7 @@
     attach: function (context) {
       $(once('gutenbergBlocksPreview', '.gutenberg-full-editor', context)).each(
         function () {
-          $('#edit-preview-link').on('click', function (e) {
+          $('#edit-preview-link').on('click', function (e: Event) {
             e.preventDefault();
 
             const previewUrl = drupalSettings.preview.previewUrl;
