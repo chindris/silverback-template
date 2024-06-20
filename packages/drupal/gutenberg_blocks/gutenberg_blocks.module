@@ -62,3 +62,16 @@ function gutenberg_blocks_form_node_form_alter(&$form, FormStateInterface $form_
     $form['#attached']['drupalSettings']['customGutenbergBlocks']['forms'] = array_values($forms);
   }
 }
+
+/**
+ * Implements hook_toolbar_alter().
+ */
+function gutenberg_blocks_toolbar_alter(&$items) {
+  // Unset the preview button from the toolbar for now,
+  // as it's a duplicate of the one in the editor.
+  // This could be configurable in the silverback_external_preview module
+  // based on routes.
+  if (array_key_exists('silverback_external_preview', $items)) {
+    unset($items['silverback_external_preview']);
+  }
+}
