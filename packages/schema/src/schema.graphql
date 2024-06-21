@@ -9,6 +9,11 @@ implementation(drupal): custom.menus::getMenuTranslations
 directive @menuTranslations(menu_id: String!) on FIELD_DEFINITION
 
 """
+implementation(drupal): custom.translatables::all
+"""
+directive @translatables(context: String!) on FIELD_DEFINITION
+
+"""
 implementation(drupal): custom.webform::url
 """
 directive @webformIdToUrl(id: String!) on FIELD_DEFINITION
@@ -65,7 +70,7 @@ directive @decapPageTranslations on FIELD_DEFINITION
 
 """
 Parse a given Url.
-For Drupal, this is implicitly implemented in the "grraphql_directives" module.
+For Drupal, this is implicitly implemented in the "graphql_directives" module.
 
 implementation(gatsby): ./page.js#route
 """
@@ -328,24 +333,27 @@ type Query {
   previewDrupalPage(id: ID!, rid: ID, locale: String!): DrupalPage
     @fetchEntity(type: "node", id: "$id", rid: "$rid", language: "$locale")
 
-  mainNavigations: [MainNavigation]
-    @gatsbyNodes(type: "MainNavigation")
-    @menuTranslations(menu_id: "main")
+  mainNavigations: [MainNavigation] @menuTranslations(menu_id: "main")
 
-  footerNavigations: [FooterNavigation]
-    @gatsbyNodes(type: "FooterNavigation")
-    @menuTranslations(menu_id: "footer")
+  footerNavigations: [FooterNavigation] @menuTranslations(menu_id: "footer")
 
-  allPages: [Page] @gatsbyNodes(type: "Page")
-  websiteSettings: WebsiteSettings
+  ssgPages(args: String): SSGPagesResult
+    @drupalView(id: "ssg_pages:default", args: "$args")
+
+  websiteSettings: WebsiteSettings @loadEntity(type: "config_pages", id: "1")
+
   viewPage(path: String!): Page @route(path: "$path") @loadEntity
 
   contentHub(locale: Locale!, args: String): ContentHubResult!
     @lang(code: "$locale")
     @drupalView(id: "content_hub:default", args: "$args")
 
-  stringTranslations: [TranslatableString!]
-    @gatsbyNodes(type: "TranslatableString")
+  stringTranslations: [TranslatableString!] @translatables(context: "gatsby")
+}
+
+type SSGPagesResult {
+  total: Int!
+  rows: [Page]!
 }
 
 type Mutation {
@@ -392,9 +400,8 @@ type DemoBlock {
 
 """
 The type provided by translations source (e.g. Decap or Drupal).
-Ingested by @mergeTranslatableStrings which handles priorities.
 """
-interface TranslatableString @default @value {
+interface TranslatableString @value(string: "drupal") @default @value {
   """
   The default message, used in the UI.
   """
@@ -409,15 +416,14 @@ interface TranslatableString @default @value {
   translation: String
 }
 
-type DecapTranslatableString implements TranslatableString
-  @sourceFrom(fn: "getTranslatables") {
+type DecapTranslatableString implements TranslatableString @type(id: "decap") {
   source: String!
   language: Locale!
   translation: String
 }
 
 type DrupalTranslatableString implements TranslatableString
-  @translatableString(contextPrefix: "gatsby") {
+  @type(id: "drupal") {
   source: String!
   language: Locale!
   translation: String

@@ -1,5 +1,5 @@
+import { useIntl } from '@amazeelabs/react-intl';
 import { FrameQuery, NavigationItem, Url, useLocation } from '@custom/schema';
-import { useIntl } from 'react-intl';
 
 import { useOperation } from '../../utils/operation';
 

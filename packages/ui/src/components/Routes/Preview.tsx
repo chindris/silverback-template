@@ -1,3 +1,4 @@
+'use client';
 import type { OperationVariables } from '@custom/schema';
 import { PreviewDrupalPageQuery, useLocation } from '@custom/schema';
 import React from 'react';

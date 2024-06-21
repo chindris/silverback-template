@@ -1,5 +1,10 @@
-query ListPages {
-  allPages {
-    path
+query ListPages($args: String!) {
+  ssgPages(args: $args) {
+    rows {
+      translations {
+        path
+      }
+    }
+    total
   }
 }

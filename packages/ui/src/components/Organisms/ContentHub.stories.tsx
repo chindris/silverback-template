@@ -1,7 +1,7 @@
 import {
   ContentHubQuery,
   ContentHubResultItemFragment,
-  OperationExecutor,
+  OperationExecutorsProvider,
   OperationResult,
   OperationVariables,
   Url,
@@ -26,9 +26,11 @@ export default {
   title: 'Components/Organisms/ContentHub',
   render: (args) => {
     return (
-      <OperationExecutor executor={args.exec} id={ContentHubQuery}>
+      <OperationExecutorsProvider
+        executors={[{ executor: args.exec, id: ContentHubQuery }]}
+      >
         <ContentHub pageSize={pageSize} />
-      </OperationExecutor>
+      </OperationExecutorsProvider>
     );
   },
 } satisfies Meta<{ exec: ContentHubExecutor }>;
@@ -58,7 +60,7 @@ export const Error = {
   },
 } satisfies ContentHubStory;
 
-export const WithResults = {
+export const WithResults: ContentHubStory = {
   args: {
     exec: async (_, vars) => {
       const items = [...Array(82).keys()].map(
@@ -93,18 +95,18 @@ export const WithResults = {
       };
     },
   },
-} satisfies ContentHubStory;
+};
 
-export const Filtered = {
+export const Filtered: ContentHubStory = {
   ...WithResults,
   parameters: {
     location: new URL('local:/content-hub?keyword=Article'),
   },
-} satisfies ContentHubStory;
+};
 
-export const Paged = {
+export const Paged: ContentHubStory = {
   ...WithResults,
   parameters: {
     location: new URL('local:/content-hub?page=2'),
   },
-} satisfies ContentHubStory;
+};

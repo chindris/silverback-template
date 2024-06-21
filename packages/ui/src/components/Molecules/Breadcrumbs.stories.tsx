@@ -1,4 +1,4 @@
-import { FrameQuery, OperationExecutor } from '@custom/schema';
+import { FrameQuery, OperationExecutorsProvider } from '@custom/schema';
 import { Meta } from '@storybook/react';
 import React from 'react';
 
@@ -16,9 +16,11 @@ export default {
 export const Default = {
   render: () => {
     return (
-      <OperationExecutor executor={FrameStory.args} id={FrameQuery}>
+      <OperationExecutorsProvider
+        executors={[{ executor: FrameStory.args, id: FrameQuery }]}
+      >
         <BreadCrumbs />
-      </OperationExecutor>
+      </OperationExecutorsProvider>
     );
   },
 };

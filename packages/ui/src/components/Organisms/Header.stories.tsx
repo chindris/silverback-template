@@ -1,4 +1,9 @@
-import { FrameQuery, Locale, OperationExecutor, Url } from '@custom/schema';
+import {
+  FrameQuery,
+  Locale,
+  OperationExecutorsProvider,
+  Url,
+} from '@custom/schema';
 import { Meta, StoryObj } from '@storybook/react';
 import { userEvent, within } from '@storybook/test';
 import React from 'react';
@@ -16,9 +21,11 @@ export default {
 export const Idle = {
   render: (args) => {
     return (
-      <OperationExecutor id={FrameQuery} executor={() => args}>
+      <OperationExecutorsProvider
+        executors={[{ id: FrameQuery, executor: args }]}
+      >
         <Header />
-      </OperationExecutor>
+      </OperationExecutorsProvider>
     );
   },
   args: {

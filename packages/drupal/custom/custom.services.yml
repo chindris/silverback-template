@@ -10,3 +10,7 @@ services:
 
   custom.menus:
     class: Drupal\custom\Menus
+
+  custom.translatables:
+    class: Drupal\custom\Translatables
+    arguments: ['@language_manager', '@locale.storage', '@database']
