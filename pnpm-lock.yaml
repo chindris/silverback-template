@@ -16,7 +16,7 @@ importers:
     devDependencies:
       '@commitlint/cli':
         specifier: ^18.4.3
-        version: 18.4.3(@types/node@18.19.31)(typescript@5.3.3)
+        version: 18.4.3(@types/node@20.11.17)(typescript@5.3.3)
       '@commitlint/config-conventional':
         specifier: ^18.4.3
         version: 18.4.3
@@ -64,7 +64,7 @@ importers:
         version: 5.3.3
       vitest:
         specifier: ^1.1.1
-        version: 1.1.1(@types/node@18.19.31)
+        version: 1.1.1(@types/node@20.11.17)
 
   apps/cms:
     dependencies:
@@ -201,6 +201,9 @@ importers:
       express-ws:
         specifier: ^5.0.2
         version: 5.0.2(express@4.19.2)
+      platformsh-config:
+        specifier: ^2.4.1
+        version: 2.4.1
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -340,6 +343,9 @@ importers:
       netlify-cli:
         specifier: ^17.21.1
         version: 17.21.1(@types/node@20.11.17)
+      platformsh-config:
+        specifier: ^2.4.1
+        version: 2.4.1
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -565,7 +571,7 @@ importers:
     devDependencies:
       '@amazeelabs/bridge-storybook':
         specifier: ^1.2.8
-        version: 1.2.8(@storybook/addon-actions@8.1.6)(happy-dom@12.10.3)(playwright@1.43.1)(react@18.2.0)
+        version: 1.2.8(@storybook/addon-actions@8.1.6)(happy-dom@12.10.3)(playwright@1.44.1)(react@18.2.0)
       '@amazeelabs/cloudinary-responsive-image':
         specifier: ^1.6.15
         version: 1.6.15
@@ -637,7 +643,7 @@ importers:
         version: 10.4.16(postcss@8.4.32)
       axe-playwright:
         specifier: ^2.0.1
-        version: 2.0.1(playwright@1.43.1)
+        version: 2.0.1(playwright@1.44.1)
       cssnano:
         specifier: ^6.0.3
         version: 6.0.3(postcss@8.4.32)
@@ -779,7 +785,7 @@ packages:
       - webdriverio
     dev: false
 
-  /@amazeelabs/bridge-storybook@1.2.8(@storybook/addon-actions@8.1.6)(happy-dom@12.10.3)(playwright@1.43.1)(react@18.2.0):
+  /@amazeelabs/bridge-storybook@1.2.8(@storybook/addon-actions@8.1.6)(happy-dom@12.10.3)(playwright@1.44.1)(react@18.2.0):
     resolution: {integrity: sha512-cM0IS1pZayNDPIc//8qKglo09RgTC0gCqCRKP5i3AuFAKZiLNZxGOWwwhS4aB2q81nBnzrAVj22rnyaaqEUpdw==}
     peerDependencies:
       '@storybook/addon-actions': '>=7.6.7'
@@ -790,7 +796,7 @@ packages:
     optionalDependencies:
       '@types/react': 18.2.46
       typescript: 5.4.4
-      vitest: 0.34.6(happy-dom@12.10.3)(playwright@1.43.1)
+      vitest: 0.34.6(happy-dom@12.10.3)(playwright@1.44.1)
     transitivePeerDependencies:
       - '@edge-runtime/vm'
       - '@vitest/browser'
@@ -2678,14 +2684,14 @@ packages:
     resolution: {integrity: sha512-Ir+AOibqzrIsL6ajt3Rz3LskB7OiMVHqltZmspbW/TJuTVuyOMirVqAkjfY6JISiLHgyNqicAC8AyHHGzNd/dA==}
     engines: {node: '>=0.1.90'}
 
-  /@commitlint/cli@18.4.3(@types/node@18.19.31)(typescript@5.3.3):
+  /@commitlint/cli@18.4.3(@types/node@20.11.17)(typescript@5.3.3):
     resolution: {integrity: sha512-zop98yfB3A6NveYAZ3P1Mb6bIXuCeWgnUfVNkH4yhIMQpQfzFwseadazOuSn0OOfTt0lWuFauehpm9GcqM5lww==}
     engines: {node: '>=v18'}
     hasBin: true
     dependencies:
       '@commitlint/format': 18.6.1
       '@commitlint/lint': 18.6.1
-      '@commitlint/load': 18.6.1(@types/node@18.19.31)(typescript@5.3.3)
+      '@commitlint/load': 18.6.1(@types/node@20.11.17)(typescript@5.3.3)
       '@commitlint/read': 18.6.1
       '@commitlint/types': 18.6.1
       execa: 5.1.1
@@ -2756,7 +2762,7 @@ packages:
       '@commitlint/types': 18.6.1
     dev: true
 
-  /@commitlint/load@18.6.1(@types/node@18.19.31)(typescript@5.3.3):
+  /@commitlint/load@18.6.1(@types/node@20.11.17)(typescript@5.3.3):
     resolution: {integrity: sha512-p26x8734tSXUHoAw0ERIiHyW4RaI4Bj99D8YgUlVV9SedLf8hlWAfyIFhHRIhfPngLlCe0QYOdRKYFt8gy56TA==}
     engines: {node: '>=v18'}
     dependencies:
@@ -2766,7 +2772,7 @@ packages:
       '@commitlint/types': 18.6.1
       chalk: 4.1.2
       cosmiconfig: 8.3.6(typescript@5.3.3)
-      cosmiconfig-typescript-loader: 5.0.0(@types/node@18.19.31)(cosmiconfig@8.3.6)(typescript@5.3.3)
+      cosmiconfig-typescript-loader: 5.0.0(@types/node@20.11.17)(cosmiconfig@8.3.6)(typescript@5.3.3)
       lodash.isplainobject: 4.0.6
       lodash.merge: 4.6.2
       lodash.uniq: 4.5.0
@@ -10767,7 +10773,7 @@ packages:
       vite: ^4 || ^5
     dependencies:
       '@swc/core': 1.4.13
-      vite: 5.0.10(@types/node@20.11.17)
+      vite: 5.0.10(@types/node@18.0.0)
     transitivePeerDependencies:
       - '@swc/helpers'
     dev: true
@@ -12434,7 +12440,7 @@ packages:
       rimraf: 3.0.2
     dev: true
 
-  /axe-playwright@2.0.1(playwright@1.43.1):
+  /axe-playwright@2.0.1(playwright@1.44.1):
     resolution: {integrity: sha512-MHjNjGARulF9XzqSfspmNjw+tpBz4x9o1VlTuLWEUW9fqzhn+xWa1qEpuOIQPbsRWQiLfooDjQAunLeE0PM5AQ==}
     peerDependencies:
       playwright: '>1.0.0'
@@ -12444,7 +12450,7 @@ packages:
       axe-html-reporter: 2.2.3(axe-core@4.7.0)
       junit-report-builder: 3.2.1
       picocolors: 1.0.0
-      playwright: 1.43.1
+      playwright: 1.44.1
     dev: true
 
   /axios@0.21.4(debug@4.3.4):
@@ -14178,7 +14184,7 @@ packages:
       object-assign: 4.1.1
       vary: 1.1.2
 
-  /cosmiconfig-typescript-loader@5.0.0(@types/node@18.19.31)(cosmiconfig@8.3.6)(typescript@5.3.3):
+  /cosmiconfig-typescript-loader@5.0.0(@types/node@20.11.17)(cosmiconfig@8.3.6)(typescript@5.3.3):
     resolution: {integrity: sha512-+8cK7jRAReYkMwMiG+bxhcNKiHJDM6bR9FD/nGBXOWdMLuYawjF5cGrtLilJ+LGd3ZjCXnJjR5DkfWPoIVlqJA==}
     engines: {node: '>=v16'}
     peerDependencies:
@@ -14186,7 +14192,7 @@ packages:
       cosmiconfig: '>=8.2'
       typescript: '>=4'
     dependencies:
-      '@types/node': 18.19.31
+      '@types/node': 20.11.17
       cosmiconfig: 8.3.6(typescript@5.3.3)
       jiti: 1.21.0
       typescript: 5.3.3
@@ -26123,6 +26129,10 @@ packages:
   /platform@1.3.6:
     resolution: {integrity: sha512-fnWVljUchTro6RiCFvCXBbNhJc2NijN7oIQxbwsyL0buWJPG85v81ehlHI9fXrJsMNgTofEoWIQeClKpgxFLrg==}
 
+  /platformsh-config@2.4.1:
+    resolution: {integrity: sha512-7uiWcjhP0Q7/MDBpdcaZG5X4lCMXcU1va9h4yJZyAAtMpHZoogd/C/+5ucc94z3W40FJwf07MO5p15ZrGzDfQA==}
+    dev: false
+
   /playwright-core@1.43.1:
     resolution: {integrity: sha512-EI36Mto2Vrx6VF7rm708qSnesVQKbxEWvPrfA1IPY6HgczBplDx7ENtx+K2n4kJ41sLLkuGfmb0ZLSSXlDhqPg==}
     engines: {node: '>=16'}
@@ -32320,6 +32330,7 @@ packages:
       - sugarss
       - supports-color
       - terser
+    dev: true
     optional: true
 
   /vite-node@1.1.1(@types/node@18.0.0):
@@ -32332,27 +32343,6 @@ packages:
       pathe: 1.1.2
       picocolors: 1.0.0
       vite: 5.2.8(@types/node@18.0.0)
-    transitivePeerDependencies:
-      - '@types/node'
-      - less
-      - lightningcss
-      - sass
-      - stylus
-      - sugarss
-      - supports-color
-      - terser
-    dev: true
-
-  /vite-node@1.1.1(@types/node@18.19.31):
-    resolution: {integrity: sha512-2bGE5w4jvym5v8llF6Gu1oBrmImoNSs4WmRVcavnG2me6+8UQntTqLiAMFyiAobp+ZXhj5ZFhI7SmLiFr/jrow==}
-    engines: {node: ^18.0.0 || >=20.0.0}
-    hasBin: true
-    dependencies:
-      cac: 6.7.14
-      debug: 4.3.4
-      pathe: 1.1.2
-      picocolors: 1.0.0
-      vite: 5.2.8(@types/node@18.19.31)
     transitivePeerDependencies:
       - '@types/node'
       - less
@@ -32538,6 +32528,8 @@ packages:
       rollup: 4.14.1
     optionalDependencies:
       fsevents: 2.3.3
+    dev: false
+    optional: true
 
   /vite@5.2.8(@types/node@20.11.17):
     resolution: {integrity: sha512-OyZR+c1CE8yeHw5V5t59aXsUPPVTHMDjEZz8MgguLL/Q7NblxhZUlTu9xSPqlsUO/y+X7dlU05jdhvyycD55DA==}
@@ -32573,6 +32565,7 @@ packages:
       rollup: 4.14.1
     optionalDependencies:
       fsevents: 2.3.3
+    dev: true
 
   /vitest@0.34.6:
     resolution: {integrity: sha512-+5CALsOvbNKnS+ZHMXtuUC7nL8/7F1F2DnHGjSsszX8zCjWSSviphCb/NuS9Nzf4Q03KyyDRBAXhF/8lffME4Q==}
@@ -32675,7 +32668,7 @@ packages:
     dependencies:
       '@types/chai': 4.3.14
       '@types/chai-subset': 1.3.5
-      '@types/node': 20.11.17
+      '@types/node': 18.19.31
       '@vitest/expect': 0.34.6
       '@vitest/runner': 0.34.6
       '@vitest/snapshot': 0.34.6
@@ -32688,15 +32681,15 @@ packages:
       debug: 4.3.4
       happy-dom: 12.10.3
       local-pkg: 0.4.3
-      magic-string: 0.30.10
+      magic-string: 0.30.9
       pathe: 1.1.2
       picocolors: 1.0.0
       std-env: 3.7.0
       strip-literal: 1.3.0
       tinybench: 2.6.0
       tinypool: 0.7.0
-      vite: 5.2.8(@types/node@20.11.17)
-      vite-node: 0.34.6(@types/node@20.11.17)
+      vite: 5.2.8(@types/node@18.19.31)
+      vite-node: 0.34.6(@types/node@18.19.31)
       why-is-node-running: 2.2.2
     transitivePeerDependencies:
       - less
@@ -32709,7 +32702,7 @@ packages:
     dev: false
     optional: true
 
-  /vitest@0.34.6(happy-dom@12.10.3)(playwright@1.43.1):
+  /vitest@0.34.6(happy-dom@12.10.3)(playwright@1.44.1):
     resolution: {integrity: sha512-+5CALsOvbNKnS+ZHMXtuUC7nL8/7F1F2DnHGjSsszX8zCjWSSviphCb/NuS9Nzf4Q03KyyDRBAXhF/8lffME4Q==}
     engines: {node: '>=v14.18.0'}
     hasBin: true
@@ -32759,7 +32752,7 @@ packages:
       magic-string: 0.30.10
       pathe: 1.1.2
       picocolors: 1.0.0
-      playwright: 1.43.1
+      playwright: 1.44.1
       std-env: 3.7.0
       strip-literal: 1.3.0
       tinybench: 2.6.0
@@ -32836,7 +32829,7 @@ packages:
       - terser
     dev: true
 
-  /vitest@1.1.1(@types/node@18.19.31):
+  /vitest@1.1.1(@types/node@20.11.17):
     resolution: {integrity: sha512-Ry2qs4UOu/KjpXVfOCfQkTnwSXYGrqTbBZxw6reIYEFjSy1QUARRg5pxiI5BEXy+kBVntxUYNMlq4Co+2vD3fQ==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
@@ -32861,7 +32854,7 @@ packages:
       jsdom:
         optional: true
     dependencies:
-      '@types/node': 18.19.31
+      '@types/node': 20.11.17
       '@vitest/expect': 1.1.1
       '@vitest/runner': 1.1.1
       '@vitest/snapshot': 1.1.1
@@ -32880,8 +32873,8 @@ packages:
       strip-literal: 1.3.0
       tinybench: 2.6.0
       tinypool: 0.8.3
-      vite: 5.2.8(@types/node@18.19.31)
-      vite-node: 1.1.1(@types/node@18.19.31)
+      vite: 5.2.8(@types/node@20.11.17)
+      vite-node: 1.1.1(@types/node@20.11.17)
       why-is-node-running: 2.2.2
     transitivePeerDependencies:
       - less

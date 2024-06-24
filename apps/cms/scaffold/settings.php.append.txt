@@ -65,3 +65,7 @@ if (getenv('LAGOON_ENVIRONMENT') !== 'prod') {
 // Disable key permissions check for Simple OAuth.
 // https://www.drupal.org/project/simple_oauth/issues/3021054
 $settings['simple_oauth.key_permissions_check'] = FALSE;
+
+if (getenv('PLATFORM_PROJECT') && file_exists($app_root . '/' . $site_path . '/settings.platformsh.php')) {
+  include $app_root . '/' . $site_path . '/settings.platformsh.php';
+}

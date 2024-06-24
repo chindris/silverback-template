@@ -13,7 +13,8 @@
 !/web/themes/custom
 
 # Lagoon integrations
-/drush
+/drush/sites
+/drush/Commands
 /.drush-lock-update
 
 # Silverback

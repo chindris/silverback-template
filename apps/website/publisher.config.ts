@@ -1,10 +1,14 @@
 import { defineConfig } from '@amazeelabs/publisher';
+import * as platformsh from 'platformsh-config';
+
+const platformshConfig = platformsh.config();
+const isPlatform = platformshConfig.isValidPlatform();
 
 const isNetlifyEnabled =
   !!process.env.NETLIFY_SITE_ID && !!process.env.NETLIFY_AUTH_TOKEN;
 const isLagoon = !!process.env.LAGOON;
 
-export default defineConfig({
+const defaultConfig = defineConfig({
   commands: {
     build: {
       command: isNetlifyEnabled
@@ -52,3 +56,25 @@ export default defineConfig({
       }
     : undefined,
 });
+
+export default isPlatform
+  ? defineConfig({
+      commands: {
+        build: {
+          command:
+            'echo "Starting fake build" && sleep 5 && echo "Fake build done"',
+          outputTimeout: 1000 * 60 * 10,
+        },
+        clean: 'pnpm clean',
+        serve: {
+          command: 'exit 0',
+          readyPattern: 'Server now ready',
+          readyTimeout: 1000 * 60,
+          port: 7999,
+        },
+        deploy: 'echo "Fake deployment done"',
+      },
+      databaseUrl: '/tmp/publisher.sqlite',
+      publisherPort: platformshConfig.port,
+    })
+  : defaultConfig;

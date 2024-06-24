@@ -28,6 +28,7 @@
     "image-size": "^1.1.1",
     "mime-types": "^2.1.35",
     "netlify-cli": "^17.21.1",
+    "platformsh-config": "^2.4.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
@@ -43,7 +44,7 @@
     "vitest": "^1.1.1"
   },
   "scripts": {
-    "test:static": "tsc --noEmit && eslint '**/*.{ts,tsx,js,jsx}' --ignore-path='./.gitignore'",
+    "test:static": "tsc --noEmit && eslint '**/*.{ts,tsx,js,jsx}' --ignore-path='./.gitignore' --config ../../.eslintrc.json",
     "full-rebuild": "pnpm clean && pnpm build:gatsby",
     "start:drupal": "pnpm run --filter @custom/cms start",
     "build:drupal": "CLOUDINARY_CLOUDNAME=test pnpm start-test start:drupal 8888 build:gatsby",

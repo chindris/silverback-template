@@ -75,7 +75,8 @@
     "drupal/userprotect": "^1.2",
     "drupal/webform": "^6.1.5",
     "drush/drush": "^12.5",
-    "enyo/dropzone": "^5.7.1"
+    "enyo/dropzone": "^5.7.1",
+    "platformsh/config-reader": "^2.4"
   },
   "conflict": {
     "drupal/drupal": "*"
@@ -118,6 +119,7 @@
         },
         "[web-root]/sites/default/all.services.yml": "scaffold/all.services.yml",
         "[web-root]/sites/default/production.settings.php": "scaffold/production.settings.php",
+        "[web-root]/sites/default/settings.platformsh.php": "scaffold/settings.platformsh.php",
         "[web-root]/robots.txt": "scaffold/robots.txt"
       },
       "allowed-packages": [

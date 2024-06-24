@@ -1,0 +1,5 @@
+# Platform.sh env vars. Used for all apps.
+# The file is a script which is executed in Dash.
+
+export PREVIEW_URL=$(echo $PLATFORM_ROUTES | base64 --decode | jq -r 'to_entries[] | select (.value.id == "preview") | .key' | sed 's:/*$::')
+export PUBLISHER_URL=$(echo $PLATFORM_ROUTES | base64 --decode | jq -r 'to_entries[] | select (.value.id == "publisher") | .key' | sed 's:/*$::')

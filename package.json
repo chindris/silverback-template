@@ -21,6 +21,9 @@
     "turbo:test:quick": "pnpm turbo:local && pnpm tb test:unit --no-daemon --go-fallback --output-logs=new-only",
     "turbo:prep": "pnpm turbo:local && pnpm tb prep --no-daemon --go-fallback --output-logs=new-only",
     "turbo:prep:force": "rm -f apps/cms/web/sites/default/files/.sqlite && pnpm tb prep --no-daemon --go-fallback --force",
+    "turbo:prep:cms": "pnpm turbo prep --filter @custom/cms --no-daemon --go-fallback --output-logs=new-only",
+    "turbo:prep:preview": "pnpm turbo prep --filter @custom/preview --no-daemon --go-fallback --output-logs=new-only",
+    "turbo:prep:website": "pnpm turbo prep --filter @custom/website --no-daemon --go-fallback --output-logs=new-only",
     "gutenberg:generate": "pnpm run --filter \"@custom/gutenberg_blocks\" gutenberg:generate"
   },
   "private": true,

@@ -20,7 +20,7 @@
         "web/sites/default/files/**",
         "../../packages/ui/static/stories/webforms/**"
       ],
-      "env": ["CI", "LAGOON"]
+      "env": ["CI", "LAGOON", "PLATFORM_PROJECT"]
     },
     "prep:composer": {
       "inputs": ["composer.json", "composer.lock", "scaffold/**", "patches/**"],
@@ -32,7 +32,8 @@
         "!web/modules/custom/**",
         "!web/themes/custom/**",
         "!web/sites/default/files/**"
-      ]
+      ],
+      "env": ["PLATFORM_PROJECT", "PLATFORM_APPLICATION_NAME"]
     },
     "test:integration": {
       "dependsOn": [

@@ -1,6 +1,13 @@
 import express from 'express';
 import expressWs from 'express-ws';
+import platformsh from 'platformsh-config';
 import { Subject } from 'rxjs';
+
+const platformshConfig = platformsh.config();
+const isPlatform = platformshConfig.isValidPlatform();
+if (platformshConfig.isValidPlatform() && !platformshConfig.inBuild()) {
+  process.env.DRUPAL_URL = platformshConfig.getRoute('cms').url;
+}
 
 const expressServer = express();
 const expressWsInstance = expressWs(expressServer);
@@ -39,7 +46,7 @@ app.get('/__preview/*', (req, _, next) => {
 app.use(express.static('./dist'));
 
 const isLagoon = !!process.env.LAGOON;
-const port = isLagoon ? 3000 : 8001;
+const port = isLagoon ? 3000 : isPlatform ? platformshConfig.port : 8001;
 console.log(`Server is running on port ${port}`);
 
 app.listen({ port, host: '0.0.0.0' });
