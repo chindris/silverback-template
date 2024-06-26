@@ -24,6 +24,7 @@
   "scripts": {
     "prep:types": "tsc --emitDeclarationOnly",
     "prep:scripts": "swc ./src -d ./build",
+    "prep:fonts": "mkdir -p build && node preloaded-fonts.js",
     "prep:styles": "NODE_ENV=production pnpm postcss src/tailwind.css -o build/styles.css",
     "prep:iframe": "NODE_ENV=production pnpm postcss src/iframe.css -o build/iframe.css",
     "prep:gutenberg": "NODE_ENV=production PREFIX=gutenberg pnpm postcss src/tailwind.css -o build/gutenberg.css",
@@ -82,6 +83,7 @@
     "@types/react": "^18.2.46",
     "@types/react-body-classname": "^1.1.10",
     "@types/react-dom": "^18.2.18",
+    "@types/node": "~18.15.3",
     "@vitejs/plugin-react-swc": "^3.5.0",
     "autoprefixer": "^10.4.16",
     "axe-playwright": "^2.0.1",
