@@ -1,16 +1,26 @@
 import { motion, useReducedMotion } from 'framer-motion';
-import React, { PropsWithChildren, useEffect } from 'react';
+import React, { PropsWithChildren, ReactNode, useEffect } from 'react';
 
 import { Messages, readMessages } from './Messages';
 
 export function PageTransition({ children }: PropsWithChildren) {
   const [messages, setMessages] = React.useState<Array<string>>([]);
+  const [messageComponents, setMessageComponents] = React.useState<
+    Array<ReactNode>
+  >([]);
   useEffect(() => {
+    // Standard messages.
     setMessages(readMessages());
+    // Language message.
+    const languageMessage = getLanguageMessage(window.location.href);
+    if (languageMessage) {
+      setMessageComponents([languageMessage]);
+    }
   }, []);
+
   return useReducedMotion() ? (
     <main id="main-content">
-      <Messages messages={messages} />
+      <Messages messages={messages} messageComponents={messageComponents} />
       {children}
     </main>
   ) : (
@@ -26,8 +36,52 @@ export function PageTransition({ children }: PropsWithChildren) {
         duration: 0.3,
       }}
     >
-      <Messages messages={messages} />
+      <Messages messages={messages} messageComponents={messageComponents} />
       {children}
     </motion.main>
   );
+}
+
+function getLanguageMessage(url: string): ReactNode {
+  const urlObject = new URL(url);
+  const contentLanguageNotAvailable =
+    urlObject.searchParams.get('content_language_not_available') === 'true';
+  if (contentLanguageNotAvailable) {
+    const requestedLanguage = urlObject.searchParams.get('requested_language');
+    if (requestedLanguage) {
+      const translations: {
+        [language: string]: { message: string; goBack: string };
+      } = {
+        en: {
+          message: 'This page is not available in the requested language.',
+          goBack: 'Go back',
+        },
+        de: {
+          message:
+            'Diese Seite ist nicht in der angeforderten Sprache verfügbar.',
+          goBack: 'Zurück',
+        },
+      };
+      const translation = translations[requestedLanguage];
+      if (translation) {
+        return (
+          <div>
+            {translation.message}{' '}
+            <a
+              href="#"
+              onClick={() => {
+                window.history.back();
+              }}
+            >
+              {translation.goBack}
+            </a>
+          </div>
+        );
+      } else {
+        console.error(
+          `Requested language "${requestedLanguage}" not found in messages.`,
+        );
+      }
+    }
+  }
 }

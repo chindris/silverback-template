@@ -1,10 +1,18 @@
 import { Html, Markup } from '@custom/schema';
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 // TODO: Style, add stories.
 
-export function Messages(props: { messages: Array<string> }) {
-  return <div>{buildMessages(props.messages)}</div>;
+export function Messages(props: {
+  messages: Array<string>;
+  messageComponents?: Array<ReactNode>;
+}) {
+  return (
+    <div>
+      {buildMessages(props.messages)}
+      {props.messageComponents}
+    </div>
+  );
 }
 
 export const buildMessages = (messages: Array<string>) => (
