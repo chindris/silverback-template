@@ -333,16 +333,15 @@ type Query {
   previewDrupalPage(id: ID!, rid: ID, locale: String!): DrupalPage
     @fetchEntity(type: "node", id: "$id", rid: "$rid", language: "$locale")
 
-  mainNavigations: [MainNavigation]
-    @gatsbyNodes(type: "MainNavigation")
-    @menuTranslations(menu_id: "main")
+  mainNavigations: [MainNavigation] @menuTranslations(menu_id: "main")
 
-  footerNavigations: [FooterNavigation]
-    @gatsbyNodes(type: "FooterNavigation")
-    @menuTranslations(menu_id: "footer")
+  footerNavigations: [FooterNavigation] @menuTranslations(menu_id: "footer")
 
-  allPages: [Page] @gatsbyNodes(type: "Page")
-  websiteSettings: WebsiteSettings
+  ssgPages(args: String): SSGPagesResult
+    @drupalView(id: "ssg_pages:default", args: "$args")
+
+  websiteSettings: WebsiteSettings @loadEntity(type: "config_pages", id: "1")
+
   viewPage(path: String!): Page @route(path: "$path") @loadEntity
 
   contentHub(locale: Locale!, args: String): ContentHubResult!
@@ -350,6 +349,11 @@ type Query {
     @drupalView(id: "content_hub:default", args: "$args")
 
   stringTranslations: [TranslatableString!] @translatables(context: "gatsby")
+}
+
+type SSGPagesResult {
+  total: Int!
+  rows: [Page]!
 }
 
 type Mutation {
