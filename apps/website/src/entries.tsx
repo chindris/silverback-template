@@ -26,7 +26,7 @@ async function query<TOperation extends AnyOperationId>(
   variables: OperationVariables<TOperation>,
 ) {
   const url = new URL(
-    `${process.env.PUBLIC_DRUPAL_URL || 'http://localhost:8888'}/graphql`,
+    `${process.env.PUBLIC_DRUPAL_URL || 'http://127.0.0.1:8888'}/graphql`,
   );
   url.searchParams.set('queryId', operation);
   url.searchParams.set('variables', JSON.stringify(variables || {}));
