@@ -1,6 +1,6 @@
 import {
   CreateSubmissionMutation,
-  OperationExecutor,
+  OperationExecutorsProvider,
   OperationResult,
 } from '@custom/schema';
 import { Meta, StoryObj } from '@storybook/react';
@@ -17,9 +17,11 @@ export default {
   title: 'Components/Molecules/InquiryForm',
   render: (args) => {
     return (
-      <OperationExecutor id={CreateSubmissionMutation} executor={args.exec}>
+      <OperationExecutorsProvider
+        executors={[{ executor: args.exec, id: CreateSubmissionMutation }]}
+      >
         <InquiryForm />
-      </OperationExecutor>
+      </OperationExecutorsProvider>
     );
   },
 } satisfies Meta<{ exec: InquiryFormExecutor }>;

@@ -1,8 +1,9 @@
+'use client';
 import {
   AnyOperationId,
   OperationResult,
   OperationVariables,
-  useExecutor,
+  useOperationExecutor,
 } from '@custom/schema';
 import useSwr, { mutate, SWRResponse } from 'swr';
 import useSWRMutation, { SWRMutationResponse } from 'swr/mutation';
@@ -18,7 +19,7 @@ export function useOperation<TOperation extends AnyOperationId>(
   operation: TOperation,
   variables?: OperationVariables<TOperation>,
 ): Omit<SWRResponse<OperationResult<TOperation>>, 'mutate'> {
-  const executor = useExecutor(operation, variables);
+  const executor = useOperationExecutor(operation, variables);
   // If the executor is a function, use SWR to manage it.
   const result = useSwr<OperationResult<TOperation>>(
     [operation, variables],
@@ -52,7 +53,7 @@ export function useMutation<TOperation extends AnyOperationId>(
   OperationVariables<TOperation>
 > {
   // Mutations don't support variable matching, since it does not make sense.
-  const executor = useExecutor(operation);
+  const executor = useOperationExecutor(operation);
   return useSWRMutation<
     OperationResult<TOperation>,
     string,
