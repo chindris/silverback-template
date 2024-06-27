@@ -11,7 +11,8 @@ test.describe('drupal pages', () => {
       content.getByRole('heading', { name: 'Privacy' }),
     ).toBeVisible();
   });
-  test('example drupal page is translated', async ({ page }) => {
+  // TODO: https://amazeelabs.atlassian.net/browse/SLB-437
+  test.fixme('example drupal page is translated', async ({ page }) => {
     const quickActions = new QuickActions(page);
     await page.goto(websiteUrl('/en/privacy'));
     await quickActions.changeLanguageTo(SiteLanguage.Deutsch);

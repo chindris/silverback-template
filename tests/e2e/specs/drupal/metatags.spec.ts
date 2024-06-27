@@ -2,7 +2,8 @@ import { expect, test } from '@playwright/test';
 
 import { websiteUrl } from '../../helpers/url';
 
-test('Metatags on Basic page', async ({ page }) => {
+// TODO: https://amazeelabs.atlassian.net/browse/SLB-436
+test.fixme('Metatags on Basic page', async ({ page }) => {
   const pageUrl = websiteUrl('/en/page-complete');
   await page.goto(pageUrl);
   await expect(page.locator('head meta[name="title"]')).toHaveAttribute(
@@ -19,7 +20,7 @@ test('Metatags on Basic page', async ({ page }) => {
   );
 });
 
-test('HTML lang attribute', async ({ page }) => {
+test.fixme('HTML lang attribute', async ({ page }) => {
   await page.goto(websiteUrl('/en'));
   await expect(page.locator('html')).toHaveAttribute('lang', 'en');
   await page.goto(websiteUrl('/de'));

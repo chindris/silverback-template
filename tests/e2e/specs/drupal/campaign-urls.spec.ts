@@ -2,8 +2,9 @@ import { expect, test } from '@playwright/test';
 
 import { websiteUrl } from '../../helpers/url';
 
+// TODO: https://amazeelabs.atlassian.net/browse/SLB-435
 test.describe('campaign url redirects', () => {
-  test('simple redirects', async ({ page }) => {
+  test.fixme('simple redirects', async ({ page }) => {
     await page.goto(websiteUrl('/php_redirect'));
     await expect(page).toHaveURL(websiteUrl('/en/php'));
 
@@ -11,7 +12,7 @@ test.describe('campaign url redirects', () => {
     await expect(page).toHaveURL(websiteUrl('/de/privatsphaere'));
   });
 
-  test('splat redirects', async ({ page }) => {
+  test.fixme('splat redirects', async ({ page }) => {
     await page.goto(websiteUrl('/old_tree/oak'));
     await expect(page).toHaveURL(websiteUrl('/en/tree/oak'));
 

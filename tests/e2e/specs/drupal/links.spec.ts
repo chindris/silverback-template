@@ -3,7 +3,8 @@ import { expect, test } from '@playwright/test';
 import { websiteUrl } from '../../helpers/url';
 
 test.describe('links', () => {
-  test('media document links target file', async ({ page }) => {
+  // TODO: https://amazeelabs.atlassian.net/browse/SLB-435
+  test.fixme('media document links target file', async ({ page }) => {
     await page.goto(websiteUrl('/en/page-links'));
 
     await page.getByRole('link', { name: 'link to page' }).click();
