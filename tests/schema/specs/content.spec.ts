@@ -30,10 +30,10 @@ test('Page', async () => {
       }
     }
     {
-      complete: _loadDrupalPage(id: "ef80e284-154b-41fd-9317-154b0a175299") {
+      complete: viewPage(path: "/en/page-complete") {
         ...Page
       }
-      minimal: _loadDrupalPage(id: "17626bb4-557f-48fc-b869-ae566f4ceae6") {
+      minimal: viewPage(path: "/en/page-minimal") {
         ...Page
       }
     }

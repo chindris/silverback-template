@@ -28,9 +28,12 @@ test('Blocks', async () => {
             __typename
             ... on MediaImage {
               __typename
+              source
+              alt
             }
             ... on MediaVideo {
               __typename
+              url
             }
           }
         }
@@ -92,10 +95,10 @@ test('Blocks', async () => {
       }
     }
     {
-      complete: _loadDrupalPage(id: "a397ca48-8fad-411e-8901-0eba2feb989c") {
+      complete: viewPage(path: "/en/blocks-complete") {
         ...Blocks
       }
-      minimal: _loadDrupalPage(id: "ceb9b2a7-4c4c-4084-ada9-d5f6505d466b") {
+      minimal: viewPage(path: "/en/blocks-minimal") {
         ...Blocks
       }
     }
@@ -132,6 +135,8 @@ test('Blocks', async () => {
               "caption": "Media image",
               "media": {
                 "__typename": "MediaImage",
+                "alt": "A beautiful landscape.",
+                "source": "{"src":"http:\\/\\/127.0.0.1:8000\\/sites\\/default\\/files\\/2023-04\\/landscape.jpg","width":2200,"height":1414,"originalSrc":"http:\\/\\/127.0.0.1:8000\\/sites\\/default\\/files\\/2023-04\\/landscape.jpg"}",
               },
             },
             {
@@ -139,6 +144,7 @@ test('Blocks', async () => {
               "caption": "Media video",
               "media": {
                 "__typename": "MediaVideo",
+                "url": "http://127.0.0.1:8000/sites/default/files/2023-06/video_mp4_belt.mp4",
               },
             },
             {
