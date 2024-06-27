@@ -69,3 +69,16 @@ environments:
         schedule: '*/15 * * * *'
         command: drush cron
         service: cli
+  lagoon-waku:
+    routes:
+      - nginx:
+          - waku.cms.amazeelabs.dev
+      - build:
+          - waku.build.amazeelabs.dev
+      - preview:
+          - waku.preview.amazeelabs.dev
+    cronjobs:
+      - name: drush cron
+        schedule: '*/15 * * * *'
+        command: drush cron
+        service: cli
