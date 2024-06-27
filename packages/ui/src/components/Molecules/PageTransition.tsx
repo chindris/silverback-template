@@ -1,8 +1,23 @@
+'use client';
 import { Locale } from '@custom/schema';
-import { motion, useReducedMotion } from 'framer-motion';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import React, { PropsWithChildren, ReactNode, useEffect } from 'react';
 
 import { Messages, readMessages } from './Messages';
+
+export function PageTransitionWrapper({ children }: PropsWithChildren) {
+  return (
+    <main>
+      {useReducedMotion() ? (
+        <>{children}</>
+      ) : (
+        <AnimatePresence mode="wait" initial={false}>
+          {children}
+        </AnimatePresence>
+      )}
+    </main>
+  );
+}
 
 export function PageTransition({ children }: PropsWithChildren) {
   const [messages, setMessages] = React.useState<Array<string>>([]);

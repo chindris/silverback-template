@@ -1,11 +1,10 @@
-import { useLocation } from '@amazeelabs/scalars';
-
-import { Locale } from './generated/index.js';
+// TODO: straight copy of the same file in the UI package
+import { Locale, useLocation } from '@custom/schema';
 
 const locales = Object.values(Locale);
-const defaultLocale: Locale = 'en';
+export const defaultLocale: Locale = 'en';
 
-function isLocale(input: any): input is Locale {
+export function isLocale(input: any): input is Locale {
   return locales.includes(input);
 }
 
