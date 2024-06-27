@@ -1,3 +1,4 @@
+'use client';
 import { Link, Locale, useLocation } from '@custom/schema';
 import { Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
