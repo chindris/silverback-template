@@ -1,11 +1,11 @@
 _core:
   default_config_hash: HaTNbtQe6_A0WF-ZElHNWcv0VK_aqOj5lBEFhAgY85s
-interval: 1000
+interval: 500
 only_on_form_change: false
 active_on:
   content_entity_forms: true
 notification:
-  active: true
+  active: false
   message: 'Updating preview...'
   delay: 500
 allowed_content_entity_types:
