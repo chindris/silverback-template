@@ -9,6 +9,11 @@ implementation(drupal): custom.menus::getMenuTranslations
 directive @menuTranslations(menu_id: String!) on FIELD_DEFINITION
 
 """
+implementation(drupal): custom.translatables::all
+"""
+directive @translatables(context: String!) on FIELD_DEFINITION
+
+"""
 implementation(drupal): custom.webform::url
 """
 directive @webformIdToUrl(id: String!) on FIELD_DEFINITION
@@ -344,8 +349,7 @@ type Query {
     @lang(code: "$locale")
     @drupalView(id: "content_hub:default", args: "$args")
 
-  stringTranslations: [TranslatableString!]
-    @gatsbyNodes(type: "TranslatableString")
+  stringTranslations: [TranslatableString!] @translatables(context: "gatsby")
 }
 
 type Mutation {
@@ -393,7 +397,7 @@ type DemoBlock {
 """
 The type provided by translations source (e.g. Decap or Drupal).
 """
-interface TranslatableString @default @value {
+interface TranslatableString @value(string: "drupal") @default @value {
   """
   The default message, used in the UI.
   """
@@ -408,15 +412,14 @@ interface TranslatableString @default @value {
   translation: String
 }
 
-type DecapTranslatableString implements TranslatableString
-  @sourceFrom(fn: "getTranslatables") {
+type DecapTranslatableString implements TranslatableString @type(id: "decap") {
   source: String!
   language: Locale!
   translation: String
 }
 
 type DrupalTranslatableString implements TranslatableString
-  @translatableString(contextPrefix: "gatsby") {
+  @type(id: "drupal") {
   source: String!
   language: Locale!
   translation: String
