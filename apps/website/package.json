@@ -11,6 +11,7 @@
     "@amazeelabs/publisher": "^2.4.17",
     "@amazeelabs/strangler-netlify": "^1.1.9",
     "@amazeelabs/token-auth-middleware": "^1.1.1",
+    "@babel/preset-typescript": "^7.24.7",
     "@custom/cms": "workspace:*",
     "@custom/decap": "workspace:*",
     "@custom/schema": "workspace:*",
