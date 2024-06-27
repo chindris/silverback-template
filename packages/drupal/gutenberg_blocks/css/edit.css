@@ -147,7 +147,7 @@
 .gutenberg__editor .drupal-preview-sidebar--header select::before,
 .gutenberg__editor .drupal-preview-sidebar--header select::after {
   --size: 0.3rem;
-  content: "";
+  content: '';
   position: absolute;
   right: 1rem;
   pointer-events: none;
