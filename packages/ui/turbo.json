@@ -2,6 +2,10 @@
   "$schema": "https://turborepo.org/schema.json",
   "extends": ["//"],
   "pipeline": {
+    "prep:fonts": {
+      "inputs": ["static/public/fonts/preload/**"],
+      "outputs": ["build/preloaded-fonts.json"]
+    },
     "prep:scripts": {
       "dependsOn": ["^prep"],
       "inputs": [
@@ -48,6 +52,7 @@
     },
     "prep": {
       "dependsOn": [
+        "prep:fonts",
         "prep:types",
         "prep:scripts",
         "prep:styles",
