@@ -1,3 +1,4 @@
+import { Locale } from '@custom/schema';
 import { motion, useReducedMotion } from 'framer-motion';
 import React, { PropsWithChildren, ReactNode, useEffect } from 'react';
 
@@ -50,7 +51,7 @@ function getLanguageMessage(url: string): ReactNode {
     const requestedLanguage = urlObject.searchParams.get('requested_language');
     if (requestedLanguage) {
       const translations: {
-        [language: string]: { message: string; goBack: string };
+        [language in Locale]: { message: string; goBack: string };
       } = {
         en: {
           message: 'This page is not available in the requested language.',
@@ -62,7 +63,7 @@ function getLanguageMessage(url: string): ReactNode {
           goBack: 'Zurück',
         },
       };
-      const translation = translations[requestedLanguage];
+      const translation = translations[requestedLanguage as Locale];
       if (translation) {
         return (
           <div>
