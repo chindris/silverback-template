@@ -8,20 +8,13 @@ export default defineConfig({
   commands: {
     build: {
       command: isNetlifyEnabled
-        ? // Bug: The first incremental build rewrites compilation hashes. This
-          // causes all files to be re-uploaded to Netlify two times:
-          // - on the initial build
-          // - on the first incremental build
-          // The bug cannot be reproduced on a clean Gatsby install, so we
-          // cannot report it.
-          // Workaround: Do a double build on the first build.
-          'if test -d public; then echo "Single build" && pnpm build:gatsby; else echo "Double build" && pnpm build:gatsby && pnpm build:gatsby; fi'
-        : 'DRUPAL_EXTERNAL_URL=http://127.0.0.1:8888 pnpm build:gatsby',
+        ? 'pnpm build:waku'
+        : 'DRUPAL_EXTERNAL_URL=http://127.0.0.1:8888 pnpm build:waku',
       outputTimeout: 1000 * 60 * 10,
     },
     clean: 'pnpm clean',
     serve: {
-      command: 'pnpm netlify dev --cwd=. --dir=public --port=7999',
+      command: 'pnpm netlify dev --cwd=. --dir=dist/public --port=7999',
       readyPattern: 'Server now ready',
       readyTimeout: 1000 * 60,
       port: 7999,
@@ -30,7 +23,7 @@ export default defineConfig({
       ? [
           `pnpm netlify env:set AWS_LAMBDA_JS_RUNTIME nodejs18.x`,
           `pnpm netlify env:set DRUPAL_EXTERNAL_URL ${process.env.DRUPAL_EXTERNAL_URL}`,
-          `pnpm netlify deploy --cwd=. --dir=public --prodIfUnlocked`,
+          `pnpm netlify deploy --cwd=. --dir=dist/public --prodIfUnlocked`,
         ].join(' && ')
       : 'echo "Fake deployment done"',
   },

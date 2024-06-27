@@ -5,7 +5,7 @@
   directory = "netlify/functions"
 
 [build]
-  publish = "public"
+  publish = "dist/public"
   edge_functions = "netlify/edge-functions"
 
 [functions.strangler]

@@ -1,14 +1,19 @@
-import { AnyOperationId, OperationVariables } from '@custom/schema';
+import {
+  AnyOperationId,
+  OperationExecutorsProvider,
+  OperationVariables,
+} from '@custom/schema';
+import React, { PropsWithChildren } from 'react';
 
 /**
  * Create an executor that operates against a Drupal endpoint.
  */
-export function drupalExecutor(endpoint: string, forward: boolean = true) {
+function drupalExecutor(endpoint: string, forward: boolean = true) {
   return async function <OperationId extends AnyOperationId>(
     id: OperationId,
     variables?: OperationVariables<OperationId>,
   ) {
-    const url = new URL(endpoint, window.location.origin);
+    const url = new URL(endpoint);
     const isMutation = id.includes('Mutation:');
     if (isMutation) {
       const { data, errors } = await (
@@ -17,7 +22,7 @@ export function drupalExecutor(endpoint: string, forward: boolean = true) {
           credentials: 'include',
           body: JSON.stringify({
             queryId: id,
-            variables: variables,
+            variables: variables || {},
           }),
           headers: forward
             ? {
@@ -37,7 +42,7 @@ export function drupalExecutor(endpoint: string, forward: boolean = true) {
       return data;
     } else {
       url.searchParams.set('queryId', id);
-      url.searchParams.set('variables', JSON.stringify(variables));
+      url.searchParams.set('variables', JSON.stringify(variables || {}));
       const { data, errors } = await (
         await fetch(url, {
           credentials: 'include',
@@ -56,4 +61,17 @@ export function drupalExecutor(endpoint: string, forward: boolean = true) {
       return data;
     }
   };
+}
+
+export function DrupalExecutor({
+  children,
+  url,
+}: PropsWithChildren<{ url: string }>) {
+  return (
+    <OperationExecutorsProvider
+      executors={[{ executor: drupalExecutor(`${url}/graphql`, false) }]}
+    >
+      {children}
+    </OperationExecutorsProvider>
+  );
 }
