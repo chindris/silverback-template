@@ -1,0 +1,165 @@
+cms:
+  type: 'php:8.2'
+
+  dependencies:
+    php:
+      composer/composer: '^2.1'
+
+  runtime:
+    extensions:
+      - sodium
+
+  relationships:
+    database: 'db:mysql'
+
+  disk: 2048
+
+  mounts:
+    '/apps/cms/web/sites/default/files':
+      source: local
+      source_path: 'files'
+    '/.drush':
+      source: local
+      source_path: 'drush'
+
+  variables:
+    env:
+      NVM_VERSION: v0.39.3
+      NODE_VERSION: v18.20.2
+
+  build:
+    flavor: none
+
+  hooks:
+    build: |
+      set -ex
+
+      # Install NVM and switch to node version defined in env vars. Script from
+      # https://docs.platform.sh/languages/nodejs/node-version.html#use-nvm
+      set +x
+      unset NPM_CONFIG_PREFIX
+      export NVM_DIR="$PLATFORM_APP_DIR/.nvm"
+      if [ ! -d "$PLATFORM_CACHE_DIR/.nvm" ]; then
+          mkdir -p $PLATFORM_CACHE_DIR/.nvm
+      fi
+      ln -s $PLATFORM_CACHE_DIR/.nvm $NVM_DIR
+      if [ ! -d "$PLATFORM_CACHE_DIR/.nvm/versions/node/$NODE_VERSION" ]; then
+          export NVM_INSTALL_FILE="${PLATFORM_CACHE_DIR}/nvm_${NVM_VERSION}_install.sh"
+          if [ ! -f "$NVM_INSTALL_FILE" ]; then
+              wget -nc -O "$NVM_INSTALL_FILE" "https://raw.githubusercontent.com/nvm-sh/nvm/$NVM_VERSION/install.sh"
+          fi
+          bash $NVM_INSTALL_FILE
+      fi
+      [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+      nvm use "$NODE_VERSION" 
+      set -x
+
+      npm install -g pnpm@8.6.12
+      pnpm i
+      pnpm turbo:prep:cms
+
+    deploy: |
+      set -ex
+      cd apps/cms
+      php ./drush/platformsh_generate_drush_yml.php
+      cd web
+      ../vendor/bin/drush -y deploy
+
+  web:
+    locations:
+      '/':
+        root: 'apps/cms/web'
+        expires: 5m
+        passthru: '/index.php'
+        # Deny access to all static files, except those specifically allowed below.
+        allow: false
+        rules:
+          '\.(avif|webp|jpe?g|png|gif|svgz?|css|js|map|ico|bmp|eot|woff2?|otf|ttf)$':
+            allow: true
+          '^/robots\.txt$':
+            allow: true
+          '^/sitemap\.xml$':
+            allow: true
+          # Deny direct access to configuration files.
+          '^/sites/sites\.php$':
+            scripts: false
+          '^/sites/[^/]+/settings.*?\.php$':
+            scripts: false
+
+      '/sites/default/files':
+        allow: true
+        expires: 5m
+        passthru: '/index.php'
+        root: 'apps/cms/web/sites/default/files'
+        scripts: false
+        rules:
+          '^/sites/default/files/(css|js)':
+            expires: 2w
+          # Ensure that private files are not accessible.
+          '^/sites/default/files/private/.*':
+            allow: false
+
+  crons:
+    drupal:
+      spec: '*/15 * * * *'
+      cmd: 'cd apps/cms/web && ../vendor/bin/drush cron'
+
+################################################################################
+
+preview:
+  type: 'nodejs:18'
+
+  disk: 1024
+
+  web:
+    commands:
+      start: cd apps/preview && pnpm start
+
+  build:
+    flavor: none
+
+  hooks:
+    build: |
+      set -ex
+
+      npm install -g pnpm@8.6.12
+      pnpm i
+      pnpm turbo:prep:preview
+
+################################################################################
+
+publisher:
+  type: 'nodejs:18'
+
+  disk: 1024
+
+  mounts:
+    '/apps/website/.cache':
+      source: local
+      source_path: 'cache'
+
+  web:
+    commands:
+      start: cd apps/website && pnpm start
+
+    # The following is required for the WebSockets to work:
+    # https://docs.platform.sh/define-routes.html#websocket-routes
+    upstream:
+      socket_family: tcp
+      protocol: http
+    locations:
+      '/':
+        passthru: true
+        request_buffering:
+          enabled: false
+
+  build:
+    flavor: none
+
+  hooks:
+    build: |
+      set -ex
+
+      npm install -g pnpm@8.6.12
+      pnpm i
+      pnpm turbo:prep:website

@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "vite build --watch",
     "prep": "vite build",
-    "test:static": "tsc --noEmit && eslint \"**/*.{ts,tsx,js,jsx}\" --ignore-path=\"./.eslintignore\"",
+    "test:static": "tsc --noEmit && eslint \"**/*.{ts,tsx,js,jsx}\" --ignore-path=\"./.eslintignore\" --config ../../../.eslintrc.json",
     "test:fix": "tsc --noEmit && eslint \"**/*.{ts,tsx,js,jsx}\" --ignore-path=\"./.eslintignore\" --fix",
     "gutenberg:generate": "node ./scripts/generate-gutenberg-block.js"
   },

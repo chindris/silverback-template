@@ -1,0 +1,21 @@
+'https://cms.{default}/':
+  id: cms
+  type: upstream
+  upstream: 'cms:http'
+  cache:
+    enabled: true
+    cookies: ['/^SS?ESS/', '/^Drupal.visitor/']
+
+'https://preview.{default}/':
+  id: preview
+  type: upstream
+  upstream: 'preview:http'
+
+'https://build.{default}/':
+  id: publisher
+  type: upstream
+  upstream: 'publisher:http'
+  cache:
+    # It's required to disable the cache for the WebSockets to work:
+    # https://docs.platform.sh/define-routes.html#websocket-routes
+    enabled: false
