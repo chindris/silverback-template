@@ -22,42 +22,35 @@
                 id: 'tablet',
                 width: 768,
                 height: 1024,
-                iconPath:
-                  '/modules/contrib/silverback_external_preview/icons/tablet.svg',
               },
               {
                 label: Drupal.t('Laptop'),
                 id: 'laptop',
                 width: 1366,
                 height: 786,
-                iconPath:
-                  '/modules/contrib/silverback_external_preview/icons/laptop.svg',
               },
               {
                 label: Drupal.t('Desktop'),
                 id: 'desktop',
                 width: 1920,
                 height: 1080,
-                iconPath:
-                  '/modules/contrib/silverback_external_preview/icons/desktop.svg',
-              },
-              {
-                label: Drupal.t('Full'),
-                id: 'full',
-                width: -1,
-                height: -1,
-                iconPath:
-                  '/modules/contrib/silverback_external_preview/icons/full.svg',
               },
             ];
 
-            let previewButtons = '';
-            previewSizes.forEach((size) => {
-              previewButtons += `
-                <button
-                  class="components-button is-primary drupal-preview-sidebar--button__${size.id}" 
-                >${size.label}</button>`;
-            });
+            const previewButton = `<button class="components-button is-primary external-preview">${Drupal.t('Preview')} ↗</button>`
+
+            const getPreviewSelect = () => {
+              let previewSelect = '<select class="external-preview">';
+              previewSizes.forEach((size) => {
+                if (size.width <= window.screen.width) {
+                  const selectOption = `<option value="${size.id}">${size.label} (${size.width} x ${size.height})</option>`;
+                  previewSelect += selectOption;
+                }
+              });
+              previewSelect += '</select>';
+              return previewSelect;
+            }
+            const previewSelect = getPreviewSelect();
 
             const previewSidebarMarkup = `
               <div class="interface-interface-skeleton__secondary-sidebar drupal-preview-sidebar" role="region" aria-label="Drupal preview" tabindex="-1">
@@ -80,7 +73,7 @@
                   </div>
                   <div class="drupal-preview-sidebar components-panel">
                     <div class="drupal-preview-sidebar--header">
-                      ${previewButtons}
+                      ${previewSelect} ${previewButton}
                     </div>
                     <div class="drupal-preview-sidebar--iframe-wrapper">
                       <iframe width="100%" height="800px" 
@@ -102,17 +95,26 @@
                   $('.drupal-preview-sidebar').remove();
                 },
               );
-              previewSizes.forEach((size) => {
-                $('.drupal-preview-sidebar--button__' + size.id).on(
-                  'click',
-                  function () {
-                    const windowFeatures =
-                      size.width !== -1 && size.height !== -1
-                        ? `resizable,height=${size.height},width=${size.width}`
-                        : `resizable,height=${screen.height},width=${screen.width}`;
-                    window.open(previewUrl, 'preview', windowFeatures);
-                  },
-                );
+
+              const $previewButton = $('button.external-preview');
+              $('select.external-preview').on(
+                'change',
+                function (event: Event) {
+                  const selectedSize = $(event.target).val();
+                  const size = previewSizes.find((size) => size.id === selectedSize);
+                  if (!size) {
+                    return;
+                  }
+                  $previewButton.data('windowHeight', size.height);
+                  $previewButton.data('windowWidth', size.width);
+                },
+              ).trigger('change');
+              $previewButton.on('click', function (event: Event) {
+                const target = $(event.target);
+                const windowWidth = target.data('windowWidth');
+                const windowHeight = target.data('windowHeight');
+                const windowFeatures = `resizable,height=${windowHeight},width=${windowWidth}`;
+                window.open(previewUrl, 'preview', windowFeatures);
               });
             } else {
               $('.drupal-preview-sidebar').remove();
