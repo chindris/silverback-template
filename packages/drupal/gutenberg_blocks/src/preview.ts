@@ -20,8 +20,8 @@
               {
                 label: Drupal.t('Tablet'),
                 id: 'tablet',
-                width: 1024,
-                height: 824,
+                width: 768,
+                height: 1024,
                 iconPath:
                   '/modules/contrib/silverback_external_preview/icons/tablet.svg',
               },
