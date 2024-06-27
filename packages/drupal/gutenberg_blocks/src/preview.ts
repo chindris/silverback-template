@@ -37,7 +37,7 @@
               },
             ];
 
-            const previewButton = `<button class="components-button is-primary external-preview">${Drupal.t('Preview')} ↗</button>`
+            const previewButton = `<button class="components-button is-primary external-preview">${Drupal.t('Preview')} ↗</button>`;
 
             const getPreviewSelect = () => {
               let previewSelect = '<select class="external-preview">';
@@ -49,7 +49,7 @@
               });
               previewSelect += '</select>';
               return previewSelect;
-            }
+            };
             const previewSelect = getPreviewSelect();
 
             const previewSidebarMarkup = `
@@ -97,18 +97,19 @@
               );
 
               const $previewButton = $('button.external-preview');
-              $('select.external-preview').on(
-                'change',
-                function (event: Event) {
+              $('select.external-preview')
+                .on('change', function (event: Event) {
                   const selectedSize = $(event.target).val();
-                  const size = previewSizes.find((size) => size.id === selectedSize);
+                  const size = previewSizes.find(
+                    (size) => size.id === selectedSize,
+                  );
                   if (!size) {
                     return;
                   }
                   $previewButton.data('windowHeight', size.height);
                   $previewButton.data('windowWidth', size.width);
-                },
-              ).trigger('change');
+                })
+                .trigger('change');
               $previewButton.on('click', function (event: Event) {
                 const target = $(event.target);
                 const windowWidth = target.data('windowWidth');
