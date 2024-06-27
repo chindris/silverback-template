@@ -7,7 +7,7 @@ import { Plugin } from 'unified';
 
 import { FadeUp } from '../../Molecules/FadeUp';
 
-const unorderedItems: Plugin<[], Element> = () => (tree) => {
+export const unorderedItems: Plugin<[], Element> = () => (tree) => {
   selectAll('ul > li', tree).forEach((node) => {
     node.properties!.unordered = true;
   });
