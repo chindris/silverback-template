@@ -7,7 +7,7 @@ active_on:
 notification:
   active: true
   message: 'Updating preview...'
-  delay: 1000
+  delay: 500
 allowed_content_entity_types:
   node:
     bundles:
