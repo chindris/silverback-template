@@ -1,4 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
+import React from 'react';
 
 import { Messages as Component } from './Messages';
 
@@ -21,7 +22,17 @@ export const Info: StoryObj<typeof Component> = {
       '<p>This is a Success message, <a href=#>linked item</a></p>',
     ],
     messageComponents: [
-      'This page is not available in the requested language.',
+      <div key={'test'}>
+        {'This page is not available in the requested language.'}{' '}
+        <a
+          href="#"
+          onClick={() => {
+            window.history.back();
+          }}
+        >
+          {'Go back'}
+        </a>
+      </div>,
     ],
   },
 };
