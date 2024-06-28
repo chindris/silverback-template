@@ -1,5 +1,5 @@
 ul li {
-  @apply !text-base !font-medium !text-gray-900;
+  @apply !font-medium !text-gray-900;
 }
 
 ul {
