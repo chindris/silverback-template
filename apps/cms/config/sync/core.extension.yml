@@ -56,6 +56,8 @@ module:
   path_alias: 0
   phpass: 0
   redirect: 0
+  replicate: 0
+  replicate_ui: 0
   reroute_email: 0
   role_delegation: 0
   serialization: 0

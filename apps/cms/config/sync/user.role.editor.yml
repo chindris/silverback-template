@@ -18,6 +18,7 @@ dependencies:
     - node
     - path
     - redirect
+    - replicate_ui
     - shortcut
     - silverback_external_preview
     - silverback_gatsby
@@ -51,6 +52,7 @@ permissions:
   - 'dropzone upload files'
   - 'edit any page content'
   - 'edit own page content'
+  - 'replicate entities'
   - 'revert page revisions'
   - 'translate editable entities'
   - 'trigger a gatsby build'
