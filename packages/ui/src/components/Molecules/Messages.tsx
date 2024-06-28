@@ -19,19 +19,32 @@ export function Messages(props: {
     setDisplayMessages(props.messages);
   }, [props.messages]);
 
+  const handleRemoveMessage = (index: number) => {
+    const newMessages = displayMessages.filter((_, i) => i !== index);
+    setDisplayMessages(newMessages);
+    storeMessages(newMessages);
+  };
+
   return (
     <div className="container-page">
       <div className="container-content">
-        {buildMessages(displayMessages, setDisplayMessages)}
-        {props.messageComponents}
+        {buildMessages(displayMessages, handleRemoveMessage)}
+        {/* {buildMessages(displayMessages, setDisplayMessages)} */}
       </div>
     </div>
   );
 }
+// export const buildMessages = (messages: Array<string>) => (
+//   <>
+//     {messages.map((message, index) => (
+//       <Html key={index} markup={message as Markup} />
+//     ))}
+//   </>
+// );
 
 export const buildMessages = (
   messages: Array<string>,
-  setDisplayMessages: React.Dispatch<React.SetStateAction<string[]>>,
+  handleRemoveMessage?: (index: number) => void,
 ) => {
   return messages.map((message, index) => (
     <div
@@ -80,33 +93,32 @@ export const buildMessages = (
           }}
         />
       </div>
-      <button
-        type="button"
-        className="ms-auto -m-1.5 bg-blue-50 text-blue-500 rounded-lg focus:ring-2 focus:ring-blue-400 p-1.5 hover:bg-blue-200 inline-flex items-center justify-center h-8 w-8"
-        data-dismiss-target={`#alert-${index + 1}`}
-        onClick={() => {
-          const newMessages = messages.filter((_, i) => i !== index);
-          setDisplayMessages(newMessages);
-        }}
-        aria-label={`Close message ${index + 1}`}
-      >
-        <span className="sr-only">Close</span>
-        <svg
-          className="w-3 h-3"
-          aria-hidden="true"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 14 14"
+      {handleRemoveMessage && (
+        <button
+          type="button"
+          className="ms-auto -m-1.5 bg-blue-50 text-blue-500 rounded-lg focus:ring-2 focus:ring-blue-400 p-1.5 hover:bg-blue-200 inline-flex items-center justify-center h-8 w-8"
+          data-dismiss-target={`#alert-${index + 1}`}
+          onClick={() => handleRemoveMessage(index)}
+          aria-label={`Close message ${index + 1}`}
         >
-          <path
-            stroke="currentColor"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
-          />
-        </svg>
-      </button>
+          <span className="sr-only">Close</span>
+          <svg
+            className="w-3 h-3"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 14 14"
+          >
+            <path
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+            />
+          </svg>
+        </button>
+      )}
     </div>
   ));
 };
