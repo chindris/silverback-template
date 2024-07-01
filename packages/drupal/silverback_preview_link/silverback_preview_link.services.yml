@@ -1,0 +1,12 @@
+services:
+  silverback_preview_link.link_expiry:
+    class: Drupal\silverback_preview_link\PreviewLinkExpiry
+    arguments: ['@config.factory']
+  silverback_preview_link.host:
+    class: Drupal\silverback_preview_link\PreviewLinkHost
+    arguments:
+      - '@entity_type.manager'
+      - '@datetime.time'
+  logger.channel.preview_link:
+    parent: logger.channel_base
+    arguments: [ 'silverback_preview_link' ]
