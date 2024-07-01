@@ -26,12 +26,6 @@ class PreviewLinkRouteProvider implements EntityRouteProviderInterface {
       $collection->add("entity.{$entity_type_id}.silverback_preview_link_generate", $generateRoute);
     }
 
-//    $linkRoute = $this->getPreviewLinkRoute($entity_type);
-//    if ($linkRoute !== NULL) {
-//      $entity_type_id = $entity_type->id();
-//      $collection->add("entity.{$entity_type_id}.preview_link", $linkRoute);
-//    }
-
     return $collection;
   }
 
@@ -51,7 +45,7 @@ class PreviewLinkRouteProvider implements EntityRouteProviderInterface {
     $route
       ->setDefaults([
         '_entity_form' => "silverback_preview_link.silverback_preview_link",
-        '_title' => 'Preview',
+        '_title' => 'Share preview',
       ])
       ->setRequirement('_permission', 'generate silverback preview links')
       ->setRequirement('_access_preview_enabled', 'TRUE')
@@ -63,38 +57,5 @@ class PreviewLinkRouteProvider implements EntityRouteProviderInterface {
 
     return $route;
   }
-
-//  /**
-//   * Gets the preview link route.
-//   *
-//   * @param \Drupal\Core\Entity\EntityTypeInterface $entity_type
-//   *   The entity type.
-//   *
-//   * @return \Symfony\Component\Routing\Route|null
-//   *   The generated route, if available.
-//   */
-//  protected function getPreviewLinkRoute(EntityTypeInterface $entity_type): ?Route {
-//    $entity_type_id = $entity_type->id();
-//    $route = new Route('/preview-link/' . $entity_type_id . '/{' . $entity_type_id . '}/{preview_token}');
-//
-//    $route
-//      ->setDefaults([
-//        '_controller' => 'Drupal\preview_link\Controller\PreviewLinkController::preview',
-//        '_title_callback' => 'Drupal\preview_link\Controller\PreviewLinkController::title',
-//      ])
-//      ->setRequirement('_entity_access', $entity_type_id . '.view')
-//      ->setRequirement('_access_preview_enabled', 'TRUE')
-//      ->setOption('preview_link.entity_type_id', $entity_type_id)
-//      ->setOption('parameters', [
-//        $entity_type_id => [
-//          'type' => 'entity:' . $entity_type_id,
-//          'load_latest_revision' => TRUE,
-//        ],
-//        'preview_token' => ['type' => 'string'],
-//      ])
-//      ->setOption('_preview_link_route', TRUE);
-//
-//    return $route;
-//  }
 
 }

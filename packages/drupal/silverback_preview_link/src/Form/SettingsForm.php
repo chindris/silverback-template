@@ -9,7 +9,7 @@ use Drupal\Core\Entity\EntityTypeBundleInfoInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\preview_link\PreviewLinkUtility;
+use Drupal\silverback_preview_link\PreviewLinkUtility;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**

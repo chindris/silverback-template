@@ -14,6 +14,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Url;
+use Drupal\node\NodeInterface;
 use Drupal\silverback_preview_link\Entity\SilverbackPreviewLink;
 use Drupal\silverback_preview_link\PreviewLinkExpiry;
 use Drupal\silverback_preview_link\PreviewLinkHostInterface;
@@ -107,46 +108,83 @@ final class PreviewLinkForm extends ContentEntityForm {
     }
 
     $host = $this->getHostEntity($routeMatch);
-    $description = $this->t('Generate a preview link for the <em>@entity_label</em> entity. Preview links will expire @lifetime after they were created.', [
-      '@entity_label' => $host->label(),
-      '@lifetime' => $this->dateFormatter->formatInterval($this->linkExpiry->getLifetime(), 1),
-    ]);
-
-    /** @var \Drupal\silverback_preview_link\Entity\SilverbackPreviewLinkInterface $previewLink */
-    $previewLink = $this->getEntity();
-    // @todo route is for the frontend.
-    $link = Url::fromRoute('<front>');
-//    $link = Url::fromRoute('entity.' . $host->getEntityTypeId() . '.silverback_preview_link', [
-//      $host->getEntityTypeId() => $host->id(),
-//      'preview_token' => $previewLink->getToken(),
-//    ]);
-
     $form = parent::buildForm($form, $form_state);
+
+    if ($host instanceof NodeInterface) {
+      /** @var \Drupal\silverback_preview_link\Entity\SilverbackPreviewLinkInterface $silverbackPreviewLink */
+      $silverbackPreviewLink = $this->getEntity();
+      /** @var \Drupal\silverback_external_preview\ExternalPreviewLink $externalPreviewLink */
+      $externalPreviewLink = \Drupal::service('silverback_external_preview.external_preview_link');
+      $externalPreviewUrl = $externalPreviewLink->createPreviewUrlFromEntity($host);
+      $query = $externalPreviewUrl->getOption('query') ?? [];
+      $query['preview_user_id'] = $this->currentUser()->id();
+      $query['preview_access_token'] = $silverbackPreviewLink->getToken();
+      $externalPreviewUrl->setOption('query', $query);
+    }
+    else {
+      \Drupal::messenger()->addError('Preview link is only available for nodes.');
+      // This could be refactored to get the storage.
+      // Implement nodes for now as we are still using Drupal Gutenberg 2.x that
+      // is not entity type agnostic.
+      // $link = Url::fromRoute('entity.' . $host->getEntityTypeId() . '.silverback_preview_link', [
+      //   $host->getEntityTypeId() => $host->id(),
+      //   'preview_token' => $previewLink->getToken(),
+      // ]);
+      return $form;
+    }
+
+    $originalAgeFormatted = $this->dateFormatter->formatInterval($this->linkExpiry->getLifetime(), 1);
     $remainingSeconds = max(0, ($this->entity->getExpiry()?->getTimestamp() ?? 0) - $this->time->getRequestTime());
+    $remainingAgeFormatted = $this->dateFormatter->formatInterval($remainingSeconds);
+    $isNewToken = $this->linkExpiry->getLifetime() === $remainingSeconds;
+
+    if ($isNewToken) {
+      $buttonsDescription = $this->t('<p><a href=":url" target="_blank">Live preview link</a> for <em>@entity_label</em>. Expires @lifetime after creation.</p>', [
+        ':url' => $externalPreviewUrl
+          ->setAbsolute()
+          ->toString(),
+        '@entity_label' => $host->label(),
+        '@lifetime' => $originalAgeFormatted,
+      ]);
+      $actionsDescription = NULL;
+    }
+    else {
+      $buttonsDescription = $this->t('<p><a href=":url" target="_blank">Live preview link</a> for <em>@entity_label</em>. Expires in @lifetime.</p>', [
+        ':url' => $externalPreviewUrl
+          ->setAbsolute()
+          ->toString(),
+        '@entity_label' => $host->label(),
+        '@lifetime' => $remainingAgeFormatted,
+      ]);
+      $actionsDescription = $this->t('If a new link is generated, active preview link will get invalidated.');
+    }
+
     $form['preview_link'] = [
       '#theme' => 'preview_link',
       '#title' => $this->t('Preview link'),
       '#weight' => -9999,
-      '#description' => $description,
-      '#remaining_lifetime' => $this->dateFormatter->formatInterval($remainingSeconds),
-      '#link' => $link
-        ->setAbsolute()
-        ->toString(),
+      '#link_description' => $buttonsDescription,
+      '#actions_description' => $actionsDescription,
+      '#remaining_lifetime' => $remainingAgeFormatted,
+      '#preview_url' => NULL,
     ];
 
-    $form['actions']['regenerate_submit'] = $form['actions']['submit'];
-    $form['actions']['regenerate_submit']['#value'] = $this->t('Save and regenerate preview link');
-    // Shift ::save to after ::regenerateToken.
-    $form['actions']['regenerate_submit']['#submit'] = array_diff($form['actions']['regenerate_submit']['#submit'], ['::save']);
-    $form['actions']['regenerate_submit']['#submit'][] = '::regenerateToken';
-    $form['actions']['regenerate_submit']['#submit'][] = '::save';
+    if (!$isNewToken) {
+      $form['actions']['regenerate_submit'] = $form['actions']['submit'];
+      $form['actions']['regenerate_submit']['#value'] = $this->t('Generate new link');
+      // Shift ::save to after ::regenerateToken.
+      $form['actions']['regenerate_submit']['#submit'] = array_diff($form['actions']['regenerate_submit']['#submit'], ['::save']);
+      $form['actions']['regenerate_submit']['#submit'][] = '::regenerateToken';
+      $form['actions']['regenerate_submit']['#submit'][] = '::save';
 
-    $form['actions']['reset'] = [
-      '#type' => 'submit',
-      '#value' => $this->t('Reset lifetime'),
-      '#submit' => ['::resetLifetime', '::save'],
-      '#weight' => 100,
-    ];
+      $form['actions']['reset'] = [
+        '#type' => 'submit',
+        '#value' => $this->t('Reset current link expiry to @lifetime', ['@lifetime' => $originalAgeFormatted]),
+        '#submit' => ['::resetLifetime', '::save'],
+        '#weight' => 100,
+      ];
+    }
+    unset($form['actions']['submit']);
 
     return $form;
   }
