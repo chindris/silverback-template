@@ -141,10 +141,10 @@ class SilverbackPreviewLink extends ContentEntityBase implements SilverbackPrevi
       ->setDescription(t('The associated entities this preview link unlocks.'))
       ->setRequired(TRUE)
       ->setCardinality(FieldStorageDefinitionInterface::CARDINALITY_UNLIMITED)
-      ->addConstraint('PreviewLinkEntitiesUniqueConstraint', [])
+      ->addConstraint('SilverbackPreviewLinkEntitiesUniqueConstraint', [])
       ->setSettings(static::entitiesDefaultFieldSettings())
       ->setDisplayOptions('form', [
-        'type' => 'preview_link_entities_widget',
+        'type' => 'silverback_preview_link_entities_widget',
         'weight' => 10,
       ]);
 
@@ -165,7 +165,7 @@ class SilverbackPreviewLink extends ContentEntityBase implements SilverbackPrevi
   /**
    * Rewrites settings for 'entities' dynamic_entity_reference field.
    *
-   * DynamicEntityReferenceItem::defaultFieldSettings doesnt receive any context
+   * DynamicEntityReferenceItem::defaultFieldSettings doesn't receive any context,
    * so we need to change the default handlers manually.
    */
   public static function entitiesDefaultFieldSettings(): array {
@@ -190,7 +190,7 @@ class SilverbackPreviewLink extends ContentEntityBase implements SilverbackPrevi
    */
   public static function expiryDefaultValue(): int {
     $time = \Drupal::time();
-    /** @var \Drupal\preview_link\PreviewLinkExpiry $linkExpiry */
+    /** @var \Drupal\silverback_preview_link\PreviewLinkExpiry $linkExpiry */
     $linkExpiry = \Drupal::service('silverback_preview_link.link_expiry');
     return max(0, $time->getRequestTime() + $linkExpiry->getLifetime());
   }

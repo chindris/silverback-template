@@ -52,7 +52,7 @@ class PreviewLinkSessionTokenController extends ControllerBase {
    * Removes tokens from the users' session.
    */
   public function removeTokens(): Response {
-    $collection = $this->privateTempStoreFactory->get('preview_link');
+    $collection = $this->privateTempStoreFactory->get('silverback_preview_link');
     $hasKeys = $collection->get('keys') !== NULL;
     $collection->delete('keys');
     if ($hasKeys) {
