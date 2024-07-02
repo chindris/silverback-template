@@ -13,13 +13,12 @@ export default function Layout({
   const data = useStaticQuery(graphql(FrameQuery));
   return (
     <OperationExecutorsProvider
-      executors={[{ executor: drupalExecutor(`/graphql`) }]}
+      executors={[
+        { executor: drupalExecutor(`/graphql`) },
+        { executor: data, id: FrameQuery },
+      ]}
     >
-      <OperationExecutorsProvider
-        executors={[{ executor: data, id: FrameQuery }]}
-      >
-        <Frame>{children}</Frame>
-      </OperationExecutorsProvider>
+      <Frame>{children}</Frame>
     </OperationExecutorsProvider>
   );
 }
