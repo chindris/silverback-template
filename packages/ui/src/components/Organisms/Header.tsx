@@ -1,7 +1,8 @@
+'use client';
+import { useIntl } from '@amazeelabs/react-intl';
 import { FrameQuery, Link, Url } from '@custom/schema';
 import clsx from 'clsx';
 import React from 'react';
-import { useIntl } from 'react-intl';
 
 import { isTruthy } from '../../utils/isTruthy';
 import { buildNavigationTree } from '../../utils/navigation';

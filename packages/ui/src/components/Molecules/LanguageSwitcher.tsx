@@ -1,3 +1,4 @@
+'use client';
 import { Link, Locale, useLocation } from '@custom/schema';
 import {
   Menu,

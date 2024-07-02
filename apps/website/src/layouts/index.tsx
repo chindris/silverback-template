@@ -1,5 +1,5 @@
 import { graphql, useStaticQuery } from '@amazeelabs/gatsby-plugin-operations';
-import { FrameQuery, OperationExecutor } from '@custom/schema';
+import { FrameQuery, OperationExecutorsProvider } from '@custom/schema';
 import { Frame } from '@custom/ui/routes/Frame';
 import React, { PropsWithChildren } from 'react';
 
@@ -12,10 +12,13 @@ export default function Layout({
 }>) {
   const data = useStaticQuery(graphql(FrameQuery));
   return (
-    <OperationExecutor executor={drupalExecutor(`/graphql`)}>
-      <OperationExecutor executor={data} id={FrameQuery}>
-        <Frame>{children}</Frame>
-      </OperationExecutor>
-    </OperationExecutor>
+    <OperationExecutorsProvider
+      executors={[
+        { executor: drupalExecutor(`/graphql`) },
+        { executor: data, id: FrameQuery },
+      ]}
+    >
+      <Frame>{children}</Frame>
+    </OperationExecutorsProvider>
   );
 }
