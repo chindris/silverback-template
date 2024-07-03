@@ -1,8 +1,8 @@
 import { buildResponsiveImage } from '@amazeelabs/cloudinary-responsive-image';
 import { createResolveConfig } from '@amazeelabs/graphql-directives';
 import {
+  AnyOperationId,
   ImageSource,
-  OperationId,
   OperationResult,
   OperationVariables,
 } from '@custom/schema';
@@ -51,7 +51,7 @@ const responsiveImage: GraphQLFieldResolver<
   ) as ImageSource;
 };
 
-export async function query<TOperation extends OperationId<any, any>>(
+export async function query<TOperation extends AnyOperationId>(
   operation: TOperation,
   rootValue: any,
   variables: OperationVariables<TOperation> = {},
@@ -84,7 +84,7 @@ export async function query<TOperation extends OperationId<any, any>>(
   return result.data;
 }
 
-export function useQuery<TOperation extends OperationId<any, any>>(
+export function useQuery<TOperation extends AnyOperationId>(
   operation: TOperation,
   rootValue: any,
   variables: OperationVariables<TOperation> = {},
@@ -114,9 +114,7 @@ export function useQuery<TOperation extends OperationId<any, any>>(
 
 export type useQueryType = typeof useQuery;
 
-export function createPreview<
-  TOperation extends OperationId<{ preview?: any }, any>,
->(
+export function createPreview<TOperation extends AnyOperationId>(
   query: TOperation,
   schema: ZodType<any, ZodTypeDef, unknown>,
   Component: React.FC<{
