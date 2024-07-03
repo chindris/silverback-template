@@ -229,13 +229,11 @@ final class PreviewLinkForm extends ContentEntityForm {
     $this->updateChangedTime($this->entity);
   }
 
-
   /**
    * {@inheritdoc}
    */
   public function save(array $form, FormStateInterface $form_state) {
     $result = parent::save($form, $form_state);
-    //$this->messenger()->addStatus($this->t('Preview Link saved.'));
     return $result;
   }
 
@@ -249,7 +247,7 @@ final class PreviewLinkForm extends ContentEntityForm {
    */
   public function regenerateToken(array &$form, FormStateInterface $form_state): void {
     $this->entity->regenerateToken(TRUE);
-    $this->messenger()->addMessage($this->t('The token has been regenerated.'));
+    $this->messenger()->addMessage($this->t('The live preview link token has been regenerated.'));
   }
 
   /**
@@ -264,8 +262,9 @@ final class PreviewLinkForm extends ContentEntityForm {
     $expiry = new \DateTimeImmutable('@' . $this->time->getRequestTime());
     $expiry = $expiry->modify('+' . $this->linkExpiry->getLifetime() . ' seconds');
     $this->entity->setExpiry($expiry);
+    $timezone = date_default_timezone_get();
     $this->messenger()->addMessage($this->t('Preview link will now expire at %time.', [
-      '%time' => $this->dateFormatter->format($expiry->getTimestamp()),
+      '%time' => $this->dateFormatter->format($expiry->getTimestamp(), 'custom', 'd/m/y H:i', $timezone) . ' ('. $timezone .')',
     ]));
   }
 
