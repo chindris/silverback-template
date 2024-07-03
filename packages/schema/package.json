@@ -62,7 +62,7 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
-    "@amazeelabs/executors": "^3.0.2",
+    "@amazeelabs/executors": "^3.0.3",
     "@amazeelabs/gatsby-silverback-cloudinary": "^1.2.7",
     "@amazeelabs/gatsby-source-silverback": "^1.14.0",
     "@amazeelabs/scalars": "^1.6.13",

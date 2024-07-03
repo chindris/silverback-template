@@ -1,6 +1,6 @@
 {
   "extends": ["//"],
-  "pipeline": {
+  "tasks": {
     "dev": {
       "persistent": true,
       "dependsOn": ["prep", "^prep"]
