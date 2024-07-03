@@ -5,6 +5,11 @@ declare(strict_types = 1);
 namespace Drupal\silverback_preview_link\Form;
 
 use Drupal\Component\Datetime\TimeInterface;
+use Drupal\Component\Utility\Html;
+use Drupal\Component\Utility\NestedArray;
+use Drupal\Core\Ajax\AjaxResponse;
+use Drupal\Core\Ajax\PrependCommand;
+use Drupal\Core\Ajax\ReplaceCommand;
 use Drupal\Core\Datetime\DateFormatterInterface;
 use Drupal\Core\Entity\ContentEntityForm;
 use Drupal\Core\Entity\EntityInterface;
@@ -13,7 +18,6 @@ use Drupal\Core\Entity\EntityTypeBundleInfoInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
-use Drupal\Core\Url;
 use Drupal\node\NodeInterface;
 use Drupal\silverback_preview_link\Entity\SilverbackPreviewLink;
 use Drupal\silverback_preview_link\PreviewLinkExpiry;
@@ -109,6 +113,8 @@ final class PreviewLinkForm extends ContentEntityForm {
 
     $host = $this->getHostEntity($routeMatch);
     $form = parent::buildForm($form, $form_state);
+    // See https://www.drupal.org/project/drupal/issues/2897377
+    $form['#id'] = Html::getId($form_state->getBuildInfo()['form_id']);
 
     if ($host instanceof NodeInterface) {
       /** @var \Drupal\silverback_preview_link\Entity\SilverbackPreviewLinkInterface $silverbackPreviewLink */
@@ -176,11 +182,17 @@ final class PreviewLinkForm extends ContentEntityForm {
       $form['actions']['regenerate_submit']['#submit'] = array_diff($form['actions']['regenerate_submit']['#submit'], ['::save']);
       $form['actions']['regenerate_submit']['#submit'][] = '::regenerateToken';
       $form['actions']['regenerate_submit']['#submit'][] = '::save';
+      $form['actions']['regenerate_submit']['#ajax'] = [
+        'callback' => [get_called_class(), 'ajaxRefreshForm'],
+      ];
 
       $form['actions']['reset'] = [
         '#type' => 'submit',
         '#value' => $this->t('Reset current link expiry to @lifetime', ['@lifetime' => $originalAgeFormatted]),
         '#submit' => ['::resetLifetime', '::save'],
+        '#ajax' => [
+          'callback' => [get_called_class(), 'ajaxRefreshForm'],
+        ],
         '#weight' => 100,
       ];
     }
@@ -189,12 +201,41 @@ final class PreviewLinkForm extends ContentEntityForm {
     return $form;
   }
 
+  public static function ajaxRefreshForm(array $form, FormStateInterface $form_state) {
+    $triggering_element = $form_state->getTriggeringElement();
+    $element = NULL;
+    if (!empty($triggering_element['#ajax']['element'])) {
+      $element = NestedArray::getValue($form, $triggering_element['#ajax']['element']);
+    }
+    // Element not specified or not found. Show messages on top of the form.
+    if (!$element) {
+      $element = $form;
+    }
+    $response = new AjaxResponse();
+    $response->addCommand(new ReplaceCommand('[data-drupal-selector="' . $form['#attributes']['data-drupal-selector'] . '"]', $form));
+    $response->addCommand(new PrependCommand('[data-drupal-selector="' . $element['#attributes']['data-drupal-selector'] . '"]', ['#type' => 'status_messages']));
+
+    return $response;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function submitForm(array &$form, FormStateInterface $form_state) {
+    // For ajax.
+    $form_state->setRebuild();
+    parent::submitForm($form, $form_state);
+    // Update the changed timestamp of the entity.
+    $this->updateChangedTime($this->entity);
+  }
+
+
   /**
    * {@inheritdoc}
    */
   public function save(array $form, FormStateInterface $form_state) {
     $result = parent::save($form, $form_state);
-    $this->messenger()->addStatus($this->t('Preview Link saved.'));
+    //$this->messenger()->addStatus($this->t('Preview Link saved.'));
     return $result;
   }
 
