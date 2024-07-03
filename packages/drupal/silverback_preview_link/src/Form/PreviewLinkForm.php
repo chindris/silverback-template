@@ -247,6 +247,8 @@ final class PreviewLinkForm extends ContentEntityForm {
    */
   public function regenerateToken(array &$form, FormStateInterface $form_state): void {
     $this->entity->regenerateToken(TRUE);
+    $expiry = $this->getExpiry();
+    $this->entity->setExpiry($expiry);
     $this->messenger()->addMessage($this->t('The live preview link token has been regenerated.'));
   }
 
@@ -259,13 +261,23 @@ final class PreviewLinkForm extends ContentEntityForm {
    *   The current state of the form.
    */
   public function resetLifetime(array &$form, FormStateInterface $form_state): void {
-    $expiry = new \DateTimeImmutable('@' . $this->time->getRequestTime());
-    $expiry = $expiry->modify('+' . $this->linkExpiry->getLifetime() . ' seconds');
+    $expiry = $this->getExpiry();
     $this->entity->setExpiry($expiry);
     $timezone = date_default_timezone_get();
     $this->messenger()->addMessage($this->t('Preview link will now expire at %time.', [
       '%time' => $this->dateFormatter->format($expiry->getTimestamp(), 'custom', 'd/m/y H:i', $timezone) . ' ('. $timezone .')',
     ]));
+  }
+
+  /**
+   * Helper to reset the expiry.
+   *
+   * @return \DateTimeImmutable|false
+   * @throws \Exception
+   */
+  private function getExpiry() {
+    $expiry = new \DateTimeImmutable('@' . $this->time->getRequestTime());
+    return $expiry->modify('+' . $this->linkExpiry->getLifetime() . ' seconds');
   }
 
 }
