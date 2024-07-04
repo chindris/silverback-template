@@ -6,13 +6,13 @@ jobs:
   write_dashboard:
     name: Write dashboard history
     if: github.ref == 'refs/heads/release' && vars.JIRA_PROJECT_ID != ''
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - name: Install estimator
         run: npm install -g @amazeelabs/estimator
 
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
