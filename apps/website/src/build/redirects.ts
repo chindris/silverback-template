@@ -1,6 +1,8 @@
 import fs from 'node:fs';
-import { query } from '../query.js';
+
 import { CampaignUrlRedirectsQuery, Locale } from '@custom/schema';
+
+import { query } from '../query.js';
 import { drupalUrl } from '../utils.js';
 
 export type Redirect = {
@@ -58,12 +60,13 @@ async function createRedirects() {
   // Create redirects for all the CampaignUrl entries from the CMS.
   let currentPage = 1;
   const pageSize = 100;
-  while (true) {
+  let fetchNext = true;
+  while (fetchNext) {
     const redirects = await query(CampaignUrlRedirectsQuery, {
       args: `pageSize=${pageSize}&page=${currentPage}`,
     });
     if (!redirects.campaignUrlRedirects?.rows?.length) {
-      break;
+      fetchNext = false;
     }
     redirects.campaignUrlRedirects?.rows?.forEach(
       (redirect) => redirect && createRedirect(redirect),
@@ -97,7 +100,7 @@ function writeRedirectsNetlify(config: RedirectsOutputConfig) {
     throw new Error('The netlify redirects file is not provided.');
   }
 
-  redirectsPool.forEach((value, key) => {
+  redirectsPool.forEach((value) => {
     let redirectEntry = `[[redirects]]
   from = "${value.source}"
   to = "${value.destination}"
