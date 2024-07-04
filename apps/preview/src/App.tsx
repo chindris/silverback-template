@@ -13,7 +13,7 @@ declare global {
   }
 }
 
-const updates$ = webSocket({
+const updates$ = webSocket<any>({
   url: `${window.location.origin.replace('http', 'ws')}/__preview`,
 }).pipe(
   retry({

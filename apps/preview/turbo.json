@@ -1,6 +1,6 @@
 {
   "extends": ["//"],
-  "pipeline": {
+  "tasks": {
     "prep": {
       "dependsOn": ["prep:app", "prep:server"]
     },
