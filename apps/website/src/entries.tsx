@@ -1,10 +1,6 @@
 import '@custom/ui/styles.css';
 
-import {
-  ListPagesQuery,
-  Locale,
-  LocationProvider
-} from '@custom/schema';
+import { ListPagesQuery, Locale, LocationProvider } from '@custom/schema';
 import { ContentHub } from '@custom/ui/routes/ContentHub';
 import { Frame } from '@custom/ui/routes/Frame';
 import { HomePage } from '@custom/ui/routes/HomePage';
