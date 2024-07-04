@@ -192,6 +192,13 @@ type DrupalPage implements ContentHubResultItem & Page
   metaTags: [MetaTag] @resolveProperty(path: "metatag")
 }
 
+type CampaignUrlRedirect @entity(type: "campaign_url", bundle: "campaign_url") {
+  source: String! @resolveProperty(path: "campaign_url_source.value")
+  destination: String! @resolveProperty(path: "campaign_url_destination.value")
+  statusCode: Int! @resolveProperty(path: "status_code.value")
+  force: Boolean! @resolveProperty(path: "force.value")
+}
+
 type Hero {
   headline: String! @resolveEditorBlockAttribute(key: "headline")
   lead: String @resolveEditorBlockAttribute(key: "lead")
@@ -349,11 +356,19 @@ type Query {
     @drupalView(id: "content_hub:default", args: "$args")
 
   stringTranslations: [TranslatableString!] @translatables(context: "gatsby")
+
+  campaignUrlRedirects(args: String): CampaignUrlRedirectsResult
+    @drupalView(id: "campaign_urls:frontend_redirects", args: "$args")
 }
 
 type SSGPagesResult {
   total: Int!
   rows: [Page]!
+}
+
+type CampaignUrlRedirectsResult {
+  total: Int!
+  rows: [CampaignUrlRedirect]
 }
 
 type Mutation {
