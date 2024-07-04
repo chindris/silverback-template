@@ -4,15 +4,15 @@ import { CampaignUrlRedirectsQuery, Locale } from '@custom/schema';
 import { drupalUrl } from '../utils.js';
 
 export type Redirect = {
-  source: string,
-  destination: string,
-  statusCode: number,
-  force?: boolean,
+  source: string;
+  destination: string;
+  statusCode: number;
+  force?: boolean;
 };
 
 type RedirectsOutputConfig = {
-  outputFile?: string,
-}
+  outputFile?: string;
+};
 
 type RedirectsOutputService = 'netlify';
 
@@ -59,11 +59,15 @@ async function createRedirects() {
   let currentPage = 1;
   const pageSize = 100;
   while (true) {
-    const redirects = await query(CampaignUrlRedirectsQuery, { args: `pageSize=${pageSize}&page=${currentPage}` });
+    const redirects = await query(CampaignUrlRedirectsQuery, {
+      args: `pageSize=${pageSize}&page=${currentPage}`,
+    });
     if (!redirects.campaignUrlRedirects?.rows?.length) {
       break;
     }
-    redirects.campaignUrlRedirects?.rows?.forEach(redirect => redirect && createRedirect(redirect));
+    redirects.campaignUrlRedirects?.rows?.forEach(
+      (redirect) => redirect && createRedirect(redirect),
+    );
     currentPage++;
   }
 
@@ -77,7 +81,10 @@ async function createRedirects() {
   });
 }
 
-function writeRedirects(service: RedirectsOutputService, config: RedirectsOutputConfig) {
+function writeRedirects(
+  service: RedirectsOutputService,
+  config: RedirectsOutputConfig,
+) {
   switch (service) {
     case 'netlify':
     default:
@@ -87,7 +94,7 @@ function writeRedirects(service: RedirectsOutputService, config: RedirectsOutput
 
 function writeRedirectsNetlify(config: RedirectsOutputConfig) {
   if (!config.outputFile) {
-    throw new Error("The netlify redirects file is not provided.");
+    throw new Error('The netlify redirects file is not provided.');
   }
 
   redirectsPool.forEach((value, key) => {
@@ -96,14 +103,14 @@ function writeRedirectsNetlify(config: RedirectsOutputConfig) {
   to = "${value.destination}"
   status = ${value.statusCode}
 `;
-  if (value.force) {
-    redirectEntry += `  force = true
+    if (value.force) {
+      redirectEntry += `  force = true
 `;
-  }
+    }
 
     fs.appendFileSync(`${config.outputFile}`, redirectEntry);
   });
 }
 
 await createRedirects();
-writeRedirects("netlify", { outputFile: "./dist/public/netlify.toml" });
+writeRedirects('netlify', { outputFile: './dist/public/netlify.toml' });
