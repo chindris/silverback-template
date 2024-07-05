@@ -1,16 +1,16 @@
 'use client';
+import type { OperationVariables } from '@custom/schema';
 import {
-  OperationVariables,
-  Url,
-  Locale,
   PreviewDrupalPageQuery,
   useLocation,
+  Locale,
+  Url,
 } from '@custom/schema';
 import React from 'react';
 
 import { clear, useOperation } from '../../utils/operation';
 import { PageDisplay } from '../Organisms/PageDisplay';
-import { useIntl } from 'react-intl';
+import { useIntl } from '@amazeelabs/react-intl';
 
 function usePreviewParameters(): OperationVariables<
   typeof PreviewDrupalPageQuery

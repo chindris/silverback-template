@@ -1,7 +1,7 @@
 import {
   FrameQuery,
   Locale,
-  OperationExecutor,
+  OperationExecutorsProvider,
   PreviewDrupalPageQuery,
   Url,
 } from '@custom/schema';
@@ -26,16 +26,19 @@ export default {
 export const Default = {
   render: (args) => {
     return (
-      <OperationExecutor executor={() => args} id={PreviewDrupalPageQuery}>
-        <OperationExecutor executor={FrameStory.args} id={FrameQuery}>
-          <Preview />
-        </OperationExecutor>
-      </OperationExecutor>
+      <OperationExecutorsProvider
+        executors={[
+          { executor: args, id: PreviewDrupalPageQuery },
+          { id: FrameQuery, executor: FrameStory.args },
+        ]}
+      >
+        <Preview />
+      </OperationExecutorsProvider>
     );
   },
   args: {
     preview: {
-      title: 'Page Title',
+      title: 'Preview Page Title',
       locale: 'en',
       translations: [
         {
