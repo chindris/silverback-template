@@ -16,6 +16,7 @@ dependencies:
     - gutenberg
     - media
     - node
+    - pate
     - path
     - redirect
     - replicate_ui
@@ -52,6 +53,7 @@ permissions:
   - 'dropzone upload files'
   - 'edit any page content'
   - 'edit own page content'
+  - 'manage page templates'
   - 'replicate entities'
   - 'revert page revisions'
   - 'translate editable entities'
@@ -62,6 +64,7 @@ permissions:
   - 'use basic transition unpublish'
   - 'use external preview'
   - 'use gutenberg'
+  - 'use page templates'
   - 'use text format gutenberg'
   - 'view all media revisions'
   - 'view any unpublished content'

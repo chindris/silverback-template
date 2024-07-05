@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4f934e8fc2c92c784d33ad8959e208b2",
+    "content-hash": "fd192b245f6f9bb57c0a18b215d6cab3",
     "packages": [
         {
             "name": "amazeeio/drupal_integrations",
@@ -3740,6 +3740,59 @@
                 "source": "https://git.drupalcode.org/project/metatag",
                 "issues": "https://www.drupal.org/project/issues/metatag",
                 "docs": "https://www.drupal.org/docs/8/modules/metatag"
+            }
+        },
+        {
+            "name": "drupal/pate",
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/pate.git",
+                "reference": "1.2.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/pate-1.2.0.zip",
+                "reference": "1.2.0",
+                "shasum": "f20a8dafcee022b5e653cddad8797e3657addad6"
+            },
+            "require": {
+                "drupal/core": "^9.2 || ^10",
+                "drupal/replicate": "*"
+            },
+            "require-dev": {
+                "drupal/entity_reference_revisions": "*",
+                "drupal/paragraphs": "*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "1.2.0",
+                    "datestamp": "1668789306",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "marcoscano",
+                    "homepage": "https://www.drupal.org/user/1288796"
+                }
+            ],
+            "description": "Allows converting existing nodes into content templates, which can be replicated by editors.",
+            "homepage": "https://www.drupal.org/project/pate",
+            "keywords": [
+                "Drupal"
+            ],
+            "support": {
+                "source": "http://cgit.drupalcode.org/pate",
+                "issues": "http://drupal.org/project/issues/pate"
             }
         },
         {
