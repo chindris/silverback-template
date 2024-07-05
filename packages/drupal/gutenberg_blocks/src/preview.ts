@@ -115,6 +115,7 @@
                   if (!size) {
                     return;
                   }
+                  $previewButton.data('windowTarget', size.id);
                   $previewButton.data('windowHeight', size.height);
                   $previewButton.data('windowWidth', size.width);
                 })
@@ -123,8 +124,9 @@
                 const target = $(event.target);
                 const windowWidth = target.data('windowWidth');
                 const windowHeight = target.data('windowHeight');
+                const windowTarget = target.data('windowTarget');
                 const windowFeatures = `resizable,height=${windowHeight},width=${windowWidth}`;
-                window.open(previewUrl, 'preview', windowFeatures);
+                window.open(previewUrl, windowTarget, windowFeatures);
               });
             } else {
               $('.drupal-preview-sidebar').remove();
