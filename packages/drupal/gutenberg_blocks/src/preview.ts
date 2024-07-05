@@ -40,10 +40,8 @@
             const getPreviewSelect = () => {
               let previewSelect = '<select class="external-preview">';
               previewSizes.forEach((size) => {
-                if (size.width <= window.screen.width) {
-                  const selectOption = `<option value="${size.id}">${size.label} (${size.width} x ${size.height})</option>`;
-                  previewSelect += selectOption;
-                }
+                const selectOption = `<option value="${size.id}">${size.label} (${size.width} x ${size.height})</option>`;
+                previewSelect += selectOption;
               });
               previewSelect += '</select>';
               return previewSelect;
