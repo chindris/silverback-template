@@ -1,0 +1,6 @@
+_core:
+  default_config_hash: XAotqrdAEia8K6UQBOR89_AxeqJJ4Q2ovs2Hx0Ro1xg
+enabled_entity_types:
+  node: {  }
+expiry_seconds: 86400
+multiple_entities: false
