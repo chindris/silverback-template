@@ -7,6 +7,7 @@
   "license": "ISC",
   "type": "module",
   "scripts": {
+    "prep": "playwright install chromium",
     "test:static": "tsc --noEmit && eslint '**/*.{ts,tsx,js,jsx}' --ignore-path='./.gitignore'",
     "test:integration:drupal": "playwright test --config playwright.config.drupal.ts",
     "test:integration:decap": "playwright test --config playwright.config.decap.ts",
@@ -15,12 +16,11 @@
     "dev:decap": "playwright test --ui --config playwright.config.decap.ts",
     "dev:drupal": "playwright test --ui --config playwright.config.drupal.ts",
     "webform-snapshots": "playwright test --config playwright.config.webforms.ts",
-    "webform-snapshots:headed": "playwright test --config playwright.config.webforms.ts --headed",
-    "download-browsers": "playwright install chromium"
+    "webform-snapshots:headed": "playwright test --config playwright.config.webforms.ts --headed"
   },
   "devDependencies": {
     "@amazeelabs/save-webpage": "^1.1.1",
-    "@playwright/test": "^1.40.1",
+    "@playwright/test": "^1.44.1",
     "@types/node": "^18"
   }
 }

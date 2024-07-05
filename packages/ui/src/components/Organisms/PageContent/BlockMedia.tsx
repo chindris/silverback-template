@@ -2,27 +2,25 @@ import { BlockMediaFragment, Html, Image } from '@custom/schema';
 import React from 'react';
 
 import { UnreachableCaseError } from '../../../utils/unreachable-case-error';
-import { ScrollPop } from '../../Client/ScrollPop';
+import { FadeUp } from '../../Molecules/FadeUp';
 
 export function BlockMedia(props: BlockMediaFragment) {
   if (!props.media) {
     return null;
   }
   return (
-    <ScrollPop>
-      <div className="container-page">
-        <div className="container-content">
-          <figure className="mt-16 container-text">
-            <Media {...props.media} />
-            {props.caption ? (
-              <figcaption className="mt-3 flex justify-center gap-x-2 text-sm leading-6 text-gray-500">
-                <Html markup={props.caption} />
-              </figcaption>
-            ) : null}
-          </figure>
-        </div>
+    <FadeUp yGap={50} className="container-page my-10">
+      <div className="container-content">
+        <figure className="container-text">
+          <Media {...props.media} />
+          {props.caption ? (
+            <figcaption className="mt-3 flex justify-center gap-x-2 text-sm leading-6 text-gray-500">
+              <Html markup={props.caption} />
+            </figcaption>
+          ) : null}
+        </figure>
       </div>
-    </ScrollPop>
+    </FadeUp>
   );
 }
 

@@ -1,5 +1,5 @@
 ul li {
-  @apply !text-base !font-medium !text-gray-900;
+  @apply text-base !font-medium !text-gray-900;
 }
 
 ul {
@@ -18,6 +18,11 @@ ul {
 
 ul li::marker {
   @apply !text-gray-500;
+}
+
+/* Remove hardcoded colors on lists within messages so they can be set to their message type inherited color scheme */
+ul li.messages::marker {
+  @apply !text-inherit;
 }
 
 .list-style--arrows li::before {

@@ -1,4 +1,5 @@
 import './customisations';
+import './preview';
 import './blocks/hero';
 import './blocks/content';
 import './blocks/heading';
@@ -12,3 +13,5 @@ import './blocks/quote';
 import './blocks/horizontal-separator';
 import './blocks/accordion';
 import './blocks/accordion-item-text';
+import './blocks/info-grid';
+import './blocks/info-grid-item';

@@ -1,6 +1,6 @@
 {
   "extends": ["//"],
-  "pipeline": {
+  "tasks": {
     "test:integration": {
       "dependsOn": ["@custom/cms#prep"]
     },
