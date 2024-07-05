@@ -1,5 +1,5 @@
+import { useIntl } from '@amazeelabs/react-intl';
 import { FrameQuery, NavigationItem, Url, useLocation } from '@custom/schema';
-import { useIntl } from 'react-intl';
 
 import { useOperation } from '../../utils/operation';
 
@@ -82,9 +82,11 @@ export function useMenuAncestors(path: string, menuName: MenuNameType) {
   }
   if (ancestors.length > 0) {
     ancestors.push({ id: '_', target: '/' as Url, title: 'Home' });
+    // Pop off the current path, we dont care about it
+    ancestors.reverse().pop();
   }
 
-  return ancestors.reverse();
+  return ancestors;
 }
 
 export const useBreadcrumbs = (menuName?: MenuNameType, path?: string) => {

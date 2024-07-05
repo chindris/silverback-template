@@ -1,6 +1,6 @@
 {
   "extends": ["//"],
-  "pipeline": {
+  "tasks": {
     "prep": {
       "dependsOn": ["prep:schema"]
     },
@@ -27,7 +27,7 @@
       "outputs": [
         "drush/**",
         "vendor/**",
-        "!**/.git/**",
+        "!*/**/.git/**",
         "web/**",
         "!web/modules/custom/**",
         "!web/themes/custom/**",

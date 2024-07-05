@@ -1,4 +1,4 @@
-import { OperationExecutor } from '@custom/schema';
+import { OperationExecutorsProvider } from '@custom/schema';
 import { Frame } from '@custom/ui/routes/Frame';
 import { Preview, usePreviewRefresh } from '@custom/ui/routes/Preview';
 import { useEffect } from 'react';
@@ -13,7 +13,7 @@ declare global {
   }
 }
 
-const updates$ = webSocket({
+const updates$ = webSocket<any>({
   url: `${window.location.origin.replace('http', 'ws')}/__preview`,
 }).pipe(
   retry({
@@ -24,17 +24,17 @@ const updates$ = webSocket({
 function App() {
   const refresh = usePreviewRefresh();
   useEffect(() => {
-    const sub = updates$.subscribe(refresh);
+    const sub = updates$.subscribe(() => refresh({}));
     return sub.unsubscribe;
   }, [refresh]);
   return (
-    <OperationExecutor
-      executor={drupalExecutor(window.GRAPHQL_ENDPOINT, false)}
+    <OperationExecutorsProvider
+      executors={[{ executor: drupalExecutor(window.GRAPHQL_ENDPOINT, false) }]}
     >
       <Frame>
         <Preview />
       </Frame>
-    </OperationExecutor>
+    </OperationExecutorsProvider>
   );
 }
 

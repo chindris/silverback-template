@@ -1,33 +1,40 @@
-import { FrameQuery, OperationExecutor, Url } from '@custom/schema';
+import { FrameQuery, OperationExecutorsProvider, Url } from '@custom/schema';
 import { Decorator, Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
-import { Translations, TranslationsProvider } from '../../utils/translations';
+import {
+  TranslationPaths,
+  TranslationsProvider,
+} from '../../utils/translations';
 import { Default } from '../Routes/Frame.stories';
 import { LanguageSwitcher } from './LanguageSwitcher';
 
 const TranslationsDecorator = ((Story, ctx) => {
   return (
-    <OperationExecutor
-      id={FrameQuery}
-      executor={{
-        ...Default.args,
-        websiteSettings: {
-          homePage: {
-            translations: [
-              { locale: 'en', path: '/en/home' as Url },
-              { locale: 'de', path: '/de/home' as Url },
-            ],
+    <OperationExecutorsProvider
+      executors={[
+        {
+          executor: {
+            ...Default.args,
+            websiteSettings: {
+              homePage: {
+                translations: [
+                  { locale: 'en', path: '/en/home' as Url },
+                  { locale: 'de', path: '/de/home' as Url },
+                ],
+              },
+            },
           },
+          id: FrameQuery,
         },
-      }}
+      ]}
     >
       <TranslationsProvider defaultTranslations={ctx.args}>
         <Story />
       </TranslationsProvider>
-    </OperationExecutor>
+    </OperationExecutorsProvider>
   );
-}) as Decorator<Translations>;
+}) as Decorator<TranslationPaths>;
 
 export default {
   component: LanguageSwitcher,
@@ -35,9 +42,9 @@ export default {
   parameters: {
     location: new URL('local:/en/english-version'),
   },
-} satisfies Meta<Translations>;
+} satisfies Meta<TranslationPaths>;
 
-type Story = StoryObj<Translations>;
+type Story = StoryObj<TranslationPaths>;
 
 export const Empty = {} satisfies Story;
 

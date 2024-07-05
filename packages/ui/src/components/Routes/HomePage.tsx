@@ -1,22 +1,24 @@
-import { HomePageQuery, useLocalized } from '@custom/schema';
+import { HomePageQuery } from '@custom/schema';
 import React from 'react';
 
 import { isTruthy } from '../../utils/isTruthy';
-import { useOperation } from '../../utils/operation';
-import { useTranslations } from '../../utils/translations';
+import { useLocalized } from '../../utils/locale';
+import { Translations } from '../../utils/translations';
+import { withOperation } from '../../utils/with-operation';
 import { PageDisplay } from '../Organisms/PageDisplay';
 
-export function HomePage() {
-  const { data } = useOperation(HomePageQuery);
-  const page = useLocalized(data?.websiteSettings?.homePage?.translations);
-
-  // Initialize the language switcher with the options this page has.
-  useTranslations(
-    Object.fromEntries(
-      data?.websiteSettings?.homePage?.translations
-        ?.filter(isTruthy)
-        .map((translation) => [translation.locale, translation.path]) || [],
-    ),
+export const HomePage = withOperation(HomePageQuery, (operationResult) => {
+  const page = useLocalized(
+    operationResult.websiteSettings?.homePage?.translations,
   );
-  return page ? <PageDisplay {...page} /> : null;
-}
+  const translations = Object.fromEntries(
+    operationResult.websiteSettings?.homePage?.translations
+      ?.filter(isTruthy)
+      .map((translation) => [translation.locale, translation.path]) || [],
+  );
+  return page ? (
+    <Translations translations={translations}>
+      <PageDisplay {...page} />
+    </Translations>
+  ) : null;
+});

@@ -13,7 +13,7 @@ runs:
       with:
         php-version: '8.2'
 
-    - uses: pnpm/action-setup@v2
+    - uses: pnpm/action-setup@v4
       name: Install pnpm
       with:
         version: 8.6.12
