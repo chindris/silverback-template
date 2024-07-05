@@ -22,7 +22,7 @@ index 10ea4e6..1c35479 100644
          if (!$entity = $resolver()) {
            // If there is no entity with this id, add the list cache tags so that
 diff --git a/src/Plugin/GraphQL/DataProducer/Routing/RouteLoad.php b/src/Plugin/GraphQL/DataProducer/Routing/RouteLoad.php
-index 48d7ad2..948258e 100644
+index 48d7ad2..0f5b52d 100644
 --- a/src/Plugin/GraphQL/DataProducer/Routing/RouteLoad.php
 +++ b/src/Plugin/GraphQL/DataProducer/Routing/RouteLoad.php
 @@ -100,13 +100,37 @@ class RouteLoad extends DataProducerPluginBase implements ContainerFactoryPlugin
@@ -30,7 +30,7 @@ index 48d7ad2..948258e 100644
      }
      else {
 +
-+      $langcode = NULL;
++      $langcode = \Drupal::service('language.default')->get()->getId();
 +      $prefixes = \Drupal::config('language.negotiation')->get('url.prefixes');
 +      foreach ($prefixes as $prefix) {
 +        if ($prefix && str_starts_with($path, '/' . $prefix . '/')) {
