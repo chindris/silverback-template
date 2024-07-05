@@ -6,11 +6,3 @@ silverback_preview_link.settings:
     _description: 'Manage Preview link settings.'
   requirements:
     _permission: 'administer silverback preview link settings'
-
-silverback_preview_link.session_tokens.remove:
-  path: '/silverback-preview-link/session-tokens/remove'
-  defaults:
-    _controller: '\Drupal\silverback_preview_link\Controller\PreviewLinkSessionTokenController::removeTokens'
-    _title: 'Remove all Preview Link session tokens'
-  requirements:
-    _access_preview_session_exists: 'TRUE'
