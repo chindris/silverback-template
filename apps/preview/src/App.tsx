@@ -24,7 +24,7 @@ const updates$ = webSocket<any>({
 function App() {
   const refresh = usePreviewRefresh();
   useEffect(() => {
-    const sub = updates$.subscribe(() => refresh({}));
+    const sub = updates$.subscribe((value) => refresh(value));
     return sub.unsubscribe;
   }, [refresh]);
   return (
