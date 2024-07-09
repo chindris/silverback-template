@@ -8,7 +8,7 @@ import {
 import {
   getOAuth2AuthorizeUrl,
   getPersistedAccessToken,
-  hasPublisherAccess,
+  hasPreviewAccess,
   initializeSession,
   isAuthenticated,
   oAuth2AuthorizationCodeClient,
@@ -24,7 +24,7 @@ const { app } = expressWsInstance;
 const updates$ = new Subject();
 app.use(express.json());
 
-// A session is only needed for OAuth2 Authorization Code grant type.
+// A session is only needed for OAuth2.
 if (isSessionRequired()) {
   initializeSession(expressServer);
 }
@@ -52,7 +52,7 @@ app.ws('/__preview', (ws) => {
   ws.on('close', sub.unsubscribe);
 });
 
-app.get('/__preview/*', (req, _, next) => {
+app.get('/__preview/*', authMiddleware, (req, _, next) => {
   req.url = '/';
   next();
 });
@@ -64,11 +64,9 @@ app.get('/__preview/*', (req, _, next) => {
 // Fallback route for login. Is used if there is no origin cookie.
 app.get('/oauth/login', async (req, res) => {
   if (await isAuthenticated(req)) {
-    const accessPublisher = await hasPublisherAccess(req);
-    if (accessPublisher) {
-      res.send(
-        'Preview access is granted. <a href="/___status/">View status</a>',
-      );
+    const accessPreview = await hasPreviewAccess(req);
+    if (accessPreview) {
+      res.send('Preview access is granted.');
     } else {
       res.send(
         'Preview access is not granted. Contact your site administrator. <a href="/oauth/logout">Log out</a>',

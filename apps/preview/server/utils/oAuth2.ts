@@ -10,12 +10,7 @@ import {
 import session from 'express-session';
 import createMemoryStore from 'memorystore';
 import fetch from 'node-fetch';
-import {
-  AccessToken,
-  AuthorizationCode,
-  ModuleOptions,
-  ResourceOwnerPassword,
-} from 'simple-oauth2';
+import { AccessToken, AuthorizationCode } from 'simple-oauth2';
 
 import { getConfig } from './config';
 
@@ -41,14 +36,14 @@ const ENCRYPTION_KEY =
 export const oAuth2AuthCodeMiddleware: RequestHandler = ((): RequestHandler => {
   return async (req: Request, res: Response, next: NextFunction) => {
     if (await isAuthenticated(req)) {
-      const accessPublisher = await hasPublisherAccess(req);
-      if (accessPublisher) {
+      const accessPreview = await hasPreviewAccess(req);
+      if (accessPreview) {
         return next();
       } else {
         res
           .status(403)
           .send(
-            'Your user account does not have Publisher access. You might contact your site administrator.',
+            'Your user account does not have Preview access. You might contact your site administrator.',
           );
       }
     } else {
@@ -56,94 +51,6 @@ export const oAuth2AuthCodeMiddleware: RequestHandler = ((): RequestHandler => {
     }
   };
 })();
-
-/**
- * Returns the Resource Owner Password middleware.
- *
- * This can be used as a minimal implementation of OAuth2 if the challenge
- * is to be exposed in the client / the backend is only accessible
- * from the client and not the end user.
- *
- * Refresh tokens are not implemented.
- */
-export const oAuth2ResourceOwnerPasswordMiddleware: RequestHandler =
-  ((): RequestHandler => {
-    return async (req: Request, res: Response, next: NextFunction) => {
-      const oAuth2Config = getConfig().oAuth2;
-      if (!oAuth2Config) {
-        throw new Error('OAuth2 configuration is missing.');
-      }
-
-      // As an MVP, we are using the www-authenticate header to send the challenge.
-      // This allows to have a lightweight implementation of the UI, and we
-      // don't need to handle any session.
-      const base64Auth = (req.headers.authorization || '').split(' ')[1] || '';
-      const [wwwLogin, wwwPassword] = Buffer.from(base64Auth, 'base64')
-        .toString()
-        .split(':');
-
-      const oAuth2ModuleOptions: ModuleOptions = {
-        client: {
-          id: oAuth2Config.clientId,
-          secret: oAuth2Config.clientSecret,
-        },
-        auth: {
-          tokenHost: oAuth2Config.tokenHost,
-          tokenPath: oAuth2Config.tokenPath,
-        },
-      };
-      const oAuth2Client = new ResourceOwnerPassword(oAuth2ModuleOptions);
-      let errorMessage: string | null = null;
-
-      if (wwwLogin && wwwPassword) {
-        const tokenParams = {
-          username: wwwLogin,
-          password: wwwPassword,
-          scope: oAuth2Config.scope,
-        };
-
-        try {
-          const accessToken = await oAuth2Client.getToken(tokenParams);
-          if (accessToken) {
-            const publisherAuthentication = await fetch(
-              `${oAuth2ModuleOptions.auth.tokenHost}/publisher/access`,
-              {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json',
-                  Authorization: `Bearer ${accessToken.token.access_token}`,
-                },
-              },
-            );
-
-            if (publisherAuthentication.status === 200) {
-              return next();
-            } else if (
-              publisherAuthentication.status === 403 ||
-              publisherAuthentication.status === 401
-            ) {
-              errorMessage = 'Publisher authentication failed.';
-            } else if (publisherAuthentication.status === 500) {
-              errorMessage = 'Internal server error.';
-            } else {
-              errorMessage = 'Unknown error.';
-            }
-          }
-        } catch (data) {
-          errorMessage = 'OAuth2 authentication failed.';
-        }
-      }
-
-      // In case of failure, just send a 401 with the www-authenticate header.
-      res.set('WWW-Authenticate', 'Basic realm="401"');
-      if (errorMessage) {
-        console.error(errorMessage);
-        res.status(401).send(errorMessage);
-      } else {
-        res.status(401).send('Authentication required.');
-      }
-    };
-  })();
 
 export const initializeSession = (server: Express): void => {
   const oAuth2Config = getConfig().oAuth2;
@@ -333,7 +240,7 @@ export const isAuthenticated = async (req: Request): Promise<boolean> => {
   return result;
 };
 
-export const hasPublisherAccess = async (req: Request): Promise<boolean> => {
+export const hasPreviewAccess = async (req: Request): Promise<boolean> => {
   const oAuth2Config = getConfig().oAuth2;
   if (!oAuth2Config) {
     throw new Error('Missing OAuth2 configuration.');
@@ -344,8 +251,9 @@ export const hasPublisherAccess = async (req: Request): Promise<boolean> => {
     throw new Error('Missing access token.');
   }
 
-  const publisherAccess = await fetch(
-    `${oAuth2Config.tokenHost}/publisher/access`,
+  // @todo add the preview token if it exists to skip authentication.
+  const previewAccess = await fetch(
+    `${oAuth2Config.tokenHost}/preview/access`,
     {
       method: 'POST',
       headers: {
@@ -354,8 +262,9 @@ export const hasPublisherAccess = async (req: Request): Promise<boolean> => {
       },
     },
   );
+  console.log('Preview access', previewAccess);
 
-  const status = await publisherAccess.status;
+  const status = await previewAccess.status;
   return status === 200;
 };
 
