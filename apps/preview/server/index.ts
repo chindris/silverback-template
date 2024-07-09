@@ -1,6 +1,21 @@
 import express from 'express';
 import expressWs from 'express-ws';
 import { Subject } from 'rxjs';
+import {
+  getAuthenticationMiddleware,
+  isSessionRequired,
+} from './utils/authentication';
+import {
+  getOAuth2AuthorizeUrl,
+  getPersistedAccessToken,
+  hasPublisherAccess,
+  initializeSession,
+  isAuthenticated,
+  oAuth2AuthorizationCodeClient,
+  persistAccessToken,
+  stateMatches,
+} from './utils/oAuth2';
+import { getConfig } from './utils/config';
 
 const expressServer = express();
 const expressWsInstance = expressWs(expressServer);
@@ -8,6 +23,13 @@ const { app } = expressWsInstance;
 
 const updates$ = new Subject();
 app.use(express.json());
+
+// A session is only needed for OAuth2 Authorization Code grant type.
+if (isSessionRequired()) {
+  initializeSession(expressServer);
+}
+// Authentication middleware based on the configuration.
+const authMiddleware = getAuthenticationMiddleware(getConfig());
 
 app.get('/endpoint.js', (_, res) => {
   res.send(
@@ -17,7 +39,6 @@ app.get('/endpoint.js', (_, res) => {
   );
 });
 
-// TODO: Protect endpoints and preview with Drupal authentication.
 app.post('/__preview', (req, res) => {
   updates$.next(req.body || {});
   res.json(true);
@@ -34,6 +55,102 @@ app.ws('/__preview', (ws) => {
 app.get('/__preview/*', (req, _, next) => {
   req.url = '/';
   next();
+});
+
+// ---------------------------------------------------------------------------
+// OAuth2 routes
+// ---------------------------------------------------------------------------
+
+// Fallback route for login. Is used if there is no origin cookie.
+app.get('/oauth/login', async (req, res) => {
+  if (await isAuthenticated(req)) {
+    const accessPublisher = await hasPublisherAccess(req);
+    if (accessPublisher) {
+      res.send(
+        'Preview access is granted. <a href="/___status/">View status</a>',
+      );
+    } else {
+      res.send(
+        'Preview access is not granted. Contact your site administrator. <a href="/oauth/logout">Log out</a>',
+      );
+    }
+  } else {
+    res.cookie('origin', req.path).send('<a href="/oauth">Log in</a>');
+  }
+});
+
+// Redirects to authentication provider.
+app.get('/oauth', (req, res) => {
+  const client = oAuth2AuthorizationCodeClient();
+  if (!client) {
+    throw new Error('Missing OAuth2 client.');
+  }
+  const authorizationUri = getOAuth2AuthorizeUrl(client, req);
+  res.redirect(authorizationUri);
+});
+
+// Callback from authentication provider.
+app.get('/oauth/callback', async (req, res) => {
+  const oAuth2Config = getConfig().oAuth2;
+  if (!oAuth2Config) {
+    throw new Error('Missing OAuth2 configuration.');
+  }
+
+  const client = oAuth2AuthorizationCodeClient();
+  if (!client) {
+    throw new Error('Missing OAuth2 client.');
+  }
+
+  // Check if the state matches.
+  if (!stateMatches(req)) {
+    return res.status(500).json('State does not match.');
+  }
+
+  const { code } = req.query;
+  const options = {
+    code,
+    scope: oAuth2Config.scope,
+    // Do not include redirect_uri, makes Drupal simple_oauth fail.
+    // Returns 400 Bad Request.
+    //redirect_uri: 'http://127.0.0.1:7777/callback',
+  };
+
+  try {
+    // @ts-ignore options due to missing redirect_uri.
+    const accessToken = await client.getToken(options);
+    console.log('/oauth/callback accessToken', accessToken);
+    persistAccessToken(accessToken, req);
+
+    if (req.cookies.origin) {
+      res.redirect(req.cookies.origin);
+    } else {
+      res.redirect('/oauth/login');
+    }
+  } catch (error) {
+    console.error(error);
+    return (
+      res
+        .status(500)
+        // @ts-ignore
+        .json(`Authentication failed with error: ${error.message}`)
+    );
+  }
+});
+
+// Removes the session.
+app.get('/oauth/logout', async (req, res) => {
+  const accessToken = getPersistedAccessToken(req);
+  if (!accessToken) {
+    return res.status(401).send('No token found.');
+  }
+
+  // Requires this Drupal patch
+  // https://www.drupal.org/project/simple_oauth/issues/2945273
+  // await accessToken.revokeAll();
+  req.session.destroy(function (err) {
+    console.log('Remove session', err);
+  });
+  res.redirect('/oauth/login');
 });
 
 app.use(express.static('./dist'));
