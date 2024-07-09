@@ -132,7 +132,7 @@ export function Footer() {
           <nav>
             <ul
               className={
-                '!pl-0 md:ml-[5.625rem] flex flex-wrap justify-between grow'
+                '!pl-0 lg:ml-[5.625rem] flex flex-wrap justify-between grow'
               }
               aria-label="Footer Primary"
             >
@@ -141,7 +141,7 @@ export function Footer() {
                   <li
                     key={key + 'header'}
                     className={
-                      'block mb-3 pr-5 lg:pr-8 last:pr-0 md:mb-0 md:text-left w-1/2 lg:w-auto'
+                      'block mb-3 pr-5 lg:pr-8 last:pr-0 md:mb-0 md:text-left w-1/2 lg:w-auto max-w-44'
                     }
                   >
                     {item.target ? (
