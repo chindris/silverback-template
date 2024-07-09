@@ -1,58 +1,111 @@
 <?php
 
+use Drupal\Core\StringTranslation\TranslatableMarkup;
+
 /**
- * Set up the Publisher OAuth Consumer and delete the Default one.
+ * Create the Publisher OAuth Consumer.
  */
-function custom_deploy_set_consumers(array &$sandbox): string {
+function custom_deploy_create_publisher_consumer(array &$sandbox): string {
+  return _custom_deploy_create_consumer(
+    'Publisher',
+    'publisher',
+    'PUBLISHER_OAUTH2_CLIENT_SECRET',
+    'PUBLISHER_URL'
+  );
+}
+
+/**
+ * Create the Preview OAuth Consumer.
+ */
+function custom_deploy_create_preview_consumer(array &$sandbox): string {
+  return _custom_deploy_create_consumer(
+    'Preview',
+    'preview',
+    'PREVIEW_OAUTH2_CLIENT_SECRET',
+    'PREVIEW_URL'
+  );
+}
+
+/**
+ * Helper function to create an OAuth Consumer if it does not exist.
+ *
+ * @param string $label
+ * @param string $client_id
+ * @param string $client_secret_env_var
+ * @param string $redirect_base_url_env_var
+ *
+ * @return string|\Drupal\Core\StringTranslation\TranslatableMarkup
+ * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+ * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+ * @throws \Drupal\Core\Entity\EntityStorageException
+ */
+function _custom_deploy_create_consumer(
+  string $label,
+  string $client_id,
+  string $client_secret_env_var,
+  string $redirect_base_url_env_var
+): string|TranslatableMarkup {
   // Skip for Silverback environments.
   // It might be used for OAuth development purpose only in Silverback
-  // and can be set manually for this case.
-  // Matches the default Publisher behavior
-  // that disables Publisher OAuth for non Lagoon environments.
+  // and can be created manually for this case.
+  // Matches the default behaviour that disables it for non Lagoon environments.
   if (getenv('SB_ENVIRONMENT')) {
-    return t('Skipping for Silverback environment.');
+    return t('Skip for Silverback environment.');
   }
 
   // Check requirements.
   $entityTypeManager = \Drupal::entityTypeManager();
 
-  $publisherUrl = getenv('PUBLISHER_URL');
-  if (!$publisherUrl) {
-    throw new \Exception('PUBLISHER_URL environment variable is not set. It is required to setup the Publisher OAuth Consumer.');
+  $redirectBaseUrl = getenv($redirect_base_url_env_var);
+  if (!$redirectBaseUrl) {
+    throw new \Exception(
+      t('@ENV_VAR environment variable is not set. It is required to create the OAuth Consumer.',
+        [
+          '@ENV_VAR' => $redirect_base_url_env_var,
+        ]
+      )
+    );
   }
 
-  $clientSecret = getenv('PUBLISHER_OAUTH2_CLIENT_SECRET');
+  $clientSecret = getenv($client_secret_env_var);
   if (!$clientSecret) {
-    throw new \Exception('PUBLISHER_OAUTH2_CLIENT_SECRET environment variable is not set. It is required to setup the Publisher OAuth Consumer.');
+    throw new \Exception(
+      t('@ENV_VAR environment variable is not set. It is required to create the OAuth Consumer.',
+        [
+          '@ENV_VAR' => $client_secret_env_var,
+        ]
+      )
+    );
   }
 
   $consumersStorage = $entityTypeManager->getStorage('consumer');
   $existingConsumers = $consumersStorage->loadMultiple();
-  $hasPublisherConsumer = FALSE;
+  $consumerExists = FALSE;
   /** @var \Drupal\consumers\Entity\ConsumerInterface $consumer */
-  foreach($existingConsumers as $consumer) {
+  foreach ($existingConsumers as $consumer) {
     // As a side effect, delete the default consumer.
     // It is installed by the Consumers module.
+    // We don't use in the template.
     if ($consumer->getClientId() === 'default_consumer') {
       $consumer->delete();
     }
-    if ($consumer->getClientId() === 'publisher') {
-      $hasPublisherConsumer = TRUE;
+    if ($consumer->getClientId() === $client_id) {
+      $consumerExists = TRUE;
     }
   }
 
-  // Create the Publisher Consumer if it does not exist.
-  if (!$hasPublisherConsumer) {
-    $oAuthCallback = $publisherUrl . '/oauth/callback';
+  // Create the Consumer if it does not exist.
+  if (!$consumerExists) {
+    $oAuthCallback = $redirectBaseUrl . '/oauth/callback';
     $consumersStorage->create([
-      'label' => 'Publisher',
-      'client_id' => 'publisher',
-      'is_default' => TRUE,
+      'label' => $label,
+      'client_id' => $client_id,
+      'is_default' => FALSE,
       'secret' => $clientSecret,
       'redirect' => $oAuthCallback,
     ])->save();
-    return t('Created Publisher OAuth Consumer.');
+    return t('Created @consumer OAuth Consumer.', ['@consumer' => $label]);
   }
 
-  return t('Publisher OAuth Consumer already exists.');
+  return t('@consumer OAuth Consumer already exists.', ['@consumer' => $label]);
 }
