@@ -1,4 +1,5 @@
 /* Import all atom stylesheets. */
+@import './components/Atoms/Fonts.css';
 @import './components/Atoms/Container.css';
 @import './components/Atoms/List.css';
 

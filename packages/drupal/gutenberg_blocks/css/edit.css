@@ -100,3 +100,32 @@
 .gutenberg__editor .edit-post-visual-editor__content-area a.no-underline {
   text-decoration: none;
 }
+
+.gutenberg__editor .drupal-preview-sidebar {
+  min-width: 350px;
+  border-right: 1px solid #e0e0e0;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.gutenberg__editor .drupal-preview-sidebar--iframe-wrapper iframe {
+  height: 100vh;
+  border: none;
+}
+
+.gutenberg__editor .drupal-preview-sidebar .interface-complementary-area-header,
+.gutenberg__editor
+  .drupal-preview-sidebar
+  .interface-complementary-area.edit-post-sidebar {
+  width: 100%;
+}
+
+.gutenberg__editor .drupal-preview-sidebar--header {
+  padding: 10px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.gutenberg__editor .drupal-preview-sidebar--header button {
+  margin-right: 5px;
+}

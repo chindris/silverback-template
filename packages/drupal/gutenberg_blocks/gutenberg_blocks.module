@@ -4,6 +4,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Language\LanguageInterface;
 use Drupal\silverback_gutenberg\Utils;
 use Drupal\webform\Entity\Webform;
+use Drupal\Core\Url;
 
 /**
 * Implements hook_library_info_alter().
@@ -26,6 +27,24 @@ function gutenberg_blocks_form_node_form_alter(&$form, FormStateInterface $form_
   /** @var \Drupal\node\NodeInterface $node */
   $node = $form_state->getFormObject()->getEntity();
   if (Utils::getGutenbergFields($node)) {
+    $form['actions']['preview_link'] = [
+      '#type' => 'link',
+      '#title' => t('Preview'),
+      '#url' => Url::fromRoute('<current>'),
+      '#attributes' => [
+        'class' => [
+          'button',
+          'button--primary',
+        ],
+      ],
+    ];
+    // Add preview url for editor preview.
+    /** @var \Drupal\silverback_external_preview\ExternalPreviewLink $externalPreviewLink */
+    $externalPreviewLink = \Drupal::service('silverback_external_preview.external_preview_link');
+    $previewUrl = $externalPreviewLink->createPreviewUrlFromEntity($node)->toString();
+    $form['#attached']['drupalSettings']['preview'] = [
+      'previewUrl' => $previewUrl,
+    ];
 
     // Load all open webforms and populate them into drupalSettings.
     $languageManager = \Drupal::languageManager();
@@ -41,5 +60,18 @@ function gutenberg_blocks_form_node_form_alter(&$form, FormStateInterface $form_
       'label' => $form->label(),
     ], $webforms);
     $form['#attached']['drupalSettings']['customGutenbergBlocks']['forms'] = array_values($forms);
+  }
+}
+
+/**
+ * Implements hook_toolbar_alter().
+ */
+function gutenberg_blocks_toolbar_alter(&$items) {
+  // Unset the preview button from the toolbar for now,
+  // as it's a duplicate of the one in the editor.
+  // This could be configurable in the silverback_external_preview module
+  // based on routes.
+  if (array_key_exists('silverback_external_preview', $items)) {
+    unset($items['silverback_external_preview']);
   }
 }

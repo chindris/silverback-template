@@ -65,7 +65,7 @@ directive @decapPageTranslations on FIELD_DEFINITION
 
 """
 Parse a given Url.
-For Drupal, this is implicitly implemented in the "grraphql_directives" module.
+For Drupal, this is implicitly implemented in the "graphql_directives" module.
 
 implementation(gatsby): ./page.js#route
 """
@@ -208,6 +208,7 @@ union PageContent @resolveEditorBlockType =
   | BlockQuote
   | BlockHorizontalSeparator
   | BlockAccordion
+  | BlockInfoGrid
 
 type BlockForm @type(id: "custom/form") {
   url: Url @resolveEditorBlockAttribute(key: "formId") @webformIdToUrl(id: "$")
@@ -295,6 +296,24 @@ type BlockQuote @type(id: "custom/quote") {
   image: MediaImage @resolveEditorBlockMedia
 }
 
+enum InfoGridIcon @default @value(string: "NONE") {
+  EMAIL
+  PHONE
+  LIFE_RING
+  NONE
+}
+
+union InfoGridContent @resolveEditorBlockType = BlockMarkup | BlockCta
+
+type BlockInfoGrid @type(id: "custom/info-grid") {
+  gridItems: [BlockInfoGridItem]! @resolveEditorBlockChildren
+}
+
+type BlockInfoGridItem {
+  icon: InfoGridIcon! @resolveEditorBlockAttribute(key: "icon")
+  infoGridContent: [InfoGridContent] @resolveEditorBlockChildren
+}
+
 type BlockHorizontalSeparator @type(id: "custom/horizontal-separator") {
   markup: Markup! @resolveEditorBlockMarkup
 }
@@ -373,7 +392,6 @@ type DemoBlock {
 
 """
 The type provided by translations source (e.g. Decap or Drupal).
-Ingested by @mergeTranslatableStrings which handles priorities.
 """
 interface TranslatableString @default @value {
   """

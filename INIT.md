@@ -66,7 +66,11 @@ replace(
   process.env.PROJECT_NAME_MACHINE,
 );
 replace(
-  ['apps/cms/.lagoon.env', 'apps/website/.lagoon.env'],
+  [
+    'apps/cms/.lagoon.env',
+    'apps/website/.lagoon.env',
+    'apps/preview/.lagoon.env',
+  ],
   'PROJECT_NAME=example',
   'PROJECT_NAME=' + process.env.PROJECT_NAME_MACHINE,
 );

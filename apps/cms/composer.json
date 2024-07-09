@@ -67,6 +67,7 @@
     "drupal/metatag": "^2.0",
     "drupal/pathauto": "^1.11",
     "drupal/redirect": "^1.8",
+    "drupal/replicate_ui": "^1.1",
     "drupal/reroute_email": "^2.2",
     "drupal/role_delegation": "^1.2",
     "drupal/simple_oauth": "^5.2",
@@ -102,7 +103,8 @@
         "Autosave preview": "./patches/fetch-entity.patch"
       },
       "drupal/gutenberg": {
-        "Gutenberg enabled hook": "https://www.drupal.org/files/issues/2024-05-07/gutenberg_enabled_hook_3445677-2.patch"
+        "Gutenberg enabled hook": "https://www.drupal.org/files/issues/2024-05-07/gutenberg_enabled_hook_3445677-2.patch",
+        "Remove !important from sidebar": "./patches/gutenberg_remove-important-sidebar.patch"
       }
     },
     "patchLevel": {

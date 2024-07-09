@@ -24,8 +24,20 @@ Other steps
 - [Create a new Lagoon project](https://amazeelabs.atlassian.net/wiki/spaces/ALU/pages/368115717/Create+a+new+Lagoon+project)
 - [Create a new Netlify project](https://amazeelabs.atlassian.net/wiki/spaces/ALU/pages/368017428/Create+a+new+Netlify+project)
 - Check the [Environment overrides](#environment-overrides) section below
+- Check the [Statistics and Estimations](#statistics-and-estimations) section
+  below
 - Check the [Choose a CMS](#choose-a-cms) section below
 - Create `dev` and `prod` branches (and optionally `stage`) from `release`
+
+## Connect to automatic estimations
+
+There are Github workflows that can connect to the
+[Amazeelabs Dashboard](https://dashboard.amazeelabs.com) to log complexity
+statistics and retrieve automatic estimations. To use that, provide a
+`JIRA_PROJECT_ID` environment variable in the Github repository variables.
+
+The project should then show up on
+[Estimator page](https://dashboard.amazeelabs.com/estimator).
 
 ## Choose a CMS
 

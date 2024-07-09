@@ -8,8 +8,6 @@ COPY --from=node /usr/local/lib/node_modules /usr/local/lib/node_modules
 COPY --from=node /usr/local/bin/node /usr/local/bin/node
 RUN ln -s /usr/local/lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm
 
-ENV PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1
-
 # Install pnpm
 RUN npm install -g pnpm@8.6.12 && pnpm config set store-dir /tmp/cache/pnpm
 

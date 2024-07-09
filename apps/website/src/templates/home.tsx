@@ -1,8 +1,10 @@
 import { graphql } from '@amazeelabs/gatsby-plugin-operations';
-import { HomePageQuery, OperationExecutor, useLocalized } from '@custom/schema';
+import { HomePageQuery, OperationExecutorsProvider } from '@custom/schema';
 import { HomePage } from '@custom/ui/routes/HomePage';
 import { HeadProps, PageProps } from 'gatsby';
 import React from 'react';
+
+import { useLocalized } from '../utils/locale';
 
 export const query = graphql(HomePageQuery);
 
@@ -37,8 +39,10 @@ export function Head({ data }: HeadProps<typeof query>) {
 
 export default function Index({ data }: PageProps<typeof query>) {
   return (
-    <OperationExecutor executor={data} id={HomePageQuery}>
+    <OperationExecutorsProvider
+      executors={[{ executor: data, id: HomePageQuery }]}
+    >
       <HomePage />
-    </OperationExecutor>
+    </OperationExecutorsProvider>
   );
 }

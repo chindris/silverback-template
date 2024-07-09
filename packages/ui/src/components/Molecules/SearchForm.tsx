@@ -1,8 +1,8 @@
+import { useIntl } from '@amazeelabs/react-intl';
 import { useLocation } from '@custom/schema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { useIntl } from 'react-intl';
 import { z } from 'zod';
 
 const formValueSchema = z.object({

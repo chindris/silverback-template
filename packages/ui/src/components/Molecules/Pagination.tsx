@@ -1,3 +1,4 @@
+import { useIntl } from '@amazeelabs/react-intl';
 import { Link, useLocation } from '@custom/schema';
 import {
   ArrowLongLeftIcon,
@@ -5,7 +6,6 @@ import {
 } from '@heroicons/react/20/solid';
 import clsx from 'clsx';
 import React from 'react';
-import { useIntl } from 'react-intl';
 import { z } from 'zod';
 
 export const paginationParamsSchema = z.object({

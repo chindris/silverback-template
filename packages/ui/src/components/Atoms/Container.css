@@ -39,3 +39,17 @@
 .container-nested .prose ol:not(ol ol) {
   @apply mt-0;
 }
+
+.consistent-margin {
+  h1,
+  h2,
+  h3,
+  p,
+  a {
+    @apply my-2;
+  }
+  p,
+  a {
+    @apply text-base;
+  }
+}

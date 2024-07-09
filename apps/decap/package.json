@@ -32,7 +32,7 @@
     "remark-rehype": "^10.1.0",
     "unified": "^10.1.2",
     "yaml": "^2.3.4",
-    "zod": "^3.22.4"
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@amazeelabs/decap-cms-backend-token-auth": "^1.1.7",

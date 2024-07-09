@@ -3,23 +3,25 @@ import clsx from 'clsx';
 import React from 'react';
 
 import { isTruthy } from '../../../utils/isTruthy';
+import { FadeUp } from '../../Molecules/FadeUp';
 
 export function BlockImageTeasers(props: BlockImageTeasersFragment) {
   return (
-    // eslint-disable-next-line tailwindcss/no-custom-classname
-    <section className="my-10 block-background-image-cards">
-      <div className="text-center">
-        <div
-          className={clsx('grid gap-2', {
-            'grid-cols-2': props.teasers.filter(isTruthy).length > 1,
-          })}
-        >
-          {props.teasers.filter(isTruthy).map((teaser, index) => (
-            <BlockImageTeaser key={index} {...teaser} />
-          ))}
+    <FadeUp yGap={50} className="my-10 block-background-image-cards">
+      <section>
+        <div className="text-center">
+          <div
+            className={clsx('grid gap-2', {
+              'grid-cols-2': props.teasers.filter(isTruthy).length > 1,
+            })}
+          >
+            {props.teasers.filter(isTruthy).map((teaser, index) => (
+              <BlockImageTeaser key={index} {...teaser} />
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </FadeUp>
   );
 }
 
