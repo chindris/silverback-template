@@ -29,7 +29,7 @@ if (isSessionRequired()) {
   initializeSession(expressServer);
 }
 // Authentication middleware based on the configuration.
-const authMiddleware = getAuthenticationMiddleware(getConfig());
+const authMiddleware = getAuthenticationMiddleware();
 
 app.get('/endpoint.js', (_, res) => {
   res.send(

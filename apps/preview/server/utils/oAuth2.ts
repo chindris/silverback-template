@@ -35,6 +35,34 @@ const ENCRYPTION_KEY =
  */
 export const oAuth2AuthCodeMiddleware: RequestHandler = ((): RequestHandler => {
   return async (req: Request, res: Response, next: NextFunction) => {
+    // Drupal's OAuth can be skipped if there is
+    // a valid preview link token for the entity.
+    const { preview_access_token, nid, entity_type_id, lang } = req.query;
+    if (preview_access_token && nid) {
+      const config = getConfig();
+      const previewAccess = await fetch(
+        `${config.drupalHost}/preview/link-access`,
+        {
+          method: 'POST',
+          body: JSON.stringify({
+            entity_id: nid,
+            // @todo we need to pass the entity type ID for other entity types.
+            //   But then also need to change the nid parameter to entity_id.
+            entity_type_id: entity_type_id || 'node',
+            langcode: lang || 'en',
+            preview_access_token: preview_access_token,
+          }),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        },
+      );
+      // Skip, otherwise continue with OAuth.
+      if (previewAccess.status === 200) {
+        return next();
+      }
+    }
+
     if (await isAuthenticated(req)) {
       const accessPreview = await hasPreviewAccess(req);
       if (accessPreview) {
@@ -251,7 +279,6 @@ export const hasPreviewAccess = async (req: Request): Promise<boolean> => {
     throw new Error('Missing access token.');
   }
 
-  // @todo add the preview token if it exists to skip authentication.
   const previewAccess = await fetch(
     `${oAuth2Config.tokenHost}/preview/access`,
     {
@@ -262,7 +289,6 @@ export const hasPreviewAccess = async (req: Request): Promise<boolean> => {
       },
     },
   );
-  console.log('Preview access', previewAccess);
 
   const status = await previewAccess.status;
   return status === 200;

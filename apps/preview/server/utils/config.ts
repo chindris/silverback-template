@@ -1,5 +1,6 @@
 export type PreviewConfig = {
   authenticationType: string; // 'oauth2' | 'basic';
+  drupalHost: string;
   /**
    * Basic auth.
    */
@@ -25,6 +26,7 @@ export type PreviewConfig = {
 export const getConfig = (): PreviewConfig => {
   return {
     authenticationType: process.env.AUTHENTICATION_TYPE || 'oauth2',
+    drupalHost: process.env.DRUPAL_URL || 'http://127.0.0.1:8888',
     basicAuth: {
       username: process.env.BASIC_AUTH_USER || 'test',
       password: process.env.BASIC_AUTH_PASSWORD || 'test',
