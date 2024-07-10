@@ -1,7 +1,7 @@
 import { NextFunction, Request, RequestHandler, Response } from 'express';
 import basicAuth from 'express-basic-auth';
 
-import { getConfig, PreviewConfig } from './config';
+import { getConfig } from './config';
 import { oAuth2AuthCodeMiddleware } from './oAuth2';
 
 /**
@@ -10,15 +10,14 @@ import { oAuth2AuthCodeMiddleware } from './oAuth2';
  * Favours OAuth2, then Basic Auth, then falling back to no auth
  * if not configured (= grant access).
  */
-export const getAuthenticationMiddleware = (
-  config: PreviewConfig,
-): RequestHandler =>
+export const getAuthenticationMiddleware = (): RequestHandler =>
   ((): RequestHandler => {
     const skipAuthentication = process.env.SKIP_AUTHENTICATION === 'true';
     if (skipAuthentication) {
       return (req: Request, res: Response, next: NextFunction): void => next();
     }
 
+    const config = getConfig();
     switch (config.authenticationType) {
       case 'oauth2':
         const oAuth2Config = config.oAuth2;
