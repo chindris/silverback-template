@@ -5,8 +5,8 @@ import { Subject } from 'rxjs';
 import {
   getAuthenticationMiddleware,
   isSessionRequired,
-} from './utils/authentication';
-import { getConfig } from './utils/config';
+} from './utils/authentication.js';
+import { getConfig } from './utils/config.js';
 import {
   getOAuth2AuthorizeUrl,
   getPersistedAccessToken,
@@ -16,7 +16,7 @@ import {
   oAuth2AuthorizationCodeClient,
   persistAccessToken,
   stateMatches,
-} from './utils/oAuth2';
+} from './utils/oAuth2.js';
 
 const expressServer = express();
 const expressWsInstance = expressWs(expressServer);
