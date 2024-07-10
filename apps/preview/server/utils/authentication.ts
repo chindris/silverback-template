@@ -20,18 +20,16 @@ export const getAuthenticationMiddleware = (): RequestHandler =>
     const config = getConfig();
     switch (config.authenticationType) {
       case 'oauth2':
-        const oAuth2Config = config.oAuth2;
-        if (oAuth2Config) {
+        if (config.oAuth2) {
           return oAuth2AuthCodeMiddleware;
         } else {
           console.error('Missing OAuth2 configuration.');
         }
         break;
       case 'basic':
-        const basicAuthConfig = getConfig().basicAuth;
-        if (basicAuthConfig) {
+        if (config.basicAuth) {
           return basicAuth({
-            users: { [basicAuthConfig.username]: basicAuthConfig.password },
+            users: { [config.basicAuth.username]: config.basicAuth.password },
             challenge: true,
           });
         } else {

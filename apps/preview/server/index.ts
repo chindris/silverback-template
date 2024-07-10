@@ -1,10 +1,12 @@
 import express from 'express';
 import expressWs from 'express-ws';
 import { Subject } from 'rxjs';
+
 import {
   getAuthenticationMiddleware,
   isSessionRequired,
 } from './utils/authentication';
+import { getConfig } from './utils/config';
 import {
   getOAuth2AuthorizeUrl,
   getPersistedAccessToken,
@@ -15,7 +17,6 @@ import {
   persistAccessToken,
   stateMatches,
 } from './utils/oAuth2';
-import { getConfig } from './utils/config';
 
 const expressServer = express();
 const expressWsInstance = expressWs(expressServer);
