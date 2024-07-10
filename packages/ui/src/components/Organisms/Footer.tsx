@@ -29,7 +29,7 @@ export function Footer() {
       <h2 className={'sr-only'}>Footer</h2>
       <div className="pb-8 container-content">
         <div className="flex flex-wrap justify-between">
-          <div className={'w-full mb-8 md:mb-0 md:w-1/4'}>
+          <div className={'w-full mb-8 mr-2 md:w-1/4'}>
             <a href="/" className={'mb-4 block'}>
               <svg
                 width="168"
@@ -141,7 +141,7 @@ export function Footer() {
                   <li
                     key={key + 'header'}
                     className={
-                      'block mb-3 pr-5 lg:pr-8 last:pr-0 md:mb-0 md:text-left w-1/2 lg:w-auto max-w-44'
+                      'block mb-3 pr-5 lg:pr-8 last:pr-0 md:mb-0 md:text-left w-1/2 lg:w-44 max-w-44'
                     }
                   >
                     {item.target ? (
