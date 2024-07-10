@@ -1,8 +1,8 @@
 import { NextFunction, Request, RequestHandler, Response } from 'express';
 import basicAuth from 'express-basic-auth';
 
-import { getConfig } from './config';
-import { oAuth2AuthCodeMiddleware } from './oAuth2';
+import { getConfig } from './config.js';
+import { oAuth2AuthCodeMiddleware } from './oAuth2.js';
 
 /**
  * Returns the Express authentication middleware based on the configuration.

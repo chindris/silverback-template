@@ -12,7 +12,7 @@ import createMemoryStore from 'memorystore';
 import fetch from 'node-fetch';
 import { AccessToken, AuthorizationCode } from 'simple-oauth2';
 
-import { getConfig } from './config';
+import { getConfig } from './config.js';
 
 declare module 'express-session' {
   interface SessionData {
