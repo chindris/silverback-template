@@ -29,7 +29,7 @@ export function Footer() {
       <h2 className={'sr-only'}>Footer</h2>
       <div className="pb-8 container-content">
         <div className="flex flex-wrap justify-between">
-          <div className={'w-full mb-8 mr-2 md:w-1/4'}>
+          <div className={'w-full mb-8 mr-2 md:w-1/4 lg:mr-[5.625rem]'}>
             <a href="/" className={'mb-4 block'}>
               <svg
                 width="168"
@@ -131,9 +131,7 @@ export function Footer() {
           </div>
           <nav>
             <ul
-              className={
-                '!pl-0 lg:ml-[5.625rem] flex flex-wrap justify-between grow'
-              }
+              className={'!pl-0 flex flex-wrap justify-between grow'}
               aria-label="Footer Primary"
             >
               {items.map((item, key) => (
