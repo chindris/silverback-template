@@ -10,6 +10,7 @@ import {
 import React from 'react';
 
 import { clear, useOperation } from '../../utils/operation';
+import { Loading } from '../Molecules/Loading';
 import { PageDisplay } from '../Organisms/PageDisplay';
 
 function usePreviewParameters(): OperationVariables<
@@ -52,30 +53,54 @@ export function usePreviewRefresh() {
 }
 
 export function Preview() {
-  const { data } = useOperation(PreviewDrupalPageQuery, usePreviewParameters());
+  const { data, isLoading, error } = useOperation(
+    PreviewDrupalPageQuery,
+    usePreviewParameters(),
+  );
   const intl = useIntl();
-  if (data?.preview) {
-    return <PageDisplay {...data.preview} />;
-  } else {
-    // @todo: load this content from Drupal settings, create a ForbiddenPage component.
-    const data403 = {
-      preview: {
-        title: '403 Forbidden',
-        locale: 'en' as Locale,
-        translations: [],
-        path: '/403' as Url,
-        content: [
-          {
-            __typename: 'BlockMarkup',
-            markup: `<p>${intl.formatMessage({
-              defaultMessage:
-                'You do not have access to this page. Your access token might have expired.',
-              id: 'iAZszQ',
-            })}</p>`,
-          },
-        ] as Exclude<PreviewDrupalPageQuery['preview'], undefined>['content'],
-      },
-    };
-    return <PageDisplay {...data403.preview} />;
-  }
+  // @todo load this content from Drupal settings, create a ForbiddenPage component.
+  // @todo forward error from the backend.
+  const data403 = {
+    preview: {
+      title: '403 Forbidden',
+      locale: 'en' as Locale,
+      translations: [],
+      path: '/403' as Url,
+      content: [
+        {
+          __typename: 'BlockMarkup',
+          markup: `<p>${intl.formatMessage({
+            defaultMessage:
+              'You do not have access to this page. Your access token might have expired.',
+            id: 'iAZszQ',
+          })}</p>`,
+        },
+      ] as Exclude<PreviewDrupalPageQuery['preview'], undefined>['content'],
+    },
+  };
+  return (
+    <>
+      {error ? (
+        <div className="flex items-center justify-center">
+          <div className="my-8 px-3 py-1 text-xs font-medium leading-none text-center text-red-500 bg-red-100 rounded-full">
+            {error}
+          </div>
+        </div>
+      ) : (
+        <>
+          {isLoading ? (
+            <Loading />
+          ) : (
+            <>
+              {data?.preview ? (
+                <PageDisplay {...data.preview} />
+              ) : (
+                <PageDisplay {...data403.preview} />
+              )}
+            </>
+          )}
+        </>
+      )}
+    </>
+  );
 }
