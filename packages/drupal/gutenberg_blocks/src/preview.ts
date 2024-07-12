@@ -14,8 +14,6 @@
                 id: 'mobile',
                 width: 375,
                 height: 725,
-                iconPath:
-                  '/modules/contrib/silverback_external_preview/icons/mobile.svg',
               },
               {
                 label: Drupal.t('Tablet'),
@@ -42,15 +40,25 @@
             const getPreviewSelect = () => {
               let previewSelect = '<select class="external-preview">';
               previewSizes.forEach((size) => {
-                if (size.width <= window.screen.width) {
-                  const selectOption = `<option value="${size.id}">${size.label} (${size.width} x ${size.height})</option>`;
-                  previewSelect += selectOption;
-                }
+                const selectOption = `<option value="${size.id}">${size.label} (${size.width} x ${size.height})</option>`;
+                previewSelect += selectOption;
               });
               previewSelect += '</select>';
               return previewSelect;
             };
             const previewSelect = getPreviewSelect();
+
+            const shareButton = `<a 
+              class="components-external-link components-button share-preview use-ajax" 
+              href="${drupalSettings.preview.previewTokenUrl}"
+              data-dialog-type="modal"
+              data-dialog-options="{&quot;width&quot;:550,&quot;height&quot;:570}" 
+              rel="external noreferrer noopener">
+                ${Drupal.t('Share preview')}<span class="components-visually-hidden">${Drupal.t('(opens in a new tab)')}</span>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="components-external-link__icon css-6wogo1-StyledIcon etxm6pv0" role="img" aria-hidden="true" focusable="false">
+                  <path d="M18.2 17c0 .7-.6 1.2-1.2 1.2H7c-.7 0-1.2-.6-1.2-1.2V7c0-.7.6-1.2 1.2-1.2h3.2V4.2H7C5.5 4.2 4.2 5.5 4.2 7v10c0 1.5 1.2 2.8 2.8 2.8h10c1.5 0 2.8-1.2 2.8-2.8v-3.6h-1.5V17zM14.9 3v1.5h3.7l-6.4 6.4 1.1 1.1 6.4-6.4v3.7h1.5V3h-6.3z"></path>
+                </svg>
+            </a>`;
 
             const previewSidebarMarkup = `
               <div class="interface-interface-skeleton__secondary-sidebar drupal-preview-sidebar" role="region" aria-label="Drupal preview" tabindex="-1">
@@ -73,7 +81,8 @@
                   </div>
                   <div class="drupal-preview-sidebar components-panel">
                     <div class="drupal-preview-sidebar--header">
-                      ${previewSelect} ${previewButton}
+                      <div>${previewSelect} ${previewButton}</div>
+                      <div>${shareButton}</div>
                     </div>
                     <div class="drupal-preview-sidebar--iframe-wrapper">
                       <iframe width="100%" height="800px" 
@@ -106,6 +115,7 @@
                   if (!size) {
                     return;
                   }
+                  $previewButton.data('windowTarget', size.id);
                   $previewButton.data('windowHeight', size.height);
                   $previewButton.data('windowWidth', size.width);
                 })
@@ -114,8 +124,9 @@
                 const target = $(event.target);
                 const windowWidth = target.data('windowWidth');
                 const windowHeight = target.data('windowHeight');
+                const windowTarget = target.data('windowTarget');
                 const windowFeatures = `resizable,height=${windowHeight},width=${windowWidth}`;
-                window.open(previewUrl, 'preview', windowFeatures);
+                window.open(previewUrl, windowTarget, windowFeatures);
               });
             } else {
               $('.drupal-preview-sidebar').remove();
