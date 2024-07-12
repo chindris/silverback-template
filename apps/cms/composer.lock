@@ -345,16 +345,16 @@
         },
         {
             "name": "amazeelabs/silverback_autosave",
-            "version": "1.2.0",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/AmazeeLabs/silverback_autosave.git",
-                "reference": "8208ddba6d5da916bf5649b7e0e53efdf491bb7a"
+                "reference": "c65e743f64c96598aec3b8bf1874cc2fd31fd534"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AmazeeLabs/silverback_autosave/zipball/8208ddba6d5da916bf5649b7e0e53efdf491bb7a",
-                "reference": "8208ddba6d5da916bf5649b7e0e53efdf491bb7a",
+                "url": "https://api.github.com/repos/AmazeeLabs/silverback_autosave/zipball/c65e743f64c96598aec3b8bf1874cc2fd31fd534",
+                "reference": "c65e743f64c96598aec3b8bf1874cc2fd31fd534",
                 "shasum": ""
             },
             "type": "drupal-module",
@@ -365,9 +365,9 @@
             "description": "Adds autosave feature on forms.",
             "support": {
                 "issues": "https://github.com/AmazeeLabs/silverback_autosave/issues",
-                "source": "https://github.com/AmazeeLabs/silverback_autosave/tree/1.2.0"
+                "source": "https://github.com/AmazeeLabs/silverback_autosave/tree/1.3.0"
             },
-            "time": "2024-04-25T13:14:00+00:00"
+            "time": "2024-07-11T08:04:07+00:00"
         },
         {
             "name": "amazeelabs/silverback_campaign_urls",
