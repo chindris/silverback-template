@@ -1,16 +1,16 @@
 'use client';
+import { useIntl } from '@amazeelabs/react-intl';
 import type { OperationVariables } from '@custom/schema';
 import {
-  PreviewDrupalPageQuery,
-  useLocation,
   Locale,
+  PreviewDrupalPageQuery,
   Url,
+  useLocation,
 } from '@custom/schema';
 import React from 'react';
 
 import { clear, useOperation } from '../../utils/operation';
 import { PageDisplay } from '../Organisms/PageDisplay';
-import { useIntl } from '@amazeelabs/react-intl';
 
 function usePreviewParameters(): OperationVariables<
   typeof PreviewDrupalPageQuery
@@ -70,7 +70,7 @@ export function Preview() {
             markup: `<p>${intl.formatMessage({
               defaultMessage:
                 'You do not have access to this page. Your access token might have expired.',
-              id: 'e7yFQY',
+              id: 'iAZszQ',
             })}</p>`,
           },
         ] as Exclude<PreviewDrupalPageQuery['preview'], undefined>['content'],
