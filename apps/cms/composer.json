@@ -100,9 +100,6 @@
       "drupal/userprotect": {
         "Fix site install": "https://www.drupal.org/files/issues/2023-07-28/3349663-8.patch"
       },
-      "amazeelabs/silverback_gatsby": {
-        "Autosave preview": "./patches/fetch-entity.patch"
-      },
       "drupal/gutenberg": {
         "Gutenberg enabled hook": "https://www.drupal.org/files/issues/2024-05-07/gutenberg_enabled_hook_3445677-2.patch",
         "Remove !important from sidebar": "./patches/gutenberg_remove-important-sidebar.patch"
