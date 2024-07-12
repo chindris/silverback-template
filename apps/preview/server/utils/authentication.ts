@@ -12,11 +12,6 @@ import { oAuth2AuthCodeMiddleware } from './oAuth2.js';
  */
 export const getAuthenticationMiddleware = (): RequestHandler =>
   ((): RequestHandler => {
-    const skipAuthentication = process.env.SKIP_AUTHENTICATION === 'true';
-    if (skipAuthentication) {
-      return (req: Request, res: Response, next: NextFunction): void => next();
-    }
-
     const config = getConfig();
     switch (config.authenticationType) {
       case 'oauth2':
@@ -35,6 +30,8 @@ export const getAuthenticationMiddleware = (): RequestHandler =>
         } else {
           console.error('Missing basic auth configuration.');
         }
+        break;
+      case 'noauth':
         break;
       default:
         console.error('Unknown authentication type.');
