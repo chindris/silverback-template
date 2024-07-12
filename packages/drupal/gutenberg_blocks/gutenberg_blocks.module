@@ -43,11 +43,12 @@ function gutenberg_blocks_form_node_form_alter(&$form, FormStateInterface $form_
     /** @var \Drupal\silverback_external_preview\ExternalPreviewLink $externalPreviewLink */
     $externalPreviewLink = \Drupal::service('silverback_external_preview.external_preview_link');
     $previewUrl = $externalPreviewLink->createPreviewUrlFromEntity($node)->toString();
+    $langcode = \Drupal::languageManager()->getCurrentLanguage(LanguageInterface::TYPE_CONTENT)->getId();
     $form['#attached']['drupalSettings']['preview'] = [
       'previewUrl' => $previewUrl,
-      // Link template does not work out here, check why.
+      // @todo link template does not work out here, check why.
       //'previewTokenUrl' => $node->toUrl('preview-link-generate')->toString(),
-      'previewTokenUrl' => '/node/' . $node->id() . '/generate-preview-link',
+      'previewTokenUrl' => '/' . $langcode . '/node/' . $node->id() . '/generate-preview-link',
     ];
     $form['#attached']['library'][] = 'core/drupal.dialog.ajax';
 
