@@ -643,3 +643,58 @@ test('Block - info grid', async () => {
     }
   `);
 });
+
+test('Conditional', async () => {
+  const result = await fetch(gql`
+    {
+      _loadDrupalPage(id: "52ee5cc7-0ac5-49b5-8550-ce59476bd4ac") {
+        content {
+          __typename
+          ... on BlockConditional {
+            content {
+              ... on BlockMarkup {
+                markup
+              }
+            }
+            displayFrom
+            displayTo
+          }
+        }
+      }
+    }
+  `);
+  expect(result).toMatchInlineSnapshot(`
+    {
+      "data": {
+        "_loadDrupalPage": {
+          "content": [
+            {
+              "__typename": "BlockConditional",
+              "content": [
+                {
+                  "markup": "
+    <p>Complete</p>
+    ",
+                },
+              ],
+              "displayFrom": "2024-05-16T11:05:00.000Z",
+              "displayTo": "2024-05-23T13:03:00.000Z",
+            },
+            {
+              "__typename": "BlockConditional",
+              "content": [
+                {
+                  "markup": "
+    <p>No conditions</p>
+    ",
+                },
+              ],
+              "displayFrom": null,
+              "displayTo": null,
+            },
+          ],
+        },
+      },
+    }
+  `);
+});

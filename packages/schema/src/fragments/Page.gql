@@ -38,6 +38,7 @@ fragment Page on Page {
     ...BlockHorizontalSeparator
     ...BlockAccordion
     ...BlockInfoGrid
+    ...BlockConditional
   }
   metaTags {
     tag
