@@ -1,7 +1,7 @@
 import { MetaTag } from '@custom/schema';
 import React from 'react';
 
-export function Head({ meta }: {meta?: Array<MetaTag | undefined>}) {
+export function Head({ meta }: { meta?: Array<MetaTag | undefined> }) {
   return meta ? (
     <>
       {meta.map((metaTag, index) => {
@@ -13,7 +13,9 @@ export function Head({ meta }: {meta?: Array<MetaTag | undefined>}) {
                 property={metaTag.attributes?.property}
                 content={metaTag.attributes?.content}
               />
-              {metaTag.attributes?.name === 'title' ? <title>{metaTag.attributes?.content}</title> : null}
+              {metaTag.attributes?.name === 'title' ? (
+                <title>{metaTag.attributes?.content}</title>
+              ) : null}
             </React.Fragment>
           );
         } else if (metaTag?.tag === 'link') {
