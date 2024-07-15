@@ -4,7 +4,7 @@ import { QuickActions, SiteLanguage } from '../../helpers/quick-actions';
 import { websiteUrl } from '../../helpers/url';
 
 test.describe('decap pages', () => {
-  test.fixme('example decap page is rendered', async ({ page }) => {
+  test('example decap page is rendered', async ({ page }) => {
     const quickActions = new QuickActions(page);
 
     await page.goto(websiteUrl('/en/decap-example'));
