@@ -7,7 +7,7 @@
   "description": "Drupal based content management system.",
   "sideEffects": false,
   "scripts": {
-    "prep:composer": "if command -v composer; then composer install; else echo 'Skipping composer install.'; fi",
+    "prep:composer": "if command -v composer; then COMPOSER_ALLOW_SUPERUSER=1 composer install; else echo 'Skipping composer install.'; fi",
     "prep:database": "./prep-database.sh",
     "prep:schema": "pnpm drush silverback-gatsby:schema-export ../../../tests/schema || true",
     "fix-premissions": "chmod +w web/sites/default/files/.htaccess && chmod +w web/sites/default/files/private/.htaccess",
