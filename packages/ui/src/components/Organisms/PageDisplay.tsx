@@ -6,7 +6,6 @@ import { isTruthy } from '../../utils/isTruthy';
 import { UnreachableCaseError } from '../../utils/unreachable-case-error';
 import { BreadCrumbs } from '../Molecules/Breadcrumbs';
 import { PageTransition } from '../Molecules/PageTransition';
-import { Head } from './Head';
 import { BlockAccordion } from './PageContent/BlockAccordion';
 import { BlockCta } from './PageContent/BlockCta';
 import { BlockForm } from './PageContent/BlockForm';
@@ -18,11 +17,12 @@ import { BlockMarkup } from './PageContent/BlockMarkup';
 import { BlockMedia } from './PageContent/BlockMedia';
 import { BlockQuote } from './PageContent/BlockQuote';
 import { PageHero } from './PageHero';
+import { PageMeta } from './PageMeta';
 
 export function PageDisplay(page: PageFragment) {
   return (
     <PageTransition>
-      <Head meta={page.metaTags}></Head>
+      <PageMeta meta={page.metaTags} locale={page.locale}></PageMeta>
       <div>
         {!page.hero && <BreadCrumbs />}
         {page.hero && <PageHero {...page.hero} />}
