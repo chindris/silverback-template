@@ -19,15 +19,17 @@ test('Metatags on Basic page', async ({ page }) => {
   );
 });
 
-// TODO: https://amazeelabs.atlassian.net/browse/SLB-436
-test.fixme('HTML lang attribute', async ({ page }) => {
+test('HTML lang attribute', async ({ page }) => {
   await page.goto(websiteUrl('/en'));
   await expect(page.locator('html')).toHaveAttribute('lang', 'en');
   await page.goto(websiteUrl('/de'));
   await expect(page.locator('html')).toHaveAttribute('lang', 'de');
 
-  await page.goto(websiteUrl('/en/imprint'));
-  await expect(page.locator('html')).toHaveAttribute('lang', 'en');
-  await page.goto(websiteUrl('/de/impressum'));
-  await expect(page.locator('html')).toHaveAttribute('lang', 'de');
+  // This does not work until https://amazeelabs.atlassian.net/browse/SLB-437
+  // gets fixed, as the '/en/imprint' shows the German page (which is the
+  // original one).
+  //await page.goto(websiteUrl('/en/imprint'));
+  //await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+  //await page.goto(websiteUrl('/de/impressum'));
+  //await expect(page.locator('html')).toHaveAttribute('lang', 'de');
 });

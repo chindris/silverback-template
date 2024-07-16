@@ -1,7 +1,18 @@
-import { MetaTag } from '@custom/schema';
-import React from 'react';
+import { Locale, MetaTag } from '@custom/schema';
+import React, { useEffect } from 'react';
 
-export function Head({ meta }: { meta?: Array<MetaTag | undefined> }) {
+type PageMetaType = {
+  meta?: Array<MetaTag | undefined>;
+  locale?: Locale;
+};
+
+export function PageMeta({ meta, locale }: PageMetaType) {
+  // Hack to set the lang attribute on the html tag, as this is not possibles
+  // right now with waku.
+  useEffect(() => {
+    document.documentElement.lang = locale || 'en';
+  }, [locale]);
+
   return meta ? (
     <>
       {meta.map((metaTag, index) => {
