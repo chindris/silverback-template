@@ -20,6 +20,7 @@ dependencies:
     - node
     - path
     - redirect
+    - replicate_ui
     - role_delegation
     - shortcut
     - silverback_campaign_urls
@@ -71,6 +72,7 @@ permissions:
   - 'edit config_pages entity'
   - 'edit own webform'
   - 'edit own webform submission'
+  - 'replicate entities'
   - 'translate editable entities'
   - 'translate interface'
   - 'trigger a gatsby build'

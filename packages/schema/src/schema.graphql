@@ -65,7 +65,7 @@ directive @decapPageTranslations on FIELD_DEFINITION
 
 """
 Parse a given Url.
-For Drupal, this is implicitly implemented in the "grraphql_directives" module.
+For Drupal, this is implicitly implemented in the "graphql_directives" module.
 
 implementation(gatsby): ./page.js#route
 """
@@ -392,7 +392,6 @@ type DemoBlock {
 
 """
 The type provided by translations source (e.g. Decap or Drupal).
-Ingested by @mergeTranslatableStrings which handles priorities.
 """
 interface TranslatableString @default @value {
   """

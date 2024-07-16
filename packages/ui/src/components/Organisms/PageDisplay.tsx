@@ -1,3 +1,4 @@
+'use client';
 import { PageFragment } from '@custom/schema';
 import React from 'react';
 

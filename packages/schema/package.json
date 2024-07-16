@@ -46,7 +46,7 @@
   },
   "devDependencies": {
     "@amazeelabs/codegen-autoloader": "^1.1.3",
-    "@amazeelabs/codegen-operation-ids": "^0.1.34",
+    "@amazeelabs/codegen-operation-ids": "^0.1.43",
     "@graphql-codegen/cli": "^5.0.0",
     "@graphql-codegen/schema-ast": "^4.0.0",
     "@graphql-codegen/typescript": "^4.0.1",
@@ -62,7 +62,7 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
-    "@amazeelabs/executors": "^2.0.2",
+    "@amazeelabs/executors": "^3.0.3",
     "@amazeelabs/gatsby-silverback-cloudinary": "^1.2.7",
     "@amazeelabs/gatsby-source-silverback": "^1.14.0",
     "@amazeelabs/scalars": "^1.6.13",

@@ -1,7 +1,7 @@
+import { useIntl } from '@amazeelabs/react-intl';
 import { ContentHubQuery, Image, Link, Locale } from '@custom/schema';
 import qs from 'query-string';
 import React from 'react';
-import { useIntl } from 'react-intl';
 
 import { isTruthy } from '../../utils/isTruthy';
 import { useOperation } from '../../utils/operation';
