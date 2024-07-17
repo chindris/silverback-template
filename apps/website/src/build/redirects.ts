@@ -1,6 +1,10 @@
 import fs from 'node:fs';
 
-import { CampaignUrlRedirectsQuery, Locale } from '@custom/schema';
+import {
+  CampaignUrlRedirectsQuery,
+  HomePageQuery,
+  Locale,
+} from '@custom/schema';
 
 import { query } from '../query.js';
 import { drupalUrl } from '../utils.js';
@@ -74,6 +78,19 @@ async function createRedirects() {
     currentPage++;
   }
 
+  // Redirect from the internal path of the home page to its root path, e.g.
+  // from /en/home to /en (for all its translations).
+  const homePages = await query(HomePageQuery, {});
+  homePages.websiteSettings?.homePage?.translations?.forEach(
+    (homePageTranslation) => {
+      createRedirect({
+        source: homePageTranslation?.path as string,
+        destination: `/${homePageTranslation?.locale}`,
+        statusCode: 301,
+      });
+    },
+  );
+
   // Any unhandled requests are handed to strangler, which will try to pass
   // them to all registered legacy systems and return 404 if none of them
   // respond.
@@ -101,19 +118,16 @@ function writeRedirectsNetlify(config: RedirectsOutputConfig) {
   }
 
   redirectsPool.forEach((value) => {
-    let redirectEntry = `[[redirects]]
-  from = "${value.source}"
-  to = "${value.destination}"
-  status = ${value.statusCode}
-`;
+    let redirectEntry = `${value.source} ${value.destination} ${value.statusCode}`;
     if (value.force) {
-      redirectEntry += `  force = true
-`;
+      redirectEntry += '!';
     }
+    redirectEntry += `
+`;
 
     fs.appendFileSync(`${config.outputFile}`, redirectEntry);
   });
 }
 
 await createRedirects();
-writeRedirects('netlify', { outputFile: './dist/public/netlify.toml' });
+writeRedirects('netlify', { outputFile: './dist/public/_redirects' });
