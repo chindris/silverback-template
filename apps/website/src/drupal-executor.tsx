@@ -8,12 +8,16 @@ import React, { PropsWithChildren } from 'react';
 /**
  * Create an executor that operates against a Drupal endpoint.
  */
-function drupalExecutor(endpoint: string, forward: boolean = true) {
+function drupalExecutor(endpoint: string) {
   return async function <OperationId extends AnyOperationId>(
     id: OperationId,
     variables?: OperationVariables<OperationId>,
   ) {
     const url = new URL(endpoint);
+    const publicUrl =
+      typeof window !== 'undefined'
+        ? new URL(window.location.href)
+        : new URL(process.env.WAKU_PUBLIC_URL || 'http://127.0.0.1:8000');
     const isMutation = id.includes('Mutation:');
     if (isMutation) {
       const { data, errors } = await (
@@ -24,11 +28,14 @@ function drupalExecutor(endpoint: string, forward: boolean = true) {
             queryId: id,
             variables: variables || {},
           }),
-          headers: forward
+          headers: publicUrl.hostname
             ? {
-                'SLB-Forwarded-Proto': window.location.protocol.slice(0, -1),
-                'SLB-Forwarded-Host': window.location.hostname,
-                'SLB-Forwarded-Port': window.location.port,
+                'SLB-Forwarded-Proto': publicUrl.protocol.slice(0, -1),
+                'SLB-Forwarded-Host': publicUrl.hostname,
+                'SLB-Forwarded-Port': publicUrl.port,
+                'X-Forwarded-Proto': publicUrl.protocol.slice(0, -1),
+                'X-Forwarded-Host': publicUrl.hostname,
+                'X-Forwarded-Port': publicUrl.port,
                 'Content-Type': 'application/json',
               }
             : {
@@ -46,11 +53,14 @@ function drupalExecutor(endpoint: string, forward: boolean = true) {
       const { data, errors } = await (
         await fetch(url, {
           credentials: 'include',
-          headers: forward
+          headers: publicUrl.hostname
             ? {
-                'SLB-Forwarded-Proto': window.location.protocol.slice(0, -1),
-                'SLB-Forwarded-Host': window.location.hostname,
-                'SLB-Forwarded-Port': window.location.port,
+                'SLB-Forwarded-Proto': publicUrl.protocol.slice(0, -1),
+                'SLB-Forwarded-Host': publicUrl.hostname,
+                'SLB-Forwarded-Port': publicUrl.port,
+                'X-Forwarded-Proto': publicUrl.protocol.slice(0, -1),
+                'X-Forwarded-Host': publicUrl.hostname,
+                'X-Forwarded-Port': publicUrl.port,
               }
             : {},
         })
@@ -69,7 +79,7 @@ export function DrupalExecutor({
 }: PropsWithChildren<{ url: string }>) {
   return (
     <OperationExecutorsProvider
-      executors={[{ executor: drupalExecutor(`${url}/graphql`, false) }]}
+      executors={[{ executor: drupalExecutor(`${url}/graphql`) }]}
     >
       {children}
     </OperationExecutorsProvider>
