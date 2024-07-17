@@ -1,6 +1,12 @@
 import '@custom/ui/styles.css';
 
-import { ListPagesQuery, Locale, LocationProvider } from '@custom/schema';
+import {
+  HomePageQuery,
+  ListPagesQuery,
+  Locale,
+  LocationProvider,
+  Url,
+} from '@custom/schema';
 import { ContentHub } from '@custom/ui/routes/ContentHub';
 import { Frame } from '@custom/ui/routes/Frame';
 import { HomePage } from '@custom/ui/routes/HomePage';
@@ -65,12 +71,34 @@ export default createPages(async ({ createPage, createLayout }) => {
     component: () => <NotFoundPage />,
   });
 
+  // Initialise a map for the homepages, since we want to exclude them from
+  // creating a page for their internal path.
+  const homePages = await query(HomePageQuery, {});
+  const homePageTranslations = new Map<Locale, Url>();
+  homePages.websiteSettings?.homePage?.translations?.forEach(
+    (homePageTranslation) => {
+      if (homePageTranslation?.locale) {
+        homePageTranslations.set(
+          homePageTranslation?.locale,
+          homePageTranslation?.path,
+        );
+      }
+    },
+  );
+
   // TODO: Paginate properly to not load all nodes in Drupal
   const pagePaths = new Set<string>();
   const pages = await query(ListPagesQuery, { args: 'pageSize=0&page=1' });
   pages.ssgPages?.rows.forEach((page) => {
     page?.translations?.forEach((translation) => {
-      if (translation?.path) {
+      // We don't want to create pages for home pages, since they already have
+      // the root one created (/en, /de, etc.). And there is also a redirect
+      // created from the internal path to the root path during the
+      // build:redirects process.
+      if (
+        translation?.path &&
+        translation.path !== homePageTranslations.get(translation.locale)
+      ) {
         pagePaths.add(translation.path);
       }
     });

@@ -14,5 +14,5 @@ export const handler = createStrangler(
         [301, 302].includes(response.status) ? response : undefined,
     },
   ],
-  fs.readFileSync('public/404.html').toString(),
+  fs.readFileSync('dist/public/404.html').toString(),
 );
