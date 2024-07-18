@@ -3,6 +3,7 @@ query ListPages($args: String!) {
     rows {
       translations {
         path
+        locale
       }
     }
     total

@@ -74,8 +74,7 @@ test('All blocks are rendered', async ({ page }) => {
   await expect(page.locator('a:text("CTA with link to media")')).toHaveCount(1);
 
   // Form
-  // TODO: https://amazeelabs.atlassian.net/browse/SLB-435
-  // await expect(
-  //   page.locator('.silverback-iframe iframe').last(),
-  // ).toHaveAttribute('src', 'http://127.0.0.1:8000/en/form/contact?iframe=true');
+  await expect(
+    page.locator('.silverback-iframe iframe').last(),
+  ).toHaveAttribute('src', 'http://127.0.0.1:8000/en/form/contact?iframe=true');
 });

@@ -1,12 +1,11 @@
 import '@custom/ui/styles.css';
 
 import {
-  AnyOperationId,
+  HomePageQuery,
   ListPagesQuery,
   Locale,
   LocationProvider,
-  OperationResult,
-  OperationVariables,
+  Url,
 } from '@custom/schema';
 import { ContentHub } from '@custom/ui/routes/ContentHub';
 import { Frame } from '@custom/ui/routes/Frame';
@@ -20,22 +19,7 @@ import { createPages } from 'waku';
 import { BrokenLinkHandler } from './broken-link-handler.js';
 import { ExecutorsClient } from './executors-client.js';
 import { ExecutorsServer } from './executors-server.js';
-
-async function query<TOperation extends AnyOperationId>(
-  operation: TOperation,
-  variables: OperationVariables<TOperation>,
-) {
-  const url = new URL(
-    `${process.env.PUBLIC_DRUPAL_URL || 'http://127.0.0.1:8888'}/graphql`,
-  );
-  url.searchParams.set('queryId', operation);
-  url.searchParams.set('variables', JSON.stringify(variables || {}));
-  const { data, errors } = await (await fetch(url)).json();
-  if (errors) {
-    throw errors;
-  }
-  return data as OperationResult<TOperation>;
-}
+import { query } from './query.js';
 
 export default createPages(async ({ createPage, createLayout }) => {
   createLayout({
@@ -87,12 +71,34 @@ export default createPages(async ({ createPage, createLayout }) => {
     component: () => <NotFoundPage />,
   });
 
+  // Initialise a map for the homepages, since we want to exclude them from
+  // creating a page for their internal path.
+  const homePages = await query(HomePageQuery, {});
+  const homePageTranslations = new Map<Locale, Url>();
+  homePages.websiteSettings?.homePage?.translations?.forEach(
+    (homePageTranslation) => {
+      if (homePageTranslation?.locale) {
+        homePageTranslations.set(
+          homePageTranslation?.locale,
+          homePageTranslation?.path,
+        );
+      }
+    },
+  );
+
   // TODO: Paginate properly to not load all nodes in Drupal
   const pagePaths = new Set<string>();
   const pages = await query(ListPagesQuery, { args: 'pageSize=0&page=1' });
   pages.ssgPages?.rows.forEach((page) => {
     page?.translations?.forEach((translation) => {
-      if (translation?.path) {
+      // We don't want to create pages for home pages, since they already have
+      // the root one created (/en, /de, etc.). And there is also a redirect
+      // created from the internal path to the root path during the
+      // build:redirects process.
+      if (
+        translation?.path &&
+        translation.path !== homePageTranslations.get(translation.locale)
+      ) {
         pagePaths.add(translation.path);
       }
     });

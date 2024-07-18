@@ -22,8 +22,7 @@ test.describe('the homepage', () => {
     ).toBeVisible();
   });
 
-  // TODO: https://amazeelabs.atlassian.net/browse/SLB-435
-  test.fixme('redirects to root path on direct access', async ({ page }) => {
+  test('redirects to root path on direct access', async ({ page }) => {
     await page.goto(websiteUrl('/en/architecture'));
     await expect(page.url()).toBe(websiteUrl('/en'));
   });

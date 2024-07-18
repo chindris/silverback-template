@@ -2,7 +2,6 @@ import { expect, test } from '@playwright/test';
 
 import { websiteUrl } from '../../helpers/url';
 
-// TODO: https://amazeelabs.atlassian.net/browse/SLB-435
 test.fixme('Webforms work', async ({ page }) => {
   await page.goto(websiteUrl('/en/blocks-complete'));
 
