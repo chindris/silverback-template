@@ -128,7 +128,8 @@ type FooterNavigation implements Navigation @menu(menu_id: "footer") {
   items: [NavigationItem]! @lang @resolveMenuItems
 }
 
-interface Page implements ContentHubResultItem @resolveEntityBundle {
+interface Page implements ContentHubResultItem & BlockTeaserItemContent
+  @resolveEntityBundle {
   id: ID!
   translations: [Page]
   locale: Locale!
@@ -140,7 +141,7 @@ interface Page implements ContentHubResultItem @resolveEntityBundle {
   metaTags: [MetaTag]
 }
 
-type DecapPage implements ContentHubResultItem & Page
+type DecapPage implements ContentHubResultItem & Page & BlockTeaserItemContent
   @sourceFrom(fn: "getPages") {
   id: ID!
   translations: [Page] @decapPageTranslations
@@ -156,7 +157,7 @@ type DecapPage implements ContentHubResultItem & Page
 """
 A generic page.
 """
-type DrupalPage implements ContentHubResultItem & Page
+type DrupalPage implements ContentHubResultItem & Page & BlockTeaserItemContent
   @entity(type: "node", bundle: "page")
   @type(id: "page") {
   id: ID! @resolveEntityUuid
@@ -209,6 +210,7 @@ union PageContent @resolveEditorBlockType =
   | BlockHorizontalSeparator
   | BlockAccordion
   | BlockInfoGrid
+  | BlockTeaserList
 
 type BlockForm @type(id: "custom/form") {
   url: Url @resolveEditorBlockAttribute(key: "formId") @webformIdToUrl(id: "$")
@@ -316,6 +318,41 @@ type BlockInfoGridItem {
 
 type BlockHorizontalSeparator @type(id: "custom/horizontal-separator") {
   markup: Markup! @resolveEditorBlockMarkup
+}
+
+type BlockTeaserList @type(id: "custom/teaser-list") {
+  layout: BlockTeaserListLayout @resolveEditorBlockAttribute(key: "layout")
+  buttonText: String @resolveEditorBlockAttribute(key: "buttonText")
+  staticContent: [BlockTeaserItem] @resolveEditorBlockChildren
+  contentHubEnabled: Boolean
+    @resolveEditorBlockAttribute(key: "contentHubEnabled")
+  filters: BlockTeaserListFilters
+}
+
+type BlockTeaserItem @type(id: "custom/teaser-item") {
+  content: BlockTeaserItemContent
+    @resolveEditorBlockAttribute(key: "uuid")
+    @loadEntity(type: "node", uuid: "$")
+}
+
+enum BlockTeaserListLayout @default @value(string: "GRID") {
+  GRID
+  CAROUSEL
+}
+
+type BlockTeaserListFilters {
+  title: String @resolveEditorBlockAttribute(key: "titleFilter")
+  limit: Int @resolveEditorBlockAttribute(key: "limit")
+}
+
+"""
+Inteface for anything that can appear in the teaser list.
+"""
+interface BlockTeaserItemContent @resolveEntityBundle {
+  path: Url!
+  title: String!
+  hero: Hero
+  teaserImage: MediaImage
 }
 
 input PaginationInput {
