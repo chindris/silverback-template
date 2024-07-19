@@ -21,10 +21,14 @@ test.describe('content hub', () => {
   test('allows to switch pages', async ({ page }) => {
     await page.goto(websiteUrl('/en/content-hub'));
     const content = await page.getByRole('main');
-    await expect(content.getByText('Architecture')).toBeVisible();
+    const heading = page.getByRole('heading', {
+      name: 'Architecture',
+      level: 5,
+    });
+    await expect(heading).toBeVisible();
     await expect(content.getByText('Gatsby')).not.toBeVisible();
     await content.getByText('Next').click();
-    await expect(content.getByText('Architecture')).not.toBeVisible();
+    await expect(heading).not.toBeVisible();
     await expect(content.getByText('Gatsby')).toBeVisible();
   });
 
@@ -33,7 +37,11 @@ test.describe('content hub', () => {
     const content = await page.getByRole('main');
     await content.getByPlaceholder('Keyword').fill('technologies');
     await content.getByRole('button', { name: 'Search' }).click();
-    await expect(content.getByText('Architecture')).not.toBeVisible();
+    const heading = page.getByRole('heading', {
+      name: 'Architecture',
+      level: 5,
+    });
+    await expect(heading).not.toBeVisible();
     await expect(content.getByText('Technologies')).toBeVisible();
   });
 
@@ -43,8 +51,16 @@ test.describe('content hub', () => {
     // Change language to German.
     await quickActions.changeLanguageTo(SiteLanguage.Deutsch);
     const content = await page.getByRole('main');
-    await expect(content.getByText('Architektur')).toBeVisible();
-    await expect(content.getByText('Architecture')).not.toBeVisible();
+    const deHeading = page.getByRole('heading', {
+      name: 'Architektur',
+      level: 5,
+    });
+    const enHeading = page.getByRole('heading', {
+      name: 'Architecture',
+      level: 5,
+    });
+    await expect(deHeading).toBeVisible();
+    await expect(enHeading).not.toBeVisible();
     await expect(content.getByText('Gatsby')).not.toBeVisible();
   });
 });
