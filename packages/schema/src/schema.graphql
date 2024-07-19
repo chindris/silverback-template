@@ -203,6 +203,18 @@ type Hero {
     @webformIdToUrl(id: "$")
 }
 
+union CommonContent @resolveEditorBlockType =
+  | BlockMarkup
+  | BlockMedia
+  | BlockForm
+  | BlockImageTeasers
+  | BlockCta
+  | BlockImageWithText
+  | BlockQuote
+  | BlockHorizontalSeparator
+  | BlockAccordion
+  | BlockInfoGrid
+
 union PageContent @resolveEditorBlockType =
   | BlockMarkup
   | BlockMedia
@@ -214,6 +226,7 @@ union PageContent @resolveEditorBlockType =
   | BlockHorizontalSeparator
   | BlockAccordion
   | BlockInfoGrid
+  | BlockConditional
 
 type BlockForm @type(id: "custom/form") {
   url: Url @resolveEditorBlockAttribute(key: "formId") @webformIdToUrl(id: "$")
@@ -333,6 +346,12 @@ type BlockInfoGridItem {
 
 type BlockHorizontalSeparator @type(id: "custom/horizontal-separator") {
   markup: Markup! @resolveEditorBlockMarkup
+}
+
+type BlockConditional @type(id: "custom/conditional") {
+  displayFrom: String @resolveEditorBlockAttribute(key: "displayFrom")
+  displayTo: String @resolveEditorBlockAttribute(key: "displayTo")
+  content: [CommonContent] @resolveEditorBlockChildren
 }
 
 input PaginationInput {
