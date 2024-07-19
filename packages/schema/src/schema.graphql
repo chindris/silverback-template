@@ -381,6 +381,10 @@ type Query {
     @gatsbyNodes(type: "MetaNavigation")
     @menuTranslations(menu_id: "meta")
 
+  metaNavigations: [MetaNavigation]
+    @gatsbyNodes(type: "MetaNavigation")
+    @menuTranslations(menu_id: "meta")
+
   mainNavigations: [MainNavigation]
     @gatsbyNodes(type: "MainNavigation")
     @menuTranslations(menu_id: "main")
