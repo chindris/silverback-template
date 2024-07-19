@@ -26,6 +26,7 @@ export const Default = {
   args: {
     mainNavigation: HeaderStory.args.mainNavigation,
     footerNavigation: FooterStory.args.footerNavigation,
+    metaNavigation: HeaderStory.args.metaNavigation,
     stringTranslations: [],
   },
 } satisfies StoryObj<FrameQuery>;

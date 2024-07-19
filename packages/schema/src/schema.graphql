@@ -118,6 +118,11 @@ interface Navigation {
   items: [NavigationItem]!
 }
 
+type MetaNavigation implements Navigation @menu(menu_id: "meta") {
+  locale: Locale! @resolveEntityLanguage
+  items: [NavigationItem]! @lang @resolveMenuItems(max_level: 1)
+}
+
 type MainNavigation implements Navigation @menu(menu_id: "main") {
   locale: Locale! @resolveEntityLanguage
   items: [NavigationItem]! @lang @resolveMenuItems
@@ -327,6 +332,10 @@ type Query {
   previewDecapPage: DecapPage
   previewDrupalPage(id: ID!, rid: ID, locale: String!): DrupalPage
     @fetchEntity(type: "node", id: "$id", rid: "$rid", language: "$locale")
+
+  metaNavigations: [MetaNavigation]
+    @gatsbyNodes(type: "MetaNavigation")
+    @menuTranslations(menu_id: "meta")
 
   mainNavigations: [MainNavigation]
     @gatsbyNodes(type: "MainNavigation")
