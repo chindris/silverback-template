@@ -10,7 +10,10 @@ test.describe('content hub', () => {
   test('lists pages in alphabetic order', async ({ page }) => {
     await page.goto(websiteUrl('/en/content-hub'));
     const content = await page.getByRole('main');
-    const heading = page.getByRole('heading', { name: 'Architecture', level: 5 });
+    const heading = page.getByRole('heading', {
+      name: 'Architecture',
+      level: 5,
+    });
     await expect(heading).toBeVisible();
     await expect(content.getByText('PHP')).not.toBeVisible();
   });
