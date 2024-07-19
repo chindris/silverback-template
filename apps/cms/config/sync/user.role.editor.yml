@@ -53,7 +53,6 @@ permissions:
   - 'dropzone upload files'
   - 'edit any page content'
   - 'edit own page content'
-  - 'manage page templates'
   - 'replicate entities'
   - 'revert page revisions'
   - 'translate editable entities'
