@@ -36,6 +36,9 @@ function Media(props: Required<BlockMediaFragment>['media']) {
       );
     case 'MediaVideo':
       return <video src={props.url} controls />;
+    case 'MediaAudio':
+    case 'MediaDocument':
+      return null;
     default:
       throw new UnreachableCaseError(props);
   }
