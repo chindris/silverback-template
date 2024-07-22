@@ -9,6 +9,7 @@ const scalars = {
   Url: '@amazeelabs/scalars#Url',
   ImageSource: '@amazeelabs/scalars#ImageSource',
   JSONString: 'string',
+  Domain: 'string',
 };
 
 const common = {

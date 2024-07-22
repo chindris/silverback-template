@@ -2,6 +2,7 @@ scalar Url @default @value(string: "")
 scalar Markup @default @value(string: "")
 scalar ImageSource @default @value(string: "")
 scalar JSONString @default @value(string: "{}")
+scalar Domain @default @value(string: "")
 
 """
 implementation(drupal): custom.menus::getMenuTranslations
@@ -135,6 +136,7 @@ type FooterNavigation implements Navigation @menu(menu_id: "footer") {
 
 interface Page implements ContentHubResultItem @resolveEntityBundle {
   id: ID!
+  domain: Domain!
   translations: [Page]
   locale: Locale!
   path: Url!
@@ -148,6 +150,7 @@ interface Page implements ContentHubResultItem @resolveEntityBundle {
 type DecapPage implements ContentHubResultItem & Page
   @sourceFrom(fn: "getPages") {
   id: ID!
+  domain: Domain!
   translations: [Page] @decapPageTranslations
   locale: Locale!
   path: Url!
@@ -165,6 +168,7 @@ type DrupalPage implements ContentHubResultItem & Page
   @entity(type: "node", bundle: "page")
   @type(id: "page") {
   id: ID! @resolveEntityUuid
+  domain: Domain!
   locale: Locale! @resolveEntityLanguage
   translations: [Page] @resolveEntityTranslations
   path: Url! @resolveEntityPath
@@ -190,6 +194,16 @@ type DrupalPage implements ContentHubResultItem & Page
     @seek(pos: 1)
     @resolveEditorBlockChildren
   metaTags: [MetaTag] @resolveProperty(path: "metatag")
+}
+
+union MediaReleaseContent = BlockMarkup | BlockMedia
+
+type MediaRelease implements ContentHubResultItem {
+  path: Url!
+  domain: Domain!
+  title: String!
+  teaserImage: MediaImage
+  content: [MediaReleaseContent]
 }
 
 type Hero {
@@ -223,9 +237,22 @@ type BlockMarkup @type(id: "core/paragraph") {
   markup: Markup! @resolveEditorBlockMarkup
 }
 
-union Media @resolveEntityBundle = MediaImage | MediaVideo
+type MediaCategory {
+  id: ID!
+  name: String!
+  parent: ID!
+}
 
-type MediaImage @type(id: "image") @entity(type: "media", bundle: "image") {
+interface Media {
+  domain: Domain!
+  categories: [MediaCategory!]!
+}
+
+type MediaImage implements Media
+  @type(id: "image")
+  @entity(type: "media", bundle: "image") {
+  domain: Domain!
+  categories: [MediaCategory!]!
   source(width: Int, height: Int, sizes: [[Int!]!]): ImageSource!
     @resolveProperty(path: "field_media_image.entity")
     @imageProps
@@ -233,8 +260,28 @@ type MediaImage @type(id: "image") @entity(type: "media", bundle: "image") {
   alt: String! @resolveProperty(path: "field_media_image.alt")
 }
 
-type MediaVideo @type(id: "video") @entity(type: "media", bundle: "video") {
+type MediaVideo implements Media
+  @type(id: "video")
+  @entity(type: "media", bundle: "video") {
+  domain: Domain!
+  categories: [MediaCategory!]!
   url: Url! @resolveProperty(path: "field_media_video_file.entity") @imageUrl
+}
+
+type MediaAudio implements Media
+  @type(id: "audio")
+  @entity(type: "media", bundle: "audio") {
+  domain: Domain!
+  categories: [MediaCategory!]!
+  url: Url! @resolveProperty(path: "field_media_audio_file.entity")
+}
+
+type MediaDocument implements Media
+  @type(id: "document")
+  @entity(type: "media", bundle: "document") {
+  domain: Domain!
+  categories: [MediaCategory!]!
+  url: Url! @resolveProperty(path: "field_media_document_file.entity")
 }
 
 type BlockMedia @type(id: "drupalmedia/drupal-media-entity") {
