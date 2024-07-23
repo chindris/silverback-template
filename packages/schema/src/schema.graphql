@@ -37,11 +37,11 @@ TODO: Move to a shared "image" package.
 implementation(gatsby): @amazeelabs/gatsby-source-silverback#responsiveImageSharp
 """
 directive @responsiveImage(
+  width: String
   height: String
   sizes: String
   transform: String
-  width: String
-) repeatable on ENUM | FIELD_DEFINITION | INTERFACE | OBJECT | SCALAR | UNION
+) repeatable on FIELD_DEFINITION | SCALAR | UNION | ENUM | INTERFACE | OBJECT
 
 """
 Retrieve an entity from the Gatsby datastore.
