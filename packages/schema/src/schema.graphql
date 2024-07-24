@@ -92,6 +92,10 @@ type ContentHubResult @default @value(json: "{\"total\": 0, \"items\": []}") {
   items: [ContentHubResultItem]! @prop(key: "rows")
 }
 
+type TeaserListResult @default @value(json: "{\"total\": 0, \"items\": []}") {
+  items: [BlockTeaserItemContent]! @prop(key: "rows")
+}
+
 type WebsiteSettings
   @entity(type: "config_pages", bundle: "website_settings", access: false) {
   homePage: Page @resolveEntityReference(field: "field_home_page") @seek(pos: 0)
@@ -326,7 +330,7 @@ type BlockTeaserList @type(id: "custom/teaser-list") {
   staticContent: [BlockTeaserItem] @resolveEditorBlockChildren
   contentHubEnabled: Boolean
     @resolveEditorBlockAttribute(key: "contentHubEnabled")
-  filters: BlockTeaserListFilters
+  filters: BlockTeaserListFilters @resolveParent
 }
 
 type BlockTeaserItem @type(id: "custom/teaser-item") {
@@ -342,13 +346,14 @@ enum BlockTeaserListLayout @default @value(string: "GRID") {
 
 type BlockTeaserListFilters {
   title: String @resolveEditorBlockAttribute(key: "titleFilter")
-  limit: Int @resolveEditorBlockAttribute(key: "limit")
+  limit: String @resolveEditorBlockAttribute(key: "limit")
 }
 
 """
 Inteface for anything that can appear in the teaser list.
 """
 interface BlockTeaserItemContent @resolveEntityBundle {
+  id: ID!
   path: Url!
   title: String!
   hero: Hero
@@ -378,6 +383,9 @@ type Query {
   viewPage(path: String!): Page @route(path: "$path") @loadEntity
 
   contentHub(locale: Locale!, args: String): ContentHubResult!
+    @lang(code: "$locale")
+    @drupalView(id: "content_hub:default", args: "$args")
+  teaserList(locale: Locale!, args: String): TeaserListResult!
     @lang(code: "$locale")
     @drupalView(id: "content_hub:default", args: "$args")
 

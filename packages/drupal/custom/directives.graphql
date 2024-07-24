@@ -9,3 +9,11 @@ directive @loadByUUID(
   uuid: String
   operation: String
 ) repeatable on FIELD_DEFINITION | SCALAR | UNION | ENUM | INTERFACE | OBJECT
+
+"""
+Resolves the parent value
+
+Provided by the "custom" module.
+Implemented in "Drupal\custom\Plugin\GraphQL\Directive\ParentValue".
+"""
+directive @resolveParent repeatable on FIELD_DEFINITION | SCALAR | UNION | ENUM | INTERFACE | OBJECT
