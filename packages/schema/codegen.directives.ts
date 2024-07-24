@@ -4,6 +4,7 @@ const config: CodegenConfig = {
   schema: [
     'node_modules/@amazeelabs/*/directives.graphql',
     '../../apps/cms/web/modules/contrib/*/directives.graphql',
+    '../../apps/cms/web/modules/custom/*/directives.graphql',
   ],
   generates: {
     'src/directives.graphql': {

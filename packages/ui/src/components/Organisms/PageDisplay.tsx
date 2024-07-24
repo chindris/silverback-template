@@ -16,6 +16,7 @@ import { BlockInfoGrid } from './PageContent/BlockInfoGrid';
 import { BlockMarkup } from './PageContent/BlockMarkup';
 import { BlockMedia } from './PageContent/BlockMedia';
 import { BlockQuote } from './PageContent/BlockQuote';
+import { BlockTeaserList } from './PageContent/BlockTeaserList';
 import { PageHero } from './PageHero';
 
 export function PageDisplay(page: PageFragment) {
@@ -46,6 +47,8 @@ export function PageDisplay(page: PageFragment) {
               return <BlockAccordion key={index} {...block} />;
             case 'BlockInfoGrid':
               return <BlockInfoGrid key={index} {...block} />;
+            case 'BlockTeaserList':
+              return <BlockTeaserList key={index} {...block} />;
             default:
               throw new UnreachableCaseError(block);
           }
