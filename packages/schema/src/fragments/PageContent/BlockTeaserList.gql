@@ -1,0 +1,22 @@
+fragment BlockTeaserList on BlockTeaserList {
+  layout
+  buttonText
+  staticContent {
+    ...BlockTeaserListItem
+  }
+}
+
+fragment BlockTeaserListItem on BlockTeaserItem {
+  __typename
+  content {
+    title
+    hero {
+      lead
+      headline
+    }
+    teaserImage {
+      alt
+      source(width: 400, height: 300)
+    }
+  }
+}

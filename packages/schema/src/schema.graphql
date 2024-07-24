@@ -332,7 +332,7 @@ type BlockTeaserList @type(id: "custom/teaser-list") {
 type BlockTeaserItem @type(id: "custom/teaser-item") {
   content: BlockTeaserItemContent
     @resolveEditorBlockAttribute(key: "uuid")
-    @loadEntity(type: "node", uuid: "$")
+    @loadByUUID(type: "node", uuid: "$")
 }
 
 enum BlockTeaserListLayout @default @value(string: "GRID") {
