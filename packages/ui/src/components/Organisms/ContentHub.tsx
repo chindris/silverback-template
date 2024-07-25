@@ -56,11 +56,14 @@ export function ContentHub({ pageSize = 10 }: { pageSize: number }) {
         {data?.contentHub.total ? (
           <>
             <ul className="my-8 grid md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-8">
-              {data?.contentHub.items.filter(isTruthy).map((item, index) => (
-                <li key={item.path}>
-                  <Card item={item} id={index} />
-                </li>
-              ))}
+              {data?.contentHub.items.filter(isTruthy).map((item, index) => {
+                const formattedIndex = index.toString();
+                return (
+                  <li key={item.path}>
+                    <Card item={item} id={formattedIndex} />
+                  </li>
+                );
+              })}
             </ul>
             <Pagination pageSize={pageSize} total={data.contentHub.total} />
           </>
@@ -75,16 +78,16 @@ const Card = ({
   id,
 }: {
   item: ContentHubResultItemFragment;
-  id: number;
+  id: string;
 }) => {
   return (
     <article
-      aria-labelledby={`${id}`}
+      aria-labelledby={'heading-' + id}
       className="focus-within:outline focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-indigo-600 relative max-w-sm bg-white rounded-lg hover:shadow overflow-hidden flex flex-col-reverse"
     >
       <div className="p-5">
         <h5
-          id={`${id}`}
+          id={'heading-' + id}
           className="mb-2 text-2xl font-bold tracking-tight text-gray-900"
         >
           {item.title}
