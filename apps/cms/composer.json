@@ -97,6 +97,9 @@
   },
   "extra": {
     "patches": {
+      "drupal/core": {
+        "Multilingual-route-resolution-in-graphql": "./patches/multilingual-route-resolution-in-graphql.patch"
+      },
       "drupal/userprotect": {
         "Fix site install": "https://www.drupal.org/files/issues/2023-07-28/3349663-8.patch"
       },
