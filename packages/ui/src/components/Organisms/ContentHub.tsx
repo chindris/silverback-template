@@ -70,41 +70,51 @@ export function ContentHub({ pageSize = 10 }: { pageSize: number }) {
   );
 }
 
-export const Card = (item: ContentHubResultItemFragment) => (
-  <article className="focus-within:outline focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-indigo-600 relative max-w-sm bg-white rounded-lg hover:shadow dark:bg-gray-800 dark:border-gray-700 overflow-hidden">
-    <div className="rounded-t-lg">
-      {item.teaserImage ? (
-        <Image {...item.teaserImage} className="w-full" />
-      ) : (
-        <div className="aspect-[4/3] bg-indigo-200" />
-      )}
-    </div>
-    <div className="p-5">
-      <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-        {item.title}
-      </h5>
-      <Link
-        href={item.path}
-        className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-blue-700 border border-blue-700 rounded-lg hover:bg-blue-800 hover:text-white focus:outline-offset-4 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 after:content-[''] after:absolute after:inset-0"
-      >
-        <span className="invisible w-0 h-0 overflow-hidden">{item.title} </span>
-        Read more
-        <svg
-          className="rtl:rotate-180 w-3.5 h-3.5 ms-2"
-          aria-hidden="true"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 14 10"
+const Card = (item: ContentHubResultItemFragment) => {
+  const id = item.title.toLowerCase().replace(/\s+/g, '-');
+
+  return (
+    <article
+      aria-labelledby={id}
+      className="focus-within:outline focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-indigo-600 relative max-w-sm bg-white rounded-lg hover:shadow dark:bg-gray-800 dark:border-gray-700 overflow-hidden flex flex-col-reverse"
+    >
+      <div className="p-5">
+        <h5
+          id={id}
+          className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
         >
-          <path
-            stroke="currentColor"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M1 5h12m0 0L9 1m4 4L9 9"
-          />
-        </svg>
-      </Link>
-    </div>
-  </article>
-);
+          {item.title}
+        </h5>
+        <Link
+          href={item.path}
+          className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-blue-700 border border-blue-700 rounded-lg hover:bg-blue-800 hover:text-white focus:outline-offset-4 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 after:content-[''] after:absolute after:inset-0"
+        >
+          <span className="sr-only w-0 h-0 overflow-hidden">{item.title}</span>
+          Read more
+          <svg
+            className="rtl:rotate-180 w-3.5 h-3.5 ms-2"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 14 10"
+          >
+            <path
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M1 5h12m0 0L9 1m4 4L9 9"
+            />
+          </svg>
+        </Link>
+      </div>
+      <div className="rounded-t-lg">
+        {item.teaserImage ? (
+          <Image {...item.teaserImage} className="w-full" />
+        ) : (
+          <div className="aspect-[4/3] bg-indigo-200" />
+        )}
+      </div>
+    </article>
+  );
+};
