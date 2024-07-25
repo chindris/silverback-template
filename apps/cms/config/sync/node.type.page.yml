@@ -4,12 +4,15 @@ status: true
 dependencies:
   module:
     - menu_ui
+    - pate
 third_party_settings:
   menu_ui:
     available_menus:
       - footer
       - main
     parent: 'main:'
+  pate:
+    is_templatable: true
 name: 'Basic page'
 type: page
 description: ''

@@ -1,0 +1,62 @@
+diff --git a/core/lib/Drupal/Core/Path/PathValidator.php b/core/lib/Drupal/Core/Path/PathValidator.php
+index c132210ca6..8239f93b91 100644
+--- a/core/lib/Drupal/Core/Path/PathValidator.php
++++ b/core/lib/Drupal/Core/Path/PathValidator.php
+@@ -121,6 +121,10 @@ protected function getUrl($path, $access_check) {
+     $request = Request::create('/' . $path);
+     $attributes = $this->getPathAttributes($path, $request, $access_check);
+
++    if ($path_langcode = $request->attributes->get('path_langcode')) {
++      $options['language'] = \Drupal::languageManager()->getLanguage($path_langcode);
++    }
++
+     if (!$attributes) {
+       return FALSE;
+     }
+diff --git a/core/modules/language/src/Plugin/LanguageNegotiation/LanguageNegotiationUrl.php b/core/modules/language/src/Plugin/LanguageNegotiation/LanguageNegotiationUrl.php
+index 133604df1b..3c9b7c4466 100644
+--- a/core/modules/language/src/Plugin/LanguageNegotiation/LanguageNegotiationUrl.php
++++ b/core/modules/language/src/Plugin/LanguageNegotiation/LanguageNegotiationUrl.php
+@@ -105,11 +105,23 @@ public function processInbound($path, Request $request) {
+       $parts = explode('/', trim($path, '/'));
+       $prefix = array_shift($parts);
+
+-      // Search prefix within added languages.
++      // We set the path language for the request, that can be used by other
++      // inbound processors later (like the AliasPathProcessor). We first find
++      // the language with an empty path prefix and default to that langcode.
++      foreach ($this->languageManager->getLanguages() as $language) {
++        if (isset($config['prefixes'][$language->getId()]) && $config['prefixes'][$language->getId()] === '') {
++          $request->attributes->set('path_langcode', $language->getId());
++          break;
++        }
++      }
++
++      // Search for the path prefix within added languages.
+       foreach ($this->languageManager->getLanguages() as $language) {
+         if (isset($config['prefixes'][$language->getId()]) && $config['prefixes'][$language->getId()] == $prefix) {
+           // Rebuild $path with the language removed.
+           $path = '/' . implode('/', $parts);
++          // Update the request with the language.
++          $request->attributes->set('path_langcode', $language->getId());
+           break;
+         }
+       }
+diff --git a/core/modules/path_alias/src/PathProcessor/AliasPathProcessor.php b/core/modules/path_alias/src/PathProcessor/AliasPathProcessor.php
+index e9e572ca5c..cd79b02bd2 100644
+--- a/core/modules/path_alias/src/PathProcessor/AliasPathProcessor.php
++++ b/core/modules/path_alias/src/PathProcessor/AliasPathProcessor.php
+@@ -34,7 +34,12 @@ public function __construct(AliasManagerInterface $alias_manager) {
+    * {@inheritdoc}
+    */
+   public function processInbound($path, Request $request) {
+-    $path = $this->aliasManager->getPathByAlias($path);
++    // The LanguageNegotiationUrl inbound path processor removes the language
++    // prefix and sets it as an attribute on the request. As there might exist
++    // the same url aliases for different languages we need to use it while
++    // querying the path alias.
++    $path_langcode = $request->attributes->get('path_langcode');
++    $path = $this->aliasManager->getPathByAlias($path, $path_langcode);
+     return $path;
+   }
+

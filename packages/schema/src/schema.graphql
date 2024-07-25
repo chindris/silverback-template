@@ -123,6 +123,11 @@ interface Navigation {
   items: [NavigationItem]!
 }
 
+type MetaNavigation implements Navigation @menu(menu_id: "meta") {
+  locale: Locale! @resolveEntityLanguage
+  items: [NavigationItem]! @lang @resolveMenuItems(max_level: 1)
+}
+
 type MainNavigation implements Navigation @menu(menu_id: "main") {
   locale: Locale! @resolveEntityLanguage
   items: [NavigationItem]! @lang @resolveMenuItems
@@ -341,6 +346,7 @@ type Query {
     @fetchEntity(type: "node", id: "$id", rid: "$rid", language: "$locale")
 
   mainNavigations: [MainNavigation] @menuTranslations(menu_id: "main")
+  metaNavigations: [MainNavigation] @menuTranslations(menu_id: "meta")
 
   footerNavigations: [FooterNavigation] @menuTranslations(menu_id: "footer")
 

@@ -19,10 +19,15 @@ export function BlockImageWithText(props: BlockImageWithTextFragment) {
               'flex flex-col lg:flex-row gap-8 lg:gap-16 items-start lg:items-center',
               {
                 'lg:flex-row-reverse':
-                  props.imagePosition === ImagePosition.Right,
+                  props.imagePosition === ImagePosition.Left,
               },
             )}
           >
+            <div className={'lg:w-1/2 nested-container prose-li:text-base'}>
+              {props.textContent?.markup && (
+                <BlockMarkup {...props.textContent} />
+              )}
+            </div>
             {!!props.image?.source && (
               <div className={'lg:w-1/2 self-start'}>
                 <Image
@@ -32,12 +37,6 @@ export function BlockImageWithText(props: BlockImageWithTextFragment) {
                 />
               </div>
             )}
-
-            <div className={'lg:w-1/2 nested-container prose-li:text-base'}>
-              {props.textContent?.markup && (
-                <BlockMarkup {...props.textContent} />
-              )}
-            </div>
           </div>
         </div>
       </div>
