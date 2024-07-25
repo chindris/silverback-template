@@ -36,7 +36,7 @@ export function LanguageSwitcher() {
           <React.Fragment key={currentLocale}>
             <MenuButton
               className={clsx(
-                'inline-flex justify-center w-full rounded-md bg-white text-sm',
+                'inline-flex justify-center w-full rounded-md bg-white text-sm font-medium',
                 {
                   'hover:text-blue-600': isMultiLingual,
                   'cursor-not-allowed opacity-70': !isMultiLingual,
@@ -83,7 +83,7 @@ export function LanguageSwitcher() {
                               focus
                                 ? 'bg-gray-100 text-gray-900'
                                 : 'text-gray-500',
-                              'block px-3.5 py-2 text-sm',
+                              'block px-3.5 py-2 text-sm opacity-70',
                             )}
                           >
                             {getLanguageName(locale as string)}

@@ -36,7 +36,15 @@ function entity_create_split_gutenberg_enabled(EntityInterface $entity) {
  */
 function entity_create_split_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
   $formObject = $form_state->getFormObject();
-  if ($formObject instanceof ContentEntityForm && $formObject->getFormDisplay($form_state)->getMode() === 'split') {
+  if (
+    $formObject instanceof ContentEntityForm &&
+    (
+      // getFormDisplay should return an object, but in fact it might return
+      // null. This happens on `/node/{node}/templatize` route.
+      $formDisplay = $formObject->getFormDisplay($form_state)
+    ) &&
+    $formDisplay->getMode() === 'split'
+  ) {
     if (empty($form['#submit'])) {
       $form['#submit'] = [];
     }
