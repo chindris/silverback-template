@@ -346,7 +346,7 @@ type Query {
     @fetchEntity(type: "node", id: "$id", rid: "$rid", language: "$locale")
 
   mainNavigations: [MainNavigation] @menuTranslations(menu_id: "main")
-  metaNavigations: [MainNavigation] @menuTranslations(menu_id: "meta")
+  metaNavigations: [MetaNavigation] @menuTranslations(menu_id: "meta")
 
   footerNavigations: [FooterNavigation] @menuTranslations(menu_id: "footer")
 
