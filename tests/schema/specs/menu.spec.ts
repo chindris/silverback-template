@@ -6,7 +6,7 @@ import { fetch } from '../lib.js';
 test('Meta', async () => {
   const result = await fetch(gql`
     {
-      metaNavigations {
+      metaNavigations(max_level: 1) {
         locale
         items {
           title
