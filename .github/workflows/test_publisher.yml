@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Publisher
-        uses: AmazeeLabs/publisher
+        uses: AmazeeLabs/publisher@v1
         with:
           env_vars: ${{ inputs.env_vars }}
 
