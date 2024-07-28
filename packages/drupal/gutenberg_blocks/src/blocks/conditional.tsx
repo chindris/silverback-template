@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import { PropsWithChildren, useState } from 'react';
 import { InnerBlocks, InspectorControls } from 'wordpress__block-editor';
 import { registerBlockType } from 'wordpress__blocks';
 import { BaseControl, PanelBody } from 'wordpress__components';
@@ -72,21 +73,18 @@ registerBlockType(`custom/conditional`, {
     );
 
     return (
-      <div className={clsx('container-wrapper', { 'bg-gray-100': !isActive })}>
-        <div className={'container-label'}>{__('Conditional content')}</div>
-        <div className="text-sm text-gray-500">{summary}</div>
-        <details open={isActive}>
-          <summary
-            style={{ cursor: 'pointer', padding: 0 }}
-            className="text-sm text-gray-500"
-          >
-            {purpose || __('Content')}
-          </summary>
+      <>
+        <CollapsibleContainer
+          title={purpose || __('Conditional content')}
+          label={__('Conditional content')}
+          isActive={isActive}
+        >
+          <div className="text-sm text-gray-500">{summary}</div>
           <InnerBlocks
             templateLock={false}
             template={[['core/paragraph', {}]]}
           />
-        </details>
+        </CollapsibleContainer>
         <InspectorControls>
           <PanelBody title={__('Purpose')}>
             <BaseControl id="purpose">
@@ -151,7 +149,7 @@ registerBlockType(`custom/conditional`, {
             </BaseControl>
           </PanelBody>
         </InspectorControls>
-      </div>
+      </>
     );
   },
 
@@ -168,4 +166,42 @@ function isoToLocalTime(isoTime: string) {
   const date = new Date(isoTime);
   date.setMinutes(date.getMinutes() - date.getTimezoneOffset());
   return date.toISOString().slice(0, 16);
+}
+
+function CollapsibleContainer({
+  children,
+  label,
+  title,
+  isActive,
+}: PropsWithChildren<{ label: string; title: string; isActive: boolean }>) {
+  const [isOpen, setIsOpen] = useState(isActive);
+  return (
+    <div
+      className={clsx('collapsible-container', {
+        'bg-gray-100': !isActive,
+        'is-open': isOpen,
+      })}
+    >
+      <div
+        className="title"
+        onClick={() => {
+          setIsOpen(!isOpen);
+        }}
+      >
+        <div className="left"></div>
+        <div className="text-gray-500 right">{title}</div>
+      </div>
+
+      {isOpen ? (
+        <div
+          className={clsx('container-wrapper no-margin', {
+            'no-min-height': !isOpen,
+          })}
+        >
+          <div className={'container-label'}>{label}</div>
+          {children}
+        </div>
+      ) : null}
+    </div>
+  );
 }

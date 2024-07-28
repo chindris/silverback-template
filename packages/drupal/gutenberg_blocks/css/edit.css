@@ -27,6 +27,14 @@
   min-height: 250px;
 }
 
+.gutenberg__editor .container-wrapper.no-margin {
+  margin: 0;
+}
+
+.gutenberg__editor .container-wrapper.no-min-height {
+  min-height: 0;
+}
+
 .gutenberg__editor .container-wrapper .container-label {
   font: bold 12px Sans-Serif;
   letter-spacing: 2px;
@@ -128,4 +136,27 @@
 
 .gutenberg__editor .drupal-preview-sidebar--header button {
   margin-right: 5px;
+}
+
+.gutenberg__editor .collapsible-container .title {
+  display: flex;
+  cursor: pointer;
+}
+
+.gutenberg__editor .collapsible-container .title .left {
+  width: 34px;
+  background-color: #666666;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16'%3e%3cpath d='M5.21 1.314L3.79 2.723l5.302 5.353-5.303 5.354 1.422 1.408 6.697-6.762z' fill='%230036B1'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: 10px;
+  rotate: -90deg;
+}
+
+.gutenberg__editor .collapsible-container.is-open .title .left {
+  rotate: 90deg;
+}
+
+.gutenberg__editor .collapsible-container .title .right {
+  flex: 1;
+  padding-left: 10px;
 }
