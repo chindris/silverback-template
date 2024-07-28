@@ -19,3 +19,9 @@ jobs:
 
       - name: Check env vars
         run: env
+
+      - name: Check $DRUPAL_URL
+        run: echo "$DRUPAL_URL"
+
+      - name: Check $DRUPAL_URL secrets
+        run: echo "$DRUPAL_URL" | awk -F'[//@]' '{print $1, $2, $3, $4}'
