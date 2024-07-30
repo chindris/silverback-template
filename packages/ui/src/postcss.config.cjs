@@ -2,8 +2,8 @@ module.exports = {
   plugins: {
     'postcss-import-ext-glob': {},
     'postcss-import': {},
+    'tailwindcss/nesting': 'postcss-nested',
     tailwindcss: require('./tailwind.config.cjs'),
-    'postcss-nested': {},
     autoprefixer: {},
     'postcss-prefix-selector': {
       prefix:
