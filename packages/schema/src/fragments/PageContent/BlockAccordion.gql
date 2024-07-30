@@ -1,4 +1,5 @@
 fragment BlockAccordion on BlockAccordion {
+  headingLevel
   items {
     ...BlockAccordionItemText
   }

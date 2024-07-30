@@ -267,6 +267,7 @@ type BlockImageTeaser @default @value {
 }
 
 type BlockAccordion @type(id: "custom/accordion") {
+  headingLevel: String! @resolveEditorBlockAttribute(key: "headingLevel")
   items: [BlockAccordionItemText!]! @resolveEditorBlockChildren
 }
 
