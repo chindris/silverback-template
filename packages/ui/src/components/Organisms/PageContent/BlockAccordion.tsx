@@ -49,7 +49,7 @@ const Heading = ({ level, className, children }: HeadingProps) => {
 };
 
 export function BlockAccordion(
-  props: BlockAccordionFragment & { headingLevel?: string },
+  props: BlockAccordionFragment,
 ) {
   return (
     <div className="container-page my-10">
