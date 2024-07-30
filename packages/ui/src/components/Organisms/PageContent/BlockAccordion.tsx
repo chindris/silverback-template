@@ -56,13 +56,13 @@ export function BlockAccordion(
       <div className="container-content">
         <div className="container-text">
           {props.items.map((item, index) => (
-            <Disclosure as="div" key={index}>
+            <Disclosure as="div" className="border-b border-gray-200 last:border-0" key={index}>
               {({ open }) => (
                 <>
                   <Heading level={props.headingLevel}>
                     <DisclosureButton
                       className={clsx(
-                        'border-b border-gray-200 last:border-0 flex w-full items-center justify-between p-4 pl-1 text-left font-medium text-lg hover:bg-gray-100',
+                        'flex w-full items-center justify-between p-4 pl-1 text-left font-medium text-lg hover:bg-gray-100',
                         { 'text-black': open, 'text-gray-500': !open },
                       )}
                     >
@@ -88,7 +88,6 @@ export function BlockAccordion(
                   <DisclosurePanel
                     className={clsx(
                       'py-5 text-base font-normal text-gray-500',
-                      { 'border-b border-gray-200 last:border-0': open },
                     )}
                   >
                     <div className="sm:w-full md:w-4/5">
