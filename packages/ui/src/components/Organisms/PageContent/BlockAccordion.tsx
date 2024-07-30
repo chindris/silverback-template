@@ -30,7 +30,7 @@ export function BlockAccordion(props: BlockAccordionFragment) {
       <div className="container-content">
         <div className="container-text">
           {props.items.map((item, index) => (
-            <Disclosure key={index}>
+            <Disclosure as="div" key={index}>
               {({ open }) => (
                 <>
                   <DisclosureButton
@@ -45,9 +45,9 @@ export function BlockAccordion(props: BlockAccordionFragment) {
                     </span>
                     <span>
                       {open ? (
-                        <ChevronUpIcon className={'h-6 w-6'} />
+                        <ChevronUpIcon className={'h-6 w-6'} focusable={false} />
                       ) : (
-                        <ChevronDownIcon className={'h-6 w-6'} />
+                        <ChevronDownIcon className={'h-6 w-6'} focusable={false} />
                       )}
                     </span>
                   </DisclosureButton>
@@ -98,19 +98,19 @@ export function BlockAccordion(props: BlockAccordionFragment) {
   );
 }
 
-function AccordionIcon({ icon }: { icon: string }) {
+function AccordionIcon({ icon, focusable = false }: { icon: string, focusable?: boolean }) {
   switch (icon) {
     case 'questionmark':
       return (
-        <QuestionMarkCircleIcon className="w-5 h-5 me-2 shrink-0 text-gray-500" />
+        <QuestionMarkCircleIcon className="w-5 h-5 me-2 shrink-0 text-gray-500" focusable={focusable} />
       );
     case 'checkmark':
       return (
-        <CheckCircleIcon className="w-5 h-5 me-2 shrink-0 text-gray-500" />
+        <CheckCircleIcon className="w-5 h-5 me-2 shrink-0 text-gray-500" focusable={focusable} />
       );
     case 'arrow':
       return (
-        <ArrowRightCircleIcon className="w-5 h-5 me-2 shrink-0 text-gray-500" />
+        <ArrowRightCircleIcon className="w-5 h-5 me-2 shrink-0 text-gray-500" focusable={focusable} />
       );
     default:
       return null;
