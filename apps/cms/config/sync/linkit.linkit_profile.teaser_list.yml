@@ -1,0 +1,21 @@
+uuid: a50edb79-f43d-4388-9606-59750a92d720
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+label: 'Teaser list'
+id: teaser_list
+description: 'Used to search items to be displayed in a teaser list, in the Gutenberg editor.'
+matchers:
+  c42abd9a-5bed-4578-84f7-a4778a062699:
+    id: 'silverback:entity:node'
+    uuid: c42abd9a-5bed-4578-84f7-a4778a062699
+    settings:
+      include_unpublished: 0
+      metadata: ''
+      bundles: {  }
+      group_by_bundle: 0
+      substitution_type: canonical
+      limit: '100'
+    weight: 0

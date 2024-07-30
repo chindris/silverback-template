@@ -14,11 +14,11 @@ fragment BlockTeaserList on BlockTeaserList {
 fragment BlockTeaserListItem on BlockTeaserItem {
   __typename
   content {
-    ...BlockTeaserItemContent
+    ...TeaserItem
   }
 }
 
-fragment BlockTeaserItemContent on BlockTeaserItemContent {
+fragment TeaserItem on TeaserItem {
   id
   path
   title

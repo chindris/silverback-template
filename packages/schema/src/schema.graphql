@@ -93,7 +93,7 @@ type ContentHubResult @default @value(json: "{\"total\": 0, \"items\": []}") {
 }
 
 type TeaserListResult @default @value(json: "{\"total\": 0, \"items\": []}") {
-  items: [BlockTeaserItemContent]! @prop(key: "rows")
+  items: [TeaserItem]! @prop(key: "rows")
 }
 
 type WebsiteSettings
@@ -132,7 +132,7 @@ type FooterNavigation implements Navigation @menu(menu_id: "footer") {
   items: [NavigationItem]! @lang @resolveMenuItems
 }
 
-interface Page implements ContentHubResultItem & BlockTeaserItemContent
+interface Page implements ContentHubResultItem & TeaserItem
   @resolveEntityBundle {
   id: ID!
   translations: [Page]
@@ -145,7 +145,7 @@ interface Page implements ContentHubResultItem & BlockTeaserItemContent
   metaTags: [MetaTag]
 }
 
-type DecapPage implements ContentHubResultItem & Page & BlockTeaserItemContent
+type DecapPage implements ContentHubResultItem & Page & TeaserItem
   @sourceFrom(fn: "getPages") {
   id: ID!
   translations: [Page] @decapPageTranslations
@@ -161,7 +161,7 @@ type DecapPage implements ContentHubResultItem & Page & BlockTeaserItemContent
 """
 A generic page.
 """
-type DrupalPage implements ContentHubResultItem & Page & BlockTeaserItemContent
+type DrupalPage implements ContentHubResultItem & Page & TeaserItem
   @entity(type: "node", bundle: "page")
   @type(id: "page") {
   id: ID! @resolveEntityUuid
@@ -334,7 +334,7 @@ type BlockTeaserList @type(id: "custom/teaser-list") {
 }
 
 type BlockTeaserItem @type(id: "custom/teaser-item") {
-  content: BlockTeaserItemContent
+  content: TeaserItem
     @resolveEditorBlockAttribute(key: "uuid")
     @loadByUUID(type: "node", uuid: "$")
 }
@@ -352,7 +352,7 @@ type BlockTeaserListFilters {
 """
 Inteface for anything that can appear in the teaser list.
 """
-interface BlockTeaserItemContent @resolveEntityBundle {
+interface TeaserItem @resolveEntityBundle {
   id: ID!
   path: Url!
   title: String!

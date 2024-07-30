@@ -232,6 +232,55 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
+        uuid:
+          id: uuid
+          table: node
+          field: uuid
+          relationship: none
+          group_type: group
+          admin_label: 'Exclude UUIDs'
+          entity_type: node
+          entity_field: uuid
+          plugin_id: string
+          operator: not_regular_expression
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: uuid_op
+            label: 'Exclude UUIDs'
+            description: ''
+            use_operator: false
+            operator: uuid_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: excludeIds
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              super_admin: '0'
+              administrator: '0'
+              gatsby_build: '0'
+              editor: '0'
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: UUID
+            description: null
+            identifier: uuid
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items:
+              1: {  }
+              2: {  }
+              3: {  }
       filter_groups:
         operator: AND
         groups:
