@@ -24,7 +24,12 @@ const unorderedItems: Plugin<[], Element> = () => (tree) => {
   });
 };
 
-const Heading = ({ level, className, children }: { level?: string; className?: string, children: React.ReactNode }) => {
+type HeadingProps = {
+  level: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6',
+  className?: string,
+  children: React.ReactNode,
+};
+const Heading = ({ level, className, children }: HeadingProps) => {
   switch (level) {
     case 'h1':
       return <h1 className={className}>{children}</h1>;
