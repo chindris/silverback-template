@@ -24,7 +24,26 @@ const unorderedItems: Plugin<[], Element> = () => (tree) => {
   });
 };
 
-export function BlockAccordion(props: BlockAccordionFragment) {
+const Heading = ({ level, className, children }: { level?: string; className?: string, children: React.ReactNode }) => {
+  switch (level) {
+    case 'h1':
+      return <h1 className={className}>{children}</h1>;
+    case 'h2':
+      return <h2 className={className}>{children}</h2>;
+    case 'h3':
+      return <h3 className={className}>{children}</h3>;
+    case 'h4':
+      return <h4 className={className}>{children}</h4>;
+    case 'h5':
+      return <h5 className={className}>{children}</h5>;
+    case 'h6':
+      return <h6 className={className}>{children}</h6>;
+    default:
+      return <h2 className={className}>{children}</h2>;
+  }
+}
+
+export function BlockAccordion(props: BlockAccordionFragment & { headingLevel?: string }) {
   return (
     <div className="container-page my-10">
       <div className="container-content">
@@ -33,24 +52,26 @@ export function BlockAccordion(props: BlockAccordionFragment) {
             <Disclosure as="div" key={index}>
               {({ open }) => (
                 <>
-                  <DisclosureButton
-                    className={clsx(
-                      'border-b border-gray-200 last:border-0 flex w-full items-center justify-between p-4 pl-1 text-left font-medium text-lg hover:bg-gray-100',
-                      { 'text-black': open, 'text-gray-500': !open },
-                    )}
-                  >
-                    <span className="flex items-center">
-                      {item.icon && <AccordionIcon icon={item.icon} />}{' '}
-                      {item.title}
-                    </span>
-                    <span>
-                      {open ? (
-                        <ChevronUpIcon className={'h-6 w-6'} focusable={false} />
-                      ) : (
-                        <ChevronDownIcon className={'h-6 w-6'} focusable={false} />
+                  <Heading level={props.headingLevel}>
+                    <DisclosureButton
+                      className={clsx(
+                        'border-b border-gray-200 last:border-0 flex w-full items-center justify-between p-4 pl-1 text-left font-medium text-lg hover:bg-gray-100',
+                        { 'text-black': open, 'text-gray-500': !open },
                       )}
-                    </span>
-                  </DisclosureButton>
+                    >
+                      <span className="flex items-center">
+                        {item.icon && <AccordionIcon icon={item.icon} />}{' '}
+                        {item.title}
+                      </span>
+                      <span>
+                        {open ? (
+                          <ChevronUpIcon className={'h-6 w-6'} focusable={false} />
+                        ) : (
+                          <ChevronDownIcon className={'h-6 w-6'} focusable={false} />
+                        )}
+                      </span>
+                    </DisclosureButton>
+                  </Heading>
                   <DisclosurePanel
                     className={clsx(
                       'py-5 text-base font-normal text-gray-500',
