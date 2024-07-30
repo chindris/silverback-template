@@ -25,9 +25,9 @@ const unorderedItems: Plugin<[], Element> = () => (tree) => {
 };
 
 type HeadingProps = {
-  level?: string,
-  className?: string,
-  children: React.ReactNode,
+  level?: string;
+  className?: string;
+  children: React.ReactNode;
 };
 const Heading = ({ level, className, children }: HeadingProps) => {
   switch (level) {
@@ -46,9 +46,11 @@ const Heading = ({ level, className, children }: HeadingProps) => {
     default:
       return <h2 className={className}>{children}</h2>;
   }
-}
+};
 
-export function BlockAccordion(props: BlockAccordionFragment & { headingLevel?: string }) {
+export function BlockAccordion(
+  props: BlockAccordionFragment & { headingLevel?: string },
+) {
   return (
     <div className="container-page my-10">
       <div className="container-content">
@@ -70,9 +72,15 @@ export function BlockAccordion(props: BlockAccordionFragment & { headingLevel?: 
                       </span>
                       <span>
                         {open ? (
-                          <ChevronUpIcon className={'h-6 w-6'} focusable={false} />
+                          <ChevronUpIcon
+                            className={'h-6 w-6'}
+                            focusable={false}
+                          />
                         ) : (
-                          <ChevronDownIcon className={'h-6 w-6'} focusable={false} />
+                          <ChevronDownIcon
+                            className={'h-6 w-6'}
+                            focusable={false}
+                          />
                         )}
                       </span>
                     </DisclosureButton>
@@ -124,19 +132,34 @@ export function BlockAccordion(props: BlockAccordionFragment & { headingLevel?: 
   );
 }
 
-function AccordionIcon({ icon, focusable = false }: { icon: string, focusable?: boolean }) {
+function AccordionIcon({
+  icon,
+  focusable = false,
+}: {
+  icon: string;
+  focusable?: boolean;
+}) {
   switch (icon) {
     case 'questionmark':
       return (
-        <QuestionMarkCircleIcon className="w-5 h-5 me-2 shrink-0 text-gray-500" focusable={focusable} />
+        <QuestionMarkCircleIcon
+          className="w-5 h-5 me-2 shrink-0 text-gray-500"
+          focusable={focusable}
+        />
       );
     case 'checkmark':
       return (
-        <CheckCircleIcon className="w-5 h-5 me-2 shrink-0 text-gray-500" focusable={focusable} />
+        <CheckCircleIcon
+          className="w-5 h-5 me-2 shrink-0 text-gray-500"
+          focusable={focusable}
+        />
       );
     case 'arrow':
       return (
-        <ArrowRightCircleIcon className="w-5 h-5 me-2 shrink-0 text-gray-500" focusable={focusable} />
+        <ArrowRightCircleIcon
+          className="w-5 h-5 me-2 shrink-0 text-gray-500"
+          focusable={focusable}
+        />
       );
     default:
       return null;
