@@ -15,9 +15,6 @@
     ],
     "./operations": [
       "./build/operations.json"
-    ],
-    "./gatsby-autoload": [
-      "./build/gatsby-autoload.mjs"
     ]
   },
   "typesVersions": {
@@ -28,8 +25,6 @@
       "/source": [
         "build/generated/source.d.ts"
       ],
-      "/gatsby-autoload": [
-        "src/types/gatsby-autoload.d.ts"
       ]
     }
   },
