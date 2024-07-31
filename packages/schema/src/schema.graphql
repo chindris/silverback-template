@@ -26,58 +26,6 @@ directive @createWebformSubmission(
   submittedData: JSONString!
 ) on FIELD_DEFINITION
 
-"""
-Retrieve the properties of an image.
-TODO: Move to a shared "image" package.
-
-implementation(gatsby): ./image.js#imageProps
-"""
-directive @imageProps repeatable on FIELD_DEFINITION | SCALAR | UNION | ENUM | INTERFACE | OBJECT
-
-"""
-Retrieve the properties of an image.
-TODO: Move to a shared "image" package.
-
-implementation(gatsby): @amazeelabs/gatsby-source-silverback#responsiveImageSharp
-"""
-directive @responsiveImage(
-  height: String
-  sizes: String
-  transform: String
-  width: String
-) repeatable on ENUM | FIELD_DEFINITION | INTERFACE | OBJECT | SCALAR | UNION
-
-"""
-Retrieve an entity from the Gatsby datastore.
-For Drupal, this is implicitly implemented in the "graphql_directives" module.
-
-implementation(gatsby): ./page.js#loadEntity
-"""
-directive @loadEntity(
-  id: String
-  operation: String
-  route: String
-  type: String
-  uuid: String
-) repeatable on ENUM | FIELD_DEFINITION | INTERFACE | OBJECT | SCALAR | UNION
-
-"""
-Retrieve all translations of a decap page.
-
-implementation(gatsby): ./page.js#decapTranslations
-"""
-directive @decapPageTranslations on FIELD_DEFINITION
-
-"""
-Parse a given Url.
-For Drupal, this is implicitly implemented in the "graphql_directives" module.
-
-implementation(gatsby): ./page.js#route
-"""
-directive @route(
-  path: String!
-) repeatable on FIELD_DEFINITION | SCALAR | UNION | ENUM | INTERFACE | OBJECT
-
 enum Locale @default @value(string: "en") {
   en
   de
@@ -138,35 +86,10 @@ type FooterNavigation implements Navigation @menu(menu_id: "footer") {
   items: [NavigationItem]! @lang @resolveMenuItems
 }
 
-interface Page implements ContentHubResultItem @resolveEntityBundle {
-  id: ID!
-  translations: [Page]
-  locale: Locale!
-  path: Url!
-  title: String!
-  teaserImage: MediaImage
-  hero: Hero
-  content: [PageContent]
-  metaTags: [MetaTag]
-}
-
-type DecapPage implements ContentHubResultItem & Page
-  @sourceFrom(fn: "getPages") {
-  id: ID!
-  translations: [Page] @decapPageTranslations
-  locale: Locale!
-  path: Url!
-  title: String!
-  teaserImage: MediaImage
-  hero: Hero
-  content: [PageContent]
-  metaTags: [MetaTag]
-}
-
 """
 A generic page.
 """
-type DrupalPage implements ContentHubResultItem & Page
+type Page implements ContentHubResultItem
   @entity(type: "node", bundle: "page")
   @type(id: "page") {
   id: ID! @resolveEntityUuid
@@ -341,8 +264,8 @@ input PaginationInput {
 }
 
 type Query {
-  previewDecapPage: DecapPage
-  previewDrupalPage(id: ID!, rid: ID, locale: String!): DrupalPage
+  previewDecapPage: Page
+  previewDrupalPage(id: ID!, rid: ID, locale: String!): Page
     @fetchEntity(type: "node", id: "$id", rid: "$rid", language: "$locale")
 
   mainNavigations: [MainNavigation] @menuTranslations(menu_id: "main")
@@ -422,7 +345,7 @@ type DemoBlock {
 """
 The type provided by translations source (e.g. Decap or Drupal).
 """
-interface TranslatableString @value(string: "drupal") @default @value {
+type TranslatableString @value(string: "drupal") @default @value {
   """
   The default message, used in the UI.
   """
@@ -434,18 +357,5 @@ interface TranslatableString @value(string: "drupal") @default @value {
   """
   The actual translated string.
   """
-  translation: String
-}
-
-type DecapTranslatableString implements TranslatableString @type(id: "decap") {
-  source: String!
-  language: Locale!
-  translation: String
-}
-
-type DrupalTranslatableString implements TranslatableString
-  @type(id: "drupal") {
-  source: String!
-  language: Locale!
   translation: String
 }
