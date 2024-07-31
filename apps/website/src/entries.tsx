@@ -1,10 +1,13 @@
 import '@custom/ui/styles.css';
 
 import {
+  AnyOperationId,
+  findExecutors,
   HomePageQuery,
   ListPagesQuery,
   Locale,
   LocationProvider,
+  OperationVariables,
   Url,
 } from '@custom/schema';
 import { ContentHub } from '@custom/ui/routes/ContentHub';
@@ -17,9 +20,20 @@ import React from 'react';
 import { createPages } from 'waku';
 
 import { BrokenLinkHandler } from './broken-link-handler.js';
-import { ExecutorsClient } from './executors-client.js';
-import { ExecutorsServer } from './executors-server.js';
+import { ClientExecutors } from './executors-client.js';
+import { ServerExecutors, serverExecutors } from './executors-server.js';
 import { query } from './query.js';
+
+async function queryAll<TOperation extends AnyOperationId>(
+  operation: TOperation,
+  variables: OperationVariables<TOperation>,
+) {
+  return Promise.all(
+    findExecutors(serverExecutors, operation, variables).map((exec) =>
+      exec instanceof Function ? exec(operation, variables) : exec,
+    ),
+  );
+}
 
 export default createPages(async ({ createPage, createLayout }) => {
   createLayout({
@@ -35,11 +49,11 @@ export default createPages(async ({ createPage, createLayout }) => {
             hash: '',
           }}
         >
-          <ExecutorsServer>
-            <ExecutorsClient>
+          <ServerExecutors>
+            <ClientExecutors>
               <Frame>{children}</Frame>
-            </ExecutorsClient>
-          </ExecutorsServer>
+            </ClientExecutors>
+          </ServerExecutors>
         </LocationProvider>
       </BrokenLinkHandler>
     ),
@@ -74,35 +88,33 @@ export default createPages(async ({ createPage, createLayout }) => {
   // Initialise a map for the homepages, since we want to exclude them from
   // creating a page for their internal path.
   const homePages = await query(HomePageQuery, {});
-  const homePageTranslations = new Map<Locale, Url>();
+  const homePageTranslations = [] as Array<Url>;
   homePages.websiteSettings?.homePage?.translations?.forEach(
     (homePageTranslation) => {
       if (homePageTranslation?.locale) {
-        homePageTranslations.set(
-          homePageTranslation?.locale,
-          homePageTranslation?.path,
-        );
+        homePageTranslations.push(homePageTranslation?.path);
       }
     },
   );
 
   // TODO: Paginate properly to not load all nodes in Drupal
   const pagePaths = new Set<string>();
-  const pages = await query(ListPagesQuery, { args: 'pageSize=0&page=1' });
-  pages.ssgPages?.rows.forEach((page) => {
-    page?.translations?.forEach((translation) => {
-      // We don't want to create pages for home pages, since they already have
-      // the root one created (/en, /de, etc.). And there is also a redirect
-      // created from the internal path to the root path during the
-      // build:redirects process.
-      if (
-        translation?.path &&
-        translation.path !== homePageTranslations.get(translation.locale)
-      ) {
-        pagePaths.add(translation.path);
-      }
-    });
+  const pageSources = await queryAll(ListPagesQuery, {
+    args: 'pageSize=0&page=1',
   });
+
+  for (const source of pageSources) {
+    source.ssgPages?.rows.forEach((page) => {
+      page?.translations?.forEach((translation) => {
+        if (
+          translation?.path &&
+          !homePageTranslations.includes(translation.path)
+        ) {
+          pagePaths.add(translation.path);
+        }
+      });
+    });
+  }
 
   createPage({
     render: 'static',

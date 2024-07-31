@@ -12,6 +12,7 @@
     "@amazeelabs/strangler-netlify": "^1.1.9",
     "@amazeelabs/token-auth-middleware": "^1.1.1",
     "@custom/cms": "workspace:*",
+    "@custom/decap": "workspace:*",
     "@custom/schema": "workspace:*",
     "@custom/ui": "workspace:*",
     "netlify-cli": "^17.29.0",
