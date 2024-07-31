@@ -6,7 +6,7 @@ jobs:
   estimate:
     name: Estimate
     if: vars.JIRA_PROJECT_ID != ''
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - name: Start Check Run
         id: check
@@ -27,7 +27,7 @@ jobs:
         run: npm install -g @amazeelabs/estimator
 
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
