@@ -1,10 +1,11 @@
-import { SilverbackSource } from '@amazeelabs/gatsby-source-silverback';
+import { Markup } from '@custom/schema';
 import {
-  BlockMarkupSource,
-  BlockMediaSource,
-  DecapPageSource,
-  LocaleSource,
-  MediaImageSource,
+  SourceBlockMarkup,
+  SourceBlockMedia,
+  SourceLocale,
+  SourceMediaImage,
+  SourcePage,
+  SourceResolvers,
 } from '@custom/schema/source';
 import type { CmsCollection, CmsField } from 'decap-cms-core';
 import fs from 'fs';
@@ -12,7 +13,6 @@ import yaml from 'yaml';
 import { z } from 'zod';
 
 import { transformMarkdown } from '../helpers/markdown';
-import { path } from '../helpers/path';
 
 // =============================================================================
 // Decap CMS collection definition.
@@ -131,6 +131,11 @@ export const PageCollection: CmsCollection = {
   ],
 };
 
+// TODO: generalize this, maybe based on `Image` scalar.
+// function decapImageSource(path: string) {
+//   return JSON.stringify({ src: path.replace('apps/decap', '') });
+// }
+
 // =============================================================================
 // Transformation schema definitions.
 // =============================================================================
@@ -140,10 +145,10 @@ const BlockMarkupSchema = z
     type: z.literal('text'),
     text: transformMarkdown,
   })
-  .transform(({ text }): BlockMarkupSource => {
+  .transform(({ text }): SourceBlockMarkup => {
     return {
       __typename: 'BlockMarkup',
-      markup: text,
+      markup: text as Markup,
     };
   });
 
@@ -154,7 +159,7 @@ const BlockMediaImageSchema = z
     image: z.string(),
     caption: transformMarkdown,
   })
-  .transform(({ image, alt, caption }): BlockMediaSource => {
+  .transform(({ image, alt, caption }): SourceBlockMedia => {
     return {
       __typename: 'BlockMedia',
       media: {
@@ -166,64 +171,101 @@ const BlockMediaImageSchema = z
     };
   });
 
-export const pageSchema = z.object({
-  __typename: z.literal('DecapPage').optional().default('DecapPage'),
-  id: z.string(),
-  title: z.string(),
-  locale: z.string().transform((l) => l as LocaleSource),
-  path: z.string(),
-  hero: z.object({
-    __typename: z.literal('Hero').optional().default('Hero'),
-    headline: z.string(),
-    lead: z.string().optional(),
-    image: z
-      .string()
-      .optional()
-      .transform((source): MediaImageSource | undefined =>
-        source
-          ? {
-              __typename: 'MediaImage',
-              source,
-              alt: '',
-            }
-          : undefined,
-      ),
-  }),
-  content: z.array(z.union([BlockMarkupSchema, BlockMediaImageSchema])),
-});
+export const pageSchema = z
+  .object({
+    id: z.string(),
+    title: z.string(),
+    locale: z.string().transform((l) => l as SourceLocale),
+    path: z.string(),
+    hero: z.object({
+      __typename: z.literal('Hero').optional().default('Hero'),
+      headline: z.string(),
+      lead: z.string().optional(),
+      image: z
+        .string()
+        .optional()
+        .transform((source): SourceMediaImage | undefined =>
+          source
+            ? {
+                __typename: 'MediaImage',
+                source: source,
+                alt: '',
+              }
+            : undefined,
+        ),
+    }),
+    content: z.array(z.union([BlockMarkupSchema, BlockMediaImageSchema])),
+  })
+  .transform((data): SourcePage => ({ __typename: 'Page', ...data }));
 
-export const getPages: SilverbackSource<DecapPageSource> = () => {
+const pages: Array<SourcePage> = [];
+
+const getPages = (path: string) => {
   const dir = `${path}/data/page`;
-  const pages: Array<[string, DecapPageSource & { _decap_id: string }]> = [];
-  fs.readdirSync(dir)
-    .filter((file) => file.endsWith('.yml'))
-    .forEach((file) => {
-      const content = yaml.parse(fs.readFileSync(`${dir}/${file}`, 'utf-8'));
-      const id = Object.values(content)
-        .map((page: any) => page.id)
-        .filter((id) => !!id)
-        .pop();
-      Object.keys(content).forEach((lang) => {
-        if (Object.keys(content[lang]).length < 2) {
-          return;
-        }
-        const input = {
-          ...content[lang],
-          id,
-          locale: lang,
-        };
-        const page = pageSchema.safeParse(input);
-        if (page.success) {
-          pages.push([
-            `${page.data.id}:${lang}`,
-            { ...page.data, _decap_id: id },
-          ]);
-        } else {
-          console.warn(`Error parsing ${file} (${lang}):`);
-          console.warn(page.error.message);
-          console.warn('Input:', content[lang]);
-        }
+  if (pages.length === 0) {
+    fs.readdirSync(dir)
+      .filter((file) => file.endsWith('.yml'))
+      .forEach((file) => {
+        const content = yaml.parse(fs.readFileSync(`${dir}/${file}`, 'utf-8'));
+        const id = Object.values(content)
+          .map((page: any) => page.id)
+          .filter((id) => !!id)
+          .pop();
+        const translations: Array<SourcePage> = [];
+        Object.keys(content).forEach((lang) => {
+          if (Object.keys(content[lang]).length < 2) {
+            return;
+          }
+          const input = {
+            ...content[lang],
+            id,
+            locale: lang,
+          };
+          const page = pageSchema.safeParse(input);
+          if (page.success) {
+            translations.push(page.data);
+          } else {
+            console.warn(`Error parsing ${file} (${lang}):`);
+            console.warn(page.error.message);
+            console.warn('Input:', content[lang]);
+          }
+        });
+        const original = { ...translations[0] };
+        original.translations = translations;
+        pages.push(original);
       });
-    });
+  }
   return pages;
 };
+
+export const pageResolvers = (path: string) =>
+  ({
+    SSGPagesResult: {
+      rows: () => getPages(path),
+      total: () => 0,
+    },
+    Query: {
+      ssgPages: () => {
+        return {
+          __typename: 'SSGPagesResult',
+          total: 0,
+          rows: [],
+        };
+      },
+      viewPage: (_, { path }) => {
+        const pages = getPages(path);
+        let result: SourcePage | undefined;
+        for (const page of pages) {
+          if (page.translations) {
+            for (const translation of page.translations) {
+              if (translation?.path === path) {
+                result = { ...translation };
+                result.translations = page.translations;
+              }
+            }
+          }
+        }
+        return result;
+      },
+    },
+  }) satisfies SourceResolvers;
