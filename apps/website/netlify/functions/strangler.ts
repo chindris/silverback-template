@@ -14,5 +14,9 @@ export const handler = createStrangler(
         [301, 302].includes(response.status) ? response : undefined,
     },
   ],
-  fs.readFileSync('dist/public/404.html').toString(),
+  // On Local environments, the public folder sits inside a dist folder, so we
+  // need to check both cases.
+  fs.existsSync('public/404.html')
+    ? fs.readFileSync('public/404.html').toString()
+    : fs.readFileSync('dist/public/404.html').toString(),
 );
