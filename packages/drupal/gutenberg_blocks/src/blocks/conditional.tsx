@@ -2,7 +2,12 @@ import clsx from 'clsx';
 import { PropsWithChildren, useState } from 'react';
 import { InnerBlocks, InspectorControls } from 'wordpress__block-editor';
 import { registerBlockType } from 'wordpress__blocks';
-import { BaseControl, PanelBody } from 'wordpress__components';
+import {
+  BaseControl,
+  PanelBody,
+  PanelRow,
+  TextControl,
+} from 'wordpress__components';
 
 // @ts-ignore
 const { t: __ } = Drupal;
@@ -87,66 +92,73 @@ registerBlockType(`custom/conditional`, {
         </CollapsibleContainer>
         <InspectorControls>
           <PanelBody title={__('Purpose')}>
-            <BaseControl id="purpose">
-              <input
-                type="text"
+            <PanelRow>
+              <TextControl
                 id="purpose"
-                defaultValue={purpose}
-                onChange={(event) => {
-                  setAttributes({ purpose: event.target.value });
-                }}
+                label={__(
+                  'The value is not exposed to the frontend and serves to identify the reason of the conditional content (e.g. Summer Campaign).',
+                )}
+                value={purpose}
+                onChange={(value: string) => setAttributes({ purpose: value })}
+                className={
+                  '[&>div]:flex [&>div]:gap-4 [&>div]:flex-col-reverse'
+                }
               />
-            </BaseControl>
-            <BaseControl
-              id="purpose-decription"
-              label={__(
-                'The value is not exposed to the frontend and serves to identify the reason of the conditional content (e.g. Summer Campaign).',
-              )}
-            >
-              <div />
-            </BaseControl>
+            </PanelRow>
           </PanelBody>
+
           <PanelBody title={__('Scheduled display')}>
-            <BaseControl id="displayFrom" label={__('From')}>
-              <br />
-              <input
-                type="datetime-local"
+            <PanelRow className={'flex flex-col items-start gap-4'}>
+              <BaseControl
                 id="displayFrom"
-                defaultValue={displayFrom ? isoToLocalTime(displayFrom) : ''}
-                onChange={(event) => {
-                  setAttributes({
-                    displayFrom: event.target.value
-                      ? localToIsoTime(event.target.value)
-                      : '',
-                  });
-                }}
-              />
-            </BaseControl>
-            <BaseControl id="displayTo" label={__('To')}>
-              <br />
-              <input
-                type="datetime-local"
+                label={__('From')}
+                className={'[&>div]:flex [&>div]:gap-4 !m-0'}
+              >
+                <input
+                  type="datetime-local"
+                  id="displayFrom"
+                  defaultValue={displayFrom ? isoToLocalTime(displayFrom) : ''}
+                  onChange={(event) => {
+                    setAttributes({
+                      displayFrom: event.target.value
+                        ? localToIsoTime(event.target.value)
+                        : '',
+                    });
+                  }}
+                />
+              </BaseControl>
+              <BaseControl
                 id="displayTo"
-                defaultValue={displayTo ? isoToLocalTime(displayTo) : ''}
-                onChange={(event) => {
-                  setAttributes({
-                    displayTo: event.target.value
-                      ? localToIsoTime(event.target.value)
-                      : '',
-                  });
+                label={__('To')}
+                className={'[&>div]:flex [&>div]:gap-4 !m-0'}
+              >
+                <input
+                  type="datetime-local"
+                  id="displayTo"
+                  defaultValue={displayTo ? isoToLocalTime(displayTo) : ''}
+                  onChange={(event) => {
+                    setAttributes({
+                      displayTo: event.target.value
+                        ? localToIsoTime(event.target.value)
+                        : '',
+                    });
+                  }}
+                />
+              </BaseControl>
+            </PanelRow>
+            <PanelRow>
+              <p
+                className={'text-sm'}
+                style={{
+                  fontSize: '0.875rem',
+                  lineHeight: '1.25rem',
                 }}
-              />
-            </BaseControl>
-            <BaseControl
-              id="decription"
-              label={
-                __('Time zone') +
-                ': ' +
-                Intl.DateTimeFormat().resolvedOptions().timeZone
-              }
-            >
-              <div />
-            </BaseControl>
+              >
+                {__('Time zone') +
+                  ': ' +
+                  Intl.DateTimeFormat().resolvedOptions().timeZone}
+              </p>
+            </PanelRow>
           </PanelBody>
         </InspectorControls>
       </>
@@ -188,8 +200,7 @@ function CollapsibleContainer({
           setIsOpen(!isOpen);
         }}
       >
-        <div className="left"></div>
-        <div className="text-gray-500 right">{title}</div>
+        <div className="text-gray-500">{title}</div>
       </div>
 
       {isOpen ? (
