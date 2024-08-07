@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { PropsWithChildren } from 'react';
+import React, { PropsWithChildren } from 'react';
 import { InnerBlocks, InspectorControls } from 'wordpress__block-editor';
 import { registerBlockType } from 'wordpress__blocks';
 import {
@@ -12,8 +12,18 @@ import {
 // @ts-ignore
 const { t: __ } = Drupal;
 
+type ConditionsType = {
+  [key: string]: {
+    label: string;
+    visible: boolean;
+    template: JSX.Element;
+  };
+};
+
+const blockTitle = __('Conditional content');
+
 registerBlockType(`custom/conditional`, {
-  title: __('Conditional content'),
+  title: blockTitle,
   category: 'layout',
   icon: 'category',
   // Allow the block only at the root level to avoid GraphQL fragment recursion.
@@ -50,41 +60,61 @@ registerBlockType(`custom/conditional`, {
     };
     const isActive = Object.values(active).every(Boolean);
 
-    const conditions = {
-      scheduledDisplay:
-        displayFrom || displayTo
-          ? '🕒 ' +
-            __('Scheduled display') +
-            ': ' +
-            [
-              displayFrom
-                ? __('From') + ' ' + new Date(displayFrom).toLocaleString()
-                : '',
-              displayTo
-                ? __('To') + ' ' + new Date(displayTo).toLocaleString()
-                : '',
-            ]
-              .filter(Boolean)
-              .join(' ')
-          : '',
+    const conditions: ConditionsType = {
+      scheduledDisplay: {
+        label: '⏱️ ' + __('Scheduled display'),
+        visible: !!(displayFrom || displayTo),
+        template: (
+          <>
+            {displayFrom ? (
+              <>
+                <span className="font-extralight">{__('From')}</span>{' '}
+                {new Date(displayFrom).toLocaleString()}
+              </>
+            ) : null}
+            {displayFrom && displayTo ? <span>{' - '}</span> : null}
+            {displayTo ? (
+              <>
+                <span className="font-extralight">{__('To')}</span>{' '}
+                {new Date(displayTo).toLocaleString()}
+              </>
+            ) : null}
+          </>
+        ),
+      },
+      device: {
+        label: '📱 ' + __('Device'),
+        visible: false,
+        template: <>{'Mobile only.'}</>,
+      },
     };
-    const hasConditions = Object.values(conditions).some(Boolean);
-    const summary = hasConditions ? (
+
+    const hasConditions = Object.values(conditions)
+      .filter(({ visible }) => visible)
+      .some(Boolean);
+
+    const conditionsSummary = hasConditions ? (
       Object.entries(conditions)
         .filter(([, value]) => !!value)
-        .map(([key, value]) => <div key={key}>{value}</div>)
+        .filter(([, { visible }]) => visible)
+        .map(([key, { label, template }]) => (
+          <>
+            <div>{label}</div>
+            {template}
+          </>
+        ))
     ) : (
-      <div>{'ℹ️ ' + __('No conditions set')}</div>
+      <>{'ℹ️ ' + __('No conditions set')}</>
     );
 
     return (
       <>
         <CollapsibleContainer
-          title={purpose || __('Conditional content')}
-          label={__('Conditional content')}
+          title={purpose || blockTitle}
+          label={blockTitle}
           isActive={isActive}
         >
-          <div className="p-4 text-sm text-gray-500">{summary}</div>
+          <div className="p-4 text-sm text-gray-500">{conditionsSummary}</div>
           <div className={clsx('p-4 border-t', { 'bg-gray-100': !isActive })}>
             <InnerBlocks
               templateLock={false}
@@ -113,7 +143,9 @@ registerBlockType(`custom/conditional`, {
               <BaseControl
                 id="displayFrom"
                 label={__('From')}
-                className={'[&>div]:flex [&>div]:gap-4 !m-0'}
+                className={
+                  '[&>div]:flex [&>div]:gap-4 [&>div>label]:w-4 [&>div>label]:my-auto !m-0'
+                }
               >
                 <input
                   type="datetime-local"
@@ -131,7 +163,9 @@ registerBlockType(`custom/conditional`, {
               <BaseControl
                 id="displayTo"
                 label={__('To')}
-                className={'[&>div]:flex [&>div]:gap-4 !m-0'}
+                className={
+                  '[&>div]:flex [&>div]:gap-4 [&>div>label]:w-4 [&>div>label]:mb-0 [&>div>label]:my-auto !m-0'
+                }
               >
                 <input
                   type="datetime-local"
@@ -148,13 +182,7 @@ registerBlockType(`custom/conditional`, {
               </BaseControl>
             </PanelRow>
             <PanelRow>
-              <p
-                className={'text-sm'}
-                style={{
-                  fontSize: '0.875rem',
-                  lineHeight: '1.25rem',
-                }}
-              >
+              <p className={'text-xs text-neutral-500'}>
                 {__('Time zone') +
                   ': ' +
                   Intl.DateTimeFormat().resolvedOptions().timeZone}
@@ -171,42 +199,38 @@ registerBlockType(`custom/conditional`, {
   },
 });
 
-function localToIsoTime(localTime: string) {
+const localToIsoTime = (localTime: string) => {
   return new Date(localTime).toISOString();
-}
+};
 
-function isoToLocalTime(isoTime: string) {
+const isoToLocalTime = (isoTime: string) => {
   const date = new Date(isoTime);
   date.setMinutes(date.getMinutes() - date.getTimezoneOffset());
   return date.toISOString().slice(0, 16);
-}
+};
 
-function CollapsibleContainer({
+const CollapsibleContainer = ({
   children,
   label,
   title,
   isActive,
-}: PropsWithChildren<{ label: string; title: string; isActive: boolean }>) {
+}: PropsWithChildren<{ label: string; title: string; isActive: boolean }>) => {
   const isLabelDifferentToTitle = label !== title;
 
   return (
     <>
-      <div
-        className={clsx('border border-gray-200', {
-          'bg-red-100': !isActive,
-        })}
-      >
-        <details>
-          <summary>
-            {title}{' '}
-            {isLabelDifferentToTitle ? (
-              <span className="text-sm m-2">({label})</span>
-            ) : null}{' '}
-          </summary>
+      <div className={'container-wrapper'}>
+        <div className={'container-label'}>{label}</div>
+        <details
+          className={clsx('border border-gray-200', {
+            'bg-gray-100': !isActive,
+          })}
+        >
+          <summary>{title}</summary>
 
           <div className="border-t">{children}</div>
         </details>
       </div>
     </>
   );
-}
+};

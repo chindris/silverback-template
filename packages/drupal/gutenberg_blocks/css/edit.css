@@ -142,6 +142,43 @@
   gap: 1rem;
 }
 
+.\[\&\>div\>label\]\:w-4 > div > label {
+  width: 1rem;
+}
+
+.\[\&\>div\>label\]\:mb-0 > div > label {
+  margin-bottom: 0;
+}
+
+.\[\&\>div\>label\]\:my-auto > div > label {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.font-extralight {
+  font-weight: 200;
+}
+
+.text-gray-600 {
+  --tw-text-opacity: 1;
+  color: rgb(75 85 99 / var(--tw-text-opacity));
+}
+
+.text-neutral-500 {
+  --tw-text-opacity: 1;
+  color: rgb(115 115 115 / var(--tw-text-opacity));
+}
+
+.text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.text-xs {
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
 .flex {
   display: flex;
 }
@@ -160,4 +197,31 @@
 
 .\!m-0 {
   margin: 0 !important;
+}
+
+details[open] {
+  padding-bottom: 1em;
+}
+
+details[open] > summary::before {
+  transform: rotate(-90deg);
+}
+
+summary::marker {
+  content: none;
+}
+
+summary::before {
+  position: relative;
+  left: calc(var(--space-s) * -1);
+  display: inline-block;
+  width: var(--space-m);
+  height: var(--space-m);
+  margin-top: calc(var(--space-m) / -2);
+  content: '';
+  transition: transform var(--details-transform-transition-duration) ease-in 0s;
+  transform: rotate(90deg);
+  text-align: center;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16'%3e%3cpath d='M5.21 1.314L3.79 2.723l5.302 5.353-5.303 5.354 1.422 1.408 6.697-6.762z' fill='%23545560'/%3e%3c/svg%3e");
+  background-size: contain;
 }
