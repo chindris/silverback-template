@@ -1,7 +1,7 @@
 declare global {
   const Drupal: {
     behaviors: any;
-    t: (s: string) => string;
+    t: (s: string, t?: object) => string;
   };
 
   const drupalSettings: {
