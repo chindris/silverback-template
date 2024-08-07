@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { PropsWithChildren, useState } from 'react';
+import { PropsWithChildren } from 'react';
 import { InnerBlocks, InspectorControls } from 'wordpress__block-editor';
 import { registerBlockType } from 'wordpress__blocks';
 import {
