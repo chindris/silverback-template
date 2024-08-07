@@ -129,3 +129,40 @@
 .gutenberg__editor .drupal-preview-sidebar--header button {
   margin-right: 5px;
 }
+
+.gutenberg__editor .drupal-preview-sidebar--header select {
+  min-width: 350px;
+  position: relative;
+  appearance: none;
+  -webkit-appearance: none;
+  padding: 0.455em 6em 0.575em 1em;
+  background-color: #fff;
+  border: 1px solid #caced1;
+  border-radius: 0.25rem;
+  color: #000;
+  cursor: pointer;
+}
+
+/* Preview select */
+.gutenberg__editor .drupal-preview-sidebar--header select::before,
+.gutenberg__editor .drupal-preview-sidebar--header select::after {
+  --size: 0.3rem;
+  content: '';
+  position: absolute;
+  right: 1rem;
+  pointer-events: none;
+}
+
+.gutenberg__editor .drupal-preview-sidebar--header select::before {
+  border-left: var(--size) solid transparent;
+  border-right: var(--size) solid transparent;
+  border-bottom: var(--size) solid black;
+  top: 40%;
+}
+
+.gutenberg__editor .drupal-preview-sidebar--header select::after {
+  border-left: var(--size) solid transparent;
+  border-right: var(--size) solid transparent;
+  border-top: var(--size) solid black;
+  top: 55%;
+}

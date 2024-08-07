@@ -20,6 +20,7 @@ module:
   dblog: 0
   default_content: 0
   dropzonejs: 0
+  dynamic_entity_reference: 0
   dynamic_page_cache: 0
   editor: 0
   entity_create_split: 0
@@ -71,6 +72,7 @@ module:
   silverback_graphql_persisted: 0
   silverback_gutenberg: 0
   silverback_iframe: 0
+  silverback_preview_link: 0
   silverback_publisher_monitor: 0
   silverback_translations: 0
   simple_oauth: 0

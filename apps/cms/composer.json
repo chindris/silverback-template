@@ -44,6 +44,7 @@
     "amazeelabs/silverback_gutenberg": "^2.4.8",
     "amazeelabs/silverback_iframe": "^1.3.5",
     "amazeelabs/silverback_iframe_theme": "^1.3.0",
+    "amazeelabs/silverback_preview_link": "^1.5",
     "amazeelabs/silverback_publisher_monitor": "^2.3.2",
     "amazeelabs/silverback_translations": "^1.0.4",
     "composer/installers": "^2.2",
@@ -102,9 +103,6 @@
       },
       "drupal/userprotect": {
         "Fix site install": "https://www.drupal.org/files/issues/2023-07-28/3349663-8.patch"
-      },
-      "amazeelabs/silverback_gatsby": {
-        "Autosave preview": "./patches/fetch-entity.patch"
       },
       "drupal/gutenberg": {
         "Gutenberg enabled hook": "https://www.drupal.org/files/issues/2024-05-07/gutenberg_enabled_hook_3445677-2.patch",
