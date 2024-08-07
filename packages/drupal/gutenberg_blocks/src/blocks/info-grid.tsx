@@ -2,7 +2,6 @@ import { InnerBlocks } from 'wordpress__block-editor';
 import { registerBlockType } from 'wordpress__blocks';
 import { useSelect } from 'wordpress__data';
 
-// @ts-ignore
 const { t: __ } = Drupal;
 
 const MAX_BLOCKS: number = 3;
@@ -19,7 +18,7 @@ registerBlockType('custom/info-grid', {
     }));
 
     return (
-      <div className={'container-wrapper'}>
+      <div className={'container-wrapper !border-stone-500'}>
         <div className={'container-label'}>{__('Info Grid')}</div>
         <InnerBlocks
           templateLock={false}

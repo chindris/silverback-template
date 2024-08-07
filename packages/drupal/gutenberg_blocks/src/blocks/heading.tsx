@@ -4,8 +4,9 @@ import { Path, SVG, ToolbarGroup } from 'wordpress__components';
 import { compose, withState } from 'wordpress__compose';
 
 import { cleanUpText } from '../utils/clean-up-text';
-// @ts-ignore
+
 const { t: __ } = Drupal;
+
 // @ts-ignore
 const { sanitizeText } = silverbackGutenbergUtils;
 

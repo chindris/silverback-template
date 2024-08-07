@@ -9,7 +9,6 @@ import {
   TextControl,
 } from 'wordpress__components';
 
-// @ts-ignore
 const { t: __ } = Drupal;
 
 type ConditionsType = {
@@ -68,14 +67,14 @@ registerBlockType(`custom/conditional`, {
           <>
             {displayFrom ? (
               <>
-                <span className="font-extralight">{__('From')}</span>{' '}
+                <span className="font-extralight">{__('From')}:</span>{' '}
                 {new Date(displayFrom).toLocaleString()}
               </>
             ) : null}
-            {displayFrom && displayTo ? <span>{' - '}</span> : null}
+            {displayFrom && displayTo ? ' ' : null}
             {displayTo ? (
               <>
-                <span className="font-extralight">{__('To')}</span>{' '}
+                <span className="font-extralight">{__('To')}:</span>{' '}
                 {new Date(displayTo).toLocaleString()}
               </>
             ) : null}
@@ -99,7 +98,7 @@ registerBlockType(`custom/conditional`, {
         .filter(([, { visible }]) => visible)
         .map(([key, { label, template }]) => (
           <>
-            <div>{label}</div>
+            <div className="font-bold">{label}</div>
             {template}
           </>
         ))
@@ -215,22 +214,40 @@ const CollapsibleContainer = ({
   title,
   isActive,
 }: PropsWithChildren<{ label: string; title: string; isActive: boolean }>) => {
-  const isLabelDifferentToTitle = label !== title;
-
   return (
     <>
-      <div className={'container-wrapper'}>
-        <div className={'container-label'}>{label}</div>
-        <details
-          className={clsx('border border-gray-200', {
-            'bg-gray-100': !isActive,
-          })}
-        >
-          <summary>{title}</summary>
+      <details
+        className={clsx('border border-gray-200', {
+          'bg-gray-100': !isActive,
+        })}
+      >
+        <summary role="button" className="grid grid-cols-[34px,1fr] p-0">
+          <span
+            className={
+              'bg-stone-500 flex justify-center items-center text-white relative'
+            }
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              role="presentation"
+              width="16"
+              height="16"
+              className="w-[var(--space-m)] h-[var(--space-m)] transition-transform ease-in duration-[var(--details-transform-transition-duration)] rotate-90"
+            >
+              <path
+                d="M5.21 1.314L3.79 2.723l5.302 5.353-5.303 5.354 1.422 1.408 6.697-6.762z"
+                fill="currentColor"
+              />
+            </svg>
+          </span>
+          <span className="col-start-2 p-4">{title}</span>
+        </summary>
 
-          <div className="border-t">{children}</div>
-        </details>
-      </div>
+        <div className={'container-wrapper !border-stone-500 !m-0'}>
+          <div className={'container-label'}>{label}</div>
+          <div className={'container-content border-t'}>{children}</div>
+        </div>
+      </details>
     </>
   );
 };

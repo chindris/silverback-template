@@ -1,8 +1,6 @@
 import { registerBlockType } from 'wordpress__blocks';
 import { compose, withState } from 'wordpress__compose';
 
-declare const Drupal: { t: (s: string) => string };
-
 const { t: __ } = Drupal;
 
 // @ts-ignore

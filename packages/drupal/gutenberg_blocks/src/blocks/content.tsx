@@ -1,7 +1,6 @@
 import { InnerBlocks } from 'wordpress__block-editor';
 import { registerBlockType } from 'wordpress__blocks';
 
-// @ts-ignore
 const { t: __ } = Drupal;
 
 const style = {
