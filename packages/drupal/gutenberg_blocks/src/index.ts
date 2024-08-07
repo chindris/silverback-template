@@ -1,7 +1,11 @@
 declare global {
-  const Drupal: { t: (s: string) => string };
+  const Drupal: {
+    behaviors: any;
+    t: (s: string) => string;
+  };
 
   const drupalSettings: {
+    preview: any;
     path: {
       baseUrl: string;
       pathPrefix: string;
