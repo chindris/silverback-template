@@ -1,25 +1,3 @@
-declare global {
-  const Drupal: {
-    behaviors: any;
-    t: (s: string) => string;
-  };
-
-  const drupalSettings: {
-    preview: any;
-    path: {
-      baseUrl: string;
-      pathPrefix: string;
-    };
-    customGutenbergBlocks: {
-      forms: Array<{
-        id: string;
-        url: string;
-        label: string;
-      }>;
-    };
-  };
-}
-
 import './customisations';
 import './preview';
 import './blocks/hero';
@@ -38,3 +16,25 @@ import './blocks/accordion';
 import './blocks/accordion-item-text';
 import './blocks/info-grid';
 import './blocks/info-grid-item';
+
+declare global {
+  const Drupal: {
+    behaviors: any;
+    t: (s: string, t?: object) => string;
+  };
+
+  const drupalSettings: {
+    preview: any;
+    path: {
+      baseUrl: string;
+      pathPrefix: string;
+    };
+    customGutenbergBlocks: {
+      forms: Array<{
+        id: string;
+        url: string;
+        label: string;
+      }>;
+    };
+  };
+}

@@ -8,6 +8,7 @@ import {
 import { registerBlockType } from 'wordpress__blocks';
 import { PanelBody } from 'wordpress__components';
 import { dispatch } from 'wordpress__data';
+
 import { DrupalMediaEntity } from '../utils/drupal-media';
 
 const { t: __ } = Drupal;

@@ -96,7 +96,7 @@ registerBlockType(`custom/conditional`, {
       Object.entries(conditions)
         .filter(([, value]) => !!value)
         .filter(([, { visible }]) => visible)
-        .map(([key, { label, template }]) => (
+        .map(([, { label, template }]) => (
           <>
             <div className="font-bold">{label}</div>
             {template}
