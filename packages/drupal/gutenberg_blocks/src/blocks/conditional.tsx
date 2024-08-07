@@ -84,25 +84,26 @@ registerBlockType(`custom/conditional`, {
           label={__('Conditional content')}
           isActive={isActive}
         >
-          <div className="text-sm text-gray-500">{summary}</div>
-          <InnerBlocks
-            templateLock={false}
-            template={[['core/paragraph', {}]]}
-          />
+          <div className="p-4 text-sm text-gray-500">{summary}</div>
+          <div className={clsx('p-4 border-t', { 'bg-gray-100': !isActive })}>
+            <InnerBlocks
+              templateLock={false}
+              template={[['core/paragraph', {}]]}
+            />
+          </div>
         </CollapsibleContainer>
         <InspectorControls>
           <PanelBody title={__('Purpose')}>
             <PanelRow>
               <TextControl
                 id="purpose"
-                label={__(
-                  'The value is not exposed to the frontend and serves to identify the reason of the conditional content (e.g. Summer Campaign).',
-                )}
+                hideLabelFromVision={true}
+                label={__('Purpose')}
                 value={purpose}
                 onChange={(value: string) => setAttributes({ purpose: value })}
-                className={
-                  '[&>div]:flex [&>div]:gap-4 [&>div]:flex-col-reverse'
-                }
+                help={__(
+                  'The value is not exposed to the frontend and serves to identify the reason of the conditional content (e.g. Summer Campaign).',
+                )}
               />
             </PanelRow>
           </PanelBody>
@@ -186,33 +187,26 @@ function CollapsibleContainer({
   title,
   isActive,
 }: PropsWithChildren<{ label: string; title: string; isActive: boolean }>) {
-  const [isOpen, setIsOpen] = useState(isActive);
-  return (
-    <div
-      className={clsx('collapsible-container', {
-        'bg-gray-100': !isActive,
-        'is-open': isOpen,
-      })}
-    >
-      <div
-        className="title"
-        onClick={() => {
-          setIsOpen(!isOpen);
-        }}
-      >
-        <div className="text-gray-500">{title}</div>
-      </div>
+  const isLabelDifferentToTitle = label !== title;
 
-      {isOpen ? (
-        <div
-          className={clsx('container-wrapper no-margin', {
-            'no-min-height': !isOpen,
-          })}
-        >
-          <div className={'container-label'}>{label}</div>
-          {children}
-        </div>
-      ) : null}
-    </div>
+  return (
+    <>
+      <div
+        className={clsx('border border-gray-200', {
+          'bg-red-100': !isActive,
+        })}
+      >
+        <details>
+          <summary>
+            {title}{' '}
+            {isLabelDifferentToTitle ? (
+              <span className="text-sm m-2">({label})</span>
+            ) : null}{' '}
+          </summary>
+
+          <div className="border-t">{children}</div>
+        </details>
+      </div>
+    </>
   );
 }
