@@ -2,7 +2,6 @@ import { InnerBlocks, InspectorControls } from 'wordpress__block-editor';
 import { registerBlockType } from 'wordpress__blocks';
 import { PanelBody, SelectControl } from 'wordpress__components';
 
-// @ts-ignore
 const { t: __ } = Drupal;
 
 enum HeadingLevels {
@@ -56,7 +55,7 @@ registerBlockType('custom/accordion', {
           </PanelBody>
         </InspectorControls>
 
-        <div className={'container-wrapper'}>
+        <div className={'container-wrapper !border-stone-500'}>
           <div className={'container-label'}>{__('Accordion')}</div>
           <InnerBlocks
             templateLock={false}

@@ -1,3 +1,21 @@
+declare global {
+  const Drupal: { t: (s: string) => string };
+
+  const drupalSettings: {
+    path: {
+      baseUrl: string;
+      pathPrefix: string;
+    };
+    customGutenbergBlocks: {
+      forms: Array<{
+        id: string;
+        url: string;
+        label: string;
+      }>;
+    };
+  };
+}
+
 import './customisations';
 import './preview';
 import './blocks/hero';

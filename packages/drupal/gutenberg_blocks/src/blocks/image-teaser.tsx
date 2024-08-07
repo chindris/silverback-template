@@ -8,11 +8,10 @@ import {
 import { registerBlockType } from 'wordpress__blocks';
 import { PanelBody } from 'wordpress__components';
 import { dispatch } from 'wordpress__data';
-
 import { DrupalMediaEntity } from '../utils/drupal-media';
 
-// @ts-ignore
 const { t: __ } = Drupal;
+
 // @ts-ignore
 const { setPlainTextAttribute } = silverbackGutenbergUtils;
 

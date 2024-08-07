@@ -8,7 +8,6 @@ import {
   limitedIconListOption,
 } from '../utils/icon-list';
 
-// @ts-ignore
 const { t: __ } = Drupal;
 
 registerBlockType('custom/info-grid-item', {
@@ -44,7 +43,7 @@ registerBlockType('custom/info-grid-item', {
           </PanelBody>
         </InspectorControls>
 
-        <div className={'container-wrapper'}>
+        <div className={'container-wrapper !border-stone-500'}>
           <div className={'container-label'}>{__('Info Grid Item')}</div>
           <div className={'info-grid-icon'} style={{ maxWidth: '50px' }}>
             {iconPreview && (

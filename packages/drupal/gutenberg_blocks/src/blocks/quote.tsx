@@ -2,11 +2,8 @@ import { RichText } from 'wordpress__block-editor';
 import { registerBlockType } from 'wordpress__blocks';
 import { compose, withState } from 'wordpress__compose';
 import { dispatch } from 'wordpress__data';
-
 import { cleanUpText } from '../utils/clean-up-text';
 import { DrupalMediaEntity } from '../utils/drupal-media';
-
-declare const Drupal: { t: (s: string) => string };
 
 const { t: __ } = Drupal;
 

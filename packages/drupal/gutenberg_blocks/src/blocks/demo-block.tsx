@@ -7,8 +7,8 @@ import { dispatch } from 'wordpress__data';
 
 import { DrupalMediaEntity } from '../utils/drupal-media';
 
-// @ts-ignore
 const { t: __ } = Drupal;
+
 // @ts-ignore
 registerBlockType('custom/demo-block', {
   title: 'Demo Block',
@@ -47,7 +47,7 @@ registerBlockType('custom/demo-block', {
             <p>Block settings</p>
           </PanelBody>
         </InspectorControls>
-        <div className={'container-wrapper'}>
+        <div className={'container-wrapper !border-stone-500'}>
           <div className={'container-label'}>{__('Demo Block')}</div>
           <div className="custom-block-demo-block">
             <RichText
