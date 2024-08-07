@@ -60,6 +60,7 @@ COPY --from=builder /tmp/.deploy/cms /app
 
 WORKDIR /app
 ENV WEBROOT=web
+ENV PHP_MEMORY_LIMIT=2048
 
 # ====================================================================================================
 # PHP IMAGE
@@ -73,6 +74,7 @@ COPY --from=cli /app /app
 
 WORKDIR /app
 ENV WEBROOT=web
+ENV PHP_MEMORY_LIMIT=2048
 
 # ====================================================================================================
 # NGINX IMAGE

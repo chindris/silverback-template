@@ -1,0 +1,73 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: 72904161-a94f-4934-98aa-f4b67e2dc9d5
+  bundle: menu_link_content
+  default_langcode: en
+  depends:
+    679de789-7c88-494e-866d-062c2abf8fbb: menu_link_content
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: 'Meta item child - should be ignored'
+  menu_name:
+    -
+      value: meta
+  link:
+    -
+      uri: 'internal:/'
+      title: ''
+      options: {  }
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: true
+  weight:
+    -
+      value: -50
+  expanded:
+    -
+      value: false
+  parent:
+    -
+      value: 'menu_link_content:679de789-7c88-494e-866d-062c2abf8fbb'
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  content_translation_uid:
+    -
+      target_id: 1
+  content_translation_status:
+    -
+      value: true
+  content_translation_created:
+    -
+      value: 1716899647
+translations:
+  de:
+    title:
+      -
+        value: 'Meta item child - should be ignored DE'
+    content_translation_source:
+      -
+        value: en
+    content_translation_outdated:
+      -
+        value: false
+    content_translation_uid:
+      -
+        target_id: 1
+    content_translation_status:
+      -
+        value: true
+    content_translation_created:
+      -
+        value: 1716900507

@@ -16,6 +16,7 @@ dependencies:
     - gutenberg
     - media
     - node
+    - pate
     - path
     - redirect
     - replicate_ui
@@ -62,6 +63,7 @@ permissions:
   - 'use basic transition unpublish'
   - 'use external preview'
   - 'use gutenberg'
+  - 'use page templates'
   - 'use text format gutenberg'
   - 'view all media revisions'
   - 'view any unpublished content'

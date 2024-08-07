@@ -1,7 +1,6 @@
 'use client';
 import { useIntl } from '@amazeelabs/react-intl';
 import { FrameQuery, Link, Url } from '@custom/schema';
-import clsx from 'clsx';
 import React from 'react';
 
 import { isTruthy } from '../../utils/isTruthy';
@@ -28,17 +27,39 @@ function useHeaderNavigation(lang: string = 'en') {
       ?.items.filter(isTruthy) || []
   );
 }
+function useMetaNavigation(lang: string = 'en') {
+  return (
+    useOperation(FrameQuery)
+      .data?.metaNavigation?.filter((nav) => nav?.locale === lang)
+      .pop()
+      ?.items.filter(isTruthy) || []
+  );
+}
 
 export function Header() {
   const intl = useIntl();
   const items = buildNavigationTree(useHeaderNavigation(intl.locale));
 
+  const metaItems = buildNavigationTree(useMetaNavigation(intl.locale));
+
   return (
     <MobileMenuProvider>
       <div className="container-page">
         <header className="container-content">
-          <div className="hidden md:flex">
-            <UserActions iconWidth="16" iconHeight="16" />
+          <div className="hidden md:flex py-2 border-b border-gray-200 md:align-bottom md:gap-x-8">
+            <nav className={'flex justify-end gap-x-6 w-full'}>
+              {metaItems.map((item, key) => (
+                <Link
+                  key={key}
+                  href={item.target}
+                  className="text-sm font-medium text-gray-900 hover:text-blue-600 leading-6 mt-px"
+                  activeClassName={'font-bold text-blue-200'}
+                >
+                  {item.title}
+                </Link>
+              ))}
+            </nav>
+            <UserActions />
           </div>
           <nav
             className="border-b border-b-gray-200 z-20 relative mx-auto flex items-center justify-between py-6"
@@ -65,12 +86,7 @@ export function Header() {
               </Link>
             </div>
             <div className="flex md:hidden">
-              <UserActions
-                iconWidth="23"
-                iconHeight="23"
-                showIconText={false}
-                isDesktop={false}
-              />
+              <UserActions />
               <MobileMenuButton className="inline-flex items-center justify-center rounded-md text-gray-700 ml-5 sm:ml-7 cursor-pointer"></MobileMenuButton>
             </div>
             <div className={'hidden md:flex'}>
@@ -79,7 +95,7 @@ export function Header() {
                   <Link
                     key={key}
                     href={item.target}
-                    className="text-base font-medium text-gray-600 ml-8 hover:text-blue-600"
+                    className="text-base font-medium text-gray-900 ml-8 hover:text-blue-600"
                     activeClassName={'font-bold text-blue-200'}
                   >
                     {item.title}
@@ -125,15 +141,15 @@ export function Header() {
             </div>
           </nav>
           <MobileMenu>
-            <div className="mt-6 flow-root">
-              <div className="-my-6 divide-y divide-gray-500/10">
+            <div className="flow-root">
+              <div className="divide-y divide-gray-500/10">
                 <div>
                   {items.map((item) =>
                     item.children.length === 0 ? (
                       <Link
                         key={item.title}
                         href={item.target}
-                        className="block hover:text-blue-600 py-4 px-8 text-lg text-gray-600 border-b border-b-solid border-b-blue-100"
+                        className="block hover:text-blue-600 py-4 px-8 text-lg text-gray-900 border-b border-b-blue-100"
                       >
                         {item.title}
                       </Link>
@@ -147,7 +163,7 @@ export function Header() {
                           key={item.target}
                           href={item.target}
                           title={item.title}
-                          className="block hover:text-blue-600 py-4 pr-8 pl-10 text-base text-gray-600"
+                          className="block hover:text-blue-600 py-4 pr-8 pl-10 text-base text-gray-900"
                         >
                           {item.title}
                         </Link>
@@ -157,7 +173,7 @@ export function Header() {
                               key={child.target}
                               href={child.target}
                               title={child.title}
-                              className="block hover:text-blue-600 py-4 pr-8 pl-10 text-base text-gray-600"
+                              className="block hover:text-blue-600 py-4 pr-8 pl-10 text-base text-gray-900"
                             >
                               {child.title}
                             </Link>
@@ -183,6 +199,18 @@ export function Header() {
                 </div>
               </div>
             </div>
+            <nav className={'flex flex-col gap-y-6 w-full mt-10 px-8'}>
+              {metaItems.map((item, key) => (
+                <Link
+                  key={key}
+                  href={item.target}
+                  className="text-base font-medium text-gray-900 hover:text-blue-600"
+                  activeClassName={'font-bold text-blue-200'}
+                >
+                  {item.title}
+                </Link>
+              ))}
+            </nav>
           </MobileMenu>
         </header>
       </div>
@@ -190,21 +218,9 @@ export function Header() {
   );
 }
 
-function UserActions({
-  isDesktop = true,
-}: {
-  iconWidth: string;
-  iconHeight: string;
-  showIconText?: boolean;
-  isDesktop?: boolean;
-}) {
+function UserActions() {
   return (
-    <div
-      className={clsx(
-        'flex w-full justify-end md:py-3',
-        isDesktop && 'border-b border-gray-300 border-opacity-30',
-      )}
-    >
+    <div>
       <LanguageSwitcher />
     </div>
   );
