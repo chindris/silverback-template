@@ -20,12 +20,15 @@ export default defineConfig({
       outputTimeout: 1000 * 60 * 10,
     },
     clean: 'pnpm clean',
-    serve: {
-      command: 'pnpm netlify dev --cwd=. --dir=public --port=7999',
-      readyPattern: 'Server now ready',
-      readyTimeout: 1000 * 60,
-      port: 7999,
-    },
+    // Serve only on non Lagoon environments.
+    serve: !isLagoon
+      ? {
+          command: 'pnpm netlify dev --cwd=. --dir=public --port=7999',
+          readyPattern: 'Server now ready',
+          readyTimeout: 1000 * 60,
+          port: 7999,
+        }
+      : undefined,
     deploy: isNetlifyEnabled
       ? [
           `pnpm netlify env:set AWS_LAMBDA_JS_RUNTIME nodejs18.x`,
