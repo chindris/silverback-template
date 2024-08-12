@@ -76,7 +76,7 @@ registerBlockType('custom/accordion-item-text', {
             />
             <InnerBlocks
               templateLock={false}
-              allowedBlocks={['core/paragraph', 'core/list', 'core/heading']}
+              allowedBlocks={['core/paragraph', 'core/list', 'custom/heading']}
               template={[['core/paragraph', {}]]}
             />
           </div>
