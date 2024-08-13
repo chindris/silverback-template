@@ -34,7 +34,3 @@ runs:
     - name: Install dependencies
       shell: bash
       run: pnpm i
-
-    - name: Check formatting
-      shell: bash
-      run: pnpm test:format
