@@ -88,7 +88,7 @@ export default createPages(async ({ createPage, createLayout }) => {
   // Initialise a map for the homepages, since we want to exclude them from
   // creating a page for their internal path.
   const homePages = await query(HomePageQuery, {});
-  const homePageTranslations = [] as Array<Url>;
+  const homePageTranslations: Array<Url> = [];
   homePages.websiteSettings?.homePage?.translations?.forEach(
     (homePageTranslation) => {
       if (homePageTranslation?.locale) {
