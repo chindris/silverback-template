@@ -78,22 +78,13 @@ enum Locale @default @value(string: "en") {
   de
 }
 
-"""
-Inteface for anything that can appear in the content hub.
-"""
-interface ContentHubResultItem @resolveEntityBundle {
-  path: Url!
-  title: String!
-  teaserImage: MediaImage
-}
-
 type ContentHubResult @default @value(json: "{\"total\": 0, \"items\": []}") {
   total: Int!
-  items: [ContentHubResultItem]! @prop(key: "rows")
+  items: [CardItem]! @prop(key: "rows")
 }
 
 type TeaserListResult @default @value(json: "{\"total\": 0, \"items\": []}") {
-  items: [TeaserItem]! @prop(key: "rows")
+  items: [CardItem]! @prop(key: "rows")
 }
 
 type WebsiteSettings
@@ -132,8 +123,7 @@ type FooterNavigation implements Navigation @menu(menu_id: "footer") {
   items: [NavigationItem]! @lang @resolveMenuItems
 }
 
-interface Page implements ContentHubResultItem & TeaserItem
-  @resolveEntityBundle {
+interface Page implements CardItem @resolveEntityBundle {
   id: ID!
   translations: [Page]
   locale: Locale!
@@ -145,8 +135,7 @@ interface Page implements ContentHubResultItem & TeaserItem
   metaTags: [MetaTag]
 }
 
-type DecapPage implements ContentHubResultItem & Page & TeaserItem
-  @sourceFrom(fn: "getPages") {
+type DecapPage implements Page & CardItem @sourceFrom(fn: "getPages") {
   id: ID!
   translations: [Page] @decapPageTranslations
   locale: Locale!
@@ -161,7 +150,7 @@ type DecapPage implements ContentHubResultItem & Page & TeaserItem
 """
 A generic page.
 """
-type DrupalPage implements ContentHubResultItem & Page & TeaserItem
+type DrupalPage implements Page & CardItem
   @entity(type: "node", bundle: "page")
   @type(id: "page") {
   id: ID! @resolveEntityUuid
@@ -334,7 +323,7 @@ type BlockTeaserList @type(id: "custom/teaser-list") {
 }
 
 type BlockTeaserItem @type(id: "custom/teaser-item") {
-  content: TeaserItem
+  content: CardItem
     @resolveEditorBlockAttribute(key: "uuid")
     @loadByUUID(type: "node", uuid: "$")
 }
@@ -350,9 +339,9 @@ type BlockTeaserListFilters {
 }
 
 """
-Inteface for anything that can appear in the teaser list.
+Inteface for anything that can appear as a card (teaser) item
 """
-interface TeaserItem @resolveEntityBundle {
+interface CardItem @resolveEntityBundle {
   id: ID!
   path: Url!
   title: String!

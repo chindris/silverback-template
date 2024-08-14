@@ -14,20 +14,6 @@ fragment BlockTeaserList on BlockTeaserList {
 fragment BlockTeaserListItem on BlockTeaserItem {
   __typename
   content {
-    ...TeaserItem
-  }
-}
-
-fragment TeaserItem on TeaserItem {
-  id
-  path
-  title
-  hero {
-    lead
-    headline
-  }
-  teaserImage {
-    alt
-    source(width: 400, height: 300)
+    ...CardItem
   }
 }

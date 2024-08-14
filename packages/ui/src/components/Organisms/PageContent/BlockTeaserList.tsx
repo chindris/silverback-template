@@ -8,7 +8,7 @@ import queryString from 'query-string';
 import React from 'react';
 
 import { useOperation } from '../../../utils/operation';
-import { TeaserItem } from '../../Molecules/TeaserItem';
+import { CardItem } from '../Card';
 
 export type TeaserListQueryArgs = {
   title: string | undefined;
@@ -27,20 +27,25 @@ function getUUIDFromId(id: string) {
 export function BlockTeaserList(props: BlockTeaserListFragment) {
   const staticIds: Array<string | undefined> = [];
   return (
-    <div>
-      {props.staticContent?.map((teaserItem) => {
-        staticIds.push(getUUIDFromId(teaserItem?.content?.id || ''));
-        return teaserItem?.content ? (
-          <TeaserItem
-            key={teaserItem?.content?.title}
-            readMoreText={props.buttonText}
-            {...teaserItem?.content}
-          />
-        ) : null;
-      })}
-      {props.contentHubEnabled && (
-        <DynamicTeaserList excludeIds={staticIds} {...props} />
-      )}
+    <div className="bg-white py-12 px-6 lg:px-8">
+      <div className="mx-auto max-w-6xl">
+        <ul className="my-8 grid md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-8">
+          {props.staticContent?.map((teaserItem) => {
+            staticIds.push(getUUIDFromId(teaserItem?.content?.id || ''));
+            return teaserItem?.content ? (
+              <li key={teaserItem?.content?.id}>
+                <CardItem
+                  readMoreText={props.buttonText}
+                  {...teaserItem?.content}
+                />
+              </li>
+            ) : null;
+          })}
+          {props.contentHubEnabled && (
+            <DynamicTeaserList excludeIds={staticIds} {...props} />
+          )}
+        </ul>
+      </div>
     </div>
   );
 }
@@ -71,11 +76,9 @@ export function DynamicTeaserList(
       <>
         {data.teaserList.items.map((teaserItem) => {
           return teaserItem ? (
-            <TeaserItem
-              key={teaserItem.id}
-              readMoreText={props.buttonText}
-              {...teaserItem}
-            />
+            <li key={teaserItem.id}>
+              <CardItem readMoreText={props.buttonText} {...teaserItem} />
+            </li>
           ) : null;
         })}
       </>
