@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "afb8e971f9cae5e9e79bac11c25290a2",
+    "content-hash": "8fa136f788cce1474b561f9f2f6d29af",
     "packages": [
         {
             "name": "amazeeio/drupal_integrations",
@@ -605,16 +605,16 @@
         },
         {
             "name": "amazeelabs/silverback_preview_link",
-            "version": "1.5.0",
+            "version": "1.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/AmazeeLabs/silverback_preview_link.git",
-                "reference": "ed2063f95ae948dfe39ed31565d0ef5ac82c2281"
+                "reference": "61cd90cef2e0b15466524dcf2a8809ff6fefe19d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AmazeeLabs/silverback_preview_link/zipball/ed2063f95ae948dfe39ed31565d0ef5ac82c2281",
-                "reference": "ed2063f95ae948dfe39ed31565d0ef5ac82c2281",
+                "url": "https://api.github.com/repos/AmazeeLabs/silverback_preview_link/zipball/61cd90cef2e0b15466524dcf2a8809ff6fefe19d",
+                "reference": "61cd90cef2e0b15466524dcf2a8809ff6fefe19d",
                 "shasum": ""
             },
             "require": {
@@ -631,9 +631,9 @@
             "homepage": "https://github.com/AmazeeLabs/silverback-mono/tree/development/packages/composer/amazeelabs/silverback_preview_link#readme",
             "support": {
                 "issues": "https://github.com/AmazeeLabs/silverback_preview_link/issues",
-                "source": "https://github.com/AmazeeLabs/silverback_preview_link/tree/1.5.0"
+                "source": "https://github.com/AmazeeLabs/silverback_preview_link/tree/1.6.0"
             },
-            "time": "2024-07-27T14:16:34+00:00"
+            "time": "2024-08-14T08:04:12+00:00"
         },
         {
             "name": "amazeelabs/silverback_publisher_monitor",
