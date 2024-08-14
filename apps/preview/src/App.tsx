@@ -8,7 +8,7 @@ import { webSocket } from 'rxjs/webSocket';
 
 declare global {
   interface Window {
-    GRAPHQL_ENDPOINT: string;
+    DRUPAL_URL: string;
   }
 }
 
@@ -28,7 +28,7 @@ function App() {
   }, [refresh]);
   return (
     <OperationExecutorsProvider
-      executors={[{ executor: createDrupalExecutor(window.GRAPHQL_ENDPOINT) }]}
+      executors={[{ executor: createDrupalExecutor(window.DRUPAL_URL) }]}
     >
       <Frame>
         <Preview />
