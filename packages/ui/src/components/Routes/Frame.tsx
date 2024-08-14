@@ -15,7 +15,7 @@ function filterByLocale(locale: Locale) {
 }
 
 function translationsMap(
-  translatables: Exclude<FrameQuery['stringTranslations'], undefined>,
+  translatables: Required<FrameQuery>['stringTranslations'],
 ) {
   return Object.fromEntries(
     translatables
