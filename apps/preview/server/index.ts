@@ -11,9 +11,9 @@ app.use(express.json());
 
 app.get('/endpoint.js', (_, res) => {
   res.send(
-    `window.DRUPAL_URL = "${
-      process.env.DRUPAL_URL || 'http://127.0.0.1:8888'
-    }";`,
+    `window.DRUPAL_URL = ${JSON.stringify(
+      process.env.DRUPAL_URL || 'http://127.0.0.1:8888',
+    )};`,
   );
 });
 
