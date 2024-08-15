@@ -56,7 +56,7 @@ export function createDrupalExecutor(host: string) {
       return data;
     } catch (error) {
       console.error('Fetch error:', error);
-      throw new Error('Fetch error: ' + JSON.stringify(error));
+      throw new Error(`Fetch error: ${error}`);
     }
   };
 }
