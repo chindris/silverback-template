@@ -220,6 +220,7 @@ const CollapsibleContainer = ({
         className={clsx('border border-gray-200', {
           'bg-gray-100': !isActive,
         })}
+        open={isActive}
       >
         <summary role="button" className="grid grid-cols-[34px,1fr] p-0">
           <span
