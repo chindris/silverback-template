@@ -46,7 +46,7 @@ registerBlockType(`custom/conditional`, {
 
     const displayFrom = attributes.displayFrom as string | undefined;
     const displayTo = attributes.displayTo as string | undefined;
-    const purpose = ((attributes.purpose as string) || '').trim();
+    const purpose = (attributes.purpose as string) || '';
 
     // Same logic as in BlockConditional.tsx
     const active = {
