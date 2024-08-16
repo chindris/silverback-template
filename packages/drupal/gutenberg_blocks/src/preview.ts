@@ -52,7 +52,7 @@
               class="components-external-link components-button share-preview use-ajax" 
               href="${drupalSettings.preview.previewTokenUrl}"
               data-dialog-type="modal"
-              data-dialog-options="{&quot;width&quot;:550,&quot;height&quot;:820}" 
+              data-dialog-options="{&quot;width&quot;:550}" 
               rel="external noreferrer noopener">
                 ${Drupal.t('Share preview')}<span class="components-visually-hidden">${Drupal.t('(opens in a new tab)')}</span>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="components-external-link__icon css-6wogo1-StyledIcon etxm6pv0" role="img" aria-hidden="true" focusable="false">
