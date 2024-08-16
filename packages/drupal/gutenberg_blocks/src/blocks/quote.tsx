@@ -6,8 +6,6 @@ import { dispatch } from 'wordpress__data';
 import { cleanUpText } from '../utils/clean-up-text';
 import { DrupalMediaEntity } from '../utils/drupal-media';
 
-declare const Drupal: { t: (s: string) => string };
-
 const { t: __ } = Drupal;
 
 // @ts-ignore

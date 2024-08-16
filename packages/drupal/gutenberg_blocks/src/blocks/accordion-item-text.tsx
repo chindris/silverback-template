@@ -9,8 +9,8 @@ import { registerBlockType } from 'wordpress__blocks';
 import { PanelBody, SelectControl } from 'wordpress__components';
 import { compose, withState } from 'wordpress__compose';
 
-// @ts-ignore
 const { t: __ } = Drupal;
+
 // @ts-ignore
 registerBlockType('custom/accordion-item-text', {
   title: 'Accordion Item Text',
@@ -53,7 +53,7 @@ registerBlockType('custom/accordion-item-text', {
             />
           </PanelBody>
         </InspectorControls>
-        <div className={'container-wrapper'}>
+        <div className={'container-wrapper !border-stone-500'}>
           <div className={'container-label'}>{__('Accordion Item Text')}</div>
           <div
             className={clsx(

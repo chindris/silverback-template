@@ -10,6 +10,7 @@ export default defineConfig({
       fileName: 'gutenberg_blocks',
     },
     rollupOptions: {
+      strictDeprecations: true,
       external: [
         'react',
         'react-dom',
@@ -23,6 +24,7 @@ export default defineConfig({
         'wordpress__hooks',
       ],
       output: {
+        strict: true,
         globals: {
           react: 'React',
           wordpress__blocks: 'wp.blocks',

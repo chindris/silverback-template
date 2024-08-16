@@ -1,7 +1,6 @@
 import { InnerBlocks } from 'wordpress__block-editor';
 import { registerBlockType } from 'wordpress__blocks';
 
-// @ts-ignore
 const { t: __ } = Drupal;
 
 registerBlockType('custom/image-teasers', {
@@ -11,7 +10,7 @@ registerBlockType('custom/image-teasers', {
   attributes: {},
   edit: () => {
     return (
-      <div className={'container-wrapper'}>
+      <div className={'container-wrapper !border-stone-500'}>
         <div className={'container-label'}>{__('Image Teasers')}</div>
         <InnerBlocks
           templateLock={false}

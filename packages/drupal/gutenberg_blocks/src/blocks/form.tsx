@@ -2,22 +2,6 @@ import { InnerBlocks, InspectorControls } from 'wordpress__block-editor';
 import { registerBlockType } from 'wordpress__blocks';
 import { PanelBody, SelectControl } from 'wordpress__components';
 
-declare const Drupal: { t: (s: string) => string };
-
-declare const drupalSettings: {
-  path: {
-    baseUrl: string;
-    pathPrefix: string;
-  };
-  customGutenbergBlocks: {
-    forms: Array<{
-      id: string;
-      url: string;
-      label: string;
-    }>;
-  };
-};
-
 const { t: __ } = Drupal;
 
 registerBlockType(`custom/form`, {
@@ -53,7 +37,7 @@ registerBlockType(`custom/form`, {
           />
         </PanelBody>
       </InspectorControls>
-      <div className={'container-wrapper'}>
+      <div className={'container-wrapper !border-stone-500'}>
         <div className={'container-label'}>{__('Form')}</div>
         {props.attributes.formId ? (
           <iframe
