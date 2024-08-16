@@ -3,6 +3,7 @@
 namespace Drupal\gutenberg_blocks\Plugin\Validation\GutenbergValidator;
 
 use Drupal\Core\StringTranslation\StringTranslationTrait;
+use Drupal\silverback_gutenberg\Annotation\GutenbergValidator;
 use Drupal\silverback_gutenberg\GutenbergValidation\GutenbergValidatorBase;
 
 /**
