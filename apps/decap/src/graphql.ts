@@ -37,7 +37,7 @@ export function createExecutor(
   const rawSchema = readFileSync(
     `${basePath}/node_modules/@custom/schema/build/schema.graphql`,
   ).toString();
-  const registry = merge.all(registries) as SourceResolvers;
+  const registry = merge.all<SourceResolvers>(registries);
   const schema: GraphQLSchema = buildSchema(rawSchema);
   const operations = z
     .record(z.string(), z.string())
@@ -74,7 +74,8 @@ export function createExecutor(
       },
     });
     if (!result.data) {
-      throw result.errors;
+      console.error(result.errors);
+      throw new Error(`Preview error: ${result.errors}`);
     }
     return JSON.parse(JSON.stringify(result.data));
   };
