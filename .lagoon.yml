@@ -69,3 +69,16 @@ environments:
         schedule: '*/15 * * * *'
         command: drush cron
         service: cli
+  demo-bog:
+    routes:
+      - nginx:
+          - bog.cms.amazeelabs.dev
+      - build:
+          - bog.build.amazeelabs.dev
+      - preview:
+          - bog.preview.amazeelabs.dev
+    cronjobs:
+      - name: drush cron
+        schedule: '*/15 * * * *'
+        command: drush cron
+        service: cli
