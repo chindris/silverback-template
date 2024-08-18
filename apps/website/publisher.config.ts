@@ -1,42 +1,8 @@
 import { defineConfig } from '@amazeelabs/publisher';
 
-const isNetlifyEnabled =
-  !!process.env.NETLIFY_SITE_ID && !!process.env.NETLIFY_AUTH_TOKEN;
 const isLagoon = !!process.env.LAGOON;
 
-export default defineConfig({
-  commands: {
-    build: {
-      command: isNetlifyEnabled
-        ? // Bug: The first incremental build rewrites compilation hashes. This
-          // causes all files to be re-uploaded to Netlify two times:
-          // - on the initial build
-          // - on the first incremental build
-          // The bug cannot be reproduced on a clean Gatsby install, so we
-          // cannot report it.
-          // Workaround: Do a double build on the first build.
-          'if test -d public; then echo "Single build" && pnpm build:gatsby; else echo "Double build" && pnpm build:gatsby && pnpm build:gatsby; fi'
-        : 'DRUPAL_EXTERNAL_URL=http://127.0.0.1:8888 pnpm build:gatsby',
-      outputTimeout: 1000 * 60 * 10,
-    },
-    clean: 'pnpm clean',
-    // Serve only on non Lagoon environments.
-    serve: !isLagoon
-      ? {
-          command: 'pnpm netlify dev --cwd=. --dir=public --port=7999',
-          readyPattern: 'Server now ready',
-          readyTimeout: 1000 * 60,
-          port: 7999,
-        }
-      : undefined,
-    deploy: isNetlifyEnabled
-      ? [
-          `pnpm netlify env:set AWS_LAMBDA_JS_RUNTIME nodejs18.x`,
-          `pnpm netlify env:set DRUPAL_EXTERNAL_URL ${process.env.DRUPAL_EXTERNAL_URL}`,
-          `pnpm netlify deploy --cwd=. --dir=public --prodIfUnlocked`,
-        ].join(' && ')
-      : 'echo "Fake deployment done"',
-  },
+const base = {
   databaseUrl: '/tmp/publisher.sqlite',
   publisherPort: isLagoon ? 3000 : 8000,
   oAuth2: isLagoon
@@ -54,4 +20,63 @@ export default defineConfig({
         grantType: 0,
       }
     : undefined,
-});
+};
+
+export default defineConfig(
+  isLagoon
+    ? {
+        ...base,
+        mode: 'github-workflow',
+        publisherBaseUrl: `https://${process.env.SERVICE_NAME}.${process.env.LAGOON_ENVIRONMENT}.${process.env.LAGOON_PROJECT}.${process.env.LAGOON_KUBERNETES}`,
+        workflow: 'fe_build.yml',
+        repo: 'AmazeeLabs/silverback-template',
+        ref: process.env.LAGOON_GIT_BRANCH!,
+        environment: process.env.LAGOON_GIT_BRANCH!,
+        environmentVariables: githubEnvVars(),
+        inputs: {
+          env: process.env.LAGOON_GIT_BRANCH!,
+        },
+        workflowTimeout: 1000 * 60 * 30,
+      }
+    : {
+        ...base,
+        mode: 'local',
+        commands: {
+          build: {
+            command:
+              'DRUPAL_EXTERNAL_URL=http://127.0.0.1:8888 pnpm build:gatsby',
+          },
+          clean: 'pnpm clean',
+          serve: {
+            command: 'pnpm netlify dev --cwd=. --dir=public --port=7999',
+            readyPattern: 'Server now ready',
+            readyTimeout: 1000 * 60,
+            port: 7999,
+          },
+        },
+      },
+);
+
+function githubEnvVars(): Record<string, string> {
+  return Object.fromEntries(
+    [
+      'DRUPAL_INTERNAL_URL',
+      'DRUPAL_EXTERNAL_URL',
+      'NETLIFY_URL',
+      'NETLIFY_SITE_ID',
+      'NETLIFY_AUTH_TOKEN',
+      'PUBLISHER_SKIP_AUTHENTICATION',
+      'PUBLISHER_OAUTH2_CLIENT_SECRET',
+      'PUBLISHER_OAUTH2_CLIENT_ID',
+      'PUBLISHER_OAUTH2_SESSION_SECRET',
+      'PUBLISHER_OAUTH2_ENVIRONMENT_TYPE',
+      'PUBLISHER_OAUTH2_TOKEN_HOST',
+    ].map((name) => {
+      if (name === 'DRUPAL_INTERNAL_URL') {
+        // No internal URLs when building on Github.
+        return ['DRUPAL_INTERNAL_URL', process.env.DRUPAL_EXTERNAL_URL || ''];
+      }
+      return [name, process.env[name] || ''];
+    }),
+  );
+}
