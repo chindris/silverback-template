@@ -3,6 +3,10 @@ if [ ! -z $LAGOON ]; then
   exit 0
 fi
 
+if [ ! -z $SKIP_DRUPAL_INSTALL ]; then
+  exit 0
+fi
+
 set -e
 
 if ! test -f web/sites/default/files/.sqlite; then
