@@ -60,7 +60,7 @@ export function DynamicTeaserList(
       {
         title: props.filters?.title,
         pageSize: (props.filters?.limit || '0') as string,
-        // The excludeIds field should contain a regular expreession value, so
+        // The excludeIds field should contain a regular expression value, so
         // the final value would be something like: (^id1$|^id2$|^id3$), meaning
         // that the results with the id1, id2 and id3 should be excluded, as
         // they were already present in the static content.
