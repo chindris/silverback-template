@@ -92,6 +92,23 @@ export const Idle = {
         ],
       },
     ],
+    metaNavigation: [
+      {
+        locale: Locale.En,
+        items: [
+          {
+            id: '1',
+            title: 'Imprint',
+            target: '/imprint' as Url,
+          },
+          {
+            id: '2',
+            title: 'Privacy',
+            target: '/privacy' as Url,
+          },
+        ],
+      },
+    ],
   },
 } satisfies StoryObj<FrameQuery>;
 

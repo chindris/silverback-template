@@ -12,18 +12,8 @@ import { dispatch } from 'wordpress__data';
 
 import { DrupalMediaEntity } from '../utils/drupal-media';
 
-declare const drupalSettings: {
-  customGutenbergBlocks: {
-    forms: Array<{
-      id: string;
-      url: string;
-      label: string;
-    }>;
-  };
-};
-
-// @ts-ignore
 const { t: __ } = Drupal;
+
 // @ts-ignore
 const { setPlainTextAttribute } = silverbackGutenbergUtils;
 

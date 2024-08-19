@@ -27,6 +27,7 @@ function gutenberg_blocks_form_node_form_alter(&$form, FormStateInterface $form_
   /** @var \Drupal\node\NodeInterface $node */
   $node = $form_state->getFormObject()->getEntity();
   if (Utils::getGutenbergFields($node)) {
+    // Perhaps move in Silverback preview link module.
     $form['actions']['preview_link'] = [
       '#type' => 'link',
       '#title' => t('Preview'),
@@ -42,9 +43,14 @@ function gutenberg_blocks_form_node_form_alter(&$form, FormStateInterface $form_
     /** @var \Drupal\silverback_external_preview\ExternalPreviewLink $externalPreviewLink */
     $externalPreviewLink = \Drupal::service('silverback_external_preview.external_preview_link');
     $previewUrl = $externalPreviewLink->createPreviewUrlFromEntity($node)->toString();
+    $langcode = \Drupal::languageManager()->getCurrentLanguage(LanguageInterface::TYPE_CONTENT)->getId();
     $form['#attached']['drupalSettings']['preview'] = [
       'previewUrl' => $previewUrl,
+      // @todo link template does not work out here, check why.
+      //'previewTokenUrl' => $node->toUrl('preview-link-generate')->toString(),
+      'previewTokenUrl' => '/' . $langcode . '/node/' . $node->id() . '/generate-preview-link',
     ];
+    $form['#attached']['library'][] = 'core/drupal.dialog.ajax';
 
     // Load all open webforms and populate them into drupalSettings.
     $languageManager = \Drupal::languageManager();

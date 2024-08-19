@@ -24,38 +24,71 @@ const unorderedItems: Plugin<[], Element> = () => (tree) => {
   });
 };
 
+type HeadingProps = {
+  level?: string;
+  className?: string;
+  children: React.ReactNode;
+};
+const Heading = ({ level, className, children }: HeadingProps) => {
+  switch (level) {
+    case 'h1':
+      return <h1 className={className}>{children}</h1>;
+    case 'h2':
+      return <h2 className={className}>{children}</h2>;
+    case 'h3':
+      return <h3 className={className}>{children}</h3>;
+    case 'h4':
+      return <h4 className={className}>{children}</h4>;
+    case 'h5':
+      return <h5 className={className}>{children}</h5>;
+    case 'h6':
+      return <h6 className={className}>{children}</h6>;
+    default:
+      return <h2 className={className}>{children}</h2>;
+  }
+};
+
 export function BlockAccordion(props: BlockAccordionFragment) {
   return (
     <div className="container-page my-10">
       <div className="container-content">
         <div className="container-text">
           {props.items.map((item, index) => (
-            <Disclosure key={index}>
+            <Disclosure
+              as="div"
+              className="border-b border-gray-200 last:border-0"
+              key={index}
+            >
               {({ open }) => (
                 <>
-                  <DisclosureButton
-                    className={clsx(
-                      'border-b border-gray-200 last:border-0 flex w-full items-center justify-between p-4 pl-1 text-left font-medium text-lg hover:bg-gray-100',
-                      { 'text-black': open, 'text-gray-500': !open },
-                    )}
-                  >
-                    <span className="flex items-center">
-                      {item.icon && <AccordionIcon icon={item.icon} />}{' '}
-                      {item.title}
-                    </span>
-                    <span>
-                      {open ? (
-                        <ChevronUpIcon className={'h-6 w-6'} />
-                      ) : (
-                        <ChevronDownIcon className={'h-6 w-6'} />
+                  <Heading level={props.headingLevel}>
+                    <DisclosureButton
+                      className={clsx(
+                        'flex w-full items-center justify-between p-4 pl-1 text-left font-medium text-lg hover:bg-gray-100',
+                        { 'text-black': open, 'text-gray-500': !open },
                       )}
-                    </span>
-                  </DisclosureButton>
+                    >
+                      <span className="flex items-center">
+                        {item.icon && <AccordionIcon icon={item.icon} />}{' '}
+                        {item.title}
+                      </span>
+                      <span>
+                        {open ? (
+                          <ChevronUpIcon
+                            className={'h-6 w-6'}
+                            focusable={false}
+                          />
+                        ) : (
+                          <ChevronDownIcon
+                            className={'h-6 w-6'}
+                            focusable={false}
+                          />
+                        )}
+                      </span>
+                    </DisclosureButton>
+                  </Heading>
                   <DisclosurePanel
-                    className={clsx(
-                      'py-5 text-base font-normal text-gray-500',
-                      { 'border-b border-gray-200 last:border-0': open },
-                    )}
+                    className={clsx('py-5 text-base font-normal text-gray-500')}
                   >
                     <div className="sm:w-full md:w-4/5">
                       {item.textContent?.markup && (
@@ -98,19 +131,34 @@ export function BlockAccordion(props: BlockAccordionFragment) {
   );
 }
 
-function AccordionIcon({ icon }: { icon: string }) {
+function AccordionIcon({
+  icon,
+  focusable = false,
+}: {
+  icon: string;
+  focusable?: boolean;
+}) {
   switch (icon) {
     case 'questionmark':
       return (
-        <QuestionMarkCircleIcon className="w-5 h-5 me-2 shrink-0 text-gray-500" />
+        <QuestionMarkCircleIcon
+          className="w-5 h-5 me-2 shrink-0 text-gray-500"
+          focusable={focusable}
+        />
       );
     case 'checkmark':
       return (
-        <CheckCircleIcon className="w-5 h-5 me-2 shrink-0 text-gray-500" />
+        <CheckCircleIcon
+          className="w-5 h-5 me-2 shrink-0 text-gray-500"
+          focusable={focusable}
+        />
       );
     case 'arrow':
       return (
-        <ArrowRightCircleIcon className="w-5 h-5 me-2 shrink-0 text-gray-500" />
+        <ArrowRightCircleIcon
+          className="w-5 h-5 me-2 shrink-0 text-gray-500"
+          focusable={focusable}
+        />
       );
     default:
       return null;

@@ -113,6 +113,11 @@ interface Navigation {
   items: [NavigationItem]!
 }
 
+type MetaNavigation implements Navigation @menu(menu_id: "meta") {
+  locale: Locale! @resolveEntityLanguage
+  items: [NavigationItem]! @lang @resolveMenuItems(max_level: 1)
+}
+
 type MainNavigation implements Navigation @menu(menu_id: "main") {
   locale: Locale! @resolveEntityLanguage
   items: [NavigationItem]! @lang @resolveMenuItems
@@ -192,6 +197,18 @@ type Hero {
     @webformIdToUrl(id: "$")
 }
 
+union CommonContent @resolveEditorBlockType =
+  | BlockMarkup
+  | BlockMedia
+  | BlockForm
+  | BlockImageTeasers
+  | BlockCta
+  | BlockImageWithText
+  | BlockQuote
+  | BlockHorizontalSeparator
+  | BlockAccordion
+  | BlockInfoGrid
+
 union PageContent @resolveEditorBlockType =
   | BlockMarkup
   | BlockMedia
@@ -204,6 +221,7 @@ union PageContent @resolveEditorBlockType =
   | BlockAccordion
   | BlockInfoGrid
   | BlockTeaserList
+  | BlockConditional
 
 type BlockForm @type(id: "custom/form") {
   url: Url @resolveEditorBlockAttribute(key: "formId") @webformIdToUrl(id: "$")
@@ -244,6 +262,7 @@ type BlockImageTeaser @default @value {
 }
 
 type BlockAccordion @type(id: "custom/accordion") {
+  headingLevel: String! @resolveEditorBlockAttribute(key: "headingLevel")
   items: [BlockAccordionItemText!]! @resolveEditorBlockChildren
 }
 
@@ -349,6 +368,12 @@ interface CardItem @resolveEntityBundle {
   teaserImage: MediaImage
 }
 
+type BlockConditional @type(id: "custom/conditional") {
+  displayFrom: String @resolveEditorBlockAttribute(key: "displayFrom")
+  displayTo: String @resolveEditorBlockAttribute(key: "displayTo")
+  content: [CommonContent] @resolveEditorBlockChildren
+}
+
 input PaginationInput {
   limit: Int!
   offset: Int!
@@ -356,8 +381,25 @@ input PaginationInput {
 
 type Query {
   previewDecapPage: DecapPage
-  previewDrupalPage(id: ID!, rid: ID, locale: String!): DrupalPage
-    @fetchEntity(type: "node", id: "$id", rid: "$rid", language: "$locale")
+  previewDrupalPage(
+    id: ID!
+    rid: ID
+    locale: String!
+    preview_user_id: ID
+    preview_access_token: String
+  ): DrupalPage
+    @fetchEntity(
+      type: "node"
+      id: "$id"
+      rid: "$rid"
+      language: "$locale"
+      preview_user_id: "$preview_user_id"
+      preview_access_token: "$preview_access_token"
+    )
+
+  metaNavigations: [MetaNavigation]
+    @gatsbyNodes(type: "MetaNavigation")
+    @menuTranslations(menu_id: "meta")
 
   mainNavigations: [MainNavigation]
     @gatsbyNodes(type: "MainNavigation")

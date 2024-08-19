@@ -9,7 +9,6 @@ import { registerBlockType } from 'wordpress__blocks';
 import { PanelBody, SelectControl, ToggleControl } from 'wordpress__components';
 import { compose, withState } from 'wordpress__compose';
 
-// @ts-ignore
 const { t: __ } = Drupal;
 
 // @ts-ignore

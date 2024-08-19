@@ -5,7 +5,6 @@ import { dispatch } from 'wordpress__data';
 
 import { DrupalMediaEntity } from '../utils/drupal-media';
 
-// @ts-ignore
 const { t: __ } = Drupal;
 
 registerBlockType('custom/image-with-text', {
@@ -41,7 +40,7 @@ registerBlockType('custom/image-with-text', {
             />
           </PanelBody>
         </InspectorControls>
-        <div className={'container-wrapper'}>
+        <div className={'container-wrapper !border-stone-500'}>
           <div className={'container-label'}>{__('Image with Text')}</div>
           <DrupalMediaEntity
             classname={'w-full'}
