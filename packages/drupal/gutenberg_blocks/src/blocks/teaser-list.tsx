@@ -8,9 +8,6 @@ import {
 } from 'wordpress__components';
 
 // @ts-ignore
-const { t: __ } = Drupal;
-
-// @ts-ignore
 const { setPlainTextAttribute } = silverbackGutenbergUtils;
 
 // @ts-ignore
