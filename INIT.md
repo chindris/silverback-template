@@ -74,17 +74,34 @@ replace(
   'PROJECT_NAME=example',
   'PROJECT_NAME=' + process.env.PROJECT_NAME_MACHINE,
 );
-const clientSecret = randomString(32);
+const publisherClientSecret = randomString(32);
 replace(
   ['apps/cms/.lagoon.env', 'apps/website/.lagoon.env'],
   'PUBLISHER_OAUTH2_CLIENT_SECRET=REPLACE_ME',
-  'PUBLISHER_OAUTH2_CLIENT_SECRET=' + clientSecret,
+  'PUBLISHER_OAUTH2_CLIENT_SECRET=' + publisherClientSecret,
 );
-const sessionSecret = randomString(32);
+const publisherSessionSecret = randomString(32);
 replace(
   ['apps/website/.lagoon.env'],
   'PUBLISHER_OAUTH2_SESSION_SECRET=REPLACE_ME',
-  'PUBLISHER_OAUTH2_SESSION_SECRET=' + sessionSecret,
+  'PUBLISHER_OAUTH2_SESSION_SECRET=' + publisherSessionSecret,
+);
+const previewClientSecret = randomString(32);
+replace(
+  ['apps/cms/.lagoon.env'],
+  'PREVIEW_OAUTH2_CLIENT_SECRET=REPLACE_ME',
+  'PREVIEW_OAUTH2_CLIENT_SECRET=' + previewClientSecret,
+);
+replace(
+  ['apps/preview/.lagoon.env'],
+  'OAUTH2_CLIENT_SECRET=REPLACE_ME',
+  'OAUTH2_CLIENT_SECRET=' + previewClientSecret,
+);
+const previewSessionSecret = randomString(32);
+replace(
+  ['apps/preview/.lagoon.env'],
+  'OAUTH2_SESSION_SECRET=REPLACE_ME',
+  'OAUTH2_SESSION_SECRET=' + previewSessionSecret,
 );
 // Template's prod domain is special.
 replace(
