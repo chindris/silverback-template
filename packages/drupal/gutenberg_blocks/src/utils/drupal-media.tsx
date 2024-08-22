@@ -10,7 +10,7 @@ type DrupalMediaComponent = React.FC<{
     allowedTypes?: [string];
   };
   setAttributes: (attributes: object) => void;
-  onError: (error: string | [string]) => void;
+  onError: (error: string | [string] | string[]) => void;
 }>;
 
 // @ts-ignore
