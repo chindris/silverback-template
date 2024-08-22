@@ -7,10 +7,9 @@ import {
   ToggleControl,
 } from 'wordpress__components';
 
-// @ts-ignore
+const { t: __ } = Drupal;
 const { setPlainTextAttribute } = silverbackGutenbergUtils;
 
-// @ts-ignore
 registerBlockType('custom/teaser-list', {
   title: __('Teaser list'),
   icon: 'slides',
@@ -30,10 +29,29 @@ registerBlockType('custom/teaser-list', {
       type: 'string',
     },
     titleFilter: {
-      typ: 'string',
+      type: 'string',
     },
   },
-  edit: (props) => {
+  edit: (props: {
+    attributes: {
+      layout: string;
+      buttonText: string;
+      contentHubEnabled: boolean;
+      limit: string;
+      titleFilter: string;
+    };
+    setAttributes: (attributes: {
+      layout?: string;
+      buttonText?: string;
+      contentHubEnabled?: boolean;
+      limit?: string;
+      titleFilter?: string;
+    }) => void;
+  }) => {
+    const { attributes, setAttributes } = props;
+    const { layout, buttonText, contentHubEnabled, limit, titleFilter } =
+      attributes;
+
     return (
       <div className={'container-wrapper'}>
         <div className={'container-label'}>{__('Teaser list')}</div>
@@ -41,19 +59,19 @@ registerBlockType('custom/teaser-list', {
           <PanelBody>
             <SelectControl
               label={__('Layout')}
-              value={props.attributes.layout as string}
+              value={layout}
               options={[
                 { label: __('Grid'), value: 'GRID' },
                 { label: __('Carousel'), value: 'CAROUSEL' },
               ]}
               onChange={(layout) => {
-                props.setAttributes({
+                setAttributes({
                   layout,
                 });
               }}
             />
             <TextControl
-              value={props.attributes.buttonText as string}
+              value={buttonText}
               label={__('Button text')}
               onChange={(buttonText: string) => {
                 setPlainTextAttribute(props, 'buttonText', buttonText);
@@ -65,39 +83,37 @@ registerBlockType('custom/teaser-list', {
             <ToggleControl
               label={__('Enable content hub')}
               help={__('Enable pulling dynamic content from the content hub.')}
-              checked={props.attributes.contentHubEnabled as boolean}
+              checked={contentHubEnabled}
               onChange={(contentHubEnabled) => {
-                props.setAttributes({
+                setAttributes({
                   contentHubEnabled,
                 });
               }}
             />
-            {typeof props.attributes.contentHubEnabled !== 'undefined' &&
-            props.attributes.contentHubEnabled ? (
+            {typeof contentHubEnabled !== 'undefined' && contentHubEnabled ? (
               <TextControl
                 label={__('Filter: Title')}
                 help={__('Filter results by title / label.')}
                 onChange={(titleFilter) => {
-                  props.setAttributes({
+                  setAttributes({
                     titleFilter,
                   });
                 }}
-                value={props.attributes.titleFilter as string}
+                value={titleFilter}
               />
             ) : null}
-            {typeof props.attributes.contentHubEnabled !== 'undefined' &&
-            props.attributes.contentHubEnabled ? (
+            {typeof contentHubEnabled !== 'undefined' && contentHubEnabled ? (
               <TextControl
                 label={__('Limit')}
                 help={__(
                   'Set a maximum number of results to show from the content hub.',
                 )}
                 onChange={(limit) => {
-                  props.setAttributes({
+                  setAttributes({
                     limit,
                   });
                 }}
-                value={props.attributes.limit as string}
+                value={limit}
               />
             ) : null}
           </PanelBody>

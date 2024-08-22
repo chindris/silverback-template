@@ -4,7 +4,6 @@ import {
 } from 'wordpress__block-editor';
 import { registerBlockType } from 'wordpress__blocks';
 
-// @ts-ignore
 registerBlockType('custom/teaser-item', {
   title: 'Teaser item',
   icon: 'slides',
@@ -23,13 +22,27 @@ registerBlockType('custom/teaser-item', {
       type: 'string',
     },
   },
-  // @ts-ignore
-  edit: (props) => {
+
+  edit: ({
+    attributes: { url },
+    setAttributes,
+  }: {
+    attributes: {
+      url: string;
+      uuid: string;
+      entityType: string;
+    };
+    setAttributes: (attributes: {
+      url?: string;
+      uuid?: string;
+      entityType?: string;
+    }) => void;
+  }) => {
     return (
       <div>
         <LinkControl
           value={{
-            url: props.attributes.url,
+            url: url,
           }}
           settings={{}}
           suggestionsQuery={{
@@ -37,9 +50,8 @@ registerBlockType('custom/teaser-item', {
             // Use the teaser_list linkit profile to fetch suggestions.
             subtype: 'teaser_list',
           }}
-          // @ts-ignore
-          onChange={(link) => {
-            props.setAttributes({
+          onChange={(link: { url: string; id: string; type: string }) => {
+            setAttributes({
               url: link.url,
               uuid: link.id,
               // At the moment, the teaser_list link autocomplete only

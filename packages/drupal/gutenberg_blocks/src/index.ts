@@ -25,6 +25,11 @@ declare global {
     t: (s: string, t?: object) => string;
   };
 
+  const silverbackGutenbergUtils: {
+    sanitizeText: (text: string) => string;
+    setPlainTextAttribute: (props: any, name: string, text: string) => void;
+  };
+
   const drupalSettings: {
     preview: any;
     path: {
