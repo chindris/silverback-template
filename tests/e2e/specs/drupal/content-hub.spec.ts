@@ -10,18 +10,38 @@ test.describe('content hub', () => {
   test('lists pages in alphabetic order', async ({ page }) => {
     await page.goto(websiteUrl('/en/content-hub'));
     const content = await page.getByRole('main');
-    await expect(content.getByText('Architecture')).toBeVisible();
+    const heading = page.getByRole('heading', {
+      name: 'Architecture',
+      level: 5,
+    });
+    await expect(heading).toBeVisible();
     await expect(content.getByText('PHP')).not.toBeVisible();
   });
 
   test('allows to switch pages', async ({ page }) => {
     await page.goto(websiteUrl('/en/content-hub'));
     const content = await page.getByRole('main');
-    await expect(content.getByText('Architecture')).toBeVisible();
+
+    await expect(
+      content.getByRole('heading', {
+        name: 'Architecture',
+        level: 5,
+      }),
+    ).toBeVisible();
     await expect(content.getByText('Gatsby')).not.toBeVisible();
     await content.getByText('Next').click();
-    await expect(content.getByText('Architecture')).not.toBeVisible();
-    await expect(content.getByText('Gatsby')).toBeVisible();
+    await expect(
+      content.getByRole('heading', {
+        name: 'Architecture',
+        level: 5,
+      }),
+    ).not.toBeVisible();
+    await expect(
+      content.getByRole('heading', {
+        name: 'Gatsby',
+        level: 5,
+      }),
+    ).toBeVisible();
   });
 
   test('allows to search for items', async ({ page }) => {
@@ -29,8 +49,18 @@ test.describe('content hub', () => {
     const content = await page.getByRole('main');
     await content.getByPlaceholder('Keyword').fill('technologies');
     await content.getByRole('button', { name: 'Search' }).click();
-    await expect(content.getByText('Architecture')).not.toBeVisible();
-    await expect(content.getByText('Technologies')).toBeVisible();
+    await expect(
+      content.getByRole('heading', {
+        name: 'Architecture',
+        level: 5,
+      }),
+    ).not.toBeVisible();
+    await expect(
+      content.getByRole('heading', {
+        name: 'Technologies',
+        level: 5,
+      }),
+    ).toBeVisible();
   });
 
   test('returns language specific results', async ({ page }) => {
@@ -39,8 +69,23 @@ test.describe('content hub', () => {
     // Change language to German.
     await quickActions.changeLanguageTo(SiteLanguage.Deutsch);
     const content = await page.getByRole('main');
-    await expect(content.getByText('Architektur')).toBeVisible();
-    await expect(content.getByText('Architecture')).not.toBeVisible();
-    await expect(content.getByText('Gatsby')).not.toBeVisible();
+    await expect(
+      content.getByRole('heading', {
+        name: 'Architektur',
+        level: 5,
+      }),
+    ).toBeVisible();
+    await expect(
+      content.getByRole('heading', {
+        name: 'Architecture',
+        level: 5,
+      }),
+    ).not.toBeVisible();
+    await expect(
+      content.getByRole('heading', {
+        name: 'Gatsby',
+        level: 5,
+      }),
+    ).not.toBeVisible();
   });
 });

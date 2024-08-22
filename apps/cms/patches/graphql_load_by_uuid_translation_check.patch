@@ -1,0 +1,15 @@
+diff --git a/src/Plugin/GraphQL/DataProducer/Entity/EntityLoadByUuid.php b/src/Plugin/GraphQL/DataProducer/Entity/EntityLoadByUuid.php
+index 10e2d405..5d1e9b1d 100644
+--- a/src/Plugin/GraphQL/DataProducer/Entity/EntityLoadByUuid.php
++++ b/src/Plugin/GraphQL/DataProducer/Entity/EntityLoadByUuid.php
+@@ -165,7 +165,9 @@ class EntityLoadByUuid extends DataProducerPluginBase implements ContainerFactor
+ 
+       // Get the correct translation.
+       if (isset($language) && $language != $entity->language()->getId() && $entity instanceof TranslatableInterface) {
+-        $entity = $entity->getTranslation($language);
++        if ($entity->hasTranslation($language)) {
++          $entity = $entity->getTranslation($language);
++        }
+         $entity->addCacheContexts(["static:language:{$language}"]);
+       }
+ 

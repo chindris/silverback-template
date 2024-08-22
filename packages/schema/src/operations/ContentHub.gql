@@ -2,7 +2,7 @@ query ContentHub($locale: Locale!, $args: String) {
   contentHub(locale: $locale, args: $args) {
     total
     items {
-      ...ContentHubResultItem
+      ...CardItem
     }
   }
 }

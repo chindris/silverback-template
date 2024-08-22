@@ -17,6 +17,7 @@ import { BlockInfoGrid } from './PageContent/BlockInfoGrid';
 import { BlockMarkup } from './PageContent/BlockMarkup';
 import { BlockMedia } from './PageContent/BlockMedia';
 import { BlockQuote } from './PageContent/BlockQuote';
+import { BlockTeaserList } from './PageContent/BlockTeaserList';
 import { PageHero } from './PageHero';
 
 export function PageDisplay(page: PageFragment) {
@@ -26,10 +27,33 @@ export function PageDisplay(page: PageFragment) {
         {!page.hero && <BreadCrumbs />}
         {page.hero && <PageHero {...page.hero} />}
         {page?.content?.filter(isTruthy).map((block, index) => {
-          if (block.__typename === 'BlockConditional') {
-            return <BlockConditional key={index} {...block} />;
-          } else {
-            return <CommonContent key={index} {...block} />;
+          switch (block.__typename) {
+            case 'BlockMedia':
+              return <BlockMedia key={index} {...block} />;
+            case 'BlockMarkup':
+              return <BlockMarkup key={index} {...block} />;
+            case 'BlockForm':
+              return <BlockForm key={index} {...block} />;
+            case 'BlockImageTeasers':
+              return <BlockImageTeasers key={index} {...block} />;
+            case 'BlockCta':
+              return <BlockCta key={index} {...block} />;
+            case 'BlockImageWithText':
+              return <BlockImageWithText key={index} {...block} />;
+            case 'BlockQuote':
+              return <BlockQuote key={index} {...block} />;
+            case 'BlockHorizontalSeparator':
+              return <BlockHorizontalSeparator key={index} {...block} />;
+            case 'BlockAccordion':
+              return <BlockAccordion key={index} {...block} />;
+            case 'BlockInfoGrid':
+              return <BlockInfoGrid key={index} {...block} />;
+            case 'BlockTeaserList':
+              return <BlockTeaserList key={index} {...block} />;
+            case 'BlockConditional':
+              return <BlockConditional key={index} {...block} />;
+            default:
+              throw new UnreachableCaseError(block);
           }
         })}
       </div>

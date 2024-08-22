@@ -1,8 +1,0 @@
-fragment ContentHubResultItem on ContentHubResultItem {
-  title
-  path
-  teaserImage {
-    alt
-    source(width: 400, height: 300)
-  }
-}

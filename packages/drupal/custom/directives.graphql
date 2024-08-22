@@ -1,0 +1,19 @@
+"""
+Loads a given entity by its uuid.
+
+Provided by the "custom" module.
+Implemented in "Drupal\custom\Plugin\GraphQL\Directive\EntityLoadByUUID".
+"""
+directive @loadByUUID(
+  type: String
+  uuid: String
+  operation: String
+) repeatable on FIELD_DEFINITION | SCALAR | UNION | ENUM | INTERFACE | OBJECT
+
+"""
+Resolves the parent value
+
+Provided by the "custom" module.
+Implemented in "Drupal\custom\Plugin\GraphQL\Directive\ParentValue".
+"""
+directive @resolveParent repeatable on FIELD_DEFINITION | SCALAR | UNION | ENUM | INTERFACE | OBJECT

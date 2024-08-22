@@ -78,18 +78,13 @@ enum Locale @default @value(string: "en") {
   de
 }
 
-"""
-Inteface for anything that can appear in the content hub.
-"""
-interface ContentHubResultItem @resolveEntityBundle {
-  path: Url!
-  title: String!
-  teaserImage: MediaImage
-}
-
 type ContentHubResult @default @value(json: "{\"total\": 0, \"items\": []}") {
   total: Int!
-  items: [ContentHubResultItem]! @prop(key: "rows")
+  items: [CardItem]! @prop(key: "rows")
+}
+
+type TeaserListResult @default @value(json: "{\"total\": 0, \"items\": []}") {
+  items: [CardItem]! @prop(key: "rows")
 }
 
 type WebsiteSettings
@@ -133,7 +128,7 @@ type FooterNavigation implements Navigation @menu(menu_id: "footer") {
   items: [NavigationItem]! @lang @resolveMenuItems
 }
 
-interface Page implements ContentHubResultItem @resolveEntityBundle {
+interface Page implements CardItem @resolveEntityBundle {
   id: ID!
   translations: [Page]
   locale: Locale!
@@ -145,8 +140,7 @@ interface Page implements ContentHubResultItem @resolveEntityBundle {
   metaTags: [MetaTag]
 }
 
-type DecapPage implements ContentHubResultItem & Page
-  @sourceFrom(fn: "getPages") {
+type DecapPage implements Page & CardItem @sourceFrom(fn: "getPages") {
   id: ID!
   translations: [Page] @decapPageTranslations
   locale: Locale!
@@ -161,7 +155,7 @@ type DecapPage implements ContentHubResultItem & Page
 """
 A generic page.
 """
-type DrupalPage implements ContentHubResultItem & Page
+type DrupalPage implements Page & CardItem
   @entity(type: "node", bundle: "page")
   @type(id: "page") {
   id: ID! @resolveEntityUuid
@@ -226,6 +220,7 @@ union PageContent @resolveEditorBlockType =
   | BlockHorizontalSeparator
   | BlockAccordion
   | BlockInfoGrid
+  | BlockTeaserList
   | BlockConditional
 
 type BlockForm @type(id: "custom/form") {
@@ -337,6 +332,42 @@ type BlockHorizontalSeparator @type(id: "custom/horizontal-separator") {
   markup: Markup! @resolveEditorBlockMarkup
 }
 
+type BlockTeaserList @type(id: "custom/teaser-list") {
+  layout: BlockTeaserListLayout @resolveEditorBlockAttribute(key: "layout")
+  buttonText: String @resolveEditorBlockAttribute(key: "buttonText")
+  staticContent: [BlockTeaserItem] @resolveEditorBlockChildren
+  contentHubEnabled: Boolean
+    @resolveEditorBlockAttribute(key: "contentHubEnabled")
+  filters: BlockTeaserListFilters @resolveParent
+}
+
+type BlockTeaserItem @type(id: "custom/teaser-item") {
+  content: CardItem
+    @resolveEditorBlockAttribute(key: "uuid")
+    @loadByUUID(type: "node", uuid: "$")
+}
+
+enum BlockTeaserListLayout @default @value(string: "GRID") {
+  GRID
+  CAROUSEL
+}
+
+type BlockTeaserListFilters {
+  title: String @resolveEditorBlockAttribute(key: "titleFilter")
+  limit: String @resolveEditorBlockAttribute(key: "limit")
+}
+
+"""
+Inteface for anything that can appear as a card (teaser) item
+"""
+interface CardItem @resolveEntityBundle {
+  id: ID!
+  path: Url!
+  title: String!
+  hero: Hero
+  teaserImage: MediaImage
+}
+
 type BlockConditional @type(id: "custom/conditional") {
   displayFrom: String @resolveEditorBlockAttribute(key: "displayFrom")
   displayTo: String @resolveEditorBlockAttribute(key: "displayTo")
@@ -383,6 +414,9 @@ type Query {
   viewPage(path: String!): Page @route(path: "$path") @loadEntity
 
   contentHub(locale: Locale!, args: String): ContentHubResult!
+    @lang(code: "$locale")
+    @drupalView(id: "content_hub:default", args: "$args")
+  teaserList(locale: Locale!, args: String): TeaserListResult!
     @lang(code: "$locale")
     @drupalView(id: "content_hub:default", args: "$args")
 
