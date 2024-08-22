@@ -1,0 +1,19 @@
+fragment BlockTeaserList on BlockTeaserList {
+  layout
+  buttonText
+  staticContent {
+    ...BlockTeaserListItem
+  }
+  contentHubEnabled
+  filters {
+    title
+    limit
+  }
+}
+
+fragment BlockTeaserListItem on BlockTeaserItem {
+  __typename
+  content {
+    ...CardItem
+  }
+}

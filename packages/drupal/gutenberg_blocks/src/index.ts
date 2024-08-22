@@ -16,6 +16,8 @@ import './blocks/accordion';
 import './blocks/accordion-item-text';
 import './blocks/info-grid';
 import './blocks/info-grid-item';
+import './blocks/teaser-list';
+import './blocks/teaser-item';
 
 declare global {
   const Drupal: {

@@ -1,6 +1,6 @@
 import {
+  CardItemFragment,
   ContentHubQuery,
-  ContentHubResultItemFragment,
   OperationExecutorsProvider,
   OperationResult,
   OperationVariables,
@@ -66,8 +66,11 @@ export const WithResults: ContentHubStory = {
       const items = [...Array(82).keys()].map(
         (i) =>
           ({
+            id: `${i}`,
             path: `/item/${i + 1}` as Url,
             title: `${i % 3 === 2 ? 'Article' : 'Story'} #${i + 1}`,
+            hero:
+              i % 2 === 0 ? { headline: `Lead text for #${i + 1}` } : undefined,
             teaserImage:
               i % 3 === 1
                 ? undefined
@@ -78,7 +81,7 @@ export const WithResults: ContentHubStory = {
                       height: 300,
                     }),
                   },
-          }) satisfies ContentHubResultItemFragment,
+          }) satisfies CardItemFragment,
       );
       const args = qs.parse(vars.args || '') as ContentHubQueryArgs;
       const filtered = items.filter(
