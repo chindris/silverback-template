@@ -605,16 +605,16 @@
         },
         {
             "name": "amazeelabs/silverback_preview_link",
-            "version": "1.6.3",
+            "version": "1.6.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/AmazeeLabs/silverback_preview_link.git",
-                "reference": "193b5ea07485bf825aed856577c9caeb451bcde9"
+                "reference": "0087294dd4764a2cbb027f5a5a89008d53cf600d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AmazeeLabs/silverback_preview_link/zipball/193b5ea07485bf825aed856577c9caeb451bcde9",
-                "reference": "193b5ea07485bf825aed856577c9caeb451bcde9",
+                "url": "https://api.github.com/repos/AmazeeLabs/silverback_preview_link/zipball/0087294dd4764a2cbb027f5a5a89008d53cf600d",
+                "reference": "0087294dd4764a2cbb027f5a5a89008d53cf600d",
                 "shasum": ""
             },
             "require": {
@@ -631,9 +631,9 @@
             "homepage": "https://github.com/AmazeeLabs/silverback-mono/tree/development/packages/composer/amazeelabs/silverback_preview_link#readme",
             "support": {
                 "issues": "https://github.com/AmazeeLabs/silverback_preview_link/issues",
-                "source": "https://github.com/AmazeeLabs/silverback_preview_link/tree/1.6.3"
+                "source": "https://github.com/AmazeeLabs/silverback_preview_link/tree/1.6.4"
             },
-            "time": "2024-08-15T10:50:30+00:00"
+            "time": "2024-08-20T20:05:58+00:00"
         },
         {
             "name": "amazeelabs/silverback_publisher_monitor",
