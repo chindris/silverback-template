@@ -13,8 +13,6 @@ import { dispatch } from 'wordpress__data';
 import { DrupalMediaEntity } from '../utils/drupal-media';
 
 const { t: __ } = Drupal;
-
-// @ts-ignore
 const { setPlainTextAttribute } = silverbackGutenbergUtils;
 
 registerBlockType('custom/hero', {

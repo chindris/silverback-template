@@ -1,3 +1,3 @@
 node_modules
-js/gutenberg_blocks.mjs
-js/gutenberg_blocks.umd.js
+dist/gutenberg_blocks.mjs
+dist/gutenberg_blocks.umd.js

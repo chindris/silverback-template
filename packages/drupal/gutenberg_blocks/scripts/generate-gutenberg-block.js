@@ -42,7 +42,7 @@ function generateGutenbergBlockCode(typeName) {
       );
 
       // Write the generated code to a file.
-      const filePath = `./src/blocks/${gutenbergBlockMachineName}.tsx`; // Output file path
+      const filePath = `./js/blocks/${gutenbergBlockMachineName}.tsx`; // Output file path
       fs.writeFileSync(filePath, blockCode);
 
       console.log(`Generated Gutenberg block for ${blockName} in ${filePath}`);
@@ -75,9 +75,8 @@ ${
 import { DrupalMediaEntity } from '../utils/drupal-media';`
 }
 
-// @ts-ignore
 const { t: __ } = Drupal;
- // @ts-ignore
+
 registerBlockType('custom/${blockName}', {
   title: '${titleCaseTitle}',
   icon: 'text',
@@ -92,8 +91,7 @@ registerBlockType('custom/${blockName}', {
     }`,
       )
       .join(',\n\t\t')}
-  }, 
-  // @ts-ignore
+  },
   edit: compose(withState())((props) => {
     const { attributes, setAttributes } = props;
     
@@ -123,7 +121,6 @@ registerBlockType('custom/${blockName}', {
       </Fragment>
     );
   }),
-
   save() {
     return null;
     // or uncomment this if you import and use InnerBlocks from wordpress__block-editor
@@ -160,7 +157,6 @@ function getGutenbergFieldBlock(attribute) {
             setAttributes={props.setAttributes}
             isMediaLibraryEnabled={true}
             onError={(error) => {
-              // @ts-ignore
               error = typeof error === 'string' ? error : error[2];
               dispatch('core/notices').createWarningNotice(error);
             }}

@@ -5,7 +5,7 @@ import { defineConfig } from 'vite';
 export default defineConfig({
   build: {
     lib: {
-      entry: resolve(__dirname, 'src/index.ts'),
+      entry: resolve(__dirname, 'js/index.ts'),
       name: 'gutenberg_blocks',
       fileName: 'gutenberg_blocks',
     },
@@ -38,7 +38,7 @@ export default defineConfig({
         },
       },
     },
-    outDir: resolve(__dirname, './js'),
+    outDir: resolve(__dirname, './dist'),
   },
   plugins: [
     react({

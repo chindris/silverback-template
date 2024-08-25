@@ -7,8 +7,6 @@ import { cleanUpText } from '../utils/clean-up-text';
 import { DrupalMediaEntity } from '../utils/drupal-media';
 
 const { t: __ } = Drupal;
-
-// @ts-ignore
 const { setPlainTextAttribute } = silverbackGutenbergUtils;
 
 // @ts-ignore

@@ -10,8 +10,6 @@ import { PanelBody, SelectControl, ToggleControl } from 'wordpress__components';
 import { compose, withState } from 'wordpress__compose';
 
 const { t: __ } = Drupal;
-
-// @ts-ignore
 const { setPlainTextAttribute } = silverbackGutenbergUtils;
 
 const ArrowRightIcon = () => (
