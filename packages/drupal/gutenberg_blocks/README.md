@@ -4,9 +4,9 @@
 
 To create a custom Gutenberg you must:
 
-1. Create a `.tsx` file in `src/blocks`, using one of the existing examples as a
+1. Create a `.tsx` file in `js/blocks`, using one of the existing examples as a
    starting point.
-2. Include the file within `src/index.ts` - this file is used to generate the
+2. Include the file within `js/index.ts` - this file is used to generate the
    javascript file included by the Drupal module.
 3. Clear the cache if necessary and you should be able to add your new block
    within the Gutenberg editor.
@@ -20,9 +20,9 @@ create a new block based on a GraphQL type.
 pnpm gutenberg:generate <GraphQLType>
 ```
 
-This will create a new block in the `src/blocks` directory, with the necessary
+This will create a new block in the `js/blocks` directory, with the necessary
 fields and attributes already defined. You will still need to add the block to
-`src/index.ts` and clear the cache to see the new block in the Gutenberg editor
+`js/index.ts` and clear the cache to see the new block in the Gutenberg editor
 after running this command.
 
 ### Icons
@@ -178,7 +178,6 @@ import { registerBlockType } from 'wordpress__blocks';
 import { InnerBlocks } from 'wordpress__block-editor';
 import { useSelect } from 'wordpress__data';
 
-// @ts-ignore
 const __ = Drupal.t;
 
 const MAX_BLOCKS: number = 1;

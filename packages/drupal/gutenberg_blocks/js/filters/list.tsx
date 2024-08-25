@@ -4,8 +4,7 @@ import { PanelBody, SelectControl } from 'wordpress__components';
 import { createHigherOrderComponent } from 'wordpress__compose';
 import { addFilter } from 'wordpress__hooks';
 
-// @ts-ignore
-const __ = Drupal.t;
+const { t: __ } = Drupal;
 
 addFilter(
   'blocks.registerBlockType',

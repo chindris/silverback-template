@@ -6,8 +6,6 @@ import { compose, withState } from 'wordpress__compose';
 import { cleanUpText } from '../utils/clean-up-text';
 
 const { t: __ } = Drupal;
-
-// @ts-ignore
 const { sanitizeText } = silverbackGutenbergUtils;
 
 // There is no way to remove formatting options (bold, italic, etc.) from the

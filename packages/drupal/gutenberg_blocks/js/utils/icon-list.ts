@@ -1,4 +1,3 @@
-// @ts-ignore
 const { t: __ } = Drupal;
 
 // HOW TO ADD A NEW ICON.
