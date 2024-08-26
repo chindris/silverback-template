@@ -58,7 +58,7 @@ declare global {
     blocks: {
       registerBlockType: any;
       InnerBlocks: any;
-      getBlockType: () => any;
+      getBlockType: (type: string) => any;
       getBlockTypes: () => any[];
       unregisterBlockType: (block: string) => void;
     };
