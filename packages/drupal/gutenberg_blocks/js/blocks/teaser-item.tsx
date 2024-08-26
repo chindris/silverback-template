@@ -23,21 +23,10 @@ registerBlockType('custom/teaser-item', {
     },
   },
 
-  edit: ({
-    attributes: { url },
-    setAttributes,
-  }: {
-    attributes: {
-      url: string;
-      uuid: string;
-      entityType: string;
-    };
-    setAttributes: (attributes: {
-      url?: string;
-      uuid?: string;
-      entityType?: string;
-    }) => void;
-  }) => {
+  edit: (props) => {
+    const { setAttributes, attributes } = props;
+    const { url } = attributes;
+
     return (
       <div>
         <LinkControl

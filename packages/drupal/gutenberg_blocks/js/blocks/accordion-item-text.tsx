@@ -7,7 +7,6 @@ import {
 } from 'wordpress__block-editor';
 import { registerBlockType } from 'wordpress__blocks';
 import { PanelBody, SelectControl } from 'wordpress__components';
-import { compose, withState } from 'wordpress__compose';
 
 const { t: __ } = Drupal;
 
@@ -26,7 +25,7 @@ registerBlockType('custom/accordion-item-text', {
     },
   },
   // @ts-ignore
-  edit: compose(withState())((props) => {
+  edit: (props) => {
     const { attributes, setAttributes } = props;
     const icons = [
       { label: __('- Select an optional icon -'), value: '' },
@@ -34,6 +33,7 @@ registerBlockType('custom/accordion-item-text', {
       { label: __('Questionmark'), value: 'questionmark' },
       { label: __('Arrow'), value: 'arrow' },
     ];
+
     setAttributes({
       icon: attributes.icon === undefined ? '' : attributes.icon,
     });
@@ -43,7 +43,7 @@ registerBlockType('custom/accordion-item-text', {
         <InspectorControls>
           <PanelBody title={__('Block settings')}>
             <SelectControl
-              value={attributes.icon}
+              value={attributes.icon as string}
               options={icons}
               onChange={(newValue) => {
                 setAttributes({
@@ -58,13 +58,13 @@ registerBlockType('custom/accordion-item-text', {
           <div
             className={clsx(
               'custom-block-accordion-item-text',
-              attributes.icon,
+              attributes.icon as string,
             )}
           >
             <RichText
               identifier="title"
               tagName="h3"
-              value={attributes.title}
+              value={attributes.title as string}
               allowedFormats={[]}
               // @ts-ignore
               disableLineBreaks={true}
@@ -83,7 +83,7 @@ registerBlockType('custom/accordion-item-text', {
         </div>
       </Fragment>
     );
-  }),
+  },
 
   save: () => {
     return <InnerBlocks.Content />;

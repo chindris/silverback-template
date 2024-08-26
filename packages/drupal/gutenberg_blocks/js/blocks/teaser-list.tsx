@@ -32,22 +32,7 @@ registerBlockType('custom/teaser-list', {
       type: 'string',
     },
   },
-  edit: (props: {
-    attributes: {
-      layout: string;
-      buttonText: string;
-      contentHubEnabled: boolean;
-      limit: string;
-      titleFilter: string;
-    };
-    setAttributes: (attributes: {
-      layout?: string;
-      buttonText?: string;
-      contentHubEnabled?: boolean;
-      limit?: string;
-      titleFilter?: string;
-    }) => void;
-  }) => {
+  edit: (props) => {
     const { attributes, setAttributes } = props;
     const { layout, buttonText, contentHubEnabled, limit, titleFilter } =
       attributes;
@@ -59,7 +44,7 @@ registerBlockType('custom/teaser-list', {
           <PanelBody>
             <SelectControl
               label={__('Layout')}
-              value={layout}
+              value={layout as string}
               options={[
                 { label: __('Grid'), value: 'GRID' },
                 { label: __('Carousel'), value: 'CAROUSEL' },
@@ -71,7 +56,7 @@ registerBlockType('custom/teaser-list', {
               }}
             />
             <TextControl
-              value={buttonText}
+              value={buttonText as string}
               label={__('Button text')}
               onChange={(buttonText: string) => {
                 setPlainTextAttribute(props, 'buttonText', buttonText);
@@ -83,7 +68,7 @@ registerBlockType('custom/teaser-list', {
             <ToggleControl
               label={__('Enable content hub')}
               help={__('Enable pulling dynamic content from the content hub.')}
-              checked={contentHubEnabled}
+              checked={contentHubEnabled as boolean}
               onChange={(contentHubEnabled) => {
                 setAttributes({
                   contentHubEnabled,
@@ -99,7 +84,7 @@ registerBlockType('custom/teaser-list', {
                     titleFilter,
                   });
                 }}
-                value={titleFilter}
+                value={titleFilter as string}
               />
             ) : null}
             {typeof contentHubEnabled !== 'undefined' && contentHubEnabled ? (
@@ -113,7 +98,7 @@ registerBlockType('custom/teaser-list', {
                     limit,
                   });
                 }}
-                value={limit}
+                value={limit as string}
               />
             ) : null}
           </PanelBody>

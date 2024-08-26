@@ -1,7 +1,6 @@
 (($, Drupal, once, drupalSettings) => {
   Drupal.behaviors.gutenbergBlocksPreview = {
-    /* @ts-ignore */
-    attach: function (context) {
+    attach: function (context: HTMLElement) {
       $(once('gutenbergBlocksPreview', '.gutenberg-full-editor', context)).each(
         function () {
           $('#edit-preview-link').on('click', function (e: Event) {
@@ -136,5 +135,4 @@
       );
     },
   };
-  /* @ts-ignore */
 })(jQuery, Drupal, once, drupalSettings);

@@ -31,6 +31,7 @@ declare global {
   };
 
   const drupalSettings: {
+    gutenberg: any;
     preview: any;
     path: {
       baseUrl: string;
@@ -44,4 +45,12 @@ declare global {
       }>;
     };
   };
+
+  const wp: {
+    richText: any;
+    blocks: any;
+  };
+
+  const jQuery: any;
+  const once: any;
 }

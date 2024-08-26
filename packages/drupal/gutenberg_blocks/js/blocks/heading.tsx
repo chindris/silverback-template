@@ -1,7 +1,6 @@
 import { BlockControls, RichText } from 'wordpress__block-editor';
 import { createBlock, registerBlockType } from 'wordpress__blocks';
 import { Path, SVG, ToolbarGroup } from 'wordpress__components';
-import { compose, withState } from 'wordpress__compose';
 
 import { cleanUpText } from '../utils/clean-up-text';
 
@@ -40,6 +39,7 @@ registerBlockType('custom/heading', {
     anchor: true,
   },
 
+  // Transform the core/paragraph block to this custom heading block.
   transforms: {
     from: [
       {
@@ -66,7 +66,7 @@ registerBlockType('custom/heading', {
     ],
   },
   // @ts-ignore
-  edit: compose(withState())((props) => {
+  edit: (props) => {
     return (
       <div className={props.className}>
         <BlockControls>
@@ -89,7 +89,7 @@ registerBlockType('custom/heading', {
         <RichText
           identifier="text"
           tagName={`h${props.attributes.level}` as keyof HTMLElementTagNameMap}
-          value={props.attributes.text}
+          value={props.attributes.text as string}
           allowedFormats={['core/bold']}
           // @ts-ignore
           disableLineBreaks={true}
@@ -103,7 +103,7 @@ registerBlockType('custom/heading', {
         />
       </div>
     );
-  }),
+  },
 
   // Provide the actual `save` method to be able to aggregate the heading with
   // other HTML blocks.

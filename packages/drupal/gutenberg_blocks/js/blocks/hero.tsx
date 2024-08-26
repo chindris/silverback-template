@@ -7,7 +7,6 @@ import {
 } from 'wordpress__block-editor';
 import { registerBlockType } from 'wordpress__blocks';
 import { PanelBody, SelectControl } from 'wordpress__components';
-import { compose, withState } from 'wordpress__compose';
 import { dispatch } from 'wordpress__data';
 
 import { DrupalMediaEntity } from '../utils/drupal-media';
@@ -52,7 +51,7 @@ registerBlockType('custom/hero', {
     html: false,
   },
   // @ts-ignore
-  edit: compose(withState())((props) => {
+  edit: (props) => {
     return (
       <>
         <InspectorControls>
@@ -116,12 +115,14 @@ registerBlockType('custom/hero', {
           <div>
             <DrupalMediaEntity
               classname={'w-full'}
-              attributes={{
-                ...props.attributes,
-                lockViewMode: true,
-                viewMode: 'gutenberg_header',
-                allowedTypes: ['image'],
-              }}
+              attributes={
+                {
+                  ...props.attributes,
+                  lockViewMode: true,
+                  viewMode: 'gutenberg_header',
+                  allowedTypes: ['image'],
+                } as object
+              }
               setAttributes={props.setAttributes}
               isMediaLibraryEnabled={true}
               onError={(error) => {
@@ -139,7 +140,7 @@ registerBlockType('custom/hero', {
                   className={'mt-10'}
                   identifier="headline"
                   tagName="span"
-                  value={props.attributes.headline}
+                  value={props.attributes.headline as string}
                   allowedFormats={[]}
                   // @ts-ignore
                   disableLineBreaks={true}
@@ -155,7 +156,7 @@ registerBlockType('custom/hero', {
               <RichText
                 identifier="lead"
                 tagName="p"
-                value={props.attributes.lead}
+                value={props.attributes.lead as string}
                 allowedFormats={[]}
                 // @ts-ignore
                 disableLineBreaks={true}
@@ -166,28 +167,30 @@ registerBlockType('custom/hero', {
                 }}
               />
             </div>
-            {props.attributes.ctaUrl && (
-              <div>
-                <RichText
-                  identifier="ctaText"
-                  className={`button`}
-                  tagName="p"
-                  multiline={false}
-                  value={props.attributes.ctaText}
-                  allowedFormats={[]}
-                  // @ts-ignore
-                  disableLineBreaks={true}
-                  placeholder={__('CTA text')}
-                  keepPlaceholderOnFocus={true}
-                  style={{
-                    cursor: 'text',
-                  }}
-                  onChange={(ctaText) => {
-                    setPlainTextAttribute(props, 'ctaText', ctaText);
-                  }}
-                />
-              </div>
-            )}
+            <>
+              {props.attributes.ctaUrl && (
+                <div>
+                  <RichText
+                    identifier="ctaText"
+                    className={`button`}
+                    tagName="p"
+                    multiline={false}
+                    value={props.attributes.ctaText as string}
+                    allowedFormats={[]}
+                    // @ts-ignore
+                    disableLineBreaks={true}
+                    placeholder={__('CTA text')}
+                    keepPlaceholderOnFocus={true}
+                    style={{
+                      cursor: 'text',
+                    }}
+                    onChange={(ctaText) => {
+                      setPlainTextAttribute(props, 'ctaText', ctaText);
+                    }}
+                  />
+                </div>
+              )}
+            </>
             {props.attributes.formId ? (
               <iframe
                 src={
@@ -202,6 +205,6 @@ registerBlockType('custom/hero', {
         </div>
       </>
     );
-  }),
+  },
   save: () => <InnerBlocks.Content />,
 });

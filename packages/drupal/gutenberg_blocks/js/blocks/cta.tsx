@@ -7,7 +7,6 @@ import {
 } from 'wordpress__block-editor';
 import { registerBlockType } from 'wordpress__blocks';
 import { PanelBody, SelectControl, ToggleControl } from 'wordpress__components';
-import { compose, withState } from 'wordpress__compose';
 
 const { t: __ } = Drupal;
 const { setPlainTextAttribute } = silverbackGutenbergUtils;
@@ -62,7 +61,7 @@ registerBlockType('custom/cta', {
     },
   },
   // @ts-ignore
-  edit: compose(withState({}))((props) => {
+  edit: (props) => {
     return (
       <div>
         <a
@@ -76,7 +75,7 @@ registerBlockType('custom/cta', {
           <RichText
             identifier="text"
             tagName="span"
-            value={props.attributes.text}
+            value={props.attributes.text as string}
             allowedFormats={[]}
             // @ts-ignore
             disableLineBreaks={true}
@@ -142,7 +141,7 @@ registerBlockType('custom/cta', {
                   ? __('Opens in a new tab.')
                   : __('Opens in the same tab.')
               }
-              checked={props.attributes.openInNewTab}
+              checked={props.attributes.openInNewTab as boolean}
               onChange={(openInNewTab) => {
                 props.setAttributes({
                   openInNewTab,
@@ -151,7 +150,7 @@ registerBlockType('custom/cta', {
             />
             <SelectControl
               label={__('Icon')}
-              value={props.attributes.icon}
+              value={props.attributes.icon as string}
               options={[
                 { label: __('- None -'), value: 'NONE' },
                 { label: __('Arrow'), value: 'ARROW' },
@@ -166,7 +165,7 @@ registerBlockType('custom/cta', {
               props.attributes.icon !== 'NONE' && (
                 <SelectControl
                   label={__('Icon position')}
-                  value={props.attributes.iconPosition}
+                  value={props.attributes.iconPosition as string}
                   options={[
                     { label: __('After button text'), value: 'AFTER' },
                     { label: __('Before button text'), value: 'BEFORE' },
@@ -182,8 +181,7 @@ registerBlockType('custom/cta', {
         </InspectorControls>
       </div>
     );
-  }),
-
+  },
   save: () => {
     return null;
   },

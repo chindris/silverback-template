@@ -2,7 +2,6 @@ import React, { Fragment } from 'react';
 import { InspectorControls, RichText } from 'wordpress__block-editor';
 import { registerBlockType } from 'wordpress__blocks';
 import { PanelBody } from 'wordpress__components';
-import { compose, withState } from 'wordpress__compose';
 import { dispatch } from 'wordpress__data';
 
 import { DrupalMediaEntity } from '../utils/drupal-media';
@@ -29,7 +28,7 @@ registerBlockType('custom/demo-block', {
     },
   },
   // @ts-ignore
-  edit: compose(withState())((props) => {
+  edit: (props) => {
     const { attributes, setAttributes } = props;
 
     // Set default values this way so that values get saved in the block's attributes.
@@ -53,7 +52,7 @@ registerBlockType('custom/demo-block', {
             <RichText
               identifier="heading"
               tagName="p"
-              value={attributes.heading}
+              value={attributes.heading as string}
               allowedFormats={[]}
               // @ts-ignore
               disableLineBreaks={true}
@@ -66,7 +65,7 @@ registerBlockType('custom/demo-block', {
             <RichText
               identifier="description"
               tagName="p"
-              value={attributes.description}
+              value={attributes.description as string}
               allowedFormats={[]}
               // @ts-ignore
               disableLineBreaks={true}
@@ -78,11 +77,13 @@ registerBlockType('custom/demo-block', {
             />
             <DrupalMediaEntity
               classname={'w-full'}
-              attributes={{
-                ...props.attributes,
-                lockViewMode: true,
-                allowedTypes: ['image'],
-              }}
+              attributes={
+                {
+                  ...props.attributes,
+                  lockViewMode: true,
+                  allowedTypes: ['image'],
+                } as object
+              }
               setAttributes={props.setAttributes}
               isMediaLibraryEnabled={true}
               onError={(error) => {
@@ -94,7 +95,7 @@ registerBlockType('custom/demo-block', {
             <RichText
               identifier="url"
               tagName="p"
-              value={attributes.url}
+              value={attributes.url as string}
               allowedFormats={[]}
               // @ts-ignore
               disableLineBreaks={true}
@@ -108,9 +109,9 @@ registerBlockType('custom/demo-block', {
         </div>
       </Fragment>
     );
-  }),
+  },
 
-  save() {
+  save: () => {
     return null;
     // or uncomment this if you import and use InnerBlocks from wordpress__block-editor
     // return <InnerBlocks.Content />;

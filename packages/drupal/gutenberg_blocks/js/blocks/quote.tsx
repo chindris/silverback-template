@@ -1,6 +1,5 @@
 import { RichText } from 'wordpress__block-editor';
 import { registerBlockType } from 'wordpress__blocks';
-import { compose, withState } from 'wordpress__compose';
 import { dispatch } from 'wordpress__data';
 
 import { cleanUpText } from '../utils/clean-up-text';
@@ -19,7 +18,7 @@ registerBlockType(`custom/quote`, {
       type: 'string',
     },
     author: {
-      tpye: 'string',
+      type: 'string',
     },
     role: {
       type: 'string',
@@ -29,7 +28,7 @@ registerBlockType(`custom/quote`, {
     },
   },
   // @ts-ignore
-  edit: compose(withState())((props) => {
+  edit: (props) => {
     return (
       <div className="prose lg:prose-xl prose-p:text-xl prose-p:font-bold prose-p:leading-8 prose-p:text-gray-900">
         <blockquote>
@@ -49,7 +48,7 @@ registerBlockType(`custom/quote`, {
           </svg>
           <RichText
             identifier="quote"
-            value={props.attributes.quote}
+            value={props.attributes.quote as string}
             allowedFormats={['core/bold']}
             // @ts-ignore
             disableLineBreaks={false}
@@ -64,12 +63,14 @@ registerBlockType(`custom/quote`, {
           <div className="flex not-prose items-center flex-wrap">
             <div className="mr-3 quote-image">
               <DrupalMediaEntity
-                attributes={{
-                  ...props.attributes,
-                  lockViewMode: true,
-                  allowedTypes: ['image'],
-                  viewMode: 'quote',
-                }}
+                attributes={
+                  {
+                    ...props.attributes,
+                    lockViewMode: true,
+                    allowedTypes: ['image'],
+                    viewMode: 'quote',
+                  } as object
+                }
                 setAttributes={props.setAttributes}
                 isMediaLibraryEnabled={true}
                 onError={(error) => {
@@ -81,7 +82,7 @@ registerBlockType(`custom/quote`, {
             </div>
             <RichText
               identifier="author"
-              value={props.attributes.author}
+              value={props.attributes.author as string}
               allowedFormats={[]}
               // @ts-ignore
               disableLineBreaks={false}
@@ -95,7 +96,7 @@ registerBlockType(`custom/quote`, {
             <RichText
               identifier="role"
               className="mt-0.5 not-italic text-gray-500 text-sm ml-3"
-              value={props.attributes.role}
+              value={props.attributes.role as string}
               allowedFormats={[]}
               // @ts-ignore
               disableLineBreaks={false}
@@ -109,8 +110,8 @@ registerBlockType(`custom/quote`, {
         </blockquote>
       </div>
     );
-  }),
-  save() {
+  },
+  save: () => {
     return null;
   },
 });

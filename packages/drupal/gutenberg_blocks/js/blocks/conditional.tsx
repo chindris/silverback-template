@@ -41,7 +41,7 @@ registerBlockType(`custom/conditional`, {
       default: '',
     },
   },
-  edit(props) {
+  edit: (props) => {
     const { attributes, setAttributes } = props;
 
     const displayFrom = attributes.displayFrom as string | undefined;
@@ -192,8 +192,7 @@ registerBlockType(`custom/conditional`, {
       </>
     );
   },
-
-  save() {
+  save: () => {
     return <InnerBlocks.Content />;
   },
 });
