@@ -54,11 +54,13 @@ declare global {
 
   // TODO improve typing - take from WP Gutenberg
   const wp: {
-    richText: any;
+    richText: { unregisterFormatType: (block: string) => void };
     blocks: {
       registerBlockType: any;
       InnerBlocks: any;
-      getBlockType: any;
+      getBlockType: () => any;
+      getBlockTypes: () => any[];
+      unregisterBlockType: (block: string) => void;
     };
   };
 
