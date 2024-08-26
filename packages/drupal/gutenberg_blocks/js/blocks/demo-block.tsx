@@ -8,8 +8,12 @@ import { DrupalMediaEntity } from '../utils/drupal-media';
 
 const { t: __ } = Drupal;
 
-// @ts-ignore
-registerBlockType('custom/demo-block', {
+registerBlockType<{
+  heading: string;
+  description: string;
+  mediaEntityIds: [string];
+  url: string;
+}>('custom/demo-block', {
   title: 'Demo Block',
   icon: 'text',
   category: 'common',
@@ -27,7 +31,7 @@ registerBlockType('custom/demo-block', {
       type: 'string',
     },
   },
-  // @ts-ignore
+
   edit: (props) => {
     const { attributes, setAttributes } = props;
 
@@ -52,7 +56,7 @@ registerBlockType('custom/demo-block', {
             <RichText
               identifier="heading"
               tagName="p"
-              value={attributes.heading as string}
+              value={attributes.heading}
               allowedFormats={[]}
               // @ts-ignore
               disableLineBreaks={true}
@@ -65,7 +69,7 @@ registerBlockType('custom/demo-block', {
             <RichText
               identifier="description"
               tagName="p"
-              value={attributes.description as string}
+              value={attributes.description}
               allowedFormats={[]}
               // @ts-ignore
               disableLineBreaks={true}
@@ -77,17 +81,14 @@ registerBlockType('custom/demo-block', {
             />
             <DrupalMediaEntity
               classname={'w-full'}
-              attributes={
-                {
-                  ...props.attributes,
-                  lockViewMode: true,
-                  allowedTypes: ['image'],
-                } as object
-              }
+              attributes={{
+                ...props.attributes,
+                lockViewMode: true,
+                allowedTypes: ['image'],
+              }}
               setAttributes={props.setAttributes}
               isMediaLibraryEnabled={true}
               onError={(error) => {
-                // @ts-ignore
                 error = typeof error === 'string' ? error : error[2];
                 dispatch('core/notices').createWarningNotice(error);
               }}
@@ -95,7 +96,7 @@ registerBlockType('custom/demo-block', {
             <RichText
               identifier="url"
               tagName="p"
-              value={attributes.url as string}
+              value={attributes.url}
               allowedFormats={[]}
               // @ts-ignore
               disableLineBreaks={true}

@@ -10,8 +10,10 @@ import { PanelBody, SelectControl } from 'wordpress__components';
 
 const { t: __ } = Drupal;
 
-// @ts-ignore
-registerBlockType('custom/accordion-item-text', {
+registerBlockType<{
+  title: string;
+  icon: string;
+}>('custom/accordion-item-text', {
   title: 'Accordion Item Text',
   icon: 'text',
   category: 'layout',
@@ -24,7 +26,6 @@ registerBlockType('custom/accordion-item-text', {
       type: 'string',
     },
   },
-  // @ts-ignore
   edit: (props) => {
     const { attributes, setAttributes } = props;
     const icons = [
@@ -43,7 +44,7 @@ registerBlockType('custom/accordion-item-text', {
         <InspectorControls>
           <PanelBody title={__('Block settings')}>
             <SelectControl
-              value={attributes.icon as string}
+              value={attributes.icon}
               options={icons}
               onChange={(newValue) => {
                 setAttributes({
@@ -58,13 +59,13 @@ registerBlockType('custom/accordion-item-text', {
           <div
             className={clsx(
               'custom-block-accordion-item-text',
-              attributes.icon as string,
+              attributes.icon,
             )}
           >
             <RichText
               identifier="title"
               tagName="h3"
-              value={attributes.title as string}
+              value={attributes.title}
               allowedFormats={[]}
               // @ts-ignore
               disableLineBreaks={true}

@@ -4,7 +4,11 @@ import {
 } from 'wordpress__block-editor';
 import { registerBlockType } from 'wordpress__blocks';
 
-registerBlockType('custom/teaser-item', {
+registerBlockType<{
+  url: string;
+  uuid: string;
+  entityType: string;
+}>('custom/teaser-item', {
   title: 'Teaser item',
   icon: 'slides',
   category: 'layout',

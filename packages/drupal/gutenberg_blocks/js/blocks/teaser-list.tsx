@@ -10,7 +10,13 @@ import {
 const { t: __ } = Drupal;
 const { setPlainTextAttribute } = silverbackGutenbergUtils;
 
-registerBlockType('custom/teaser-list', {
+registerBlockType<{
+  layout: string;
+  buttonText: string;
+  contentHubEnabled: boolean;
+  limit: string;
+  titleFilter: string;
+}>('custom/teaser-list', {
   title: __('Teaser list'),
   icon: 'slides',
   category: 'layout',
@@ -44,7 +50,7 @@ registerBlockType('custom/teaser-list', {
           <PanelBody>
             <SelectControl
               label={__('Layout')}
-              value={layout as string}
+              value={layout}
               options={[
                 { label: __('Grid'), value: 'GRID' },
                 { label: __('Carousel'), value: 'CAROUSEL' },
@@ -56,9 +62,9 @@ registerBlockType('custom/teaser-list', {
               }}
             />
             <TextControl
-              value={buttonText as string}
+              value={buttonText}
               label={__('Button text')}
-              onChange={(buttonText: string) => {
+              onChange={(buttonText) => {
                 setPlainTextAttribute(props, 'buttonText', buttonText);
               }}
               help={__(
@@ -68,7 +74,7 @@ registerBlockType('custom/teaser-list', {
             <ToggleControl
               label={__('Enable content hub')}
               help={__('Enable pulling dynamic content from the content hub.')}
-              checked={contentHubEnabled as boolean}
+              checked={contentHubEnabled}
               onChange={(contentHubEnabled) => {
                 setAttributes({
                   contentHubEnabled,
@@ -84,7 +90,7 @@ registerBlockType('custom/teaser-list', {
                     titleFilter,
                   });
                 }}
-                value={titleFilter as string}
+                value={titleFilter}
               />
             ) : null}
             {typeof contentHubEnabled !== 'undefined' && contentHubEnabled ? (
@@ -98,7 +104,7 @@ registerBlockType('custom/teaser-list', {
                     limit,
                   });
                 }}
-                value={limit as string}
+                value={limit}
               />
             ) : null}
           </PanelBody>

@@ -9,7 +9,10 @@ const { sanitizeText } = silverbackGutenbergUtils;
 
 // There is no way to remove formatting options (bold, italic, etc.) from the
 // core/heading block. So we use a custom one.
-registerBlockType('custom/heading', {
+registerBlockType<{
+  level: number;
+  text: string;
+}>('custom/heading', {
   title: __('Heading'),
   icon: (
     <svg
@@ -65,7 +68,7 @@ registerBlockType('custom/heading', {
       },
     ],
   },
-  // @ts-ignore
+
   edit: (props) => {
     return (
       <div className={props.className}>
@@ -89,7 +92,7 @@ registerBlockType('custom/heading', {
         <RichText
           identifier="text"
           tagName={`h${props.attributes.level}` as keyof HTMLElementTagNameMap}
-          value={props.attributes.text as string}
+          value={props.attributes.text}
           allowedFormats={['core/bold']}
           // @ts-ignore
           disableLineBreaks={true}
@@ -112,7 +115,7 @@ registerBlockType('custom/heading', {
     return (
       <RichText.Content
         tagName={TagName as keyof HTMLElementTagNameMap}
-        value={props.attributes.text as string}
+        value={props.attributes.text}
       />
     );
   },

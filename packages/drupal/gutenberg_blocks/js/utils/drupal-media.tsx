@@ -13,6 +13,5 @@ type DrupalMediaComponent = React.FC<{
   onError: (error: string | [string] | string[]) => void;
 }>;
 
-// @ts-ignore
 export const DrupalMediaEntity = DrupalGutenberg.Components
   .DrupalMediaEntity as DrupalMediaComponent;

@@ -14,7 +14,16 @@ import { DrupalMediaEntity } from '../utils/drupal-media';
 const { t: __ } = Drupal;
 const { setPlainTextAttribute } = silverbackGutenbergUtils;
 
-registerBlockType('custom/hero', {
+registerBlockType<{
+  mediaEntityIds: [string];
+  headline: string;
+  lead: string;
+  ctaUrl: string;
+  ctaText: string;
+  ctaOpenInNewTab: boolean;
+  showLinkControl: boolean;
+  formId: string;
+}>('custom/hero', {
   title: __('Hero'),
   icon: 'cover-image',
   category: 'layout',
@@ -50,7 +59,7 @@ registerBlockType('custom/hero', {
     align: false,
     html: false,
   },
-  // @ts-ignore
+
   edit: (props) => {
     return (
       <>
@@ -64,8 +73,7 @@ registerBlockType('custom/hero', {
                   openInNewTab: props.attributes.ctaOpenInNewTab,
                 }}
                 settings={{}}
-                // @ts-ignore
-                onChange={(link) => {
+                onChange={(link: { url: string; opensInNewTab: boolean }) => {
                   props.setAttributes({
                     ctaUrl: link.url,
                     ctaOpenInNewTab: link.opensInNewTab,
@@ -95,7 +103,7 @@ registerBlockType('custom/hero', {
           </PanelBody>
           <PanelBody title={__('Form')}>
             <SelectControl
-              value={props.attributes.formId as string}
+              value={props.attributes.formId}
               options={[
                 { label: __('- Select a form -'), value: '' },
                 ...drupalSettings.customGutenbergBlocks.forms.map((form) => ({
@@ -103,7 +111,7 @@ registerBlockType('custom/hero', {
                   value: form.id,
                 })),
               ]}
-              onChange={(formId: string) => {
+              onChange={(formId) => {
                 props.setAttributes({
                   formId,
                 });
@@ -115,18 +123,15 @@ registerBlockType('custom/hero', {
           <div>
             <DrupalMediaEntity
               classname={'w-full'}
-              attributes={
-                {
-                  ...props.attributes,
-                  lockViewMode: true,
-                  viewMode: 'gutenberg_header',
-                  allowedTypes: ['image'],
-                } as object
-              }
+              attributes={{
+                ...props.attributes,
+                lockViewMode: true,
+                viewMode: 'gutenberg_header',
+                allowedTypes: ['image'],
+              }}
               setAttributes={props.setAttributes}
               isMediaLibraryEnabled={true}
               onError={(error) => {
-                // @ts-ignore
                 error = typeof error === 'string' ? error : error[2];
                 dispatch('core/notices').createWarningNotice(error);
               }}
@@ -140,7 +145,7 @@ registerBlockType('custom/hero', {
                   className={'mt-10'}
                   identifier="headline"
                   tagName="span"
-                  value={props.attributes.headline as string}
+                  value={props.attributes.headline}
                   allowedFormats={[]}
                   // @ts-ignore
                   disableLineBreaks={true}
@@ -156,7 +161,7 @@ registerBlockType('custom/hero', {
               <RichText
                 identifier="lead"
                 tagName="p"
-                value={props.attributes.lead as string}
+                value={props.attributes.lead}
                 allowedFormats={[]}
                 // @ts-ignore
                 disableLineBreaks={true}
@@ -175,7 +180,7 @@ registerBlockType('custom/hero', {
                     className={`button`}
                     tagName="p"
                     multiline={false}
-                    value={props.attributes.ctaText as string}
+                    value={props.attributes.ctaText}
                     allowedFormats={[]}
                     // @ts-ignore
                     disableLineBreaks={true}

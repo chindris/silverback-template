@@ -28,8 +28,15 @@ const ArrowRightIcon = () => (
   </svg>
 );
 
-// @ts-ignore
-registerBlockType('custom/cta', {
+registerBlockType<{
+  url: string;
+  text: string;
+  'data-id': string;
+  'data-entity-type': string;
+  openInNewTab: boolean;
+  icon: string;
+  iconPosition: string;
+}>('custom/cta', {
   title: 'CTA',
   icon: 'admin-links',
   category: 'common',
@@ -60,7 +67,6 @@ registerBlockType('custom/cta', {
       default: 'AFTER',
     },
   },
-  // @ts-ignore
   edit: (props) => {
     return (
       <div>
@@ -75,7 +81,7 @@ registerBlockType('custom/cta', {
           <RichText
             identifier="text"
             tagName="span"
-            value={props.attributes.text as string}
+            value={props.attributes.text}
             allowedFormats={[]}
             // @ts-ignore
             disableLineBreaks={true}
@@ -84,7 +90,7 @@ registerBlockType('custom/cta', {
             style={{
               cursor: 'text',
             }}
-            onChange={(text: string) => {
+            onChange={(text) => {
               setPlainTextAttribute(props, 'text', text);
             }}
           />
@@ -111,8 +117,8 @@ registerBlockType('custom/cta', {
               //  type: 'post',
               //  subtype: 'gutenberg',
               //}}
-              // @ts-ignore
-              onChange={(link) => {
+
+              onChange={(link: { url: string; id: string; type: string }) => {
                 props.setAttributes({
                   url: link.url,
                   'data-id': link.id,
@@ -125,6 +131,7 @@ registerBlockType('custom/cta', {
                     // then we can set the data-entity-type value more accurate.
                     // Right now, we just make a "guess" based on the the human
                     // readable label for English and German.
+                    // TODO - this depends on each language, find new solution
                     link.type.startsWith('Media') ||
                     link.type.startsWith('Medien')
                       ? 'media'
@@ -141,7 +148,7 @@ registerBlockType('custom/cta', {
                   ? __('Opens in a new tab.')
                   : __('Opens in the same tab.')
               }
-              checked={props.attributes.openInNewTab as boolean}
+              checked={props.attributes.openInNewTab}
               onChange={(openInNewTab) => {
                 props.setAttributes({
                   openInNewTab,
@@ -150,7 +157,7 @@ registerBlockType('custom/cta', {
             />
             <SelectControl
               label={__('Icon')}
-              value={props.attributes.icon as string}
+              value={props.attributes.icon}
               options={[
                 { label: __('- None -'), value: 'NONE' },
                 { label: __('Arrow'), value: 'ARROW' },
@@ -165,7 +172,7 @@ registerBlockType('custom/cta', {
               props.attributes.icon !== 'NONE' && (
                 <SelectControl
                   label={__('Icon position')}
-                  value={props.attributes.iconPosition as string}
+                  value={props.attributes.iconPosition}
                   options={[
                     { label: __('After button text'), value: 'AFTER' },
                     { label: __('Before button text'), value: 'BEFORE' },

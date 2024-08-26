@@ -9,7 +9,7 @@ const style = {
   padding: '0 40px',
 };
 
-registerBlockType(`custom/content`, {
+registerBlockType<{}>(`custom/content`, {
   title: __('Content'),
   category: 'layout',
   icon: 'media-document',
