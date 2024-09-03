@@ -1,14 +1,20 @@
 'use client';
+import { createDrupalExecutor } from '@custom/cms';
+import { OperationExecutorsProvider } from '@custom/schema';
 import React, { PropsWithChildren } from 'react';
 
-import { DrupalExecutor } from './drupal-executor.js';
-
-export function ExecutorsClient({ children }: PropsWithChildren) {
+export function ClientExecutors({ children }: PropsWithChildren) {
   return (
-    <DrupalExecutor
-      url={import.meta.env.WAKU_PUBLIC_DRUPAL_URL || 'http://127.0.0.1:8888'}
+    <OperationExecutorsProvider
+      executors={[
+        {
+          executor: createDrupalExecutor(
+            import.meta.env.WAKU_PUBLIC_DRUPAL_URL || 'http://127.0.0.1:8888',
+          ),
+        },
+      ]}
     >
       {children}
-    </DrupalExecutor>
+    </OperationExecutorsProvider>
   );
 }

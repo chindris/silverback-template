@@ -2,11 +2,12 @@ import fs from 'node:fs';
 
 import {
   CampaignUrlRedirectsQuery,
+  findExecutor,
   HomePageQuery,
   Locale,
 } from '@custom/schema';
 
-import { query } from '../query.js';
+import { serverExecutors } from '../executors-server.js';
 import { drupalUrl } from '../utils.js';
 
 export type Redirect = {
@@ -61,14 +62,25 @@ async function createRedirects() {
     });
   });
 
+  const campaignUrlExec = findExecutor(
+    serverExecutors,
+    CampaignUrlRedirectsQuery,
+    {
+      args: '',
+    },
+  );
+
   // Create redirects for all the CampaignUrl entries from the CMS.
   let currentPage = 1;
   const pageSize = 100;
   let fetchNext = true;
   while (fetchNext) {
-    const redirects = await query(CampaignUrlRedirectsQuery, {
-      args: `pageSize=${pageSize}&page=${currentPage}`,
-    });
+    const redirects =
+      campaignUrlExec instanceof Function
+        ? await campaignUrlExec(CampaignUrlRedirectsQuery, {
+            args: `pageSize=${pageSize}&page=${currentPage}`,
+          })
+        : campaignUrlExec;
     if (!redirects.campaignUrlRedirects?.rows?.length) {
       fetchNext = false;
     }
@@ -78,9 +90,14 @@ async function createRedirects() {
     currentPage++;
   }
 
+  const homepageExec = findExecutor(serverExecutors, HomePageQuery, {});
+
   // Redirect from the internal path of the home page to its root path, e.g.
   // from /en/home to /en (for all its translations).
-  const homePages = await query(HomePageQuery, {});
+  const homePages =
+    homepageExec instanceof Function
+      ? await homepageExec(HomePageQuery, {})
+      : homepageExec;
   homePages.websiteSettings?.homePage?.translations?.forEach(
     (homePageTranslation) => {
       createRedirect({

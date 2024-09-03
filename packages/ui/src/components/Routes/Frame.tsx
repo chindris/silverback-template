@@ -14,17 +14,11 @@ function filterByLocale(locale: Locale) {
     str.language === locale;
 }
 
-function translationsMap(translatables: FrameQuery['stringTranslations']) {
+function translationsMap(
+  translatables: Required<FrameQuery>['stringTranslations'],
+) {
   return Object.fromEntries(
-    [
-      // Make sure that Drupal translations have higher precedence.
-      ...(translatables?.filter(
-        (tr) => tr.__typename === 'DecapTranslatableString',
-      ) || []),
-      ...(translatables?.filter(
-        (tr) => tr.__typename === 'DrupalTranslatableString',
-      ) || []),
-    ]
+    translatables
       .filter((tr) => tr.translation)
       .map((tr) => [tr.source, tr.translation]),
   );
@@ -33,10 +27,12 @@ function translationsMap(translatables: FrameQuery['stringTranslations']) {
 export function Frame({ children }: PropsWithChildren) {
   const locale = useLocale();
   return (
-    <Operation id={FrameQuery}>
+    <Operation id={FrameQuery} all={true}>
       {(result) => {
         if (result.state === 'success') {
-          const rawTranslations = result.data.stringTranslations || [];
+          const rawTranslations = result.data
+            .map((res) => res.stringTranslations || [])
+            .reduce((acc, val) => [...acc, ...val], []);
           const translations = {
             ...translationsMap(
               rawTranslations?.filter(filterByLocale('en')) || [],

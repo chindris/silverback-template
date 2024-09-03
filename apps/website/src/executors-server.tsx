@@ -1,13 +1,23 @@
+import { createDrupalExecutor } from '@custom/cms';
+import { createDecapExecutor } from '@custom/decap';
+import { OperationExecutorsProvider } from '@custom/schema';
 import React, { PropsWithChildren } from 'react';
 
-import { DrupalExecutor } from './drupal-executor.js';
+import { drupalUrl } from './utils.js';
 
-export function ExecutorsServer({ children }: PropsWithChildren) {
+export const serverExecutors = [
+  {
+    executor: createDecapExecutor('./node_modules/@custom/decap'),
+  },
+  {
+    executor: createDrupalExecutor(drupalUrl),
+  },
+];
+
+export function ServerExecutors({ children }: PropsWithChildren) {
   return (
-    <DrupalExecutor
-      url={process.env.WAKU_PUBLIC_DRUPAL_URL || 'http://127.0.0.1:8888'}
-    >
+    <OperationExecutorsProvider executors={serverExecutors}>
       {children}
-    </DrupalExecutor>
+    </OperationExecutorsProvider>
   );
 }

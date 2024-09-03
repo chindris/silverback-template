@@ -2,7 +2,12 @@
   "extends": ["//"],
   "tasks": {
     "prep": {
-      "dependsOn": ["prep:schema"]
+      "dependsOn": ["prep:scripts", "prep:schema"]
+    },
+    "prep:scripts": {
+      "dependsOn": ["^prep"],
+      "inputs": ["src/**"],
+      "outputs": ["dist/**"]
     },
     "prep:schema": {
       "dependsOn": ["prep:database"]
@@ -37,6 +42,7 @@
     "test:integration": {
       "dependsOn": [
         "prep",
+        "@custom/preview#prep",
         "@custom-tests/e2e#test:integration:drupal",
         "@custom-tests/schema#test:integration"
       ]
