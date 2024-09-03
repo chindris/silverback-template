@@ -21,6 +21,14 @@ const LocationDecorator: Decorator = (Story, ctx) => {
   );
 };
 
+const IsStorybookDecorator: Decorator = (Story) => {
+  // This var is documented but does not exist in our setup for some reason.
+  // https://storybook.js.org/docs/faq#how-can-my-code-detect-if-it-is-running-in-storybook
+  // @ts-ignore
+  window.IS_STORYBOOK = true;
+  return <Story />;
+};
+
 declare global {
   interface Window {
     __STORYBOOK_PREVIEW__: {
@@ -117,4 +125,9 @@ export const parameters = {
   },
 };
 
-export const decorators = [LocationDecorator, IntlDecorator, SWRCacheDecorator];
+export const decorators = [
+  LocationDecorator,
+  IntlDecorator,
+  SWRCacheDecorator,
+  IsStorybookDecorator,
+];

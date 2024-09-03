@@ -49,6 +49,10 @@ export const Default = {
         },
       ],
       path: '/test' as Url,
+      editLink: {
+        type: 'drupal',
+        url: '/test/edit' as Url,
+      },
       content: [
         {
           __typename: 'BlockImageTeasers',
