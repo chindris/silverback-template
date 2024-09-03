@@ -225,6 +225,12 @@ function custom_form_views_exposed_form_alter(&$form, FormStateInterface $form_s
     // Not applicable
     $form['langcode']['#options']['zxx'],
   );
+  // The `excludeIds` filter contains a list of UUIDs, and this might exceed the
+  // 128 characters limit of the field. To avoid this, we increase the maxlength
+  // of the exposed filter to 2048.
+  if (!empty($form['excludeIds'])) {
+    $form['excludeIds']['#maxlength'] = 2048;
+  }
 }
 
 /**

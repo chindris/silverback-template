@@ -32,7 +32,7 @@ const config: CodegenConfig = {
     'build/operations.json': {
       plugins: ['@amazeelabs/codegen-operation-ids'],
     },
-    // Directive autoloader for Drupla.
+    // Directive autoloader for Drupal.
     'build/drupal-autoload.json': {
       plugins: ['@amazeelabs/codegen-autoloader'],
       config: {

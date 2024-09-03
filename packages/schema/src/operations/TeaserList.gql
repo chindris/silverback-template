@@ -1,0 +1,7 @@
+query TeaserList($locale: Locale!, $args: String) {
+  teaserList(locale: $locale, args: $args) {
+    items {
+      ...CardItem
+    }
+  }
+}

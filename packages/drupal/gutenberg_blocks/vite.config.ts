@@ -5,11 +5,12 @@ import { defineConfig } from 'vite';
 export default defineConfig({
   build: {
     lib: {
-      entry: resolve(__dirname, 'src/index.ts'),
+      entry: resolve(__dirname, 'js/index.ts'),
       name: 'gutenberg_blocks',
       fileName: 'gutenberg_blocks',
     },
     rollupOptions: {
+      strictDeprecations: true,
       external: [
         'react',
         'react-dom',
@@ -23,6 +24,7 @@ export default defineConfig({
         'wordpress__hooks',
       ],
       output: {
+        strict: true,
         globals: {
           react: 'React',
           wordpress__blocks: 'wp.blocks',
@@ -36,7 +38,7 @@ export default defineConfig({
         },
       },
     },
-    outDir: resolve(__dirname, './js'),
+    outDir: resolve(__dirname, './dist'),
   },
   plugins: [
     react({

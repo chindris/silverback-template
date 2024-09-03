@@ -1,6 +1,6 @@
 edit:
   js:
-    js/gutenberg_blocks.umd.js: {}
+    dist/gutenberg_blocks.umd.js: {}
   css:
     theme:
       css/edit.css: {}

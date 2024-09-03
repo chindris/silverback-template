@@ -2,11 +2,11 @@
   "extends": ["//"],
   "tasks": {
     "test:static": {
-      "inputs": ["src/**"]
+      "inputs": ["js/**"]
     },
     "prep": {
-      "inputs": ["src/**"],
-      "outputs": ["js/**"]
+      "inputs": ["js/**"],
+      "outputs": ["dist/**"]
     }
   }
 }

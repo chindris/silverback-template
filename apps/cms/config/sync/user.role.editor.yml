@@ -10,6 +10,7 @@ dependencies:
     - content_moderation
     - content_translation
     - dropzonejs
+    - entity_usage
     - environment_indicator
     - file
     - filter
@@ -33,6 +34,7 @@ is_admin: null
 permissions:
   - 'access administration pages'
   - 'access content overview'
+  - 'access entity usage statistics'
   - 'access environment indicator'
   - 'access media overview'
   - 'access shortcuts'
