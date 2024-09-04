@@ -21,9 +21,13 @@ class EntityEditLink extends PluginBase implements DirectiveInterface {
     return $builder->compose(
       $builder->produce('entity_url')
         ->map('entity', $builder->fromParent())
-        ->map('rel', $builder->fromValue('edit-form'))
-        ->map('options', $builder->fromValue(['absolute' => TRUE])),
+        ->map('rel', $builder->fromValue('edit-form')),
       $builder->produce('url_path')->map('url', $builder->fromParent()),
+      $builder->callback(function ($path) {
+        // Can't use "absolute" option when building the URL, because Gatsby
+        // tricks Drupal to think its base URL is Netlify URL.
+        return (getenv('LAGOON_ROUTE') ?: 'http://127.0.0.1:8888') . $path;
+      })
     );
   }
 
