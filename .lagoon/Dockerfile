@@ -35,10 +35,6 @@ RUN --mount=type=cache,target=/tmp/cache composer install --no-dev
 
 WORKDIR /app
 
-# Decap config.
-ENV VITE_DECAP_REPO='AmazeeLabs/silverback-template'
-ENV VITE_DECAP_BRANCH="$LAGOON_GIT_BRANCH"
-
 # Copy the all package sources, install and prepare them.
 COPY . /app
 RUN --mount=type=cache,target=/tmp/cache pnpm i && \
@@ -146,5 +142,9 @@ RUN if [ "$(uname -m)" != "aarch64" ]; then ln -s /home/.deno/bin/deno /usr/loca
 COPY --from=builder /tmp/.deploy/website /app
 
 RUN mkdir -p /home/.cache/deno/gen && chmod -R 777 /home/.cache/deno
+
+# Decap config.
+ENV VITE_DECAP_REPO='AmazeeLabs/silverback-template'
+ENV VITE_DECAP_BRANCH="$LAGOON_GIT_BRANCH"
 
 CMD pnpm publisher
