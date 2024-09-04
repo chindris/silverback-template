@@ -4,8 +4,8 @@ import {
   SourceBlockMedia,
   SourceLocale,
   SourceMediaImage,
-  SourcePage,
   SourceResolvers,
+  SourceResolversTypes,
 } from '@custom/schema/source';
 import type { CmsCollection, CmsField } from 'decap-cms-core';
 import fs from 'fs';
@@ -171,6 +171,8 @@ const BlockMediaImageSchema = z
     };
   });
 
+type ResolvedPage = Exclude<SourceResolversTypes['Page'], Promise<any>>;
+
 export const pageSchema = z
   .object({
     id: z.string(),
@@ -196,9 +198,9 @@ export const pageSchema = z
     }),
     content: z.array(z.union([BlockMarkupSchema, BlockMediaImageSchema])),
   })
-  .transform((data): SourcePage => ({ __typename: 'Page', ...data }));
+  .transform((data): ResolvedPage => ({ __typename: 'Page', ...data }));
 
-const pages: Array<SourcePage> = [];
+const pages: Array<ResolvedPage> = [];
 
 const getPages = (path: string) => {
   const dir = `${path}/data/page`;
@@ -211,7 +213,7 @@ const getPages = (path: string) => {
           .map((page: any) => page.id)
           .filter((id) => !!id)
           .pop();
-        const translations: Array<SourcePage> = [];
+        const translations: Array<ResolvedPage> = [];
         Object.keys(content).forEach((lang) => {
           if (Object.keys(content[lang]).length < 2) {
             return;
@@ -252,12 +254,13 @@ export const pageResolvers = (path: string) =>
           rows: [],
         };
       },
-      viewPage: (_, { path }) => {
+      viewPage: async (_, { path }) => {
         const pages = getPages(path);
-        let result: SourcePage | undefined;
+        let result: ResolvedPage | undefined;
         for (const page of pages) {
           if (page.translations) {
-            for (const translation of page.translations) {
+            for (const promise of page.translations) {
+              const translation = await promise;
               if (translation?.path === path) {
                 result = { ...translation };
                 result.translations = page.translations;
