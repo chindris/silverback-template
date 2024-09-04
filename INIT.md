@@ -53,6 +53,7 @@ replace(
   [
     '.lagoon.yml',
     'README.md',
+    '.lagoon/Dockerfile',
     'apps/cms/config/sync/system.site.yml',
     'apps/cms/config/sync/slack.settings.yml',
     'apps/cms/scaffold/settings.php.append.txt',
