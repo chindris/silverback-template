@@ -154,8 +154,8 @@ importers:
         version: 3.23.8
     devDependencies:
       '@amazeelabs/decap-cms-backend-token-auth':
-        specifier: ^1.2.0
-        version: 1.2.0(@emotion/react@11.11.4)(@types/react@18.2.46)(decap-cms-lib-auth@3.0.5)(immutable@3.8.2)(lodash@4.17.21)(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^1.2.1
+        version: 1.2.1(@emotion/react@11.11.4)(@types/react@18.2.46)(decap-cms-lib-auth@3.0.5)(immutable@3.8.2)(lodash@4.17.21)(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
       '@types/node':
         specifier: ^18
         version: 18.0.0
@@ -296,8 +296,8 @@ importers:
         specifier: ^1.6.15
         version: 1.6.15
       '@amazeelabs/decap-cms-backend-token-auth':
-        specifier: ^1.2.0
-        version: 1.2.0(@emotion/react@11.11.4)(@types/react@18.3.3)(decap-cms-lib-auth@3.0.5)(immutable@3.8.2)(lodash@4.17.21)(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^1.2.1
+        version: 1.2.1(@emotion/react@11.11.4)(@types/react@18.3.3)(decap-cms-lib-auth@3.0.5)(immutable@3.8.2)(lodash@4.17.21)(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
       '@amazeelabs/gatsby-plugin-operations':
         specifier: ^1.1.3
         version: 1.1.3
@@ -571,6 +571,9 @@ importers:
       hast-util-select:
         specifier: ^5.0.5
         version: 5.0.5
+      js-cookie:
+        specifier: ^3.0.5
+        version: 3.0.5
       query-string:
         specifier: ^9.0.0
         version: 9.0.0
@@ -647,6 +650,9 @@ importers:
       '@types/hast':
         specifier: ^2.3.9
         version: 2.3.9
+      '@types/js-cookie':
+        specifier: ^3.0.6
+        version: 3.0.6
       '@types/node':
         specifier: ~18.15.3
         version: 18.15.3
@@ -892,8 +898,8 @@ packages:
       - encoding
       - supports-color
 
-  /@amazeelabs/decap-cms-backend-token-auth@1.2.0(@emotion/react@11.11.4)(@types/react@18.2.46)(decap-cms-lib-auth@3.0.5)(immutable@3.8.2)(lodash@4.17.21)(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-kvRwuWEJkdms8Hna2itBZuM5F9wWwLl2MSA6rjBlizdJiLrHDrk1MPPHQdMeS6ZsnVf47As/a4kHTQyhUHuhpw==}
+  /@amazeelabs/decap-cms-backend-token-auth@1.2.1(@emotion/react@11.11.4)(@types/react@18.2.46)(decap-cms-lib-auth@3.0.5)(immutable@3.8.2)(lodash@4.17.21)(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-Pk4HVRQzcuFaszp/panQb7S7QEgbqdFR+mMLLk+MkzP3qMbVuRRIHa/w4wYzMvGIPCTV+ZlDzHv/HGZ67MZ/Hg==}
     peerDependencies:
       react: ^18.3.1
       react-dom: ^18.3.1
@@ -914,8 +920,8 @@ packages:
       - prop-types
     dev: true
 
-  /@amazeelabs/decap-cms-backend-token-auth@1.2.0(@emotion/react@11.11.4)(@types/react@18.3.3)(decap-cms-lib-auth@3.0.5)(immutable@3.8.2)(lodash@4.17.21)(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-kvRwuWEJkdms8Hna2itBZuM5F9wWwLl2MSA6rjBlizdJiLrHDrk1MPPHQdMeS6ZsnVf47As/a4kHTQyhUHuhpw==}
+  /@amazeelabs/decap-cms-backend-token-auth@1.2.1(@emotion/react@11.11.4)(@types/react@18.3.3)(decap-cms-lib-auth@3.0.5)(immutable@3.8.2)(lodash@4.17.21)(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-Pk4HVRQzcuFaszp/panQb7S7QEgbqdFR+mMLLk+MkzP3qMbVuRRIHa/w4wYzMvGIPCTV+ZlDzHv/HGZ67MZ/Hg==}
     peerDependencies:
       react: ^18.3.1
       react-dom: ^18.3.1
@@ -5163,6 +5169,7 @@ packages:
   /@humanwhocodes/config-array@0.5.0:
     resolution: {integrity: sha512-FagtKFz74XrTl7y6HCzQpwDfXP0yhxe9lHLD1UZxjvZIcbyRz8zTFF/yYNfSfzU414eDwZ1SrO0Qvtyf+wFMQg==}
     engines: {node: '>=10.10.0'}
+    deprecated: Use @eslint/config-array instead
     requiresBuild: true
     dependencies:
       '@humanwhocodes/object-schema': 1.2.1
@@ -5178,6 +5185,7 @@ packages:
 
   /@humanwhocodes/object-schema@1.2.1:
     resolution: {integrity: sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==}
+    deprecated: Use @eslint/object-schema instead
     requiresBuild: true
 
   /@iarna/toml@2.2.5:
@@ -9977,6 +9985,10 @@ packages:
     resolution: {integrity: sha512-pk2B1NWalF9toCRu6gjBzR69syFjP4Od8WRAX+0mmf9lAjCRicLOWc+ZrxZHx/0XRjotgkF9t6iaMJ+aXcOdZQ==}
     dependencies:
       '@types/istanbul-lib-report': 3.0.3
+
+  /@types/js-cookie@3.0.6:
+    resolution: {integrity: sha512-wkw9yd1kEXOPnvEeEV1Go1MmxtBJL0RR79aOTAApecWFVu7w0NNXNqhcWgvw2YgZDYadliXkl14pa3WXw5jlCQ==}
+    dev: true
 
   /@types/js-yaml@4.0.9:
     resolution: {integrity: sha512-k4MGaQl5TGo/iipqb2UDG2UwjXziSWkh0uysQelTlJpX1qGlpUZYm8PnO4DxG1qBomtJUdYJ6qR6xdIah10JLg==}
@@ -23250,6 +23262,11 @@ packages:
 
   /js-base64@3.7.7:
     resolution: {integrity: sha512-7rCnleh0z2CkXhH67J8K1Ytz0b2Y+yxTPL+/KOJoa20hfnVQ/3/T6W/KflYI4bRHRagNeXeU2bkNGI3v1oS/lw==}
+
+  /js-cookie@3.0.5:
+    resolution: {integrity: sha512-cEiJEAEoIbWfCZYKWhVwFuvPX1gETRYPw6LlaTKoxD3s2AkXzkCjnp6h0V77ozyqj0jakteJ4YqDJT830+lVGw==}
+    engines: {node: '>=14'}
+    dev: false
 
   /js-sha256@0.9.0:
     resolution: {integrity: sha512-sga3MHh9sgQN2+pJ9VYZ+1LPwXOxuBJBA5nrR5/ofPfuiJBE2hnjsaN8se8JznOmGLN2p49Pe5U/ttafcs/apA==}
