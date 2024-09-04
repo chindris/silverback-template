@@ -653,7 +653,7 @@ test('Block - info grid', async () => {
 test('Conditional', async () => {
   const result = await fetch(gql`
     {
-      _loadDrupalPage(id: "52ee5cc7-0ac5-49b5-8550-ce59476bd4ac") {
+      _loadPage(id: "52ee5cc7-0ac5-49b5-8550-ce59476bd4ac") {
         content {
           __typename
           ... on BlockConditional {
@@ -672,7 +672,7 @@ test('Conditional', async () => {
   expect(result).toMatchInlineSnapshot(`
     {
       "data": {
-        "_loadDrupalPage": {
+        "_loadPage": {
           "content": [
             {
               "__typename": "BlockConditional",
