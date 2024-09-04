@@ -85,6 +85,26 @@ test('Page', async () => {
               },
               "tag": "link",
             },
+            {
+              "attributes": {
+                "content": "Page: complete | Silverback Drupal Template",
+                "href": null,
+                "name": null,
+                "property": "og:title",
+                "rel": null,
+              },
+              "tag": "meta",
+            },
+            {
+              "attributes": {
+                "content": "Paragraph",
+                "href": null,
+                "name": null,
+                "property": "og:description",
+                "rel": null,
+              },
+              "tag": "meta",
+            },
           ],
           "path": "/en/page-complete",
           "teaserImage": {
@@ -132,6 +152,26 @@ test('Page', async () => {
                 "rel": "canonical",
               },
               "tag": "link",
+            },
+            {
+              "attributes": {
+                "content": "Page: minimal | Silverback Drupal Template",
+                "href": null,
+                "name": null,
+                "property": "og:title",
+                "rel": null,
+              },
+              "tag": "meta",
+            },
+            {
+              "attributes": {
+                "content": "",
+                "href": null,
+                "name": null,
+                "property": "og:description",
+                "rel": null,
+              },
+              "tag": "meta",
             },
           ],
           "path": "/en/page-minimal",
