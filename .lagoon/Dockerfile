@@ -145,6 +145,7 @@ RUN mkdir -p /home/.cache/deno/gen && chmod -R 777 /home/.cache/deno
 
 # Decap config.
 ENV VITE_DECAP_REPO='AmazeeLabs/silverback-template'
+ARG LAGOON_GIT_BRANCH
 ENV VITE_DECAP_BRANCH="$LAGOON_GIT_BRANCH"
 
 CMD pnpm publisher

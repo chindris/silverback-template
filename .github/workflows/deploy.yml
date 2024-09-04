@@ -6,8 +6,12 @@ on:
       - dev
 
 jobs:
-  test:
+  deploy:
     name: Deploy
+    if:
+      secrets.NETLIFY_AUTH_TOKEN && ((github.ref == 'refs/heads/prod' &&
+      vars.NETLIFY_PROD_ID) || (github.ref == 'refs/heads/dev' &&
+      vars.NETLIFY_DEV_ID))
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -45,23 +49,10 @@ jobs:
           CLOUDINARY_CLOUDNAME: ${{ secrets.CLOUDINARY_CLOUDNAME }}
           GATSBY_PUBLIC_URL: ${{ vars.GATSBY_PUBLIC_URL }}
 
-      - name: Check for Netlify auth token
-        id: netlify-check
-        shell: bash
-        run: |
-          if [ "${{ secrets.NETLIFY_AUTH_TOKEN }}" != '' ]; then
-            echo "available=true" >> $GITHUB_OUTPUT;
-          else
-            echo "available=false" >> $GITHUB_OUTPUT;
-          fi
-
       - name: Deploy to dev
         run: pnpm netlify deploy --prod --filter "@custom/website"
         working-directory: ../deploy
-        if:
-          github.ref == 'refs/heads/dev' &&
-          steps.netlify-check.outputs.available == 'true' && vars.NETLIFY_DEV_ID
-          != ''
+        if: github.ref == 'refs/heads/dev' && vars.NETLIFY_DEV_ID != ''
         env:
           NETLIFY_SITE_ID: ${{ vars.NETLIFY_DEV_ID }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
@@ -69,10 +60,7 @@ jobs:
       - name: Deploy to prod
         run: pnpm netlify deploy --prod --filter "@custom/website"
         working-directory: ../deploy
-        if:
-          github.ref == 'refs/heads/prod' &&
-          steps.netlify-check.outputs.available == 'true' &&
-          vars.NETLIFY_PROD_ID != ''
+        if: github.ref == 'refs/heads/prod' && vars.NETLIFY_PROD_ID != ''
         env:
           NETLIFY_SITE_ID: ${{ vars.NETLIFY_PROD_ID }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
