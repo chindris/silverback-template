@@ -1,5 +1,6 @@
 import { useIntl } from '@amazeelabs/react-intl';
 import { PageFragment } from '@custom/schema';
+import Cookies from 'js-cookie';
 import React, { useEffect, useState } from 'react';
 
 import { UnreachableCaseError } from '../../utils/unreachable-case-error';
@@ -29,11 +30,10 @@ export function ContentEditLink({ url, type }: Props) {
 }
 
 function isLoggedIn(type: Props['type']): boolean {
-  if (
-    typeof window !== 'undefined' &&
-    'IS_STORYBOOK' in window &&
-    window.IS_STORYBOOK
-  ) {
+  if (typeof window === 'undefined') {
+    return false;
+  }
+  if ('IS_STORYBOOK' in window && window.IS_STORYBOOK) {
     return true;
   }
 
@@ -53,7 +53,7 @@ function isLoggedIn(type: Props['type']): boolean {
       return isLoggedInDrupal;
 
     case 'decap':
-      const isLoggedInDecap = !!sessionStorage.getItem('decap-cms-logged-in');
+      const isLoggedInDecap = !!Cookies.get('decap-cms-logged-in');
       return isLoggedInDecap;
 
     default:
