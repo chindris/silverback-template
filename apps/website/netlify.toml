@@ -22,3 +22,8 @@
 [[edge_functions]]
   path = "/.netlify/functions/github-proxy/*"
   function = "github-proxy-auth"
+
+[[headers]]
+  for = "/set-drupal-session"
+  [headers.values]
+    Content-Security-Policy = "frame-ancestors *"
