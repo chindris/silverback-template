@@ -353,6 +353,9 @@ importers:
       '@custom/ui':
         specifier: workspace:*
         version: link:../../packages/ui
+      image-dimensions:
+        specifier: ^2.3.0
+        version: 2.3.0
       netlify-cli:
         specifier: ^17.29.0
         version: 17.29.0(@types/node@18.15.13)
@@ -368,6 +371,9 @@ importers:
       react-server-dom-webpack:
         specifier: 19.0.0-rc.0
         version: 19.0.0-rc.0(react-dom@19.0.0-rc.0)(react@19.0.0-rc.0)(webpack@5.91.0)
+      sharp:
+        specifier: 0.33.1
+        version: 0.33.1
       tsx:
         specifier: ^4.7.1
         version: 4.7.1

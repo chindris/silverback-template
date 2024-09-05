@@ -6,4 +6,10 @@ export default {
       '@amazeelabs/bridge': path.resolve(__dirname, 'src/bridge.tsx'),
     },
   },
+  ssr: {
+    external: ['sharp', 'image-dimensions'],
+  },
+  optimizeDeps: {
+    exclude: ['sharp', 'image-dimensions'],
+  },
 };
