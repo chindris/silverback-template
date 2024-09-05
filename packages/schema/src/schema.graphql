@@ -1,6 +1,5 @@
 scalar Url @default @value(string: "")
 scalar Markup @default @value(string: "")
-scalar ImageSource @default @value(string: "")
 scalar JSONString @default @value(string: "{}")
 
 """
@@ -170,10 +169,7 @@ type BlockMarkup @type(id: "core/paragraph") {
 union Media @resolveEntityBundle = MediaImage | MediaVideo
 
 type MediaImage @type(id: "image") @entity(type: "media", bundle: "image") {
-  source(width: Int, height: Int, sizes: [[Int!]!]): ImageSource!
-    @resolveProperty(path: "field_media_image.entity")
-    @imageProps
-    @responsiveImage(height: "$height", width: "$width", sizes: "$sizes")
+  url: Url! @resolveProperty(path: "field_media_image.entity") @imageUrl
   alt: String! @resolveProperty(path: "field_media_image.alt")
 }
 

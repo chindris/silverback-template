@@ -14,6 +14,13 @@ import { z } from 'zod';
 
 import { transformMarkdown } from '../helpers/markdown';
 
+export const imagePath = (source: string) => {
+  // The Decap "media" directory is symlinked to "public/media" in Waku,
+  // thats why this works. The "Image" component in "@amazeelabs/image" will
+  // handle relative paths by prepending the `public` path to the URL.
+  return source.substring(`/apps/decap/`.length);
+};
+
 // =============================================================================
 // Decap CMS collection definition.
 // =============================================================================
@@ -164,7 +171,7 @@ const BlockMediaImageSchema = z
       __typename: 'BlockMedia',
       media: {
         __typename: 'MediaImage',
-        source: image,
+        url: imagePath(image),
         alt,
       },
       caption: caption,
@@ -190,7 +197,7 @@ export const pageSchema = z
           source
             ? {
                 __typename: 'MediaImage',
-                source: source,
+                url: imagePath(source),
                 alt: '',
               }
             : undefined,

@@ -28,7 +28,7 @@ test('Blocks', async () => {
             __typename
             ... on MediaImage {
               __typename
-              source
+              url
               alt
             }
             ... on MediaVideo {
@@ -136,7 +136,7 @@ test('Blocks', async () => {
               "media": {
                 "__typename": "MediaImage",
                 "alt": "A beautiful landscape.",
-                "source": "{"src":"http:\\/\\/127.0.0.1:8000\\/sites\\/default\\/files\\/2023-04\\/landscape.jpg","width":2200,"height":1414,"originalSrc":"http:\\/\\/127.0.0.1:8000\\/sites\\/default\\/files\\/2023-04\\/landscape.jpg"}",
+                "url": "http://127.0.0.1:8000/sites/default/files/2023-04/landscape.jpg",
               },
             },
             {
