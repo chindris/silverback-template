@@ -269,3 +269,17 @@ function custom_file_download($uri) {
     throw new AccessDeniedHttpException();
   }
 }
+
+/**
+ * Implements hook_views_data_alter().
+ */
+function custom_views_data_alter(array &$data) {
+  $data['node_field_revision']['custom_link_to_revision'] = [
+    'field' => [
+      'title' => t('Link to revision, with the node label as text.'),
+      'help' => t('Provide a link to the revision that matches the core content view EX (canonical or latest version url).'),
+      'id' => 'custom__node_revision_link',
+      'click sortable' => FALSE,
+    ],
+  ];
+}
