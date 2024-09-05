@@ -1,4 +1,5 @@
-import { Image, Link, PageFragment } from '@custom/schema';
+import { Image } from '@amazeelabs/image';
+import { Link, PageFragment } from '@custom/schema';
 import React from 'react';
 
 import { BreadCrumbs } from '../Molecules/Breadcrumbs';
@@ -21,8 +22,9 @@ function DefaultHero(props: NonNullable<PageFragment['hero']>) {
         {props.image ? (
           <Image
             alt={props.image.alt}
-            source={props.image.source}
+            src={props.image.url}
             priority={true}
+            width={3840}
             className="absolute inset-0 -z-10 h-full w-full object-cover"
             data-test-id={'hero-image'}
           />
@@ -73,7 +75,8 @@ function FormHero(props: NonNullable<PageFragment['hero']>) {
           <>
             <Image
               alt={props.image.alt}
-              source={props.image.source}
+              src={props.image.url}
+              width={3840}
               priority={true}
               className="absolute inset-0 h-full w-full object-cover"
               data-test-id={'hero-image'}
