@@ -6,6 +6,9 @@ display:
     display_options:
       title: 'Moderierter Inhalt'
       fields:
+        title:
+          label: Titel
+          separator: ', '
         type:
           label: Inhaltstyp
           separator: ', '

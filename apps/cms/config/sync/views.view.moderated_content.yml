@@ -4,7 +4,6 @@ status: true
 dependencies:
   module:
     - content_moderation
-    - custom
     - node
     - user
   enforced:
@@ -83,15 +82,16 @@ display:
           selected_actions:
             - node_delete_action
             - node_save_action
-        custom_link_to_revision:
-          id: custom_link_to_revision
+        title:
+          id: title
           table: node_field_revision
-          field: custom_link_to_revision
+          field: title
           relationship: none
           group_type: group
           admin_label: ''
           entity_type: node
-          plugin_id: custom__node_revision_link
+          entity_field: title
+          plugin_id: field
           label: Title
           exclude: false
           alter:
@@ -112,8 +112,8 @@ display:
             target: ''
             nl2br: false
             max_length: 0
-            word_boundary: true
-            ellipsis: true
+            word_boundary: false
+            ellipsis: false
             more_link: false
             more_link_text: ''
             more_link_path: ''
@@ -133,7 +133,20 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          text: link
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: true
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
         type:
           id: type
           table: node_field_data
