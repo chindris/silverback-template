@@ -546,8 +546,8 @@ importers:
   packages/ui:
     dependencies:
       '@amazeelabs/image':
-        specifier: ^1.2.1
-        version: 1.2.1(react-dom@19.0.0-rc.0)(react@19.0.0-rc.0)(webpack@5.91.0)
+        specifier: ^1.3.0
+        version: 1.3.0(react-dom@19.0.0-rc.0)(react@19.0.0-rc.0)(webpack@5.91.0)
       '@amazeelabs/react-intl':
         specifier: ^1.1.1
         version: 1.1.1(react-dom@19.0.0-rc.0)(react@19.0.0-rc.0)(typescript@5.4.5)(webpack@5.91.0)
@@ -1084,8 +1084,8 @@ packages:
       lodash-es: 4.17.21
     dev: false
 
-  /@amazeelabs/image@1.2.1(react-dom@19.0.0-rc.0)(react@19.0.0-rc.0)(webpack@5.91.0):
-    resolution: {integrity: sha512-CQxv6RUhOiCKhKRHNekR1enlaVwkkBSes8nRF0+9FwhEjUhZNz4kmY6xrT65gLJ3d2wPvTSnOwBG5fNjP02tQQ==}
+  /@amazeelabs/image@1.3.0(react-dom@19.0.0-rc.0)(react@19.0.0-rc.0)(webpack@5.91.0):
+    resolution: {integrity: sha512-pcI62fjEEhwcf1Z9Bvka1amh0oZ/XWIOJ42uWlffpU3b2nf73+112Cc/r9kK8sd9WbudV9nFCl2uIqJDfvaF9g==}
     peerDependencies:
       react: 19.0.0-rc.0
       react-dom: 19.0.0-rc.0
