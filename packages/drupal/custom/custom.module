@@ -14,6 +14,8 @@ use Drupal\media\Entity\Media;
 use Drupal\silverback_gutenberg\LinkProcessor;
 use Drupal\user\Entity\Role;
 use Drupal\user\UserInterface;
+use Drupal\Core\Url;
+use Drupal\Core\Link;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 /**
@@ -267,5 +269,38 @@ function _custom_key_auth_form_access(UserInterface $user): AccessResult {
 function custom_file_download($uri) {
   if (str_starts_with($uri, 'private://') && str_ends_with($uri, '.key')) {
     throw new AccessDeniedHttpException();
+  }
+}
+
+/**
+ * Implements hook_preprocess_views_view_field().
+ *
+ *  Provide the same UX as the core 'content' view for the linked title field.
+ *  As the 'content' view is replaced by the 'moderated_content' one.
+ *
+ *  - Use the latest revision route if the node has a pending revision.
+ *  - Otherwise, use the canonical node route.
+ */
+function custom_preprocess_views_view_field(&$variables) {
+  if (
+    $variables['view']->id() === 'moderated_content' &&
+    $variables['field']->field === 'title'
+  ) {
+    $node = $variables['row']->_entity;
+    if (!$node || !$node->getRevisionId()) {
+      return;
+    }
+    $langcode = $node->language()->getId();
+    $rowLangcode = $variables['row']->node_field_revision_langcode;
+    $translatedNode = $node;
+    if ($rowLangcode !== $langcode && $node->hasTranslation($rowLangcode)) {
+      $translatedNode = $node->getTranslation($rowLangcode);
+    }
+    /** @var \Drupal\content_moderation\ModerationInformationInterface $moderation_info */
+    $moderation_info = \Drupal::service('content_moderation.moderation_information');
+    $url = $moderation_info->hasPendingRevision($translatedNode) ?
+      Url::fromRoute('entity.node.latest_version', ['node' => $translatedNode->id()]) :
+      $translatedNode->toUrl();
+    $variables['output'] = Link::fromTextAndUrl($translatedNode->getTitle(), $url);
   }
 }
