@@ -2,7 +2,7 @@
   "extends": ["//"],
   "tasks": {
     "prep": {
-      "dependsOn": ["prep:scripts", "prep:schema", "@custom/preview#prep"]
+      "dependsOn": ["prep:scripts", "prep:schema"]
     },
     "prep:scripts": {
       "dependsOn": ["^prep"],
