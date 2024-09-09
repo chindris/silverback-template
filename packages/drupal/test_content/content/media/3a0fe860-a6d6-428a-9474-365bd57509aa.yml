@@ -7,6 +7,9 @@ _meta:
   depends:
     bbf1a994-9ff6-44a6-8842-6481bc83dad6: file
 default:
+  revision_user:
+    -
+      target_id: 1
   status:
     -
       value: true

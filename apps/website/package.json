@@ -15,6 +15,7 @@
     "@custom/decap": "workspace:*",
     "@custom/schema": "workspace:*",
     "@custom/ui": "workspace:*",
+    "fs-extra": "^11.2.0",
     "gatsby": "^5.13.1",
     "gatsby-plugin-layout": "^4.13.0",
     "gatsby-plugin-manifest": "^5.13.0",
@@ -53,7 +54,7 @@
     "serve": "netlify dev --cwd=. --dir=public --port=8000",
     "dev": "pnpm clean && publisher",
     "open": "open http://127.0.0.1:8000/___status/",
-    "gatsby:develop": "ENABLE_GATSBY_REFRESH_ENDPOINT=true pnpm gatsby develop",
+    "gatsby:develop": "pnpm gatsby develop",
     "gatsby:refresh": "curl -X POST http://localhost:8000/__refresh",
     "clean": "gatsby clean"
   }

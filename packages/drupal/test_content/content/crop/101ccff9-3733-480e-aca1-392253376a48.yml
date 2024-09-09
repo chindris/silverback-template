@@ -1,0 +1,28 @@
+_meta:
+  version: '1.0'
+  entity_type: crop
+  uuid: 101ccff9-3733-480e-aca1-392253376a48
+  bundle: focal_point
+  default_langcode: en
+default:
+  entity_id:
+    -
+      value: 5
+  entity_type:
+    -
+      value: file
+  uri:
+    -
+      value: 'public://2023-04/decoupled-architecture.png'
+  x:
+    -
+      value: 1000
+  'y':
+    -
+      value: 549
+  revision_timestamp:
+    -
+      value: 1725914614
+  revision_uid:
+    -
+      target_id: 1
