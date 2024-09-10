@@ -4,13 +4,7 @@ export default {
   resolve: {
     alias: {
       '@amazeelabs/bridge': path.resolve(__dirname, 'src/bridge.tsx'),
+      'fs': 'node:fs'
     },
-  },
-
-  ssr: {
-    external: ['fs'],
-  },
-  optimizeDeps: {
-    exclude: ['fs'],
   },
 };
