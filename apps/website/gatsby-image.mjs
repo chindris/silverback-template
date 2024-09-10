@@ -17,7 +17,7 @@ function determineCropFocus(filename) {
 }
 
 function calculateCropArea(width, height, x, y) {
-  if ((x === 0 && y === 0) || (width === 0 || height === 0)) {
+  if ((x === 0 && y === 0) || width === 0 || height === 0) {
     return AREA_FALLBACK;
   }
 
@@ -29,12 +29,12 @@ function calculateCropArea(width, height, x, y) {
   const adjustedY = y === height ? y - 1 : y;
   const adjustedX = x === width ? x - 1 : x;
 
-  const row = Math.floor(adjustedY / height * 3);
-  const col = Math.floor(adjustedX / width * 3);
+  const row = Math.floor((adjustedY / height) * 3);
+  const col = Math.floor((adjustedX / width) * 3);
   const areas = [
-    ['northwest', 'north', 'northeast'],
-    ['west', 'center', 'east'],
-    ['southwest', 'south', 'southeast'],
+    ['NORTHWEST', 'NORTH', 'NORTHEAST'],
+    ['WEST', 'CENTER', 'EAST'],
+    ['SOUTHWEST', 'SOUTH', 'SOUTHEAST'],
   ];
 
   // If we met an exception in the calculation of the area,
@@ -73,13 +73,13 @@ export const responsiveImageSharp = async (originalImage, args, context) => {
     const breakpoints =
       args.sizes && args.sizes.length > 0
         ? args.sizes.map((item) => {
-          // If the sizes array contains tuples, then just return the first item
-          // to be added to the breakpoints elements.
-          if (Array.isArray(item)) {
-            return item[0];
-          }
-          return item;
-        })
+            // If the sizes array contains tuples, then just return the first item
+            // to be added to the breakpoints elements.
+            if (Array.isArray(item)) {
+              return item[0];
+            }
+            return item;
+          })
         : undefined;
 
     const fluidFileResult = await fluid({
@@ -90,11 +90,18 @@ export const responsiveImageSharp = async (originalImage, args, context) => {
         quality: 90,
         srcSetBreakpoints: breakpoints,
         cropFocus:
-          determineCropFocus(responsiveImage.src) || calculateCropArea(width, height, responsiveImage.focalPoint.x, responsiveImage.focalPoint.y),
+          determineCropFocus(responsiveImage.src) ||
+          calculateCropArea(
+            width,
+            height,
+            responsiveImage.focalPoint.x,
+            responsiveImage.focalPoint.y,
+          ),
       },
       reporter: reporter,
       cache: cache,
     });
+    console.log('fluidFileResult', fluidFileResult);
     responsiveImageResult.src = fluidFileResult.src;
     responsiveImageResult.width = fluidFileResult.presentationWidth;
     responsiveImageResult.height = fluidFileResult.presentationHeight;
