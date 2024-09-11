@@ -61,7 +61,7 @@ export const CardItem = ({
             src={teaserImage.url}
             width={400}
             height={300}
-            className="w-full aspect-[4/3]"
+            className="w-full"
           />
         ) : (
           <div className="aspect-[4/3] bg-indigo-200" />
