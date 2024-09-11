@@ -15,7 +15,6 @@
     "@custom/decap": "workspace:*",
     "@custom/schema": "workspace:*",
     "@custom/ui": "workspace:*",
-    "fs-extra": "^11.2.0",
     "gatsby": "^5.13.1",
     "gatsby-plugin-layout": "^4.13.0",
     "gatsby-plugin-manifest": "^5.13.0",

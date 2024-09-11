@@ -6,20 +6,11 @@
 // TS file name should be different from gastby-config.ts, otherwise Gatsby will
 // pick it up instead of the JS file.
 
-import { responsiveImageSharp } from './gatsby-image.mjs';
-
 process.env.NETLIFY_URL = process.env.NETLIFY_URL || 'http://127.0.0.1:8000';
 
 process.env.CLOUDINARY_API_KEY = process.env.CLOUDINARY_API_KEY || 'test';
 process.env.CLOUDINARY_API_SECRET = process.env.CLOUDINARY_API_SECRET || 'test';
 process.env.CLOUDINARY_CLOUDNAME = process.env.CLOUDINARY_CLOUDNAME || 'demo';
-
-async function saveResponsiveImageSharp(node, args, context) {
-  console.log('saving responsive image');
-  if (node) {
-    return await responsiveImageSharp(node, args, context);
-  }
-}
 
 /**
  *
@@ -66,7 +57,6 @@ const plugins = [
     resolve: '@amazeelabs/gatsby-source-silverback',
     options: {
       schema_configuration: './graphqlrc.yml',
-      directives: { responsiveImage: saveResponsiveImageSharp },
     },
   },
   '@custom/cms',
