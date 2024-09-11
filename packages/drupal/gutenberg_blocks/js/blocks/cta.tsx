@@ -29,10 +29,10 @@ const ArrowRightIcon = () => (
 );
 
 registerBlockType<{
-  url: string;
+  url?: string;
   text: string;
-  'data-id': string;
-  'data-entity-type': string;
+  'data-id'?: string;
+  'data-entity-type'?: string;
   openInNewTab: boolean;
   icon: string;
   iconPosition: string;
@@ -46,6 +46,7 @@ registerBlockType<{
     },
     text: {
       type: 'string',
+      default: '',
     },
     // To have an easier integration with entity usage, we also retrieve and
     // store the uuid (data-id) and the entity type of internal links.
@@ -57,6 +58,7 @@ registerBlockType<{
     },
     openInNewTab: {
       type: 'boolean',
+      default: false,
     },
     icon: {
       type: 'string',

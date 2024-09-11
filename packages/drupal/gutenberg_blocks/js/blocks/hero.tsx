@@ -15,14 +15,14 @@ const { t: __ } = Drupal;
 const { setPlainTextAttribute } = silverbackGutenbergUtils;
 
 registerBlockType<{
-  mediaEntityIds: [string];
+  mediaEntityIds?: [string];
   headline: string;
   lead: string;
-  ctaUrl: string;
+  ctaUrl?: string;
   ctaText: string;
   ctaOpenInNewTab: boolean;
   showLinkControl: boolean;
-  formId: string;
+  formId?: string;
 }>('custom/hero', {
   title: __('Hero'),
   icon: 'cover-image',
@@ -33,18 +33,22 @@ registerBlockType<{
     },
     headline: {
       type: 'string',
+      default: '',
     },
     lead: {
       type: 'string',
+      default: '',
     },
     ctaUrl: {
       type: 'string',
     },
     ctaText: {
       type: 'string',
+      default: '',
     },
     ctaOpenInNewTab: {
       type: 'boolean',
+      default: false,
     },
     showLinkControl: {
       type: 'boolean',

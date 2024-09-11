@@ -15,9 +15,9 @@ const { t: __ } = Drupal;
 const { setPlainTextAttribute } = silverbackGutenbergUtils;
 
 registerBlockType<{
-  mediaEntityIds: [string];
+  mediaEntityIds?: [string];
   title: string;
-  ctaUrl: string;
+  ctaUrl?: string;
   ctaText: string;
 }>('custom/image-teaser', {
   title: __('Image Teaser'),
@@ -30,12 +30,14 @@ registerBlockType<{
     },
     title: {
       type: 'string',
+      default: '',
     },
     ctaUrl: {
       type: 'string',
     },
     ctaText: {
       type: 'string',
+      default: '',
     },
   },
   edit: (props) => {

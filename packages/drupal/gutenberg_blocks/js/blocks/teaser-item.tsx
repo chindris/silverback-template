@@ -5,9 +5,9 @@ import {
 import { registerBlockType } from 'wordpress__blocks';
 
 registerBlockType<{
-  url: string;
-  uuid: string;
-  entityType: string;
+  url?: string;
+  uuid?: string;
+  entityType?: string;
 }>('custom/teaser-item', {
   title: 'Teaser item',
   icon: 'slides',

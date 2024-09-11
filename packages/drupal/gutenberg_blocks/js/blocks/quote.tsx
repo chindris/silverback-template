@@ -12,7 +12,7 @@ registerBlockType<{
   quote: string;
   author: string;
   role: string;
-  mediaEntityIds: [string];
+  mediaEntityIds?: [string];
 }>(`custom/quote`, {
   title: __('Quote'),
   icon: 'format-quote',
@@ -20,12 +20,15 @@ registerBlockType<{
   attributes: {
     quote: {
       type: 'string',
+      default: '',
     },
     author: {
       type: 'string',
+      default: '',
     },
     role: {
       type: 'string',
+      default: '',
     },
     mediaEntityIds: {
       type: 'array',

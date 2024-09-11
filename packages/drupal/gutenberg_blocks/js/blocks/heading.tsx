@@ -35,6 +35,7 @@ registerBlockType<{
     },
     text: {
       type: 'string',
+      default: '',
     },
   },
   supports: {

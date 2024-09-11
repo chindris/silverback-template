@@ -12,7 +12,7 @@ const { t: __ } = Drupal;
 
 registerBlockType<{
   title: string;
-  icon: string;
+  icon?: string;
 }>('custom/accordion-item-text', {
   title: 'Accordion Item Text',
   icon: 'text',
@@ -21,6 +21,7 @@ registerBlockType<{
   attributes: {
     title: {
       type: 'string',
+      default: '',
     },
     icon: {
       type: 'string',

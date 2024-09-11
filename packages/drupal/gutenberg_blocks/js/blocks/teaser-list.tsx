@@ -13,8 +13,8 @@ const { setPlainTextAttribute } = silverbackGutenbergUtils;
 registerBlockType<{
   layout: string;
   buttonText: string;
-  contentHubEnabled: boolean;
-  limit: string;
+  contentHubEnabled?: boolean;
+  limit: number;
   titleFilter: string;
 }>('custom/teaser-list', {
   title: __('Teaser list'),
@@ -27,15 +27,18 @@ registerBlockType<{
     },
     buttonText: {
       type: 'string',
+      default: '',
     },
     contentHubEnabled: {
       type: 'boolean',
     },
     limit: {
-      type: 'string',
+      type: 'number',
+      default: 0,
     },
     titleFilter: {
       type: 'string',
+      default: '',
     },
   },
   edit: (props) => {
@@ -101,7 +104,7 @@ registerBlockType<{
                 )}
                 onChange={(limit) => {
                   setAttributes({
-                    limit,
+                    limit: parseInt(limit),
                   });
                 }}
                 value={limit}

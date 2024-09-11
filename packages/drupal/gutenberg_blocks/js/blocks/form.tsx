@@ -5,7 +5,7 @@ import { PanelBody, SelectControl } from 'wordpress__components';
 const { t: __ } = Drupal;
 
 registerBlockType<{
-  formId: string;
+  formId?: string;
 }>(`custom/form`, {
   title: __('Form'),
   icon: 'media-document',

@@ -11,7 +11,7 @@ const { t: __ } = Drupal;
 registerBlockType<{
   heading: string;
   description: string;
-  mediaEntityIds: [string];
+  mediaEntityIds?: [string];
   url: string;
 }>('custom/demo-block', {
   title: 'Demo Block',
@@ -20,15 +20,18 @@ registerBlockType<{
   attributes: {
     heading: {
       type: 'string',
+      default: '',
     },
     description: {
       type: 'string',
+      default: '',
     },
     mediaEntityIds: {
       type: 'array',
     },
     url: {
       type: 'string',
+      default: '',
     },
   },
 

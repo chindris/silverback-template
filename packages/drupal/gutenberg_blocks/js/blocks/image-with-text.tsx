@@ -8,7 +8,7 @@ import { DrupalMediaEntity } from '../utils/drupal-media';
 const { t: __ } = Drupal;
 
 registerBlockType<{
-  mediaEntityIds: [string];
+  mediaEntityIds?: [string];
   imagePosition: string;
 }>('custom/image-with-text', {
   title: __('Image with Text'),
