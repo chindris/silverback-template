@@ -7,4 +7,10 @@ export default {
       fs: 'node:fs',
     },
   },
+  ssr: {
+    external: ['sharp', 'image-dimensions'],
+  },
+  optimizeDeps: {
+    exclude: ['sharp', 'image-dimensions'],
+  },
 };

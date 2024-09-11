@@ -1,6 +1,7 @@
+import { ImageSettings } from '@amazeelabs/image';
 import { IntlProvider } from '@amazeelabs/react-intl';
 import { FrameQuery, Locale, Operation } from '@custom/schema';
-import React, { PropsWithChildren } from 'react';
+import React, { ComponentProps, PropsWithChildren } from 'react';
 
 import translationSources from '../../../build/translatables.json';
 import { useLocale } from '../../utils/locale';
@@ -24,7 +25,10 @@ function translationsMap(
   );
 }
 
-export function Frame({ children }: PropsWithChildren) {
+export function Frame({
+  children,
+  ...imageSettings
+}: PropsWithChildren<ComponentProps<typeof ImageSettings>>) {
   const locale = useLocale();
   return (
     <Operation id={FrameQuery} all={true}>
@@ -53,13 +57,15 @@ export function Frame({ children }: PropsWithChildren) {
             ]),
           );
           return (
-            <IntlProvider locale={locale} messages={messages}>
-              <TranslationsProvider>
-                <Header />
-                <PageTransitionWrapper>{children}</PageTransitionWrapper>
-                <Footer />
-              </TranslationsProvider>
-            </IntlProvider>
+            <ImageSettings {...imageSettings}>
+              <IntlProvider locale={locale} messages={messages}>
+                <TranslationsProvider>
+                  <Header />
+                  <PageTransitionWrapper>{children}</PageTransitionWrapper>
+                  <Footer />
+                </TranslationsProvider>
+              </IntlProvider>
+            </ImageSettings>
           );
         }
       }}

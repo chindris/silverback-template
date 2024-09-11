@@ -1,3 +1,4 @@
+'use client';
 import { Locale, MetaTag } from '@custom/schema';
 import React, { useEffect } from 'react';
 

@@ -23,6 +23,7 @@ import { BrokenLinkHandler } from './broken-link-handler.js';
 import { ClientExecutors } from './executors-client.js';
 import { ServerExecutors, serverExecutors } from './executors-server.js';
 import { query } from './query.js';
+import { drupalUrl, frontendUrl } from './utils.js';
 
 async function queryAll<TOperation extends AnyOperationId>(
   operation: TOperation,
@@ -51,7 +52,9 @@ export default createPages(async ({ createPage, createLayout }) => {
         >
           <ServerExecutors>
             <ClientExecutors>
-              <Frame>{children}</Frame>
+              <Frame alterSrc={(src) => src.replace(frontendUrl, drupalUrl)}>
+                {children}
+              </Frame>
             </ClientExecutors>
           </ServerExecutors>
         </LocationProvider>

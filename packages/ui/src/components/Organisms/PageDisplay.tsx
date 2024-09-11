@@ -1,4 +1,3 @@
-'use client';
 import { BlockConditionalFragment, PageFragment } from '@custom/schema';
 import React from 'react';
 

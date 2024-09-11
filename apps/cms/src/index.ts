@@ -1,6 +1,6 @@
 import type { AnyOperationId, OperationVariables } from '@custom/schema';
 
-export function createDrupalExecutor(host: string) {
+export function createDrupalExecutor(host: string, frontendUrl: string) {
   return async function <OperationId extends AnyOperationId>(
     id: OperationId,
     variables?: OperationVariables<OperationId>,
@@ -10,7 +10,7 @@ export function createDrupalExecutor(host: string) {
     const publicUrl =
       typeof window !== 'undefined'
         ? new URL(window.location.href)
-        : new URL(process.env.WAKU_PUBLIC_URL || 'http://127.0.0.1:8000');
+        : new URL(frontendUrl);
     const headers = {
       'SLB-Forwarded-Proto': publicUrl.protocol.slice(0, -1),
       'SLB-Forwarded-Host': publicUrl.hostname,

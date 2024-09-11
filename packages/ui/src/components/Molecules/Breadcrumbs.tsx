@@ -1,3 +1,4 @@
+'use client';
 import { Link } from '@custom/schema';
 import {
   ChevronRightIcon,

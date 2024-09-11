@@ -3,14 +3,14 @@ import { createDecapExecutor } from '@custom/decap';
 import { OperationExecutorsProvider } from '@custom/schema';
 import React, { PropsWithChildren } from 'react';
 
-import { drupalUrl } from './utils.js';
+import { drupalUrl, frontendUrl } from './utils.js';
 
 export const serverExecutors = [
   {
     executor: createDecapExecutor('./node_modules/@custom/decap'),
   },
   {
-    executor: createDrupalExecutor(drupalUrl),
+    executor: createDrupalExecutor(drupalUrl, frontendUrl),
   },
 ];
 
