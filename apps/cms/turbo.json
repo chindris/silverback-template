@@ -42,7 +42,6 @@
     "test:integration": {
       "dependsOn": [
         "prep",
-        "@custom/preview#prep",
         "@custom-tests/e2e#test:integration:drupal",
         "@custom-tests/schema#test:integration"
       ]

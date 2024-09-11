@@ -20,7 +20,7 @@
     "turbo:test": "pnpm turbo:local && pnpm tb test:unit --output-logs=new-only && pnpm tb test:integration --output-logs=new-only --concurrency=1",
     "turbo:test:force": "pnpm tb test:unit --output-logs=new-only --force && pnpm tb test:integration --output-logs=new-only --concurrency=1 --force",
     "turbo:test:quick": "pnpm turbo:local && pnpm tb test:unit --output-logs=new-only",
-    "turbo:prep": "pnpm turbo:local && pnpm tb prep --output-logs=new-only",
+    "turbo:prep": "pnpm turbo:local && pnpm turbo prep --output-logs=new-only",
     "turbo:prep:force": "rm -f apps/cms/web/sites/default/files/.sqlite && pnpm tb prep --force",
     "gutenberg:generate": "pnpm run --filter \"@custom/gutenberg_blocks\" gutenberg:generate"
   },

@@ -5,7 +5,6 @@ import {
 } from '@custom/schema';
 import { SourceResolvers } from '@custom/schema/source';
 import merge from 'deepmerge';
-import { readFileSync } from 'fs';
 import {
   buildSchema,
   graphql,
@@ -17,6 +16,9 @@ import {
 } from 'graphql';
 import { z } from 'zod';
 
+import rawOperations from '../node_modules/@custom/schema/build/operations.json?raw';
+import rawSchema from '../node_modules/@custom/schema/build/schema.graphql?raw';
+
 function isImageSource(type: GraphQLOutputType) {
   if (type instanceof GraphQLNonNull) {
     return isImageSource(type.ofType);
@@ -26,17 +28,10 @@ function isImageSource(type: GraphQLOutputType) {
 
 export function createExecutor(
   registries: Array<SourceResolvers>,
-  basePath: string = '.',
 ): <TOperation extends AnyOperationId>(
   operation: TOperation,
   variables: OperationVariables<TOperation>,
 ) => Promise<OperationResult<TOperation>> {
-  const rawOperations = readFileSync(
-    `${basePath}/node_modules/@custom/schema/build/operations.json`,
-  ).toString();
-  const rawSchema = readFileSync(
-    `${basePath}/node_modules/@custom/schema/build/schema.graphql`,
-  ).toString();
   const registry = merge.all<SourceResolvers>(registries);
   const schema: GraphQLSchema = buildSchema(rawSchema);
   const operations = z
