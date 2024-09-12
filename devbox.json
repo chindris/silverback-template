@@ -6,7 +6,6 @@
   },
   "packages": [
     "nodejs@18.19.0",
-    "nodePackages.pnpm@8.6.12",
     "php@8.2",
     "php82Packages.composer@2",
     "php82Extensions.xdebug@3"
