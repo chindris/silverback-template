@@ -66,7 +66,9 @@ jobs:
           exitOnceUploaded: true
           externals: |
             static/stories/webforms/**
-        if: ${{ steps.chromatic-check.outputs.available == 'true' }}
+        if:
+          ${{ steps.chromatic-check.outputs.available == 'true' &&
+          github.ref  != 'refs/heads/dev' }}
 
       - name: Deploy storybook to netlify
         run:

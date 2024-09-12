@@ -1,4 +1,9 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-pnpm commitlint --edit "$1"
+if [ -f .devbox/virtenv/nodejs/corepack-bin/pnpm ]; then
+  # For devbox users making Git commits from IDE.
+  .devbox/virtenv/nodejs/corepack-bin/pnpm commitlint --edit "$1"
+else
+  pnpm commitlint --edit "$1"
+fi
