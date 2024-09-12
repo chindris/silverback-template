@@ -1,0 +1,28 @@
+_meta:
+  version: '1.0'
+  entity_type: crop
+  uuid: 10743cfc-604c-4a07-baf3-e267d9c89ff6
+  bundle: focal_point
+  default_langcode: en
+default:
+  entity_id:
+    -
+      value: 3
+  entity_type:
+    -
+      value: file
+  uri:
+    -
+      value: 'public://media-icons/generic/generic.png'
+  x:
+    -
+      value: 90
+  'y':
+    -
+      value: 90
+  revision_timestamp:
+    -
+      value: 1725914614
+  revision_uid:
+    -
+      target_id: 1

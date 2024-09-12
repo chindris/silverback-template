@@ -53,7 +53,7 @@
     "serve": "netlify dev --cwd=. --dir=public --port=8000",
     "dev": "pnpm clean && publisher",
     "open": "open http://127.0.0.1:8000/___status/",
-    "gatsby:develop": "ENABLE_GATSBY_REFRESH_ENDPOINT=true pnpm gatsby develop",
+    "gatsby:develop": "pnpm gatsby develop",
     "gatsby:refresh": "curl -X POST http://localhost:8000/__refresh",
     "clean": "gatsby clean"
   }
