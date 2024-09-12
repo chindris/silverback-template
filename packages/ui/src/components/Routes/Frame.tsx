@@ -60,6 +60,11 @@ export function Frame({
             <ImageSettings {...imageSettings}>
               <IntlProvider locale={locale} messages={messages}>
                 <TranslationsProvider>
+                  <link
+                    rel="icon"
+                    href="/images/favicon.ico"
+                    type="image/x-icon"
+                  />
                   <Header />
                   <PageTransitionWrapper>{children}</PageTransitionWrapper>
                   <Footer />
