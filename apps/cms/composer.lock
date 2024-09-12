@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8fa136f788cce1474b561f9f2f6d29af",
+    "content-hash": "100235f9d6430bec6fcde58e71363c55",
     "packages": [
         {
             "name": "amazeeio/drupal_integrations",
@@ -287,20 +287,20 @@
         },
         {
             "name": "amazeelabs/silverback-cli",
-            "version": "2.9.9",
+            "version": "2.9.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/AmazeeLabs/silverback-cli.git",
-                "reference": "e0427d57cfa0137672ff8290110a0f463612ce5b"
+                "reference": "5189be4b6646b000c022d968030bb5a2d5479747"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AmazeeLabs/silverback-cli/zipball/e0427d57cfa0137672ff8290110a0f463612ce5b",
-                "reference": "e0427d57cfa0137672ff8290110a0f463612ce5b",
+                "url": "https://api.github.com/repos/AmazeeLabs/silverback-cli/zipball/5189be4b6646b000c022d968030bb5a2d5479747",
+                "reference": "5189be4b6646b000c022d968030bb5a2d5479747",
                 "shasum": ""
             },
             "require": {
-                "drush/drush": "^10 || ^11 || ^12",
+                "drush/drush": "^10 || ^11 || ^12 || ^13",
                 "ext-json": "*",
                 "nelexa/zip": "^4.0.2",
                 "vlucas/phpdotenv": "^5.6.0"
@@ -339,9 +339,9 @@
             "description": "Scaffolder for Amazee Silverback projects.",
             "support": {
                 "issues": "https://github.com/AmazeeLabs/silverback-cli/issues",
-                "source": "https://github.com/AmazeeLabs/silverback-cli/tree/2.9.9"
+                "source": "https://github.com/AmazeeLabs/silverback-cli/tree/2.9.13"
             },
-            "time": "2024-01-03T06:30:01+00:00"
+            "time": "2024-09-10T13:47:29+00:00"
         },
         {
             "name": "amazeelabs/silverback_autosave",

@@ -34,7 +34,7 @@
     "amazeelabs/proxy-drupal-core": "^1.1.12",
     "amazeelabs/proxy-graphql": "^1.1.7",
     "amazeelabs/proxy-gutenberg": "^1.3",
-    "amazeelabs/silverback-cli": "^2.9.4",
+    "amazeelabs/silverback-cli": "^2.9.13",
     "amazeelabs/silverback_autosave": "^1.1",
     "amazeelabs/silverback_campaign_urls": "^1.0.5",
     "amazeelabs/silverback_cloudinary": "^1.3.0",

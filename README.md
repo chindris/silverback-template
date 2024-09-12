@@ -108,13 +108,15 @@ either (or both), follow these two steps:
 
 ## Installation
 
+Tip: The easiest way to set up a working environment for the project is
+[devbox](docs/devbox.md).
+
+Install dependencies and prepare packages:
+
 ```
 pnpm i
 pnpm turbo:prep
 ```
-
-Additionally, you can run `pnpm turbo:test` to make sure that your system is
-fully compatible with the project.
 
 Tip: Run `pnpm turbo:prep:force` after switching branches to avoid issues.
 
