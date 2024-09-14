@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "22551efe3b21406f6a65c1b69286bc83",
+    "content-hash": "f6e4fedffec29e9bf8369101bc989a57",
     "packages": [
         {
             "name": "amazeeio/drupal_integrations",
@@ -287,20 +287,20 @@
         },
         {
             "name": "amazeelabs/silverback-cli",
-            "version": "2.9.9",
+            "version": "2.9.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/AmazeeLabs/silverback-cli.git",
-                "reference": "e0427d57cfa0137672ff8290110a0f463612ce5b"
+                "reference": "5189be4b6646b000c022d968030bb5a2d5479747"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AmazeeLabs/silverback-cli/zipball/e0427d57cfa0137672ff8290110a0f463612ce5b",
-                "reference": "e0427d57cfa0137672ff8290110a0f463612ce5b",
+                "url": "https://api.github.com/repos/AmazeeLabs/silverback-cli/zipball/5189be4b6646b000c022d968030bb5a2d5479747",
+                "reference": "5189be4b6646b000c022d968030bb5a2d5479747",
                 "shasum": ""
             },
             "require": {
-                "drush/drush": "^10 || ^11 || ^12",
+                "drush/drush": "^10 || ^11 || ^12 || ^13",
                 "ext-json": "*",
                 "nelexa/zip": "^4.0.2",
                 "vlucas/phpdotenv": "^5.6.0"
@@ -339,9 +339,9 @@
             "description": "Scaffolder for Amazee Silverback projects.",
             "support": {
                 "issues": "https://github.com/AmazeeLabs/silverback-cli/issues",
-                "source": "https://github.com/AmazeeLabs/silverback-cli/tree/2.9.9"
+                "source": "https://github.com/AmazeeLabs/silverback-cli/tree/2.9.13"
             },
-            "time": "2024-01-03T06:30:01+00:00"
+            "time": "2024-09-10T13:47:29+00:00"
         },
         {
             "name": "amazeelabs/silverback_autosave",
@@ -3512,32 +3512,39 @@
         },
         {
             "name": "drupal/graphql",
-            "version": "4.6.0",
+            "version": "4.9.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/graphql.git",
-                "reference": "8.x-4.6"
+                "reference": "8.x-4.9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/graphql-8.x-4.6.zip",
-                "reference": "8.x-4.6",
-                "shasum": "629eb1d405ea35460e6f94bd46a20316adf4fbe9"
+                "url": "https://ftp.drupal.org/files/projects/graphql-8.x-4.9.zip",
+                "reference": "8.x-4.9",
+                "shasum": "8045e8f07e82a55f229235bb614ba7df87e718ef"
             },
             "require": {
-                "drupal/core": "^9.3 || ^10",
-                "drupal/typed_data": "*",
-                "php": ">=7.3",
+                "drupal/core": "^10.2 || ^11",
+                "drupal/typed_data": "^1.0 || ^2.0",
+                "php": ">=8.1",
                 "webonyx/graphql-php": "^14.8.0"
             },
             "require-dev": {
-                "drupal/node-node": "*"
+                "drupal/node-node": "*",
+                "drupal/redirect": "^1.0",
+                "jangregor/phpstan-prophecy": "^1.0.0",
+                "mglaman/phpstan-drupal": "^1.1.2",
+                "phpstan/extension-installer": "^1.0",
+                "phpstan/phpstan": "^1.11.2",
+                "phpstan/phpstan-deprecation-rules": "^1.0.0",
+                "phpstan/phpstan-phpunit": "^1.0.0"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-4.6",
-                    "datestamp": "1699463388",
+                    "version": "8.x-4.9",
+                    "datestamp": "1726057421",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -3562,7 +3569,7 @@
                     "homepage": "https://www.drupal.org/user/612814"
                 },
                 {
-                    "name": "Kingdutch",
+                    "name": "kingdutch",
                     "homepage": "https://www.drupal.org/user/1868952"
                 },
                 {
@@ -16359,5 +16366,8 @@
         "php": "^8.2 <8.3"
     },
     "platform-dev": [],
+    "platform-overrides": {
+        "php": "8.2"
+    },
     "plugin-api-version": "2.6.0"
 }
