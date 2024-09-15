@@ -22,3 +22,6 @@
 [[edge_functions]]
   path = "/.netlify/functions/github-proxy/*"
   function = "github-proxy-auth"
+
+[[plugins]]
+package = "@netlify/plugin-gatsby"
