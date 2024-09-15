@@ -6,6 +6,7 @@ import {
   ViewPageQuery,
 } from '@custom/schema';
 import Landscape from '@stories/landscape.jpg?as=metadata';
+import Portrait from '@stories/portrait.jpg?as=metadata';
 import { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
@@ -112,7 +113,8 @@ export const FullHero = {
         headline: 'Page Hero Headline',
         lead: 'A longer lead text that even might break into multiple lines.',
         image: {
-          source: image(Landscape, { width: 2000 }),
+          landscape: image(Landscape, { width: 2000 }),
+          portrait: image(Portrait, { width: 2000 }),
           alt: 'Stock photo landscape hero.',
         },
         ctaUrl: '/test' as Url,
@@ -132,7 +134,8 @@ export const FormHero = {
         headline: 'Page Hero Headline',
         lead: 'A longer lead text that even might break into multiple lines.',
         image: {
-          source: image(Landscape, { width: 2000 }),
+          landscape: image(Landscape, { width: 2000 }),
+          portrait: image(Portrait, { width: 2000 }),
           alt: 'Stock photo landscape hero.',
         },
         ctaUrl: '/test' as Url,

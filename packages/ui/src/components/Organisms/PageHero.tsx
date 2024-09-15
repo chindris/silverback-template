@@ -17,15 +17,24 @@ export function PageHero(props: NonNullable<PageFragment['hero']>) {
 function DefaultHero(props: NonNullable<PageFragment['hero']>) {
   return (
     <>
-      <section className="default-hero relative isolate overflow-hidden bg-gray-900 pt-12 pb-24 min-h-[20rem] lg:min-h-[33rem] container-page">
+      <section className="default-hero relative isolate overflow-hidden bg-gray-900 pt-12 pb-24 min-h-[20rem] lg:min-h-[33rem] container-page h-[50rem] lg:h-auto">
         {props.image ? (
-          <Image
-            alt={props.image.alt}
-            source={props.image.source}
-            priority={true}
-            className="absolute inset-0 -z-10 h-full w-full object-cover"
-            data-test-id={'hero-image'}
-          />
+          <>
+            <Image
+              alt={props.image.alt}
+              source={props.image.landscape}
+              priority={true}
+              className="absolute inset-0 -z-10 h-full w-full object-cover hidden lg:block"
+              data-test-id={'hero-image'}
+            />
+            <Image
+              alt={props.image.alt}
+              source={props.image.portrait}
+              priority={true}
+              className="absolute inset-0 -z-10 h-full w-full object-cover block lg:hidden"
+              data-test-id={'hero-image'}
+            />
+          </>
         ) : null}
         <div className="container-content">
           <div className="mx-auto max-w-2xl lg:mx-0">
@@ -73,7 +82,7 @@ function FormHero(props: NonNullable<PageFragment['hero']>) {
           <>
             <Image
               alt={props.image.alt}
-              source={props.image.source}
+              source={props.image.landscape}
               priority={true}
               className="absolute inset-0 h-full w-full object-cover"
               data-test-id={'hero-image'}
