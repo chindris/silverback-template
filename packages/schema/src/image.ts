@@ -1,8 +1,11 @@
+import { readFileSync } from 'fs';
+import { fluid } from 'gatsby-plugin-sharp';
+import {
+  createRemoteFileNode,
+} from 'gatsby-source-filesystem';
 import type { GraphQLFieldResolver } from 'graphql';
 import sizeOf from 'image-size';
 import { lookup } from 'mime-types';
-import { fluid } from 'gatsby-plugin-sharp';
-import { createRemoteFileNode } from 'gatsby-source-filesystem';
 
 const AREA_FALLBACK = 'attention';
 
