@@ -167,10 +167,10 @@ export const responsiveImage: GraphQLFieldResolver<string, any> = async (
         cropFocus:
           determineCropFocus(responsiveImage.src) ||
           calculateCropArea(
-            parseInt(width),
-            parseInt(height),
-            parseInt(responsiveImage.focalPoint.x),
-            parseInt(responsiveImage.focalPoint.y),
+            parseInt(responsiveImage.width),
+            parseInt(responsiveImage.height),
+            parseInt(responsiveImage.focalPoint?.x),
+            parseInt(responsiveImage.focalPoint?.y),
           ),
       },
       reporter: reporter,
