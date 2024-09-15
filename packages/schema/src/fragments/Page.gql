@@ -10,8 +10,10 @@ fragment Page on Page {
     headline
     lead
     image {
-      source(
+      portrait: source(width: 1200, height: 2400)
+      landscape: source(
         width: 2000
+        height: 500
         sizes: [
           [800, 800]
           [1200, 200]

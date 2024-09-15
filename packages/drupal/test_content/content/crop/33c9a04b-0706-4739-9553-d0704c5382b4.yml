@@ -1,0 +1,28 @@
+_meta:
+  version: '1.0'
+  entity_type: crop
+  uuid: 33c9a04b-0706-4739-9553-d0704c5382b4
+  bundle: focal_point
+  default_langcode: en
+default:
+  entity_id:
+    -
+      value: 4
+  entity_type:
+    -
+      value: file
+  uri:
+    -
+      value: 'public://2023-04/landscape.jpg'
+  x:
+    -
+      value: 1782
+  'y':
+    -
+      value: 1046
+  revision_timestamp:
+    -
+      value: 1725914614
+  revision_uid:
+    -
+      target_id: 1

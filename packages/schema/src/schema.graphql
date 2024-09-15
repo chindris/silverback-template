@@ -30,10 +30,9 @@ implementation(gatsby): ./image.js#imageProps
 directive @imageProps repeatable on FIELD_DEFINITION | SCALAR | UNION | ENUM | INTERFACE | OBJECT
 
 """
-Retrieve the properties of an image.
-TODO: Move to a shared "image" package.
+Override the image saving to add focal point info
 
-implementation(gatsby): @amazeelabs/gatsby-source-silverback#responsiveImageSharp
+implementation(gatsby): ./image.js#responsiveImage
 """
 directive @responsiveImage(
   height: String
@@ -234,10 +233,22 @@ type BlockMarkup @type(id: "core/paragraph") {
 union Media @resolveEntityBundle = MediaImage | MediaVideo
 
 type MediaImage @type(id: "image") @entity(type: "media", bundle: "image") {
-  source(width: Int, height: Int, sizes: [[Int!]!]): ImageSource!
+  source(
+    width: Int
+    height: Int
+    sizes: [[Int!]!]
+    transform: String
+  ): ImageSource!
     @resolveProperty(path: "field_media_image.entity")
     @imageProps
-    @responsiveImage(height: "$height", width: "$width", sizes: "$sizes")
+    @focalPoint
+    @responsiveImage(
+      height: "$height"
+      width: "$width"
+      sizes: "$sizes"
+      transform: "$transform"
+    )
+
   alt: String! @resolveProperty(path: "field_media_image.alt")
 }
 
