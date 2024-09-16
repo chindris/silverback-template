@@ -4,6 +4,8 @@ _meta:
   uuid: 7a928d7d-f9ad-4edb-aa22-2f535bc5c873
   bundle: page
   default_langcode: en
+  depends:
+    5dfc1856-e9e4-4f02-9cd6-9d888870ce1a: media
 default:
   revision_uid:
     -
@@ -43,12 +45,10 @@ default:
   body:
     -
       value: |-
-        <!-- wp:custom/hero {"headline":"Cherry tree"} /-->
+        <!-- wp:custom/hero {"mediaEntityIds":["5dfc1856-e9e4-4f02-9cd6-9d888870ce1a"],"headline":"Cherry tree"} /-->
 
         <!-- wp:custom/content -->
-        <!-- wp:paragraph -->
-        <p></p>
-        <!-- /wp:paragraph -->
+        <!-- wp:drupalmedia/drupal-media-entity {"mediaEntityIds":["5dfc1856-e9e4-4f02-9cd6-9d888870ce1a"]} /-->
         <!-- /wp:custom/content -->
       format: gutenberg
       summary: ''
