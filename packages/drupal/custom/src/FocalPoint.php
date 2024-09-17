@@ -20,7 +20,10 @@ class FocalPoint {
    * @return array
    *   The focal point coordinates.
    */
-  public static function getFocalPoint(DirectiveArguments $args) {
+  public static function getFocalPoint(DirectiveArguments $args) : ?array {
+    if (!class_exists(Crop::class)) {
+      return [];
+    }
     if ($args->value instanceof File) {
       $filePath = $args->value->getFileUri();
 
