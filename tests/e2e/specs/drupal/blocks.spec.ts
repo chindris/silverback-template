@@ -8,7 +8,7 @@ test('All blocks are rendered', async ({ page }) => {
   // Hero
   await expect(
     page.locator('img[data-test-id=hero-image][alt="A beautiful landscape."]'),
-  ).toHaveCount(1);
+  ).toHaveCount(2);
   await expect(
     page.locator('h1:text("All kinds of blocks with maximum data")'),
   ).toHaveCount(1);
