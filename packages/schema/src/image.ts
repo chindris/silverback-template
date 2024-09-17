@@ -1,8 +1,12 @@
+import { readFileSync } from 'fs';
+import { fluid } from 'gatsby-plugin-sharp';
+import {
+  createFileNodeFromBuffer,
+  createRemoteFileNode,
+} from 'gatsby-source-filesystem';
 import type { GraphQLFieldResolver } from 'graphql';
 import sizeOf from 'image-size';
 import { lookup } from 'mime-types';
-import { fluid } from 'gatsby-plugin-sharp';
-import { createRemoteFileNode } from 'gatsby-source-filesystem';
 
 const AREA_FALLBACK = 'attention';
 
@@ -96,6 +100,15 @@ const calculateCropArea = (
   return areas[row][col];
 };
 
+function isValidUrl(url: string) {
+  try {
+    new URL(url);
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
 export const responsiveImage: GraphQLFieldResolver<string, any> = async (
   originalImage,
   args,
@@ -106,7 +119,9 @@ export const responsiveImage: GraphQLFieldResolver<string, any> = async (
   try {
     const responsiveImageResult = {
       ...responsiveImage,
-      originalSrc: new URL(responsiveImage.src).pathname,
+      originalSrc: isValidUrl(responsiveImage.src)
+        ? new URL(responsiveImage.src).pathname
+        : responsiveImage.src,
     };
 
     // If no config object is given, or no width is specified, we just return
@@ -115,12 +130,19 @@ export const responsiveImage: GraphQLFieldResolver<string, any> = async (
       return JSON.stringify(responsiveImageResult);
     }
 
-    const file = await createRemoteFileNode({
-      url: responsiveImage.src,
-      cache: cache,
-      createNode: createNode,
-      createNodeId: createNodeId,
-    });
+    const file = isValidUrl(responsiveImage.src)
+      ? await createRemoteFileNode({
+          url: responsiveImage.src,
+          cache: cache,
+          createNode: createNode,
+          createNodeId: createNodeId,
+        })
+      : await createFileNodeFromBuffer({
+          buffer: readFileSync(responsiveImage.src),
+          cache: cache,
+          createNode: createNode,
+          createNodeId: createNodeId,
+        });
     const width = args.width;
     const height = args.height || undefined;
     const breakpoints =
@@ -145,10 +167,10 @@ export const responsiveImage: GraphQLFieldResolver<string, any> = async (
         cropFocus:
           determineCropFocus(responsiveImage.src) ||
           calculateCropArea(
-            parseInt(width),
-            parseInt(height),
-            parseInt(responsiveImage.focalPoint.x),
-            parseInt(responsiveImage.focalPoint.y),
+            parseInt(responsiveImage.width),
+            parseInt(responsiveImage.height),
+            parseInt(responsiveImage.focalPoint?.x),
+            parseInt(responsiveImage.focalPoint?.y),
           ),
       },
       reporter: reporter,

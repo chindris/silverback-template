@@ -7,3 +7,6 @@ dependencies:
   - simple_oauth:simple_oauth
   - consumers:consumers
   - drupal:serialization
+
+'interface translation project': custom
+'interface translation server pattern': modules/custom/custom/translations/%language.po
