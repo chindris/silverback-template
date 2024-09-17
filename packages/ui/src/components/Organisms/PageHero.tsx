@@ -15,20 +15,37 @@ export function PageHero(props: NonNullable<PageFragment['hero']>) {
   );
 }
 
+function HeroImage(props: NonNullable<PageFragment['hero']>['image']) {
+  return props ? (
+    <>
+      <Image
+        alt={props.alt}
+        src={props.url}
+        priority={true}
+        width={3840}
+        focalPoint={props.focalPoint}
+        className="absolute inset-0 -z-10 h-full w-full object-cover"
+        data-test-id={'hero-image'}
+      />
+      <Image
+        alt={props.alt}
+        src={props.url}
+        priority={true}
+        width={1200}
+        height={2400}
+        focalPoint={props.focalPoint}
+        className="absolute inset-0 -z-10 h-full w-full object-cover"
+        data-test-id={'hero-image'}
+      />
+    </>
+  ) : null;
+}
+
 function DefaultHero(props: NonNullable<PageFragment['hero']>) {
   return (
     <>
-      <section className="default-hero relative isolate overflow-hidden bg-gray-900 pt-12 pb-24 min-h-[20rem] lg:min-h-[33rem] container-page">
-        {props.image ? (
-          <Image
-            alt={props.image.alt}
-            src={props.image.url}
-            priority={true}
-            width={3840}
-            className="absolute inset-0 -z-10 h-full w-full object-cover"
-            data-test-id={'hero-image'}
-          />
-        ) : null}
+      <section className="default-hero relative isolate overflow-hidden bg-gray-900 pt-12 pb-24 min-h-[20rem] lg:min-h-[33rem] container-page h-[50rem] lg:h-auto">
+        {props.image ? <HeroImage {...props.image} /> : null}
         <div className="container-content">
           <div className="mx-auto max-w-2xl lg:mx-0">
             <h1 className="text-5xl font-extrabold tracking-tight leading-tight text-white drop-shadow-md">
@@ -71,19 +88,7 @@ function FormHero(props: NonNullable<PageFragment['hero']>) {
   return (
     <section>
       <div className="relative isolate overflow-hidden bg-gray-900 py-12 md:py-24">
-        {props.image ? (
-          <>
-            <Image
-              alt={props.image.alt}
-              src={props.image.url}
-              width={3840}
-              priority={true}
-              className="absolute inset-0 h-full w-full object-cover"
-              data-test-id={'hero-image'}
-            />
-            <div className="absolute inset-0 h-full w-full bg-black opacity-40" />
-          </>
-        ) : null}
+        {props.image ? <HeroImage {...props.image} /> : null}
 
         <div className="px-4 pb-[22rem] lg:pb-96 container-page text-center lg:px-6 relative">
           <div className="max-w-screen-xl mx-auto">

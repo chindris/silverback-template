@@ -1,0 +1,28 @@
+_meta:
+  version: '1.0'
+  entity_type: crop
+  uuid: eaee4cf9-c845-4e13-b6e9-c9544e8bcf15
+  bundle: focal_point
+  default_langcode: en
+default:
+  entity_id:
+    -
+      value: 7
+  entity_type:
+    -
+      value: file
+  uri:
+    -
+      value: 'public://2024-04/the_silverback.jpeg'
+  x:
+    -
+      value: 563
+  'y':
+    -
+      value: 115
+  revision_timestamp:
+    -
+      value: 1725914614
+  revision_uid:
+    -
+      target_id: 1

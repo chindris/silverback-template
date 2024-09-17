@@ -8,6 +8,11 @@ implementation(drupal): custom.menus::getMenuTranslations
 directive @menuTranslations(menu_id: String!) on FIELD_DEFINITION
 
 """
+implementation(drupal): \Drupal\custom\FocalPoint::getFocalPoint
+"""
+directive @focalPoint on FIELD_DEFINITION
+
+"""
 implementation(drupal): custom.translatables::all
 """
 directive @translatables(context: String!) on FIELD_DEFINITION
@@ -170,6 +175,9 @@ union Media @resolveEntityBundle = MediaImage | MediaVideo
 
 type MediaImage @type(id: "image") @entity(type: "media", bundle: "image") {
   url: Url! @resolveProperty(path: "field_media_image.entity") @imageUrl
+  focalPoint: [Int!]
+    @resolveProperty(path: "field_media_image.entity")
+    @focalPoint
   alt: String! @resolveProperty(path: "field_media_image.alt")
 }
 
