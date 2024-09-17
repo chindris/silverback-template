@@ -3,7 +3,7 @@ import { registerBlockType } from 'wordpress__blocks';
 
 const { t: __ } = Drupal;
 
-registerBlockType('custom/image-teasers', {
+registerBlockType<{}>('custom/image-teasers', {
   title: __('Image Teasers'),
   icon: 'format-image',
   category: 'layout',

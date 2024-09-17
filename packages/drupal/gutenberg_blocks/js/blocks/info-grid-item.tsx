@@ -10,7 +10,9 @@ import {
 
 const { t: __ } = Drupal;
 
-registerBlockType('custom/info-grid-item', {
+registerBlockType<{
+  icon: string;
+}>('custom/info-grid-item', {
   title: __('Info Grid Item'),
   icon: 'align-wide',
   category: 'layout',
@@ -23,20 +25,20 @@ registerBlockType('custom/info-grid-item', {
   },
   edit: (props) => {
     const { setAttributes } = props;
-    const iconPreview = iconImagePreview(props.attributes.icon as string);
+    const iconPreview = iconImagePreview(props.attributes.icon);
 
     return (
       <>
         <InspectorControls>
           <PanelBody title={__('Select an icon')}>
             <SelectControl
-              value={props.attributes.icon as string}
+              value={props.attributes.icon}
               options={limitedIconListOption([
                 Icons.EMAIL,
                 Icons.PHONE,
                 Icons.LIFE_RING,
               ])}
-              onChange={(icon: string) => {
+              onChange={(icon) => {
                 setAttributes({ icon });
               }}
             />
@@ -47,7 +49,7 @@ registerBlockType('custom/info-grid-item', {
           <div className={'container-label'}>{__('Info Grid Item')}</div>
           <div className={'info-grid-icon'} style={{ maxWidth: '50px' }}>
             {iconPreview && (
-              <img src={iconPreview} alt={props.attributes.icon as string} />
+              <img src={iconPreview} alt={props.attributes.icon} />
             )}
           </div>
           <InnerBlocks

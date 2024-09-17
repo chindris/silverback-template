@@ -14,7 +14,12 @@ import { DrupalMediaEntity } from '../utils/drupal-media';
 const { t: __ } = Drupal;
 const { setPlainTextAttribute } = silverbackGutenbergUtils;
 
-registerBlockType('custom/image-teaser', {
+registerBlockType<{
+  mediaEntityIds?: [string];
+  title: string;
+  ctaUrl?: string;
+  ctaText: string;
+}>('custom/image-teaser', {
   title: __('Image Teaser'),
   parent: ['custom/image-teasers'],
   icon: 'cover-image',
@@ -25,12 +30,14 @@ registerBlockType('custom/image-teaser', {
     },
     title: {
       type: 'string',
+      default: '',
     },
     ctaUrl: {
       type: 'string',
     },
     ctaText: {
       type: 'string',
+      default: '',
     },
   },
   edit: (props) => {
@@ -57,7 +64,7 @@ registerBlockType('custom/image-teaser', {
             <DrupalMediaEntity
               classname={'w-full'}
               attributes={{
-                ...(props.attributes as any),
+                ...props.attributes,
                 lockViewMode: true,
                 viewMode: 'gutenberg_header',
                 allowedTypes: ['image'],
@@ -65,7 +72,6 @@ registerBlockType('custom/image-teaser', {
               setAttributes={props.setAttributes}
               isMediaLibraryEnabled={true}
               onError={(error) => {
-                // @ts-ignore
                 error = typeof error === 'string' ? error : error[2];
                 dispatch('core/notices').createWarningNotice(error);
               }}
@@ -78,7 +84,7 @@ registerBlockType('custom/image-teaser', {
                 className={'font-bold text-2xl mt-3'}
                 identifier="title"
                 tagName="div"
-                value={props.attributes.title as string}
+                value={props.attributes.title}
                 allowedFormats={[]}
                 // @ts-ignore
                 disableLineBreaks={true}
@@ -94,7 +100,7 @@ registerBlockType('custom/image-teaser', {
                 identifier="ctaText"
                 tagName="div"
                 multiline={false}
-                value={props.attributes.ctaText as string}
+                value={props.attributes.ctaText}
                 allowedFormats={[]}
                 // @ts-ignore
                 disableLineBreaks={true}

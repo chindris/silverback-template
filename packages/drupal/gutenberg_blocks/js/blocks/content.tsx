@@ -9,7 +9,7 @@ const style = {
   padding: '0 40px',
 };
 
-registerBlockType(`custom/content`, {
+registerBlockType<{}>(`custom/content`, {
   title: __('Content'),
   category: 'layout',
   icon: 'media-document',
@@ -19,7 +19,7 @@ registerBlockType(`custom/content`, {
     align: true,
     html: false,
   },
-  edit() {
+  edit: () => {
     return (
       <main style={style} className="prose lg:prose-xl">
         <InnerBlocks templateLock={false} template={[['core/paragraph', {}]]} />
@@ -27,7 +27,7 @@ registerBlockType(`custom/content`, {
     );
   },
 
-  save() {
+  save: () => {
     return <InnerBlocks.Content />;
   },
 });

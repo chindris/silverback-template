@@ -7,12 +7,13 @@ import {
 } from 'wordpress__block-editor';
 import { registerBlockType } from 'wordpress__blocks';
 import { PanelBody, SelectControl } from 'wordpress__components';
-import { compose, withState } from 'wordpress__compose';
 
 const { t: __ } = Drupal;
 
-// @ts-ignore
-registerBlockType('custom/accordion-item-text', {
+registerBlockType<{
+  title: string;
+  icon?: string;
+}>('custom/accordion-item-text', {
   title: 'Accordion Item Text',
   icon: 'text',
   category: 'layout',
@@ -20,13 +21,13 @@ registerBlockType('custom/accordion-item-text', {
   attributes: {
     title: {
       type: 'string',
+      default: '',
     },
     icon: {
       type: 'string',
     },
   },
-  // @ts-ignore
-  edit: compose(withState())((props) => {
+  edit: (props) => {
     const { attributes, setAttributes } = props;
     const icons = [
       { label: __('- Select an optional icon -'), value: '' },
@@ -34,6 +35,7 @@ registerBlockType('custom/accordion-item-text', {
       { label: __('Questionmark'), value: 'questionmark' },
       { label: __('Arrow'), value: 'arrow' },
     ];
+
     setAttributes({
       icon: attributes.icon === undefined ? '' : attributes.icon,
     });
@@ -83,7 +85,7 @@ registerBlockType('custom/accordion-item-text', {
         </div>
       </Fragment>
     );
-  }),
+  },
 
   save: () => {
     return <InnerBlocks.Content />;

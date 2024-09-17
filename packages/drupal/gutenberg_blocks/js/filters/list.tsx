@@ -30,9 +30,11 @@ addFilter<any>(
     (BlockEdit) => (props) => {
       const { name, attributes, setAttributes, isSelected } = props;
       const { customListStyle, ordered } = attributes;
+
       if (!customListStyle === undefined) {
         setAttributes({ customListStyle: '' });
       }
+
       return (
         <>
           <BlockEdit {...props} />

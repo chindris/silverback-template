@@ -25,12 +25,19 @@ declare global {
     t: (s: string, t?: object) => string;
   };
 
+  const DrupalGutenberg: {
+    Components: {
+      DrupalMediaEntity: any;
+    };
+  };
+
   const silverbackGutenbergUtils: {
     sanitizeText: (text: string) => string;
     setPlainTextAttribute: (props: any, name: string, text: string) => void;
   };
 
   const drupalSettings: {
+    gutenberg: any;
     preview: any;
     path: {
       baseUrl: string;
@@ -44,4 +51,19 @@ declare global {
       }>;
     };
   };
+
+  // TODO improve typing - take from WP Gutenberg
+  const wp: {
+    richText: { unregisterFormatType: (block: string) => void };
+    blocks: {
+      registerBlockType: any;
+      InnerBlocks: any;
+      getBlockType: (type: string) => any;
+      getBlockTypes: () => any[];
+      unregisterBlockType: (block: string) => void;
+    };
+  };
+
+  const jQuery: any;
+  const once: any;
 }
