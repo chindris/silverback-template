@@ -67,7 +67,6 @@ import {
 } from 'wordpress__block-editor';
 import { registerBlockType } from 'wordpress__blocks';
 import { PanelBody } from 'wordpress__components';
-import { compose, withState } from 'wordpress__compose';
 ${
   attributes.find((attribute) => attribute.type === 'array') &&
   `import { dispatch } from 'wordpress__data';
@@ -77,7 +76,13 @@ import { DrupalMediaEntity } from '../utils/drupal-media';`
 
 const { t: __ } = Drupal;
 
-registerBlockType('custom/${blockName}', {
+registerBlockType<{
+${attributes
+  .filter((attribute) => attribute.type)
+  .map((attribute) => {
+    return `${attribute.name}: ${attribute.type};`;
+  })}
+}>('custom/${blockName}', {
   title: '${titleCaseTitle}',
   icon: 'text',
   category: 'common',
@@ -92,7 +97,7 @@ registerBlockType('custom/${blockName}', {
       )
       .join(',\n\t\t')}
   },
-  edit: compose(withState())((props) => {
+  edit: (props) => {
     const { attributes, setAttributes } = props;
     
     // Set default values this way so that values get saved in the block's attributes.
@@ -120,7 +125,7 @@ registerBlockType('custom/${blockName}', {
         </div>
       </Fragment>
     );
-  }),
+  },
   save() {
     return null;
     // or uncomment this if you import and use InnerBlocks from wordpress__block-editor

@@ -2,34 +2,40 @@ import React, { Fragment } from 'react';
 import { InspectorControls, RichText } from 'wordpress__block-editor';
 import { registerBlockType } from 'wordpress__blocks';
 import { PanelBody } from 'wordpress__components';
-import { compose, withState } from 'wordpress__compose';
 import { dispatch } from 'wordpress__data';
 
 import { DrupalMediaEntity } from '../utils/drupal-media';
 
 const { t: __ } = Drupal;
 
-// @ts-ignore
-registerBlockType('custom/demo-block', {
+registerBlockType<{
+  heading: string;
+  description: string;
+  mediaEntityIds?: [string];
+  url: string;
+}>('custom/demo-block', {
   title: 'Demo Block',
   icon: 'text',
   category: 'common',
   attributes: {
     heading: {
       type: 'string',
+      default: '',
     },
     description: {
       type: 'string',
+      default: '',
     },
     mediaEntityIds: {
       type: 'array',
     },
     url: {
       type: 'string',
+      default: '',
     },
   },
-  // @ts-ignore
-  edit: compose(withState())((props) => {
+
+  edit: (props) => {
     const { attributes, setAttributes } = props;
 
     // Set default values this way so that values get saved in the block's attributes.
@@ -86,7 +92,6 @@ registerBlockType('custom/demo-block', {
               setAttributes={props.setAttributes}
               isMediaLibraryEnabled={true}
               onError={(error) => {
-                // @ts-ignore
                 error = typeof error === 'string' ? error : error[2];
                 dispatch('core/notices').createWarningNotice(error);
               }}
@@ -108,9 +113,9 @@ registerBlockType('custom/demo-block', {
         </div>
       </Fragment>
     );
-  }),
+  },
 
-  save() {
+  save: () => {
     return null;
     // or uncomment this if you import and use InnerBlocks from wordpress__block-editor
     // return <InnerBlocks.Content />;

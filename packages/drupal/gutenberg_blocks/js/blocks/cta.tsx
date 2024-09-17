@@ -7,7 +7,6 @@ import {
 } from 'wordpress__block-editor';
 import { registerBlockType } from 'wordpress__blocks';
 import { PanelBody, SelectControl, ToggleControl } from 'wordpress__components';
-import { compose, withState } from 'wordpress__compose';
 
 const { t: __ } = Drupal;
 const { setPlainTextAttribute } = silverbackGutenbergUtils;
@@ -29,8 +28,15 @@ const ArrowRightIcon = () => (
   </svg>
 );
 
-// @ts-ignore
-registerBlockType('custom/cta', {
+registerBlockType<{
+  url?: string;
+  text: string;
+  'data-id'?: string;
+  'data-entity-type'?: string;
+  openInNewTab: boolean;
+  icon: string;
+  iconPosition: string;
+}>('custom/cta', {
   title: 'CTA',
   icon: 'admin-links',
   category: 'common',
@@ -40,6 +46,7 @@ registerBlockType('custom/cta', {
     },
     text: {
       type: 'string',
+      default: '',
     },
     // To have an easier integration with entity usage, we also retrieve and
     // store the uuid (data-id) and the entity type of internal links.
@@ -51,6 +58,7 @@ registerBlockType('custom/cta', {
     },
     openInNewTab: {
       type: 'boolean',
+      default: false,
     },
     icon: {
       type: 'string',
@@ -61,8 +69,7 @@ registerBlockType('custom/cta', {
       default: 'AFTER',
     },
   },
-  // @ts-ignore
-  edit: compose(withState({}))((props) => {
+  edit: (props) => {
     return (
       <div>
         <a
@@ -85,7 +92,7 @@ registerBlockType('custom/cta', {
             style={{
               cursor: 'text',
             }}
-            onChange={(text: string) => {
+            onChange={(text) => {
               setPlainTextAttribute(props, 'text', text);
             }}
           />
@@ -112,8 +119,8 @@ registerBlockType('custom/cta', {
               //  type: 'post',
               //  subtype: 'gutenberg',
               //}}
-              // @ts-ignore
-              onChange={(link) => {
+
+              onChange={(link: { url: string; id: string; type: string }) => {
                 props.setAttributes({
                   url: link.url,
                   'data-id': link.id,
@@ -126,6 +133,7 @@ registerBlockType('custom/cta', {
                     // then we can set the data-entity-type value more accurate.
                     // Right now, we just make a "guess" based on the the human
                     // readable label for English and German.
+                    // TODO - this depends on each language, find new solution
                     link.type.startsWith('Media') ||
                     link.type.startsWith('Medien')
                       ? 'media'
@@ -182,8 +190,7 @@ registerBlockType('custom/cta', {
         </InspectorControls>
       </div>
     );
-  }),
-
+  },
   save: () => {
     return null;
   },

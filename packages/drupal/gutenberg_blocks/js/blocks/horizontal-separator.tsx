@@ -1,19 +1,16 @@
 import { registerBlockType } from 'wordpress__blocks';
-import { compose, withState } from 'wordpress__compose';
 
 const { t: __ } = Drupal;
 
-// @ts-ignore
-registerBlockType(`custom/horizontal-separator`, {
+registerBlockType<{}>(`custom/horizontal-separator`, {
   title: __('Horizontal separator'),
   icon: 'minus',
   category: 'text',
   attributes: {},
-  // @ts-ignore
-  edit: compose(withState())(() => {
+  edit: () => {
     return <hr />;
-  }),
-  save() {
+  },
+  save: () => {
     return null;
   },
 });
