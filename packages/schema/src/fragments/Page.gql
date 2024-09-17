@@ -12,6 +12,7 @@ fragment Page on Page {
     image {
       url
       alt
+      focalPoint
     }
     ctaText
     ctaUrl

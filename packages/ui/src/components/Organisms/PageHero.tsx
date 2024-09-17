@@ -23,6 +23,7 @@ function HeroImage(props: NonNullable<PageFragment['hero']>['image']) {
         src={props.url}
         priority={true}
         width={3840}
+        focalPoint={props.focalPoint}
         className="absolute inset-0 -z-10 h-full w-full object-cover"
         data-test-id={'hero-image'}
       />
@@ -32,6 +33,7 @@ function HeroImage(props: NonNullable<PageFragment['hero']>['image']) {
         priority={true}
         width={1200}
         height={2400}
+        focalPoint={props.focalPoint}
         className="absolute inset-0 -z-10 h-full w-full object-cover"
         data-test-id={'hero-image'}
       />
