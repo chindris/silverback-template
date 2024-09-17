@@ -1,5 +1,25 @@
 {
   "$schema": "https://turborepo.org/schema.json",
+  "globalPassThroughEnv": [
+    // Workaround for https://github.com/jetify-com/devbox/issues/1415
+    "PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS",
+    // Env vars provided by devbox
+    "DEVBOX_*",
+    "NIX_*",
+    "PHP*",
+    "NODE_*",
+    "HOST_PATH"
+  ],
+  "globalDependencies": [
+    // devbox
+    "devbox.json",
+    "devbox.lock",
+    "devbox.d/**",
+    // direnv
+    ".envrc",
+    // pnpm
+    ".npmrc"
+  ],
   "tasks": {
     "build": {
       "dependsOn": ["prep"]

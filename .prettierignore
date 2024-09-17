@@ -4,3 +4,4 @@ packages
 tests
 .turbo
 pnpm-lock.yaml
+.devbox

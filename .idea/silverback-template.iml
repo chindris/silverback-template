@@ -16,6 +16,7 @@
       <excludeFolder url="file://$MODULE_DIR$/apps/cms/web/sites" />
       <excludeFolder url="file://$MODULE_DIR$/apps/cms/web/themes/contrib" />
       <excludeFolder url="file://$MODULE_DIR$/apps/cms/web/modules/custom" />
+      <excludeFolder url="file://$MODULE_DIR$/.devbox" />
       <excludePattern pattern=".turbo" />
       <excludePattern pattern="build" />
       <excludePattern pattern="dist" />
