@@ -104,7 +104,7 @@ registerBlockType<{
                 )}
                 onChange={(limit) => {
                   setAttributes({
-                    limit: parseInt(limit),
+                    limit: parseInt(limit) ? parseInt(limit) : 0,
                   });
                 }}
                 value={limit}
