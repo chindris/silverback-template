@@ -77,6 +77,20 @@ enum Locale @default @value(string: "en") {
   de
 }
 
+enum Backend @default @value(string: "drupal") {
+  drupal
+  decap
+}
+
+interface Editable {
+  editLink: EditLink
+}
+
+type EditLink {
+  url: Url! @resolveEntityEditLink
+  type: Backend! @value(string: "drupal")
+}
+
 type ContentHubResult @default @value(json: "{\"total\": 0, \"items\": []}") {
   total: Int!
   items: [CardItem]! @prop(key: "rows")
@@ -127,11 +141,12 @@ type FooterNavigation implements Navigation @menu(menu_id: "footer") {
   items: [NavigationItem]! @lang @resolveMenuItems
 }
 
-interface Page implements CardItem @resolveEntityBundle {
+interface Page implements CardItem & Editable @resolveEntityBundle {
   id: ID!
   translations: [Page]
   locale: Locale!
   path: Url!
+  editLink: EditLink
   title: String!
   teaserImage: MediaImage
   hero: Hero
@@ -139,11 +154,13 @@ interface Page implements CardItem @resolveEntityBundle {
   metaTags: [MetaTag]
 }
 
-type DecapPage implements Page & CardItem @sourceFrom(fn: "getPages") {
+type DecapPage implements Page & Editable & CardItem
+  @sourceFrom(fn: "getPages") {
   id: ID!
   translations: [Page] @decapPageTranslations
   locale: Locale!
   path: Url!
+  editLink: EditLink
   title: String!
   teaserImage: MediaImage
   hero: Hero
@@ -154,13 +171,14 @@ type DecapPage implements Page & CardItem @sourceFrom(fn: "getPages") {
 """
 A generic page.
 """
-type DrupalPage implements Page & CardItem
+type DrupalPage implements Page & Editable & CardItem
   @entity(type: "node", bundle: "page")
   @type(id: "page") {
   id: ID! @resolveEntityUuid
   locale: Locale! @resolveEntityLanguage
   translations: [Page] @resolveEntityTranslations
   path: Url! @resolveEntityPath
+  editLink: EditLink @resolveParent
   title: String! @resolveProperty(path: "title.value")
   teaserImage: MediaImage
     @resolveEditorBlocks(path: "body.value")

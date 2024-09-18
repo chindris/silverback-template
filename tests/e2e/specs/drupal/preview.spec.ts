@@ -21,7 +21,7 @@ test.describe('instant preview', () => {
     ).toBeVisible();
     await expect(
       page
-        .frameLocator('iframe')
+        .frameLocator('iframe.external-preview-entity__iframe')
         .getByRole('heading', { name: 'This is visible instantly.' }),
     ).toBeVisible();
 
