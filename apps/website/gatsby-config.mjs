@@ -28,6 +28,19 @@ const plugins = [
         'node_modules/@custom/ui/build/styles.css': '/styles.css',
         'node_modules/@custom/ui/build/iframe.css': '/iframe.css',
         'node_modules/@custom/ui/static/public': '/',
+        // The assets in the generated index.html are loaded from a path
+        // relative to the base url, so we need to exract the assets into the
+        // root folder of gatsby as well, otherwise they won't be loaded.
+        // If we do not do that, then the assets will exist in
+        // /__voyager/__voyager_assets but the index.html loads them from
+        // "/__voyager_assets".
+        ...(process.env.VOYAGER_ENABLE === 'true'
+          ? {
+              'node_modules/@custom/voyager/dist/__voyager_assets':
+                '/__voyager_assets',
+              'node_modules/@custom/voyager/dist': '/__voyager',
+            }
+          : {}),
       },
     },
   },

@@ -4,8 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "test:static": "tsc --noEmit && eslint \"**/*.{ts,tsx,js,jsx}\" --ignore-path=\"./.gitignore\"",
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "prep": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
