@@ -1,8 +1,8 @@
 {
-  "name": "SLB - PHP 8.2 + SQLite 3 + Node 18",
+  "name": "PHP 8.2 + SQLite 3 + Node 18 + pnpm 8.6+",
   "dockerFile": "Dockerfile",
   "forwardPorts": [8080],
-  "postCreateCommand": "sudo apt-get update && sudo apt-get install -y sqlite3 && composer install",
+  "postCreateCommand": "sudo apt-get update && sudo apt-get install -y sqlite3 && composer install && npm install -g pnpm@^8.6",
   "customizations": {
     "vscode": {
       "extensions": [

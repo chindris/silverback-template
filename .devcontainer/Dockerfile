@@ -20,11 +20,13 @@ RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Install Node.js 18
-RUN curl -sL https://deb.nodesource.com/setup_18.x | bash -
+RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
 RUN apt-get install -y nodejs
+RUN node --version
 
-# Install pnpm
-RUN npm install -g pnpm
+# Install pnpm 8.6+
+RUN npm install -g pnpm@^8.6
+RUN pnpm --version
 
 # Install SQLite
 RUN apt-get update && apt-get install -y sqlite3 libsqlite3-dev
