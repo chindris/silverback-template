@@ -75,7 +75,7 @@ final class UsageCount extends FieldPluginBase {
    * {@inheritdoc}
    */
   public function render(ResultRow $values): string|MarkupInterface {
-    // @todo Modify or replace the rendered value here.
+
     $count = 0;
     $media = $values->_entity;
     if ($media instanceof MediaInterface) {
@@ -84,9 +84,6 @@ final class UsageCount extends FieldPluginBase {
       foreach ($all_usages as $source_type => $ids) {
         $type_storage = $this->entityTypeManager->getStorage($source_type);
         foreach ($ids as $source_id => $records) {
-          // We will show a single row per source entity. If the target is not
-          // referenced on its default revision on the default language, we will
-          // just show indicate that in a specific column.
           $source_entity = $type_storage->load($source_id);
           if (!$source_entity) {
             // If for some reason this record is broken, just skip it.
@@ -95,7 +92,7 @@ final class UsageCount extends FieldPluginBase {
 
           $link = $this->getSourceEntityLink($source_entity);
           // If the label is empty it means this usage shouldn't be shown
-          // on the UI, just skip this row.
+          // on the UI, just skip this count.
           if (empty($link)) {
             continue;
           }
