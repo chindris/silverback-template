@@ -14,7 +14,11 @@ $config['silverback_external_preview.settings'] = [
 
 $config['graphql.graphql_servers.main']['schema_configuration']['directable']['build_webhook'] = $publisherUrl . '/___status/build';
 $config['graphql.graphql_servers.main']['schema_configuration']['directable']['update_webhook'] = $publisherUrl . '/___status/update';
-$config['graphql.graphql_servers.main']['schema_configuration']['directable']['build_url'] = $publisherUrl;
+if (getenv('SB_ENVIRONMENT')) {
+  $config['graphql.graphql_servers.main']['schema_configuration']['directable']['build_url'] = $publisherUrl;
+} else {
+  $config['graphql.graphql_servers.main']['schema_configuration']['directable']['build_url'] = $netlifyUrl;
+}
 
 $settings['silverback_graphql_persisted_map'] = '../node_modules/@custom/schema/build/operations.json';
 
