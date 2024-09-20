@@ -7,7 +7,23 @@
       "extensions": [
         "felixfbecker.php-debug",
         "bmewburn.vscode-intelephense-client",
-        "esbenp.prettier-vscode"
+        "esbenp.prettier-vscode",
+        "ZixuanChen.vitest-explorer",
+        "GraphQL.vscode-graphql",
+        "GraphQL.vscode-graphql-syntax",
+        "eamodio.gitlens",
+        "GitHub.vscode-pull-request-github",
+        "GitHub.copilot",
+        "dbaeumer.vscode-eslint",
+        "ms-azuretools.vscode-docker",
+        "ms-playwright.playwright",
+        "denoland.vscode-deno",
+        "bradlc.vscode-tailwindcss",
+        "felixfbecker.php-debug",
+        "humao.rest-client",
+        "DEVSENSE.phptools-vscode",
+        "GitHub.vscode-github-actions",
+        "Graphite.gti-vscode"
       ]
     }
   }
