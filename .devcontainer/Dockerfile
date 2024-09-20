@@ -19,13 +19,24 @@ RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Install Node.js 18
-RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
-RUN apt-get install -y nodejs
+# Install nvm, Node.js 18, and pnpm 8.6.12
+ENV NVM_DIR /root/.nvm
+ENV NODE_VERSION 18.18.0
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash \
+    && . $NVM_DIR/nvm.sh \
+    && nvm install $NODE_VERSION \
+    && nvm alias default $NODE_VERSION \
+    && nvm use default
+
+ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
+
+# Verify Node.js installation
 RUN node --version
 
-# Install pnpm 8.6+
-RUN npm install -g pnpm@^8.6
+# Install specific pnpm version
+RUN npm install -g pnpm@8.6.12
+
+# Verify pnpm installation
 RUN pnpm --version
 
 # Install SQLite
