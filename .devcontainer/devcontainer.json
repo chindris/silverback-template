@@ -2,6 +2,10 @@
   "name": "PHP 8.2 + SQLite 3 + Node 18 + pnpm 8.6+",
   "dockerFile": "Dockerfile",
   "forwardPorts": [8080],
+  "workspaceFolder": "/workspaces/silverback-template",
+  "postCreateCommand": {
+    "init": "cd /workspaces/silverback-template && pnpm i && cd /workspaces/silverback-template/tests/e2e && pnpm exec playwright install-deps && cd /workspaces/silverback-template && pnpm turbo:prep"
+  },
   "customizations": {
     "vscode": {
       "extensions": [

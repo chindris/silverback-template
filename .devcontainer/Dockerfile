@@ -1,31 +1,80 @@
-FROM mcr.microsoft.com/vscode/devcontainers/base:ubuntu
+FROM php:8.2-apache
 
-# Install Node.js
-ARG NODE_VERSION="18.19.0"
-RUN su vscode -c "source /usr/local/share/nvm/nvm.sh && nvm install ${NODE_VERSION} && nvm use ${NODE_VERSION} && nvm alias default ${NODE_VERSION}"
-RUN echo "nvm use default &>/dev/null" >> ~/.bashrc
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    git \
+    curl \
+    libpng-dev \
+    libonig-dev \
+    libxml2-dev \
+    zip \
+    unzip \
+    zsh
 
-# Install PHP and extensions
-RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
-    && apt-get -y install --no-install-recommends php8.2 php8.2-gd php8.2-mbstring php8.2-curl php8.2-sqlite3 php8.2-zip php8.2-xdebug php8.2-imagick
+# Clear cache
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Install Playwright dependencies
-RUN su vscode -c "npm install -g pnpm@8.6.12 @withgraphite/graphite-cli && pnpm dlx playwright@1.32.3 install-deps && pnpm dlx playwright@1.32.3 install"
+# Install PHP extensions
+RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 
-# Copy xdebug configuration
-COPY .devcontainer/xdebug.ini /etc/php/8.2/mods-available/xdebug.ini
+# Install Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Install Deno
-RUN curl -fsSL https://deno.land/x/install/install.sh | sh
-RUN echo 'export DENO_INSTALL="/home/vscode/.deno"' >> /home/vscode/.bashrc && \
-    echo 'export PATH="$DENO_INSTALL/bin:$PATH"' >> /home/vscode/.bashrc && \
-    /home/vscode/.deno/bin/deno completions bash > /home/vscode/.bashrc.d/90-deno
+# Install Node.js 18
+RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
+RUN apt-get install -y nodejs
+RUN node --version
+
+# Install pnpm 8.6+
+RUN npm install -g pnpm@8.6.12
+RUN pnpm --version
+
+# Install SQLite
+RUN apt-get update && apt-get install -y sqlite3 libsqlite3-dev
+
+# Install additional PHP extensions for Drupal
+RUN docker-php-ext-install opcache
+RUN pecl install apcu && docker-php-ext-enable apcu
+
+# Install and enable Xdebug
+RUN pecl install xdebug && docker-php-ext-enable xdebug
+
+# Configure Xdebug for remote debugging
+RUN echo "xdebug.mode=debug" >> /usr/local/etc/php/conf.d/xdebug.ini && \
+    echo "xdebug.start_with_request=yes" >> /usr/local/etc/php/conf.d/xdebug.ini && \
+    echo "xdebug.client_host=host.docker.internal" >> /usr/local/etc/php/conf.d/xdebug.ini && \
+    echo "xdebug.client_port=9003" >> /usr/local/etc/php/conf.d/xdebug.ini && \
+    echo "xdebug.log=/tmp/xdebug.log" >> /usr/local/etc/php/conf.d/xdebug.ini
+
+# Install Oh My Zsh
+RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended && \
+    # Set Zsh as the default shell
+    chsh -s /bin/zsh && \
+    # Change ownership of the .oh-my-zsh directory
+    chmod -R 755 /root/.oh-my-zsh
+
+# Set up a basic .zshrc configuration
+RUN cp /root/.oh-my-zsh/templates/zshrc.zsh-template /root/.zshrc && \
+    sed -i 's/ZSH_THEME="robbyrussell"/ZSH_THEME="agnoster"/g' /root/.zshrc
+
+    # RUN nvm use 18
+# RUN npm i -g pnpm@8.6.12
+
+WORKDIR /workspaces/silverback-template/apps/cms
+RUN apt-get update && apt-get install -y git qpdf imagemagick libicu-dev && \
+    docker-php-ext-install intl && \
+    docker-php-ext-enable intl
+RUN composer config --global github-protocols https
+
+# Change document root for Apache
+RUN sed -ri -e 's!/var/www/html!/var/www/html/web!g' /etc/apache2/sites-available/*.conf
+RUN sed -ri -e 's!/var/www/!/var/www/html/web!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
 # Install Helix editor
-RUN apt-get update && apt-get install -y software-properties-common && \
-    add-apt-repository ppa:maveonair/helix-editor && \
-    apt-get update && \
-    apt-get install -y helix
+# RUN apt-get update && apt-get install -y software-properties-common && \
+#     add-apt-repository ppa:maveonair/helix-editor && \
+#     apt-get update && \
+#     apt-get install -y helix
 
 # Install phpactor
 RUN curl -Lo phpactor.phar https://github.com/phpactor/phpactor/releases/latest/download/phpactor.phar && \
@@ -38,7 +87,5 @@ RUN curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | d
     && apt update \
     && apt install gh -y
 
-# Clean up
-RUN apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/*
-
-USER vscode
+# Enable Apache modules
+RUN a2enmod rewrite
