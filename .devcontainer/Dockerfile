@@ -87,5 +87,10 @@ RUN curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | d
     && apt update \
     && apt install gh -y
 
+ENV NETLIFY_URL=http://localhost:8000
+ENV DRUPAL_EXTERNAL_URL=http://localhost:8888
+ENV DRUPAL_INTERNAL_URL=http://127.0.0.1:8888
+ENV PUBLISHER_URL=http://localhost:8000
+
 # Enable Apache modules
 RUN a2enmod rewrite
