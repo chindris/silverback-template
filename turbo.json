@@ -1,6 +1,7 @@
 {
   "$schema": "https://turborepo.org/schema.json",
   "globalPassThroughEnv": [
+    "PLAYWRIGHT_BROWSERS_PATH",
     // Workaround for https://github.com/jetify-com/devbox/issues/1415
     "PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS",
     // Env vars provided by devbox
