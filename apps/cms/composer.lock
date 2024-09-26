@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f6e4fedffec29e9bf8369101bc989a57",
+    "content-hash": "3105a4891946236dd438f480f35ec788",
     "packages": [
         {
             "name": "amazeeio/drupal_integrations",
@@ -62,22 +62,33 @@
         },
         {
             "name": "amazeelabs/default-content",
-            "version": "1.2.14",
+            "version": "1.2.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/AmazeeLabs/default-content.git",
-                "reference": "a26b1786ad3d786b750aa643d37ec005bc9e5dc1"
+                "reference": "0c8f2724e29de1dbe70b8b603b6b5fa10e81980d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AmazeeLabs/default-content/zipball/a26b1786ad3d786b750aa643d37ec005bc9e5dc1",
-                "reference": "a26b1786ad3d786b750aa643d37ec005bc9e5dc1",
+                "url": "https://api.github.com/repos/AmazeeLabs/default-content/zipball/0c8f2724e29de1dbe70b8b603b6b5fa10e81980d",
+                "reference": "0c8f2724e29de1dbe70b8b603b6b5fa10e81980d",
                 "shasum": ""
             },
             "require": {
-                "amazeelabs/proxy-default-content": "^1.1.16"
+                "cweagans/composer-patches": "^1.7.3",
+                "drupal/default_content": "^2.0.0-alpha1"
             },
             "type": "package",
+            "extra": {
+                "enable-patching": true,
+                "composer-exit-on-patch-failure": true,
+                "patches": {
+                    "drupal/default_content": {
+                        "Allow to alter exported fields (Used by custom module of silverback-template to clean the default content exports)": "https://www.drupal.org/files/issues/2022-11-07/default_content_hook_exported_fields-3181075-7.patch",
+                        "Paragraphs support": "https://www.drupal.org/files/issues/2022-05-09/2698425-173.patch"
+                    }
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "AmazeeLabs\\DefaultContent\\": "src/AmazeeLabs/DefaultContent"
@@ -90,9 +101,9 @@
             "description": "Helpers for managing the Drupal's default content.",
             "support": {
                 "issues": "https://github.com/AmazeeLabs/default-content/issues",
-                "source": "https://github.com/AmazeeLabs/default-content/tree/1.2.14"
+                "source": "https://github.com/AmazeeLabs/default-content/tree/1.2.18"
             },
-            "time": "2024-02-20T11:44:25+00:00"
+            "time": "2024-09-26T09:35:59+00:00"
         },
         {
             "name": "amazeelabs/graphql_directives",
@@ -130,160 +141,6 @@
                 "source": "https://github.com/AmazeeLabs/graphql_directives/tree/2.5.1"
             },
             "time": "2024-04-08T11:43:10+00:00"
-        },
-        {
-            "name": "amazeelabs/proxy-default-content",
-            "version": "1.1.16",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/AmazeeLabs/proxy-default-content.git",
-                "reference": "8f5b3901d3bfa85dccfa0860bf348949580f7296"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/AmazeeLabs/proxy-default-content/zipball/8f5b3901d3bfa85dccfa0860bf348949580f7296",
-                "reference": "8f5b3901d3bfa85dccfa0860bf348949580f7296",
-                "shasum": ""
-            },
-            "require": {
-                "cweagans/composer-patches": "^1.7.3",
-                "drupal/default_content": "^2.0.0-alpha1"
-            },
-            "type": "library",
-            "extra": {
-                "enable-patching": true,
-                "composer-exit-on-patch-failure": true,
-                "patches": {
-                    "drupal/default_content": {
-                        "Allow to alter exported fields": "https://www.drupal.org/files/issues/2022-11-07/default_content_hook_exported_fields-3181075-7.patch",
-                        "Paragraphs support": "https://www.drupal.org/files/issues/2022-05-09/2698425-173.patch"
-                    }
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0+"
-            ],
-            "description": "Proxy package for drupal/default_content.",
-            "homepage": "https://silverback.netlify.app",
-            "support": {
-                "issues": "https://github.com/AmazeeLabs/proxy-default-content/issues",
-                "source": "https://github.com/AmazeeLabs/proxy-default-content/tree/1.1.16"
-            },
-            "time": "2024-02-12T12:38:41+00:00"
-        },
-        {
-            "name": "amazeelabs/proxy-drupal-core",
-            "version": "1.1.12",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/AmazeeLabs/proxy-drupal-core.git",
-                "reference": "623138e8bfd640a3a2cb453bba180240d4a7242d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/AmazeeLabs/proxy-drupal-core/zipball/623138e8bfd640a3a2cb453bba180240d4a7242d",
-                "reference": "623138e8bfd640a3a2cb453bba180240d4a7242d",
-                "shasum": ""
-            },
-            "require": {
-                "cweagans/composer-patches": "^1.7.3",
-                "drupal/core-recommended": "^9 || ^10"
-            },
-            "type": "library",
-            "extra": {
-                "enable-patching": true,
-                "composer-exit-on-patch-failure": true,
-                "patches": {
-                    "drupal/core": {
-                        "Catch-All routes (#2741939)": "https://git.drupalcode.org/project/drupal/-/merge_requests/443/diffs.patch",
-                        "Wrong language field labels after drupal_rebuild()": "https://www.drupal.org/files/issues/2021-12-01/3221375-27-workaround.patch"
-                    }
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0+"
-            ],
-            "description": "Proxy package for drupal/core.",
-            "homepage": "https://silverback.netlify.app",
-            "support": {
-                "issues": "https://github.com/AmazeeLabs/proxy-drupal-core/issues",
-                "source": "https://github.com/AmazeeLabs/proxy-drupal-core/tree/1.1.12"
-            },
-            "time": "2023-03-23T11:12:13+00:00"
-        },
-        {
-            "name": "amazeelabs/proxy-graphql",
-            "version": "1.1.9",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/AmazeeLabs/proxy-graphql.git",
-                "reference": "10bb3b3a42f7a465f066482fea40c7b1a80d77cd"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/AmazeeLabs/proxy-graphql/zipball/10bb3b3a42f7a465f066482fea40c7b1a80d77cd",
-                "reference": "10bb3b3a42f7a465f066482fea40c7b1a80d77cd",
-                "shasum": ""
-            },
-            "require": {
-                "cweagans/composer-patches": "^1.7.3",
-                "drupal/graphql": "^4.6.0"
-            },
-            "type": "library",
-            "extra": {
-                "enable-patching": true,
-                "composer-exit-on-patch-failure": true,
-                "patches": []
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0+"
-            ],
-            "description": "Proxy package for drupal/graphql.",
-            "homepage": "https://silverback.netlify.app",
-            "support": {
-                "issues": "https://github.com/AmazeeLabs/proxy-graphql/issues",
-                "source": "https://github.com/AmazeeLabs/proxy-graphql/tree/1.1.9"
-            },
-            "time": "2023-11-27T06:05:41+00:00"
-        },
-        {
-            "name": "amazeelabs/proxy-gutenberg",
-            "version": "1.3.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/AmazeeLabs/proxy-gutenberg.git",
-                "reference": "6c0ee854135900873368220a0e5937aac473bbc8"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/AmazeeLabs/proxy-gutenberg/zipball/6c0ee854135900873368220a0e5937aac473bbc8",
-                "reference": "6c0ee854135900873368220a0e5937aac473bbc8",
-                "shasum": ""
-            },
-            "require": {
-                "cweagans/composer-patches": "^1.7.3",
-                "drupal/gutenberg": "^2.8.0"
-            },
-            "type": "library",
-            "extra": {
-                "enable-patching": true,
-                "composer-exit-on-patch-failure": true,
-                "patches": []
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0+"
-            ],
-            "description": "Proxy package for drupal/gutenberg.",
-            "homepage": "https://silverback.netlify.app",
-            "support": {
-                "issues": "https://github.com/AmazeeLabs/proxy-gutenberg/issues",
-                "source": "https://github.com/AmazeeLabs/proxy-gutenberg/tree/1.3.2"
-            },
-            "time": "2023-10-19T06:37:33+00:00"
         },
         {
             "name": "amazeelabs/silverback-cli",
@@ -3085,7 +2942,7 @@
                     "homepage": "https://www.drupal.org/user/1852732"
                 },
                 {
-                    "name": "Berdir",
+                    "name": "berdir",
                     "homepage": "https://www.drupal.org/user/214652"
                 },
                 {
@@ -3101,7 +2958,7 @@
                     "homepage": "https://www.drupal.org/user/395439"
                 },
                 {
-                    "name": "Sam152",
+                    "name": "sam152",
                     "homepage": "https://www.drupal.org/user/1485048"
                 }
             ],
@@ -4837,29 +4694,32 @@
         },
         {
             "name": "drupal/typed_data",
-            "version": "1.0.0-beta2",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/typed_data.git",
-                "reference": "8.x-1.0-beta2"
+                "reference": "2.0.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/typed_data-8.x-1.0-beta2.zip",
-                "reference": "8.x-1.0-beta2",
-                "shasum": "e0aa651b129d8dcd765ca49cba8682ebe09e6e73"
+                "url": "https://ftp.drupal.org/files/projects/typed_data-2.0.0.zip",
+                "reference": "2.0.0",
+                "shasum": "25630e18c83ad1b2b748063c09baaa9a79c13d6d"
             },
             "require": {
                 "drupal/core": "^9.1 || ^10"
             },
+            "conflict": {
+                "drupal/core": ">=10.3"
+            },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-1.0-beta2",
-                    "datestamp": "1679429196",
+                    "version": "2.0.0",
+                    "datestamp": "1721608329",
                     "security-coverage": {
-                        "status": "not-covered",
-                        "message": "Beta releases are not covered by Drupal security advisories."
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
                     }
                 },
                 "drush": {
@@ -4878,7 +4738,7 @@
                     "homepage": "https://www.drupal.org/user/16747"
                 },
                 {
-                    "name": "TR",
+                    "name": "tr",
                     "homepage": "https://www.drupal.org/user/202830"
                 }
             ],
@@ -16366,8 +16226,5 @@
         "php": "^8.2 <8.3"
     },
     "platform-dev": [],
-    "platform-overrides": {
-        "php": "8.2"
-    },
     "plugin-api-version": "2.6.0"
 }
