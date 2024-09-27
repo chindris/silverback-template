@@ -82,3 +82,7 @@ environments:
         schedule: '*/15 * * * *'
         command: drush cron
         service: cli
+      - name: Frontend build
+        schedule: '*/5 * * * *'
+        command: drush silverback-gatsby:build main
+        service: cli
