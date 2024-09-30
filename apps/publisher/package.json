@@ -2,7 +2,7 @@
   "name": "@custom/publisher",
   "private": true,
   "dependencies": {
-    "@amazeelabs/publisher": "^2.5.0"
+    "@amazeelabs/publisher": "^2.5.1"
   },
   "scripts": {
     "test:static": "tsc --noEmit && eslint '**/*.{ts,tsx,js,jsx}' --ignore-path='./.gitignore'",
