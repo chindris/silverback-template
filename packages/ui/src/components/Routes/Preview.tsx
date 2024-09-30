@@ -1,17 +1,13 @@
 'use client';
 import { useIntl } from '@amazeelabs/react-intl';
 import type { OperationVariables } from '@custom/schema';
-import {
-  Locale,
-  PreviewDrupalPageQuery,
-  Url,
-  useLocation,
-} from '@custom/schema';
+import { PreviewDrupalPageQuery, useLocation } from '@custom/schema';
 import React from 'react';
 
 import { clear, useOperation } from '../../utils/operation';
 import { Loading } from '../Molecules/Loading';
 import { PageDisplay } from '../Organisms/PageDisplay';
+import { Messages } from '../Molecules/Messages';
 
 function usePreviewParameters(): OperationVariables<
   typeof PreviewDrupalPageQuery
@@ -57,27 +53,17 @@ export function Preview() {
     PreviewDrupalPageQuery,
     usePreviewParameters(),
   );
+
   const intl = useIntl();
   // @todo load this content from Drupal settings, create a ForbiddenPage component.
   // @todo forward error from the backend.
-  const data403 = {
-    preview: {
-      title: '403 Forbidden',
-      locale: 'en' as Locale,
-      translations: [],
-      path: '/403' as Url,
-      content: [
-        {
-          __typename: 'BlockMarkup',
-          markup: `<p>${intl.formatMessage({
-            defaultMessage:
-              'You do not have access to this page. Your access token might have expired.',
-            id: 'iAZszQ',
-          })}</p>`,
-        },
-      ] as Exclude<PreviewDrupalPageQuery['preview'], undefined>['content'],
-    },
-  };
+  const errorMessages = [
+    intl.formatMessage({
+      defaultMessage:
+        'You do not have access to this page. Your access token might have expired.',
+      id: 'iAZszQ',
+    }),
+  ];
   return (
     <>
       {error ? (
@@ -95,7 +81,7 @@ export function Preview() {
               {data?.preview ? (
                 <PageDisplay {...data.preview} />
               ) : (
-                <PageDisplay {...data403.preview} />
+                <Messages messages={errorMessages} />
               )}
             </>
           )}
