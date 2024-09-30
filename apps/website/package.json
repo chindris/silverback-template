@@ -8,7 +8,6 @@
     "@amazeelabs/gatsby-plugin-operations": "^1.1.3",
     "@amazeelabs/gatsby-plugin-static-dirs": "^1.0.1",
     "@amazeelabs/gatsby-source-silverback": "^1.14.0",
-    "@amazeelabs/publisher": "^2.5.0",
     "@amazeelabs/strangler-netlify": "^1.1.9",
     "@amazeelabs/token-auth-middleware": "^1.1.1",
     "@custom/cms": "workspace:*",
@@ -49,10 +48,7 @@
     "build:drupal": "CLOUDINARY_CLOUDNAME=test pnpm start-test start:drupal 8888 build:gatsby",
     "build:gatsby": "gatsby build",
     "build": "if node has-drupal.mjs; then pnpm build:drupal; else pnpm build:gatsby; fi",
-    "start": "publisher",
     "serve": "netlify dev --cwd=. --dir=public --port=8000",
-    "dev": "pnpm clean && publisher",
-    "open": "open http://127.0.0.1:8000/___status/",
     "gatsby:develop": "pnpm gatsby develop",
     "gatsby:refresh": "curl -X POST http://localhost:8000/__refresh",
     "clean": "gatsby clean"
