@@ -43,6 +43,10 @@ environments:
         schedule: '*/15 * * * *'
         command: drush cron
         service: cli
+      - name: Frontend a frontend build
+        schedule: '0 * * * *'
+        command: drush silverback-gatsby:build main
+        service: cli
   stage:
     routes:
       - nginx:
@@ -56,6 +60,10 @@ environments:
         schedule: '*/15 * * * *'
         command: drush cron
         service: cli
+      - name: Frontend a frontend build
+        schedule: '15 * * * *'
+        command: drush silverback-gatsby:build main
+        service: cli
   dev:
     routes:
       - nginx:
@@ -68,6 +76,10 @@ environments:
       - name: drush cron
         schedule: '*/15 * * * *'
         command: drush cron
+        service: cli
+      - name: Frontend a frontend build
+        schedule: '30 * * * *'
+        command: drush silverback-gatsby:build main
         service: cli
   demo-bog:
     routes:
