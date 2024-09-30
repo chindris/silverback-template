@@ -55,8 +55,8 @@ export function Preview() {
   );
 
   const intl = useIntl();
-  // @todo load this content from Drupal settings, create a ForbiddenPage component.
   // @todo forward error from the backend.
+  // @todo 403 status code.
   const errorMessages = [
     intl.formatMessage({
       defaultMessage:
