@@ -1,0 +1,15 @@
+{
+  "name": "@custom/publisher",
+  "private": true,
+  "dependencies": {
+    "@amazeelabs/publisher": "^2.5.0"
+  },
+  "scripts": {
+    "test:static": "tsc --noEmit && eslint '**/*.{ts,tsx,js,jsx}' --ignore-path='./.gitignore'",
+    "dev": "cd ../website && pnpm clean && cd - && publisher",
+    "open": "open http://127.0.0.1:8000/___status/"
+  },
+  "devDependencies": {
+    "@types/node": "^18"
+  }
+}

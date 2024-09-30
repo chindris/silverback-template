@@ -44,11 +44,12 @@ export default defineConfig(
         commands: {
           build: {
             command:
-              'DRUPAL_EXTERNAL_URL=http://127.0.0.1:8888 pnpm build:gatsby',
+              'cd ../website && DRUPAL_EXTERNAL_URL=http://127.0.0.1:8888 pnpm build:gatsby',
           },
           clean: 'pnpm clean',
           serve: {
-            command: 'pnpm netlify dev --cwd=. --dir=public --port=7999',
+            command:
+              'cd ../website && pnpm netlify dev --cwd=. --dir=public --port=7999',
             readyPattern: 'Server now ready',
             readyTimeout: 1000 * 60,
             port: 7999,
