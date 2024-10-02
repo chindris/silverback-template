@@ -30,9 +30,10 @@ tasks:
           fi
         service: cli
     - run:
-        name: Trigger a frontend build
+        name: Trigger a clean frontend build
         # Source before https://github.com/uselagoon/lagoon/issues/574
-        command: source /home/.bashrc && drush silverback-gatsby:build main
+        command:
+          source /home/.bashrc && curl -X POST "$PUBLISHER_URL/___status/clean"
         service: cli
 environments:
   prod:
