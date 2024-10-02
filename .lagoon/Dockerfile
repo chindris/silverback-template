@@ -98,9 +98,9 @@ ENV WEBROOT=web
 # PREVIEW IMAGE
 # ====================================================================================================
 
-FROM uselagoon/node-18:23.12.0 as preview
+FROM uselagoon/node-18 as preview
 
-RUN npm install -g pnpm@8.6.0
+RUN npm install -g pnpm@8.15.9
 COPY --from=builder /tmp/.deploy/preview /app
 CMD pnpm start
 
@@ -108,11 +108,11 @@ CMD pnpm start
 # PUBLISHER IMAGE
 # ====================================================================================================
 
-FROM uselagoon/node-18:23.12.0 as publisher
+FROM uselagoon/node-18 as publisher
 
 RUN apk add --no-cache sqlite curl github-cli
 
-RUN npm install -g pnpm@8.6.0
+RUN npm install -g pnpm@8.15.9
 
 COPY --from=builder /tmp/.deploy/publisher /app
 
