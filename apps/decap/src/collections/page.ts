@@ -233,18 +233,14 @@ const getPages = (path: string) => {
           const page = pageSchema.safeParse(input);
           if (page.success) {
             const editUrl = `${process.env.NETLIFY_URL || 'http://127.0.0.1:8000'}/admin/#/collections/page/entries/${file.replace(/\.yml$/, '')}`;
-            translations.push([
-              `${page.data.id}:${lang}`,
-              {
-                ...page.data,
-                _decap_id: id,
-                editLink: {
-                  __typename: 'EditLink',
-                  url: editUrl,
-                  type: 'decap',
-                },
+            translations.push({
+              ...page.data,
+              editLink: {
+                __typename: 'EditLink',
+                url: editUrl,
+                type: 'decap',
               },
-            ]);
+            });
           } else {
             console.warn(`Error parsing ${file} (${lang}):`);
             console.warn(page.error.message);
