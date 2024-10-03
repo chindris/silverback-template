@@ -18,6 +18,11 @@ test('string translations', async () => {
       "stringTranslations": [
         {
           "language": "de",
+          "source": "Edit",
+          "translation": "Bearbeiten",
+        },
+        {
+          "language": "de",
           "source": "Company name",
           "translation": "Drupal Company",
         },
