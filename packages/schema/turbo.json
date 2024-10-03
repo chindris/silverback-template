@@ -4,7 +4,7 @@
   "tasks": {
     "prep:directives": {
       "dependsOn": ["@custom/cms#prep:composer"],
-      "inputs": ["package.json"],
+      "inputs": ["package.json", "../drupal/custom/directives.graphql"],
       "outputs": ["src/directives.graphql"]
     },
     "prep:codegen": {

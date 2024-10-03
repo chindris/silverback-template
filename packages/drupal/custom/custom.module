@@ -286,3 +286,59 @@ function custom_views_data_alter(array &$data) {
     ],
   ];
 }
+
+/**
+ * Implements hook_preprocess_HOOK() for "html".
+ */
+function custom_preprocess_html(&$variables) {
+  _custom_add_session_iframe_to_page($variables);
+}
+
+/**
+ * Adds a hidden iframe to set the session expiration time on the frontend.
+ *
+ * @param array $variables
+ *   Variables passed to hook_preprocess_html().
+ *
+ * @return void
+ */
+function _custom_add_session_iframe_to_page(array &$variables): void {
+  $variables['page_bottom']['frontend_session_iframe'] = [
+    '#cache' => [
+      'max-age' => 0,
+    ],
+  ];
+  // Do not add the iframe if silverback_iframe_theme is the current theme. We
+  // don't want to load the iframe in the iframe.
+  $isDefaultTheme = \Drupal::theme()->getActiveTheme()->getName() === \Drupal::config('system.theme')->get('default');
+  if ($isDefaultTheme) {
+    // Currently, any authenticated user is considered an editor.
+    $isEditor = \Drupal::currentUser()->isAuthenticated();
+    if ($isEditor) {
+      // Guess the probable session expiration time.
+      /** @var \Drupal\Core\Session\MetadataBag $sessionMeta */
+      $sessionMeta = \Drupal::service('session_manager.metadata_bag');
+      /** @var \Drupal\Core\Session\SessionConfiguration $sessionConfig */
+      $sessionConfig = \Drupal::service('session_configuration');
+      $sessionOptions = $sessionConfig->getOptions(\Drupal::request());
+      $cookieLifetime = $sessionOptions['cookie_lifetime'];
+      $gcLifetime = $sessionOptions['gc_maxlifetime'];
+      $gcExpire = $sessionMeta->getLastUsed() + $gcLifetime;
+      $cookieExpire = $sessionMeta->getCreated() + $cookieLifetime;
+      $sessionExpire = date('c', min($cookieExpire, $gcExpire));
+    }
+    else {
+      // Unset the session expiration time.
+      $sessionExpire = '';
+    }
+    $variables['page_bottom']['frontend_session_iframe'] += [
+      '#type' => 'html_tag',
+      '#tag' => 'iframe',
+      '#value' => '',
+      '#attributes' => [
+        'src' => (getenv('NETLIFY_URL') ?: 'http://127.0.0.1:8000') . '/set-drupal-session?session_expire=' . rawurlencode($sessionExpire),
+        'style' => 'width: 0; height: 0; border: none;',
+      ],
+    ];
+  }
+}

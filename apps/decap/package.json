@@ -42,7 +42,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@amazeelabs/decap-cms-backend-token-auth": "^1.1.7",
+    "@amazeelabs/decap-cms-backend-token-auth": "^1.2.1",
     "@types/deepmerge": "^2.2.0",
     "@types/lodash": "^4.17.6",
     "@types/mime-types": "^2.1.4",

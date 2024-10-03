@@ -5,7 +5,7 @@ import { useSelect } from 'wordpress__data';
 const { t: __ } = Drupal;
 const MAX_BLOCKS: number = 3;
 
-registerBlockType('custom/info-grid', {
+registerBlockType<{}>('custom/info-grid', {
   title: __('Info Grid'),
   icon: 'editor-insertmore',
   category: 'layout',

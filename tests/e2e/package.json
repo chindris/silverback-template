@@ -7,16 +7,15 @@
   "license": "ISC",
   "type": "module",
   "scripts": {
-    "prep": "playwright install chromium",
     "test:static": "tsc --noEmit && eslint '**/*.{ts,tsx,js,jsx}' --ignore-path='./.gitignore'",
-    "test:integration:drupal": "playwright test --config playwright.config.drupal.ts",
-    "test:integration:decap": "playwright test --config playwright.config.decap.ts",
-    "test:headed:drupal": "playwright test --headed --config playwright.config.drupal.ts",
-    "test:headed:decap": "playwright test --headed --config playwright.config.decap.ts",
-    "dev:decap": "playwright test --ui --config playwright.config.decap.ts",
-    "dev:drupal": "playwright test --ui --config playwright.config.drupal.ts",
-    "webform-snapshots": "playwright test --config playwright.config.webforms.ts",
-    "webform-snapshots:headed": "playwright test --config playwright.config.webforms.ts --headed"
+    "test:integration:drupal": "playwright install chromium && playwright test --config playwright.config.drupal.ts",
+    "test:integration:decap": "playwright install chromium && playwright test --config playwright.config.decap.ts",
+    "test:headed:drupal": "playwright install chromium && playwright test --headed --config playwright.config.drupal.ts",
+    "test:headed:decap": "playwright install chromium && playwright test --headed --config playwright.config.decap.ts",
+    "dev:decap": "playwright install chromium && playwright test --ui --config playwright.config.decap.ts",
+    "dev:drupal": "playwright install chromium && playwright test --ui --config playwright.config.drupal.ts",
+    "webform-snapshots": "playwright install chromium && playwright test --config playwright.config.webforms.ts",
+    "webform-snapshots:headed": "playwright install chromium && playwright test --config playwright.config.webforms.ts --headed"
   },
   "devDependencies": {
     "@amazeelabs/save-webpage": "^1.1.1",

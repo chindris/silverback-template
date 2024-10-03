@@ -10,7 +10,13 @@ import {
 const { t: __ } = Drupal;
 const { setPlainTextAttribute } = silverbackGutenbergUtils;
 
-registerBlockType('custom/teaser-list', {
+registerBlockType<{
+  layout: string;
+  buttonText: string;
+  contentHubEnabled?: boolean;
+  limit: number;
+  titleFilter: string;
+}>('custom/teaser-list', {
   title: __('Teaser list'),
   icon: 'slides',
   category: 'layout',
@@ -21,33 +27,21 @@ registerBlockType('custom/teaser-list', {
     },
     buttonText: {
       type: 'string',
+      default: '',
     },
     contentHubEnabled: {
       type: 'boolean',
     },
     limit: {
-      type: 'string',
+      type: 'number',
+      default: 0,
     },
     titleFilter: {
       type: 'string',
+      default: '',
     },
   },
-  edit: (props: {
-    attributes: {
-      layout: string;
-      buttonText: string;
-      contentHubEnabled: boolean;
-      limit: string;
-      titleFilter: string;
-    };
-    setAttributes: (attributes: {
-      layout?: string;
-      buttonText?: string;
-      contentHubEnabled?: boolean;
-      limit?: string;
-      titleFilter?: string;
-    }) => void;
-  }) => {
+  edit: (props) => {
     const { attributes, setAttributes } = props;
     const { layout, buttonText, contentHubEnabled, limit, titleFilter } =
       attributes;
@@ -73,7 +67,7 @@ registerBlockType('custom/teaser-list', {
             <TextControl
               value={buttonText}
               label={__('Button text')}
-              onChange={(buttonText: string) => {
+              onChange={(buttonText) => {
                 setPlainTextAttribute(props, 'buttonText', buttonText);
               }}
               help={__(
@@ -110,7 +104,7 @@ registerBlockType('custom/teaser-list', {
                 )}
                 onChange={(limit) => {
                   setAttributes({
-                    limit,
+                    limit: Math.max(0, parseInt(limit) || 0),
                   });
                 }}
                 value={limit}

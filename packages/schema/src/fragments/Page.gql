@@ -1,6 +1,10 @@
 fragment Page on Page {
   locale
   path
+  editLink {
+    url
+    type
+  }
   translations {
     locale
     path

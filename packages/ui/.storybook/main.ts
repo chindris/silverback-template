@@ -1,7 +1,7 @@
 import type { StorybookConfig } from '@storybook/react-vite';
 import { mergeConfig, UserConfig } from 'vite';
 import { imagetools } from 'vite-imagetools';
-import { resolve, dirname } from 'path';
+import { resolve, dirname, join } from 'path';
 
 import { readdirSync } from 'fs';
 
@@ -29,19 +29,18 @@ const config: StorybookConfig = {
   staticDirs: ['../static/public', '../static/stories'],
   stories: ['../src/**/*.@(mdx|stories.@(ts|tsx))'],
   addons: [
-    '@storybook/addon-links',
-    '@storybook/addon-essentials',
-    '@storybook/addon-interactions',
-    '@storybook/addon-coverage',
-    '@storybook/addon-a11y',
+    getAbsolutePath('@storybook/addon-links'),
+    getAbsolutePath('@storybook/addon-essentials'),
+    getAbsolutePath('@storybook/addon-interactions'),
+    getAbsolutePath('@storybook/addon-coverage'),
+    getAbsolutePath('@storybook/addon-a11y'),
+    getAbsolutePath('@storybook/addon-mdx-gfm'),
   ],
   framework: {
-    name: '@storybook/react-vite',
+    name: getAbsolutePath('@storybook/react-vite'),
     options: {},
   },
-  docs: {
-    autodocs: 'tag',
-  },
+  docs: {},
   previewHead: (head) => `
     ${head}
     ${fonts
@@ -53,3 +52,7 @@ const config: StorybookConfig = {
   `,
 };
 export default config;
+
+function getAbsolutePath(value: string): any {
+  return dirname(require.resolve(join(value, 'package.json')));
+}

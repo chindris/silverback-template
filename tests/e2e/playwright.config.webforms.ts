@@ -1,11 +1,10 @@
 import { defineConfig, devices } from '@playwright/test';
 
-import defaults from './playwright.config.drupal';
+import defaults from './playwright.config.default';
 
 export default defineConfig({
   ...defaults,
   testDir: './webform-snapshots',
-  reporter: 'list',
   webServer: [
     {
       command: 'pnpm run --filter "@custom/cms" start',

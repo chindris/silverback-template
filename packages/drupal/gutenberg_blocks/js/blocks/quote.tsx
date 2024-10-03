@@ -1,6 +1,5 @@
 import { RichText } from 'wordpress__block-editor';
 import { registerBlockType } from 'wordpress__blocks';
-import { compose, withState } from 'wordpress__compose';
 import { dispatch } from 'wordpress__data';
 
 import { cleanUpText } from '../utils/clean-up-text';
@@ -9,27 +8,34 @@ import { DrupalMediaEntity } from '../utils/drupal-media';
 const { t: __ } = Drupal;
 const { setPlainTextAttribute } = silverbackGutenbergUtils;
 
-// @ts-ignore
-registerBlockType(`custom/quote`, {
+registerBlockType<{
+  quote: string;
+  author: string;
+  role: string;
+  mediaEntityIds?: [string];
+}>(`custom/quote`, {
   title: __('Quote'),
   icon: 'format-quote',
   category: 'text',
   attributes: {
     quote: {
       type: 'string',
+      default: '',
     },
     author: {
-      tpye: 'string',
+      type: 'string',
+      default: '',
     },
     role: {
       type: 'string',
+      default: '',
     },
     mediaEntityIds: {
       type: 'array',
     },
   },
-  // @ts-ignore
-  edit: compose(withState())((props) => {
+
+  edit: (props) => {
     return (
       <div className="prose lg:prose-xl prose-p:text-xl prose-p:font-bold prose-p:leading-8 prose-p:text-gray-900">
         <blockquote>
@@ -73,7 +79,6 @@ registerBlockType(`custom/quote`, {
                 setAttributes={props.setAttributes}
                 isMediaLibraryEnabled={true}
                 onError={(error) => {
-                  // @ts-ignore
                   error = typeof error === 'string' ? error : error[2];
                   dispatch('core/notices').createWarningNotice(error);
                 }}
@@ -109,8 +114,8 @@ registerBlockType(`custom/quote`, {
         </blockquote>
       </div>
     );
-  }),
-  save() {
+  },
+  save: () => {
     return null;
   },
 });

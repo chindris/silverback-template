@@ -21,7 +21,11 @@ type ConditionsType = {
 
 const blockTitle = __('Conditional content');
 
-registerBlockType(`custom/conditional`, {
+registerBlockType<{
+  displayFrom: string;
+  displayTo: string;
+  purpose: string;
+}>(`custom/conditional`, {
   title: blockTitle,
   category: 'layout',
   icon: 'category',
@@ -41,12 +45,9 @@ registerBlockType(`custom/conditional`, {
       default: '',
     },
   },
-  edit(props) {
+  edit: (props) => {
     const { attributes, setAttributes } = props;
-
-    const displayFrom = attributes.displayFrom as string | undefined;
-    const displayTo = attributes.displayTo as string | undefined;
-    const purpose = (attributes.purpose as string) || '';
+    const { displayFrom, displayTo, purpose } = attributes;
 
     // Same logic as in BlockConditional.tsx
     const active = {
@@ -192,8 +193,7 @@ registerBlockType(`custom/conditional`, {
       </>
     );
   },
-
-  save() {
+  save: () => {
     return <InnerBlocks.Content />;
   },
 });

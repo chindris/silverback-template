@@ -4,7 +4,9 @@ import { PanelBody, SelectControl } from 'wordpress__components';
 
 const { t: __ } = Drupal;
 
-registerBlockType(`custom/form`, {
+registerBlockType<{
+  formId?: string;
+}>(`custom/form`, {
   title: __('Form'),
   icon: 'media-document',
   category: 'layout',
@@ -21,7 +23,7 @@ registerBlockType(`custom/form`, {
       <InspectorControls>
         <PanelBody>
           <SelectControl
-            value={props.attributes.formId as string}
+            value={props.attributes.formId}
             options={[
               { label: __('- Select a form -'), value: '' },
               ...drupalSettings.customGutenbergBlocks.forms.map((form) => ({
@@ -29,7 +31,7 @@ registerBlockType(`custom/form`, {
                 value: form.id,
               })),
             ]}
-            onChange={(formId: string) => {
+            onChange={(formId) => {
               props.setAttributes({
                 formId,
               });

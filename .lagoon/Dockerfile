@@ -9,7 +9,7 @@ COPY --from=node /usr/local/bin/node /usr/local/bin/node
 RUN ln -s /usr/local/lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm
 
 # Install pnpm
-RUN npm install -g pnpm@8.6.12 && pnpm config set store-dir /tmp/cache/pnpm
+RUN npm install -g pnpm@8.15.9 && pnpm config set store-dir /tmp/cache/pnpm
 
 # Copy pnpm lockfile and install dependencies.
 COPY pnpm-lock.yaml .npmrc /app/
@@ -34,6 +34,11 @@ ENV COMPOSER_HOME=/tmp/cache/composer
 RUN --mount=type=cache,target=/tmp/cache composer install --no-dev
 
 WORKDIR /app
+
+# Decap config.
+ENV VITE_DECAP_REPO='AmazeeLabs/silverback-template'
+ARG LAGOON_GIT_BRANCH
+ENV VITE_DECAP_BRANCH="$LAGOON_GIT_BRANCH"
 
 # Copy the all package sources, install and prepare them.
 COPY . /app

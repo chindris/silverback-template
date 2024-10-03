@@ -6,8 +6,11 @@ on:
       - dev
 
 jobs:
-  test:
+  deploy:
     name: Deploy
+    if:
+      (github.ref == 'refs/heads/prod' && vars.NETLIFY_PROD_ID) || (github.ref
+      == 'refs/heads/dev' && vars.NETLIFY_DEV_ID)
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -60,8 +63,7 @@ jobs:
         working-directory: ../deploy
         if:
           github.ref == 'refs/heads/dev' &&
-          steps.netlify-check.outputs.available == 'true' && vars.NETLIFY_DEV_ID
-          != ''
+          steps.netlify-check.outputs.available == 'true'
         env:
           NETLIFY_SITE_ID: ${{ vars.NETLIFY_DEV_ID }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
@@ -71,8 +73,7 @@ jobs:
         working-directory: ../deploy
         if:
           github.ref == 'refs/heads/prod' &&
-          steps.netlify-check.outputs.available == 'true' &&
-          vars.NETLIFY_PROD_ID != ''
+          steps.netlify-check.outputs.available == 'true'
         env:
           NETLIFY_SITE_ID: ${{ vars.NETLIFY_PROD_ID }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}

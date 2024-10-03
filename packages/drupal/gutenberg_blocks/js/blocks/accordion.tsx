@@ -11,7 +11,9 @@ enum HeadingLevels {
   H5 = 'h5',
 }
 
-registerBlockType('custom/accordion', {
+registerBlockType<{
+  headingLevel: string;
+}>('custom/accordion', {
   title: __('Accordion'),
   icon: 'menu',
   category: 'layout',
@@ -29,7 +31,7 @@ registerBlockType('custom/accordion', {
         <InspectorControls>
           <PanelBody title={__('Heading Level')}>
             <SelectControl
-              value={props.attributes.headingLevel as string}
+              value={props.attributes.headingLevel}
               options={[
                 {
                   label: __('Heading 2'),

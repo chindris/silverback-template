@@ -35,6 +35,20 @@ enum Locale @default @value(string: "en") {
   de
 }
 
+enum Backend @default @value(string: "drupal") {
+  drupal
+  decap
+}
+
+interface Editable {
+  editLink: EditLink
+}
+
+type EditLink {
+  url: Url! @resolveEntityEditLink
+  type: Backend! @value(string: "drupal")
+}
+
 type ContentHubResult @default @value(json: "{\"total\": 0, \"items\": []}") {
   total: Int!
   items: [CardItem]! @prop(key: "rows")
@@ -95,6 +109,7 @@ type Page implements CardItem
   locale: Locale! @resolveEntityLanguage
   translations: [Page] @resolveEntityTranslations
   path: Url! @resolveEntityPath
+  editLink: EditLink @resolveParent
   title: String! @resolveProperty(path: "title.value")
   teaserImage: MediaImage
     @resolveEditorBlocks(path: "body.value")

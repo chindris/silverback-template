@@ -4,6 +4,7 @@ import React from 'react';
 import { isTruthy } from '../../utils/isTruthy';
 import { UnreachableCaseError } from '../../utils/unreachable-case-error';
 import { BreadCrumbs } from '../Molecules/Breadcrumbs';
+import { ContentEditLink } from '../Molecules/ContentEditLink';
 import { PageTransition } from '../Molecules/PageTransition';
 import { BlockAccordion } from './PageContent/BlockAccordion';
 import { BlockConditional } from './PageContent/BlockConditional';
@@ -25,6 +26,7 @@ export function PageDisplay(page: PageFragment) {
     <PageTransition>
       <PageMeta meta={page.metaTags} locale={page.locale}></PageMeta>
       <div>
+        {page.editLink ? <ContentEditLink {...page.editLink} /> : null}
         {!page.hero && <BreadCrumbs />}
         {page.hero && <PageHero {...page.hero} />}
         {page?.content?.filter(isTruthy).map((block, index) => {

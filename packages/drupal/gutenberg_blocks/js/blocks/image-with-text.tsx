@@ -7,7 +7,10 @@ import { DrupalMediaEntity } from '../utils/drupal-media';
 
 const { t: __ } = Drupal;
 
-registerBlockType('custom/image-with-text', {
+registerBlockType<{
+  mediaEntityIds?: [string];
+  imagePosition: string;
+}>('custom/image-with-text', {
   title: __('Image with Text'),
   icon: 'cover-image',
   category: 'layout',
@@ -27,7 +30,7 @@ registerBlockType('custom/image-with-text', {
         <InspectorControls>
           <PanelBody title={__('Image position')}>
             <SelectControl
-              value={props.attributes.imagePosition as string}
+              value={props.attributes.imagePosition}
               options={[
                 { label: __('Left'), value: 'left' },
                 { label: __('Right'), value: 'right' },
@@ -45,7 +48,7 @@ registerBlockType('custom/image-with-text', {
           <DrupalMediaEntity
             classname={'w-full'}
             attributes={{
-              ...(props.attributes as any),
+              ...props.attributes,
               lockViewMode: true,
               viewMode: 'gutenberg_header',
               allowedTypes: ['image'],
@@ -53,7 +56,6 @@ registerBlockType('custom/image-with-text', {
             setAttributes={props.setAttributes}
             isMediaLibraryEnabled={true}
             onError={(error) => {
-              // @ts-ignore
               error = typeof error === 'string' ? error : error[2];
               dispatch('core/notices').createWarningNotice(error);
             }}
