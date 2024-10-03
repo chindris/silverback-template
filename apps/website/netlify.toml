@@ -9,7 +9,7 @@
   edge_functions = "netlify/edge-functions"
 
 [functions.strangler]
-  included_files = ["dist/public/404.html"]
+  included_files = ["dist/public/404.html", "dist/public/RSC/404.txt"]
 
 [[edge_functions]]
   path = "/"
