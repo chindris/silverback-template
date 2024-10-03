@@ -101,6 +101,7 @@ function _custom_deploy_create_consumer(
       'label' => $label,
       'client_id' => $client_id,
       'is_default' => FALSE,
+      'third_party' => FALSE,
       'secret' => $clientSecret,
       'redirect' => $oAuthCallback,
     ])->save();
