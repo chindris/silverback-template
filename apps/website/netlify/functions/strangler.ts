@@ -26,6 +26,7 @@ export const handler = createStrangler(
       url: drupalUrl,
       applies: (url) => url.pathname.startsWith('/RSC/'),
       preprocess: (event) => {
+        // Before handling, turn the RSC url into the corresponding Drupal url.
         event.rawUrl = decodeRSCUrl(event.rawUrl).toString();
         event.path = decodeRSCUrl(event.path).pathname;
         return event;
@@ -38,6 +39,8 @@ export const handler = createStrangler(
               status: response.status,
               headers: {
                 ...response.headers,
+                // After handling, turn the resulting redirect target
+                // into the corresponding RSC url.
                 Location: encodeRSCUrl(location).toString(),
               },
             });
