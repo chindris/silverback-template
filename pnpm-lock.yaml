@@ -290,8 +290,8 @@ importers:
   apps/publisher:
     dependencies:
       '@amazeelabs/publisher':
-        specifier: ^2.5.2
-        version: 2.5.2(react@18.2.0)(typescript@4.9.5)
+        specifier: ^2.5.5
+        version: 2.5.5(react@18.2.0)(typescript@4.9.5)
     devDependencies:
       '@types/node':
         specifier: ^18
@@ -1133,8 +1133,8 @@ packages:
     resolution: {integrity: sha512-cckhn9qOlI2uvJtTvmo3FNABLwt+7Z5yMOtEeGCaNqoSrgrlL1pUc2oQ9aY9OhBZIVk6+U2IrvSyrYvuNdbjZg==}
     dev: false
 
-  /@amazeelabs/publisher@2.5.2(react@18.2.0)(typescript@4.9.5):
-    resolution: {integrity: sha512-eHkmbb/dXHHPLoNjWvwdhWItf214bc8mD4UtkvZjEHB/TuUE+QCUfeXBOa5RGK+AkrU0s+kIgCCQxkm60zGAVA==}
+  /@amazeelabs/publisher@2.5.5(react@18.2.0)(typescript@4.9.5):
+    resolution: {integrity: sha512-XzheGgKtIcFftK3xpltyJ9DFDcpAEr2spzbXjK3i26eswHkZnvA+LzeiyFJZSVCLR6OWnvupEvHr4tHW3tmsFg==}
     engines: {node: '>=16'}
     hasBin: true
     dependencies:
@@ -20365,6 +20365,7 @@ packages:
 
   /inflight@1.0.6:
     resolution: {integrity: sha512-k92I/b08q4wvFscXCLvqfsHCrjrF7yiXsQuIVvVE7N82W3+aqpzuUdBbfhWcy/FZR3/4IgflMgKLOsvPDrGCJA==}
+    deprecated: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
     dependencies:
       once: 1.4.0
       wrappy: 1.0.2
