@@ -45,7 +45,7 @@
   "scripts": {
     "test:static": "tsc --noEmit && eslint '**/*.{ts,tsx,js,jsx}' --ignore-path='./.gitignore'",
     "full-rebuild": "pnpm clean && pnpm build:gatsby",
-    "start:drupal": "pnpm run --filter @custom/cms start",
+    "start:drupal": "pnpm run --filter @custom/cms start >> /tmp/cms.log 2>&1",
     "build:drupal": "CLOUDINARY_CLOUDNAME=test pnpm start-test start:drupal 8888 build:gatsby",
     "build:gatsby": "gatsby build",
     "build": "if node has-drupal.mjs; then pnpm build:drupal; else pnpm build:gatsby; fi",
