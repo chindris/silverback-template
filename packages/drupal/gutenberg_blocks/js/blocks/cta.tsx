@@ -116,7 +116,6 @@ registerBlockType<{
               // for 'data-entity-type' in the onChange() handler by yourself.
 
               //suggestionsQuery={{
-              //  type: 'post',
               //  subtype: 'gutenberg',
               //}}
 
