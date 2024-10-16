@@ -34,6 +34,16 @@ jobs:
           TURBO_TOKEN: 'local'
           TURBO_TEAM: 'local'
 
+      - name: 'Logs: cms'
+        run: cat /tmp/cms.log || true
+        if: always()
+      - name: 'Logs: website'
+        run: cat /tmp/website.log || true
+        if: always()
+      - name: 'Logs: preview'
+        run: cat /tmp/preview.log || true
+        if: always()
+
       - name: Upload Playwright report
         uses: actions/upload-artifact@v4
         if: failure()

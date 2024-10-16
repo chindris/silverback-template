@@ -7,7 +7,7 @@ export default defineConfig({
   testDir: './webform-snapshots',
   webServer: [
     {
-      command: 'pnpm run --filter "@custom/cms" start',
+      command: 'pnpm run --filter "@custom/cms" start >> /tmp/cms.log 2>&1',
       port: 8888,
       reuseExistingServer: !process.env.CI,
     },
