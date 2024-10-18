@@ -52,8 +52,8 @@ export function Header() {
                 <Link
                   key={key}
                   href={item.target}
-                  className="text-sm font-medium text-gray-900 hover:text-blue-600 leading-6 mt-px"
-                  activeClassName={'font-bold text-blue-200'}
+                  className="text-sm font-medium text-gray-900 hover:text-red-600 leading-6 mt-px"
+                  activeClassName={'font-bold text-red-200'}
                 >
                   {item.title}
                 </Link>
@@ -73,16 +73,7 @@ export function Header() {
                     id: 'FPGwAt',
                   })}
                 </span>
-                <SiteLogo
-                  width={213}
-                  height={59}
-                  className={'hidden lg:block'}
-                />
-                <SiteLogo
-                  width={160}
-                  height={40}
-                  className={'block lg:hidden'}
-                />
+                <img src="/vz-logo.png" alt="Verbraucherzentrale" />
               </Link>
             </div>
             <div className="flex md:hidden">
@@ -95,8 +86,8 @@ export function Header() {
                   <Link
                     key={key}
                     href={item.target}
-                    className="text-base font-medium text-gray-900 ml-8 hover:text-blue-600"
-                    activeClassName={'font-bold text-blue-200'}
+                    className="text-base font-medium text-gray-900 ml-8 hover:text-red-600"
+                    activeClassName={'font-bold text-red-200'}
                   >
                     {item.title}
                   </Link>
@@ -105,7 +96,7 @@ export function Header() {
                     <Link
                       key={item.target}
                       href={item.target}
-                      className="m-1.5 block hover:text-blue-600 p-2 text-sm leading-[1.25rem] text-gray-900 font-bold"
+                      className="m-1.5 block hover:text-red-600 p-2 text-sm leading-[1.25rem] text-gray-900 font-bold"
                     >
                       {item.title}
                     </Link>
@@ -114,7 +105,7 @@ export function Header() {
                         <Link
                           key={child.target}
                           href={child.target}
-                          className="m-1.5 block hover:text-blue-600 p-2 text-sm leading-[1.25rem] text-gray-500"
+                          className="m-1.5 block hover:text-red-600 p-2 text-sm leading-[1.25rem] text-gray-500"
                         >
                           {child.title}
                         </Link>
@@ -127,7 +118,7 @@ export function Header() {
                             <Link
                               key={grandChild.target}
                               href={grandChild.target}
-                              className="block p-2 pl-5 text-sm leading-[1.25rem] text-gray-500 hover:text-blue-600"
+                              className="block p-2 pl-5 text-sm leading-[1.25rem] text-gray-500 hover:text-red-600"
                             >
                               {grandChild.title}
                             </Link>
@@ -149,7 +140,7 @@ export function Header() {
                       <Link
                         key={item.title}
                         href={item.target}
-                        className="block hover:text-blue-600 py-4 px-8 text-lg text-gray-900 border-b border-b-blue-100"
+                        className="block hover:text-red-600 py-4 px-8 text-lg text-gray-900 border-b border-b-red-100"
                       >
                         {item.title}
                       </Link>
@@ -163,7 +154,7 @@ export function Header() {
                           key={item.target}
                           href={item.target}
                           title={item.title}
-                          className="block hover:text-blue-600 py-4 pr-8 pl-10 text-base text-gray-900"
+                          className="block hover:text-red-600 py-4 pr-8 pl-10 text-base text-gray-900"
                         >
                           {item.title}
                         </Link>
@@ -173,7 +164,7 @@ export function Header() {
                               key={child.target}
                               href={child.target}
                               title={child.title}
-                              className="block hover:text-blue-600 py-4 pr-8 pl-10 text-base text-gray-900"
+                              className="block hover:text-red-600 py-4 pr-8 pl-10 text-base text-gray-900"
                             >
                               {child.title}
                             </Link>
@@ -204,8 +195,8 @@ export function Header() {
                 <Link
                   key={key}
                   href={item.target}
-                  className="text-base font-medium text-gray-900 hover:text-blue-600"
-                  activeClassName={'font-bold text-blue-200'}
+                  className="text-base font-medium text-gray-900 hover:text-red-600"
+                  activeClassName={'font-bold text-red-200'}
                 >
                   {item.title}
                 </Link>

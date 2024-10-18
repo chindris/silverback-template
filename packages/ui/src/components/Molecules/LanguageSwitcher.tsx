@@ -38,7 +38,7 @@ export function LanguageSwitcher() {
               className={clsx(
                 'inline-flex justify-center w-full rounded-md bg-white text-sm font-medium',
                 {
-                  'hover:text-blue-600': isMultiLingual,
+                  'hover:text-red-600': isMultiLingual,
                   'cursor-not-allowed opacity-70': !isMultiLingual,
                 },
               )}
@@ -71,7 +71,7 @@ export function LanguageSwitcher() {
                           <Link
                             href={translations[locale]!}
                             className={clsx(
-                              focus ? 'text-blue-600' : 'text-gray-500',
+                              focus ? 'text-red-600' : 'text-gray-500',
                               'block px-4 py-2 text-sm',
                             )}
                           >

@@ -17,7 +17,7 @@ module.exports = {
               },
               'ul>li::marker, ol>li::marker': {},
               strong: {
-                color: theme('colors.gray.900'),
+                color: theme('colors.red.900'),
                 fontWeight: '700',
               },
               '.prose p': {
@@ -26,7 +26,7 @@ module.exports = {
                 lineHeight: '1.688rem',
               },
               '.prose a, .prose p a': {
-                color: theme('colors.blue.600'),
+                color: theme('colors.red.700'),
                 fontWeight: '400',
               },
               '.prose em': {
@@ -38,14 +38,14 @@ module.exports = {
               blockquote: {},
               '.prose blockquote p': {
                 fontWeight: '700',
-                color: '#111928',
+                color: theme('colors.red.900'),
               },
               cite: {},
               'h1, h2, h3, h4, h5, h6': {},
               '.prose h1': {},
               '.prose h2': {
                 fontWeight: '700',
-                color: theme('colors.gray.900'),
+                color: theme('colors.red.900'),
               },
               '.prose h3': {},
               '.prose h4': {},

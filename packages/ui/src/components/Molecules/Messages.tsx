@@ -48,7 +48,7 @@ export const buildMessages = (
       {messages.map((message, index) => (
         <div
           key={index}
-          className="flex items-center p-4 my-4 text-blue-800 border-t-4 border-blue-300 bg-blue-50"
+          className="flex items-center p-4 my-4 text-red-800 border-t-4 border-red-300 bg-red-50"
           role="alert"
           aria-live="polite"
         >
@@ -82,7 +82,7 @@ export const buildMessages = (
                       <li
                         {...props}
                         className={clsx(className, {
-                          '!text-blue-800 ml-5 mt-1 mb-1 list-disc messages text-sm font-medium':
+                          '!text-red-800 ml-5 mt-1 mb-1 list-disc messages text-sm font-medium':
                             unordered,
                         })}
                       >
@@ -99,7 +99,7 @@ export const buildMessages = (
           {handleRemoveMessage && (
             <button
               type="button"
-              className="ms-auto -m-1.5 bg-blue-50 text-blue-500 rounded-lg focus:ring-2 focus:ring-blue-400 p-1.5 hover:bg-blue-200 inline-flex items-center justify-center h-8 w-8"
+              className="ms-auto -m-1.5 bg-red-50 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 inline-flex items-center justify-center h-8 w-8"
               data-dismiss-target={`#alert-${index + 1}`}
               onClick={() => handleRemoveMessage(index)}
               aria-label={`Close message ${index + 1}`}

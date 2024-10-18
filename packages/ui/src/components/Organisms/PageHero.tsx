@@ -49,7 +49,7 @@ function DefaultHero(props: NonNullable<PageFragment['hero']>) {
             {props.ctaText && props.ctaUrl ? (
               <Link
                 href={props.ctaUrl}
-                className="mt-7 px-5 py-2.5 text-sm font-medium text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                className="mt-7 px-5 py-2.5 text-sm font-medium text-white inline-flex items-center bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 rounded-lg text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
               >
                 <svg
                   className="mr-2 -ml-1 w-4 h-4"
@@ -104,7 +104,7 @@ function FormHero(props: NonNullable<PageFragment['hero']>) {
             {props.ctaText && props.ctaUrl ? (
               <Link
                 href={props.ctaUrl}
-                className="mt-7 px-5 py-2.5 text-sm font-medium text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                className="mt-7 px-5 py-2.5 text-sm font-medium text-white inline-flex items-center bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 rounded-lg text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
               >
                 <svg
                   className="mr-2 -ml-1 w-4 h-4"
@@ -153,7 +153,7 @@ function NoImageHero(props: NonNullable<PageFragment['hero']>) {
             {props.ctaText && props.ctaUrl ? (
               <Link
                 href={props.ctaUrl}
-                className="mt-5 px-5 py-2.5 text-sm font-medium text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                className="mt-5 px-5 py-2.5 text-sm font-medium text-white inline-flex items-center bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 rounded-lg text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
               >
                 <svg
                   className="mr-2 -ml-1 w-4 h-4"
