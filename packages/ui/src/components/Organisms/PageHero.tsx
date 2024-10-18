@@ -142,7 +142,7 @@ function NoImageHero(props: NonNullable<PageFragment['hero']>) {
       <section className="relative isolate overflow-hidden pt-12 sm:pt-20 container-page">
         <div className="container-content">
           <div className="container-text">
-            <h1 className="text-4xl font-extrabold tracking-tight leading-tight">
+            <h1 className="text-4xl font-extrabold tracking-tight leading-tight text-red-900">
               {props.headline}
             </h1>
             {props.lead ? (

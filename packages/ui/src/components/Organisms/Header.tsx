@@ -195,8 +195,8 @@ export function Header() {
                 <Link
                   key={key}
                   href={item.target}
-                  className="text-base font-medium text-gray-900 hover:text-red-600"
-                  activeClassName={'font-bold text-red-200'}
+                  className="text-base font-medium text-gray-900 hover:text-red-900"
+                  activeClassName={'font-bold text-red-900'}
                 >
                   {item.title}
                 </Link>
