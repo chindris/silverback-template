@@ -1,6 +1,12 @@
 <?php
 
 /**
+ * @file
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+
+/**
  * Implements hook_module_implements_alter().
  */
 function custom_heavy_module_implements_alter(&$implementations, $hook) {
@@ -9,4 +15,15 @@ function custom_heavy_module_implements_alter(&$implementations, $hook) {
     unset($implementations['custom']);
     $implementations['custom'] = $group;
   }
+}
+
+/**
+ * Implements hook_form_alter().
+ *
+ * Executed at the very late stage.
+ *
+ * @see custom_heavy_module_implements_alter
+ */
+function custom_heavy_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  // dpm($form_id);
 }

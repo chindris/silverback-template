@@ -1,0 +1,22 @@
+<?php
+
+/**
+ * @file
+ * Primary module hooks for Silveback Alt AI module.
+ */
+
+/**
+ *
+ */
+function silverback_image_ai_form_alter(&$form, &$form_state, $form_id) {
+  $service = \Drupal::service('silverback_image_ai.utilities');
+
+  if ($form_id == 'views_exposed_form') {
+    // ..
+  }
+
+  if ($form_id == 'views_form_media_media_page_list') {
+    // ..
+  }
+
+}

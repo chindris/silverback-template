@@ -1,0 +1,6 @@
+ai_model: 'gpt-4o-mini'
+debug_mode: false
+words_length: '40'
+alt_prefix: ''
+alt_suffix: ''
+ai_context: ''

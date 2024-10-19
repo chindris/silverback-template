@@ -1,0 +1,7 @@
+silverback_image_ai.settings:
+  path: '/admin/config/system/silverback/image-ai-settings'
+  defaults:
+    _title: 'Silverback Alt AI Settings'
+    _form: 'Drupal\silverback_image_ai\Form\ImageAiSettingsForm'
+  requirements:
+    _permission: 'administer site configuration'

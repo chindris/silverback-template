@@ -1,0 +1,5 @@
+name: 'Silverback AI'
+type: module
+description: 'Silverback AI base module'
+package: Silverback
+core_version_requirement: ^10

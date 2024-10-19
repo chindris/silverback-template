@@ -1,0 +1,8 @@
+open_ai_base_uri: 'https://api.openai.com/v1/'
+open_ai_key: ''
+ai_model: ''
+words_length: '40'
+alt_prefix: KNIME
+alt_suffix: ''
+ai_context: ''
+debug_mode: 1
