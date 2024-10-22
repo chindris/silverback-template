@@ -56,8 +56,8 @@ final class ImageAiUtilities implements ImageAiUtilitiesInterface {
 
     $base_64_data = $this->getBase64EncodeData($image);
 
-    $response_body = $this->sendOpenAiRequest($base_64_data, $langcode);
-    // $response_body = $this->getFakeResponseBody($base_64_data, $langcode);
+    // $response_body = $this->sendOpenAiRequest($base_64_data, $langcode);
+    $response_body = $this->getFakeResponseBody($base_64_data, $langcode);
     if ($this->configFactory->get('silverback_image_ai.settings')->get('debug_mode')) {
       \Drupal::logger('debug')->debug('<pre>' . print_r($response_body, TRUE) . "</pre>");
     }
