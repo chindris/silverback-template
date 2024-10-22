@@ -1,0 +1,7 @@
+media.alt_update:
+  route_name: entity.media.add_page
+  title: 'Alt text update (AI)'
+  weight: 12
+  appears_on:
+    - entity.media.collection
+    - view.media_library.page

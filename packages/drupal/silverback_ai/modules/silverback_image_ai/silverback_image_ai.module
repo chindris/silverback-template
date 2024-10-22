@@ -15,8 +15,5 @@ function silverback_image_ai_form_alter(&$form, &$form_state, $form_id) {
     // ..
   }
 
-  if ($form_id == 'views_form_media_media_page_list') {
-    // ..
-  }
-
+  $route_name = \Drupal::routeMatch()->getRouteName();
 }
