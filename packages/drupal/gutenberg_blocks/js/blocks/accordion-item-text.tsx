@@ -55,8 +55,13 @@ registerBlockType<{
       <Fragment>
         <InspectorControls>
           <PanelBody title={__('Heading Level')}>
-            <div>{__('Heading level is defined in the parent accordion block.')}</div>
-            <div>{__('Currently it is set to:')} <strong>{attributes.headingLevel}</strong></div>
+            <div>
+              {__('Heading level is defined in the parent accordion block.')}
+            </div>
+            <div>
+              {__('Currently it is set to:')}{' '}
+              <strong>{attributes.headingLevel}</strong>
+            </div>
           </PanelBody>
           <PanelBody title={__('Block settings')}>
             <SelectControl
