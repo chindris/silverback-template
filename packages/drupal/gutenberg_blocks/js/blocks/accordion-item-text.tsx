@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import React, { Fragment } from 'react';
+import { Fragment } from 'react';
 import {
   InnerBlocks,
   InspectorControls,
@@ -13,6 +13,7 @@ const { t: __ } = Drupal;
 registerBlockType<{
   title: string;
   icon?: string;
+  headingLevel: string;
 }>('custom/accordion-item-text', {
   title: 'Accordion Item Text',
   icon: 'text',
@@ -25,6 +26,10 @@ registerBlockType<{
     },
     icon: {
       type: 'string',
+    },
+    headingLevel: {
+      type: 'string',
+      default: 'h3',
     },
   },
   edit: (props) => {
@@ -40,9 +45,19 @@ registerBlockType<{
       icon: attributes.icon === undefined ? '' : attributes.icon,
     });
 
+    setAttributes({
+      headingLevel: attributes.headingLevel,
+    });
+
+    console.log('dan props', props);
+
     return (
       <Fragment>
         <InspectorControls>
+          <PanelBody title={__('Heading Level')}>
+            <div>{__('Heading level is defined in the parent accordion block.')}</div>
+            <div>{__('Currently it is set to:')} <strong>{attributes.headingLevel}</strong></div>
+          </PanelBody>
           <PanelBody title={__('Block settings')}>
             <SelectControl
               value={attributes.icon}
@@ -65,7 +80,7 @@ registerBlockType<{
           >
             <RichText
               identifier="title"
-              tagName="h3"
+              tagName={attributes.headingLevel as keyof HTMLElementTagNameMap}
               value={attributes.title}
               allowedFormats={[]}
               // @ts-ignore
