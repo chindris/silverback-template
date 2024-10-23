@@ -1,7 +1,7 @@
-import { dispatch, useSelect } from 'wordpress__data';
 import { InnerBlocks, InspectorControls } from 'wordpress__block-editor';
 import { registerBlockType } from 'wordpress__blocks';
 import { PanelBody, SelectControl } from 'wordpress__components';
+import { dispatch, useSelect } from 'wordpress__data';
 
 const { t: __ } = Drupal;
 
@@ -28,6 +28,7 @@ registerBlockType<{
     const { attributes, setAttributes } = props;
     const headingLevel = attributes.headingLevel;
 
+    /* eslint-disable-next-line */
     const { children } = useSelect((select) => ({
       children: select('core/block-editor').getBlocksByClientId(props.clientId),
     }));
