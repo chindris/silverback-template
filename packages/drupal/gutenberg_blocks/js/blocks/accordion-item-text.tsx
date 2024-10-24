@@ -49,8 +49,6 @@ registerBlockType<{
       headingLevel: attributes.headingLevel,
     });
 
-    console.log('dan props', props);
-
     return (
       <Fragment>
         <InspectorControls>
