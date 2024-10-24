@@ -68,6 +68,7 @@ registerBlockType<{
               onChange={(headingLevel: string) => {
                 setAttributes({ headingLevel });
               }}
+              help={__('The heading level will be applied to all nested accordion items.')}
             />
           </PanelBody>
         </InspectorControls>
