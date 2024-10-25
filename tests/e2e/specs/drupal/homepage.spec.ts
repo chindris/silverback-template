@@ -35,15 +35,17 @@ test.describe('the homepage', () => {
     ).toBeVisible();
   });
 
-  test.describe('if german is the preferred language', () => {
-    test.use({ locale: 'de-DE' });
-    test('redirects to german ', async ({ page }) => {
-      await page.goto(websiteUrl('/'));
-      const content = await page.getByRole('main');
-      await expect(
-        content.getByText('Architektur', { exact: true }),
-      ).toBeVisible();
-    });
+  test('redirects to german if german is the preferred language', async ({
+    browser,
+  }) => {
+    const context = await browser.newContext({ locale: 'de-DE' });
+    const page = await context.newPage();
+    await page.goto(websiteUrl('/'));
+    const content = await page.getByRole('main');
+    await expect(
+      content.getByText('Architektur', { exact: true }),
+    ).toBeVisible();
+    context.close();
   });
 
   test('it displays an image', async ({ page }) => {
