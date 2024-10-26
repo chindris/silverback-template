@@ -39,7 +39,7 @@
   "scripts": {
     "test:static": "tsc --noEmit && eslint '**/*.{ts,tsx,js,jsx}' --ignore-path='./.eslintignore'",
     "full-rebuild": "pnpm clean && pnpm build:waku",
-    "start:drupal": "pnpm run --filter @custom/cms start",
+    "start:drupal": "pnpm run --filter @custom/cms start >> /tmp/cms.log 2>&1",
     "build:drupal": "CLOUDINARY_CLOUDNAME=test pnpm start-test start:drupal 8888 build:waku",
     "build:waku": "waku build && pnpm build:redirects",
     "build:redirects": "tsx ./src/build/redirects.ts --dir=dist/public",

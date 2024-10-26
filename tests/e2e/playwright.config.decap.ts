@@ -7,7 +7,8 @@ export default defineConfig({
   testDir: './specs/decap',
   webServer: [
     {
-      command: 'pnpm run --filter "@custom/website" serve',
+      command:
+        'pnpm run --filter "@custom/website" serve >> /tmp/website.log 2>&1',
       port: 8000,
       reuseExistingServer: !process.env.CI,
     },
