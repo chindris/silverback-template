@@ -1,5 +1,5 @@
 'use client';
-import { Link } from '@custom/schema';
+import { Link, Locale } from '@custom/schema';
 import {
   ChevronRightIcon,
   EllipsisHorizontalIcon,
@@ -10,6 +10,9 @@ import React, { useEffect, useState } from 'react';
 import { isTruthy } from '../../utils/isTruthy';
 import { truncateString } from '../../utils/stringTruncation';
 import { useBreadcrumbs } from '../Routes/Menu';
+
+// Paths that lead to the home page and should display the home icon.
+const home_paths = Object.values(Locale).map((locale) => `/${locale}`);
 
 export function BreadCrumbs() {
   const breadcrumbs = useBreadcrumbs();
@@ -97,7 +100,7 @@ export function BreadCrumbs() {
                       'hidden',
                   )}
                 >
-                  {target === '/' && (
+                  {home_paths.includes(target) && (
                     <svg
                       className="w-4 h-4 mr-4"
                       aria-hidden="true"

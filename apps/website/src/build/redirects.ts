@@ -135,12 +135,13 @@ function writeRedirectsNetlify(config: RedirectsOutputConfig) {
   }
 
   redirectsPool.forEach((value) => {
-    let redirectEntry = `${value.source} ${value.destination} ${value.statusCode}`;
+    let redirectEntry = `\n${value.source} ${value.destination} ${value.statusCode}`;
     if (value.force) {
       redirectEntry += '!';
     }
-    redirectEntry += `
-`;
+    if ([301, 302].includes(value.statusCode)) {
+      redirectEntry += `\n/RSC${value.source}.txt /RSC${value.destination}.txt ${value.statusCode}`;
+    }
 
     fs.appendFileSync(`${config.outputFile}`, redirectEntry);
   });

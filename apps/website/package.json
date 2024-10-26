@@ -9,7 +9,7 @@
     "@amazeelabs/gatsby-plugin-static-dirs": "^1.0.1",
     "@amazeelabs/gatsby-source-silverback": "^1.14.0",
     "@amazeelabs/publisher": "^2.4.36",
-    "@amazeelabs/strangler-netlify": "^1.1.9",
+    "@amazeelabs/strangler-netlify": "^1.2.1",
     "@amazeelabs/token-auth-middleware": "^1.1.1",
     "@custom/cms": "workspace:*",
     "@custom/decap": "workspace:*",
