@@ -74,14 +74,18 @@ class AiUsageController extends ControllerBase {
       'username' => $this->t('User'),
       'entity_id' => $this->t('Entity'),
       'tokens_total' => $this->t('Tokens'),
-      'ai_provider' => $this->t('Provider'),
+      'ai_provider' => $this->t('Provider / Model'),
       'module_name' => $this->t('Module'),
     ];
 
     $build['table'] = [
-      '#type' => 'tableselect',
+      '#type' => 'table',
       '#header' => $header,
-      '#options' => [],
+      '#rows' => \Drupal::service('silverback_ai.token.usage')->getEntries(),
+      '#sticky' => TRUE,
+      '#attributes' => [
+        'class' => ['webform-element-plugin-table'],
+      ],
       '#empty' => $this->t('No records found'),
     ];
 

@@ -1,5 +1,5 @@
 media.alt_update:
-  route_name: entity.media.add_page
+  route_name: silverback_image_ai.image_ai_batch_update
   title: 'Alt text update (AI)'
   weight: 12
   appears_on:

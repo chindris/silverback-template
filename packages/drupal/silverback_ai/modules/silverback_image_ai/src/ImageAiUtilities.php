@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Drupal\silverback_image_ai;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Entity\EntityTypeManager;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\file\FileInterface;
 use Drupal\media\MediaInterface;
@@ -30,6 +31,7 @@ final class ImageAiUtilities implements ImageAiUtilitiesInterface {
     private readonly ClientInterface $httpClient,
     private readonly TokenUsageInterface $silverbackAiTokenUsage,
     private readonly OpenAiHttpClient $openAiHttpClient,
+    private readonly EntityTypeManager $entityTypeManager,
   ) {}
 
   /**
@@ -56,8 +58,15 @@ final class ImageAiUtilities implements ImageAiUtilitiesInterface {
 
     $base_64_data = $this->getBase64EncodeData($image);
 
-    // $response_body = $this->sendOpenAiRequest($base_64_data, $langcode);
-    $response_body = $this->getFakeResponseBody($base_64_data, $langcode);
+    if (getenv('SILVERBACK_IMAGE_AI_DRY_RUN')) {
+      $response_body = $this->getFakeResponseBody($base_64_data, $langcode);
+    }
+    else {
+      $response_body = $this->sendOpenAiRequest($base_64_data, $langcode);
+    }
+
+    $this->logUsage($response_body);
+
     if ($this->configFactory->get('silverback_image_ai.settings')->get('debug_mode')) {
       \Drupal::logger('debug')->debug('<pre>' . print_r($response_body, TRUE) . "</pre>");
     }
@@ -215,13 +224,23 @@ final class ImageAiUtilities implements ImageAiUtilitiesInterface {
   }
 
   /**
+   * Sets the alt text for the media image field.
    *
+   * This method updates the alt text of the given media entity's image field.
+   * It saves the changes to the entity unless the 'SILVERBACK_IMAGE_AI_DRY_RUN' environment
+   * variable is set. The method is intended for use with Drupal media entities.
+   *
+   * @param \Drupal\media\Entity\Media $media
+   *   The media entity whose image alt text is being set.
+   * @param string $alt_text
+   *   The alt text to set for the media image.
    */
   public function setMediaImageAltText(MediaInterface $media, string $alt_text) {
     /** @var \Drupal\media\Entity\Media $media */
     $media->field_media_image->alt = $alt_text;
-    // @todo Uncomment this on PROD, this is only for testing
-    // $media->save();
+    if (!getenv('SILVERBACK_IMAGE_AI_DRY_RUN')) {
+      $media->save();
+    }
   }
 
   /**
@@ -261,10 +280,90 @@ final class ImageAiUtilities implements ImageAiUtilitiesInterface {
   }
 
   /**
+   * Retrieves the total count of media items of type 'image'.
+   *
+   * This function executes a database query to count the distinct media items
+   * where the bundle is 'image' and the media ID (mid) is not null.
+   *
+   * @return int
+   *   The total count of image media items.
+   */
+  public function getMediaImagesTotalCount() {
+    $query = \Drupal::database()->select('media', 'm')
+      ->fields('m', ['mid'])
+      ->condition('bundle', 'image')
+      ->isNotNull('mid')
+      ->distinct();
+    return (int) $query->countQuery()->execute()->fetchField();
+  }
+
+  /**
+   * Gets a list of media entities.
+   *
+   * This function loads media entities of the 'image' bundle and iterates over
+   * their translations. It builds and returns an array of entities with language
+   * codes.
+   *
+   * @return array
+   *   An array of arrays, each containing:
+   *   - entity: The media entity translation.
+   *   - langcode: The language code of the translation.
+   */
+  public function getMediaEntitiesToUpdateAll() {
+    $entities = [];
+    $media_entities = $this->entityTypeManager->getStorage('media')->loadByProperties([
+      'bundle' => 'image',
+    ]);
+    foreach ($media_entities as $media) {
+      foreach ($media->getTranslationLanguages() as $langcode => $translation) {
+        $entity = $media->getTranslation($langcode);
+        $entities[] = [
+          'entity' => $entity,
+          'langcode' => $langcode,
+        ];
+      }
+    }
+    return $entities;
+  }
+
+  /**
+   * Gets a list of media entities to update without alt value.
+   *
+   * This function loads media entities of the 'image' bundle and iterates over
+   * their translations. It builds and returns an array of entities with language
+   * codes.
+   *
+   * @return array
+   *   An array of arrays, each containing:
+   *   - entity: The media entity translation.
+   *   - langcode: The language code of the translation.
+   */
+  public function getMediaEntitiesToUpdateWithAlt() {
+    $entities = [];
+    $media_entities = $this->entityTypeManager->getStorage('media')->loadByProperties([
+      'bundle' => 'image',
+    ]);
+    foreach ($media_entities as $media) {
+      foreach ($media->getTranslationLanguages() as $langcode => $translation) {
+        $entity = $media->getTranslation($langcode);
+        if (!$entity->field_media_image->alt) {
+          $entities[] = [
+            'entity' => $entity,
+            'langcode' => $langcode,
+          ];
+        }
+      }
+    }
+    return $entities;
+  }
+
+  /**
    *
    */
-  private function logUsage() {
+  private function logUsage(array $response_body) {
     // ..
+    $response_body['module'] = 'Silverback Image AI';
+    $this->silverbackAiTokenUsage->createUsageEntry($response_body);
   }
 
 }

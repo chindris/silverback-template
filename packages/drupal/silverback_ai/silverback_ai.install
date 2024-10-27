@@ -6,6 +6,7 @@
  */
 
 use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Language\LanguageInterface;
 
 /**
  * Implements hook_schema().
@@ -36,6 +37,13 @@ function silverback_ai_schema() {
         'type' => 'int',
         'unsigned' => TRUE,
         'not null' => TRUE,
+      ],
+      'langcode' => [
+        'description' => 'The language of this request.',
+        'type' => 'varchar_ascii',
+        'length' => 12,
+        'not null' => TRUE,
+        'default' => LanguageInterface::LANGCODE_NOT_SPECIFIED,
       ],
       'target_entity_type_id' => [
         'type' => 'varchar_ascii',
