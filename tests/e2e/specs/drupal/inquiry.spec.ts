@@ -22,7 +22,7 @@ test.describe('inquiry (mutation example)', () => {
 
   test('invalid e-mail address', async ({ page }) => {
     await page.goto(websiteUrl('/en/inquiry'));
-    const content = await page.getByRole('main');
+    const content = page.getByRole('main');
     await content.getByPlaceholder('Name').fill('John Doe');
     await content.getByPlaceholder('Email').fill('john');
     await content.getByPlaceholder('Subject').fill('Lorem ipsum');
