@@ -5,11 +5,11 @@ import { websiteUrl } from '../../helpers/url';
 
 test.describe('content hub', () => {
   test.beforeEach(async ({ page }) => {
-    page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.emulateMedia({ reducedMotion: 'reduce' });
   });
   test('lists pages in alphabetic order', async ({ page }) => {
     await page.goto(websiteUrl('/en/content-hub'));
-    const content = await page.getByRole('main');
+    const content = page.getByRole('main');
     const heading = page.getByRole('heading', {
       name: 'Architecture',
       level: 5,
@@ -20,7 +20,7 @@ test.describe('content hub', () => {
 
   test('allows to switch pages', async ({ page }) => {
     await page.goto(websiteUrl('/en/content-hub'));
-    const content = await page.getByRole('main');
+    const content = page.getByRole('main');
 
     await expect(
       content.getByRole('heading', {
@@ -46,7 +46,7 @@ test.describe('content hub', () => {
 
   test('allows to search for items', async ({ page }) => {
     await page.goto(websiteUrl('/en/content-hub'));
-    const content = await page.getByRole('main');
+    const content = page.getByRole('main');
     await content.getByPlaceholder('Keyword').fill('technologies');
     await content.getByRole('button', { name: 'Search' }).click();
     await expect(
@@ -68,7 +68,7 @@ test.describe('content hub', () => {
     await page.goto(websiteUrl('/en/content-hub'));
     // Change language to German.
     await quickActions.changeLanguageTo(SiteLanguage.Deutsch);
-    const content = await page.getByRole('main');
+    const content = page.getByRole('main');
     await expect(
       content.getByRole('heading', {
         name: 'Architektur',
