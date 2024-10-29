@@ -45,7 +45,7 @@ test.describe('the homepage', () => {
     await expect(
       content.getByText('Architektur', { exact: true }),
     ).toBeVisible();
-    context.close();
+    await context.close();
   });
 
   test('it displays an image', async ({ page }) => {
