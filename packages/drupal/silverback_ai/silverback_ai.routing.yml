@@ -4,7 +4,16 @@ silverback_ai.ai_usage:
     _title: 'Silverback AI usage'
     _controller: '\Drupal\silverback_ai\Controller\AiUsageController'
   requirements:
-    _permission: 'access content'
+    _permission: 'access token usage'
+
+silverback_ai.ai_usage.details:
+  path: '/admin/reports/silverback-ai-usage/{record}/details'
+  defaults:
+    _title: 'Silverback AI usage details'
+    _controller: '\Drupal\silverback_ai\Controller\UsageDetailsController'
+  requirements:
+    _permission: 'access token usage'
+
 silverback_ai.ai_settings:
   path: '/admin/config/system/silverback-ai-settings'
   defaults:

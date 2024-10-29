@@ -64,29 +64,35 @@ class AiUsageController extends ControllerBase {
    */
   public function __invoke(): array {
 
-    $build['content'] = [
-      '#type' => 'item',
-      '#markup' => $this->t('It works!'),
-    ];
-
+    // @todo Add pager
+    // @todo Add modal for display the response body
     $header = [
       'timestamp' => $this->t('Timestamp'),
       'username' => $this->t('User'),
-      'entity_id' => $this->t('Entity'),
-      'tokens_total' => $this->t('Tokens'),
+      'entity_id' => $this->t('Entity type'),
+      'tokens_total' => $this->t('Tokens used'),
       'ai_provider' => $this->t('Provider / Model'),
       'module_name' => $this->t('Module'),
+      'info' => $this->t('Information'),
     ];
+
+    // @todo Add DI
+    $entries = \Drupal::service('silverback_ai.token.usage')->getEntries();
+    $entries = array_map(function ($item) {
+      unset($item['response']);
+      return $item;
+    }, $entries);
 
     $build['table'] = [
       '#type' => 'table',
       '#header' => $header,
-      '#rows' => \Drupal::service('silverback_ai.token.usage')->getEntries(),
+      '#rows' => $entries,
       '#sticky' => TRUE,
-      '#attributes' => [
-        'class' => ['webform-element-plugin-table'],
-      ],
       '#empty' => $this->t('No records found'),
+    ];
+
+    $build['pager'] = [
+      '#type' => 'pager',
     ];
 
     return $build;

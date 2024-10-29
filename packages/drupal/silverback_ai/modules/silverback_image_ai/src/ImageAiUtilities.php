@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Drupal\silverback_image_ai;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityTypeManager;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\file\FileInterface;
@@ -65,7 +66,7 @@ final class ImageAiUtilities implements ImageAiUtilitiesInterface {
       $response_body = $this->sendOpenAiRequest($base_64_data, $langcode);
     }
 
-    $this->logUsage($response_body);
+    $this->logUsage($response_body, $image);
 
     if ($this->configFactory->get('silverback_image_ai.settings')->get('debug_mode')) {
       \Drupal::logger('debug')->debug('<pre>' . print_r($response_body, TRUE) . "</pre>");
@@ -251,7 +252,7 @@ final class ImageAiUtilities implements ImageAiUtilitiesInterface {
       "id" => "chatcmpl-AJe6memR1kLukQdK957wAFydW54rK",
       "object" => "chat.completion",
       "created" => 1729245772,
-      "model" => "gpt-4o-mini-2024-07-18",
+      "model" => "gpt-4o-mini",
       "choices" => [
         0 => [
           "index" => 0,
@@ -360,9 +361,18 @@ final class ImageAiUtilities implements ImageAiUtilitiesInterface {
   /**
    *
    */
-  private function logUsage(array $response_body) {
+  private function logUsage(array $response_body, EntityInterface $entity = NULL) {
     // ..
     $response_body['module'] = 'Silverback Image AI';
+
+    if ($entity) {
+      $response_body['entity_id'] = (string) $entity->id();
+      $response_body['entity_type_id'] = (string) $entity->getEntityTypeId();
+      if ($entity->getEntityType()->isRevisionable()) {
+        $response_body['entity_revision_id'] = (string) $entity->getRevisionId();
+      }
+    }
+
     $this->silverbackAiTokenUsage->createUsageEntry($response_body);
   }
 
