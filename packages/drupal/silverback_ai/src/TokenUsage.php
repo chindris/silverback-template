@@ -8,6 +8,7 @@ use Drupal\Component\Serialization\Json;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Database\Connection;
 use Drupal\Core\Datetime\DrupalDateTime;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Link;
 use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 use Drupal\Core\Render\Markup;
@@ -21,7 +22,7 @@ use Drupal\user\Entity\User;
 final class TokenUsage implements TokenUsageInterface {
 
   private const USER_ADMIN = 1;
-  private const LIMIT = 25;
+  private const PAGER_LIMIT = 25;
 
   use StringTranslationTrait;
 
@@ -33,6 +34,7 @@ final class TokenUsage implements TokenUsageInterface {
     private readonly AccountProxyInterface $currentUser,
     private readonly LoggerChannelFactoryInterface $loggerFactory,
     private readonly ConfigFactoryInterface $configFactory,
+    private readonly EntityTypeManagerInterface $entityTypeManager,
   ) {}
 
   /**
@@ -97,7 +99,7 @@ final class TokenUsage implements TokenUsageInterface {
         'response',
       ])
       ->orderBy('id', 'DESC');
-    $pager = $query->extend('Drupal\Core\Database\Query\PagerSelectExtender')->limit(self::LIMIT);
+    $pager = $query->extend('Drupal\Core\Database\Query\PagerSelectExtender')->limit(self::PAGER_LIMIT);
     $rsc = $pager->execute();
     $rows = [];
 
@@ -135,7 +137,7 @@ final class TokenUsage implements TokenUsageInterface {
     $entity_info = '';
     if ($row->target_entity_id && $row->target_entity_type_id) {
       // @todo Aldo check revision
-      $entity = \Drupal::entityTypeManager()->getStorage($row->target_entity_type_id)->load($row->target_entity_id);
+      $entity = $this->entityTypeManager->getStorage($row->target_entity_type_id)->load($row->target_entity_id);
       $entity_info = $entity ? $entity->bundle() : '';
       // @todo Add url to entity. Problem is the e.g. File entities
       // they return exception calling this method.

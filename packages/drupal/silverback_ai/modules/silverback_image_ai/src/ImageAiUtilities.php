@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\silverback_image_ai;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
@@ -359,7 +357,16 @@ final class ImageAiUtilities implements ImageAiUtilitiesInterface {
   }
 
   /**
+   * Logs the usage of the Silverback Image AI module.
    *
+   * This method updates the response body with module and entity details and
+   * creates a new usage entry using the Silverback AI Token Usage service.
+   *
+   * @param array $response_body
+   *   An associative array that will be enhanced with module and entity information.
+   * @param \Drupal\Core\Entity\EntityInterface|null $entity
+   *   The entity for which to log usage details. If provided, its id, type,
+   *   and revision id will be added to the response body if the entity is revisionable.
    */
   private function logUsage(array $response_body, EntityInterface $entity = NULL) {
     // ..
