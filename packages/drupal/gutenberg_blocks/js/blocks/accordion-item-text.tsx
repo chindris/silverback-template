@@ -13,12 +13,12 @@ const { t: __ } = Drupal;
 registerBlockType<{
   title: string;
   icon?: string;
-  headingLevel: string;
 }>('custom/accordion-item-text', {
   title: 'Accordion Item Text',
   icon: 'text',
   category: 'layout',
   parent: ['custom/accordion'],
+  usesContext: ['custom/accordion-headingLevel'],
   attributes: {
     title: {
       type: 'string',
@@ -27,13 +27,9 @@ registerBlockType<{
     icon: {
       type: 'string',
     },
-    headingLevel: {
-      type: 'string',
-      default: 'h3',
-    },
   },
   edit: (props) => {
-    const { attributes, setAttributes } = props;
+    const { attributes, setAttributes, context } = props;
     const icons = [
       { label: __('- Select an optional icon -'), value: '' },
       { label: __('Checkmark'), value: 'checkmark' },
@@ -45,9 +41,7 @@ registerBlockType<{
       icon: attributes.icon === undefined ? '' : attributes.icon,
     });
 
-    setAttributes({
-      headingLevel: attributes.headingLevel,
-    });
+    const headingLevel = context['custom/accordion-headingLevel'];
 
     return (
       <Fragment>
@@ -58,7 +52,7 @@ registerBlockType<{
             </div>
             <div>
               {__('Currently it is set to:')}{' '}
-              <strong>{attributes.headingLevel}</strong>
+              <strong>{headingLevel as string}</strong>
             </div>
           </PanelBody>
           <PanelBody title={__('Block settings')}>
@@ -83,7 +77,7 @@ registerBlockType<{
           >
             <RichText
               identifier="title"
-              tagName={attributes.headingLevel as keyof HTMLElementTagNameMap}
+              tagName={headingLevel as keyof HTMLElementTagNameMap}
               value={attributes.title}
               allowedFormats={[]}
               // @ts-ignore
