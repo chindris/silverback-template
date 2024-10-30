@@ -66,6 +66,7 @@ module:
   role_delegation: 0
   serialization: 0
   shortcut: 0
+  silverback_ai: 0
   silverback_autosave: 0
   silverback_campaign_urls: 0
   silverback_cloudinary: 0
@@ -74,6 +75,7 @@ module:
   silverback_graphql_persisted: 0
   silverback_gutenberg: 0
   silverback_iframe: 0
+  silverback_image_ai: 0
   silverback_preview_link: 0
   silverback_publisher_monitor: 0
   silverback_translations: 0

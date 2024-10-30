@@ -1,0 +1,11 @@
+uuid: 5fc8a9eb-135d-4fec-a94a-b90808339bd5
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+id: media_alt_ai_update_action
+label: 'Alt text update (images only)'
+type: media
+plugin: 'entity:alt_ai_update_action:media'
+configuration: {  }
