@@ -23,15 +23,18 @@ registerBlockType<{
       default: HeadingLevels.H2,
     },
   },
+  providesContext: {
+    'custom/accordion-headingLevel': 'headingLevel',
+  },
   edit: (props) => {
-    const { setAttributes } = props;
+    const { attributes, setAttributes } = props;
 
     return (
       <>
         <InspectorControls>
           <PanelBody title={__('Heading Level')}>
             <SelectControl
-              value={props.attributes.headingLevel}
+              value={attributes.headingLevel}
               options={[
                 {
                   label: __('Heading 2'),
@@ -53,6 +56,9 @@ registerBlockType<{
               onChange={(headingLevel: string) => {
                 setAttributes({ headingLevel });
               }}
+              help={__(
+                'The heading level will be applied to all nested accordion items.',
+              )}
             />
           </PanelBody>
         </InspectorControls>
