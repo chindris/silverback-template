@@ -53,6 +53,7 @@ final class ImageAiUtilities implements ImageAiUtilitiesInterface {
    *   or NULL if the API response does not contain the expected data.
    *
    * @throws \Exception
+   *
    * @todo
    *   Implement a fallback mechanism to return default ALT text in case of API failure.
    */
@@ -71,7 +72,6 @@ final class ImageAiUtilities implements ImageAiUtilitiesInterface {
 
     if ($this->configFactory->get('silverback_image_ai.settings')->get('debug_mode')) {
       \Drupal::logger('debug')->debug('<pre>' . print_r($response_body, TRUE) . "</pre>");
-      $this->loggerFactory->get('silverback_ai')->error($e->getMessage());
     }
 
     $prefix = $this->configFactory->get('silverback_image_ai.settings')->get('alt_prefix') ?: '';
@@ -109,6 +109,7 @@ final class ImageAiUtilities implements ImageAiUtilitiesInterface {
    *
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+   *
    * @todo
    *   Extract the image processing logic to a separate method for improved
    *   code maintainability and readability.
@@ -208,6 +209,7 @@ final class ImageAiUtilities implements ImageAiUtilitiesInterface {
    *
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+   *
    * @todo Create a db table to store data, query can be slow for large number of entities.
    */
   public function getMissingAltEntitiesCount() {
@@ -314,6 +316,7 @@ final class ImageAiUtilities implements ImageAiUtilitiesInterface {
    *   An array of arrays, each containing:
    *   - entity: The media entity translation.
    *   - langcode: The language code of the translation.
+   *
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
@@ -345,6 +348,7 @@ final class ImageAiUtilities implements ImageAiUtilitiesInterface {
    *   An array of arrays, each containing:
    *   - entity: The media entity translation.
    *   - langcode: The language code of the translation.
+   *
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
