@@ -8,6 +8,7 @@ test.describe('instant preview', () => {
     await page.goto(cmsUrl('/admin/content'));
     await page.getByRole('link', { name: 'Add content' }).click();
     await page
+      .locator('.layout-region--node-main')
       .getByLabel('Title', { exact: true })
       .fill('Instant preview test');
     await page.locator('#edit-submit').click();
