@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import React, { Fragment } from 'react';
+import { Fragment } from 'react';
 import {
   InnerBlocks,
   InspectorControls,
@@ -18,6 +18,7 @@ registerBlockType<{
   icon: 'text',
   category: 'layout',
   parent: ['custom/accordion'],
+  usesContext: ['custom/accordion-headingLevel'],
   attributes: {
     title: {
       type: 'string',
@@ -28,7 +29,7 @@ registerBlockType<{
     },
   },
   edit: (props) => {
-    const { attributes, setAttributes } = props;
+    const { attributes, setAttributes, context } = props;
     const icons = [
       { label: __('- Select an optional icon -'), value: '' },
       { label: __('Checkmark'), value: 'checkmark' },
@@ -40,9 +41,20 @@ registerBlockType<{
       icon: attributes.icon === undefined ? '' : attributes.icon,
     });
 
+    const headingLevel = context['custom/accordion-headingLevel'];
+
     return (
       <Fragment>
         <InspectorControls>
+          <PanelBody title={__('Heading Level')}>
+            <div>
+              {__('Heading level is defined in the parent accordion block.')}
+            </div>
+            <div>
+              {__('Currently it is set to:')}{' '}
+              <strong>{headingLevel as string}</strong>
+            </div>
+          </PanelBody>
           <PanelBody title={__('Block settings')}>
             <SelectControl
               value={attributes.icon}
@@ -65,7 +77,7 @@ registerBlockType<{
           >
             <RichText
               identifier="title"
-              tagName="h3"
+              tagName={headingLevel as keyof HTMLElementTagNameMap}
               value={attributes.title}
               allowedFormats={[]}
               // @ts-ignore
