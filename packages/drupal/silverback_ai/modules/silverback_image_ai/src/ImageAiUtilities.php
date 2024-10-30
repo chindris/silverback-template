@@ -5,6 +5,7 @@ namespace Drupal\silverback_image_ai;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityTypeManager;
+use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\file\FileInterface;
 use Drupal\media\MediaInterface;
@@ -26,6 +27,7 @@ final class ImageAiUtilities implements ImageAiUtilitiesInterface {
    * Constructs an AltAiGenerator object.
    */
   public function __construct(
+    private readonly LoggerChannelFactoryInterface $loggerFactory,
     private readonly ConfigFactoryInterface $configFactory,
     private readonly ClientInterface $httpClient,
     private readonly TokenUsageInterface $silverbackAiTokenUsage,
@@ -50,6 +52,7 @@ final class ImageAiUtilities implements ImageAiUtilitiesInterface {
    *   The generated ALT text if successful, a message indicating a missing API key,
    *   or NULL if the API response does not contain the expected data.
    *
+   * @throws \Exception
    * @todo
    *   Implement a fallback mechanism to return default ALT text in case of API failure.
    */
@@ -68,6 +71,7 @@ final class ImageAiUtilities implements ImageAiUtilitiesInterface {
 
     if ($this->configFactory->get('silverback_image_ai.settings')->get('debug_mode')) {
       \Drupal::logger('debug')->debug('<pre>' . print_r($response_body, TRUE) . "</pre>");
+      $this->loggerFactory->get('silverback_ai')->error($e->getMessage());
     }
 
     $prefix = $this->configFactory->get('silverback_image_ai.settings')->get('alt_prefix') ?: '';
@@ -103,11 +107,13 @@ final class ImageAiUtilities implements ImageAiUtilitiesInterface {
    *   A string containing the base64-encoded image data prefixed with the
    *   appropriate data URI scheme and mime type.
    *
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    * @todo
    *   Extract the image processing logic to a separate method for improved
    *   code maintainability and readability.
    */
-  private function getBase64EncodeData(FileInterface $image) {
+  public function getBase64EncodeData(FileInterface $image) {
     // @todo Extract this to method
     $image_uri = $image->getFileUri();
     $image_type = $image->getMimeType();
@@ -123,7 +129,6 @@ final class ImageAiUtilities implements ImageAiUtilitiesInterface {
         $image_style->createDerivative($image_uri, $derivative_uri);
       }
       $absolute_path = $fileSystem->realpath($derivative_uri);
-      ($absolute_path);
     }
     else {
       $absolute_path = $fileSystem->realpath($image_uri);
@@ -131,14 +136,13 @@ final class ImageAiUtilities implements ImageAiUtilitiesInterface {
 
     $image_file = file_get_contents($absolute_path);
     $base_64_image = base64_encode($image_file);
-    $base_64_data = "data:$image_type;base64,$base_64_image";
-    return $base_64_data;
+    return "data:$image_type;base64,$base_64_image";
   }
 
   /**
    * Sends a request to the OpenAI API to generate ALT text for an image.
    *
-   * This private method takes base64-encoded image data and a language code as parameters.
+   * This method takes base64-encoded image data and a language code as parameters.
    * It constructs a payload for the OpenAI API using the specified model and message format,
    * including an instruction to generate a concise ALT text for the image in the specified language.
    *
@@ -150,10 +154,10 @@ final class ImageAiUtilities implements ImageAiUtilitiesInterface {
    * @return array
    *   The decoded JSON response from the OpenAI API containing the generated ALT text.
    *
-   * @throws \Exception
+   * @throws \Exception|\GuzzleHttp\Exception\GuzzleException
    *   Thrown if the HTTP request to the OpenAI API fails.
    */
-  private function sendOpenAiRequest(string $base_64_data, string $langcode) {
+  public function sendOpenAiRequest(string $base_64_data, string $langcode) {
     $language_name = $langcode ? \Drupal::languageManager()->getLanguageName($langcode) : 'English';
     // @todo Get some of these from settings
     $model = $this->configFactory->get('silverback_image_ai.settings')->get('ai_model') ?: self::DEFAULT_AI_MODEL;
@@ -193,8 +197,7 @@ final class ImageAiUtilities implements ImageAiUtilitiesInterface {
     }
 
     $responseBodyContents = $response->getBody()->getContents();
-    $response_body = json_decode($responseBodyContents, TRUE, 512, JSON_THROW_ON_ERROR);
-    return $response_body;
+    return json_decode($responseBodyContents, TRUE, 512, JSON_THROW_ON_ERROR);
   }
 
   /**
@@ -203,6 +206,8 @@ final class ImageAiUtilities implements ImageAiUtilitiesInterface {
    * @return int
    *   The number of media entities missing alt text.
    *
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    * @todo Create a db table to store data, query can be slow for large number of entities.
    */
   public function getMissingAltEntitiesCount() {
@@ -233,6 +238,8 @@ final class ImageAiUtilities implements ImageAiUtilitiesInterface {
    *   The media entity whose image alt text is being set.
    * @param string $alt_text
    *   The alt text to set for the media image.
+   *
+   * @throws \Drupal\Core\Entity\EntityStorageException
    */
   public function setMediaImageAltText(MediaInterface $media, string $alt_text) {
     /** @var \Drupal\media\Entity\Media $media */
@@ -245,7 +252,7 @@ final class ImageAiUtilities implements ImageAiUtilitiesInterface {
   /**
    * Emulates a fake response. Used for development.
    */
-  private function getFakeResponseBody(string $base_64_data, string $langcode) {
+  public function getFakeResponseBody(string $base_64_data, string $langcode) {
     return [
       "id" => "chatcmpl-AJe6memR1kLukQdK957wAFydW54rK",
       "object" => "chat.completion",
@@ -307,6 +314,8 @@ final class ImageAiUtilities implements ImageAiUtilitiesInterface {
    *   An array of arrays, each containing:
    *   - entity: The media entity translation.
    *   - langcode: The language code of the translation.
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
   public function getMediaEntitiesToUpdateAll() {
     $entities = [];
@@ -336,6 +345,8 @@ final class ImageAiUtilities implements ImageAiUtilitiesInterface {
    *   An array of arrays, each containing:
    *   - entity: The media entity translation.
    *   - langcode: The language code of the translation.
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
   public function getMediaEntitiesToUpdateWithAlt() {
     $entities = [];
@@ -367,8 +378,10 @@ final class ImageAiUtilities implements ImageAiUtilitiesInterface {
    * @param \Drupal\Core\Entity\EntityInterface|null $entity
    *   The entity for which to log usage details. If provided, its id, type,
    *   and revision id will be added to the response body if the entity is revisionable.
+   *
+   * @throws \Exception
    */
-  private function logUsage(array $response_body, EntityInterface $entity = NULL) {
+  public function logUsage(array $response_body, EntityInterface $entity = NULL) {
     // ..
     $response_body['module'] = 'Silverback Image AI';
 

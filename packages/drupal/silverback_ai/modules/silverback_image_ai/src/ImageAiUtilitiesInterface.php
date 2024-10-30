@@ -52,7 +52,7 @@ interface ImageAiUtilitiesInterface {
    *   Extract the image processing logic to a separate method for improved
    *   code maintainability and readability.
    */
-  private function getBase64EncodeData(FileInterface $image);
+  public function getBase64EncodeData(FileInterface $image);
 
   /**
    * Sends a request to the OpenAI API to generate ALT text for an image.
@@ -72,7 +72,7 @@ interface ImageAiUtilitiesInterface {
    * @throws \Exception
    *   Thrown if the HTTP request to the OpenAI API fails.
    */
-  private function sendOpenAiRequest(string $base_64_data, string $langcode);
+  public function sendOpenAiRequest(string $base_64_data, string $langcode);
 
   /**
    * Number of media entities with the 'image' bundle that are missing alt text.
@@ -101,7 +101,7 @@ interface ImageAiUtilitiesInterface {
   /**
    * Emulates a fake response. Used for development.
    */
-  private function getFakeResponseBody(string $base_64_data, string $langcode);
+  public function getFakeResponseBody(string $base_64_data, string $langcode);
 
   /**
    * Retrieves the total count of media items of type 'image'.
@@ -154,6 +154,6 @@ interface ImageAiUtilitiesInterface {
    *   The entity for which to log usage details. If provided, its id, type,
    *   and revision id will be added to the response body if the entity is revisionable.
    */
-  private function logUsage(array $response_body, EntityInterface $entity = NULL);
+  public function logUsage(array $response_body, EntityInterface $entity = NULL);
 
 }

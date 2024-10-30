@@ -59,6 +59,8 @@ class UsageDetailsController extends ControllerBase {
    *
    * @return array
    *   A render array.
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
   public function __invoke(RouteMatchInterface $routeMatch): array {
 

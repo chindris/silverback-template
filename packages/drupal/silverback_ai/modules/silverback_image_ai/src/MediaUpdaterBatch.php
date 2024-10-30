@@ -21,7 +21,7 @@ class MediaUpdaterBatch {
    *
    * @var \Drupal\Core\Logger\LoggerChannelInterface
    */
-  protected $loggerChannel;
+  protected \Drupal\Core\Logger\LoggerChannelInterface $loggerChannel;
 
   /**
    * Constructor.
@@ -34,11 +34,19 @@ class MediaUpdaterBatch {
   }
 
   /**
-   * {@inheritdoc}
+   * Creates a batch operation to process media image updates.
+   *
+   * This method initializes a batch process for updating media images, setting
+   * up the batch operations and conditions for Drush integration if run via CLI.
+   *
+   * @param array $items
+   *   An array of items to be processed in the batch. Each item represents
+   *   a single media entity requiring updates.
+   *
+   * @return void
    */
   public function create(array $items): void {
 
-    /** @var \Drupal\Core\Batch\BatchBuilder $batchBuilder */
     $batchBuilder = (new BatchBuilder())
       ->setTitle($this->t('Running media image updates...'))
       ->setFinishCallback([self::class, 'finish'])
@@ -72,8 +80,7 @@ class MediaUpdaterBatch {
    *   Batch context.
    */
   public static function process(array $batch, array &$context) {
-    // Process elements stored in the each batch (operation).
-    // $context['results'][] = $item;.
+    // Process elements stored in each batch (operation).
     $processed = !empty($context['results']) ? count($context['results']) : $batch['count'];
     $entity = $batch['item']['entity'];
 
@@ -85,13 +92,11 @@ class MediaUpdaterBatch {
       $service->setMediaImageAltText($entity, $alt_text);
     }
 
-    $context['message'] = t('Processing media item @processed/@total @label with id: @id (@langcode) ALT: @alt', [
+    $context['message'] = t('Processing media item @processed/@total with id: @id (@langcode) ', [
       '@processed' => $processed,
       '@total' => $batch['total'],
-      '@label' => substr($entity->label(), 0, 12) . '..',
       '@id' => $entity->id(),
       '@langcode' => $batch['item']['langcode'],
-      '@alt' => substr($alt_text, 0, 64) . '..',
     ]);
 
     sleep(1);
@@ -110,7 +115,7 @@ class MediaUpdaterBatch {
    * @param array $operations
    *   A list of the operations that had not been completed by the batch API.
    */
-  public static function finish($success, $results, $operations) {
+  public static function finish(bool $success, array $results, array $operations) {
     $messenger = \Drupal::messenger();
     if ($success) {
       $messenger->addStatus(t('Items processed successfully.'));

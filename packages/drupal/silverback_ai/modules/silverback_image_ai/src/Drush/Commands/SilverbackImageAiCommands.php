@@ -2,6 +2,8 @@
 
 namespace Drupal\silverback_image_ai\Drush\Commands;
 
+use Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException;
+use Drupal\Component\Plugin\Exception\PluginNotFoundException;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\silverback_image_ai\ImageAiUtilities;
 use Drupal\silverback_image_ai\MediaUpdaterBatch;
@@ -39,11 +41,17 @@ final class SilverbackImageAiCommands extends DrushCommands {
 
   /**
    * Command description here.
+   *
+   * @param false[] $options
+   *
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+   * @throws \Drush\Exceptions\UserAbortException
    */
   #[CLI\Command(name: 'silverback-image-ai:alt:generate', aliases: ['slb:alt:g'])]
   #[CLI\Option(name: 'update-all', description: 'Update all image alt texts. ATTENTION: This will overwrite existing alt texts.')]
   #[CLI\Usage(name: 'silverback-image-ai:alt:generate', description: 'Generate alt text for media images.')]
-  public function commandName($options = [
+  public function commandName(array $options = [
     'update-all' => FALSE,
   ]) {
     $media_entities = [];
@@ -58,8 +66,12 @@ final class SilverbackImageAiCommands extends DrushCommands {
       }
     }
     else {
-      $media_entities = $this->service->getMediaEntitiesToUpdateWithAlt();
-      $this->batch->create($media_entities);
+      try {
+        $media_entities = $this->service->getMediaEntitiesToUpdateWithAlt();
+        $this->batch->create($media_entities);
+      } catch (InvalidPluginDefinitionException|PluginNotFoundException $e) {
+        // @todo
+      }
     }
 
     // Temp.

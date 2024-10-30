@@ -32,7 +32,6 @@ final class ImageAiSettingsForm extends ConfigFormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state): array {
 
-    // ?? getenv('OPEN_AI_API_KEY');
     $open_ai_api_key = $this->configFactory->get('silverback_ai.settings')->get('open_ai_api_key');
 
     // ..

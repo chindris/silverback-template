@@ -12,7 +12,16 @@ namespace Drupal\silverback_image_ai;
 interface MediaUpdaterBatchInterface {
 
   /**
-   * {@inheritdoc}
+   * Creates a batch operation to process media image updates.
+   *
+   * This method initializes a batch process for updating media images, setting
+   * up the batch operations and conditions for Drush integration if run via CLI.
+   *
+   * @param array $items
+   *   An array of items to be processed in the batch. Each item represents
+   *   a single media entity requiring updates.
+   *
+   * @return void
    */
   public function create(array $media_entities = []);
 
@@ -39,6 +48,6 @@ interface MediaUpdaterBatchInterface {
    * @param array $operations
    *   A list of the operations that had not been completed by the batch API.
    */
-  public static function finish($success, $results, $operations);
+  public static function finish(bool $success, array $results, array $operations);
 
 }

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Drupal\silverback_image_ai\Form;
 
+use Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException;
+use Drupal\Component\Plugin\Exception\PluginNotFoundException;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Messenger\MessengerInterface;
@@ -108,23 +110,6 @@ final class ImageAiBatchUpdateForm extends FormBase {
       ],
     ];
 
-    // $form['batch_missing_only']['actions']['submit_missing'] = [
-    //   '#type' => 'submit',
-    //   '#value' => $this->t('Run update process'),
-    //   '#button_type' => 'primary',
-    //   // '#disabled' => $missing_count == 0 ,
-    // ];
-    // $form['batch_all'] = [
-    //   '#type' => 'details',
-    //   '#title' => $this->t('Batch update ALL media images'),
-    //   '#open' => TRUE,
-    // ];
-    // $form['batch_container']['info_all'] = [
-    //   '#type' => 'markup',
-    //   '#markup' => $this->t('There are @count media images in total.', [
-    //     '@count' => $media_images_count,
-    //   ]),
-    // ];
     $form['batch_container']['confirm'] = [
       '#title' => $this->t('⚠️ I understand that this action will overwrite all existing ALT texts and I want to proceed.'),
       '#type' => 'checkbox',
@@ -165,8 +150,12 @@ final class ImageAiBatchUpdateForm extends FormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state): void {
     // @todo Create a method for this
-    $media_entities = $this->service->getMediaEntitiesToUpdateAll();
-    // $this->batch->create($media_entities);
+    try {
+      $media_entities = $this->service->getMediaEntitiesToUpdateAll();
+      $this->batch->create($media_entities);
+    } catch (InvalidPluginDefinitionException|PluginNotFoundException $e) {
+      // @todo
+    }
   }
 
 }
