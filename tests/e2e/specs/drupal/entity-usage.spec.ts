@@ -7,8 +7,11 @@ test.describe('entity-usage', () => {
 
   test('media usage works with inline doc links', async ({ page }) => {
     await page.goto(cmsUrl('/admin/content/media'));
-    page.locator('div.view-content').getByText('Example DOCX document').click();
-    page.locator('a.tabs__link').getByText('Usage').click();
+    await page
+      .locator('div.view-content')
+      .getByText('Example DOCX document')
+      .click();
+    await page.locator('a.tabs__link').getByText('Usage').click();
     await expect(
       page.locator('table').getByText('Page with links'),
     ).toBeVisible();
