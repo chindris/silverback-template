@@ -34,7 +34,7 @@ registerBlockType<{
         <InspectorControls>
           <PanelBody title={__('Heading Level')}>
             <SelectControl
-              value={props.attributes.headingLevel}
+              value={attributes.headingLevel}
               options={[
                 {
                   label: __('Heading 2'),
