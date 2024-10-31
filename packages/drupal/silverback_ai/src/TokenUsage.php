@@ -58,9 +58,9 @@ final class TokenUsage implements TokenUsageInterface {
         ->fields([
           'uid' => $uid,
           'timestamp' => (new DrupalDateTime())->getTimestamp(),
-          'target_entity_type_id' => $context['entity_type_id'] ?? '',
-          'target_entity_id' => $context['entity_id'] ?? '',
-          'target_entity_revision_id' => $context['entity_revision_id'] ?? '',
+          'target_entity_type_id' => $context['entity_type_id'] ?? NULL,
+          'target_entity_id' => $context['entity_id'] ?? NULL,
+          'target_entity_revision_id' => $context['entity_revision_id'] ?? NULL,
           'tokens_in' => $tokens_in,
           'tokens_out' => $tokens_out,
           'total_count' => $tokens_total,
@@ -131,6 +131,7 @@ final class TokenUsage implements TokenUsageInterface {
    *   - 'module_name': The name of the module associated with the entry.
    *   - 'info': A renderable link to detailed usage information displayed in
    *     a modal dialog.
+   *
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */

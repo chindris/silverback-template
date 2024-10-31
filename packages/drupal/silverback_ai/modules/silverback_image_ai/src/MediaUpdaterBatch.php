@@ -6,6 +6,7 @@ namespace Drupal\silverback_image_ai;
 
 use Drupal\Core\Batch\BatchBuilder;
 use Drupal\Core\Logger\LoggerChannelFactoryInterface;
+use Drupal\Core\Logger\LoggerChannelInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 
 /**
@@ -21,7 +22,7 @@ class MediaUpdaterBatch {
    *
    * @var \Drupal\Core\Logger\LoggerChannelInterface
    */
-  protected \Drupal\Core\Logger\LoggerChannelInterface $loggerChannel;
+  protected LoggerChannelInterface $loggerChannel;
 
   /**
    * Constructor.
