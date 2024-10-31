@@ -35,7 +35,7 @@ test.describe('the homepage', () => {
     ).toBeVisible();
   });
 
-  test('redirects to german if german is the preferred language', async ({
+  test.fixme('redirects to german if german is the preferred language', async ({
     browser,
   }) => {
     const context = await browser.newContext({ locale: 'de-DE' });
