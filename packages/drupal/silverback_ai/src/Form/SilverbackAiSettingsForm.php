@@ -55,6 +55,7 @@ final class SilverbackAiSettingsForm extends ConfigFormBase {
       $this->t('Install the <strong><a href="@href" target="_blank">Open AI</a></strong> module to use the defined key from the module settings.', [
         '@href' => 'https://www.drupal.org/project/openai',
       ]),
+      '#default_value' => $this->config('silverback_ai.settings')->get('open_ai_api_key'),
     ];
 
     return parent::buildForm($form, $form_state);
@@ -73,7 +74,7 @@ final class SilverbackAiSettingsForm extends ConfigFormBase {
   public function submitForm(array &$form, FormStateInterface $form_state): void {
     $this->config('silverback_ai.settings')
       ->set('open_ai_base_uri', $form_state->getValue('open_ai_base_uri'))
-      ->set('open_ai_key', $form_state->getValue('open_ai_key'))
+      ->set('open_ai_api_key', $form_state->getValue('open_ai_api_key'))
       ->save();
     parent::submitForm($form, $form_state);
   }
