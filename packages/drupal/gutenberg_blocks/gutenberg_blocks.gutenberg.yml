@@ -4,3 +4,5 @@ theme-support:
       dropCap: false
 libraries-edit:
   - gutenberg_blocks/edit
+dynamic-blocks:
+  custom/hero: {}

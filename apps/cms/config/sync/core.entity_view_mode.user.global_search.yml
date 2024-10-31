@@ -1,0 +1,11 @@
+uuid: 7a3527a5-2ee0-4805-994f-75cbfdb55f09
+langcode: en
+status: true
+dependencies:
+  module:
+    - user
+id: user.global_search
+label: 'Global search'
+description: 'View mode used for indexing the content in the administrative global search.'
+targetEntityType: user
+cache: true
