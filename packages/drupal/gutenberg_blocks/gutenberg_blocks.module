@@ -81,3 +81,39 @@ function gutenberg_blocks_toolbar_alter(&$items) {
     unset($items['silverback_external_preview']);
   }
 }
+
+/**
+ * Prepares variables for custom image-teaser Gutenberg block template.
+ *
+ * @see template_preprocess_gutenberg_block
+ */
+function template_preprocess_gutenberg_block__custom__image_teaser(&$variables) {
+  _template_preprocess_gutenberg_block_add_rendered_image($variables);
+}
+
+/**
+ * Prepares variables for custom image-teaser Gutenberg block template.
+ *
+ * @see template_preprocess_gutenberg_block
+ */
+function template_preprocess_gutenberg_block__custom__image_with_text(&$variables) {
+  _template_preprocess_gutenberg_block_add_rendered_image($variables);
+}
+
+/**
+ * Helper function to inject a variable into gutenberg blocks that have a media
+ * reference (through the mediaEntityIds block attribute). The injected variable
+ * represents the rendered media.
+ *
+ * @return void
+ */
+function _template_preprocess_gutenberg_block_add_rendered_image(&$variables) {
+  if (!empty($variables['block_attributes']['mediaEntityIds'])) {
+    /** @var \Drupal\gutenberg\MediaEntityRendererInterface $media_entity_renderer */
+    $media_entity_renderer = \Drupal::service('gutenberg.media_entity.renderer');
+    $variables['rendered_image'] = $media_entity_renderer->renderArray(
+      reset($variables['block_attributes']['mediaEntityIds']),
+      $variables['block_attributes']['viewMode'] ?? 'default'
+    );
+  }
+}
