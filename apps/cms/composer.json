@@ -46,6 +46,7 @@
     "amazeelabs/silverback_translations": "^1.0.4",
     "composer/installers": "^2.2",
     "drupal/admin_toolbar": "^3.4.1",
+    "drupal/coffee": "^1.4",
     "drupal/config_filter": "*",
     "drupal/config_ignore": "^3.2",
     "drupal/config_notify": "^1.10",
@@ -111,6 +112,9 @@
       },
       "drupal/graphql": {
         "Check if translation exists when loading an entity by its uuid": "./patches/graphql_load_by_uuid_translation_check.patch"
+      },
+      "drupal/coffee": {
+        "On the fly ajax search POC": "./patches/contrib/coffee/on_the_fly_ajax_search_poc.patch"
       }
     },
     "patchLevel": {
