@@ -6,3 +6,8 @@ libraries-edit:
   - gutenberg_blocks/edit
 dynamic-blocks:
   custom/hero: {}
+  custom/accordion-item-text: {}
+  custom/cta: {}
+  custom/image-teaser: {}
+  custom/image-with-text: {}
+  custom/quote: {}

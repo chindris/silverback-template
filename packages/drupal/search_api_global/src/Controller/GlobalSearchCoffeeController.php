@@ -34,8 +34,7 @@ class GlobalSearchCoffeeController extends ControllerBase {
         }
         $commands[] = [
           'value' => $url,
-          'label' => $entity->label() . ' (' . $entity->getEntityType()->getLabel() . ')',
-          'command' => $entity->label(),
+          'label' => $entity->label() . ' (' . $entity->getEntityType()->getLabel() . ')<br/> <em style="font-size: 10px">' . $row->_item->getExcerpt() . '</em>',
         ];
       }
     }
