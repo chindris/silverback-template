@@ -86,6 +86,9 @@ importers:
       '@custom/schema':
         specifier: workspace:*
         version: link:../../packages/schema
+      '@custom/search_api_global':
+        specifier: workspace:*
+        version: link:../../packages/drupal/search_api_global
       '@custom/test_content':
         specifier: workspace:*
         version: link:../../packages/drupal/test_content
@@ -524,6 +527,8 @@ importers:
       vite:
         specifier: ^5.0.10
         version: 5.4.1(@types/node@18.15.3)
+
+  packages/drupal/search_api_global: {}
 
   packages/drupal/test_content: {}
 
@@ -4607,6 +4612,19 @@ packages:
 
   /@graphql-codegen/plugin-helpers@2.7.2(graphql@16.8.1):
     resolution: {integrity: sha512-kln2AZ12uii6U59OQXdjLk5nOlh1pHis1R98cDZGFnfaiAbX9V3fxcZ1MMJkB7qFUymTALzyjZoXXdyVmPMfRg==}
+    peerDependencies:
+      graphql: 16.8.1
+    dependencies:
+      '@graphql-tools/utils': 8.13.1(graphql@16.8.1)
+      change-case-all: 1.0.14
+      common-tags: 1.8.2
+      graphql: 16.8.1
+      import-from: 4.0.0
+      lodash: 4.17.21
+      tslib: 2.4.1
+
+  /@graphql-codegen/plugin-helpers@3.1.2(graphql@16.8.1):
+    resolution: {integrity: sha512-emOQiHyIliVOIjKVKdsI5MXj312zmRDwmHpyUTZMjfpvxq/UVAHUJIVdVf+lnjjrI+LXBTgMlTWTgHQfmICxjg==}
     peerDependencies:
       graphql: 16.8.1
     dependencies:

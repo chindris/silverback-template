@@ -1,0 +1,11 @@
+uuid: 49d32b79-bacb-4a0f-a8d5-ed92e6e52682
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.global_search
+label: 'Global search'
+description: 'View mode used for indexing the content in the administrative global search.'
+targetEntityType: node
+cache: true
