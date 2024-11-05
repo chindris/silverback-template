@@ -16,7 +16,7 @@ class GlobalSearchCoffeeController extends ControllerBase {
     $search = $request->query->get('search');
     // More advanced example to include view results.
     if ($view = Views::getView('global_search')) {
-      $view->setDisplay('search');
+      $view->setDisplay('global_search_embed');
       if (!empty($search)) {
         $view->setExposedInput(['search_api_fulltext' => $search]);
       }
