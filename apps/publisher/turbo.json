@@ -1,0 +1,8 @@
+{
+  "extends": ["//"],
+  "tasks": {
+    "test:static": {
+      "inputs": ["publisher.config.ts", "tsconfig.json"]
+    }
+  }
+}
