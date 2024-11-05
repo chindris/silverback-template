@@ -238,27 +238,25 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
-        - user
         - 'user.node_grants:view'
         - user.permissions
       tags:
         - 'config:search_api.index.global_search'
         - 'search_api_list:global_search'
-  search:
-    id: search
-    display_title: Page
-    display_plugin: page
+  global_search_embed:
+    id: global_search_embed
+    display_title: 'Global search'
+    display_plugin: embed
     position: 1
     display_options:
+      display_description: ''
       display_extenders: {  }
-      path: admin/search
     cache_metadata:
       max-age: -1
       contexts:
         - 'languages:language_interface'
         - url
         - url.query_args
-        - user
         - 'user.node_grants:view'
         - user.permissions
       tags:

@@ -5,26 +5,43 @@ dependencies:
   config:
     - field.storage.media.field_media_image
     - field.storage.media.field_media_video_file
-    - field.storage.media.field_media_oembed_video
     - search_api.server.database
     - core.entity_view_mode.config_pages.global_search
     - core.entity_view_mode.media.global_search
     - core.entity_view_mode.node.global_search
     - core.entity_view_mode.user.global_search
   module:
+    - path_alias
     - menu_link_content
+    - silverback_campaign_urls
     - user
+    - redirect
     - search_api
     - config_pages
     - media
     - node
     - taxonomy
-    - webform
 id: global_search
 name: 'Global search'
 description: ''
 read_only: false
 field_settings:
+  alias_destination:
+    label: 'URL alias'
+    datasource_id: 'entity:path_alias'
+    property_path: alias
+    type: text
+    dependencies:
+      module:
+        - path_alias
+  alias_source:
+    label: 'System path'
+    datasource_id: 'entity:path_alias'
+    property_path: path
+    type: text
+    dependencies:
+      module:
+        - path_alias
   alt:
     label: 'Image » Alternative text'
     datasource_id: 'entity:media'
@@ -41,6 +58,22 @@ field_settings:
     dependencies:
       module:
         - menu_link_content
+  campaign_url_destination:
+    label: Destination
+    datasource_id: 'entity:campaign_url'
+    property_path: campaign_url_destination
+    type: text
+    dependencies:
+      module:
+        - silverback_campaign_urls
+  campaign_url_source:
+    label: Source
+    datasource_id: 'entity:campaign_url'
+    property_path: campaign_url_source
+    type: text
+    dependencies:
+      module:
+        - silverback_campaign_urls
   description:
     label: 'Video file » Description'
     datasource_id: 'entity:media'
@@ -57,14 +90,6 @@ field_settings:
     dependencies:
       module:
         - menu_link_content
-  field_media_oembed_video:
-    label: 'Remote video URL'
-    datasource_id: 'entity:media'
-    property_path: field_media_oembed_video
-    type: text
-    dependencies:
-      config:
-        - field.storage.media.field_media_oembed_video
   mail:
     label: Email
     datasource_id: 'entity:user'
@@ -81,6 +106,22 @@ field_settings:
     dependencies:
       module:
         - menu_link_content
+  redirect_destination:
+    label: To
+    datasource_id: 'entity:redirect'
+    property_path: redirect_redirect
+    type: text
+    dependencies:
+      module:
+        - redirect
+  redirect_source:
+    label: From
+    datasource_id: 'entity:redirect'
+    property_path: redirect_source
+    type: text
+    dependencies:
+      module:
+        - redirect
   rendered_item:
     label: 'Rendered HTML output'
     property_path: rendered_item
@@ -89,6 +130,8 @@ field_settings:
       roles:
         - editor
       view_mode:
+        'entity:campaign_url':
+          campaign_url: ''
         'entity:config_pages':
           website_settings: global_search
         'entity:media':
@@ -100,14 +143,14 @@ field_settings:
           menu_link_content: ''
         'entity:node':
           page: global_search
+        'entity:path_alias':
+          path_alias: ''
+        'entity:redirect':
+          redirect: ''
         'entity:taxonomy_term':
           taxonomy_term: ''
         'entity:user':
           user: global_search
-        'entity:webform_submission':
-          contact: ''
-          inquiry: ''
-          styling: ''
   title:
     label: 'Image » Title'
     datasource_id: 'entity:media'
@@ -125,6 +168,10 @@ field_settings:
       module:
         - menu_link_content
 datasource_settings:
+  'entity:campaign_url':
+    bundles:
+      default: true
+      selected: {  }
   'entity:config_pages':
     bundles:
       default: true
@@ -150,6 +197,11 @@ datasource_settings:
     languages:
       default: true
       selected: {  }
+  'entity:path_alias': {  }
+  'entity:redirect':
+    bundles:
+      default: true
+      selected: {  }
   'entity:taxonomy_term':
     bundles:
       default: true
@@ -159,10 +211,6 @@ datasource_settings:
       selected: {  }
   'entity:user':
     languages:
-      default: true
-      selected: {  }
-  'entity:webform_submission':
-    bundles:
       default: true
       selected: {  }
 processor_settings:
@@ -187,13 +235,18 @@ processor_settings:
       preprocess_query: -15
     all_fields: true
     fields:
+      - alias_destination
+      - alias_source
       - alt
       - bundle_menu_link
+      - campaign_url_destination
+      - campaign_url_source
       - description
       - description_menu_link
-      - field_media_oembed_video
       - mail
       - menu_name
+      - redirect_destination
+      - redirect_source
       - rendered_item
       - title
       - title_menu_link
@@ -211,13 +264,18 @@ processor_settings:
       preprocess_query: -20
     all_fields: true
     fields:
+      - alias_destination
+      - alias_source
       - alt
       - bundle_menu_link
+      - campaign_url_destination
+      - campaign_url_source
       - description
       - description_menu_link
-      - field_media_oembed_video
       - mail
       - menu_name
+      - redirect_destination
+      - redirect_source
       - rendered_item
       - title
       - title_menu_link
@@ -229,13 +287,18 @@ processor_settings:
       preprocess_query: -2
     all_fields: true
     fields:
+      - alias_destination
+      - alias_source
       - alt
       - bundle_menu_link
+      - campaign_url_destination
+      - campaign_url_source
       - description
       - description_menu_link
-      - field_media_oembed_video
       - mail
       - menu_name
+      - redirect_destination
+      - redirect_source
       - rendered_item
       - title
       - title_menu_link
@@ -281,13 +344,18 @@ processor_settings:
       preprocess_query: -6
     all_fields: true
     fields:
+      - alias_destination
+      - alias_source
       - alt
       - bundle_menu_link
+      - campaign_url_destination
+      - campaign_url_source
       - description
       - description_menu_link
-      - field_media_oembed_video
       - mail
       - menu_name
+      - redirect_destination
+      - redirect_source
       - rendered_item
       - title
       - title_menu_link
@@ -301,16 +369,43 @@ processor_settings:
       preprocess_query: -20
     all_fields: true
     fields:
+      - alias_destination
+      - alias_source
       - alt
       - bundle_menu_link
+      - campaign_url_destination
+      - campaign_url_source
       - description
       - description_menu_link
-      - field_media_oembed_video
       - mail
       - menu_name
+      - redirect_destination
+      - redirect_source
       - rendered_item
       - title
       - title_menu_link
+  type_boost:
+    weights:
+      preprocess_index: 0
+    boosts:
+      'entity:campaign_url':
+        datasource_boost: 1.0
+      'entity:config_pages':
+        datasource_boost: 1.0
+      'entity:media':
+        datasource_boost: 2.0
+      'entity:menu_link_content':
+        datasource_boost: 1.0
+      'entity:node':
+        datasource_boost: 5.0
+      'entity:path_alias':
+        datasource_boost: 1.0
+      'entity:redirect':
+        datasource_boost: 1.0
+      'entity:taxonomy_term':
+        datasource_boost: 1.0
+      'entity:user':
+        datasource_boost: 1.0
 tracker_settings:
   default:
     indexing_order: fifo
