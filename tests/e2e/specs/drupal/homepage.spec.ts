@@ -35,6 +35,19 @@ test.describe('the homepage', () => {
     ).toBeVisible();
   });
 
+  // TODO: Fix this test.
+  //  Current issue:
+  //  In the Playwright traces we see that browser does a request to
+  //  http://127.0.0.1:8000/ with the following headers:
+  //    Host: 127.0.0.1:8000
+  //    Accept-Language: de-DE
+  //  The 301 response headers are:
+  //    location: http://127.0.0.1:8000/en
+  //    server: Netlify
+  //    host: 127.0.0.1:8888
+  //  The most confusing part is the response host - 8888 is the Drupal's port.
+  //  The response for http://127.0.0.1:8000/en does not even have the host
+  //  header.
   test.fixme(
     'redirects to german if german is the preferred language',
     async ({ browser }) => {
