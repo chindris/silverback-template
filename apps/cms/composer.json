@@ -27,7 +27,7 @@
     }
   ],
   "require": {
-    "php": "^8.2 <8.3",
+    "php": "^8.3 <8.4",
     "amazeeio/drupal_integrations": "^0.3.7",
     "amazeelabs/default-content": "^1.2.11",
     "amazeelabs/graphql_directives": "^2.4",
@@ -46,13 +46,12 @@
     "amazeelabs/silverback_translations": "^1.0.4",
     "composer/installers": "^2.2",
     "drupal/admin_toolbar": "^3.4.1",
-    "drupal/config_filter": "*",
     "drupal/config_ignore": "^3.2",
     "drupal/config_notify": "^1.10",
     "drupal/config_pages": "^2.14",
     "drupal/core-composer-scaffold": "^10",
     "drupal/core-recommended": "^10",
-    "drupal/default_content": "2.0.0-alpha2",
+    "drupal/default_content": "^2.0.0-alpha2",
     "drupal/dropzonejs": "^2.8",
     "drupal/entity_usage": "^2.0@beta",
     "drupal/environment_indicator": "^4.0.14",
@@ -74,7 +73,7 @@
     "drupal/role_delegation": "^1.2",
     "drupal/simple_oauth": "^5.2",
     "drupal/slack": "^1.4",
-    "drupal/stage_file_proxy": "^2.0.2",
+    "drupal/stage_file_proxy": "^3.0",
     "drupal/userprotect": "^1.2",
     "drupal/webform": "^6.1.5",
     "drush/drush": "^12.5",
@@ -93,16 +92,14 @@
       "drupal/core-composer-scaffold": true,
       "dealerdirect/phpcodesniffer-composer-installer": true,
       "phpstan/extension-installer": false,
-      "php-http/discovery": true
+      "php-http/discovery": true,
+      "tbachert/spi": true
     }
   },
   "extra": {
     "patches": {
       "drupal/core": {
         "Multilingual-route-resolution-in-graphql": "./patches/multilingual-route-resolution-in-graphql.patch"
-      },
-      "drupal/userprotect": {
-        "Fix site install": "https://www.drupal.org/files/issues/2023-07-28/3349663-8.patch"
       },
       "drupal/gutenberg": {
         "Gutenberg enabled hook": "https://www.drupal.org/files/issues/2024-05-07/gutenberg_enabled_hook_3445677-2.patch",
@@ -166,7 +163,6 @@
   },
   "require-dev": {
     "drupal/core-dev": "^10",
-    "drupal/devel": "^5.2",
     "phpspec/prophecy-phpunit": "^2.0.2"
   }
 }
