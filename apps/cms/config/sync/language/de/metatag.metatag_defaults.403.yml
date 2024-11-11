@@ -1,4 +1,5 @@
-label: Startseite
+label: '403 Zugriff verweigert'
 tags:
+  robots: noindex
   canonical_url: '[site:url]'
   shortlink: '[site:url]'
