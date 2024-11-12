@@ -86,6 +86,9 @@ importers:
       '@custom/schema':
         specifier: workspace:*
         version: link:../../packages/schema
+      '@custom/search_api_global':
+        specifier: workspace:*
+        version: link:../../packages/drupal/search_api_global
       '@custom/test_content':
         specifier: workspace:*
         version: link:../../packages/drupal/test_content
@@ -476,6 +479,8 @@ importers:
       vite:
         specifier: ^5.0.10
         version: 5.0.10(@types/node@18.0.0)
+
+  packages/drupal/search_api_global: {}
 
   packages/drupal/test_content: {}
 
