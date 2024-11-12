@@ -1,0 +1,35 @@
+uuid: 0719287e-1b69-47e5-a510-06fcb867982a
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.global_search
+    - field.field.media.remote_video.field_media_oembed_video
+    - media.type.remote_video
+id: media.remote_video.global_search
+targetEntityType: media
+bundle: remote_video
+mode: global_search
+content:
+  field_media_oembed_video:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  name:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  created: true
+  langcode: true
+  search_api_excerpt: true
+  thumbnail: true
+  uid: true

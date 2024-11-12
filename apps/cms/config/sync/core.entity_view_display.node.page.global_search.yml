@@ -1,44 +1,40 @@
-uuid: b89bc055-565e-4d9e-84ed-004ebca07484
+uuid: f030f353-55d5-40d0-aaac-9bb42f8236c0
 langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.node.global_search
     - field.field.node.page.body
     - field.field.node.page.field_metatags
     - node.type.page
   module:
+    - gutenberg
     - metatag
-    - silverback_external_preview
     - user
-id: node.page.default
+id: node.page.global_search
 targetEntityType: node
 bundle: page
-mode: default
+mode: global_search
 content:
-  content_moderation_control:
-    settings: {  }
-    third_party_settings: {  }
-    weight: 0
-    region: content
-  external_preview_link:
-    type: external_preview_iframe_formatter
+  body:
+    type: gutenberg_text
     label: hidden
     settings:
-      width: 100%
-      height: 900
-      view_live_link: true
+      format: gutenberg
+      content_only: true
     third_party_settings: {  }
     weight: 1
     region: content
   field_metatags:
     type: metatag_empty_formatter
-    label: above
+    label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 2
+    weight: 0
     region: content
 hidden:
-  body: true
+  content_moderation_control: true
+  external_preview_link: true
   langcode: true
   links: true
   search_api_excerpt: true
