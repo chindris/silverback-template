@@ -11,7 +11,6 @@ import { dispatch } from 'wordpress__data';
 
 import { DrupalMediaEntity } from '../utils/drupal-media';
 
-const { t: __ } = Drupal;
 const { setPlainTextAttribute } = silverbackGutenbergUtils;
 
 registerBlockType<{
@@ -20,7 +19,7 @@ registerBlockType<{
   ctaUrl?: string;
   ctaText: string;
 }>('custom/image-teaser', {
-  title: __('Image Teaser'),
+  title: Drupal.t('Image Teaser', {}, {context: 'gutenberg'}),
   parent: ['custom/image-teasers'],
   icon: 'cover-image',
   category: 'layout',
@@ -44,9 +43,9 @@ registerBlockType<{
     return (
       <>
         <InspectorControls>
-          <PanelBody title={__('CTA Link')}>
+          <PanelBody title={Drupal.t('CTA Link', {}, {context: 'gutenberg'})}>
             <LinkControl
-              placeholder={__('Link')}
+              placeholder={Drupal.t('Link', {}, {context: 'gutenberg'})}
               value={{
                 url: props.attributes.ctaUrl,
               }}
@@ -88,7 +87,7 @@ registerBlockType<{
                 allowedFormats={[]}
                 // @ts-ignore
                 disableLineBreaks={true}
-                placeholder={__('Title')}
+                placeholder={Drupal.t('Title', {}, {context: 'gutenberg'})}
                 keepPlaceholderOnFocus={true}
                 onChange={(title) => {
                   setPlainTextAttribute(props, 'title', title);
@@ -104,7 +103,7 @@ registerBlockType<{
                 allowedFormats={[]}
                 // @ts-ignore
                 disableLineBreaks={true}
-                placeholder={__('CTA text')}
+                placeholder={Drupal.t('CTA text', {}, {context: 'gutenberg'})}
                 keepPlaceholderOnFocus={true}
                 style={{
                   cursor: 'text',

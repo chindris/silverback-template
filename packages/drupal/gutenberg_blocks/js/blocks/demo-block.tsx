@@ -6,8 +6,6 @@ import { dispatch } from 'wordpress__data';
 
 import { DrupalMediaEntity } from '../utils/drupal-media';
 
-const { t: __ } = Drupal;
-
 registerBlockType<{
   heading: string;
   description: string;
@@ -49,12 +47,12 @@ registerBlockType<{
     return (
       <Fragment>
         <InspectorControls>
-          <PanelBody title={__('Block settings')}>
+          <PanelBody title={Drupal.t('Block settings', {}, {context: 'gutenberg'})}>
             <p>Block settings</p>
           </PanelBody>
         </InspectorControls>
         <div className={'container-wrapper !border-stone-500'}>
-          <div className={'container-label'}>{__('Demo Block')}</div>
+          <div className={'container-label'}>{Drupal.t('Demo Block', {}, {context: 'gutenberg'})}</div>
           <div className="custom-block-demo-block">
             <RichText
               identifier="heading"
@@ -63,7 +61,7 @@ registerBlockType<{
               allowedFormats={[]}
               // @ts-ignore
               disableLineBreaks={true}
-              placeholder={__('Heading')}
+              placeholder={Drupal.t('Heading', {}, {context: 'gutenberg'})}
               keepPlaceholderOnFocus={true}
               onChange={(newValue) => {
                 setAttributes({ heading: newValue });
@@ -76,7 +74,7 @@ registerBlockType<{
               allowedFormats={[]}
               // @ts-ignore
               disableLineBreaks={true}
-              placeholder={__('Description')}
+              placeholder={Drupal.t('Description', {}, {context: 'gutenberg'})}
               keepPlaceholderOnFocus={true}
               onChange={(newValue) => {
                 setAttributes({ description: newValue });
@@ -103,7 +101,7 @@ registerBlockType<{
               allowedFormats={[]}
               // @ts-ignore
               disableLineBreaks={true}
-              placeholder={__('Url')}
+              placeholder={Drupal.t('Url', {}, {context: 'gutenberg'})}
               keepPlaceholderOnFocus={true}
               onChange={(newValue) => {
                 setAttributes({ url: newValue });
