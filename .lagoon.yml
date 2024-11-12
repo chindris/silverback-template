@@ -29,6 +29,12 @@ tasks:
             drush simple-oauth:generate-keys /app/web/sites/default/files/private/keys
           fi
         service: cli
+    - run:
+        name: Trigger a clean frontend build
+        # Source before https://github.com/uselagoon/lagoon/issues/574
+        command:
+          source /home/.bashrc && curl -X POST "$PUBLISHER_URL/___status/clean"
+        service: cli
 environments:
   prod:
     routes:
@@ -43,6 +49,10 @@ environments:
         schedule: '*/15 * * * *'
         command: drush cron
         service: cli
+      - name: Frontend a frontend build
+        schedule: '0 * * * *'
+        command: drush silverback-gatsby:build main
+        service: cli
   stage:
     routes:
       - nginx:
@@ -56,6 +66,10 @@ environments:
         schedule: '*/15 * * * *'
         command: drush cron
         service: cli
+      - name: Frontend a frontend build
+        schedule: '15 * * * *'
+        command: drush silverback-gatsby:build main
+        service: cli
   dev:
     routes:
       - nginx:
@@ -68,4 +82,8 @@ environments:
       - name: drush cron
         schedule: '*/15 * * * *'
         command: drush cron
+        service: cli
+      - name: Frontend a frontend build
+        schedule: '30 * * * *'
+        command: drush silverback-gatsby:build main
         service: cli

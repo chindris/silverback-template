@@ -19,6 +19,7 @@ schema_configuration:
     extensions:
       silverback_campaign_urls: silverback_campaign_urls
       silverback_gatsby: silverback_gatsby
+    build_trigger_on_save: 0
 persisted_queries_settings:
   silverback_graphql_persisted:
     weight: 0
