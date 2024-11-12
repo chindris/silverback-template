@@ -67,7 +67,7 @@ test('Page', async () => {
             },
             {
               "attributes": {
-                "content": "Paragraph",
+                "content": "Headline Lead text Paragraph",
                 "href": null,
                 "name": "description",
                 "property": null,

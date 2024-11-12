@@ -95,3 +95,4 @@ page_allowed_drupal_blocks:
   drupalblock/all_webform: 0
   webform_block: 0
   webform_submission_limit_block: 0
+  drupalmedia/drupal-media-entity: drupalmedia/drupal-media-entity

@@ -2,7 +2,7 @@
 # BUILDER IMAGE
 # ====================================================================================================
 FROM uselagoon/node-18-builder as node
-FROM uselagoon/php-8.2-cli-drupal as builder
+FROM uselagoon/php-8.3-cli-drupal as builder
 
 COPY --from=node /usr/local/lib/node_modules /usr/local/lib/node_modules
 COPY --from=node /usr/local/bin/node /usr/local/bin/node
@@ -55,7 +55,7 @@ RUN --mount=type=cache,target=/tmp/cache pnpm deploy --filter "@custom/preview" 
 # ====================================================================================================
 # CLI IMAGE
 # ====================================================================================================
-FROM uselagoon/php-8.2-cli-drupal as cli
+FROM uselagoon/php-8.3-cli-drupal as cli
 
 RUN apk add --no-cache git qpdf imagemagick icu-dev && \
   docker-php-ext-install intl && \
@@ -70,7 +70,7 @@ ENV PHP_MEMORY_LIMIT=2048
 # ====================================================================================================
 # PHP IMAGE
 # ====================================================================================================
-FROM uselagoon/php-8.2-fpm as php
+FROM uselagoon/php-8.3-fpm as php
 RUN apk add --no-cache imagemagick qpdf icu-dev && \
   docker-php-ext-install intl && \
   docker-php-ext-enable intl
