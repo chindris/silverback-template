@@ -16,7 +16,7 @@ registerBlockType<{
   limit: number;
   titleFilter: string;
 }>('custom/teaser-list', {
-  title: Drupal.t('Teaser list', {}, {context: 'gutenberg'}),
+  title: Drupal.t('Teaser list', {}, { context: 'gutenberg' }),
   icon: 'slides',
   category: 'layout',
   attributes: {
@@ -47,15 +47,23 @@ registerBlockType<{
 
     return (
       <div className={'container-wrapper'}>
-        <div className={'container-label'}>{Drupal.t('Teaser list', {}, {context: 'gutenberg'})}</div>
+        <div className={'container-label'}>
+          {Drupal.t('Teaser list', {}, { context: 'gutenberg' })}
+        </div>
         <InspectorControls>
           <PanelBody>
             <SelectControl
-              label={Drupal.t('Layout', {}, {context: 'gutenberg'})}
+              label={Drupal.t('Layout', {}, { context: 'gutenberg' })}
               value={layout}
               options={[
-                { label: Drupal.t('Grid', {}, {context: 'gutenberg'}), value: 'GRID' },
-                { label: Drupal.t('Carousel', {}, {context: 'gutenberg'}), value: 'CAROUSEL' },
+                {
+                  label: Drupal.t('Grid', {}, { context: 'gutenberg' }),
+                  value: 'GRID',
+                },
+                {
+                  label: Drupal.t('Carousel', {}, { context: 'gutenberg' }),
+                  value: 'CAROUSEL',
+                },
               ]}
               onChange={(layout) => {
                 setAttributes({
@@ -65,17 +73,27 @@ registerBlockType<{
             />
             <TextControl
               value={buttonText}
-              label={Drupal.t('Button text', {}, {context: 'gutenberg'})}
+              label={Drupal.t('Button text', {}, { context: 'gutenberg' })}
               onChange={(buttonText) => {
                 setPlainTextAttribute(props, 'buttonText', buttonText);
               }}
               help={Drupal.t(
-                'A text to show for the read more link. Leave empty to use the default one (Read more).', {}, {context: 'gutenberg'}
+                'A text to show for the read more link. Leave empty to use the default one (Read more).',
+                {},
+                { context: 'gutenberg' },
               )}
             />
             <ToggleControl
-              label={Drupal.t('Enable content hub', {}, {context: 'gutenberg'})}
-              help={Drupal.t('Enable pulling dynamic content from the content hub.', {}, {context: 'gutenberg'})}
+              label={Drupal.t(
+                'Enable content hub',
+                {},
+                { context: 'gutenberg' },
+              )}
+              help={Drupal.t(
+                'Enable pulling dynamic content from the content hub.',
+                {},
+                { context: 'gutenberg' },
+              )}
               checked={contentHubEnabled}
               onChange={(contentHubEnabled) => {
                 setAttributes({
@@ -85,8 +103,12 @@ registerBlockType<{
             />
             {typeof contentHubEnabled !== 'undefined' && contentHubEnabled ? (
               <TextControl
-                label={Drupal.t('Filter: Title', {}, {context: 'gutenberg'})}
-                help={Drupal.t('Filter results by title / label.', {}, {context: 'gutenberg'})}
+                label={Drupal.t('Filter: Title', {}, { context: 'gutenberg' })}
+                help={Drupal.t(
+                  'Filter results by title / label.',
+                  {},
+                  { context: 'gutenberg' },
+                )}
                 onChange={(titleFilter) => {
                   setAttributes({
                     titleFilter,
@@ -97,9 +119,11 @@ registerBlockType<{
             ) : null}
             {typeof contentHubEnabled !== 'undefined' && contentHubEnabled ? (
               <TextControl
-                label={Drupal.t('Limit', {}, {context: 'gutenberg'})}
+                label={Drupal.t('Limit', {}, { context: 'gutenberg' })}
                 help={Drupal.t(
-                  'Set a maximum number of results to show from the content hub.', {}, {context: 'gutenberg'}
+                  'Set a maximum number of results to show from the content hub.',
+                  {},
+                  { context: 'gutenberg' },
                 )}
                 onChange={(limit) => {
                   setAttributes({

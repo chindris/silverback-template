@@ -12,7 +12,7 @@ registerBlockType<{
   level: number;
   text: string;
 }>('custom/heading', {
-  title: Drupal.t('Heading', {}, {context: 'gutenberg'}),
+  title: Drupal.t('Heading', {}, { context: 'gutenberg' }),
   icon: (
     <svg
       width="24"
@@ -78,7 +78,11 @@ registerBlockType<{
               const isActive = level === props.attributes.level;
               return {
                 icon: <HeadingLevelIcon level={level} isPressed={false} />,
-                title: Drupal.t('Heading @level', { '@level': level }, {context: 'gutenberg'}),
+                title: Drupal.t(
+                  'Heading @level',
+                  { '@level': level },
+                  { context: 'gutenberg' },
+                ),
                 isActive,
                 onClick: () => {
                   props.setAttributes({
@@ -96,7 +100,7 @@ registerBlockType<{
           allowedFormats={['core/bold']}
           // @ts-ignore
           disableLineBreaks={true}
-          placeholder={Drupal.t('Heading', {}, {context: 'gutenberg'})}
+          placeholder={Drupal.t('Heading', {}, { context: 'gutenberg' })}
           keepPlaceholderOnFocus={true}
           onChange={(text) => {
             props.setAttributes({

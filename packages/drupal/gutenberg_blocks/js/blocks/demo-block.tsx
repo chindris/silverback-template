@@ -12,7 +12,7 @@ registerBlockType<{
   mediaEntityIds?: [string];
   url: string;
 }>('custom/demo-block', {
-  title: 'Demo Block',
+  title: Drupal.t('Demo Block', {}, { context: 'gutenberg' }),
   icon: 'text',
   category: 'common',
   attributes: {
@@ -47,12 +47,16 @@ registerBlockType<{
     return (
       <Fragment>
         <InspectorControls>
-          <PanelBody title={Drupal.t('Block settings', {}, {context: 'gutenberg'})}>
+          <PanelBody
+            title={Drupal.t('Block settings', {}, { context: 'gutenberg' })}
+          >
             <p>Block settings</p>
           </PanelBody>
         </InspectorControls>
         <div className={'container-wrapper !border-stone-500'}>
-          <div className={'container-label'}>{Drupal.t('Demo Block', {}, {context: 'gutenberg'})}</div>
+          <div className={'container-label'}>
+            {Drupal.t('Demo Block', {}, { context: 'gutenberg' })}
+          </div>
           <div className="custom-block-demo-block">
             <RichText
               identifier="heading"
@@ -61,7 +65,7 @@ registerBlockType<{
               allowedFormats={[]}
               // @ts-ignore
               disableLineBreaks={true}
-              placeholder={Drupal.t('Heading', {}, {context: 'gutenberg'})}
+              placeholder={Drupal.t('Heading', {}, { context: 'gutenberg' })}
               keepPlaceholderOnFocus={true}
               onChange={(newValue) => {
                 setAttributes({ heading: newValue });
@@ -74,7 +78,11 @@ registerBlockType<{
               allowedFormats={[]}
               // @ts-ignore
               disableLineBreaks={true}
-              placeholder={Drupal.t('Description', {}, {context: 'gutenberg'})}
+              placeholder={Drupal.t(
+                'Description',
+                {},
+                { context: 'gutenberg' },
+              )}
               keepPlaceholderOnFocus={true}
               onChange={(newValue) => {
                 setAttributes({ description: newValue });
@@ -101,7 +109,7 @@ registerBlockType<{
               allowedFormats={[]}
               // @ts-ignore
               disableLineBreaks={true}
-              placeholder={Drupal.t('Url', {}, {context: 'gutenberg'})}
+              placeholder={Drupal.t('Url', {}, { context: 'gutenberg' })}
               keepPlaceholderOnFocus={true}
               onChange={(newValue) => {
                 setAttributes({ url: newValue });
