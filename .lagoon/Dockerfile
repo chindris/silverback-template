@@ -65,7 +65,8 @@ COPY --from=builder /tmp/.deploy/cms /app
 
 WORKDIR /app
 ENV WEBROOT=web
-ENV PHP_MEMORY_LIMIT=2048
+# To not meet OOM on Drupal config import.
+ENV PHP_MEMORY_LIMIT=2048M
 
 # ====================================================================================================
 # PHP IMAGE
@@ -79,7 +80,8 @@ COPY --from=cli /app /app
 
 WORKDIR /app
 ENV WEBROOT=web
-ENV PHP_MEMORY_LIMIT=2048
+# Keep EX nice when running static builds.
+ENV PHP_MEMORY_LIMIT=2048M
 
 # ====================================================================================================
 # NGINX IMAGE
