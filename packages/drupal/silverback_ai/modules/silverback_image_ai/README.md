@@ -1,6 +1,13 @@
 ## INTRODUCTION
 
-The Silverback Image AI module contains some AI functionality for images, such as automatic Alt attribute completion.
+The Silverback Image AI module provides AI-powered functionality for image management in Drupal. Its main features include:
+
+- Automatic generation of alt text for images using AI
+- Intelligent image analysis and description
+- Accessibility improvements through better image descriptions
+- Integration with OpenAI's vision models for image processing
+
+The module aims to enhance the accessibility and SEO of your Drupal site by ensuring all images have meaningful alternative text.
 
 ## REQUIREMENTS
 

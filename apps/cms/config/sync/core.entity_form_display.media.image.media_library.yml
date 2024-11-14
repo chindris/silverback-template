@@ -8,14 +8,14 @@ dependencies:
     - image.style.thumbnail
     - media.type.image
   module:
-    - image
+    - silverback_image_ai
 id: media.image.media_library
 targetEntityType: media
 bundle: image
 mode: media_library
 content:
   field_media_image:
-    type: image_image
+    type: image_image_ai
     weight: -50
     region: content
     settings:

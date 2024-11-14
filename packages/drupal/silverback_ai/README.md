@@ -18,4 +18,12 @@ It is recommended though to add the Open AI Api key as environment variable (`OP
 
 ## USAGE TRACKING
 
-- All Silverback AI modules should report token usage using the `TokenUsage` service. The report can be seen at: `/admin/reports/silverback-ai-usage`.
+The Silverback AI module tracks OpenAI API token usage for monitoring and cost management purposes:
+
+- All Silverback AI submodules automatically report their token usage through the `TokenUsage` service
+- Usage statistics can be viewed at `/admin/reports/silverback-ai-usage`
+- The report shows:
+  - Total tokens used per module
+  - Cost estimates based on current OpenAI pricing
+  - Usage breakdown by time period
+  - Details of individual API calls

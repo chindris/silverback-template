@@ -74,19 +74,8 @@ final class ImageAiUtilities implements ImageAiUtilitiesInterface {
       \Drupal::logger('debug')->debug('<pre>' . print_r($response_body, TRUE) . "</pre>");
     }
 
-    $prefix = $this->configFactory->get('silverback_image_ai.settings')->get('alt_prefix') ?: '';
-    $suffix = $this->configFactory->get('silverback_image_ai.settings')->get('alt_suffix') ?: '';
-
-    if (!empty($prefix)) {
-      $prefix .= ' | ';
-    }
-
-    if (!empty($suffix)) {
-      $suffix = ' | ' . $suffix;
-    }
-
     if (isset($response_body['choices'][0]['message']['content'])) {
-      return $prefix . trim($response_body['choices'][0]['message']['content']) . $suffix;
+      return trim($response_body['choices'][0]['message']['content']);
     }
 
     return NULL;
@@ -164,7 +153,15 @@ final class ImageAiUtilities implements ImageAiUtilitiesInterface {
     $model = $this->configFactory->get('silverback_image_ai.settings')->get('ai_model') ?: self::DEFAULT_AI_MODEL;
     $words = $this->configFactory->get('silverback_image_ai.settings')->get('words_length') ?: self::DEFAULT_WORD_LENGTH;
 
-    $prompt = "Generate a concise and descriptive ALT text for this image. The ALT text should be a single sentence, no more than {$words} words long. The Alt text should be in the {$language_name} language.";
+    $context = $this->configFactory->get('silverback_image_ai.settings')->get('alt_ai_context');
+
+    if (!empty($context)) {
+      $prompt = "Given the following context:\r\n'{$context}' \r\n";
+      $prompt .= "generate a concise and descriptive ALT text for this image. The ALT text should be a single sentence, no more than {$words} words long. The Alt text should be in the {$language_name} language.";
+    }
+    else {
+      $prompt = "Generate a concise and descriptive ALT text for this image. The ALT text should be a single sentence, no more than {$words} words long. The Alt text should be in the {$language_name} language.";
+    }
 
     $payload = [
       'model' => $model,
