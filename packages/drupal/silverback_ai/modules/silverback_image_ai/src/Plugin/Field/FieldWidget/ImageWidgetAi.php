@@ -30,6 +30,8 @@ use Drupal\image\Entity\ImageStyle;
  */
 class ImageWidgetAi extends FileWidget {
 
+  private const DEFAULT_LANGCODE = 'en';
+
   /**
    * The image factory service.
    *
@@ -201,6 +203,7 @@ class ImageWidgetAi extends FileWidget {
    */
   public static function process($element, FormStateInterface $form_state, $form) {
     $item = $element['#value'];
+
     $item['fids'] = $element['fids']['#value'];
 
     $element['#theme'] = 'image_widget';
@@ -232,38 +235,39 @@ class ImageWidgetAi extends FileWidget {
         }
       }
 
-      // Add the additional alt and title fields.
-      $icon = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-stars" viewBox="0 0 16 16">
-        <path d="M7.657 6.247c.11-.33.576-.33.686 0l.645 1.937a2.89 2.89 0 0 0 1.829 1.828l1.936.645c.33.11.33.576 0 .686l-1.937.645a2.89 2.89 0 0 0-1.828 1.829l-.645 1.936a.361.361 0 0 1-.686 0l-.645-1.937a2.89 2.89 0 0 0-1.828-1.828l-1.937-.645a.361.361 0 0 1 0-.686l1.937-.645a2.89 2.89 0 0 0 1.828-1.828zM3.794 1.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387A1.73 1.73 0 0 0 4.593 5.69l-.387 1.162a.217.217 0 0 1-.412 0L3.407 5.69A1.73 1.73 0 0 0 2.31 4.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387A1.73 1.73 0 0 0 3.407 2.31zM10.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.16 1.16 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.16 1.16 0 0 0-.732-.732L9.1 2.137a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732z"/>
-          </svg>';
-
       $element['ai_container'] = [
         '#type' => 'container',
         '#attributes' => [
           'style' => ['text-align: right'],
         ],
       ];
+
       $element['ai_container']['alt_ai_generate'] = [
         '#type' => 'submit',
-        '#value' => Markup::create('Re-generate Alt text'),
+        '#value' => new TranslatableMarkup('Re-generate ALT text'),
         '#weight' => -12,
-        '#suffix' => Markup::create($icon),
         '#attributes' => [
           'class' => ['button--extrasmall', 'button', 'js-form-submit', 'form-submit'],
-          'style' => ['width: 164px; float: right'],
+          'style' => ['padding: 2px 12px'],
         ],
         '#ajax' => [
-          'callback' => static::class . '::myAjaxCallback',
+          'callback' => static::class . '::generateAjaxCallback',
           'event' => 'click',
           'wrapper_id' => $element['#attributes']['data-drupal-selector'] . '-alt',
-            // 'wrapper' => $form['field_media_image']['#id'],
           'fids' => $item['fids'],
-          'langcode' => $form_state->get('langcode'),
+          'langcode' => $form_state->get('langcode') ?? ImageWidgetAi::getLangcode($form, $form_state),
           'progress' => [
             'type' => 'throbber',
             'message' => t('Generating alt text...'),
           ],
         ],
+      ];
+
+      // @todo Add DI
+      $disclaimer = "<div style='font-size: 0.8em'><em>" . \Drupal::config('silverback_image_ai.settings')->get('alt_disclaimer') . "</em></div>";
+      $element['ai_container']['disclaimer'] = [
+        '#type' => 'item',
+        '#markup' => Markup::create($disclaimer),
       ];
 
       $element['preview'] = [
@@ -281,9 +285,9 @@ class ImageWidgetAi extends FileWidget {
 
       // [AI utilities]
       if (!isset($item['alt'])) {
+        $langcode = ImageWidgetAi::getLangcode($form, $form_state);
         $service = \Drupal::service('silverback_image_ai.utilities');
-        $langcode = $form_state->get('langcode') ?? 'en';
-        $item['alt'] = $service->generateImageAlt($file, $langcode);
+        $item['alt'] = $service->generateImageAlt($file, $langcode ?? ImageWidgetAi::DEFAULT_LANGCODE);
       }
       // [end AI utilities]
     }
@@ -306,7 +310,7 @@ class ImageWidgetAi extends FileWidget {
       '#title' => new TranslatableMarkup('Alternative text'),
       '#type' => 'textfield',
       '#default_value' => $item['alt'] ?? '',
-      '#description' => new TranslatableMarkup('Short description of the image used by screen readers and displayed when the image is not loaded. This is important for accessibility.'),
+      '#description' => new TranslatableMarkup('Short description of the image used by screen readers and displayed when the image is not loaded. This is important for accessibility and SEO.'),
       // @see https://www.drupal.org/node/465106#alt-text
       '#maxlength' => 512,
       '#weight' => -12,
@@ -392,16 +396,14 @@ class ImageWidgetAi extends FileWidget {
     return $changed;
   }
 
-  // Get the value from example select field and fill.
-
   /**
    * The textbox with the selected text.
    */
-  public static function myAjaxCallback(array &$form, FormStateInterface $form_state) {
+  public static function generateAjaxCallback(array &$form, FormStateInterface $form_state) {
     $triggering_element = $form_state->getTriggeringElement();
     $wrapper_id = $triggering_element['#ajax']['wrapper_id'];
     $fids = $triggering_element['#ajax']['fids'];
-    $langcode = $triggering_element['#ajax']['langcode'] ?? 'en';
+    $langcode = $triggering_element['#ajax']['langcode'] ?? ImageWidgetAi::DEFAULT_LANGCODE;
     // @todo get the file
     $fid = reset($fids);
     $file = NULL;
@@ -418,6 +420,35 @@ class ImageWidgetAi extends FileWidget {
       }
     }
     return $response;
+  }
+
+  /**
+   *
+   */
+  public static function getLangcode(array &$form, FormStateInterface $form_state) {
+    // @todo Add DI
+    $langcode = ImageWidgetAi::DEFAULT_LANGCODE;
+
+    $input = $form_state->getUserInput();
+    $langcode = is_array($input['langcode']) ? reset($input['langcode']) : [];
+    $langcode = $langcode['value'] ?? NULL;
+    if (!empty($langcode)) {
+      $language_codes = \Drupal::languageManager()->getLanguages();
+      // Make sure the selected langcode exists and it is a real language.
+      if (empty($language_codes[$langcode])) {
+        $langcode = ImageWidgetAi::DEFAULT_LANGCODE;
+      }
+    }
+
+    if (!$langcode) {
+      // Try to fetch from entity language.
+      if ($prefixes = \Drupal::config('language.negotiation')->get('url.prefixes')) {
+        $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+        $langcode = $prefixes[$language] ?? NULL;
+      }
+    }
+
+    return $langcode;
   }
 
 }

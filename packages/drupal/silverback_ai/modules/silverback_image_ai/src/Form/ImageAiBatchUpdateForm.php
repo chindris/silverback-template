@@ -153,7 +153,8 @@ final class ImageAiBatchUpdateForm extends FormBase {
     try {
       $media_entities = $this->service->getMediaEntitiesToUpdateAll();
       $this->batch->create($media_entities);
-    } catch (InvalidPluginDefinitionException|PluginNotFoundException $e) {
+    }
+    catch (InvalidPluginDefinitionException | PluginNotFoundException $e) {
       // @todo
     }
   }
