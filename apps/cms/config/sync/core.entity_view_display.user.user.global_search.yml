@@ -1,0 +1,18 @@
+uuid: 4f0dd15a-c0ad-4f09-a785-7bba608a3918
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.user.global_search
+  module:
+    - user
+id: user.user.global_search
+targetEntityType: user
+bundle: user
+mode: global_search
+content: {  }
+hidden:
+  langcode: true
+  masquerade: true
+  member_for: true
+  search_api_excerpt: true

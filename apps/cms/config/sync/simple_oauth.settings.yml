@@ -1,6 +1,6 @@
 _core:
   default_config_hash: KsPFWSp6mgXIQgjBJEShfKUGn6VLRlbpIJ2EysXvXWM
-access_token_expiration: 3600
+access_token_expiration: 43200
 authorization_code_expiration: 300
 refresh_token_expiration: 1209600
 token_cron_batch_size: 0

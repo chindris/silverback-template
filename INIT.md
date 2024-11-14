@@ -57,6 +57,7 @@ replace(
     'apps/cms/config/sync/system.site.yml',
     'apps/cms/config/sync/slack.settings.yml',
     'apps/cms/scaffold/settings.php.append.txt',
+    'apps/publisher/publisher.config.ts',
   ],
   'silverback-template',
   process.env.PROJECT_NAME_MACHINE,

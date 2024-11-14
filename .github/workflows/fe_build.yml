@@ -1,0 +1,81 @@
+name: FE Build
+
+on:
+  workflow_dispatch:
+    inputs:
+      publisher_payload:
+        description: Publisher payload
+        required: true
+      env:
+        description: Environment
+        required: true
+
+run-name: 'FE Build [env: ${{ inputs.env }}]'
+
+concurrency:
+  group: fe_build_${{ inputs.env }}
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Setup
+        uses: ./.github/actions/setup
+
+      - name: TurboRepo local server
+        uses: felixmosh/turborepo-gh-artifacts@v2
+        with:
+          server-token: 'local'
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Prepare
+        run: SKIP_DRUPAL_INSTALL=1 pnpm turbo:prep
+        env:
+          TURBO_API: 'http://127.0.0.1:9080'
+          TURBO_TOKEN: 'local'
+          TURBO_TEAM: 'local'
+
+      - name: Publisher
+        uses: AmazeeLabs/publisher-action@4371b4a90a9fe2c86248e76c0f428e39abf6b610
+        with:
+          success_env_var_name: BUILD_IS_SUCCESSFUL
+          cache_paths: |
+            apps/website/.cache
+            apps/website/public
+          cache_key: 'fe-build-${{ inputs.env }}'
+
+      - name: Build & deploy
+        run: |
+          set -ex
+          cd apps/website
+
+          # Build
+          if test -d public; then 
+            echo "Single build"
+            pnpm build:gatsby 
+          else 
+            echo "Double build"
+            # To mitigate Gatsby bug:
+            #   The first incremental build rewrites compilation hashes even if
+            #   there are no content changes.
+            pnpm build:gatsby
+            pnpm build:gatsby 
+          fi
+
+          # Deploy
+          pnpm netlify env:set AWS_LAMBDA_JS_RUNTIME nodejs18.x
+          pnpm netlify env:set DRUPAL_EXTERNAL_URL $DRUPAL_EXTERNAL_URL
+          pnpm netlify deploy --cwd=. --dir=apps/website/public --prodIfUnlocked
+
+          # Report success to Publisher
+          echo "BUILD_IS_SUCCESSFUL=1" >> $GITHUB_ENV
+        env:
+          TURBO_API: 'http://127.0.0.1:9080'
+          TURBO_TOKEN: 'local'
+          TURBO_TEAM: 'local'

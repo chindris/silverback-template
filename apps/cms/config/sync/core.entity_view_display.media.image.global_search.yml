@@ -1,0 +1,37 @@
+uuid: ee74d301-5723-4317-959d-4ebf11c34c5a
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.global_search
+    - field.field.media.image.field_media_image
+    - media.type.image
+  module:
+    - image
+id: media.image.global_search
+targetEntityType: media
+bundle: image
+mode: global_search
+content:
+  field_media_image:
+    type: image_url
+    label: hidden
+    settings:
+      image_style: ''
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  name:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  created: true
+  langcode: true
+  search_api_excerpt: true
+  thumbnail: true
+  uid: true
