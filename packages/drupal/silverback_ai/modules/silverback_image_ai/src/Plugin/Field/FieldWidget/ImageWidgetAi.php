@@ -203,6 +203,7 @@ class ImageWidgetAi extends FileWidget {
    */
   public static function process($element, FormStateInterface $form_state, $form) {
     $item = $element['#value'];
+
     $item['fids'] = $element['fids']['#value'];
 
     $element['#theme'] = 'image_widget';
@@ -243,7 +244,7 @@ class ImageWidgetAi extends FileWidget {
 
       $element['ai_container']['alt_ai_generate'] = [
         '#type' => 'submit',
-        '#value' => Markup::create('Re-generate Alt text'),
+        '#value' => new TranslatableMarkup('Re-generate ALT text'),
         '#weight' => -12,
         '#attributes' => [
           'class' => ['button--extrasmall', 'button', 'js-form-submit', 'form-submit'],
@@ -254,7 +255,7 @@ class ImageWidgetAi extends FileWidget {
           'event' => 'click',
           'wrapper_id' => $element['#attributes']['data-drupal-selector'] . '-alt',
           'fids' => $item['fids'],
-          'langcode' => $form_state->get('langcode'),
+          'langcode' => $form_state->get('langcode') ?? ImageWidgetAi::getLangcode($form, $form_state),
           'progress' => [
             'type' => 'throbber',
             'message' => t('Generating alt text...'),
@@ -284,20 +285,9 @@ class ImageWidgetAi extends FileWidget {
 
       // [AI utilities]
       if (!isset($item['alt'])) {
-
-        $input = $form_state->getUserInput();
-        $langcode = reset($input['langcode']);
-        $langcode = $langcode['value'] ?? NULL;
-        if (!empty($langcode)) {
-          $language_codes = \Drupal::languageManager()->getLanguages();
-          // Make sure the selected langcode exists and it is a real language.
-          if (empty($language_codes[$langcode])) {
-            $langcode = ImageWidgetAi::DEFAULT_LANGCODE;
-          }
-        }
-
+        $langcode = ImageWidgetAi::getLangcode($form, $form_state);
         $service = \Drupal::service('silverback_image_ai.utilities');
-        $item['alt'] = $service->generateImageAlt($file, $langcode);
+        $item['alt'] = $service->generateImageAlt($file, $langcode ?? ImageWidgetAi::DEFAULT_LANGCODE);
       }
       // [end AI utilities]
     }
@@ -413,7 +403,7 @@ class ImageWidgetAi extends FileWidget {
     $triggering_element = $form_state->getTriggeringElement();
     $wrapper_id = $triggering_element['#ajax']['wrapper_id'];
     $fids = $triggering_element['#ajax']['fids'];
-    $langcode = $triggering_element['#ajax']['langcode'] ?? 'en';
+    $langcode = $triggering_element['#ajax']['langcode'] ?? ImageWidgetAi::DEFAULT_LANGCODE;
     // @todo get the file
     $fid = reset($fids);
     $file = NULL;
@@ -430,6 +420,35 @@ class ImageWidgetAi extends FileWidget {
       }
     }
     return $response;
+  }
+
+  /**
+   *
+   */
+  public static function getLangcode(array &$form, FormStateInterface $form_state) {
+    // @todo Add DI
+    $langcode = ImageWidgetAi::DEFAULT_LANGCODE;
+
+    $input = $form_state->getUserInput();
+    $langcode = is_array($input['langcode']) ? reset($input['langcode']) : [];
+    $langcode = $langcode['value'] ?? NULL;
+    if (!empty($langcode)) {
+      $language_codes = \Drupal::languageManager()->getLanguages();
+      // Make sure the selected langcode exists and it is a real language.
+      if (empty($language_codes[$langcode])) {
+        $langcode = ImageWidgetAi::DEFAULT_LANGCODE;
+      }
+    }
+
+    if (!$langcode) {
+      // Try to fetch from entity language.
+      if ($prefixes = \Drupal::config('language.negotiation')->get('url.prefixes')) {
+        $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+        $langcode = $prefixes[$language] ?? NULL;
+      }
+    }
+
+    return $langcode;
   }
 
 }
