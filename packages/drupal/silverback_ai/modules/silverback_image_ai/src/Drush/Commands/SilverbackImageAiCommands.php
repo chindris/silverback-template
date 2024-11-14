@@ -69,7 +69,8 @@ final class SilverbackImageAiCommands extends DrushCommands {
       try {
         $media_entities = $this->service->getMediaEntitiesToUpdateWithAlt();
         $this->batch->create($media_entities);
-      } catch (InvalidPluginDefinitionException|PluginNotFoundException $e) {
+      }
+      catch (InvalidPluginDefinitionException | PluginNotFoundException $e) {
         // @todo
       }
     }

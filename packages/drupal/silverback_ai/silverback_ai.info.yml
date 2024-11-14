@@ -2,4 +2,6 @@ name: 'Silverback AI'
 type: module
 description: 'Silverback AI base module'
 package: Silverback
-core_version_requirement: ^10
+core_version_requirement: ^10 || ^11
+dependencies:
+  - webform:webform
