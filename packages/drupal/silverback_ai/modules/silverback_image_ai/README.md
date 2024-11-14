@@ -21,3 +21,15 @@ See: <https://www.drupal.org/node/895232> for further information.
 ## CONFIGURATION
 
 - Base settings form: `/admin/config/system/silverback/image-ai-settings`.
+
+## SERVICES
+
+### ImageAiUtilities Service
+
+The `ImageAiUtilities` service provides core functionality for AI-powered image processing. It handles:
+
+- Generation of ALT text for images using OpenAI's vision models
+- Processing of image files and media entities
+- Integration with OpenAI's API for image analysis
+- Token usage tracking and logging
+

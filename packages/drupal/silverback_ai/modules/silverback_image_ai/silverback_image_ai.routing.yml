@@ -1,7 +1,7 @@
 silverback_image_ai.settings:
   path: '/admin/config/system/silverback/image-ai-settings'
   defaults:
-    _title: 'Silverback Alt AI Settings'
+    _title: 'Silverback Image AI Settings'
     _form: 'Drupal\silverback_image_ai\Form\ImageAiSettingsForm'
   requirements:
     _permission: 'administer site configuration'
@@ -9,7 +9,7 @@ silverback_image_ai.settings:
 silverback_image_ai.image_ai_batch_update:
   path: '/admin/silverback-ai/update/image'
   defaults:
-    _title: 'Image Ai Batch Update'
+    _title: 'Image AI Batch Update'
     _form: 'Drupal\silverback_image_ai\Form\ImageAiBatchUpdateForm'
   requirements:
     _permission: 'access content'
