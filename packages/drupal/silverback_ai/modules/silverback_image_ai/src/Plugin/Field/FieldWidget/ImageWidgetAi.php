@@ -30,6 +30,8 @@ use Drupal\image\Entity\ImageStyle;
  */
 class ImageWidgetAi extends FileWidget {
 
+  private const DEFAULT_LANGCODE = 'en';
+
   /**
    * The image factory service.
    *
@@ -282,8 +284,19 @@ class ImageWidgetAi extends FileWidget {
 
       // [AI utilities]
       if (!isset($item['alt'])) {
+
+        $input = $form_state->getUserInput();
+        $langcode = reset($input['langcode']);
+        $langcode = $langcode['value'] ?? NULL;
+        if (!empty($langcode)) {
+          $language_codes = \Drupal::languageManager()->getLanguages();
+          // Make sure the selected langcode exists and it is a real language.
+          if (empty($language_codes[$langcode])) {
+            $langcode = ImageWidgetAi::DEFAULT_LANGCODE;
+          }
+        }
+
         $service = \Drupal::service('silverback_image_ai.utilities');
-        $langcode = $form_state->get('langcode') ?? 'en';
         $item['alt'] = $service->generateImageAlt($file, $langcode);
       }
       // [end AI utilities]
