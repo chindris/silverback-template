@@ -75,8 +75,6 @@ final class SilverbackImageAiCommands extends DrushCommands {
       }
     }
 
-    // Temp.
-    // $media_entities = array_slice($this->getMediaEntities(), 0, 2);.
     $this->logger()->success(dt('@count media images updated.', [
       '@count' => count($media_entities),
     ]));

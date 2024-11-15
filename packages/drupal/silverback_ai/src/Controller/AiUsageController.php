@@ -64,8 +64,6 @@ class AiUsageController extends ControllerBase {
    */
   public function __invoke(): array {
 
-    // @todo Add pager
-    // @todo Add modal for display the response body
     $header = [
       'timestamp' => $this->t('Timestamp'),
       'username' => $this->t('User'),

@@ -72,13 +72,20 @@ final class TokenUsage implements TokenUsageInterface {
         ->execute();
     }
     catch (\Exception $e) {
-      // @todo do something
       $this->loggerFactory->get('silverback_ai')->error($e->getMessage());
     }
   }
 
   /**
+   * Retrieves a list of entries from the 'silverback_ai_usage' table.
    *
+   * This function queries the database to select fields related to AI usage
+   * and orders them by ID in descending order. It paginates the result
+   * according to a predefined limit. Each row fetched from the database
+   * is processed using the `buildRow` method before being added to the result set.
+   *
+   * @return array
+   *   An array of processed database records.
    */
   public function getEntries() {
     $query = $this->connection->select('silverback_ai_usage', 's')

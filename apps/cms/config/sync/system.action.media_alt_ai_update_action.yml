@@ -5,7 +5,7 @@ dependencies:
   module:
     - media
 id: media_alt_ai_update_action
-label: 'Alt text update (images only)'
+label: 'Alt text update (AI)'
 type: media
 plugin: 'entity:alt_ai_update_action:media'
 configuration: {  }
