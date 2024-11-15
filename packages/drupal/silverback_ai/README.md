@@ -4,6 +4,7 @@ The Silverback AI module is a base module
 
 ## REQUIREMENTS
 
+- Media
 - Webform (using some webform elements on reporting)
 
 ## INSTALLATION
