@@ -29,11 +29,14 @@ export function BlockTeaserList(props: BlockTeaserListFragment) {
   return (
     <div className="bg-white py-12 px-6 lg:px-8">
       <div className="mx-auto max-w-6xl">
-        <ul className="my-8 grid md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-8">
+        <ul className="my-8 grid md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-8 grid-cols-subgrid">
           {props.staticContent?.map((teaserItem) => {
             staticIds.push(getUUIDFromId(teaserItem?.content?.id || ''));
             return teaserItem?.content ? (
-              <li key={teaserItem?.content?.id}>
+              <li
+                key={teaserItem?.content?.id}
+                className="grid grid-rows-subgrid"
+              >
                 <CardItem
                   readMoreText={props.buttonText}
                   {...teaserItem?.content}
@@ -76,7 +79,7 @@ export function DynamicTeaserList(
       <>
         {data.teaserList.items.map((teaserItem) => {
           return teaserItem ? (
-            <li key={teaserItem.id}>
+            <li key={teaserItem.id} className="grid grid-rows-subgrid">
               <CardItem readMoreText={props.buttonText} {...teaserItem} />
             </li>
           ) : null;
