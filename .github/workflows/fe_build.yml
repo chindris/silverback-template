@@ -69,7 +69,7 @@ jobs:
           fi
 
           # Deploy
-          pnpm netlify env:set AWS_LAMBDA_JS_RUNTIME nodejs18.x
+          pnpm netlify env:set AWS_LAMBDA_JS_RUNTIME nodejs20.x
           pnpm netlify env:set DRUPAL_EXTERNAL_URL $DRUPAL_EXTERNAL_URL
           pnpm netlify deploy --cwd=. --dir=apps/website/public --prodIfUnlocked
 

@@ -20,6 +20,6 @@
   "devDependencies": {
     "@amazeelabs/save-webpage": "^1.1.1",
     "@playwright/test": "^1.44.1",
-    "@types/node": "^18"
+    "@types/node": "^20"
   }
 }
