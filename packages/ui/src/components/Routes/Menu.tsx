@@ -64,7 +64,9 @@ export function useMenuAncestors(path: string, menuName: MenuNameType) {
   // Set current page breadcrumb
   if (typeof processingMenuItem !== 'undefined') {
     // If not home path then only push into breadcrumbs array
-    processingMenuItem.target !== '/' && ancestors.push(processingMenuItem);
+    if (processingMenuItem.target !== '/') {
+      ancestors.push(processingMenuItem);
+    }
   }
 
   while (

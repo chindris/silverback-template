@@ -16,7 +16,7 @@ export const CardItem = ({
   return (
     <article
       aria-labelledby={formattedID}
-      className="focus-within:outline focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-indigo-600 relative max-w-sm bg-white rounded-lg hover:shadow overflow-hidden flex flex-col-reverse"
+      className="relative flex max-w-sm flex-col-reverse overflow-hidden rounded-lg bg-white focus-within:outline focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-indigo-600 hover:shadow"
     >
       <div className="p-5">
         <h5
@@ -28,16 +28,16 @@ export const CardItem = ({
         {hero?.headline ? <div>{hero?.headline}</div> : null}
         <Link
           href={path}
-          className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-blue-700 border border-blue-700 rounded-lg hover:bg-blue-800 hover:text-white focus:outline-offset-4 after:content-[''] after:absolute after:inset-0"
+          className="inline-flex items-center rounded-lg border border-blue-700 px-3 py-2 text-center text-sm font-medium text-blue-700 after:absolute after:inset-0 after:content-[''] hover:bg-blue-800 hover:text-white focus:outline-offset-4"
         >
-          <span className="sr-only w-0 h-0 overflow-hidden">{title}</span>
+          <span className="sr-only size-0 overflow-hidden">{title}</span>
           {readMoreText ||
             intl.formatMessage({
               defaultMessage: 'Read more',
               id: 'S++WdB',
             })}
           <svg
-            className="rtl:rotate-180 w-3.5 h-3.5 ms-2"
+            className="ms-2 size-3.5 rtl:rotate-180"
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"

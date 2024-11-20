@@ -23,13 +23,13 @@ export function Footer() {
     <footer
       id="footer"
       className={
-        'container-page relative z-10 bg-gray-100 text-gray-500 py-12 lg:py-16'
+        'container-page relative z-10 bg-gray-100 py-12 text-gray-500 lg:py-16'
       }
     >
       <h2 className={'sr-only'}>Footer</h2>
-      <div className="pb-8 container-content">
+      <div className="container-content pb-8">
         <div className="flex flex-wrap justify-between">
-          <div className={'w-full mb-8 mr-2 md:w-1/4 lg:mr-[5.625rem]'}>
+          <div className={'mb-8 mr-2 w-full md:w-1/4 lg:mr-[5.625rem]'}>
             <a href="/" className={'mb-4 block'}>
               <svg
                 width="168"
@@ -73,10 +73,10 @@ export function Footer() {
               </svg>
             </a>
             <div className="sm:flex sm:items-center sm:justify-between">
-              <div className="flex mt-4 space-x-6 sm:justify-center sm:mt-0">
+              <div className="mt-4 flex space-x-6 sm:mt-0 sm:justify-center">
                 <a href="#" className="text-gray-400 hover:text-black">
                   <svg
-                    className="w-5 h-5"
+                    className="size-5"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                     aria-hidden="true"
@@ -90,7 +90,7 @@ export function Footer() {
                 </a>
                 <a href="#" className="text-gray-400 hover:text-black">
                   <svg
-                    className="w-5 h-5"
+                    className="size-5"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                     aria-hidden="true"
@@ -100,7 +100,7 @@ export function Footer() {
                 </a>
                 <a href="#" className="text-gray-400 hover:text-black">
                   <svg
-                    className="w-5 h-5"
+                    className="size-5"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                     aria-hidden="true"
@@ -114,7 +114,7 @@ export function Footer() {
                 </a>
                 <a href="#" className="text-gray-400 hover:text-black">
                   <svg
-                    className="w-5 h-5"
+                    className="size-5"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                     aria-hidden="true"
@@ -131,7 +131,7 @@ export function Footer() {
           </div>
           <nav>
             <ul
-              className={'!pl-0 flex flex-wrap justify-between grow'}
+              className={'flex grow flex-wrap justify-between !pl-0'}
               aria-label="Footer Primary"
             >
               {items.map((item, key) => (
@@ -139,14 +139,14 @@ export function Footer() {
                   <li
                     key={key + 'header'}
                     className={
-                      'block mb-3 pr-5 lg:pr-8 last:pr-0 md:mb-0 md:text-left w-1/2 lg:w-44 max-w-44'
+                      'mb-3 block w-1/2 max-w-44 pr-5 last:pr-0 md:mb-0 md:text-left lg:w-44 lg:pr-8'
                     }
                   >
                     {item.target ? (
                       <Link
                         href={item.target!}
                         className={
-                          'text-gray-900 block hover:underline transition-all font-semibold text-[0.875rem] leading-[1.313rem] uppercase mb-4'
+                          'mb-4 block text-[0.875rem] font-semibold uppercase leading-[1.313rem] text-gray-900 transition-all hover:underline'
                         }
                       >
                         {item.title}
@@ -154,7 +154,7 @@ export function Footer() {
                     ) : (
                       <span
                         className={
-                          'block transition-all font-semibold text-[0.875rem] leading-[1.313rem] uppercase mb-4'
+                          'mb-4 block text-[0.875rem] font-semibold uppercase leading-[1.313rem] transition-all'
                         }
                       >
                         {item.title}
@@ -165,7 +165,7 @@ export function Footer() {
                           <Link
                             key={child.target}
                             href={child.target}
-                            className="text-gray-500 font-normal block transition-all text-base mb-4 hover:underline"
+                            className="mb-4 block text-base font-normal text-gray-500 transition-all hover:underline"
                           >
                             {child.title}
                           </Link>

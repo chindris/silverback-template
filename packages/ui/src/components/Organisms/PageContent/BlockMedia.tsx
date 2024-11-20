@@ -29,7 +29,7 @@ function Media(props: Required<BlockMediaFragment>['media']) {
     case 'MediaImage':
       return (
         <Image
-          className="max-w-full mx-auto"
+          className="mx-auto max-w-full"
           source={props.source}
           alt={props.alt}
         />

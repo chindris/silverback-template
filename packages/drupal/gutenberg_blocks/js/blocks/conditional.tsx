@@ -115,7 +115,7 @@ registerBlockType<{
           isActive={isActive}
         >
           <div className="p-4 text-sm text-gray-500">{conditionsSummary}</div>
-          <div className={clsx('p-4 border-t', { 'bg-gray-100': !isActive })}>
+          <div className={clsx('border-t p-4', { 'bg-gray-100': !isActive })}>
             <InnerBlocks
               templateLock={false}
               template={[['core/paragraph', {}]]}
@@ -144,7 +144,7 @@ registerBlockType<{
                 id="displayFrom"
                 label={__('From')}
                 className={
-                  '[&>div]:flex [&>div]:gap-4 [&>div>label]:w-4 [&>div>label]:my-auto !m-0'
+                  '!m-0 [&>div>label]:my-auto [&>div>label]:w-4 [&>div]:flex [&>div]:gap-4'
                 }
               >
                 <input
@@ -164,7 +164,7 @@ registerBlockType<{
                 id="displayTo"
                 label={__('To')}
                 className={
-                  '[&>div]:flex [&>div]:gap-4 [&>div>label]:w-4 [&>div>label]:mb-0 [&>div>label]:my-auto !m-0'
+                  '!m-0 [&>div>label]:my-auto [&>div>label]:mb-0 [&>div>label]:w-4 [&>div]:flex [&>div]:gap-4'
                 }
               >
                 <input
@@ -225,7 +225,7 @@ const CollapsibleContainer = ({
         <summary role="button" className="grid grid-cols-[34px,1fr] p-0">
           <span
             className={
-              'bg-stone-500 flex justify-center items-center text-white relative'
+              'relative flex items-center justify-center bg-stone-500 text-white'
             }
           >
             <svg
@@ -233,7 +233,7 @@ const CollapsibleContainer = ({
               role="presentation"
               width="16"
               height="16"
-              className="w-[var(--space-m)] h-[var(--space-m)] transition-transform ease-in duration-[var(--details-transform-transition-duration)] rotate-90"
+              className="size-[var(--space-m)] rotate-90 transition-transform duration-[var(--details-transform-transition-duration)] ease-in"
             >
               <path
                 d="M5.21 1.314L3.79 2.723l5.302 5.353-5.303 5.354 1.422 1.408 6.697-6.762z"
@@ -244,7 +244,7 @@ const CollapsibleContainer = ({
           <span className="col-start-2 p-4">{title}</span>
         </summary>
 
-        <div className={'container-wrapper !border-stone-500 !m-0'}>
+        <div className={'container-wrapper !m-0 !border-stone-500'}>
           <div className={'container-label'}>{label}</div>
           <div className={'container-content border-t'}>{children}</div>
         </div>

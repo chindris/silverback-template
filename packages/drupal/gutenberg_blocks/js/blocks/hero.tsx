@@ -1,5 +1,4 @@
 import {
-  // @ts-ignore
   __experimentalLinkControl as LinkControl,
   InnerBlocks,
   InspectorControls,
@@ -151,7 +150,6 @@ registerBlockType<{
                   tagName="span"
                   value={props.attributes.headline}
                   allowedFormats={[]}
-                  // @ts-ignore
                   disableLineBreaks={true}
                   placeholder={__('Headline')}
                   keepPlaceholderOnFocus={true}
@@ -167,7 +165,6 @@ registerBlockType<{
                 tagName="p"
                 value={props.attributes.lead}
                 allowedFormats={[]}
-                // @ts-ignore
                 disableLineBreaks={true}
                 placeholder={__('Lead text')}
                 keepPlaceholderOnFocus={true}
@@ -186,7 +183,6 @@ registerBlockType<{
                     multiline={false}
                     value={props.attributes.ctaText}
                     allowedFormats={[]}
-                    // @ts-ignore
                     disableLineBreaks={true}
                     placeholder={__('CTA text')}
                     keepPlaceholderOnFocus={true}
