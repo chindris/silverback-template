@@ -66,8 +66,8 @@ registerBlockType<{
               });
             }}
           />
-          <div className="flex not-prose items-center flex-wrap">
-            <div className="mr-3 quote-image">
+          <div className="not-prose flex flex-wrap items-center">
+            <div className="quote-image mr-3">
               <DrupalMediaEntity
                 attributes={{
                   ...props.attributes,
@@ -97,7 +97,7 @@ registerBlockType<{
             <span className="ml-3 text-base">/</span>
             <RichText
               identifier="role"
-              className="mt-0.5 not-italic text-gray-500 text-sm ml-3"
+              className="ml-3 mt-0.5 text-sm not-italic text-gray-500"
               value={props.attributes.role}
               allowedFormats={[]}
               disableLineBreaks={false}

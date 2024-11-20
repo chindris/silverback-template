@@ -50,12 +50,12 @@ export const buildMessages = (
       {messages.map((message, index) => (
         <div
           key={index}
-          className="flex items-center p-4 my-4 text-blue-800 border-t-4 border-blue-300 bg-blue-50"
+          className="my-4 flex items-center border-t-4 border-blue-300 bg-blue-50 p-4 text-blue-800"
           role="alert"
           aria-live="polite"
         >
           <svg
-            className="mr-3 shrink-0 size-4"
+            className="mr-3 size-4 shrink-0"
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             fill="currentColor"
@@ -64,7 +64,7 @@ export const buildMessages = (
             <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
           </svg>
           <span className="sr-only">Info</span>
-          <div className="text-sm font-medium prose-a:font-semibold prose-a:underline">
+          <div className="prose-a:font-semibold prose-a:underline text-sm font-medium">
             {typeof message === 'string' ? (
               <Html
                 key={index}
@@ -101,7 +101,7 @@ export const buildMessages = (
           {handleRemoveMessage && (
             <button
               type="button"
-              className="ms-auto -m-1.5 bg-blue-50 text-blue-500 rounded-lg focus:ring-2 focus:ring-blue-400 p-1.5 hover:bg-blue-200 inline-flex items-center justify-center size-8"
+              className="-m-1.5 ms-auto inline-flex size-8 items-center justify-center rounded-lg bg-blue-50 p-1.5 text-blue-500 hover:bg-blue-200 focus:ring-2 focus:ring-blue-400"
               data-dismiss-target={`#alert-${index + 1}`}
               onClick={() => handleRemoveMessage(index)}
               aria-label={`Close message ${index + 1}`}

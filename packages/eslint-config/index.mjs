@@ -88,9 +88,7 @@ export const frontend = tseslint.config(
       ],
       'formatjs/enforce-placeholders': 'error',
       'formatjs/no-camel-case': 'error',
-      // TODO: `[0]` turns the rule off. We need to make it either a warning or
-      //  an error. Or turn it off with a proper "off".
-      'tailwindcss/classnames-order': [0],
+      'tailwindcss/classnames-order': 'error',
     },
   },
 );

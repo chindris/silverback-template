@@ -33,7 +33,7 @@ export function SearchForm() {
             navigate(location, { ...values, page: 1 });
           })}
         >
-          <div className="mr-2 mb-2 w-full sm:max-w-xs">
+          <div className="mb-2 mr-2 w-full sm:max-w-xs">
             <label htmlFor="keyword" className="sr-only">
               {intl.formatMessage({
                 defaultMessage: 'Keyword',
@@ -42,7 +42,7 @@ export function SearchForm() {
             </label>
             <input
               {...register('keyword')}
-              className="block p-3 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 shadow-sm focus-within:border-gray-300 focus:ring-0"
+              className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-3 text-sm text-gray-900 shadow-sm focus-within:border-gray-300 focus:ring-0"
               placeholder={intl.formatMessage({
                 defaultMessage: 'Keyword',
                 id: 'fe0rMF',
@@ -51,7 +51,7 @@ export function SearchForm() {
           </div>
           <button
             type="submit"
-            className="mb-2 py-3 px-5 text-sm font-medium text-center text-white rounded-lg bg-indigo-600 sm:w-fit hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:bg-indigo-600 dark:hover:bg-indigo-600 dark:focus:ring-indigo-600"
+            className="mb-2 rounded-lg bg-indigo-600 px-5 py-3 text-center text-sm font-medium text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sm:w-fit dark:bg-indigo-600 dark:hover:bg-indigo-600 dark:focus:ring-indigo-600"
           >
             {intl.formatMessage({ defaultMessage: 'Search', id: 'xmcVZ0' })}
           </button>

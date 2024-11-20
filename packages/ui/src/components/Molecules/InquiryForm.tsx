@@ -68,7 +68,7 @@ export function InquiryForm() {
               })}
             />
           </div>
-          <div className="w-full sm:max-w-sm pt-2">
+          <div className="w-full pt-2 sm:max-w-sm">
             <label htmlFor="email" className="sr-only">
               {intl.formatMessage({
                 defaultMessage: 'Email',
@@ -84,7 +84,7 @@ export function InquiryForm() {
               })}
             />
           </div>
-          <div className="w-full sm:max-w-sm pt-2">
+          <div className="w-full pt-2 sm:max-w-sm">
             <label htmlFor="subject" className="sr-only">
               {intl.formatMessage({
                 defaultMessage: 'Subject',
@@ -100,7 +100,7 @@ export function InquiryForm() {
               })}
             />
           </div>
-          <div className="w-full sm:max-w-sm pt-2">
+          <div className="w-full pt-2 sm:max-w-sm">
             <label htmlFor="question" className="sr-only">
               {intl.formatMessage({
                 defaultMessage: 'Message',
