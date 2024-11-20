@@ -36,7 +36,7 @@ export function LanguageSwitcher() {
           <React.Fragment key={currentLocale}>
             <MenuButton
               className={clsx(
-                'inline-flex justify-center w-full rounded-md bg-white text-sm font-medium',
+                'inline-flex w-full justify-center rounded-md bg-white text-sm font-medium',
                 {
                   'hover:text-blue-600': isMultiLingual,
                   'cursor-not-allowed opacity-70': !isMultiLingual,
@@ -45,7 +45,7 @@ export function LanguageSwitcher() {
               disabled={!isMultiLingual}
             >
               {getLanguageName(currentLocale ?? 'en')}
-              <ChevronDownIcon className="ml-1 h-5 w-5" aria-hidden="true" />
+              <ChevronDownIcon className="ml-1 size-5" aria-hidden="true" />
             </MenuButton>
           </React.Fragment>
         </div>
@@ -59,7 +59,7 @@ export function LanguageSwitcher() {
           leaveFrom="opacity-100 translate-y-0"
           leaveTo="opacity-0 translate-y-1"
         >
-          <MenuItems className="origin-top-right absolute z-50 right-0 mt-3 w-48 rounded bg-white shadow-md ring-1 ring-gray-100">
+          <MenuItems className="absolute right-0 z-50 mt-3 w-48 origin-top-right rounded bg-white shadow-md ring-1 ring-gray-100">
             <div className="py-1">
               {Object.values(Locale).map((locale) => (
                 <React.Fragment key={locale}>

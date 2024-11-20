@@ -32,17 +32,20 @@
     "start-server-and-test": "^2.0.3"
   },
   "devDependencies": {
+    "@custom/eslint-config": "workspace:*",
     "@netlify/edge-functions": "^2.3.1",
     "@netlify/functions": "^2.6.0",
     "@testing-library/react": "^14.1.2",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@types/serve-static": "^1.15.5",
+    "eslint": "9.14.0",
     "happy-dom": "^12.10.3",
+    "typescript": "^5.3.3",
     "vitest": "^1.1.1"
   },
   "scripts": {
-    "test:static": "tsc --noEmit && eslint '**/*.{ts,tsx,js,jsx}' --ignore-path='./.gitignore'",
+    "test:static": "tsc --noEmit && eslint . --quiet",
     "full-rebuild": "pnpm clean && pnpm build:gatsby",
     "start:drupal": "pnpm run --filter @custom/cms start >> /tmp/cms.log 2>&1",
     "build:drupal": "CLOUDINARY_CLOUDNAME=test pnpm start-test start:drupal 8888 build:gatsby",

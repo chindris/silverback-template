@@ -80,7 +80,6 @@ registerBlockType<{
               tagName={headingLevel as keyof HTMLElementTagNameMap}
               value={attributes.title}
               allowedFormats={[]}
-              // @ts-ignore
               disableLineBreaks={true}
               placeholder={__('Title')}
               keepPlaceholderOnFocus={true}

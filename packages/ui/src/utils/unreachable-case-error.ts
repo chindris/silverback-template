@@ -3,6 +3,7 @@ export class UnreachableCaseError extends Error {
     let serialized;
     try {
       serialized = JSON.stringify(value);
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (e) {
       serialized = `${value}`;
     }

@@ -68,7 +68,7 @@ export function Preview() {
     <>
       {error ? (
         <div className="flex items-center justify-center">
-          <div className="my-8 px-3 py-1 text-xs font-medium leading-none text-center text-red-500 bg-red-100 rounded-full">
+          <div className="my-8 rounded-full bg-red-100 px-3 py-1 text-center text-xs font-medium leading-none text-red-500">
             {error}
           </div>
         </div>
