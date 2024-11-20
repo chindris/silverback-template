@@ -53,6 +53,7 @@ const responsiveImage: GraphQLFieldResolver<
 
 export async function query<TOperation extends AnyOperationId>(
   operation: TOperation,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   rootValue: any,
   variables: OperationVariables<TOperation> = {},
   getAssetUrl: (path: string) => string,
@@ -86,6 +87,7 @@ export async function query<TOperation extends AnyOperationId>(
 
 export function useQuery<TOperation extends AnyOperationId>(
   operation: TOperation,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   rootValue: any,
   variables: OperationVariables<TOperation> = {},
   getAssetUrl: (path: string) => string,
@@ -116,6 +118,7 @@ export type useQueryType = typeof useQuery;
 
 export function createPreview<TOperation extends AnyOperationId>(
   query: TOperation,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   schema: ZodType<any, ZodTypeDef, unknown>,
   Component: React.FC<{
     preview: Exclude<OperationResult<TOperation>['preview'], undefined>;

@@ -19,6 +19,10 @@ import './blocks/info-grid-item';
 import './blocks/teaser-list';
 import './blocks/teaser-item';
 
+import { ComponentType } from 'react';
+
+/* eslint-disable */
+
 declare global {
   const Drupal: {
     behaviors: any;
@@ -66,4 +70,14 @@ declare global {
 
   const jQuery: any;
   const once: any;
+}
+
+// Fix Gutenberg types.
+declare module '@wordpress/block-editor' {
+  namespace RichText {
+    interface Props<T extends keyof HTMLElementTagNameMap> {
+      disableLineBreaks?: boolean;
+    }
+  }
+  const __experimentalLinkControl: ComponentType<any>;
 }

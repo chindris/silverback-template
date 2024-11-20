@@ -57,7 +57,6 @@ registerBlockType<{
             identifier="quote"
             value={props.attributes.quote}
             allowedFormats={['core/bold']}
-            // @ts-ignore
             disableLineBreaks={false}
             placeholder={__('Quote')}
             keepPlaceholderOnFocus={false}
@@ -88,7 +87,6 @@ registerBlockType<{
               identifier="author"
               value={props.attributes.author}
               allowedFormats={[]}
-              // @ts-ignore
               disableLineBreaks={false}
               placeholder={__('Author')}
               keepPlaceholderOnFocus={false}
@@ -102,7 +100,6 @@ registerBlockType<{
               className="mt-0.5 not-italic text-gray-500 text-sm ml-3"
               value={props.attributes.role}
               allowedFormats={[]}
-              // @ts-ignore
               disableLineBreaks={false}
               placeholder={__('Role')}
               keepPlaceholderOnFocus={false}

@@ -12,7 +12,7 @@ const formValueSchema = z.object({
 export function useSearchParameters() {
   const [location] = useLocation();
   return formValueSchema.parse(
-    Object.fromEntries(location.searchParams.entries() ?? ([] as any)),
+    Object.fromEntries(location.searchParams.entries() ?? []),
   );
 }
 

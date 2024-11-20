@@ -1,5 +1,4 @@
 import {
-  // @ts-ignore
   __experimentalLinkControl as LinkControl,
   InnerBlocks,
   InspectorControls,
@@ -86,7 +85,6 @@ registerBlockType<{
                 tagName="div"
                 value={props.attributes.title}
                 allowedFormats={[]}
-                // @ts-ignore
                 disableLineBreaks={true}
                 placeholder={__('Title')}
                 keepPlaceholderOnFocus={true}
@@ -102,7 +100,6 @@ registerBlockType<{
                 multiline={false}
                 value={props.attributes.ctaText}
                 allowedFormats={[]}
-                // @ts-ignore
                 disableLineBreaks={true}
                 placeholder={__('CTA text')}
                 keepPlaceholderOnFocus={true}

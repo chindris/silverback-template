@@ -21,7 +21,7 @@ export enum Icons {
 
 // Single icon type.
 export type Icon = {
-  label: any;
+  label: string;
   value: string;
 };
 

@@ -1,6 +1,5 @@
 import clsx from 'clsx';
 import {
-  // @ts-ignore
   __experimentalLinkControl as LinkControl,
   InspectorControls,
   RichText,
@@ -85,7 +84,6 @@ registerBlockType<{
             tagName="span"
             value={props.attributes.text}
             allowedFormats={[]}
-            // @ts-ignore
             disableLineBreaks={true}
             placeholder={__('Link text')}
             keepPlaceholderOnFocus={true}

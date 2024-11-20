@@ -16,9 +16,9 @@ export function BreadCrumbs() {
   const [toggleMoreBreadcrumbs, setToggleMoreBreadcrumbs] = useState(false);
 
   useEffect(() => {
-    breadcrumbs.length > 5 &&
-      toggleMoreBreadcrumbs === false &&
+    if (breadcrumbs.length > 5 && toggleMoreBreadcrumbs === false) {
       setHideInnerBreadcrumbs(true);
+    }
   }, [hideInnerBreadcrumbs, breadcrumbs, toggleMoreBreadcrumbs]);
 
   if (!breadcrumbs.length) {
@@ -40,7 +40,7 @@ export function BreadCrumbs() {
                   <div aria-hidden="true">
                     <ChevronRightIcon
                       className={
-                        'hidden xl:flex rotate-180 xl:rotate-0 w-4 h-4 text-gray-400 mr-4'
+                        'hidden xl:flex rotate-180 xl:rotate-0 size-4 text-gray-400 mr-4'
                       }
                     />
                   </div>
@@ -76,7 +76,7 @@ export function BreadCrumbs() {
                   >
                     <ChevronRightIcon
                       className={
-                        'rotate-180 xl:rotate-0 w-4 h-4 text-gray-400 mr-4'
+                        'rotate-180 xl:rotate-0 size-4 text-gray-400 mr-4'
                       }
                     />
                   </div>
@@ -98,7 +98,7 @@ export function BreadCrumbs() {
                 >
                   {target === '/' && (
                     <svg
-                      className="w-4 h-4 mr-4"
+                      className="size-4 mr-4"
                       aria-hidden="true"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="currentColor"

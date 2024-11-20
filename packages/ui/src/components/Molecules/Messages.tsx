@@ -20,7 +20,9 @@ export function Messages(props: {
 
   useEffect(() => {
     setDisplayMessages(props.messages);
-    props.messageComponents && setMessageComponents(props.messageComponents);
+    if (props.messageComponents) {
+      setMessageComponents(props.messageComponents);
+    }
   }, [props.messages]);
 
   const handleRemoveMessage = (index: number) => {
@@ -53,7 +55,7 @@ export const buildMessages = (
           aria-live="polite"
         >
           <svg
-            className="mr-3 shrink-0 w-4 h-4"
+            className="mr-3 shrink-0 size-4"
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             fill="currentColor"
@@ -99,14 +101,14 @@ export const buildMessages = (
           {handleRemoveMessage && (
             <button
               type="button"
-              className="ms-auto -m-1.5 bg-blue-50 text-blue-500 rounded-lg focus:ring-2 focus:ring-blue-400 p-1.5 hover:bg-blue-200 inline-flex items-center justify-center h-8 w-8"
+              className="ms-auto -m-1.5 bg-blue-50 text-blue-500 rounded-lg focus:ring-2 focus:ring-blue-400 p-1.5 hover:bg-blue-200 inline-flex items-center justify-center size-8"
               data-dismiss-target={`#alert-${index + 1}`}
               onClick={() => handleRemoveMessage(index)}
               aria-label={`Close message ${index + 1}`}
             >
               <span className="sr-only">Close</span>
               <svg
-                className="w-3 h-3"
+                className="size-3"
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -144,6 +146,7 @@ export const readMessages = (): Array<string> => {
       ) {
         return messages;
       }
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (e) {
       return [];
     }

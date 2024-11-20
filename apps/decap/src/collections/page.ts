@@ -200,6 +200,7 @@ export const getPages: SilverbackSource<DecapPageSource> = () => {
     .forEach((file) => {
       const content = yaml.parse(fs.readFileSync(`${dir}/${file}`, 'utf-8'));
       const id = Object.values(content)
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         .map((page: any) => page.id)
         .filter((id) => !!id)
         .pop();

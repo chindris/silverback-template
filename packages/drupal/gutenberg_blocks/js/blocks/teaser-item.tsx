@@ -1,7 +1,4 @@
-import {
-  // @ts-ignore
-  __experimentalLinkControl as LinkControl,
-} from 'wordpress__block-editor';
+import { __experimentalLinkControl as LinkControl } from 'wordpress__block-editor';
 import { registerBlockType } from 'wordpress__blocks';
 
 registerBlockType<{

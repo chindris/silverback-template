@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import { ComponentType } from 'react';
 import { InspectorControls } from 'wordpress__block-editor';
 import { PanelBody, SelectControl } from 'wordpress__components';
 import { createHigherOrderComponent } from 'wordpress__compose';
@@ -9,7 +10,7 @@ const { t: __ } = Drupal;
 addFilter(
   'blocks.registerBlockType',
   'custom/list',
-  (settings: { name: string; attributes: any }) => {
+  (settings: { name: string; attributes: object }) => {
     if (settings.name === 'core/list') {
       settings.attributes = Object.assign(settings.attributes, {
         customListStyle: {
@@ -22,7 +23,7 @@ addFilter(
   },
 );
 
-addFilter<any>(
+addFilter<ComponentType>(
   'editor.BlockEdit',
   'custom/list',
   createHigherOrderComponent(
@@ -31,7 +32,7 @@ addFilter<any>(
       const { name, attributes, setAttributes, isSelected } = props;
       const { customListStyle, ordered } = attributes;
 
-      if (!customListStyle === undefined) {
+      if (customListStyle === undefined) {
         setAttributes({ customListStyle: '' });
       }
 
@@ -65,7 +66,7 @@ addFilter<any>(
   ),
 );
 
-addFilter<any>(
+addFilter<ComponentType>(
   'editor.BlockListBlock',
   'custom/list',
   createHigherOrderComponent(
@@ -90,7 +91,14 @@ addFilter<any>(
 addFilter(
   'blocks.getSaveContent.extraProps',
   'custom/list',
-  (props: any, blockType: { name: string }, attributes: any) => {
+  (
+    props: { className: string },
+    blockType: { name: string },
+    attributes: {
+      customListStyle: string;
+      ordered: boolean;
+    },
+  ) => {
     if (blockType.name === 'core/list') {
       const { customListStyle, ordered } = attributes;
       if (!ordered && customListStyle) {

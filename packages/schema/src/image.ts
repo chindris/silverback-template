@@ -10,7 +10,7 @@ import { lookup } from 'mime-types';
 
 const AREA_FALLBACK = 'attention';
 
-export const imageProps: GraphQLFieldResolver<string, any> = (source) => {
+export const imageProps: GraphQLFieldResolver<string, unknown> = (source) => {
   // If it's a Decap image, process it.
   // Otherwise, it comes from Drupal and
   // already has all necessary props.
@@ -47,6 +47,7 @@ export const imageProps: GraphQLFieldResolver<string, any> = (source) => {
         }
         return JSON.stringify(decoded);
       }
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       return source;
     }
@@ -104,11 +105,13 @@ function isValidUrl(url: string) {
   try {
     new URL(url);
     return true;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (e) {
     return false;
   }
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const responsiveImage: GraphQLFieldResolver<string, any> = async (
   originalImage,
   args,
@@ -147,7 +150,7 @@ export const responsiveImage: GraphQLFieldResolver<string, any> = async (
     const height = args.height || undefined;
     const breakpoints =
       args.sizes && args.sizes.length > 0
-        ? args.sizes.map((item: any) => {
+        ? args.sizes.map((item: unknown) => {
             // If the sizes array contains tuples, then just return the first item
             // to be added to the breakpoints elements.
             if (Array.isArray(item)) {
