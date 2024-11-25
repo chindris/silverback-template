@@ -10,4 +10,4 @@ dts
 apps/website/.env
 .DS_Store
 .turbo
-_local
+/_local
