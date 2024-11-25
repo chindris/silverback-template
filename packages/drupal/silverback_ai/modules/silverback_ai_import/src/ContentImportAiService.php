@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Drupal\silverback_ai_import;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
-use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Logger\LoggerChannelFactoryInterface;
@@ -35,112 +34,25 @@ final class ContentImportAiService {
   ) {}
 
   /**
-   * @todo Import content
-   */
-  public function import(FileInterface $file, EntityInterface $entity) {
-    dpm(__METHOD__);
-    // @todo Add DI
-    $uri = $file->getFileUri();
-    $stream_wrapper_manager = \Drupal::service('stream_wrapper_manager')->getViaUri($uri);
-    $file_path = $stream_wrapper_manager->realpath();
-
-    $client = \Drupal::httpClient();
-    try {
-      $response = $client->request('GET', 'http://localhost:3000/convert?path=' . $file_path, [
-        'headers' => [
-          'Accept' => 'application/json',
-        ],
-      ]);
-
-      $body = $response->getBody()->getContents();
-      $response = json_decode($body);
-      $result = [];
-      foreach ($response->content as $index => $child) {
-        $schema = NULL;
-        $template = NULL;
-
-        $type = $child->type;
-        $ast = json_encode($child);
-
-        // @todo Modify these according to type
-        if ($type == 'Header') {
-          $template = <<<EOD
-          <!-- wp:custom/heading {"text": headingText} -->
-          <headerHtmlTag class="wp-block-custom-heading">headingText</headerHtmlTag>
-          <!-- /wp:custom/heading -->
-          EOD;
-          $schema = json_encode([
-            'headingText' => 'string',
-            'headerHtmlTag' => 'string',
-          ]);
-        }
-
-        if ($type == 'Paragraph') {
-          $template = <<<EOD
-          <!-- wp:paragraph -->
-          <p>paragraphText</p>
-          <!-- /wp:paragraph -->
-          EOD;
-          $schema = json_encode([
-            'paragraphText' => 'html',
-          ]);
-        }
-
-        if ($type == 'List') {
-          $template = <<<EOD
-          <!-- wp:list -->
-          listItems
-          <!-- /wp:list -->
-          EOD;
-          $schema = json_encode([
-            'listItems' => 'html',
-          ]);
-        }
-
-        if ($type == 'Table') {
-          $template = <<<EOD
-          <!-- wp:table -->
-          <figure class="wp-block-table">htmlTable</figure>
-          <!-- /wp:table -->
-          EOD;
-          $schema = json_encode([
-            'htmlTable' => 'html',
-          ]);
-        }
-
-        // @todo Also this should be a batch process
-        if (!empty($schema) && !empty($template)) {
-          if ($index == 3) {
-            $data = $this->sendOpenAiRequest($ast, $type, $template, $schema);
-            if (isset($data['choices'][0]['message']['content'])) {
-              $result[] = $data['choices'][0]['message']['content'];
-            }
-          }
-        }
-      }//end for
-      dpm($result);
-
-    }
-    catch (RequestException $e) {
-      // Handle any errors.
-      \Drupal::logger('silverback_ai_import')->error($e->getMessage());
-    }
-
-  }
-
-  /**
    *
    */
   public function processChunk($chunk) {
+    // Convert to array.
+    $chunk = json_decode(json_encode($chunk), TRUE);
     $result = NULL;
     $schema = NULL;
     $template = NULL;
 
-    $type = $chunk->type;
+    $type = $chunk['type'];
     $ast = json_encode($chunk);
 
     // @todo Modify these according to type
     if ($type == 'Header') {
+      $plugin = $this->getPlugin($chunk);
+      if ($plugin) {
+        return $plugin->convert($chunk);
+      }
+
       $template = <<<EOD
       <!-- wp:custom/heading {"level":headingLevel,"text":"headingText"} -->
       <headerHtmlTag class="wp-block-custom-heading">headingText</headerHtmlTag>
@@ -163,7 +75,7 @@ final class ContentImportAiService {
         'paragraphText' => 'html',
       ]);
 
-      $html = $chunk->htmlValue;
+      $html = $chunk['htmlValue'];
       $return = <<<EOD
       <!-- wp:paragraph -->
       <p>$html</p>
@@ -183,7 +95,7 @@ final class ContentImportAiService {
         'listItems' => 'html',
       ]);
 
-      $html = $chunk->htmlValue;
+      $html = $chunk['htmlValue'];
       $return = <<<EOD
       <!-- wp:list -->
       $html
@@ -202,7 +114,7 @@ final class ContentImportAiService {
         'htmlTable' => 'html',
       ]);
 
-      $html = $chunk->htmlValue;
+      $html = $chunk['htmlValue'];
       $return = <<<EOD
       <!-- wp:table -->
       <figure class="wp-block-table">$html</figure>
@@ -212,7 +124,7 @@ final class ContentImportAiService {
     }
 
     if ($type == 'Image') {
-      $src = $chunk->src;
+      $src = $chunk['src'];
       $media = $this->createMediaImageFromPath($src);
       if ($media) {
         $mid = $media->id();
@@ -255,6 +167,7 @@ final class ContentImportAiService {
     $stream_wrapper_manager = \Drupal::service('stream_wrapper_manager')->getViaUri($uri);
     $file_path = $stream_wrapper_manager->realpath();
 
+    // @todo Use some configuration values here for the service
     $client = \Drupal::httpClient();
     try {
       $response = $client->request('GET', 'http://localhost:3000/convert?path=' . $file_path, [
@@ -467,13 +380,12 @@ final class ContentImportAiService {
         'status' => 1,
         'field_media_image' => [
           'target_id' => $file->id(),
-          // We might want to improve alt text generation.
+          // @todo Improve alt text generation.
           'alt' => $file->getFilename(),
           'title' => $file->getFilename(),
         ],
       ]);
 
-      // Save the media entity.
       $media->save();
       return $media;
     }
@@ -481,6 +393,23 @@ final class ContentImportAiService {
       \Drupal::logger('image_import')->error('Error creating media entity: @error', ['@error' => $e->getMessage()]);
       return NULL;
     }
+  }
+
+  /**
+   *
+   */
+  private function getPlugin($chunk) {
+    $plugin = NULL;
+    $manager = \Drupal::service('plugin.manager.ai.import');
+    $definitions = $manager->getDefinitions();
+    // @todo Order by weight.
+    foreach ($definitions as $definition) {
+      $plugin = $manager->createInstance($definition['id']);
+      if ($plugin->matches($chunk)) {
+        break;
+      }
+    }
+    return $plugin;
   }
 
 }

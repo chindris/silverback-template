@@ -113,13 +113,17 @@ class ContentImportBatch {
     $nid = $results['nid'];
     if (!empty($nid)) {
       $node = Node::load($nid);
+
+      // @todo Possible we need more process here.
+      $results['content'] = array_map(function ($item) {
+        return str_replace('<p></p>', '', $item);
+      }, $results['content']);
+
       // @todo Improve that to respect also templates
       $implode = implode(PHP_EOL, $results['content']);
       $content = <<<EOD
       <!-- wp:custom/content -->
-
       $implode
-
       <!-- /wp:custom/content -->
       EOD;
 

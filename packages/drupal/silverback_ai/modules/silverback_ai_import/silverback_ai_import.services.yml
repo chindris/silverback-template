@@ -6,3 +6,6 @@ services:
     class: 'Drupal\silverback_ai_import\ContentImportBatch'
     arguments:
       - '@logger.factory'
+  plugin.manager.ai.import:
+    class: Drupal\silverback_ai_import\AiImportPluginManager
+    arguments: ['@container.namespaces', '@cache.default', '@module_handler']

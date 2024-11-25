@@ -6,8 +6,6 @@
  */
 
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\gutenberg\Parser\BlockParser;
-use Drupal\node\Entity\Node;
 
 /**
  * {@inheritdoc}
@@ -15,14 +13,7 @@ use Drupal\node\Entity\Node;
 function silverback_ai_import_form_alter(&$form, &$form_state, $form_id) {
 
   if ($form_id == 'views_exposed_form') {
-    $file = \Drupal::entityTypeManager()->getStorage('file')->load(110);
-    $entity = Node::load(95);
-    $block_parser = new BlockParser();
-    $blocks = $block_parser->parse($entity->body->value);
-
-    // $service = \Drupal::service('silverback_ai_import.content');
-    // $service->import($file, $entity);
-    // $ast = $service->getAstFromFilePath($file);
+    // @todo
   }
 
 }
