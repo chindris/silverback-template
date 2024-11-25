@@ -9,6 +9,7 @@ import promise from 'eslint-plugin-promise';
 import react from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
+import storybook from 'eslint-plugin-storybook';
 import tailwindcss from 'eslint-plugin-tailwindcss';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
@@ -50,6 +51,7 @@ export const base = tseslint.config(
 
 export const frontend = tseslint.config(
   ...base,
+  storybook.configs['flat/recommended'],
   tailwindcss.configs['flat/recommended'],
   {
     ...react.configs.flat.recommended,
