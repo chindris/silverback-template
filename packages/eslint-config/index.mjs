@@ -2,16 +2,16 @@
 
 import eslint from '@eslint/js';
 import prettier from 'eslint-config-prettier';
+import formatjs from 'eslint-plugin-formatjs';
 import importPlugin from 'eslint-plugin-import';
 import noOnlyTests from 'eslint-plugin-no-only-tests';
 import promise from 'eslint-plugin-promise';
 import react from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
+import tailwindcss from 'eslint-plugin-tailwindcss';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
-import formatjs from 'eslint-plugin-formatjs';
-import tailwindcss from 'eslint-plugin-tailwindcss';
 
 export { defineFlatConfig as defineConfig } from 'eslint-define-config';
 
