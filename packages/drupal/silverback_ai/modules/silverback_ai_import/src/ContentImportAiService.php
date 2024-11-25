@@ -44,7 +44,18 @@ final class ContentImportAiService {
   }
 
   /**
+   * Retrieves the AST (Abstract Syntax Tree) from a given file path using an HTTP service.
    *
+   * @param \Drupal\file\FileInterface $file
+   *   The file for which to generate the AST.
+   *
+   * @return mixed
+   *   The decoded JSON response containing the AST from the external service, or NULL if the request fails.
+   *
+   * @throws \GuzzleHttp\Exception\RequestException
+   *   Thrown when the HTTP request fails, though it is caught and logged within this method.
+   *
+   * @todo Implement configuration handling for service endpoints or client headers.
    */
   public function getAstFromFilePath(FileInterface $file) {
     $uri = $file->getFileUri();
@@ -207,9 +218,23 @@ final class ContentImportAiService {
   }
 
   /**
+   * Retrieves a plugin instance that matches the specified chunk.
    *
+   * This method creates an instance of the default AI plugin and then
+   * iterates through all available plugin definitions to find a plugin
+   * that matches the provided chunk. The first matching plugin instance
+   * will be selected and returned.
+   *
+   * @todo Order the plugin definitions by weight before attempting to find a match.
+   *
+   * @param mixed $chunk
+   *   The input data that will be used to match against plugin definitions.
+   *
+   * @return object
+   *   The plugin instance that matches the provided chunk or the default
+   *   plugin if no matches are found.   *   *   *   *   *   *   *   *   *   *   *   *   *
    */
-  private function getPlugin($chunk) {
+  public function getPlugin($chunk) {
     $selected_plugin = $this->pluginManager->createInstance('ai_default');
     $definitions = $this->pluginManager->getDefinitions();
     // @todo Order by weight.
