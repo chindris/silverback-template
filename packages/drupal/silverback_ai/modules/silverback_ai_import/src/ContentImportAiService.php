@@ -31,6 +31,7 @@ final class ContentImportAiService {
     private readonly LoggerChannelFactoryInterface $loggerFactory,
     private readonly ConfigFactoryInterface $configFactory,
     private readonly OpenAiHttpClient $silverbackAiOpenaiHttpClient,
+    private readonly AiImportPluginManager $pluginManager,
   ) {}
 
   /**
@@ -46,23 +47,11 @@ final class ContentImportAiService {
     $type = $chunk['type'];
     $ast = json_encode($chunk);
 
+    $plugin = $this->getPlugin($chunk);
+
     // @todo Modify these according to type
     if ($type == 'Header') {
-      $plugin = $this->getPlugin($chunk);
-      if ($plugin) {
-        return $plugin->convert($chunk);
-      }
-
-      $template = <<<EOD
-      <!-- wp:custom/heading {"level":headingLevel,"text":"headingText"} -->
-      <headerHtmlTag class="wp-block-custom-heading">headingText</headerHtmlTag>
-      <!-- /wp:custom/heading -->
-      EOD;
-      $schema = json_encode([
-        'headingText' => 'string',
-        'headingLevel' => 'number, 2 or 3 or 4. Any other number should be converted to 2.',
-        'headerHtmlTag' => 'h2 or h3 or h4. Any other header should be converted to h2.',
-      ]);
+      return $plugin->convert($chunk);
     }
 
     if ($type == 'Paragraph') {
@@ -399,17 +388,17 @@ final class ContentImportAiService {
    *
    */
   private function getPlugin($chunk) {
-    $plugin = NULL;
-    $manager = \Drupal::service('plugin.manager.ai.import');
-    $definitions = $manager->getDefinitions();
+    $selected_plugin = $this->pluginManager->createInstance('ai_default');
+    $definitions = $this->pluginManager->getDefinitions();
     // @todo Order by weight.
     foreach ($definitions as $definition) {
-      $plugin = $manager->createInstance($definition['id']);
+      $plugin = $this->pluginManager->createInstance($definition['id']);
       if ($plugin->matches($chunk)) {
+        $selected_plugin = $plugin;
         break;
       }
     }
-    return $plugin;
+    return $selected_plugin;
   }
 
 }

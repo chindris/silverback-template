@@ -6,15 +6,15 @@ use Drupal\Core\Plugin\PluginBase;
 use Drupal\silverback_ai_import\AiImportPluginManagerInterface;
 
 /**
- * Provides a markdown header to gutenberg block convert plugin.
+ * Provides a default gutenberg block converter plugin.
  *
  * @Plugin(
- *   id = "ai_header",
- *   label = @Translation("Markdown header convert plugin"),
+ *   id = "ai_default",
+ *   label = @Translation("Default convert plugin"),
  *   weight = 0,
  * )
  */
-class HeaderImportPlugin extends PluginBase implements AiImportPluginManagerInterface {
+class DefaultImportPlugin extends PluginBase implements AiImportPluginManagerInterface {
 
   /**
    * The schema to use.
@@ -52,19 +52,15 @@ class HeaderImportPlugin extends PluginBase implements AiImportPluginManagerInte
    * Get a description if the plugin.
    */
   public function description() {
-    return $this->t('Convert markdown headers to Gutenberg blocks.');
+    return $this->t('Default converter, just throws the html into Gutenberg blocks.');
   }
 
   /**
    * {@inheritDoc}
    */
   public function getSchema() {
-    // Actually we are only interest here in keys.
-    // Values can be descriptions to help the data extraction if using AI.
     return [
-      'headingText' => 'string',
-      'headingLevel' => 'number, 2 or 3 or 4. ',
-      'headerHtmlTag' => 'h2 or h3 or h4. Any other header should be converted to h2.',
+      'htmlValue' => 'string, html markup',
     ];
   }
 
@@ -73,9 +69,9 @@ class HeaderImportPlugin extends PluginBase implements AiImportPluginManagerInte
    */
   public function getTemplate() {
     return <<<EOD
-    <!-- wp:custom/heading {"level":headingLevel,"text":"headingText"} -->
-    <headerHtmlTag class="wp-block-custom-heading">headingText</headerHtmlTag>
-    <!-- /wp:custom/heading -->
+    <!-- wp:paragraph -->
+    htmlValue
+    <!-- /wp:paragraph -->
     EOD;
   }
 
@@ -83,7 +79,8 @@ class HeaderImportPlugin extends PluginBase implements AiImportPluginManagerInte
    * {@inheritDoc}
    */
   public function matches(array $chunk) {
-    return $chunk['type'] == 'Header';
+    // This should not much by default.
+    return FALSE;
   }
 
   /**
@@ -91,60 +88,8 @@ class HeaderImportPlugin extends PluginBase implements AiImportPluginManagerInte
    */
   public function convert(array $chunk) {
     // We are using some custom method here.
-    // @todo Add a validation method.
-    $data = $this->parseMarkdownHeader($chunk['raw']);
+    $data['htmlValue'] = $chunk['htmlValue'];
     return $this->generateBlock($data);
-  }
-
-  /**
-   * Parses a markdown header string and returns details about it.
-   *
-   * This method trims whitespace from the header string, matches a specific
-   * markdown heading pattern, determines the heading level based on the number
-   * of '#' characters, and generates the corresponding HTML tag for the header.
-   *
-   * The resulting heading level is constrained between 2 and 4 based on custom rules.
-   *
-   * @param string $header
-   *   The markdown header string to parse.
-   *
-   * @return array
-   *   An associative array.
-   *
-   * @throws \InvalidArgumentException if the header is not in a valid markdown format.
-   */
-  private function parseMarkdownHeader(string $header): array {
-    // Trim whitespace.
-    $header = trim($header);
-
-    // Match the heading pattern.
-    if (!preg_match('/^(#{1,6})\s+(.+)$/', $header, $matches)) {
-      throw new \InvalidArgumentException('Invalid markdown header format');
-    }
-
-    // Get the number of # symbols to determine heading level.
-    $level = strlen($matches[1]);
-
-    // Restrictions from the custom/header SLB block.
-    if ($level == 1) {
-      $level = 2;
-    }
-
-    if ($level > 4) {
-      $level = 4;
-    }
-
-    // Get the actual heading text.
-    $text = trim($matches[2]);
-
-    // Create the corresponding HTML tag.
-    $headerHtmlTag = 'h' . $level;
-
-    return [
-      'headingText' => $text,
-      'headingLevel' => $level,
-      'headerHtmlTag' => $headerHtmlTag,
-    ];
   }
 
   /**

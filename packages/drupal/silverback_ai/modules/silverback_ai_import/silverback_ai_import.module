@@ -13,7 +13,26 @@ use Drupal\Core\Form\FormStateInterface;
 function silverback_ai_import_form_alter(&$form, &$form_state, $form_id) {
 
   if ($form_id == 'views_exposed_form') {
-    // @todo
+    $file = \Drupal::entityTypeManager()->getStorage('file')->load(123);
+    // $entity = Node::load(96);
+    // $block_parser = new BlockParser();
+    // $blocks = $block_parser->parse($entity->body->value);
+    $service = \Drupal::service('silverback_ai_import.content');
+    // $service->import($file, $entity);
+    $ast = $service->getAstFromFilePath($file);
+    // Header example.
+    $chunk = reset($ast->content);
+    $chunk = json_decode(json_encode($chunk), TRUE);
+
+    $manager = \Drupal::service('plugin.manager.ai.import');
+    $definitions = $manager->getDefinitions();
+    foreach ($definitions as $definition) {
+      $plugin = $manager->createInstance($definition['id']);
+      // dpm($plugin->matches($chunk));
+    }
+    // $plugin = $manager->createInstance('ai_header', ['level' => 2]);
+    $plugin = $manager->createInstance('ai_header');
+    // dpm($plugin->convert($chunk));
   }
 
 }
