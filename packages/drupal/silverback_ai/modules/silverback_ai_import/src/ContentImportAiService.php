@@ -6,7 +6,6 @@ namespace Drupal\silverback_ai_import;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Session\AccountProxyInterface;
@@ -40,112 +39,8 @@ final class ContentImportAiService {
   public function processChunk($chunk) {
     // Convert to array.
     $chunk = json_decode(json_encode($chunk), TRUE);
-    $result = NULL;
-    $schema = NULL;
-    $template = NULL;
-
-    $type = $chunk['type'];
-    $ast = json_encode($chunk);
-
     $plugin = $this->getPlugin($chunk);
-
-    // @todo Modify these according to type
-    if ($type == 'Header') {
-      return $plugin->convert($chunk);
-    }
-
-    if ($type == 'Paragraph') {
-      $template = <<<EOD
-      <!-- wp:paragraph -->
-      <p>paragraphText</p>
-      <!-- /wp:paragraph -->
-      EOD;
-      $schema = json_encode([
-        'paragraphText' => 'html',
-      ]);
-
-      $html = $chunk['htmlValue'];
-      $return = <<<EOD
-      <!-- wp:paragraph -->
-      <p>$html</p>
-      <!-- /wp:paragraph -->
-      EOD;
-      return $return;
-
-    }
-
-    if ($type == 'List') {
-      $template = <<<EOD
-      <!-- wp:list -->
-      listItems
-      <!-- /wp:list -->
-      EOD;
-      $schema = json_encode([
-        'listItems' => 'html',
-      ]);
-
-      $html = $chunk['htmlValue'];
-      $return = <<<EOD
-      <!-- wp:list -->
-      $html
-      <!-- /wp:list -->
-      EOD;
-      return $return;
-    }
-
-    if ($type == 'Table') {
-      $template = <<<EOD
-      <!-- wp:table -->
-      <figure class="wp-block-table">htmlTable</figure>
-      <!-- /wp:table -->
-      EOD;
-      $schema = json_encode([
-        'htmlTable' => 'html',
-      ]);
-
-      $html = $chunk['htmlValue'];
-      $return = <<<EOD
-      <!-- wp:table -->
-      <figure class="wp-block-table">$html</figure>
-      <!-- /wp:table -->
-      EOD;
-      return $return;
-    }
-
-    if ($type == 'Image') {
-      $src = $chunk['src'];
-      $media = $this->createMediaImageFromPath($src);
-      if ($media) {
-        $mid = $media->id();
-        $return = <<<EOD
-        <!-- wp:custom/image-with-text {"mediaEntityIds":["$mid"]} -->
-        <!-- wp:paragraph -->
-        <p></p>
-        <!-- /wp:paragraph -->
-        <!-- /wp:custom/image-with-text -->
-        EOD;
-        return $return;
-      }
-
-      $return = <<<EOD
-      <!-- wp:custom/image-with-text {"mediaEntityIds":[]} -->
-      <!-- wp:paragraph -->
-      <p></p>
-      <!-- /wp:paragraph -->
-      <!-- /wp:custom/image-with-text -->
-      EOD;
-      return $return;
-
-    }
-
-    // @todo Also this should be a batch process
-    if (!empty($schema) && !empty($template)) {
-      $data = $this->sendOpenAiRequest($ast, $type, $template, $schema);
-      if (isset($data['choices'][0]['message']['content'])) {
-        $result = $data['choices'][0]['message']['content'];
-      }
-    }
-    return $result;
+    return $plugin->convert($chunk);
   }
 
   /**
@@ -309,79 +204,6 @@ final class ContentImportAiService {
 
     $responseBodyContents = $response->getBody()->getContents();
     return json_decode($responseBodyContents, TRUE, 512, JSON_THROW_ON_ERROR);
-  }
-
-  /**
-   * Creates a file entity and a media image entity from a given image path.
-   *
-   * @param string $image_path
-   *   The server path to the image file.
-   * @param string $media_bundle
-   *   The media bundle type (optional, defaults to 'image').
-   * @param int $user_id
-   *   The user ID to associate with the created entities (optional, defaults to current user).
-   *
-   * @return \Drupal\media\MediaInterface|null
-   *   The created media entity, or NULL if creation fails.
-   *
-   * @throws \Drupal\Core\Entity\EntityStorageException
-   */
-  public function createMediaImageFromPath($image_path, $media_bundle = 'image', $user_id = NULL) {
-    // Ensure the file exists.
-    if (!file_exists($image_path)) {
-      \Drupal::logger('image_import')->error('File does not exist: @path', ['@path' => $image_path]);
-      return NULL;
-    }
-
-    // Get the current user if no user ID is provided.
-    if ($user_id === NULL) {
-      $user_id = \Drupal::currentUser()->id();
-    }
-
-    // Prepare the file.
-    $file_uri = 'public://' . basename($image_path);
-
-    try {
-      // Create file entity.
-      $file = \Drupal::service('file.repository')->writeData(
-      file_get_contents($image_path),
-      $file_uri,
-      FileSystemInterface::EXISTS_REPLACE
-      );
-
-      // Set file status to permanent.
-      if ($file) {
-        $file->setPermanent();
-        $file->save();
-      }
-      else {
-        \Drupal::logger('image_import')->error('Failed to create file entity for: @path', ['@path' => $image_path]);
-        return NULL;
-      }
-
-      // Create media entity.
-      $media_storage = \Drupal::entityTypeManager()->getStorage('media');
-      /** @var  \Drupal\media\Entity\media $media */
-      $media = $media_storage->create([
-        'bundle' => $media_bundle,
-        'name' => $file->getFilename(),
-        'uid' => $user_id,
-        'status' => 1,
-        'field_media_image' => [
-          'target_id' => $file->id(),
-          // @todo Improve alt text generation.
-          'alt' => $file->getFilename(),
-          'title' => $file->getFilename(),
-        ],
-      ]);
-
-      $media->save();
-      return $media;
-    }
-    catch (\Exception $e) {
-      \Drupal::logger('image_import')->error('Error creating media entity: @error', ['@error' => $e->getMessage()]);
-      return NULL;
-    }
   }
 
   /**
