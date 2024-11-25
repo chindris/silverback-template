@@ -4,6 +4,9 @@
   "exports": {
     ".": "./index.mjs"
   },
+  "bin": {
+    "eslint": "./eslint"
+  },
   "scripts": {
     "test:static": "eslint . --quiet"
   },
