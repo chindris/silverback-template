@@ -8,20 +8,29 @@ import TurndownService from 'turndown';
 import { fileURLToPath } from 'url';
 
 // @todo Fix this to work locally and live
+const isLagoon = !!process.env.LAGOON;
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-let lagoon_dirname = __dirname;
-lagoon_dirname = '/app/web/sites/default/files/converted';
+const __dirname = isLagoon
+  ? '/app/web/sites/default/files/converted'
+  : path.dirname(__filename);
 
 async function extractMainContent(htmlString) {
-  // Create a new JSDOM instance and parse the HTML string
-  const dom = new JSDOM(htmlString);
+  const bodyRegex = /<body[^>]*>([\s\S]*?)<\/body>/i;
+  const match = htmlString.match(bodyRegex);
+  // Return the captured group (content between tags) or null if no match
+  const html = match ? match[1] : null;
 
-  // Extract the <main> element content
-  const mainElement = dom.window.document.querySelector('main');
-
-  // Return the inner HTML of the <main> tag, or an empty string if not found
-  return mainElement ? mainElement.innerHTML : '';
+  if (html) {
+    // Create a new JSDOM instance and parse the HTML string
+    const dom = new JSDOM(html);
+    // Extract the <main> element content
+    let mainElement = dom.window.document.querySelector('main');
+    if (!mainElement) {
+      mainElement = dom.window.document.querySelector('article');
+    }
+    // Return the inner HTML of the <main> tag, or an empty string if not found
+    return mainElement ? mainElement.innerHTML : '';
+  }
 }
 
 async function getImageExtension(buffer) {
@@ -73,7 +82,7 @@ export async function htmlToMarkdown(url) {
   const html = await extractMainContent(fullHtml);
   // Generate folder name based on HTML content
   const folderName = generateFolderName(html);
-  const outputDir = path.join(lagoon_dirname, folderName);
+  const outputDir = path.join(__dirname, folderName);
   const imagesDir = path.join(outputDir, 'images');
 
   await fs.ensureDir(outputDir);
