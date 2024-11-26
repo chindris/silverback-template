@@ -4,11 +4,14 @@ import imageType from 'image-type';
 import mammoth from 'mammoth';
 import path from 'path';
 import TurndownService from 'turndown';
-// import { fileURLToPath } from "url";
+import { fileURLToPath } from 'url';
 
-// const __filename = fileURLToPath(import.meta.url);
-// const __dirname = path.dirname(__filename);
-const lagoon_dirname = '/app/web/sites/default/files/converted';
+// @todo Fix this to work locally and live
+const isLagoon = !!process.env.LAGOON;
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = isLagoon
+  ? '/app/web/sites/default/files/converted'
+  : path.dirname(__filename);
 
 async function getImageExtension(buffer) {
   const type = await imageType(buffer);
@@ -28,7 +31,7 @@ export async function wordToMarkdown(filePath) {
 
   const folderName = generateFolderName(filePath);
   // const outputDir = path.join(__dirname, folderName);
-  const outputDir = path.join(lagoon_dirname, folderName);
+  const outputDir = path.join(__dirname, folderName);
   const imagesDir = path.join(outputDir, 'images');
 
   await fs.ensureDir(outputDir);

@@ -85,7 +85,6 @@ class ContentImportBatch {
     $processed = !empty($context['results']) ? count($context['results']) : $batch['count'];
     $service = \Drupal::service('silverback_ai_import.content');
     $content = $service->processChunk($batch['item']['chunk']);
-    // $content = '<!-- wp:paragraph -->xxx<!-- /wp:paragraph -->';
     \Drupal::logger('silverback_ai_import')->debug($content);
     $context['results']['content'][] = $content;
     $context['results']['nid'] = $batch['item']['nid'];
@@ -123,12 +122,20 @@ class ContentImportBatch {
       $implode = implode(PHP_EOL, $results['content']);
       $content = <<<EOD
       <!-- wp:custom/content -->
+
       $implode
+
       <!-- /wp:custom/content -->
       EOD;
 
-      $node->body->value = $content;
-      $node->save();
+      // @todo Surround with try catch here
+      try {
+        $node->body->value = $content;
+        $node->save();
+      }
+      catch (\Exception $e) {
+        // @todo
+      }
     }
 
     $messenger = \Drupal::messenger();

@@ -24,14 +24,14 @@ function silverback_ai_import_form_node_page_split_form_alter(&$form, FormStateI
     '#open' => TRUE,
     '#weight' => 99,
   ];
-  $form['import']['import_options'] = [
+  $form['import']['import_type'] = [
     '#type' => 'radios',
     '#title' => t('Import content from:'),
     '#options' => [
       'none' => t('Do not import any content'),
       'docx' => t('Microsoft Word file'),
       // 'pdf' => t("PDF file"),
-      // 'html' => t("Remote HTML page"),
+      'url' => t("Remote HTML page"),
     ],
     '#default_value' => 'none',
   ];
@@ -40,7 +40,7 @@ function silverback_ai_import_form_node_page_split_form_alter(&$form, FormStateI
     '#type' => 'container',
     '#states' => [
       'visible' => [
-        'input[name="import_options"]' => ['value' => 'docx'],
+        'input[name="import_type"]' => ['value' => 'docx'],
       ],
     ],
   ];
@@ -60,6 +60,21 @@ function silverback_ai_import_form_node_page_split_form_alter(&$form, FormStateI
     ],
   ];
 
+  $form['import']['container_url'] = [
+    '#type' => 'container',
+    '#states' => [
+      'visible' => [
+        'input[name="import_type"]' => ['value' => 'url'],
+      ],
+    ],
+  ];
+
+  $form['import']['container_url']['url_value'] = [
+    '#type' => 'url',
+    '#title' => t('URL'),
+    '#maxlength' => 1024,
+  ];
+
   $form['actions']['submit']['#submit'][] = '_silverback_ai_import_form_submit';
 
   // Better to have this unpublished originally, and then
@@ -75,10 +90,18 @@ function silverback_ai_import_form_node_page_split_form_alter(&$form, FormStateI
 function _silverback_ai_import_form_submit(array $form, FormStateInterface $form_state) {
   $entity = $form_state->getFormObject()->getEntity();
   $fid = reset($form_state->getValue('file'));
-  if ($fid) {
+  $url_value = $form_state->getValue('url_value');
+
+  $service = \Drupal::service('silverback_ai_import.content');
+  $content = \Drupal::service('silverback_ai_import.batch.import');
+  $type = $form_state->getValue('import_type');
+  if ($fid && $type == 'docx') {
     $file = \Drupal::entityTypeManager()->getStorage('file')->load($fid);
-    $service = \Drupal::service('silverback_ai_import.content');
     $ast = $service->getAstFromFilePath($file);
-    \Drupal::service('silverback_ai_import.batch.import')->create($ast->content, $entity);
+    $content->create($ast->content, $entity);
+  }
+  elseif (!empty($url_value) && $type == 'url') {
+    $ast = $service->getAstFromUrl($url_value);
+    $content->create($ast->content, $entity);
   }
 }
