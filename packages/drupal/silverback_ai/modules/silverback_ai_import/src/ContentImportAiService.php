@@ -62,10 +62,13 @@ final class ContentImportAiService {
     $stream_wrapper_manager = \Drupal::service('stream_wrapper_manager')->getViaUri($uri);
     $file_path = $stream_wrapper_manager->realpath();
 
-    // @todo Use some configuration values here for the service
+    // $config['silverback_ai_import.settings']['parse_doc_service_url'] = 'http://127.0.0.1:3000';
+    $parse_service_url = $this->configFactory->get('silverback_ai_import.settings')->get('parse_doc_service_url');
+
     $client = \Drupal::httpClient();
     try {
-      $response = $client->request('GET', 'http://localhost:3000/convert?path=' . $file_path, [
+      // @todo For now this is working only for docx files.
+      $response = $client->request('GET', "{$parse_service_url}/convert?path={$file_path}", [
         'headers' => [
           'Accept' => 'application/json',
         ],
@@ -81,7 +84,7 @@ final class ContentImportAiService {
   }
 
   /**
-   *
+   * {Helper method}
    */
   public function extractData(string $ast, string $schema) {
     // @todo Get some of these from settings
@@ -143,7 +146,7 @@ final class ContentImportAiService {
   }
 
   /**
-   *
+   * {Helper method}
    */
   public function sendOpenAiRequest(string $ast, string $type, string $template, string $schema) {
     // @todo Get some of these from settings
@@ -227,25 +230,25 @@ final class ContentImportAiService {
    *
    * @todo Order the plugin definitions by weight before attempting to find a match.
    *
-   * @param mixed $chunk
+   * @param array $chunk
    *   The input data that will be used to match against plugin definitions.
    *
    * @return object
    *   The plugin instance that matches the provided chunk or the default
    *   plugin if no matches are found.   *   *   *   *   *   *   *   *   *   *   *   *   *
    */
-  public function getPlugin($chunk) {
-    $selected_plugin = $this->pluginManager->createInstance('ai_default');
+  public function getPlugin(array $chunk) {
+    $default_plugin = $this->pluginManager->createInstance('ai_default');
     $definitions = $this->pluginManager->getDefinitions();
     // @todo Order by weight.
     foreach ($definitions as $definition) {
       $plugin = $this->pluginManager->createInstance($definition['id']);
       if ($plugin->matches($chunk)) {
-        $selected_plugin = $plugin;
+        $default_plugin = $plugin;
         break;
       }
     }
-    return $selected_plugin;
+    return $default_plugin;
   }
 
 }

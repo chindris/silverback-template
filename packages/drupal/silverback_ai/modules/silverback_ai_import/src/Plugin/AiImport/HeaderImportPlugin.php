@@ -148,21 +148,9 @@ class HeaderImportPlugin extends PluginBase implements AiImportPluginManagerInte
   }
 
   /**
-   * Generates a block string by replacing template placeholders with parsed header data.
-   *
-   * This function takes a chunk of markdown content and a template string. It uses
-   * the parsed data from the markdown header to replace placeholders in the template
-   * with actual values corresponding to the markdown header's level, text, and HTML tag.
-   * Before processing, it ensures that all required keys are available in the parsed data.
-   *
-   * @param array $data
-   *   The template string containing placeholders for replacement.
-   *
-   * @return string The template string with placeholders replaced by actual data.
-   *
-   * @throws \InvalidArgumentException if a required key is missing from the parsed data.
+   * {@inheritDoc}
    */
-  private function generateBlock(array $data): string {
+  public function generateBlock(array $data): string {
     // Validate required keys.
     $required_keys = array_keys($this->getSchema());
     $template = $this->getTemplate();
