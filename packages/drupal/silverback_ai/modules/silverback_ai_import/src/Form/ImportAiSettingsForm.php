@@ -58,12 +58,11 @@ final class ImportAiSettingsForm extends ConfigFormBase {
       '#open' => TRUE,
     ];
 
-    $form['general']['parse_doc_service_url'] = [
+    $form['general']['converter_service_url'] = [
       '#type' => 'textfield',
-      '#title' => $this->t('URL for parse DOCX service'),
-      '#default_value' => $this->config('silverback_ai_import.settings')->get('parse_doc_service_url'),
+      '#title' => $this->t('Converter URL service'),
+      '#default_value' => $this->config('silverback_ai_import.settings')->get('converter_service_url'),
     ];
-
     return parent::buildForm($form, $form_state);
   }
 
@@ -79,7 +78,7 @@ final class ImportAiSettingsForm extends ConfigFormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state): void {
     $this->config('silverback_ai_import.settings')
-      ->set('parse_doc_service_url', $form_state->getValue('parse_doc_service_url'))
+      ->set('converter_service_url', $form_state->getValue('converter_service_url'))
       ->save();
     parent::submitForm($form, $form_state);
   }
