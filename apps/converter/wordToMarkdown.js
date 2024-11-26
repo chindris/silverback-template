@@ -8,7 +8,7 @@ import TurndownService from 'turndown';
 
 // const __filename = fileURLToPath(import.meta.url);
 // const __dirname = path.dirname(__filename);
-const lagoon_dirname = '/tmp/converted';
+const lagoon_dirname = '/app/web/sites/default/files/converted';
 
 async function getImageExtension(buffer) {
   const type = await imageType(buffer);

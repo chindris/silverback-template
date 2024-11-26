@@ -124,7 +124,7 @@ services:
   converter:
     build:
       context: .
-      target: preview
+      target: converter
       dockerfile: .lagoon/Dockerfile
     environment:
       <<: *default-environment
@@ -133,8 +133,9 @@ services:
       - amazeeio-network
       - default
     labels:
-      lagoon.type: node
-      lagoon.name: converter
+      lagoon.type: node-persistent
+      lagoon.persistent.name: nginx # mount the persistent storage of nginx into this container
+      lagoon.persistent: /app/web/sites/default/files/
 
 networks:
   amazeeio-network:
