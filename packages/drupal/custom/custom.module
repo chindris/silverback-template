@@ -14,6 +14,8 @@ use Drupal\media\Entity\Media;
 use Drupal\silverback_gutenberg\LinkProcessor;
 use Drupal\user\Entity\Role;
 use Drupal\user\UserInterface;
+use Drupal\Core\Entity\ContentEntityFormInterface;
+use Drupal\node\NodeInterface;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 /**
@@ -164,40 +166,67 @@ function custom_silverback_gutenberg_link_processor_inbound_link_alter(
 /**
  * Implements hook_form_alter().
  *
- * Executed at the very late stage.
+ * Using global form_alter as it's to be executed at the very late stage.
  * @see custom_heavy_module_implements_alter
  */
 function custom_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-  $gutenbergModeratedForms = ['node_page_form', 'node_page_edit_form'];
-  if (in_array($form_id, $gutenbergModeratedForms) && array_key_exists('moderation_state', $form)) {
+  $form_object = $form_state->getFormObject();
 
-    // Move the moderation state widget on pages into the gutenberg sidebar.
+  if (!$form_object instanceof ContentEntityFormInterface) {
+    return;
+  }
+
+  // Gutenberg v2 is only enabled for nodes.
+  $entity = $form_state->getFormObject()->getEntity();
+  if(!$entity instanceof NodeInterface) {
+    return;
+  }
+
+  if (!_gutenberg_is_gutenberg_enabled($entity)) {
+    return;
+  }
+
+  // Move the moderation state widget into the gutenberg sidebar.
+  if (array_key_exists('moderation_state', $form)) {
     $form['moderation_state']['#group'] = 'meta';
-    // For some reason the above method does not work for regular fields.
-    // But we need to move metatags into the sidebar as well.
-    $form['meta']['field_metatags'] = $form['field_metatags'];
-    $form['field_metatags']['#access'] = FALSE;
+  }
 
-    // If the "More settings" fieldset is empty, remove it completely.
-    $metaboxHasFields = FALSE;
-    foreach (Element::children($form) as $key) {
-      if (($form[$key]['#group'] ?? '') === 'metabox_fields') {
+  // Move metatags in the sidebar.
+  // #group won't work here.
+  if (
+    array_key_exists('field_metatags', $form) &&
+    !empty($form['#fields_with_details'])
+  ) {
+    foreach ($form['#fields_with_details'] as $key => $value) {
+      if ($value === 'field_metatags') {
+        unset($form['#fields_with_details'][$key]);
+        break;
+      }
+    }
+  }
+
+  // If the "More settings" fieldset is empty, remove it completely.
+  $metaboxHasFields = FALSE;
+  foreach (Element::children($form) as $key) {
+    if (($form[$key]['#group'] ?? '') === 'metabox_fields') {
+      $metaboxHasFields = TRUE;
+      break;
+    }
+  }
+
+  if (!$metaboxHasFields && isset($form['#fieldgroups'])) {
+    foreach ($form['#fieldgroups'] as $group) {
+      if (($group->parent_name ?? '') === 'metabox_fields') {
         $metaboxHasFields = TRUE;
         break;
       }
     }
-    if (!$metaboxHasFields && isset($form['#fieldgroups'])) {
-      foreach ($form['#fieldgroups'] as $group) {
-        if (($group->parent_name ?? '') === 'metabox_fields') {
-          $metaboxHasFields = TRUE;
-          break;
-        }
-      }
-    }
-    if (!$metaboxHasFields) {
-      unset($form['metabox_fields']);
-    }
   }
+
+  if (!$metaboxHasFields) {
+    $form['metabox_fields']['#access'] = FALSE;
+  }
+
 }
 
 /**
