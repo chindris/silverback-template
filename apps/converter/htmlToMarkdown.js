@@ -43,8 +43,9 @@ function generateFolderName(content) {
 async function downloadImage(url) {
   try {
     const response = await fetch(url);
-    if (!response.ok)
+    if (!response.ok) {
       throw new Error(`Failed to fetch image: ${response.statusText}`);
+    }
     return Buffer.from(await response.arrayBuffer());
   } catch (error) {
     console.warn(
