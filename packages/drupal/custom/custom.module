@@ -186,7 +186,7 @@ function custom_form_alter(&$form, FormStateInterface $form_state, $form_id) {
 
   // Gutenberg v2 is only enabled for nodes.
   $entity = $form_state->getFormObject()->getEntity();
-  if(!$entity instanceof NodeInterface) {
+  if (!$entity instanceof NodeInterface) {
     return;
   }
 
