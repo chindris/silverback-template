@@ -53,13 +53,13 @@ function silverback_ai_import_form_node_page_split_form_alter(&$form, FormStateI
     '#options' => [
       'none' => t('Do not import any content'),
       'docx' => t('Microsoft Word file'),
-      'pdf' => t("PDF file"),
-      'html' => t("Remote HTML page"),
+      // 'pdf' => t("PDF file"),
+      // 'html' => t("Remote HTML page"),
     ],
     '#default_value' => 'none',
   ];
 
-  $form['import']['container'] = [
+  $form['import']['container_docx'] = [
     '#type' => 'container',
     '#states' => [
       'visible' => [
@@ -68,10 +68,10 @@ function silverback_ai_import_form_node_page_split_form_alter(&$form, FormStateI
     ],
   ];
 
-  $form['import']['container']['file'] = [
+  $form['import']['container_docx']['file'] = [
     '#type' => 'managed_file',
     '#title' => t('Select a Microsoft Word file'),
-    '#description' => t('some description here'),
+    '#description' => t('Select a Microsoft Word document to import content from.'),
     '#multiple' => FALSE,
     '#attributes' => [
       'class' => ['file--import'],
