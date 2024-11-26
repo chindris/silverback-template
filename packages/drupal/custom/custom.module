@@ -184,7 +184,7 @@ function custom_form_alter(&$form, FormStateInterface $form_state, $form_id) {
     // For some reason the above method does not work for regular fields.
     // But we need to move metatags into the sidebar as well.
     $form['meta']['field_metatags'] = $form['field_metatags'];
-    unset($form['field_metatags']);
+    $form['field_metatags']['#access'] = FALSE;
 
     // If the "More settings" fieldset is empty, remove it completely.
     $metaboxHasFields = FALSE;
