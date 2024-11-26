@@ -62,8 +62,9 @@ class HeaderImportPlugin extends PluginBase implements AiImportPluginManagerInte
     // Actually we are only interest here in keys.
     // Values can be descriptions to help the data extraction if using AI.
     return [
+      'attributesJson' => 'json attributes string',
       'headingText' => 'string',
-      'headingLevel' => 'number, 2 or 3 or 4. ',
+      'headingLevel' => 'number, 2 or 3 or 4.',
       'headerHtmlTag' => 'h2 or h3 or h4. Any other header should be converted to h2.',
     ];
   }
@@ -73,7 +74,7 @@ class HeaderImportPlugin extends PluginBase implements AiImportPluginManagerInte
    */
   public function getTemplate() {
     return <<<EOD
-    <!-- wp:custom/heading {"level":headingLevel,"text":"headingText"} -->
+    <!-- wp:custom/heading attributesJson -->
     <headerHtmlTag class="wp-block-custom-heading">headingText</headerHtmlTag>
     <!-- /wp:custom/heading -->
     EOD;
@@ -136,11 +137,18 @@ class HeaderImportPlugin extends PluginBase implements AiImportPluginManagerInte
 
     // Get the actual heading text.
     $text = trim($matches[2]);
-
+    // $text = str_replace('"', '', $text);
+    // $text = str_replace('\\', '', $text);
     // Create the corresponding HTML tag.
     $headerHtmlTag = 'h' . $level;
 
+    $attributesJson = [
+      'level' => intval($level),
+      'text' => $text,
+    ];
+
     return [
+      'attributesJson' => json_encode($attributesJson),
       'headingText' => $text,
       'headingLevel' => $level,
       'headerHtmlTag' => $headerHtmlTag,

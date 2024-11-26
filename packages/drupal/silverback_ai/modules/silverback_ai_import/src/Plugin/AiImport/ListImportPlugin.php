@@ -86,7 +86,14 @@ class ListImportPlugin extends PluginBase implements AiImportPluginManagerInterf
    * {@inheritDoc}
    */
   public function convert(array $chunk) {
-    $data['listItems'] = $chunk['htmlValue'];
+
+    $html = $chunk['htmlValue'];
+
+    $html = str_replace('<ol>', '<ul>', $html);
+    $html = str_replace('</ol>', '</ul>', $html);
+    $html = str_replace(["\r", "\n"], '', $html);
+
+    $data['listItems'] = $html;
     return $this->generateBlock($data);
   }
 

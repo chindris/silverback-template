@@ -83,6 +83,29 @@ final class ContentImportAiService {
   }
 
   /**
+   *
+   */
+  public function getAstFromUrl(string $url) {
+    $parse_service_url = $this->configFactory->get('silverback_ai_import.settings')->get('converter_service_url');
+    $client = \Drupal::httpClient();
+    try {
+      // @todo For now this is working only for docx files.
+      $response = $client->request('GET', "{$parse_service_url}/html-convert?path={$url}", [
+        'headers' => [
+          'Accept' => 'application/json',
+        ],
+      ]);
+      $body = $response->getBody()->getContents();
+      $response = json_decode($body);
+    }
+    catch (RequestException $e) {
+      // Handle any errors.
+      \Drupal::logger('silverback_ai_import')->error($e->getMessage());
+    }
+    return $response;
+  }
+
+  /**
    * {Helper method}
    */
   public function extractData(string $ast, string $schema) {

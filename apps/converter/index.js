@@ -5,6 +5,7 @@ import { toHtml } from 'hast-util-to-html';
 import { fromMarkdown } from 'mdast-util-from-markdown';
 import { toHast } from 'mdast-util-to-hast';
 
+import { htmlToMarkdown } from './htmlToMarkdown.js';
 import { wordToMarkdown } from './wordToMarkdown.js';
 
 const app = express();
@@ -69,6 +70,61 @@ app.get('/convert', async (req, res) => {
     // First convert Word to Markdown
     const { markdownPath, warnings, outputDir } =
       await wordToMarkdown(filePath);
+
+    // Then read and process the Markdown
+    const markdown = readFileSync(markdownPath, 'utf-8');
+    const mdast = fromMarkdown(markdown);
+
+    const md = readFileSync(markdownPath, 'utf-8');
+    const ast = parse(md);
+
+    mdast.children.forEach(async (element, index) => {
+      const hast = toHast(element, { allowDangerousHtml: true });
+      const html = toHtml(hast, { allowDangerousHtml: true });
+      element.htmlValue = html;
+      element.type = ast.children[index].type;
+      element.raw = ast.children[index].raw;
+      if (element.type == 'Table') {
+        element.htmlValue = markdownToHtmlTable(html);
+      }
+
+      if (ast.children[index].children[0].type == 'Image') {
+        element.type = 'Image';
+        element.src = `${outputDir}/${ast.children[index].children[0].url}`;
+      }
+    });
+
+    // Return the processed content along with conversion info
+    res.json({
+      content: mdast.children,
+      outputDirectory: outputDir,
+      warnings: warnings,
+    });
+  } catch (error) {
+    if (error.code === 'ENOENT') {
+      res.status(404).json({ error: `File not found: ${filePath}` });
+    } else {
+      res.status(500).json({
+        error: 'Error processing document',
+        details: error.message,
+      });
+    }
+  }
+});
+
+app.get('/html-convert', async (req, res) => {
+  const filePath = req.query.path;
+
+  if (!filePath) {
+    return res.status(400).json({
+      error: "Please provide a URLas 'path' query parameter",
+    });
+  }
+
+  try {
+    // First convert Word to Markdown
+    const { markdownPath, warnings, outputDir } =
+      await htmlToMarkdown(filePath);
 
     // Then read and process the Markdown
     const markdown = readFileSync(markdownPath, 'utf-8');
