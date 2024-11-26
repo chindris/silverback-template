@@ -24,10 +24,7 @@ async function extractMainContent(htmlString) {
     // Create a new JSDOM instance and parse the HTML string
     const dom = new JSDOM(html);
     // Extract the <main> element content
-    let mainElement = dom.window.document.querySelector('main');
-    if (!mainElement) {
-      mainElement = dom.window.document.querySelector('article');
-    }
+    const mainElement = dom.window.document.querySelector('main, article');
     // Return the inner HTML of the <main> tag, or an empty string if not found
     return mainElement ? mainElement.innerHTML : '';
   }
