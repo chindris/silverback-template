@@ -1,0 +1,84 @@
+<?php
+
+/**
+ * @file
+ * Primary module hooks for silverback_ai_import module.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * {@inheritdoc}
+ */
+function silverback_ai_import_form_alter(&$form, &$form_state, $form_id) {
+  // @todo
+}
+
+/**
+ * {@inheritdoc}
+ */
+function silverback_ai_import_form_node_page_split_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $form['import'] = [
+    '#type' => 'details',
+    '#title' => t('Import content'),
+    '#open' => TRUE,
+    '#weight' => 99,
+  ];
+  $form['import']['import_options'] = [
+    '#type' => 'radios',
+    '#title' => t('Import content from:'),
+    '#options' => [
+      'none' => t('Do not import any content'),
+      'docx' => t('Microsoft Word file'),
+      // 'pdf' => t("PDF file"),
+      // 'html' => t("Remote HTML page"),
+    ],
+    '#default_value' => 'none',
+  ];
+
+  $form['import']['container_docx'] = [
+    '#type' => 'container',
+    '#states' => [
+      'visible' => [
+        'input[name="import_options"]' => ['value' => 'docx'],
+      ],
+    ],
+  ];
+
+  $form['import']['container_docx']['file'] = [
+    '#type' => 'managed_file',
+    '#title' => t('Select a Microsoft Word file'),
+    '#description' => t('Select a Microsoft Word document to import content from.'),
+    // @todo Update this to some private file path, shared with node service.
+    '#upload_location' => 'public://converted/',
+    '#multiple' => FALSE,
+    '#attributes' => [
+      'class' => ['file--import'],
+    ],
+    '#upload_validators' => [
+      'file_validate_extensions' => ['doc docx DOC DOCX'],
+    ],
+  ];
+
+  $form['actions']['submit']['#submit'][] = '_silverback_ai_import_form_submit';
+
+  // Better to have this unpublished originally, and then
+  // we will display a message to the user (esp. if there is AI content)
+  $form['moderation_state']['#access'] = FALSE;
+  $form['actions']['submit']['#value'] = t('Create');
+
+}
+
+/**
+ * {@inheritdoc}
+ */
+function _silverback_ai_import_form_submit(array $form, FormStateInterface $form_state) {
+  $entity = $form_state->getFormObject()->getEntity();
+  $fid = reset($form_state->getValue('file'));
+  if ($fid) {
+    $file = \Drupal::entityTypeManager()->getStorage('file')->load($fid);
+    $service = \Drupal::service('silverback_ai_import.content');
+    $ast = $service->getAstFromFilePath($file);
+    \Drupal::service('silverback_ai_import.batch.import')->create($ast->content, $entity);
+  }
+}

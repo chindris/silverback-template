@@ -1,0 +1,7 @@
+silverback_ai_import.import_ai_settings:
+  path: '/admin/config/system/silverback/import-ai-settings'
+  defaults:
+    _title: 'Import AI settings'
+    _form: 'Drupal\silverback_ai_import\Form\ImportAiSettingsForm'
+  requirements:
+    _permission: 'administer site configuration'
