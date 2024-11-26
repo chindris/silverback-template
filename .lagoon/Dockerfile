@@ -119,3 +119,14 @@ RUN npm install -g pnpm@8.15.9
 COPY --from=builder /tmp/.deploy/publisher /app
 
 CMD pnpm publisher
+
+# ====================================================================================================
+# PREVIEW IMAGE
+# ====================================================================================================
+
+FROM uselagoon/node-18 as converter
+
+RUN npm install -g pnpm@8.15.9
+COPY --from=builder /tmp/.deploy/converter /app
+CMD pnpm start
+

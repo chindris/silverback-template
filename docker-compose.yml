@@ -121,6 +121,21 @@ services:
       lagoon.type: node
       lagoon.name: preview
 
+  converter:
+    build:
+      context: .
+      target: preview
+      dockerfile: .lagoon/Dockerfile
+    environment:
+      <<: *default-environment
+      LAGOON_LOCALDEV_URL: converter-${COMPOSE_PROJECT_NAME:-slbtemplate}.docker.amazee.io
+    networks:
+      - amazeeio-network
+      - default
+    labels:
+      lagoon.type: node
+      lagoon.name: converter
+
 networks:
   amazeeio-network:
     external: true
