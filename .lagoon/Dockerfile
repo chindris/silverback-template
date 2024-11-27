@@ -125,7 +125,7 @@ CMD pnpm publisher
 # CONVERTER IMAGE
 # ====================================================================================================
 
-FROM uselagoon/node-18 as converter
+FROM uselagoon/node-18 as convertmd
 
 RUN npm install -g pnpm@8.15.9
 COPY --from=builder /tmp/.deploy/converter /app

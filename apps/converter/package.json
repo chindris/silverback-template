@@ -16,9 +16,11 @@
     "fs-extra": "^11.2.0",
     "hast-util-to-html": "^9.0.3",
     "image-type": "^5.2.0",
+    "jsdom": "^25.0.1",
     "mammoth": "^1.8.0",
     "mdast-util-from-markdown": "^2.0.2",
     "mdast-util-to-hast": "^13.2.0",
+    "node-fetch": "^3.3.2",
     "sanitize-filename": "^1.6.3",
     "turndown": "^7.2.0"
   }
