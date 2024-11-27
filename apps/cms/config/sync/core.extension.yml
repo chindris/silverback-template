@@ -71,6 +71,7 @@ module:
   serialization: 0
   shortcut: 0
   silverback_ai: 0
+  silverback_ai_import: 0
   silverback_autosave: 0
   silverback_campaign_urls: 0
   silverback_cloudinary: 0
