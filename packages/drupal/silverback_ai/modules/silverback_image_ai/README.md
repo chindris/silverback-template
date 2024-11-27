@@ -32,4 +32,3 @@ The `ImageAiUtilities` service provides core functionality for AI-powered image 
 - Processing of image files and media entities
 - Integration with OpenAI's API for image analysis
 - Token usage tracking and logging
-
