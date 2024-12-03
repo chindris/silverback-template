@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "742014aafd9ab33f8279829676973af2",
+    "content-hash": "3704c67619022646a408ea39aedbbcf7",
     "packages": [
         {
             "name": "amazeeio/drupal_integrations",
@@ -199,6 +199,32 @@
                 "source": "https://github.com/AmazeeLabs/silverback-cli/tree/2.9.14"
             },
             "time": "2024-10-31T12:03:02+00:00"
+        },
+        {
+            "name": "amazeelabs/silverback_ai",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/AmazeeLabs/silverback_ai.git",
+                "reference": "24659e718e449c56df6957c244c668a4e7e088f6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AmazeeLabs/silverback_ai/zipball/24659e718e449c56df6957c244c668a4e7e088f6",
+                "reference": "24659e718e449c56df6957c244c668a4e7e088f6",
+                "shasum": ""
+            },
+            "type": "drupal-module",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "description": "Silverback AI functionality.",
+            "support": {
+                "issues": "https://github.com/AmazeeLabs/silverback_ai/issues",
+                "source": "https://github.com/AmazeeLabs/silverback_ai/tree/1.1.0"
+            },
+            "time": "2024-12-02T11:19:58+00:00"
         },
         {
             "name": "amazeelabs/silverback_autosave",
