@@ -36,12 +36,16 @@ test('Page', async () => {
       minimal: _loadDrupalPage(id: "17626bb4-557f-48fc-b869-ae566f4ceae6") {
         ...Page
       }
-      seo_all_empty: _loadDrupalPage(id: "5f108e07-62ca-4025-adca-069b3adfc22c") {
+      seo_all_empty: _loadDrupalPage(
+        id: "5f108e07-62ca-4025-adca-069b3adfc22c"
+      ) {
         translations {
           ...Page
         }
       }
-      seo_all_filled_in: _loadDrupalPage(id: "6344bdc5-1b02-4542-b4ae-4e6df23b3e4c") {
+      seo_all_filled_in: _loadDrupalPage(
+        id: "6344bdc5-1b02-4542-b4ae-4e6df23b3e4c"
+      ) {
         translations {
           ...Page
         }
