@@ -48,7 +48,7 @@ registerBlockType<{
       {
         type: 'block',
         blocks: ['core/paragraph'],
-        // @ts-ignore
+        // @ts-expect-error `content` is missing in typing.
         transform: ({ content }) => {
           return createBlock('custom/heading', {
             text: sanitizeText(content),
@@ -98,7 +98,6 @@ registerBlockType<{
           tagName={`h${props.attributes.level}` as keyof HTMLElementTagNameMap}
           value={props.attributes.text}
           allowedFormats={['core/bold']}
-          // @ts-ignore
           disableLineBreaks={true}
           placeholder={Drupal.t('Heading', {}, { context: 'gutenberg' })}
           keepPlaceholderOnFocus={true}
@@ -147,7 +146,7 @@ function HeadingLevelIcon({
       height="24"
       viewBox="0 0 20 20"
       xmlns="http://www.w3.org/2000/svg"
-      // @ts-ignore
+      // @ts-expect-error No idea.
       isPressed={isPressed}
     >
       <Path d={levelToPath[level]} />

@@ -364,7 +364,7 @@ test('Blocks', async () => {
     }
   `);
   const germanForm = german.data.page.content.find(
-    (it: any) => it.__typename === 'BlockForm',
+    (it: { __typename: string }) => it.__typename === 'BlockForm',
   );
   expect(germanForm.url).toBe('http://127.0.0.1:8000/de/form/contact');
 });

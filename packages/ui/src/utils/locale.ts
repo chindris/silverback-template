@@ -3,8 +3,8 @@ import { Locale, useLocation } from '@custom/schema';
 const locales = Object.values(Locale);
 export const defaultLocale: Locale = 'en';
 
-export function isLocale(input: any): input is Locale {
-  return locales.includes(input);
+export function isLocale(input: unknown): input is Locale {
+  return locales.includes(input as Locale);
 }
 
 /**

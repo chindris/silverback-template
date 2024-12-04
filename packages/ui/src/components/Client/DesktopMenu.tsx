@@ -33,7 +33,7 @@ export function DesktopMenuDropDown({
         <>
           <PopoverButton
             className={clsx(
-              'flex items-center text-base font-medium ml-8 hover:text-blue-600',
+              'ml-8 flex items-center text-base font-medium hover:text-blue-600',
               open ? 'text-blue-600' : 'text-gray-900',
             )}
             onClick={() => avoidFocusOnClick()}
@@ -41,7 +41,7 @@ export function DesktopMenuDropDown({
             {title}
             <ChevronDownIcon
               className={clsx(
-                'h-5 w-5 flex-none text-blue-600',
+                'size-5 flex-none text-blue-600',
                 open && 'rotate-180',
               )}
               aria-hidden="true"
@@ -76,13 +76,13 @@ export function DesktopMenuDropdownDisclosure({
         <div className={clsx('m-1.5 rounded', open && 'bg-gray-100')}>
           <DisclosureButton
             className={clsx(
-              'flex w-full items-center justify-between px-2 py-1 text-sm leading-[1.25rem] hover:text-blue-600',
-              open ? 'text-blue-600 font-medium' : 'text-gray-500',
+              'flex w-full items-center justify-between px-2 py-1 text-sm leading-5 hover:text-blue-600',
+              open ? 'font-medium text-blue-600' : 'text-gray-500',
             )}
           >
             {title}
             <ChevronDownIcon
-              className={clsx('h-5 w-5 flex-none text-blue-600', {
+              className={clsx('size-5 flex-none text-blue-600', {
                 'rotate-180': open,
               })}
               aria-hidden="true"

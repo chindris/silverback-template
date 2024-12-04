@@ -13,7 +13,9 @@ declare global {
   }
 }
 
-const updates$ = webSocket<any>({
+type PreviewRefresh = Parameters<ReturnType<typeof usePreviewRefresh>>[0];
+
+const updates$ = webSocket<PreviewRefresh>({
   url: `${window.location.origin.replace('http', 'ws')}/__preview`,
 }).pipe(
   retry({

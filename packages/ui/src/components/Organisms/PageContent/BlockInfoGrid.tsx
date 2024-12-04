@@ -11,13 +11,13 @@ export function BlockInfoGrid(props: BlockInfoGridFragment) {
       <div className="container-content">
         <div
           className={
-            'flex flex-col md:flex-row flex-wrap justify-center gap-12 items-center md:items-start'
+            'flex flex-col flex-wrap items-center justify-center gap-12 md:flex-row md:items-start'
           }
         >
           {props.gridItems.map((item, index) => (
             <div
               key={index}
-              className="flex flex-col items-center justify-start gap-4 px-3 md:px-4 text-center md:w-[calc((100%-3rem)/2)] lg:w-[calc((100%-6rem)/3)]"
+              className="flex flex-col items-center justify-start gap-4 px-3 text-center md:w-[calc((100%-3rem)/2)] md:px-4 lg:w-[calc((100%-6rem)/3)]"
             >
               {item?.icon && iconMap[item?.icon]}
               <div className="flex flex-col items-center justify-center gap-3">
@@ -25,13 +25,13 @@ export function BlockInfoGrid(props: BlockInfoGridFragment) {
                   switch (block?.__typename) {
                     case 'BlockCta':
                       return (
-                        <div className="nested-container w-fit mx-auto">
+                        <div className="nested-container mx-auto w-fit">
                           <BlockCta key={index} {...block} />
                         </div>
                       );
                     case 'BlockMarkup':
                       return (
-                        <div className="nested-container *:m-0 consistent-margin">
+                        <div className="nested-container consistent-margin *:m-0">
                           <BlockMarkup key={index} {...block} />
                         </div>
                       );

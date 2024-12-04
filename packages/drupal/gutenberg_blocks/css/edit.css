@@ -330,3 +330,7 @@ details[open] > summary svg {
   button.block-editor-link-control__search-item:hover {
   background-color: #ddd;
 }
+
+.entity-meta .media-library-selection .media-library-item--grid {
+  width: 100%;
+}

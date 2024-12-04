@@ -32,12 +32,12 @@ export function ContentHub({ pageSize = 10 }: { pageSize: number }) {
     ),
   });
   return (
-    <div className="bg-white py-12 px-6 lg:px-8">
+    <div className="bg-white px-6 py-12 lg:px-8">
       <div className="mx-auto max-w-6xl">
         <SearchForm />
         {error ? (
           <div className="flex items-center justify-center">
-            <div className="my-8 px-3 py-1 text-xs font-medium leading-none text-center text-red-500 bg-red-100 rounded-full">
+            <div className="my-8 rounded-full bg-red-100 px-3 py-1 text-center text-xs font-medium leading-none text-red-500">
               {error}
             </div>
           </div>
@@ -50,7 +50,7 @@ export function ContentHub({ pageSize = 10 }: { pageSize: number }) {
         ) : null}
         {data?.contentHub.total ? (
           <>
-            <ul className="my-8 grid gap-4 lg:gap-8 md:grid-cols-2 lg:grid-cols-3 auto-rows-fr grid-rows-subgrid">
+            <ul className="my-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
               {data?.contentHub.items.filter(isTruthy).map((item) => {
                 return (
                   <li key={item.path} className="grid grid-rows-subgrid">
