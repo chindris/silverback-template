@@ -6,6 +6,7 @@ _meta:
   default_langcode: en
   depends:
     b998ae5e-8b56-40ca-8f80-fd4404e7e716: media
+    50a28359-32f7-48ee-9577-330d79a2b62c: node
 default:
   revision_uid:
     -
@@ -31,6 +32,12 @@ default:
   moderation_state:
     -
       value: published
+  pate_is_template:
+    -
+      value: false
+  pate_structure_only:
+    -
+      value: false
   path:
     -
       alias: /page-links
@@ -49,7 +56,7 @@ default:
 
         <!-- wp:custom/content -->
         <!-- wp:paragraph -->
-        <p><a href="/sites/default/files/2023-04/document_docx.docx" data-type="Media: Document" data-id="1" data-entity-type="media">link to file</a></p>
+        <p><a href="/media/b998ae5e-8b56-40ca-8f80-fd4404e7e716/edit" data-type="Media: Document" data-id="b998ae5e-8b56-40ca-8f80-fd4404e7e716" data-entity-type="media">link to file</a></p>
         <!-- /wp:paragraph -->
 
         <!-- wp:paragraph -->
