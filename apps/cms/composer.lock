@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f454aea5320a33ca07d94c3ecc1ae066",
+    "content-hash": "3704c67619022646a408ea39aedbbcf7",
     "packages": [
         {
             "name": "amazeeio/drupal_integrations",
@@ -189,6 +189,32 @@
             "time": "2024-10-31T12:03:02+00:00"
         },
         {
+            "name": "amazeelabs/silverback_ai",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/AmazeeLabs/silverback_ai.git",
+                "reference": "24659e718e449c56df6957c244c668a4e7e088f6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AmazeeLabs/silverback_ai/zipball/24659e718e449c56df6957c244c668a4e7e088f6",
+                "reference": "24659e718e449c56df6957c244c668a4e7e088f6",
+                "shasum": ""
+            },
+            "type": "drupal-module",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "description": "Silverback AI functionality.",
+            "support": {
+                "issues": "https://github.com/AmazeeLabs/silverback_ai/issues",
+                "source": "https://github.com/AmazeeLabs/silverback_ai/tree/1.1.0"
+            },
+            "time": "2024-12-02T11:19:58+00:00"
+        },
+        {
             "name": "amazeelabs/silverback_autosave",
             "version": "1.3.1",
             "source": {
@@ -355,16 +381,16 @@
         },
         {
             "name": "amazeelabs/silverback_gutenberg",
-            "version": "2.5.19",
+            "version": "2.5.21",
             "source": {
                 "type": "git",
                 "url": "https://github.com/AmazeeLabs/silverback_gutenberg.git",
-                "reference": "38662f38c28bcdaab14f80564c589b66b2d00f50"
+                "reference": "e89057a0bd02912abbc0cf640d86dd1ad23b8d43"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AmazeeLabs/silverback_gutenberg/zipball/38662f38c28bcdaab14f80564c589b66b2d00f50",
-                "reference": "38662f38c28bcdaab14f80564c589b66b2d00f50",
+                "url": "https://api.github.com/repos/AmazeeLabs/silverback_gutenberg/zipball/e89057a0bd02912abbc0cf640d86dd1ad23b8d43",
+                "reference": "e89057a0bd02912abbc0cf640d86dd1ad23b8d43",
                 "shasum": ""
             },
             "require": {
@@ -377,9 +403,9 @@
             "homepage": "https://github.com/AmazeeLabs/silverback-mono/tree/development/packages/composer/amazeelabs/silverback_gutenberg#readme",
             "support": {
                 "issues": "https://github.com/AmazeeLabs/silverback_gutenberg/issues",
-                "source": "https://github.com/AmazeeLabs/silverback_gutenberg/tree/2.5.19"
+                "source": "https://github.com/AmazeeLabs/silverback_gutenberg/tree/2.5.21"
             },
-            "time": "2024-09-09T12:01:03+00:00"
+            "time": "2024-12-04T11:33:15+00:00"
         },
         {
             "name": "amazeelabs/silverback_iframe",
