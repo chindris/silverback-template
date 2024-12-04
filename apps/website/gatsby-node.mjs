@@ -104,22 +104,4 @@ export const createPages = async ({ actions }) => {
       component: resolve(`./src/templates/profile.tsx`),
     });
   });
-
-  // Broken Gatsby links will attempt to load page-data.json files, which don't exist
-  // and also should not be piped into the strangler function. Thats why they
-  // are caught right here.
-  actions.createRedirect({
-    fromPath: '/page-data/*',
-    toPath: '/404',
-    statusCode: 404,
-  });
-
-  // Any unhandled requests are handed to strangler, which will try to pass
-  // them to all registered legacy systems and return 404 if none of them
-  // respond.
-  actions.createRedirect({
-    fromPath: '/*',
-    toPath: `/.netlify/functions/strangler`,
-    statusCode: 200,
-  });
 };
