@@ -7,7 +7,7 @@
   "license": "ISC",
   "type": "module",
   "scripts": {
-    "test:static": "tsc --noEmit && eslint '**/*.{ts,tsx,js,jsx}' --ignore-path='./.gitignore'",
+    "test:static": "tsc --noEmit && eslint . --quiet",
     "test:integration:drupal": "playwright install chromium && playwright test --config playwright.config.drupal.ts",
     "test:integration:decap": "playwright install chromium && playwright test --config playwright.config.decap.ts",
     "test:headed:drupal": "playwright install chromium && playwright test --headed --config playwright.config.drupal.ts",
@@ -19,7 +19,9 @@
   },
   "devDependencies": {
     "@amazeelabs/save-webpage": "^1.1.1",
+    "@custom/eslint-config": "workspace:*",
     "@playwright/test": "^1.44.1",
-    "@types/node": "^18"
+    "@types/node": "^18",
+    "typescript": "^5.3.3"
   }
 }

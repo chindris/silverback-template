@@ -16,9 +16,9 @@ export function BreadCrumbs() {
   const [toggleMoreBreadcrumbs, setToggleMoreBreadcrumbs] = useState(false);
 
   useEffect(() => {
-    breadcrumbs.length > 5 &&
-      toggleMoreBreadcrumbs === false &&
+    if (breadcrumbs.length > 5 && toggleMoreBreadcrumbs === false) {
       setHideInnerBreadcrumbs(true);
+    }
   }, [hideInnerBreadcrumbs, breadcrumbs, toggleMoreBreadcrumbs]);
 
   if (!breadcrumbs.length) {
@@ -27,10 +27,10 @@ export function BreadCrumbs() {
 
   return (
     <div className="container-page">
-      <nav className="pt-5 container-content" aria-label="Breadcrumb">
+      <nav className="container-content pt-5" aria-label="Breadcrumb">
         <ol
           className={
-            'rounded-lg items-center overflow-x-scroll flex py-2.5 container'
+            'container flex items-center overflow-x-scroll rounded-lg py-2.5'
           }
         >
           {breadcrumbs?.filter(isTruthy).map(({ title, target, id }, index) => (
@@ -40,12 +40,12 @@ export function BreadCrumbs() {
                   <div aria-hidden="true">
                     <ChevronRightIcon
                       className={
-                        'hidden xl:flex rotate-180 xl:rotate-0 w-4 h-4 text-gray-400 mr-4'
+                        'mr-4 hidden size-4 rotate-180 text-gray-400 xl:flex xl:rotate-0'
                       }
                     />
                   </div>
                   <button
-                    className="mr-4 hidden xl:flex items-center rounded-sm px-1 py-2 bg-gray-100 hover:bg-gray-200 h-2"
+                    className="mr-4 hidden h-2 items-center rounded-sm bg-gray-100 px-1 py-2 hover:bg-gray-200 xl:flex"
                     onClick={() => {
                       setHideInnerBreadcrumbs(false);
                       setToggleMoreBreadcrumbs(true);
@@ -76,7 +76,7 @@ export function BreadCrumbs() {
                   >
                     <ChevronRightIcon
                       className={
-                        'rotate-180 xl:rotate-0 w-4 h-4 text-gray-400 mr-4'
+                        'mr-4 size-4 rotate-180 text-gray-400 xl:rotate-0'
                       }
                     />
                   </div>
@@ -85,7 +85,7 @@ export function BreadCrumbs() {
                   href={target}
                   title={title}
                   className={clsx(
-                    'inline-flex items-center text-sm font-medium hover:text-blue-600 whitespace-nowrap',
+                    'inline-flex items-center whitespace-nowrap text-sm font-medium hover:text-blue-600',
                     index < breadcrumbs.length - 1 &&
                       hideInnerBreadcrumbs !== true
                       ? 'hidden xl:inline-flex xl:items-center'
@@ -98,7 +98,7 @@ export function BreadCrumbs() {
                 >
                   {target === '/' && (
                     <svg
-                      className="w-4 h-4 mr-4"
+                      className="mr-4 size-4"
                       aria-hidden="true"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="currentColor"

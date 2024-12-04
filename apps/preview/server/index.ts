@@ -121,8 +121,10 @@ app.get('/oauth/callback', async (req, res) => {
   };
 
   try {
-    // @ts-ignore options due to missing redirect_uri.
-    const accessToken = await client.getToken(options);
+    const accessToken = await client.getToken(
+      // @ts-expect-error Missing redirect_uri.
+      options,
+    );
     console.log('/oauth/callback accessToken', accessToken);
     persistAccessToken(accessToken, req);
 
@@ -133,12 +135,9 @@ app.get('/oauth/callback', async (req, res) => {
     }
   } catch (error) {
     console.error(error);
-    return (
-      res
-        .status(500)
-        // @ts-ignore
-        .json(`Authentication failed with error: ${error.message}`)
-    );
+    return res
+      .status(500)
+      .json(`Authentication failed with error: ${error.message}`);
   }
 });
 

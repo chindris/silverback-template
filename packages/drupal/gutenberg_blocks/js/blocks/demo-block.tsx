@@ -63,7 +63,6 @@ registerBlockType<{
               tagName="p"
               value={attributes.heading}
               allowedFormats={[]}
-              // @ts-ignore
               disableLineBreaks={true}
               placeholder={Drupal.t('Heading', {}, { context: 'gutenberg' })}
               keepPlaceholderOnFocus={true}
@@ -76,7 +75,6 @@ registerBlockType<{
               tagName="p"
               value={attributes.description}
               allowedFormats={[]}
-              // @ts-ignore
               disableLineBreaks={true}
               placeholder={Drupal.t(
                 'Description',
@@ -107,7 +105,6 @@ registerBlockType<{
               tagName="p"
               value={attributes.url}
               allowedFormats={[]}
-              // @ts-ignore
               disableLineBreaks={true}
               placeholder={Drupal.t('Url', {}, { context: 'gutenberg' })}
               keepPlaceholderOnFocus={true}

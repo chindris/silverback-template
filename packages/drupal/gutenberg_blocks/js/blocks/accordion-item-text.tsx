@@ -108,7 +108,6 @@ registerBlockType<{
               tagName={headingLevel as keyof HTMLElementTagNameMap}
               value={attributes.title}
               allowedFormats={[]}
-              // @ts-ignore
               disableLineBreaks={true}
               placeholder={Drupal.t('Title', {}, { context: 'gutenberg' })}
               keepPlaceholderOnFocus={true}

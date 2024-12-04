@@ -1,5 +1,4 @@
 import {
-  // @ts-ignore
   __experimentalLinkControl as LinkControl,
   InnerBlocks,
   InspectorControls,
@@ -157,7 +156,6 @@ registerBlockType<{
                   tagName="span"
                   value={props.attributes.headline}
                   allowedFormats={[]}
-                  // @ts-ignore
                   disableLineBreaks={true}
                   placeholder={Drupal.t(
                     'Headline',
@@ -177,7 +175,6 @@ registerBlockType<{
                 tagName="p"
                 value={props.attributes.lead}
                 allowedFormats={[]}
-                // @ts-ignore
                 disableLineBreaks={true}
                 placeholder={Drupal.t(
                   'Lead text',
@@ -200,7 +197,6 @@ registerBlockType<{
                     multiline={false}
                     value={props.attributes.ctaText}
                     allowedFormats={[]}
-                    // @ts-ignore
                     disableLineBreaks={true}
                     placeholder={Drupal.t(
                       'CTA text',
