@@ -1,5 +1,9 @@
 node_modules/
 /test-results/
+/test-results-drupal/
+/test-results-decap/
+/test-results-webform-snapshots/
 /playwright-report/
 /playwright/.cache/
 .auth
+build-archive.log

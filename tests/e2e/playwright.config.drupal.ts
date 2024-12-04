@@ -5,6 +5,7 @@ import defaults from './playwright.config.default';
 export default defineConfig({
   ...defaults,
   testDir: './specs/drupal',
+  outputDir: './test-results-drupal',
   webServer: [
     {
       command: 'pnpm run --filter "@custom/cms" start >> /tmp/cms.log 2>&1',

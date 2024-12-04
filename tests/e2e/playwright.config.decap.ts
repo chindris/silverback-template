@@ -5,6 +5,7 @@ import defaults from './playwright.config.default';
 export default defineConfig({
   ...defaults,
   testDir: './specs/decap',
+  outputDir: './test-results-decap',
   webServer: [
     {
       command:

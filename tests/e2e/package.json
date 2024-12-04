@@ -12,6 +12,7 @@
     "test:integration:decap": "playwright install chromium && playwright test --config playwright.config.decap.ts",
     "test:headed:drupal": "playwright install chromium && playwright test --headed --config playwright.config.drupal.ts",
     "test:headed:decap": "playwright install chromium && playwright test --headed --config playwright.config.decap.ts",
+    "chromatic": "chromatic --playwright --exit-zero-on-changes",
     "dev:decap": "playwright install chromium && playwright test --ui --config playwright.config.decap.ts",
     "dev:drupal": "playwright install chromium && playwright test --ui --config playwright.config.drupal.ts",
     "webform-snapshots": "playwright install chromium && playwright test --config playwright.config.webforms.ts",
@@ -19,9 +20,11 @@
   },
   "devDependencies": {
     "@amazeelabs/save-webpage": "^1.1.1",
+    "@chromatic-com/playwright": "^0.10.1",
     "@custom/eslint-config": "workspace:*",
     "@playwright/test": "^1.44.1",
     "@types/node": "^18",
+    "chromatic": "^11.20.0",
     "typescript": "^5.3.3"
   }
 }

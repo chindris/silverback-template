@@ -1,8 +1,9 @@
-import { expect, test } from '@playwright/test';
+import { expect, test } from '@chromatic-com/playwright';
 
 import { websiteUrl } from '../../helpers/url';
 
 test('All blocks are rendered', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.goto(websiteUrl('/en/blocks-complete'));
 
   // Hero

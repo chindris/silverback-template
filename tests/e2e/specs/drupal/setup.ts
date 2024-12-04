@@ -1,6 +1,8 @@
-import { expect, test as setup } from '@playwright/test';
+import { expect, test as setup } from '@chromatic-com/playwright';
 
 import { cmsUrl } from '../../helpers/url';
+
+setup.use({ disableAutoSnapshot: true });
 
 setup('setup', async ({ page }) => {
   await page.goto(cmsUrl('/user/login'));

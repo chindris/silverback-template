@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test';
+import { expect, test } from '@chromatic-com/playwright';
 
 import { QuickActions, SiteLanguage } from '../../helpers/quick-actions';
 import { websiteUrl } from '../../helpers/url';

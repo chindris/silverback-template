@@ -1,6 +1,8 @@
-import { expect, test } from '@playwright/test';
+import { expect, test } from '@chromatic-com/playwright';
 
 import { websiteUrl } from '../../helpers/url';
+
+test.use({ disableAutoSnapshot: true });
 
 test.describe('campaign url redirects', () => {
   test('simple redirects', async ({ page }) => {
