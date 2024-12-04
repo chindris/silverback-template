@@ -32,6 +32,12 @@ default:
   moderation_state:
     -
       value: published
+  pate_is_template:
+    -
+      value: false
+  pate_structure_only:
+    -
+      value: false
   path:
     -
       alias: /page-complete
