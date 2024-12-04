@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "test:static": "tsc --noEmit && eslint \"**/*.{ts,tsx,js,jsx}\" --ignore-path=\"./.gitignore\"",
+    "test:static": "tsc --noEmit && eslint . --quiet",
     "dev": "vite",
     "build": "tsc -b && vite build",
     "prep": "vite build",
