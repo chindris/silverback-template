@@ -11,6 +11,79 @@ import { wordToMarkdown } from './wordToMarkdown.js';
 const app = express();
 const PORT = 3000;
 
+async function enhanceMdastNodesRecursive(tree, outputDir) {
+  // Process a single node and its children
+  async function processNode(node) {
+    // First process all children recursively to ensure they have htmlValue
+    if (node.children && Array.isArray(node.children)) {
+      await Promise.all(node.children.map(child => processNode(child)));
+    }
+    const hast = toHast(node, { allowDangerousHtml: true });
+    const html = toHtml(hast, { allowDangerousHtml: true });
+
+    const type = node.type;
+    node.type =  type.charAt(0).toUpperCase() + type.slice(1)
+
+    if (node.type == 'Table') {
+      node.htmlValue = markdownToHtmlTable(html);
+    }
+
+    if (node.type == 'List') {
+      node.htmlValue = generateHtml(node);
+    }
+
+    if (node.type === 'Image') {
+      node.src = node.url;
+      node.src = `${outputDir}/${node.url}`;
+    }
+
+    if (!node.htmlValue) {
+      node.htmlValue = html;
+    }
+
+    return node;
+  }
+
+
+ // Helper function to generate HTML for each node type
+ function generateHtml(node) {
+  switch (node.type.toLowerCase()) {
+    case 'paragraph':
+      return `<p>${node.children?.map(child => child.htmlValue || '').join('')}</p>`;
+    case 'heading':
+      return `<h${node.depth}>${node.children?.map(child => child.htmlValue || '').join('')}</h${node.depth}>`;
+    case 'text':
+      return node.value;
+    case 'emphasis':
+      return `<em>${node.children?.map(child => child.htmlValue || '').join('')}</em>`;
+    case 'strong':
+      return `<strong>${node.children?.map(child => child.htmlValue || '').join('')}</strong>`;
+    case 'link':
+      return `<a href="${node.url}">${node.children?.map(child => child.htmlValue || '').join('')}</a>`;
+    case 'image':
+      return `<img src="${node.url}" alt="${node.alt || ''}" />`;
+    case 'list':
+      const tag = node.ordered ? 'ol' : 'ul';
+      return `<${tag}>${node.children?.map(child => child.htmlValue || '').join('')}</${tag}>`;
+    case 'listItem':
+      return `<li>${node.children?.map(child => child.htmlValue || '').join('')}</li>`;
+    case 'blockquote':
+      return `<blockquote>${node.children?.map(child => child.htmlValue || '').join('')}</blockquote>`;
+    case 'code':
+      return `<pre><code${node.lang ? ` class="language-${node.lang}"` : ''}>${node.value}</code></pre>`;
+    case 'inlineCode':
+      return `<code>${node.value}</code>`;
+    case 'thematicBreak':
+      return '<hr />';
+    default:
+      return '';
+  }
+}
+
+
+  return processNode(tree);
+}
+
 function markdownToHtmlTable(markdownTable) {
   // Split the markdown table into lines
   const lines = markdownTable.trim().split('\n');
@@ -78,25 +151,23 @@ app.get('/convert', async (req, res) => {
     const md = readFileSync(markdownPath, 'utf-8');
     const ast = parse(md);
 
+    // This is to correct some types
     mdast.children.forEach(async (element, index) => {
-      const hast = toHast(element, { allowDangerousHtml: true });
-      const html = toHtml(hast, { allowDangerousHtml: true });
-      element.htmlValue = html;
+      // const hast = toHast(element, { allowDangerousHtml: true });
+      // const html = toHtml(hast, { allowDangerousHtml: true });
       element.type = ast.children[index].type;
       element.raw = ast.children[index].raw;
-      if (element.type == 'Table') {
-        element.htmlValue = markdownToHtmlTable(html);
-      }
-
       if (ast.children[index].children[0].type == 'Image') {
-        element.type = 'Image';
-        element.src = `${outputDir}/${ast.children[index].children[0].url}`;
+        // element.type = 'Image';
+        // element.src = `${outputDir}/${ast.children[index].children[0].url}`;
       }
     });
 
+    const enhanced = await enhanceMdastNodesRecursive(mdast, outputDir);
     // Return the processed content along with conversion info
     res.json({
-      content: mdast.children,
+      //content: mdast.children,
+      content: enhanced.children,
       outputDirectory: outputDir,
       warnings: warnings,
     });
@@ -134,24 +205,17 @@ app.get('/html-convert', async (req, res) => {
     const ast = parse(md);
 
     mdast.children.forEach(async (element, index) => {
-      const hast = toHast(element, { allowDangerousHtml: true });
-      const html = toHtml(hast, { allowDangerousHtml: true });
-      element.htmlValue = html;
       element.type = ast.children[index].type;
       element.raw = ast.children[index].raw;
-      if (element.type == 'Table') {
-        element.htmlValue = markdownToHtmlTable(html);
-      }
-
-      if (ast.children[index].children[0].type == 'Image') {
-        element.type = 'Image';
-        element.src = `${outputDir}/${ast.children[index].children[0].url}`;
-      }
     });
+
+
+    const enhanced = await enhanceMdastNodesRecursive(mdast, outputDir);
 
     // Return the processed content along with conversion info
     res.json({
-      content: mdast.children,
+      //content: mdast.children,
+      content: enhanced.children,
       outputDirectory: outputDir,
       warnings: warnings,
     });

@@ -12,6 +12,14 @@ use Drupal\Core\Form\FormStateInterface;
  */
 function silverback_ai_import_form_alter(&$form, &$form_state, $form_id) {
   // @todo
+  if ($form_id == 'views_exposed_formXXX') {
+    $service = \Drupal::service('silverback_ai_import.content');
+    $url_value = 'https://www.tcs.ch/de/camping-reisen/camping-insider/community/backen-mit-dem-omnia.php';
+    $ast = $service->getAstFromUrl($url_value);
+    $flatten = $service->flattenAst($ast->content);
+    dpm($flatten);
+    $content = \Drupal::service('silverback_ai_import.batch.import');
+  }
 }
 
 /**
@@ -98,10 +106,14 @@ function _silverback_ai_import_form_submit(array $form, FormStateInterface $form
   if ($fid && $type == 'docx') {
     $file = \Drupal::entityTypeManager()->getStorage('file')->load($fid);
     $ast = $service->getAstFromFilePath($file);
+    $flatten = $service->flattenAst($ast->content);
     $content->create($ast->content, $entity);
+    // $content->create($flatten, $entity);
   }
   elseif (!empty($url_value) && $type == 'url') {
     $ast = $service->getAstFromUrl($url_value);
+    $flatten = $service->flattenAst($ast->content);
     $content->create($ast->content, $entity);
+    // $content->create($flatten, $entity);
   }
 }

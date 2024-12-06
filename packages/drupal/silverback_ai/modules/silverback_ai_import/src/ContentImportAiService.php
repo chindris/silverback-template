@@ -264,13 +264,51 @@ final class ContentImportAiService {
     $definitions = $this->pluginManager->getDefinitions();
     // @todo Order by weight.
     foreach ($definitions as $definition) {
-      $plugin = $this->pluginManager->createInstance($definition['id']);
+      $plugin = $this->pluginManager->createInstance($definition['id'], ['chunk' => $chunk]);
       if ($plugin->matches($chunk)) {
         $default_plugin = $plugin;
         break;
       }
     }
     return $default_plugin;
+  }
+
+  /**
+   *
+   */
+  public function flattenAst($ast, $parent = NULL) {
+
+    $ast = json_decode(json_encode($ast), TRUE);
+    static $flatNodes = [];
+    static $id;
+
+    if ($ast === NULL) {
+      return $flatNodes;
+    }
+
+    foreach ($ast as $chunk) {
+
+      if (isset($chunk['type'])
+        && in_array($chunk['type'], ['strong', 'text', 'listItem'])) {
+        continue;
+      }
+
+      $children = $chunk['children'] ?? [];
+      // unset($chunk['children']);
+      // Chunk preprocessing.
+      $chunk['type'] = ucfirst($chunk['type']);
+      $chunk['id'] = ++$id;
+      $chunk['parent'] = $parent;
+
+      $flatNodes[] = $chunk;
+
+      // Recursively process children.
+      foreach ($children as $child) {
+        $this->flattenAst([$child], $id);
+      }
+    }
+
+    return $flatNodes;
   }
 
 }

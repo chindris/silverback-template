@@ -68,6 +68,17 @@ class ListImportPlugin extends PluginBase implements AiImportPluginManagerInterf
    * {@inheritDoc}
    */
   public function getTemplate() {
+    $config = $this->configuration;
+    $chunk = $config['chunk'];
+
+    if ($chunk['ordered'] == TRUE) {
+      return <<<EOD
+      <!-- wp:list {"ordered":true} -->
+      listItems
+      <!-- /wp:list -->
+      EOD;
+    }
+
     return <<<EOD
       <!-- wp:list -->
       listItems
@@ -88,12 +99,10 @@ class ListImportPlugin extends PluginBase implements AiImportPluginManagerInterf
   public function convert(array $chunk) {
 
     $html = $chunk['htmlValue'];
-
-    $html = str_replace('<ol>', '<ul>', $html);
-    $html = str_replace('</ol>', '</ul>', $html);
     $html = str_replace(["\r", "\n"], '', $html);
 
     $data['listItems'] = $html;
+
     return $this->generateBlock($data);
   }
 

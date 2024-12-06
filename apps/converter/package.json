@@ -8,7 +8,8 @@
   "author": "",
   "license": "ISC",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "dev": "node --watch index.js"
   },
   "dependencies": {
     "@textlint/markdown-to-ast": "^14.3.0",
@@ -22,6 +23,7 @@
     "mdast-util-to-hast": "^13.2.0",
     "node-fetch": "^3.3.2",
     "sanitize-filename": "^1.6.3",
-    "turndown": "^7.2.0"
+    "turndown": "^7.2.0",
+    "unist-util-visit": "^5.0.0"
   }
 }
