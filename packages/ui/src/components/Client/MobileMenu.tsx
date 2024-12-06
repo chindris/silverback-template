@@ -54,7 +54,7 @@ export function MobileMenu({ children }: PropsWithChildren<{}>) {
   return (
     <Dialog as="div" className="lg:hidden" open={isOpen} onClose={setIsOpen}>
       <div className="fixed inset-0 z-10" />
-      <DialogPanel className="fixed border-t border-t-blue-100 top-[5.75rem] inset-y-0 right-0 w-full overflow-y-auto bg-white py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10 z-20">
+      <DialogPanel className="fixed inset-y-0 right-0 top-[5.75rem] z-20 w-full overflow-y-auto border-t border-t-blue-100 bg-white py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
         {children}
       </DialogPanel>
     </Dialog>
@@ -90,12 +90,12 @@ export function MobileMenuDropdown({
         <div
           className={clsx(
             '',
-            open && nestLevel === 2 && 'bg-gray-100 rounded mx-8',
+            open && nestLevel === 2 && 'mx-8 rounded bg-gray-100',
           )}
         >
           <DisclosureButton
             className={clsx(
-              'flex w-full items-center justify-between py-4 leading-[1.25rem]',
+              'flex w-full items-center justify-between py-4 leading-5',
               open && 'text-blue-600',
               !open && 'text-gray-900',
               open && nestLevel === 1 && 'bg-blue-100',
@@ -107,7 +107,7 @@ export function MobileMenuDropdown({
           >
             {title}
             <ChevronDownIcon
-              className={clsx('h-5 w-5 flex-none text-blue-600', {
+              className={clsx('size-5 flex-none text-blue-600', {
                 'rotate-180': open,
               })}
               aria-hidden="true"

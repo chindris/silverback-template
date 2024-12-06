@@ -21,7 +21,7 @@ export function ContentEditLink({ url, type }: Props) {
       <a
         href={url}
         target="_blank"
-        className="absolute right-0 z-50 bg-orange-400 hover:bg-orange-500 text-white px-5 py-2"
+        className="absolute right-0 z-50 bg-orange-400 px-5 py-2 text-white hover:bg-orange-500"
         rel="noreferrer"
       >
         {intl.formatMessage({ defaultMessage: 'Edit', id: 'wEQDC6' })}

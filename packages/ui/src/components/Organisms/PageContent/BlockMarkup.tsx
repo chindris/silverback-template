@@ -30,7 +30,7 @@ export function BlockMarkup(props: BlockMarkupFragment) {
               components={{
                 blockquote: ({ children }: PropsWithChildren<{}>) => {
                   return (
-                    <blockquote className="border-l-0 relative pl-0">
+                    <blockquote className="relative border-l-0 pl-0">
                       <svg
                         width="32"
                         height="24"

@@ -28,6 +28,7 @@
     }
   },
   "scripts": {
+    "test:static": "tsc --noEmit && eslint . --quiet",
     "watch": "concurrently \"npm run watch:codegen\" \"npm run watch:swc\" \"npm run watch:tsc\"",
     "watch:codegen": "graphql-codegen --verbose --watch",
     "watch:swc": "swc ./src -d ./build --watch",
@@ -41,6 +42,7 @@
   "devDependencies": {
     "@amazeelabs/codegen-autoloader": "^1.2.0",
     "@amazeelabs/codegen-operation-ids": "^0.1.43",
+    "@custom/eslint-config": "workspace:*",
     "@graphql-codegen/cli": "^5.0.0",
     "@graphql-codegen/schema-ast": "^4.0.0",
     "@graphql-codegen/typescript": "^4.0.1",

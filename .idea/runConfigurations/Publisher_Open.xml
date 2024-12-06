@@ -1,0 +1,12 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Publisher Open" type="js.build_tools.npm" folderName="Publisher">
+    <package-json value="$PROJECT_DIR$/apps/publisher/package.json" />
+    <command value="run" />
+    <scripts>
+      <script value="open" />
+    </scripts>
+    <node-interpreter value="project" />
+    <envs />
+    <method v="2" />
+  </configuration>
+</component>

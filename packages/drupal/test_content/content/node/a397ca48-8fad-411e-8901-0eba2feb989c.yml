@@ -9,6 +9,7 @@ _meta:
     478c4289-961d-4ce8-85d6-578ae05f3019: media
     5dfc1856-e9e4-4f02-9cd6-9d888870ce1a: media
     72187a1f-3e48-4b45-a9b7-189c6fd7ee26: media
+    0b45a665-286a-414e-a091-c13fa4e20eb2: node
 default:
   revision_uid:
     -
@@ -34,6 +35,12 @@ default:
   moderation_state:
     -
       value: published
+  pate_is_template:
+    -
+      value: false
+  pate_structure_only:
+    -
+      value: false
   path:
     -
       alias: /blocks-complete

@@ -2,21 +2,20 @@ import { useIntl } from '@amazeelabs/react-intl';
 import { CreateSubmissionMutation } from '@custom/schema';
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { z } from 'zod';
 
 import { useMutation } from '../../utils/operation';
 import { Messages } from './Messages';
 
-const formValueSchema = z.object({
-  name: z.string(),
-  email: z.string(),
-  subject: z.string().optional(),
-  question: z.string(),
-});
+type FormValue = {
+  name: string;
+  email: string;
+  subject?: string;
+  question: string;
+};
 
 export function InquiryForm() {
   const intl = useIntl();
-  type FormValue = z.infer<typeof formValueSchema>;
+
   const { register, handleSubmit } = useForm<FormValue>();
 
   const { data, trigger, isMutating } = useMutation(CreateSubmissionMutation);
@@ -69,7 +68,7 @@ export function InquiryForm() {
               })}
             />
           </div>
-          <div className="w-full sm:max-w-sm pt-2">
+          <div className="w-full pt-2 sm:max-w-sm">
             <label htmlFor="email" className="sr-only">
               {intl.formatMessage({
                 defaultMessage: 'Email',
@@ -85,7 +84,7 @@ export function InquiryForm() {
               })}
             />
           </div>
-          <div className="w-full sm:max-w-sm pt-2">
+          <div className="w-full pt-2 sm:max-w-sm">
             <label htmlFor="subject" className="sr-only">
               {intl.formatMessage({
                 defaultMessage: 'Subject',
@@ -101,7 +100,7 @@ export function InquiryForm() {
               })}
             />
           </div>
-          <div className="w-full sm:max-w-sm pt-2">
+          <div className="w-full pt-2 sm:max-w-sm">
             <label htmlFor="question" className="sr-only">
               {intl.formatMessage({
                 defaultMessage: 'Message',
