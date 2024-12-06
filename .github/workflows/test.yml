@@ -1,6 +1,15 @@
 name: Test
 on:
   push:
+  workflow_dispatch:
+    inputs:
+      turborepo_caching:
+        description: 'Turborepo caching'
+        type: choice
+        options:
+          - 'On'
+          - 'Off'
+        default: 'On'
 
 jobs:
   test:
@@ -25,6 +34,7 @@ jobs:
         run: pnpm test:format
 
       - name: TurboRepo local server
+        if: ${{ github.event.inputs.turborepo_caching != 'Off' }}
         uses: felixmosh/turborepo-gh-artifacts@v2
         with:
           server-token: 'local'

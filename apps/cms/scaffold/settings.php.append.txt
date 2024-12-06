@@ -77,3 +77,5 @@ if (file_exists(__DIR__ . '/settings.local.php')) {
 if (file_exists(__DIR__ . '/services.local.yml')) {
   $settings['container_yamls'][] = __DIR__ . '/services.local.yml';
 }
+
+$config['silverback_ai.settings']['open_ai_api_key'] = getenv('OPEN_AI_API_KEY');

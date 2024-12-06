@@ -6,7 +6,7 @@ export function BrokenLinkHandler({ children }: PropsWithChildren) {
   return (
     <ErrorBoundary
       onError={(error) => {
-        if ((error as any).statusCode === 404) {
+        if ('statusCode' in error && error.statusCode === 404) {
           window.location.reload();
         } else {
           console.error(error);

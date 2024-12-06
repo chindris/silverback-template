@@ -6,12 +6,12 @@ import { FadeUp } from '../../Molecules/FadeUp';
 
 export function BlockQuote(props: BlockQuoteFragment) {
   return (
-    <FadeUp yGap={50} className="container-page mt-16 mb-8">
+    <FadeUp yGap={50} className="container-page mb-8 mt-16">
       <div className="container-page">
         <div className="container-content">
           <div className="container-text">
             <div className="prose lg:prose-xl prose-p:text-xl prose-p:font-bold prose-p:leading-8 prose-p:text-[#111928]">
-              <blockquote className="border-l-0 relative pl-0 pb-8 pt-16">
+              <blockquote className="relative border-l-0 pb-8 pl-0 pt-16">
                 <svg
                   width="32"
                   height="24"
@@ -28,16 +28,16 @@ export function BlockQuote(props: BlockQuoteFragment) {
                   />
                 </svg>
                 <p>{props.quote && <Html markup={props.quote} />}</p>
-                <div className="flex not-prose items-center flex-wrap">
+                <div className="not-prose flex flex-wrap items-center">
                   {props.image && (
                     <Image
-                      className="w-6 h-6 rounded-full object-contain mr-3.5 "
+                      className="mr-3.5 size-6 rounded-full object-contain "
                       src={props.image.url}
                       width={24}
                       alt={props.image.alt || 'Author image'}
                     />
                   )}
-                  <div className="not-italic text-base font-semibold">
+                  <div className="text-base font-semibold not-italic">
                     {props.author && (
                       <p className="not-prose">{props.author}</p>
                     )}
@@ -45,7 +45,7 @@ export function BlockQuote(props: BlockQuoteFragment) {
                   {props.role && (
                     <p className="not-prose flex">
                       <span className="ml-3 text-base">/</span>
-                      <span className="mt-0.5 not-italic text-gray-500 text-sm ml-3">
+                      <span className="ml-3 mt-0.5 text-sm not-italic text-gray-500">
                         {props.role}
                       </span>
                     </p>

@@ -7,15 +7,15 @@
   },
   "packages": [
     "nodejs@18.19.0",
-    "php@8.2",
-    "php82Packages.composer@2",
-    "php82Extensions.xdebug@3"
+    "php@8.3",
+    "php83Packages.composer@2",
+    "php83Extensions.xdebug@3"
   ],
   "shell": {
     "scripts": {
       "clean": [
         "rm -rf node_modules",
-        "git clean -dxff -e '_local' -e '.idea'",
+        "git clean -dxff -e '/_local' -e '/.idea'",
         "find . -type d -empty -delete",
         "direnv reload"
       ]

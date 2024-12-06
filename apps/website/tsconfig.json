@@ -16,5 +16,5 @@
     "checkJs": true,
     "jsx": "react"
   },
-  "exclude": ["netlify", "node_modules", "public", "dist"]
+  "exclude": ["netlify", "node_modules", "public", "dist", "eslint.config.mjs"]
 }

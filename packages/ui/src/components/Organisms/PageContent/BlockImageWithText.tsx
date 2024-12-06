@@ -13,22 +13,22 @@ export function BlockImageWithText(props: BlockImageWithTextFragment) {
         <div className="container-content my-12 lg:my-16">
           <div
             className={clsx(
-              'flex flex-col lg:flex-row gap-8 lg:gap-16 items-start lg:items-center',
+              'flex flex-col items-start gap-8 lg:flex-row lg:items-center lg:gap-16',
               {
                 'lg:flex-row-reverse':
                   props.imagePosition === ImagePosition.Left,
               },
             )}
           >
-            <div className={'lg:w-1/2 nested-container prose-li:text-base'}>
+            <div className={'nested-container prose-li:text-base lg:w-1/2'}>
               {props.textContent?.markup && (
                 <BlockMarkup {...props.textContent} />
               )}
             </div>
             {!!props.image?.url && (
-              <div className={'lg:w-1/2 self-start'}>
+              <div className={'self-start lg:w-1/2 '}>
                 <Image
-                  className="object-cover w-full"
+                  className="w-full object-cover"
                   src={props.image.url}
                   width={608}
                   alt={props.image.alt || ''}

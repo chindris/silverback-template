@@ -11,7 +11,7 @@ test.fixme('Metatags on Basic page', async ({ page }) => {
   );
   await expect(page.locator('head meta[name="description"]')).toHaveAttribute(
     'content',
-    'Paragraph',
+    'Headline Lead text Paragraph',
   );
   await expect(page.locator('head link[rel="canonical"]')).toHaveAttribute(
     'href',

@@ -4,6 +4,7 @@ import { Locale, useLocation } from '@custom/schema';
 const locales = Object.values(Locale);
 export const defaultLocale: Locale = 'en';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function isLocale(input: any): input is Locale {
   return locales.includes(input);
 }

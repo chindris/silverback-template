@@ -19,7 +19,7 @@ export function BlockConditional(props: BlockConditionalFragment) {
       ].every(Boolean),
     };
     setIsActive(Object.values(active).every(Boolean));
-  }, []);
+  }, [props.displayTo, props.displayFrom]);
 
   return isActive ? (
     <>

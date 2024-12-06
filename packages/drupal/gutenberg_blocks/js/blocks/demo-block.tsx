@@ -61,7 +61,6 @@ registerBlockType<{
               tagName="p"
               value={attributes.heading}
               allowedFormats={[]}
-              // @ts-ignore
               disableLineBreaks={true}
               placeholder={__('Heading')}
               keepPlaceholderOnFocus={true}
@@ -74,7 +73,6 @@ registerBlockType<{
               tagName="p"
               value={attributes.description}
               allowedFormats={[]}
-              // @ts-ignore
               disableLineBreaks={true}
               placeholder={__('Description')}
               keepPlaceholderOnFocus={true}
@@ -101,7 +99,6 @@ registerBlockType<{
               tagName="p"
               value={attributes.url}
               allowedFormats={[]}
-              // @ts-ignore
               disableLineBreaks={true}
               placeholder={__('Url')}
               keepPlaceholderOnFocus={true}

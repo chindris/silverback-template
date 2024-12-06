@@ -1,0 +1,40 @@
+uuid: f030f353-55d5-40d0-aaac-9bb42f8236c0
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.global_search
+    - field.field.node.page.body
+    - field.field.node.page.field_metatags
+    - node.type.page
+  module:
+    - gutenberg
+    - metatag
+    - user
+id: node.page.global_search
+targetEntityType: node
+bundle: page
+mode: global_search
+content:
+  body:
+    type: gutenberg_text
+    label: hidden
+    settings:
+      format: gutenberg
+      content_only: true
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_metatags:
+    type: metatag_empty_formatter
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  content_moderation_control: true
+  external_preview_link: true
+  langcode: true
+  links: true
+  search_api_excerpt: true

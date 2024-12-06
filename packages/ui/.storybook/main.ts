@@ -1,16 +1,15 @@
 import type { StorybookConfig } from '@storybook/react-vite';
+import { readdirSync } from 'fs';
+import { dirname, join, resolve } from 'path';
 import { mergeConfig, UserConfig } from 'vite';
 import { imagetools } from 'vite-imagetools';
-import { resolve, dirname, join } from 'path';
-
-import { readdirSync } from 'fs';
 
 const fonts = readdirSync(`static/public/fonts/preload`).map((font) => {
   return `/fonts/preload/${font}`;
 });
 
 const config: StorybookConfig = {
-  viteFinal: (config, { configType }) =>
+  viteFinal: (config) =>
     mergeConfig(config, {
       css: {
         postcss: 'src',
@@ -19,7 +18,12 @@ const config: StorybookConfig = {
         alias: {
           '@amazeelabs/bridge': '@amazeelabs/bridge-storybook',
           '@stories': resolve(
-            dirname(new URL(import.meta.url).pathname),
+            dirname(
+              new URL(
+                // @ts-expect-error It works.
+                import.meta.url,
+              ).pathname,
+            ),
             '../static/stories',
           ),
         },
@@ -53,6 +57,6 @@ const config: StorybookConfig = {
 };
 export default config;
 
-function getAbsolutePath(value: string): any {
+function getAbsolutePath(value: string): string {
   return dirname(require.resolve(join(value, 'package.json')));
 }

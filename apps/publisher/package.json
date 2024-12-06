@@ -1,0 +1,17 @@
+{
+  "name": "@custom/publisher",
+  "private": true,
+  "dependencies": {
+    "@amazeelabs/publisher": "^2.5.5"
+  },
+  "scripts": {
+    "test:static": "tsc --noEmit && eslint . --quiet",
+    "dev": "cd ../website && pnpm clean && cd - && publisher",
+    "open": "open http://127.0.0.1:8000/___status/"
+  },
+  "devDependencies": {
+    "@custom/eslint-config": "workspace:*",
+    "@types/node": "^18",
+    "typescript": "^5.3.3"
+  }
+}
