@@ -17,7 +17,7 @@ import { Inquiry } from '@custom/ui/routes/Inquiry';
 import { NotFoundPage } from '@custom/ui/routes/NotFoundPage';
 import { Page } from '@custom/ui/routes/Page';
 import React from 'react';
-import { createPages } from 'waku';
+import { new_createPages } from 'waku';
 
 import { BrokenLinkHandler } from './broken-link-handler.js';
 import { ClientExecutors } from './executors-client.js';
@@ -36,57 +36,68 @@ async function queryAll<TOperation extends AnyOperationId>(
   );
 }
 
-export default createPages(async ({ createPage, createLayout }) => {
-  createLayout({
-    render: 'static',
-    path: '/',
-    component: ({ children, path }) => (
-      <BrokenLinkHandler>
-        <LocationProvider
-          currentLocation={{
-            pathname: path,
-            searchParams: new URLSearchParams(),
-            search: '',
-            hash: '',
-          }}
-        >
-          <ServerExecutors>
-            <ClientExecutors>
-              <Frame alterSrc={(src) => src.replace(frontendUrl, drupalUrl)}>
-                {children}
-              </Frame>
-            </ClientExecutors>
-          </ServerExecutors>
-        </LocationProvider>
-      </BrokenLinkHandler>
-    ),
-  });
+const pages = new_createPages(async ({ createPage, createLayout }) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const entries: Array<any> = [
+    createLayout({
+      render: 'static',
+      path: '/',
+      component: ({ children, path }) => (
+        <BrokenLinkHandler>
+          <LocationProvider
+            currentLocation={{
+              pathname: path,
+              searchParams: new URLSearchParams(),
+              search: '',
+              hash: '',
+            }}
+          >
+            <ServerExecutors>
+              <ClientExecutors>
+                <Frame alterSrc={(src) => src.replace(frontendUrl, drupalUrl)}>
+                  {children}
+                </Frame>
+              </ClientExecutors>
+            </ServerExecutors>
+          </LocationProvider>
+        </BrokenLinkHandler>
+      ),
+    }),
+  ];
 
   Object.values(Locale).forEach((lang) => {
-    createPage({
-      render: 'static',
-      path: `/${lang}`,
-      component: () => <HomePage />,
-    });
+    entries.push(
+      createPage({
+        render: 'static',
+        path: `/${lang}`,
+        component: () => <HomePage />,
+      }),
+    );
 
-    createPage({
-      render: 'static',
-      path: `/${lang}/content-hub`,
-      component: () => <ContentHub pageSize={6} />,
-    });
+    entries.push(
+      createPage({
+        render: 'static',
+        path: `/${lang}/content-hub`,
+        component: () => <ContentHub pageSize={6} />,
+      }),
+    );
 
-    createPage({
-      render: 'static',
-      path: `/${lang}/inquiry`,
-      component: () => <Inquiry />,
-    });
+    entries.push(
+      createPage({
+        render: 'static',
+        path: `/${lang}/inquiry`,
+        component: () => <Inquiry />,
+      }),
+    );
   });
 
-  createPage({
-    render: 'static',
-    path: '/404',
-    component: () => <NotFoundPage />,
-  });
+  entries.push(
+    createPage({
+      render: 'static',
+      path: '/404',
+      component: () => <NotFoundPage />,
+    }),
+  );
 
   // Initialise a map for the homepages, since we want to exclude them from
   // creating a page for their internal path.
@@ -119,10 +130,16 @@ export default createPages(async ({ createPage, createLayout }) => {
     });
   }
 
-  createPage({
-    render: 'static',
-    path: '/[...path]',
-    staticPaths: [...pagePaths].map((path) => path.substring(1).split('/')),
-    component: Page,
-  });
+  entries.push(
+    createPage({
+      render: 'static',
+      path: '/[...path]',
+      staticPaths: [...pagePaths].map((path) => path.substring(1).split('/')),
+      component: Page,
+    }),
+  );
+
+  return entries;
 });
+
+export default pages;
