@@ -71,7 +71,8 @@ class ListImportPlugin extends PluginBase implements AiImportPluginManagerInterf
     $config = $this->configuration;
     $chunk = $config['chunk'];
 
-    if ($chunk['ordered'] == TRUE) {
+    if (isset($chunk['ordered'])
+      && $chunk['ordered'] == TRUE) {
       return <<<EOD
       <!-- wp:list {"ordered":true} -->
       listItems

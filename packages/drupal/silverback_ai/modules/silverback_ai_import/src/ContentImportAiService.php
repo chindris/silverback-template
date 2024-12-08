@@ -289,7 +289,13 @@ final class ContentImportAiService {
     foreach ($ast as $chunk) {
 
       if (isset($chunk['type'])
-        && in_array($chunk['type'], ['strong', 'text', 'listItem'])) {
+        && in_array($chunk['type'], [
+          'Strong',
+          'Text',
+          'ListItem',
+          'Emphasis',
+          'Link',
+        ])) {
         continue;
       }
 
@@ -301,7 +307,6 @@ final class ContentImportAiService {
       $chunk['parent'] = $parent;
 
       $flatNodes[] = $chunk;
-
       // Recursively process children.
       foreach ($children as $child) {
         $this->flattenAst([$child], $id);
@@ -309,6 +314,22 @@ final class ContentImportAiService {
     }
 
     return $flatNodes;
+  }
+
+  /**
+   *
+   */
+  public function iterateArray(array &$data, int $depth = 0): void {
+    foreach ($data as &$item) {
+      // Process item here.
+      if (isset($item['type'])) {
+        $item['gutenberg'] = $this->processChunk($item);
+      }
+
+      if (isset($item['children']) && is_array($item['children'])) {
+        $this->iterateArray($item['children'], $depth + 1);
+      }
+    }
   }
 
 }

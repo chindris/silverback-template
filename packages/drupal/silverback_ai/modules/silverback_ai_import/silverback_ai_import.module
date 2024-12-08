@@ -12,13 +12,42 @@ use Drupal\Core\Form\FormStateInterface;
  */
 function silverback_ai_import_form_alter(&$form, &$form_state, $form_id) {
   // @todo
-  if ($form_id == 'views_exposed_formXXX') {
+  if ($form_id == 'views_exposed_form') {
     $service = \Drupal::service('silverback_ai_import.content');
     $url_value = 'https://www.tcs.ch/de/camping-reisen/camping-insider/community/backen-mit-dem-omnia.php';
     $ast = $service->getAstFromUrl($url_value);
     $flatten = $service->flattenAst($ast->content);
-    dpm($flatten);
-    $content = \Drupal::service('silverback_ai_import.batch.import');
+    // dpm($flatten);
+    // $file = \Drupal::entityTypeManager()->getStorage('file')->load(11);
+    // $ast = $service->getAstFromFilePath($file);
+    $flatten = $service->flattenAst($ast->content);
+    // dpm($ast->content);.
+    foreach ($flatten as $el) {
+      // dpm($el);
+    }
+    // dpm($flatten);
+    $arr = json_decode(json_encode($ast), TRUE);
+    $data = $arr['content'];
+    /* $callback = function (&$item, $depth) {
+    $item['xxx'] = 'xxx';
+    }; */
+
+    $service->iterateArray($data);
+    dpm($data);
+    // Example usage:
+    /*
+    foreach ($ast->content as $obj) {
+    dpm($obj);
+    $iterator = function ($key, $value) {
+    $times = (int) $key * 1 + 1;
+    $repeat = str_repeat(' ', (int) $times);
+    if (isset($value->type) && !empty($value->type)) {
+    // dpm($repeat . $value->type);.
+    }
+    };
+    $service->iterateObject($obj, $iterator);
+    }
+     */
   }
 }
 
@@ -106,14 +135,14 @@ function _silverback_ai_import_form_submit(array $form, FormStateInterface $form
   if ($fid && $type == 'docx') {
     $file = \Drupal::entityTypeManager()->getStorage('file')->load($fid);
     $ast = $service->getAstFromFilePath($file);
-    $flatten = $service->flattenAst($ast->content);
     $content->create($ast->content, $entity);
-    // $content->create($flatten, $entity);
+    $flatten = $service->flattenAst($ast->content);
+    $content->create($flatten, $entity);
   }
   elseif (!empty($url_value) && $type == 'url') {
     $ast = $service->getAstFromUrl($url_value);
-    $flatten = $service->flattenAst($ast->content);
     $content->create($ast->content, $entity);
-    // $content->create($flatten, $entity);
+    $flatten = $service->flattenAst($ast->content);
+    $content->create($flatten, $entity);
   }
 }

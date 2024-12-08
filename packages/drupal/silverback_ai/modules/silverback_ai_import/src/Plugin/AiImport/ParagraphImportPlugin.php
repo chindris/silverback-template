@@ -86,11 +86,8 @@ class ParagraphImportPlugin extends PluginBase implements AiImportPluginManagerI
    * {@inheritDoc}
    */
   public function convert(array $chunk) {
-    $chunk = $chunk['htmlValue'];
-
-    // $chunk = str_replace('img src="images/', 'img src="/sites/default/files/converted/5fc8be62e2a1/images/', $chunk);
-    $data['paragraphText'] = $chunk;
-    // Transform image src paths under certain conditions.
+    $val = $chunk['htmlValue'];
+    $data['paragraphText'] = preg_replace('/<img[^>]+>/i', '', $val);
     return $this->generateBlock($data);
   }
 

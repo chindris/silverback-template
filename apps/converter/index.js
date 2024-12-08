@@ -12,33 +12,31 @@ const app = express();
 const PORT = 3000;
 
 async function enhanceMdastNodesRecursive(tree, outputDir) {
+
   // Process a single node and its children
   async function processNode(node) {
     // First process all children recursively to ensure they have htmlValue
     if (node.children && Array.isArray(node.children)) {
       await Promise.all(node.children.map(child => processNode(child)));
     }
+
     const hast = toHast(node, { allowDangerousHtml: true });
     const html = toHtml(hast, { allowDangerousHtml: true });
 
     const type = node.type;
     node.type =  type.charAt(0).toUpperCase() + type.slice(1)
+    node.outputDir = outputDir;
+
+    if (!node.htmlValue) {
+      node.htmlValue = html;
+    }
 
     if (node.type == 'Table') {
       node.htmlValue = markdownToHtmlTable(html);
     }
 
-    if (node.type == 'List') {
-      node.htmlValue = generateHtml(node);
-    }
-
-    if (node.type === 'Image') {
-      node.src = node.url;
+    if (node.type == 'Image') {
       node.src = `${outputDir}/${node.url}`;
-    }
-
-    if (!node.htmlValue) {
-      node.htmlValue = html;
     }
 
     return node;
@@ -64,7 +62,7 @@ async function enhanceMdastNodesRecursive(tree, outputDir) {
       return `<img src="${node.url}" alt="${node.alt || ''}" />`;
     case 'list':
       const tag = node.ordered ? 'ol' : 'ul';
-      return `<${tag}>${node.children?.map(child => child.htmlValue || '').join('')}</${tag}>`;
+      return `<${tag}>${node.children?.map(child => child.raw || '').join('')}</${tag}>`;
     case 'listItem':
       return `<li>${node.children?.map(child => child.htmlValue || '').join('')}</li>`;
     case 'blockquote':
@@ -82,6 +80,37 @@ async function enhanceMdastNodesRecursive(tree, outputDir) {
 
 
   return processNode(tree);
+}
+
+async function flattenMdastNodesRecursive(tree) {
+  async function flattenNode(node) {
+    // Base case: if no node or no children, return the node as is
+    if (!node || !node.children) {
+      return node;
+    }
+
+    // Recursively flatten all children first
+    const flattenedChildren = await Promise.all(
+      node.children.map(child => flattenNode(child))
+    );
+
+    // Update node's children with flattened results
+    node.children = flattenedChildren;
+
+    // Handle the special case of Paragraph with single Image
+    if (
+      node.type === 'Paragraph' &&
+      Array.isArray(node.children) &&
+      node.children.length === 1 &&
+      node.children[0].type === 'Image'
+    ) {
+      return node.children[0];
+    }
+
+    return node;
+  }
+
+  return flattenNode(tree);
 }
 
 function markdownToHtmlTable(markdownTable) {
@@ -144,30 +173,28 @@ app.get('/convert', async (req, res) => {
     const { markdownPath, warnings, outputDir } =
       await wordToMarkdown(filePath);
 
-    // Then read and process the Markdown
+      // Then read and process the Markdown
     const markdown = readFileSync(markdownPath, 'utf-8');
     const mdast = fromMarkdown(markdown);
-
     const md = readFileSync(markdownPath, 'utf-8');
     const ast = parse(md);
 
     // This is to correct some types
     mdast.children.forEach(async (element, index) => {
-      // const hast = toHast(element, { allowDangerousHtml: true });
-      // const html = toHtml(hast, { allowDangerousHtml: true });
+      const hast = toHast(element, { allowDangerousHtml: true });
+      const html = toHtml(hast, { allowDangerousHtml: true });
       element.type = ast.children[index].type;
       element.raw = ast.children[index].raw;
-      if (ast.children[index].children[0].type == 'Image') {
-        // element.type = 'Image';
-        // element.src = `${outputDir}/${ast.children[index].children[0].url}`;
-      }
+      element.htmlValue = html;
     });
 
+    // Flatten images
     const enhanced = await enhanceMdastNodesRecursive(mdast, outputDir);
+    const flatten = await flattenMdastNodesRecursive(enhanced);
+
     // Return the processed content along with conversion info
     res.json({
-      //content: mdast.children,
-      content: enhanced.children,
+      content: flatten.children,
       outputDirectory: outputDir,
       warnings: warnings,
     });
@@ -205,8 +232,11 @@ app.get('/html-convert', async (req, res) => {
     const ast = parse(md);
 
     mdast.children.forEach(async (element, index) => {
+      const hast = toHast(element, { allowDangerousHtml: true });
+      const html = toHtml(hast, { allowDangerousHtml: true });
       element.type = ast.children[index].type;
       element.raw = ast.children[index].raw;
+      element.htmlValue = html;
     });
 
 
