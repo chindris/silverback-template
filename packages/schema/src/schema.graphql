@@ -79,24 +79,11 @@ type NavigationItem {
   target: Url! @resolveMenuItemUrl
 }
 
-interface Navigation {
-  locale: Locale!
-  items: [NavigationItem]!
-}
-
-type MetaNavigation implements Navigation @menu(menu_id: "meta") {
+type Navigation {
   locale: Locale! @resolveEntityLanguage
-  items: [NavigationItem]! @lang @resolveMenuItems(max_level: 1)
-}
-
-type MainNavigation implements Navigation @menu(menu_id: "main") {
-  locale: Locale! @resolveEntityLanguage
-  items: [NavigationItem]! @lang @resolveMenuItems
-}
-
-type FooterNavigation implements Navigation @menu(menu_id: "footer") {
-  locale: Locale! @resolveEntityLanguage
-  items: [NavigationItem]! @lang @resolveMenuItems
+  items(max_level: Int): [NavigationItem]!
+    @lang
+    @resolveMenuItems(max_level: "$max_level")
 }
 
 """
@@ -352,10 +339,9 @@ type Query {
       preview_access_token: "$preview_access_token"
     )
 
-  mainNavigations: [MainNavigation] @menuTranslations(menu_id: "main")
-  metaNavigations: [MetaNavigation] @menuTranslations(menu_id: "meta")
-
-  footerNavigations: [FooterNavigation] @menuTranslations(menu_id: "footer")
+  mainNavigations: [Navigation] @menuTranslations(menu_id: "main")
+  metaNavigations: [Navigation] @menuTranslations(menu_id: "meta")
+  footerNavigations: [Navigation] @menuTranslations(menu_id: "footer")
 
   ssgPages(args: String): SSGPagesResult
     @drupalView(id: "ssg_pages:default", args: "$args")
