@@ -136,13 +136,15 @@ function _silverback_ai_import_form_submit(array $form, FormStateInterface $form
     $file = \Drupal::entityTypeManager()->getStorage('file')->load($fid);
     $ast = $service->getAstFromFilePath($file);
     $content->create($ast->content, $entity);
-    $flatten = $service->flattenAst($ast->content);
-    $content->create($flatten, $entity);
+
+    // $flatten = $service->flattenAst($ast->content);
+    // $content->create($flatten, $entity);
   }
   elseif (!empty($url_value) && $type == 'url') {
     $ast = $service->getAstFromUrl($url_value);
     $content->create($ast->content, $entity);
-    $flatten = $service->flattenAst($ast->content);
-    $content->create($flatten, $entity);
+
+    // $flatten = $service->flattenAst($ast->content);
+    // $content->create($flatten, $entity);
   }
 }

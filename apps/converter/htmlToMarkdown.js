@@ -1,3 +1,4 @@
+import { extract } from '@extractus/article-extractor'
 import crypto from 'crypto';
 import fs from 'fs-extra';
 import imageType from 'image-type';
@@ -13,6 +14,18 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = isLagoon
   ? '/app/web/sites/default/files/converted'
   : path.dirname(__filename);
+
+
+async function extractMainContentFromUrl(url) {
+      try {
+        const mainContent = await extract(url);
+        console.log("🚀 ~ extractMainContentFromUrl ~ mainContent:", mainContent)
+        return mainContent ? mainContent.content : '';
+      } catch (err) {
+        console.error(err)
+      }
+      return '';
+  }
 
 async function extractMainContent(htmlString) {
   const bodyRegex = /<body[^>]*>([\s\S]*?)<\/body>/i;
@@ -69,6 +82,7 @@ export async function htmlToMarkdown(url) {
   }
 
   // Fetch HTML content
+  /*
   const response = await fetch(url);
   if (!response.ok) {
     throw new Error(`Failed to fetch page: ${response.statusText}`);
@@ -76,6 +90,8 @@ export async function htmlToMarkdown(url) {
   const fullHtml = await response.text();
 
   const html = await extractMainContent(fullHtml);
+  */
+  const html = await extractMainContentFromUrl(url);
   // Generate folder name based on HTML content
   const folderName = generateFolderName(html);
   const outputDir = path.join(__dirname, folderName);

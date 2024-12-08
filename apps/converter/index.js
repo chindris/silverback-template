@@ -239,13 +239,12 @@ app.get('/html-convert', async (req, res) => {
       element.htmlValue = html;
     });
 
-
     const enhanced = await enhanceMdastNodesRecursive(mdast, outputDir);
+    const flatten = await flattenMdastNodesRecursive(enhanced);
 
     // Return the processed content along with conversion info
     res.json({
-      //content: mdast.children,
-      content: enhanced.children,
+      content: flatten.children,
       outputDirectory: outputDir,
       warnings: warnings,
     });
