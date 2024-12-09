@@ -162,3 +162,10 @@ if (!fs.existsSync(initPackage)) {
 }
 fs.rmSync(initPackage, { recursive: true, force: true });
 console.log('👉 Run `pnpm i` to update the lock file.');
+
+// Remove the init script check.
+replace(
+  '.github/workflows/test.yml',
+  / {2}init_script:.*? {2}docker_build:/gs,
+  '  docker_build:',
+);
