@@ -79,7 +79,7 @@ replace(
 replace(
   [
     'apps/cms/.lagoon.env',
-    'apps/website/.lagoon.env',
+    'apps/publisher/.lagoon.env',
     'apps/preview/.lagoon.env',
   ],
   'PROJECT_NAME=example',
@@ -87,13 +87,13 @@ replace(
 );
 const publisherClientSecret = randomString(32);
 replace(
-  ['apps/cms/.lagoon.env', 'apps/website/.lagoon.env'],
+  ['apps/cms/.lagoon.env', 'apps/publisher/.lagoon.env'],
   'PUBLISHER_OAUTH2_CLIENT_SECRET=REPLACE_ME',
   'PUBLISHER_OAUTH2_CLIENT_SECRET=' + publisherClientSecret,
 );
 const publisherSessionSecret = randomString(32);
 replace(
-  ['apps/website/.lagoon.env'],
+  ['apps/publisher/.lagoon.env'],
   'PUBLISHER_OAUTH2_SESSION_SECRET=REPLACE_ME',
   'PUBLISHER_OAUTH2_SESSION_SECRET=' + publisherSessionSecret,
 );
