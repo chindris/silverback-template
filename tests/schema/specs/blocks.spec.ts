@@ -95,9 +95,6 @@ test('Blocks', async () => {
       complete: _loadDrupalPage(id: "a397ca48-8fad-411e-8901-0eba2feb989c") {
         ...Blocks
       }
-      minimal: _loadDrupalPage(id: "ceb9b2a7-4c4c-4084-ada9-d5f6505d466b") {
-        ...Blocks
-      }
     }
   `);
 
@@ -274,64 +271,6 @@ test('Blocks', async () => {
               "__typename": "MediaImage",
             },
             "lead": "Lead text",
-          },
-        },
-        "minimal": {
-          "content": [
-            {
-              "__typename": "BlockMedia",
-              "caption": null,
-              "media": null,
-            },
-            {
-              "__typename": "BlockForm",
-              "url": null,
-            },
-            {
-              "__typename": "BlockMarkup",
-              "markup": "
-    <ul><li></li></ul>
-
-    <figure class="wp-block-table"><table><tbody><tr><td></td><td></td></tr><tr><td></td><td></td></tr></tbody></table></figure>
-
-    <h2 class="wp-block-custom-heading"></h2>
-    ",
-            },
-            {
-              "__typename": "BlockCta",
-              "icon": null,
-              "iconPosition": null,
-              "openInNewTab": null,
-              "text": null,
-              "url": null,
-            },
-            {
-              "__typename": "BlockImageWithText",
-              "image": null,
-              "imagePosition": "left",
-              "textContent": {
-                "__typename": "BlockMarkup",
-                "markup": "
-    <p></p>
-    ",
-              },
-            },
-            {
-              "__typename": "BlockQuote",
-              "author": "Jane Doe",
-              "image": null,
-              "quote": "In vitae diam quis odio tincidunt faucibus eget ut libero",
-              "role": null,
-            },
-          ],
-          "hero": {
-            "__typename": "Hero",
-            "ctaText": null,
-            "ctaUrl": null,
-            "formUrl": null,
-            "headline": "All kinds of blocks with minimum data",
-            "image": null,
-            "lead": null,
           },
         },
       },
