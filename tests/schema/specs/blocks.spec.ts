@@ -677,7 +677,7 @@ test('Block: Quote', async () => {
                 "__typename": "MediaImage",
               },
               "quote": "My mother always used to say: The older you get, the better you get, unless you’re a banana.",
-              "role": "The Golden Girls",
+              "role": "TheGoldenGirls",
             },
           ],
         },

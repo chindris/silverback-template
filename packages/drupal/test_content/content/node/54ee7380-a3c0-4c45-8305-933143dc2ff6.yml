@@ -54,7 +54,7 @@ default:
         <!-- wp:custom/hero {"headline":"Block: Quote","lead":"Block: Quote"} /-->
 
         <!-- wp:custom/content -->
-        <!-- wp:custom/quote {"quote":"My mother always used to say: The older you get, the better you get, unless you\u2019re a banana.","author":"Rose (Betty White)","role":"The\u00a0Golden Girls","mediaEntityIds":["5dfc1856-e9e4-4f02-9cd6-9d888870ce1a"]} /-->
+        <!-- wp:custom/quote {"quote":"My mother always used to say: The older you get, the better you get, unless you\u2019re a banana.","author":"Rose (Betty White)","role":"TheGoldenGirls","mediaEntityIds":["5dfc1856-e9e4-4f02-9cd6-9d888870ce1a"]} /-->
         <!-- /wp:custom/content -->
       format: gutenberg
       summary: ''
