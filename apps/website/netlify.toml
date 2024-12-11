@@ -1,2 +1,6 @@
+[build]
+command = "turbo run build --filter @custom/website"
+publish = "apps/website/public"
+
 [[plugins]]
-  package = "@netlify/plugin-gatsby"
+package = "@netlify/plugin-gatsby"
