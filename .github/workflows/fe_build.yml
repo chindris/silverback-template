@@ -68,6 +68,10 @@ jobs:
             pnpm build:gatsby 
           fi
 
+          # Debug
+          env | grep VITE_
+          grep -R 'api_root:' public/admin/assets
+
           # Deploy
           pnpm netlify env:set AWS_LAMBDA_JS_RUNTIME nodejs18.x
           pnpm netlify env:set DRUPAL_EXTERNAL_URL $DRUPAL_EXTERNAL_URL
