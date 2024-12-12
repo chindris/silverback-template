@@ -300,9 +300,11 @@ test('Block: Accordion', async () => {
               "items": [
                 {
                   "__typename": "BlockAccordionItemText",
-                  "icon": "",
+                  "icon": "checkmark",
                   "textContent": {
                     "markup": "
+    <p>I am the content for title one.</p>
+
     <p>Lorem ipsum dolor sit amet consectetur adipiscing elit auctor, lectus nibh gravida platea euismod parturient vitae interdum senectus, laoreet litora mauris tempor risus curae inceptos. Morbi ut facilisi ullamcorper arcu dictum hac congue eros nunc, nisl nullam dictumst malesuada euismod primis fusce convallis tempor, sociosqu est dis cursus maecenas id felis dui. Vestibulum turpis scelerisque montes felis laoreet metus ligula tincidunt auctor tempus fusce fermentum, conubia habitant sapien hac sed semper cum cubilia nunc augue. Laoreet velit parturient fermentum penatibus sociosqu mollis auctor nascetur pellentesque et libero, ac nisl commodo posuere sagittis enim egestas placerat molestie curabitur. Dictumst laoreet commodo magnis feugiat sagittis platea felis est convallis, integer curae blandit sociis suspendisse maecenas potenti risus ridiculus, a tempor tellus pellentesque fermentum fames tincidunt scelerisque.</p>
     ",
                   },
@@ -310,23 +312,39 @@ test('Block: Accordion', async () => {
                 },
                 {
                   "__typename": "BlockAccordionItemText",
-                  "icon": "",
+                  "icon": "questionmark",
                   "textContent": {
                     "markup": "
+    <p><meta charset="utf-8">I am the content for title two.</p>
+
     <p>Lorem ipsum dolor sit amet consectetur adipiscing elit dis rutrum vestibulum congue est malesuada egestas vitae, at ante varius nec vulputate cubilia mauris cras auctor suscipit faucibus nisl dictumst. Pulvinar sociosqu parturient habitant himenaeos in volutpat nascetur magnis, iaculis varius at mi sollicitudin morbi ligula nec, diam per scelerisque risus elementum tempor vel. Velit montes quisque metus penatibus porttitor iaculis justo posuere, porta suspendisse sem nullam ante facilisis proin, neque sollicitudin dis himenaeos ligula morbi euismod. Volutpat tempus ultrices feugiat dictum senectus porta condimentum sodales, eros sociosqu libero risus suspendisse proin tortor, egestas ridiculus nostra platea commodo id torquent. Dis ultrices mollis hac tempor magna diam suscipit natoque odio et, tortor tellus enim litora eu felis ad volutpat cursus pharetra, nostra mus auctor inceptos metus mattis porta scelerisque magnis. Natoque iaculis nascetur pellentesque est arcu pharetra phasellus interdum, venenatis tempor proin dictum metus dapibus dis, tortor malesuada duis ad eu ullamcorper elementum. Metus odio dignissim dictum fames nec ut, faucibus porta placerat ullamcorper cum donec felis, tempor imperdiet scelerisque commodo himenaeos.</p>
     ",
                   },
-                  "title": "<meta charset="utf-8">Accordion Title Two",
+                  "title": "Accordion Title Two",
+                },
+                {
+                  "__typename": "BlockAccordionItemText",
+                  "icon": "arrow",
+                  "textContent": {
+                    "markup": "
+    <p><meta charset="utf-8">I am the content for title three.</p>
+
+    <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sodales, dictum massa scelerisque parturient sagittis rutrum taciti porttitor, in eleifend habitant habitasse enim placerat phasellus. Mus tempus euismod id donec facilisi imperdiet mollis, montes convallis cubilia per tristique faucibus, pellentesque quam interdum sagittis tellus ac. Sociis sapien imperdiet himenaeos mus ornare conubia hac molestie proin, etiam diam arcu eleifend euismod odio vivamus. Turpis nisl ad hac duis fusce phasellus nibh dictum integer purus arcu, donec sociosqu eu at tortor sapien scelerisque tempus gravida mattis, torquent praesent feugiat volutpat felis viverra pellentesque eget suscipit quisque.</p>
+    ",
+                  },
+                  "title": "Accordion Title Three",
                 },
                 {
                   "__typename": "BlockAccordionItemText",
                   "icon": "",
                   "textContent": {
                     "markup": "
-    <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sodales, dictum massa scelerisque parturient sagittis rutrum taciti porttitor, in eleifend habitant habitasse enim placerat phasellus. Mus tempus euismod id donec facilisi imperdiet mollis, montes convallis cubilia per tristique faucibus, pellentesque quam interdum sagittis tellus ac. Sociis sapien imperdiet himenaeos mus ornare conubia hac molestie proin, etiam diam arcu eleifend euismod odio vivamus. Turpis nisl ad hac duis fusce phasellus nibh dictum integer purus arcu, donec sociosqu eu at tortor sapien scelerisque tempus gravida mattis, torquent praesent feugiat volutpat felis viverra pellentesque eget suscipit quisque.</p>
+    <p><meta charset="utf-8"><meta charset="utf-8">I am the content for title four.</p>
+
+    <p>Lorem ipsum dolor sit amet consectetur adipiscing elit justo habitant, platea laoreet hac suspendisse taciti euismod fermentum cras. Sed purus est varius nullam, sem magna ultricies viverra dui, class a vehicula. Leo enim dapibus malesuada feugiat dis dui placerat pretium, lacus taciti cum sociis diam tortor dictumst, libero vel venenatis turpis nisl dictum cursus. Auctor habitant duis vestibulum venenatis natoque a ligula, malesuada senectus integer tempus fames turpis. Nostra varius feugiat habitasse eget lacinia porttitor phasellus aliquet nascetur eu a semper maecenas conubia velit sagittis, euismod praesent justo nunc lectus pulvinar nullam egestas molestie pretium metus ullamcorper luctus tincidunt tellus. Accumsan dapibus per quisque malesuada sagittis leo montes erat, euismod nostra sem cras rhoncus turpis tempor placerat aptent, taciti cubilia lobortis pellentesque nulla lectus eleifend.</p>
     ",
                   },
-                  "title": "Accordion Title Three",
+                  "title": "Accordion Title Four",
                 },
               ],
             },
@@ -469,21 +487,21 @@ test('Block: Image Teasers', async () => {
               "teasers": [
                 {
                   "__typename": "BlockImageTeaser",
-                  "ctaText": "Image Teaser CTA",
-                  "ctaUrl": null,
+                  "ctaText": "Image One Teaser CTA",
+                  "ctaUrl": "/",
                   "image": {
                     "__typename": "MediaImage",
                   },
-                  "title": "Image Teaser Title",
+                  "title": "Image One Teaser Title",
                 },
                 {
                   "__typename": "BlockImageTeaser",
-                  "ctaText": "Image Teaser CTA",
-                  "ctaUrl": null,
+                  "ctaText": "Image Two Teaser CTA",
+                  "ctaUrl": "/",
                   "image": {
                     "__typename": "MediaImage",
                   },
-                  "title": "Image Teaser Title",
+                  "title": "Image Two Teaser Title",
                 },
               ],
             },
