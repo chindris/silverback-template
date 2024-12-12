@@ -58,3 +58,49 @@ default:
         <!-- /wp:custom/content -->
       format: gutenberg
       summary: ''
+translations:
+  de:
+    status:
+      -
+        value: true
+    uid:
+      -
+        target_id: 1
+    title:
+      -
+        value: 'Webform Success Page DE'
+    created:
+      -
+        value: 1734005079
+    promote:
+      -
+        value: false
+    sticky:
+      -
+        value: false
+    moderation_state:
+      -
+        value: published
+    path:
+      -
+        alias: /webform/success
+        langcode: de
+        pathauto: 0
+    content_translation_source:
+      -
+        value: en
+    content_translation_outdated:
+      -
+        value: false
+    body:
+      -
+        value: |-
+          <!-- wp:custom/hero {"headline":"Webformular-Erfolgsseite","lead":"Webformular-Erfolgsseite"} /-->
+
+          <!-- wp:custom/content -->
+          <!-- wp:paragraph -->
+          <p>Dies ist die Erfolgsseite des Webformulars. Einige Webformulare werden bei Erfolg hierher umgeleitet.</p>
+          <!-- /wp:paragraph -->
+          <!-- /wp:custom/content -->
+        format: gutenberg
+        summary: ''
