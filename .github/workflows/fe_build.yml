@@ -70,7 +70,13 @@ jobs:
 
           # Debug
           env | grep VITE_
-          grep -R 'api_root:' public/admin/assets
+          pwd
+          ls -lisa .
+          ls -lisa public
+          ls -lisa public/admin
+          ls -lisa public/admin/assets
+          cat public/admin/assets/*
+          grep -R 'api_root' public/admin/assets
 
           # Deploy
           pnpm netlify env:set AWS_LAMBDA_JS_RUNTIME nodejs18.x
