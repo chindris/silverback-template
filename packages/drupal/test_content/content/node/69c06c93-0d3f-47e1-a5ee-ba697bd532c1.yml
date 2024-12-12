@@ -60,3 +60,51 @@ default:
         <!-- /wp:custom/content -->
       format: gutenberg
       summary: ''
+translations:
+  de:
+    status:
+      -
+        value: true
+    uid:
+      -
+        target_id: 1
+    title:
+      -
+        value: 'Block: Form DE'
+    created:
+      -
+        value: 1734004706
+    promote:
+      -
+        value: false
+    sticky:
+      -
+        value: false
+    moderation_state:
+      -
+        value: published
+    path:
+      -
+        alias: /block-form
+        langcode: de
+        pathauto: 0
+    content_translation_source:
+      -
+        value: en
+    content_translation_outdated:
+      -
+        value: false
+    body:
+      -
+        value: |-
+          <!-- wp:custom/hero {"headline":"Block: Formular","lead":"Block: Formular"} /-->
+
+          <!-- wp:custom/content -->
+          <!-- wp:custom/form {"formId":"contact"} /-->
+
+          <!-- wp:custom/form {"formId":"inquiry"} /-->
+
+          <!-- wp:custom/form {"formId":"styling"} /-->
+          <!-- /wp:custom/content -->
+        format: gutenberg
+        summary: ''
