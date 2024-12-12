@@ -33,7 +33,6 @@ test('Webforms work', async ({ page }) => {
     .first()
     .getByRole('button', { name: 'Send message' })
     .click();
-  // TODO: Find out why it does not work.
   await expect(page).toHaveURL(websiteUrl('/de/webform/success'));
 
   // TODO: Move all silverback-mono tests here?
