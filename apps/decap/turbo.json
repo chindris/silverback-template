@@ -3,6 +3,7 @@
   "extends": ["//"],
   "tasks": {
     "prep:vite": {
+      "env": ["VITE_DECAP_REPO", "VITE_DECAP_BRANCH"],
       "dependsOn": ["^prep"],
       "inputs": ["src/**", "vite.config.ts", "index.html"],
       "outputs": ["dist/**"]
