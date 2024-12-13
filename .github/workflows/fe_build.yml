@@ -34,13 +34,6 @@ jobs:
           server-token: 'local'
           repo-token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Prepare
-        run: SKIP_DRUPAL_INSTALL=1 pnpm turbo:prep
-        env:
-          TURBO_API: 'http://127.0.0.1:9080'
-          TURBO_TOKEN: 'local'
-          TURBO_TEAM: 'local'
-
       - name: Publisher
         uses: AmazeeLabs/publisher-action@4371b4a90a9fe2c86248e76c0f428e39abf6b610
         with:
@@ -49,6 +42,17 @@ jobs:
             apps/website/.cache
             apps/website/public
           cache_key: 'fe-build-${{ inputs.env }}'
+
+      - name: Prepare
+        run: SKIP_DRUPAL_INSTALL=1 pnpm turbo:prep
+        env:
+          TURBO_API: 'http://127.0.0.1:9080'
+          TURBO_TOKEN: 'local'
+          TURBO_TEAM: 'local'
+          # Vite bundles its env vars into the build, so we need to pass them in
+          # the prep step.
+          VITE_DECAP_REPO: ${{ github.repository }}
+          VITE_DECAP_BRANCH: ${{ github.ref_name }}
 
       - name: Build & deploy
         run: |
@@ -68,20 +72,10 @@ jobs:
             pnpm build:gatsby 
           fi
 
-          # Debug
-          env | grep VITE_
-          pwd
-          ls -lisa .
-          ls -lisa public
-          ls -lisa public/admin
-          ls -lisa public/admin/assets
-          cat public/admin/assets/*
-          grep -R 'api_root' public/admin/assets
-
           # Deploy
           pnpm netlify env:set AWS_LAMBDA_JS_RUNTIME nodejs18.x
           pnpm netlify env:set DRUPAL_EXTERNAL_URL $DRUPAL_EXTERNAL_URL
-          pnpm netlify deploy --cwd=. --dir=apps/website/public --prodIfUnlocked
+          pnpm netlify deploy --cwd=. --dir=apps/website/public --prodIfUnlocked --skip-functions-cache
 
           # Report success to Publisher
           echo "BUILD_IS_SUCCESSFUL=1" >> $GITHUB_ENV
