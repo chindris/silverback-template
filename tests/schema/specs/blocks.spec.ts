@@ -576,11 +576,11 @@ test('Block: Heading', async () => {
 
     <h4 class="wp-block-custom-heading">Heading four</h4>
 
-    <h2 class="wp-block-custom-heading">Heading two - Bold</h2>
+    <h2 class="wp-block-custom-heading"><strong>Heading two - Bold</strong></h2>
 
-    <h3 class="wp-block-custom-heading">Heading three - Bold</h3>
+    <h3 class="wp-block-custom-heading"><strong>Heading three - Bold</strong></h3>
 
-    <h4 class="wp-block-custom-heading">Heading four - Bold</h4>
+    <h4 class="wp-block-custom-heading"><strong>Heading four - Bold</strong></h4>
     ",
             },
           ],
