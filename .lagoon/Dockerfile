@@ -35,7 +35,7 @@ RUN --mount=type=cache,target=/tmp/cache composer install --no-dev
 
 WORKDIR /app
 
-# Decap config.
+# Decap config. For the case if Publisher mode is "local".
 ENV VITE_DECAP_REPO='AmazeeLabs/silverback-template'
 ARG LAGOON_GIT_BRANCH
 ENV VITE_DECAP_BRANCH="$LAGOON_GIT_BRANCH"
