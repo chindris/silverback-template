@@ -75,7 +75,7 @@ jobs:
           # Deploy
           pnpm netlify env:set AWS_LAMBDA_JS_RUNTIME nodejs18.x
           pnpm netlify env:set DRUPAL_EXTERNAL_URL $DRUPAL_EXTERNAL_URL
-          pnpm netlify deploy --cwd=. --dir=apps/website/public --prodIfUnlocked --skip-functions-cache
+          pnpm netlify deploy --cwd=. --dir=apps/website/public --prodIfUnlocked --debug
 
           # Report success to Publisher
           echo "BUILD_IS_SUCCESSFUL=1" >> $GITHUB_ENV
