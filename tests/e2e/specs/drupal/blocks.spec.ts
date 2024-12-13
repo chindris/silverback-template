@@ -150,7 +150,7 @@ test.describe('Testing All Blocks', () => {
 
     await expect(
       page.locator('img[data-test-id=hero-image][alt="The silverback"]'),
-    ).toHaveCount(1);
+    ).toHaveCount(2);
 
     await expect(
       page.locator('.silverback-iframe iframe').first(),
