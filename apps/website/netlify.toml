@@ -3,7 +3,6 @@
 
 [functions]
   directory = "netlify/functions"
-  external_node_modules = ["@amazeelabs/decap-cms-backend-token-auth"]
 
 [build]
   publish = "public"
