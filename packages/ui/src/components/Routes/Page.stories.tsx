@@ -76,6 +76,10 @@ export const Default = {
           ...InlineStyles.args,
         },
         {
+          __typename: 'BlockMedia',
+          ...Paragraph.args,
+        },
+        {
           __typename: 'BlockImageWithText',
           ...ImageRight.args,
         },
