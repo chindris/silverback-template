@@ -5,7 +5,6 @@
   directory = "netlify/functions"
 
 [build]
-  base = "apps/website"
   publish = "public"
   edge_functions = "netlify/edge-functions"
 
