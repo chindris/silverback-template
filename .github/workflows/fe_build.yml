@@ -34,15 +34,6 @@ jobs:
           server-token: 'local'
           repo-token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Publisher
-        uses: AmazeeLabs/publisher-action@4371b4a90a9fe2c86248e76c0f428e39abf6b610
-        with:
-          success_env_var_name: BUILD_IS_SUCCESSFUL
-          cache_paths: |
-            apps/website/.cache
-            apps/website/public
-          cache_key: 'fe-build-${{ inputs.env }}'
-
       - name: Prepare
         run: SKIP_DRUPAL_INSTALL=1 pnpm turbo:prep
         env:
@@ -53,6 +44,15 @@ jobs:
           # the prep step.
           VITE_DECAP_REPO: ${{ github.repository }}
           VITE_DECAP_BRANCH: ${{ github.ref_name }}
+
+      - name: Publisher
+        uses: AmazeeLabs/publisher-action@4371b4a90a9fe2c86248e76c0f428e39abf6b610
+        with:
+          success_env_var_name: BUILD_IS_SUCCESSFUL
+          cache_paths: |
+            apps/website/.cache
+            apps/website/public
+          cache_key: 'fe-build-${{ inputs.env }}'
 
       - name: Build & deploy
         run: |
