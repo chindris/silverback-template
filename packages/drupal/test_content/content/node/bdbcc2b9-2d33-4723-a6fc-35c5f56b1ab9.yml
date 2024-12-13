@@ -64,16 +64,16 @@ default:
         <h4 class="wp-block-custom-heading">Heading four</h4>
         <!-- /wp:custom/heading -->
 
-        <!-- wp:custom/heading {"text":"Heading two - Bold"} -->
-        <h2 class="wp-block-custom-heading">Heading two - Bold</h2>
+        <!-- wp:custom/heading {"text":"\u003cstrong\u003eHeading two - Bold\u003c/strong\u003e"} -->
+        <h2 class="wp-block-custom-heading"><strong>Heading two - Bold</strong></h2>
         <!-- /wp:custom/heading -->
 
-        <!-- wp:custom/heading {"level":3,"text":"Heading three - Bold"} -->
-        <h3 class="wp-block-custom-heading">Heading three - Bold</h3>
+        <!-- wp:custom/heading {"level":3,"text":"\u003cstrong\u003eHeading three - Bold\u003c/strong\u003e"} -->
+        <h3 class="wp-block-custom-heading"><strong>Heading three - Bold</strong></h3>
         <!-- /wp:custom/heading -->
 
-        <!-- wp:custom/heading {"level":4,"text":"Heading four - Bold"} -->
-        <h4 class="wp-block-custom-heading">Heading four - Bold</h4>
+        <!-- wp:custom/heading {"level":4,"text":"\u003cstrong\u003eHeading four - Bold\u003c/strong\u003e"} -->
+        <h4 class="wp-block-custom-heading"><strong>Heading four - Bold</strong></h4>
         <!-- /wp:custom/heading -->
         <!-- /wp:custom/content -->
       format: gutenberg
