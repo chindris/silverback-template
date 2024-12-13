@@ -35,6 +35,11 @@ RUN --mount=type=cache,target=/tmp/cache composer install --no-dev
 
 WORKDIR /app
 
+# Decap config.
+ENV VITE_DECAP_REPO='AmazeeLabs/silverback-template'
+ARG LAGOON_GIT_BRANCH
+ENV VITE_DECAP_BRANCH="$LAGOON_GIT_BRANCH"
+
 # Copy the all package sources, install and prepare them.
 COPY . /app
 RUN --mount=type=cache,target=/tmp/cache pnpm i && \
@@ -113,11 +118,6 @@ RUN apk add --no-cache sqlite curl github-cli
 RUN npm install -g pnpm@8.15.9
 
 COPY --from=builder /tmp/.deploy/publisher /app
-
-# Decap config.
-ENV VITE_DECAP_REPO='AmazeeLabs/silverback-template'
-ARG LAGOON_GIT_BRANCH
-ENV VITE_DECAP_BRANCH="$LAGOON_GIT_BRANCH"
 
 CMD pnpm publisher
 
