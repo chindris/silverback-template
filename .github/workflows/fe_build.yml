@@ -68,10 +68,16 @@ jobs:
             pnpm build:gatsby 
           fi
 
+          # "netlify deploy" fails to locate edge functions when executed from a
+          # monorepo. Flags like --cwd or --filter do not help. So we deploy the
+          # website app to a dedicated folder first.
+          pnpm deploy --filter "@custom/website" /tmp/deploy --prod
+          cd /tmp/deploy
+
           # Deploy
           pnpm netlify env:set AWS_LAMBDA_JS_RUNTIME nodejs18.x
           pnpm netlify env:set DRUPAL_EXTERNAL_URL $DRUPAL_EXTERNAL_URL
-          pnpm netlify deploy --cwd=. --dir=apps/website/public --prodIfUnlocked
+          pnpm netlify deploy --prodIfUnlocked
 
           # Report success to Publisher
           echo "BUILD_IS_SUCCESSFUL=1" >> $GITHUB_ENV
