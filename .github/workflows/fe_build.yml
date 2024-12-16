@@ -40,10 +40,6 @@ jobs:
           TURBO_API: 'http://127.0.0.1:9080'
           TURBO_TOKEN: 'local'
           TURBO_TEAM: 'local'
-          # Vite bundles its env vars into the build, so we need to pass them in
-          # the prep step.
-          VITE_DECAP_REPO: ${{ github.repository }}
-          VITE_DECAP_BRANCH: ${{ github.ref_name }}
 
       - name: Publisher
         uses: AmazeeLabs/publisher-action@4371b4a90a9fe2c86248e76c0f428e39abf6b610
