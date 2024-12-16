@@ -2,18 +2,16 @@ import { saveWebpage } from '@amazeelabs/save-webpage';
 import { expect, Page, test } from '@playwright/test';
 import { execSync } from 'child_process';
 
-import { cmsUrl } from '../helpers/url';
-
-const baseDir = '../../packages/ui/static/stories/webforms';
+const baseDir = '../ui/static/stories/webforms';
 const iframeResizerSelector =
   'script[src*="silverback_iframe/js/iframeResizer.contentWindow.min.js"]';
 
 test('Export webforms for styling', async ({ page }) => {
   execSync(`rm -rf ${baseDir}`);
 
-  const baseUrl = cmsUrl('/en/form/styling?iframe=true&no_css=true');
-
-  page.setViewportSize({
+  const baseUrl =
+    'http://127.0.0.1:8888/en/form/styling?iframe=true&no_css=true';
+  await page.setViewportSize({
     // In the frontend the form is wrapped into a div with max-w-3xl class,
     // which translates to 48 rem, which is 768 px. Roughly.
     // We try to match the width because the modal is centered dynamically by
