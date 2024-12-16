@@ -823,9 +823,21 @@ importers:
 
   tests/e2e:
     devDependencies:
+      '@custom/cms':
+        specifier: workspace:*
+        version: link:../../apps/cms
+      '@custom/decap':
+        specifier: workspace:*
+        version: link:../../apps/decap
       '@custom/eslint-config':
         specifier: workspace:*
         version: link:../../packages/eslint-config
+      '@custom/preview':
+        specifier: workspace:*
+        version: link:../../apps/preview
+      '@custom/website':
+        specifier: workspace:*
+        version: link:../../apps/website
       '@playwright/test':
         specifier: ^1.44.1
         version: 1.44.1
