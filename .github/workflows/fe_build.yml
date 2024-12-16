@@ -34,13 +34,6 @@ jobs:
           server-token: 'local'
           repo-token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Prepare
-        run: SKIP_DRUPAL_INSTALL=1 pnpm turbo:prep
-        env:
-          TURBO_API: 'http://127.0.0.1:9080'
-          TURBO_TOKEN: 'local'
-          TURBO_TEAM: 'local'
-
       - name: Publisher
         uses: AmazeeLabs/publisher-action@4371b4a90a9fe2c86248e76c0f428e39abf6b610
         with:
@@ -49,6 +42,13 @@ jobs:
             apps/website/.cache
             apps/website/public
           cache_key: 'fe-build-${{ inputs.env }}'
+
+      - name: Prepare
+        run: SKIP_DRUPAL_INSTALL=1 pnpm turbo:prep
+        env:
+          TURBO_API: 'http://127.0.0.1:9080'
+          TURBO_TOKEN: 'local'
+          TURBO_TEAM: 'local'
 
       - name: Build & deploy
         run: |
