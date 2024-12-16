@@ -28,9 +28,12 @@ test('Blocks', async () => {
             __typename
             ... on MediaImage {
               __typename
+              url
+              alt
             }
             ... on MediaVideo {
               __typename
+              url
             }
           }
         }
@@ -92,10 +95,10 @@ test('Blocks', async () => {
       }
     }
     {
-      complete: _loadDrupalPage(id: "a397ca48-8fad-411e-8901-0eba2feb989c") {
+      complete: viewPage(path: "/en/blocks-complete") {
         ...Blocks
       }
-      minimal: _loadDrupalPage(id: "ceb9b2a7-4c4c-4084-ada9-d5f6505d466b") {
+      minimal: viewPage(path: "/en/blocks-minimal") {
         ...Blocks
       }
     }
@@ -132,6 +135,8 @@ test('Blocks', async () => {
               "caption": "Media image",
               "media": {
                 "__typename": "MediaImage",
+                "alt": "A beautiful landscape.",
+                "url": "http://127.0.0.1:8000/sites/default/files/2023-04/landscape.jpg",
               },
             },
             {
@@ -139,6 +144,7 @@ test('Blocks', async () => {
               "caption": "Media video",
               "media": {
                 "__typename": "MediaVideo",
+                "url": "http://127.0.0.1:8000/sites/default/files/2023-06/video_mp4_belt.mp4",
               },
             },
             {
@@ -340,7 +346,7 @@ test('Blocks', async () => {
 
   const german = await fetch(gql`
     {
-      page: _loadDrupalPage(id: "a397ca48-8fad-411e-8901-0eba2feb989c:de") {
+      page: _loadPage(id: "a397ca48-8fad-411e-8901-0eba2feb989c:de") {
         content {
           __typename
           ... on BlockForm {
@@ -359,7 +365,7 @@ test('Blocks', async () => {
 test('Block - info grid', async () => {
   const result = await fetch(gql`
     {
-      _loadDrupalPage(id: "3164a225-df20-4794-8cfc-b7cd81cfde58") {
+      _loadPage(id: "3164a225-df20-4794-8cfc-b7cd81cfde58") {
         content {
           __typename
           ... on BlockInfoGrid {
@@ -386,7 +392,7 @@ test('Block - info grid', async () => {
   expect(result).toMatchInlineSnapshot(`
     {
       "data": {
-        "_loadDrupalPage": {
+        "_loadPage": {
           "content": [
             {
               "__typename": "BlockInfoGrid",
@@ -647,7 +653,7 @@ test('Block - info grid', async () => {
 test('Conditional', async () => {
   const result = await fetch(gql`
     {
-      _loadDrupalPage(id: "52ee5cc7-0ac5-49b5-8550-ce59476bd4ac") {
+      _loadPage(id: "52ee5cc7-0ac5-49b5-8550-ce59476bd4ac") {
         content {
           __typename
           ... on BlockConditional {
@@ -666,7 +672,7 @@ test('Conditional', async () => {
   expect(result).toMatchInlineSnapshot(`
     {
       "data": {
-        "_loadDrupalPage": {
+        "_loadPage": {
           "content": [
             {
               "__typename": "BlockConditional",

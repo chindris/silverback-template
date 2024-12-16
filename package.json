@@ -17,11 +17,11 @@
     "test:format:root": "pnpm prettier --ignore-unknown '**/**' --ignore-path .prettierignore-root",
     "test:format:workspaces": "pnpm --workspace-concurrency=1 -r exec prettier --ignore-unknown '**/**'",
     "turbo:local": "if [ -z $CI ]; then echo $(date)$RANDOM > apps/cms/turbo-seed.txt; fi",
-    "turbo:test": "pnpm turbo:local && pnpm turbo test:unit --output-logs=new-only && pnpm turbo test:integration --output-logs=new-only --concurrency=1",
-    "turbo:test:force": "pnpm turbo test:unit --output-logs=new-only --force && pnpm turbo test:integration --output-logs=new-only --concurrency=1 --force",
-    "turbo:test:quick": "pnpm turbo:local && pnpm turbo test:unit --output-logs=new-only",
+    "turbo:test": "pnpm turbo:local && pnpm tb test:unit --output-logs=new-only && pnpm tb test:integration --output-logs=new-only --concurrency=1",
+    "turbo:test:force": "pnpm tb test:unit --output-logs=new-only --force && pnpm tb test:integration --output-logs=new-only --concurrency=1 --force",
+    "turbo:test:quick": "pnpm turbo:local && pnpm tb test:unit --output-logs=new-only",
     "turbo:prep": "pnpm turbo:local && pnpm turbo prep --output-logs=new-only",
-    "turbo:prep:force": "rm -f apps/cms/web/sites/default/files/.sqlite && pnpm turbo prep --force",
+    "turbo:prep:force": "rm -f apps/cms/web/sites/default/files/.sqlite && pnpm tb prep --force",
     "gutenberg:generate": "pnpm run --filter \"@custom/gutenberg_blocks\" gutenberg:generate"
   },
   "private": true,
@@ -30,14 +30,8 @@
     "@commitlint/config-conventional": "^18.4.3",
     "husky": "^8.0.3",
     "prettier": "^3.2.5",
-    "turbo": "^2.0.6"
-  },
-  "resolutions": {
-    "gatsby-plugin-sharp": "5.13.1",
-    "sharp": "0.33.1",
-    "graphql": "16.8.1"
-  },
-  "pnpm": {
-    "patchedDependencies": {}
+    "turbo": "^2.0.6",
+    "typescript": "^5.3.3",
+    "vitest": "^1.1.1"
   }
 }

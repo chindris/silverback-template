@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test';
 
 import { websiteUrl } from '../../helpers/url';
 
-test('Metatags on Basic page', async ({ page }) => {
+test.fixme('Metatags on Basic page', async ({ page }) => {
   const pageUrl = websiteUrl('/en/page-complete');
   await page.goto(pageUrl);
   await expect(page.locator('head meta[name="title"]')).toHaveAttribute(

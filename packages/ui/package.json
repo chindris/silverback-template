@@ -39,6 +39,7 @@
     "report": "mkdir -p coverage/storybook && nyc report --reporter=lcov -t coverage/storybook --report-dir coverage/storybook"
   },
   "dependencies": {
+    "@amazeelabs/image": "^1.4.3",
     "@amazeelabs/react-intl": "^1.1.1",
     "@amazeelabs/silverback-iframe": "^1.3.0",
     "@custom/schema": "workspace:*",
@@ -52,6 +53,7 @@
     "js-cookie": "^3.0.5",
     "query-string": "^9.0.0",
     "react-hook-form": "^7.49.2",
+    "react-server-dom-webpack": "19.0.0-rc.0",
     "swr": "^2.2.4",
     "unified": "^10.1.2",
     "zod": "^3.23.8",

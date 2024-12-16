@@ -9,6 +9,7 @@
       "outputs": ["src/gatsby-fragments.js", "styles.css"]
     },
     "test:static": {
+      "dependsOn": ["^prep"],
       "inputs": ["src/**", "!src/gatsby-fragments.js"]
     },
     "build": {

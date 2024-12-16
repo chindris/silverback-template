@@ -30,10 +30,10 @@ test('Page', async () => {
       }
     }
     {
-      complete: _loadDrupalPage(id: "ef80e284-154b-41fd-9317-154b0a175299") {
+      complete: viewPage(path: "/en/page-complete") {
         ...Page
       }
-      minimal: _loadDrupalPage(id: "17626bb4-557f-48fc-b869-ae566f4ceae6") {
+      minimal: viewPage(path: "/en/page-minimal") {
         ...Page
       }
     }
@@ -85,6 +85,26 @@ test('Page', async () => {
               },
               "tag": "link",
             },
+            {
+              "attributes": {
+                "content": "Page: complete | Silverback Drupal Template",
+                "href": null,
+                "name": null,
+                "property": "og:title",
+                "rel": null,
+              },
+              "tag": "meta",
+            },
+            {
+              "attributes": {
+                "content": "Headline Lead text Paragraph",
+                "href": null,
+                "name": null,
+                "property": "og:description",
+                "rel": null,
+              },
+              "tag": "meta",
+            },
           ],
           "path": "/en/page-complete",
           "teaserImage": {
@@ -132,6 +152,26 @@ test('Page', async () => {
                 "rel": "canonical",
               },
               "tag": "link",
+            },
+            {
+              "attributes": {
+                "content": "Page: minimal | Silverback Drupal Template",
+                "href": null,
+                "name": null,
+                "property": "og:title",
+                "rel": null,
+              },
+              "tag": "meta",
+            },
+            {
+              "attributes": {
+                "content": "",
+                "href": null,
+                "name": null,
+                "property": "og:description",
+                "rel": null,
+              },
+              "tag": "meta",
             },
           ],
           "path": "/en/page-minimal",
