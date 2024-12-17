@@ -1,10 +1,18 @@
 import { expect, test as setup } from '@chromatic-com/playwright';
 
-import { cmsUrl } from '../../helpers/url';
+import { cmsUrl } from '../helpers/url';
+import {
+  netlifyBootTimeout,
+  waitForNetlifyBoot,
+} from '../helpers/wait-for-netlify-boot';
+
+setup.setTimeout(netlifyBootTimeout + 30_000);
 
 setup.use({ disableAutoSnapshot: true });
 
 setup('setup', async ({ page }) => {
+  await waitForNetlifyBoot(page);
+
   await page.goto(cmsUrl('/user/login'));
   await page.getByRole('textbox', { name: 'Username' }).fill('admin');
   await page.getByRole('textbox', { name: 'Password' }).fill('admin');

@@ -510,6 +510,24 @@ importers:
         specifier: ^8.15.0
         version: 8.15.0(eslint@9.14.0)(typescript@5.6.3)
 
+  packages/init:
+    devDependencies:
+      '@custom/eslint-config':
+        specifier: workspace:*
+        version: link:../eslint-config
+      '@types/prompts':
+        specifier: ^2.4.9
+        version: 2.4.9
+      prompts:
+        specifier: ^2.4.2
+        version: 2.4.2
+      tsx:
+        specifier: ^4.7.1
+        version: 4.7.1
+      typescript:
+        specifier: ^5.3.3
+        version: 5.6.3
+
   packages/schema:
     dependencies:
       '@amazeelabs/executors':
@@ -785,7 +803,7 @@ importers:
         specifier: ^1.1.1
         version: 1.1.1(@types/node@18.15.3)(happy-dom@12.10.3)
 
-  tests/e2e:
+  packages/webform-export:
     devDependencies:
       '@amazeelabs/save-webpage':
         specifier: ^1.1.1
@@ -795,7 +813,34 @@ importers:
         version: 0.10.1(@playwright/test@1.44.1)(esbuild@0.20.2)(typescript@5.6.3)
       '@custom/eslint-config':
         specifier: workspace:*
+        version: link:../eslint-config
+      '@playwright/test':
+        specifier: ^1.44.1
+        version: 1.44.1
+      '@types/node':
+        specifier: ^18
+        version: 18.15.13
+      typescript:
+        specifier: ^5.3.3
+        version: 5.6.3
+
+  tests/e2e:
+    devDependencies:
+      '@custom/cms':
+        specifier: workspace:*
+        version: link:../../apps/cms
+      '@custom/decap':
+        specifier: workspace:*
+        version: link:../../apps/decap
+      '@custom/eslint-config':
+        specifier: workspace:*
         version: link:../../packages/eslint-config
+      '@custom/preview':
+        specifier: workspace:*
+        version: link:../../apps/preview
+      '@custom/website':
+        specifier: workspace:*
+        version: link:../../apps/website
       '@playwright/test':
         specifier: ^1.44.1
         version: 1.44.1
@@ -805,6 +850,36 @@ importers:
       chromatic:
         specifier: ^11.20.0
         version: 11.20.0(@chromatic-com/playwright@0.10.1)
+      typescript:
+        specifier: ^5.3.3
+        version: 5.6.3
+
+  tests/e2e-basic:
+    devDependencies:
+      '@custom/cms':
+        specifier: workspace:*
+        version: link:../../apps/cms
+      '@custom/decap':
+        specifier: workspace:*
+        version: link:../../apps/decap
+      '@custom/eslint-config':
+        specifier: workspace:*
+        version: link:../../packages/eslint-config
+      '@custom/preview':
+        specifier: workspace:*
+        version: link:../../apps/preview
+      '@custom/publisher':
+        specifier: workspace:*
+        version: link:../../apps/publisher
+      '@custom/website':
+        specifier: workspace:*
+        version: link:../../apps/website
+      '@playwright/test':
+        specifier: ^1.44.1
+        version: 1.44.1
+      '@types/node':
+        specifier: ^18
+        version: 18.15.13
       typescript:
         specifier: ^5.3.3
         version: 5.6.3
@@ -4345,7 +4420,7 @@ packages:
     dependencies:
       '@formatjs/icu-messageformat-parser': 2.9.4
       '@types/json-stable-stringify': 1.1.0
-      '@types/node': 22.9.0
+      '@types/node': 18.15.13
       chalk: 4.1.2
       json-stable-stringify: 1.1.1
       tslib: 2.8.1
@@ -9428,12 +9503,6 @@ packages:
       undici-types: 6.19.8
     dev: true
 
-  /@types/node@22.9.0:
-    resolution: {integrity: sha512-vuyHg81vvWA1Z1ELfvLko2c8f34gyA0zaic0+Rllc5lbCnbSyuvb2Oxpm6TAUAC/2xZN3QGqxBNggD1nNR2AfQ==}
-    dependencies:
-      undici-types: 6.19.8
-    dev: true
-
   /@types/node@8.10.66:
     resolution: {integrity: sha512-tktOkFUA4kXx2hhhrB8bIFb5TbwzS4uOhKEmwiD+NoiL0qtP2OQ9mFldbgD4dV1djrlBYP6eBuQZiWjuHUpqFw==}
 
@@ -9449,6 +9518,13 @@ packages:
 
   /@types/picomatch@3.0.1:
     resolution: {integrity: sha512-1MRgzpzY0hOp9pW/kLRxeQhUWwil6gnrUYd3oEpeYBqp/FexhaCPv3F8LsYr47gtUU45fO2cm1dbwkSrHEo8Uw==}
+    dev: true
+
+  /@types/prompts@2.4.9:
+    resolution: {integrity: sha512-qTxFi6Buiu8+50/+3DGIWLHM6QuWsEKugJnnP6iv2Mc4ncxE4A/OJkjuVOA+5X0X1S/nq5VJRa8Lu+nwcvbrKA==}
+    dependencies:
+      '@types/node': 18.15.13
+      kleur: 3.0.3
     dev: true
 
   /@types/prop-types@15.7.12:
@@ -33801,7 +33877,7 @@ packages:
     dependencies:
       cheerio: 1.0.0-rc.12
       css-url-parser: 1.1.3
-      debug: 4.3.4
+      debug: 4.3.7
       fs-extra: 10.1.0
       got: 12.6.1
       normalize-url: 7.2.0

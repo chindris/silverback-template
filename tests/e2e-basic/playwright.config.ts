@@ -1,20 +1,22 @@
 import { defineConfig, devices } from '@playwright/test';
 
-import defaults from './playwright.config.default';
-
 export default defineConfig({
-  ...defaults,
-  testDir: './specs/drupal',
-  outputDir: './test-results-drupal',
+  retries: process.env.CI ? 2 : 0,
+  workers: 1,
+  reporter: 'html',
+  use: {
+    trace: process.env.CI ? 'retain-on-failure' : 'on',
+    actionTimeout: 10_000,
+  },
   webServer: [
     {
-      command: 'pnpm run --filter "@custom/cms" start >> /tmp/cms.log 2>&1',
+      command: 'pnpm run --filter "@custom/cms" dev >> /tmp/cms.log 2>&1',
       port: 8888,
       reuseExistingServer: !process.env.CI,
     },
     {
       command:
-        'pnpm run --filter "@custom/website" serve >> /tmp/website.log 2>&1',
+        'pnpm run --filter "@custom/publisher" dev >> /tmp/website.log 2>&1',
       port: 8000,
       reuseExistingServer: !process.env.CI,
     },
@@ -25,10 +27,11 @@ export default defineConfig({
       reuseExistingServer: !process.env.CI,
     },
   ],
+  testDir: './specs',
   projects: [
     {
       name: 'setup',
-      testMatch: /drupal\/setup\.ts/,
+      testMatch: /setup\.ts/,
     },
     {
       name: 'chromium',

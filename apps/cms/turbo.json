@@ -8,7 +8,11 @@
       "dependsOn": ["prep:database"]
     },
     "prep:database": {
-      "dependsOn": ["prep:composer", "^prep"],
+      "dependsOn": [
+        "prep:composer",
+        "^prep",
+        "@custom/webform-export#test:static"
+      ],
       "inputs": [
         "turbo-seed.txt",
         "prep-database.sh",
@@ -20,7 +24,7 @@
         "web/sites/default/files/**",
         "../../packages/ui/static/stories/webforms/**"
       ],
-      "env": ["CI", "LAGOON", "SKIP_DRUPAL_INSTALL"]
+      "env": ["CI", "LAGOON", "SKIP_DRUPAL_INSTALL", "GITHUB_ACTIONS"]
     },
     "prep:composer": {
       "inputs": ["composer.json", "composer.lock", "scaffold/**", "patches/**"],
@@ -32,13 +36,6 @@
         "!web/modules/custom/**",
         "!web/themes/custom/**",
         "!web/sites/default/files/**"
-      ]
-    },
-    "test:integration": {
-      "dependsOn": [
-        "prep",
-        "@custom-tests/e2e#test:integration:drupal",
-        "@custom-tests/schema#test:integration"
       ]
     }
   }
