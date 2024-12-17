@@ -14,7 +14,7 @@ Minimum steps
     - Disable `Allow merge commits`
     - Enable `Automatically delete head branches`
 - Clone the newly create repo
-- Run `pnpm --filter @custom/init run init` from the project root
+- Run `pnpm i && pnpm --filter @custom/init run init` from the project root
 - Answer its questions
 - Review the changes in the repo
 - Commit and push
