@@ -1,7 +1,7 @@
 _meta:
   version: '1.0'
   entity_type: node
-  uuid: 17626bb4-557f-48fc-b869-ae566f4ceae6
+  uuid: 080b30e2-5a68-4390-9dec-0c7e850840a7
   bundle: page
   default_langcode: en
 default:
@@ -16,10 +16,10 @@ default:
       target_id: 1
   title:
     -
-      value: 'Page: minimal'
+      value: 'Block: CTA'
   created:
     -
-      value: 1686758984
+      value: 1733840458
   promote:
     -
       value: false
@@ -37,7 +37,7 @@ default:
       value: false
   path:
     -
-      alias: /page-minimal
+      alias: /block-cta
       langcode: en
       pathauto: 0
   content_translation_source:
@@ -49,12 +49,12 @@ default:
   body:
     -
       value: |-
-        <!-- wp:custom/hero /-->
+        <!-- wp:custom/hero {"headline":"Block: CTA","lead":"Block: CTA"} /-->
 
         <!-- wp:custom/content -->
-        <!-- wp:paragraph -->
-        <p></p>
-        <!-- /wp:paragraph -->
+        <!-- wp:custom/cta {"text":"Block CTA"} /-->
+
+        <!-- wp:custom/cta {"text":"CTA with Icon","icon":"ARROW"} /-->
         <!-- /wp:custom/content -->
       format: gutenberg
       summary: ''
