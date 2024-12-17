@@ -808,9 +808,6 @@ importers:
       '@amazeelabs/save-webpage':
         specifier: ^1.1.1
         version: 1.1.1
-      '@chromatic-com/playwright':
-        specifier: ^0.10.1
-        version: 0.10.1(@playwright/test@1.44.1)(esbuild@0.20.2)(typescript@5.6.3)
       '@custom/eslint-config':
         specifier: workspace:*
         version: link:../eslint-config
@@ -826,6 +823,9 @@ importers:
 
   tests/e2e:
     devDependencies:
+      '@chromatic-com/playwright':
+        specifier: ^0.10.1
+        version: 0.10.1(@playwright/test@1.44.1)(typescript@5.6.3)
       '@custom/cms':
         specifier: workspace:*
         version: link:../../apps/cms
@@ -2827,7 +2827,7 @@ packages:
     resolution: {integrity: sha512-snXIGNiZpqjno3XYQN2lbBB+05hsQR/LSttbtIW1c0gmZ7Kh/DIo0YrxlDxCDulAMFPFM8J+4voLwvYepSj3sw==}
     hasBin: true
 
-  /@chromatic-com/playwright@0.10.1(@playwright/test@1.44.1)(esbuild@0.20.2)(typescript@5.6.3):
+  /@chromatic-com/playwright@0.10.1(@playwright/test@1.44.1)(typescript@5.6.3):
     resolution: {integrity: sha512-8+SCVHd4G85h21Cw1zIJFcseWwti1XhqXKtMMVsGOez6V0bvMjn+xvVcnGhLmlZmVdTDLwwSjmzzXmQWm+FaPw==}
     hasBin: true
     peerDependencies:
@@ -2838,8 +2838,8 @@ packages:
       '@segment/analytics-node': 1.3.0
       '@storybook/addon-essentials': 8.3.3(storybook@8.3.3)
       '@storybook/csf': 0.1.11
-      '@storybook/manager-api': 8.3.3(storybook@8.3.3)
-      '@storybook/server-webpack5': 8.4.6(esbuild@0.20.2)(storybook@8.3.3)(typescript@5.6.3)
+      '@storybook/manager-api': 8.4.6(storybook@8.3.3)
+      '@storybook/server-webpack5': 8.4.6(storybook@8.3.3)(typescript@5.6.3)
       storybook: 8.3.3
       ts-dedent: 2.2.0
     transitivePeerDependencies:
@@ -8079,7 +8079,7 @@ packages:
       - supports-color
     dev: true
 
-  /@storybook/builder-webpack5@8.4.6(esbuild@0.20.2)(storybook@8.3.3)(typescript@5.6.3):
+  /@storybook/builder-webpack5@8.4.6(storybook@8.3.3)(typescript@5.6.3):
     resolution: {integrity: sha512-/ZInCFk2myJZinnAU05bATe+9iJn3+YRoxl+CUpYljxzsjoqb7iAwaNaMNolZCDOnMj24Kg2Pt87WtzAhu+ilw==}
     peerDependencies:
       storybook: ^8.4.6
@@ -8089,7 +8089,7 @@ packages:
         optional: true
     dependencies:
       '@storybook/core-webpack': 8.4.6(storybook@8.3.3)
-      '@types/node': 22.9.0
+      '@types/node': 22.7.2
       '@types/semver': 7.5.8
       browser-assert: 1.2.1
       case-sensitive-paths-webpack-plugin: 2.4.0
@@ -8105,13 +8105,13 @@ packages:
       semver: 7.6.3
       storybook: 8.3.3
       style-loader: 3.3.4(webpack@5.91.0)
-      terser-webpack-plugin: 5.3.10(esbuild@0.20.2)(webpack@5.91.0)
+      terser-webpack-plugin: 5.3.10(webpack@5.91.0)
       ts-dedent: 2.2.0
       typescript: 5.6.3
       url: 0.11.3
       util: 0.12.5
       util-deprecate: 1.0.2
-      webpack: 5.91.0(esbuild@0.20.2)
+      webpack: 5.91.0
       webpack-dev-middleware: 6.1.3(webpack@5.91.0)
       webpack-hot-middleware: 2.26.1
       webpack-virtual-modules: 0.6.1
@@ -8202,7 +8202,7 @@ packages:
     peerDependencies:
       storybook: ^8.4.6
     dependencies:
-      '@types/node': 22.9.0
+      '@types/node': 22.7.2
       storybook: 8.3.3
       ts-dedent: 2.2.0
     dev: true
@@ -8315,7 +8315,7 @@ packages:
       '@storybook/core-webpack': 8.4.6(storybook@8.3.3)
       '@storybook/global': 5.0.0
       '@storybook/server': 8.4.6(storybook@8.3.3)
-      '@types/node': 22.9.0
+      '@types/node': 22.7.2
       safe-identifier: 0.4.2
       storybook: 8.3.3
       ts-dedent: 2.2.0
@@ -8423,16 +8423,16 @@ packages:
       util-deprecate: 1.0.2
     dev: true
 
-  /@storybook/server-webpack5@8.4.6(esbuild@0.20.2)(storybook@8.3.3)(typescript@5.6.3):
+  /@storybook/server-webpack5@8.4.6(storybook@8.3.3)(typescript@5.6.3):
     resolution: {integrity: sha512-/LZ6lFFuqnGACGltDXowFPCwlSeIyduvwprhDgm5KsY/AAxDxOJHYfbDdDw9ILPyeWm/LrVToCt8xrIsS4/X7g==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
       storybook: ^8.4.6
     dependencies:
-      '@storybook/builder-webpack5': 8.4.6(esbuild@0.20.2)(storybook@8.3.3)(typescript@5.6.3)
+      '@storybook/builder-webpack5': 8.4.6(storybook@8.3.3)(typescript@5.6.3)
       '@storybook/preset-server-webpack': 8.4.6(storybook@8.3.3)
       '@storybook/server': 8.4.6(storybook@8.3.3)
-      '@types/node': 22.9.0
+      '@types/node': 22.7.2
       storybook: 8.3.3
     transitivePeerDependencies:
       - '@rspack/core'
@@ -11326,15 +11326,6 @@ packages:
     dependencies:
       acorn: 8.11.3
 
-  /acorn-import-assertions@1.9.0(acorn@8.14.0):
-    resolution: {integrity: sha512-cmMwop9x+8KFhxvKrKfPYmN6/pKTYYHBqLa0DfvVZcKMJWNyWLnaqND7dx/qn66R7ewM1UX5XMaDVP5wlVTaVA==}
-    deprecated: package has been renamed to acorn-import-attributes
-    peerDependencies:
-      acorn: ^8
-    dependencies:
-      acorn: 8.14.0
-    dev: true
-
   /acorn-import-attributes@1.9.5(acorn@8.11.3):
     resolution: {integrity: sha512-n02Vykv5uA3eHGM/Z2dQrcD56kL8TyDb2p1+0P83PClMnC/nc+anbQRhIOWnSq4Ke/KvDPrY3C9hDtC/A3eHnQ==}
     peerDependencies:
@@ -13261,7 +13252,7 @@ packages:
       '@chromatic-com/playwright':
         optional: true
     dependencies:
-      '@chromatic-com/playwright': 0.10.1(@playwright/test@1.44.1)(esbuild@0.20.2)(typescript@5.6.3)
+      '@chromatic-com/playwright': 0.10.1(@playwright/test@1.44.1)(typescript@5.6.3)
     dev: true
 
   /chrome-trace-event@1.0.3:
@@ -14212,7 +14203,7 @@ packages:
       postcss-modules-values: 4.0.0(postcss@8.4.49)
       postcss-value-parser: 4.2.0
       semver: 7.6.3
-      webpack: 5.91.0(esbuild@0.20.2)
+      webpack: 5.91.0
     dev: true
 
   /css-minimizer-webpack-plugin@2.0.0(webpack@5.91.0):
@@ -17095,7 +17086,7 @@ packages:
       tailwindcss: ^3.4.0
     dependencies:
       fast-glob: 3.3.2
-      postcss: 8.4.38
+      postcss: 8.4.49
       tailwindcss: 3.4.15
     dev: false
     optional: true
@@ -18389,7 +18380,7 @@ packages:
       semver: 7.6.3
       tapable: 2.2.1
       typescript: 5.6.3
-      webpack: 5.91.0(esbuild@0.20.2)
+      webpack: 5.91.0
     dev: true
 
   /form-data-encoder@2.1.4:
@@ -20862,7 +20853,7 @@ packages:
       lodash: 4.17.21
       pretty-error: 4.0.0
       tapable: 2.2.1
-      webpack: 5.91.0(esbuild@0.20.2)
+      webpack: 5.91.0
     dev: true
 
   /htmlparser2@3.10.1:
@@ -27061,7 +27052,7 @@ packages:
     dependencies:
       icss-utils: 5.1.0(postcss@8.4.49)
       postcss: 8.4.49
-      postcss-selector-parser: 6.1.2
+      postcss-selector-parser: 6.0.16
       postcss-value-parser: 4.2.0
     dev: true
 
@@ -27081,7 +27072,7 @@ packages:
       postcss: ^8.1.0
     dependencies:
       postcss: 8.4.49
-      postcss-selector-parser: 6.1.2
+      postcss-selector-parser: 6.0.16
     dev: true
 
   /postcss-modules-values@4.0.0(postcss@8.4.38):
@@ -30881,7 +30872,7 @@ packages:
     peerDependencies:
       webpack: ^5.0.0
     dependencies:
-      webpack: 5.91.0(esbuild@0.20.2)
+      webpack: 5.91.0
     dev: true
 
   /style-to-object@0.3.0:
@@ -31284,31 +31275,6 @@ packages:
       serialize-javascript: 6.0.2
       terser: 5.30.3
       webpack: 5.91.0(esbuild@0.19.12)
-    dev: true
-
-  /terser-webpack-plugin@5.3.10(esbuild@0.20.2)(webpack@5.91.0):
-    resolution: {integrity: sha512-BKFPWlPDndPs+NGGCr1U59t0XScL5317Y0UReNrHaw9/FwhPENlq6bfgs+4yPfyP51vqC1bQ4rp1EfXW5ZSH9w==}
-    engines: {node: '>= 10.13.0'}
-    peerDependencies:
-      '@swc/core': '*'
-      esbuild: '*'
-      uglify-js: '*'
-      webpack: ^5.1.0
-    peerDependenciesMeta:
-      '@swc/core':
-        optional: true
-      esbuild:
-        optional: true
-      uglify-js:
-        optional: true
-    dependencies:
-      '@jridgewell/trace-mapping': 0.3.25
-      esbuild: 0.20.2
-      jest-worker: 27.5.1
-      schema-utils: 3.3.0
-      serialize-javascript: 6.0.2
-      terser: 5.30.3
-      webpack: 5.91.0(esbuild@0.20.2)
     dev: true
 
   /terser-webpack-plugin@5.3.10(webpack@5.91.0):
@@ -33634,7 +33600,7 @@ packages:
       mime-types: 2.1.35
       range-parser: 1.2.1
       schema-utils: 4.2.0
-      webpack: 5.91.0(esbuild@0.20.2)
+      webpack: 5.91.0
     dev: true
 
   /webpack-hot-middleware@2.26.1:
@@ -33823,46 +33789,6 @@ packages:
       schema-utils: 3.3.0
       tapable: 2.2.1
       terser-webpack-plugin: 5.3.10(esbuild@0.19.12)(webpack@5.91.0)
-      watchpack: 2.4.1
-      webpack-sources: 3.2.3
-    transitivePeerDependencies:
-      - '@swc/core'
-      - esbuild
-      - uglify-js
-    dev: true
-
-  /webpack@5.91.0(esbuild@0.20.2):
-    resolution: {integrity: sha512-rzVwlLeBWHJbmgTC/8TvAcu5vpJNII+MelQpylD4jNERPwpBJOE2lEcko1zJX3QJeLjTTAnQxn/OJ8bjDzVQaw==}
-    engines: {node: '>=10.13.0'}
-    hasBin: true
-    peerDependencies:
-      webpack-cli: '*'
-    peerDependenciesMeta:
-      webpack-cli:
-        optional: true
-    dependencies:
-      '@types/eslint-scope': 3.7.7
-      '@types/estree': 1.0.6
-      '@webassemblyjs/ast': 1.12.1
-      '@webassemblyjs/wasm-edit': 1.12.1
-      '@webassemblyjs/wasm-parser': 1.12.1
-      acorn: 8.14.0
-      acorn-import-assertions: 1.9.0(acorn@8.14.0)
-      browserslist: 4.23.0
-      chrome-trace-event: 1.0.3
-      enhanced-resolve: 5.16.0
-      es-module-lexer: 1.5.0
-      eslint-scope: 5.1.1
-      events: 3.3.0
-      glob-to-regexp: 0.4.1
-      graceful-fs: 4.2.11
-      json-parse-even-better-errors: 2.3.1
-      loader-runner: 4.3.0
-      mime-types: 2.1.35
-      neo-async: 2.6.2
-      schema-utils: 3.3.0
-      tapable: 2.2.1
-      terser-webpack-plugin: 5.3.10(esbuild@0.20.2)(webpack@5.91.0)
       watchpack: 2.4.1
       webpack-sources: 3.2.3
     transitivePeerDependencies:

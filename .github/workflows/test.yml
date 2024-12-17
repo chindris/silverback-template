@@ -84,12 +84,9 @@ jobs:
           playwright: true
           projectToken: ${{ secrets.CHROMATIC_PLAYWRIGHT_PROJECT_TOKEN }}
           workingDir: tests/e2e/
-        env:
-          CHROMATIC_ARCHIVE_LOCATION: ./test-results-drupal
         if:
-          ${{steps.chromatic-playwright-check.outputs.available == 'true' &&
-          hashFiles('tests/e2e/test-results-drupal') != '' && (success() ||
-          failure()) }}
+          always() && hashFiles('tests/e2e/test-results') &&
+          steps.chromatic-playwright-check.outputs.available == 'true'
 
       - name: Publish Storybook to Chromatic
         id: chromatic-storybook

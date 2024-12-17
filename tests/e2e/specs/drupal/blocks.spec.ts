@@ -1,4 +1,5 @@
-import { expect, Page, test } from '@chromatic-com/playwright';
+import { expect, test } from '@chromatic-com/playwright';
+import { Page } from '@playwright/test';
 
 import { websiteUrl } from '../../helpers/url';
 
