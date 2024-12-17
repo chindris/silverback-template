@@ -151,6 +151,14 @@ replace(
   '## ',
 );
 
+// Remove e2e tests.
+const e2ePackage = 'tests/e2e';
+if (!fs.existsSync(e2ePackage)) {
+  console.error('E2E tests already removed.');
+  process.exit(1);
+}
+fs.rmSync(e2ePackage, { recursive: true, force: true });
+
 // Remove the init script check.
 replace('.github/workflows/test.yml', / {6}- name: Init check.*?\n\n/gs, '');
 
