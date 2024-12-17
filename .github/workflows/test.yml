@@ -132,6 +132,22 @@ jobs:
           DASHBOARD_ACCESS_TOKEN: ${{ secrets.DASHBOARD_ACCESS_TOKEN }}
         run: amazeelabs-estimator update
 
+  init_script:
+    name: Init script
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Setup
+        uses: ./.github/actions/setup
+      - name: Test init script
+        run:
+          pnpm --filter @custom/init run init --project-human-name "Foo Bar"
+          --project-machine-name foo_bar | grep 'Run `pnpm i` to update the lock
+          file'
+
   docker_build:
     name: Docker Build
     if:
