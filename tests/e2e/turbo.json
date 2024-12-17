@@ -4,7 +4,11 @@
     "test:integration": {
       "dependsOn": ["@custom/website#build"],
       "env": ["PLAYWRIGHT_WEBSITE_URL", "PLAYWRIGHT_CMS_URL"],
-      "inputs": ["helpers/**", "specs/**", "playwright.config.ts"]
+      "inputs": ["helpers/**", "specs/**", "playwright.config.ts"],
+      "outputs": [
+        // Store test results for Chromatic.
+        "test-results/**"
+      ]
     }
   }
 }
