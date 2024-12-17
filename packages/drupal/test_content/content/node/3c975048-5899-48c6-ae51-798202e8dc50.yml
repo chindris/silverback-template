@@ -1,12 +1,9 @@
 _meta:
   version: '1.0'
   entity_type: node
-  uuid: ef80e284-154b-41fd-9317-154b0a175299
+  uuid: 3c975048-5899-48c6-ae51-798202e8dc50
   bundle: page
   default_langcode: en
-  depends:
-    3a0fe860-a6d6-428a-9474-365bd57509aa: media
-    72187a1f-3e48-4b45-a9b7-189c6fd7ee26: media
 default:
   revision_uid:
     -
@@ -19,10 +16,10 @@ default:
       target_id: 1
   title:
     -
-      value: 'Page: complete'
+      value: 'Webform Success Page'
   created:
     -
-      value: 1686759007
+      value: 1734004272
   promote:
     -
       value: false
@@ -40,7 +37,7 @@ default:
       value: false
   path:
     -
-      alias: /page-complete
+      alias: /webform/success
       langcode: en
       pathauto: 0
   content_translation_source:
@@ -52,14 +49,12 @@ default:
   body:
     -
       value: |-
-        <!-- wp:custom/hero {"mediaEntityIds":["3a0fe860-a6d6-428a-9474-365bd57509aa"],"headline":"Headline","lead":"Lead text"} /-->
+        <!-- wp:custom/hero {"headline":"Webform Success Page","lead":"Webform Success Page"} /-->
 
         <!-- wp:custom/content -->
         <!-- wp:paragraph -->
-        <p>Paragraph</p>
+        <p>This is the webform success page, and some webforms will be redirected here upon success.</p>
         <!-- /wp:paragraph -->
-
-        <!-- wp:drupalmedia/drupal-media-entity {"mediaEntityIds":["72187a1f-3e48-4b45-a9b7-189c6fd7ee26"],"caption":"Image caption"} /-->
         <!-- /wp:custom/content -->
       format: gutenberg
       summary: ''
@@ -73,10 +68,10 @@ translations:
         target_id: 1
     title:
       -
-        value: 'Page: complete DE'
+        value: 'Webform Success Page DE'
     created:
       -
-        value: 1686759294
+        value: 1734005079
     promote:
       -
         value: false
@@ -88,7 +83,7 @@ translations:
         value: published
     path:
       -
-        alias: /page-complete-de
+        alias: /webform/success
         langcode: de
         pathauto: 0
     content_translation_source:
@@ -100,14 +95,12 @@ translations:
     body:
       -
         value: |-
-          <!-- wp:custom/hero {"mediaEntityIds":["3a0fe860-a6d6-428a-9474-365bd57509aa"],"headline":"\u00dcberschrift","lead":"Leittext"} /-->
+          <!-- wp:custom/hero {"headline":"Webformular-Erfolgsseite","lead":"Webformular-Erfolgsseite"} /-->
 
           <!-- wp:custom/content -->
           <!-- wp:paragraph -->
-          <p>Absatz</p>
+          <p>Dies ist die Erfolgsseite des Webformulars. Einige Webformulare werden bei Erfolg hierher umgeleitet.</p>
           <!-- /wp:paragraph -->
-
-          <!-- wp:drupalmedia/drupal-media-entity {"mediaEntityIds":["72187a1f-3e48-4b45-a9b7-189c6fd7ee26"],"caption":"Bildunterschrift"} /-->
           <!-- /wp:custom/content -->
         format: gutenberg
         summary: ''

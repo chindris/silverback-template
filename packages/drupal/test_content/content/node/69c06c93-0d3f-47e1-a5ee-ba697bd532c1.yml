@@ -1,12 +1,9 @@
 _meta:
   version: '1.0'
   entity_type: node
-  uuid: ef80e284-154b-41fd-9317-154b0a175299
+  uuid: 69c06c93-0d3f-47e1-a5ee-ba697bd532c1
   bundle: page
   default_langcode: en
-  depends:
-    3a0fe860-a6d6-428a-9474-365bd57509aa: media
-    72187a1f-3e48-4b45-a9b7-189c6fd7ee26: media
 default:
   revision_uid:
     -
@@ -19,10 +16,10 @@ default:
       target_id: 1
   title:
     -
-      value: 'Page: complete'
+      value: 'Block: Form'
   created:
     -
-      value: 1686759007
+      value: 1733841355
   promote:
     -
       value: false
@@ -40,7 +37,7 @@ default:
       value: false
   path:
     -
-      alias: /page-complete
+      alias: /block-form
       langcode: en
       pathauto: 0
   content_translation_source:
@@ -52,14 +49,14 @@ default:
   body:
     -
       value: |-
-        <!-- wp:custom/hero {"mediaEntityIds":["3a0fe860-a6d6-428a-9474-365bd57509aa"],"headline":"Headline","lead":"Lead text"} /-->
+        <!-- wp:custom/hero {"headline":"Block: Form","lead":"Block: Form"} /-->
 
         <!-- wp:custom/content -->
-        <!-- wp:paragraph -->
-        <p>Paragraph</p>
-        <!-- /wp:paragraph -->
+        <!-- wp:custom/form {"formId":"contact"} /-->
 
-        <!-- wp:drupalmedia/drupal-media-entity {"mediaEntityIds":["72187a1f-3e48-4b45-a9b7-189c6fd7ee26"],"caption":"Image caption"} /-->
+        <!-- wp:custom/form {"formId":"inquiry"} /-->
+
+        <!-- wp:custom/form {"formId":"styling"} /-->
         <!-- /wp:custom/content -->
       format: gutenberg
       summary: ''
@@ -73,10 +70,10 @@ translations:
         target_id: 1
     title:
       -
-        value: 'Page: complete DE'
+        value: 'Block: Form DE'
     created:
       -
-        value: 1686759294
+        value: 1734004706
     promote:
       -
         value: false
@@ -88,7 +85,7 @@ translations:
         value: published
     path:
       -
-        alias: /page-complete-de
+        alias: /block-form
         langcode: de
         pathauto: 0
     content_translation_source:
@@ -100,14 +97,14 @@ translations:
     body:
       -
         value: |-
-          <!-- wp:custom/hero {"mediaEntityIds":["3a0fe860-a6d6-428a-9474-365bd57509aa"],"headline":"\u00dcberschrift","lead":"Leittext"} /-->
+          <!-- wp:custom/hero {"headline":"Block: Formular","lead":"Block: Formular"} /-->
 
           <!-- wp:custom/content -->
-          <!-- wp:paragraph -->
-          <p>Absatz</p>
-          <!-- /wp:paragraph -->
+          <!-- wp:custom/form {"formId":"contact"} /-->
 
-          <!-- wp:drupalmedia/drupal-media-entity {"mediaEntityIds":["72187a1f-3e48-4b45-a9b7-189c6fd7ee26"],"caption":"Bildunterschrift"} /-->
+          <!-- wp:custom/form {"formId":"inquiry"} /-->
+
+          <!-- wp:custom/form {"formId":"styling"} /-->
           <!-- /wp:custom/content -->
         format: gutenberg
         summary: ''
