@@ -4,16 +4,10 @@ declare(strict_types=1);
 
 namespace Drupal\silverback_ai_import\Form;
 
-use Drupal\Core\Ajax\AjaxResponse;
-use Drupal\Core\Ajax\ReplaceCommand;
-use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Markup;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
-use Drupal\file\Entity\File;
-use Drupal\node\Entity\Node;
-use Drupal\node\NodeInterface;
 
 /**
  * Provides a Silverback Import AI form.
@@ -114,7 +108,6 @@ final class PageDropForm extends FormBase {
       '#suffix' => '</div>',
     ];
 
-    // $form['actions']['submit']['#submit'][] = '_silverback_ai_import_form_submit';
     $form['actions'] = [
       '#type' => 'actions',
       '#states' => [
@@ -124,35 +117,24 @@ final class PageDropForm extends FormBase {
       ],
       'submit' => [
         '#type' => 'submit',
-        '#value' => $this->t('Process document'),
-      /*         '#attributes' => [
-          'class' => [
-            'use-ajax-submit',
-          ],
+        '#value' => $this->t('Import document'),
+      ],
+    ];
+
+    $form['actions_url'] = [
+      '#type' => 'actions',
+      '#states' => [
+        'visible' => [
+          'input[name="import_type"]' => ['value' => 'url'],
         ],
-        '#ajax' => [
-          '#progress_indicator' => 'throbber',
-          '#progress_message' => $this->t('Validating input'),
-          'callback' => '::myAjaxCallbackDocx',
-          'event' => 'click',
-          'wrapper' => 'edit-output',
-        ], */
+      ],
+      'submit' => [
+        '#type' => 'submit',
+        '#value' => $this->t('Import web page'),
       ],
     ];
 
     return $form;
-  }
-
-  /**
-   * The textbox with the selected text.
-   */
-  public function myAjaxCallbackDocx(array &$form, FormStateInterface $form_state) {
-    $file = $form_state->getValue('file');
-
-    $response = new AjaxResponse();
-
-    $response->addCommand(new ReplaceCommand('#edit-output', '<div id="edit-output"><em>' . $this->t('Please upload a file') . '</em></div>'));
-    return $response;
   }
 
   /**
@@ -171,45 +153,35 @@ final class PageDropForm extends FormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state): void {
     $type = $form_state->getValue('import_type');
+    $url_value = $form_state->getValue('url_value');
+
+    // @todo Add DI
+    $service = \Drupal::service('silverback_ai_import.content');
+    $content = \Drupal::service('silverback_ai_import.batch.import');
+
     if ($type == 'docx') {
-      $file = $form_state->getValue('file');
-      $filepath = $file['uploaded_files'][0]['path'];
-      $directory = 'public://converted';
-      $file_system = \Drupal::service('file_system');
-      $file_system->prepareDirectory($directory, FileSystemInterface:: CREATE_DIRECTORY | FileSystemInterface::MODIFY_PERMISSIONS);
-      $file_system->copy($filepath, $directory . '/' . basename($filepath), FileSystemInterface::EXISTS_REPLACE);
-
-      $file = File::create([
-        'filename' => basename($filepath),
-        'uri' => "{$directory}/" . basename($filepath),
-        'status' => NodeInterface::PUBLISHED,
-        'uid' => \Drupal::currentUser()->id() ?? 1,
-      ]);
-
-      $file->setPermanent();
-      $file->save();
+      $file_data = $form_state->getValue('file');
+      $file = $service->createFileEntityFromDropzoneData($file_data);
 
       if ($file) {
-        $service = \Drupal::service('silverback_ai_import.content');
         $ast = $service->getAstFromFilePath($file);
+        $entity = $service->createEntityFromDocxAst($ast);
 
-        $markdown = file_get_contents($ast->outputDirectory . '/content.md');
-        $openai = \Drupal::service('silverback_ai_import.content');
-        $data = $openai->extractBaseDataFromMarkdown($markdown);
-        if (isset($data['choices'][0]['message']['content'])) {
-          $content = \Drupal::service('silverback_ai_import.batch.import');
-          $data = json_decode($data['choices'][0]['message']['content'], TRUE);
-          $entity = Node::create([
-            'type' => 'page',
-            'title' => $data['title'],
-            'langcode' => strtolower($data['language']),
-          ]);
-          $entity->save();
-          $ast = $service->getAstFromFilePath($file);
+        if ($entity) {
+          // @todo Add DI
           $flatten = $service->flattenAst($ast->content);
           $content->create($flatten, $entity);
-          $form_state->setRedirectUrl($entity->toUrl());
+          $form_state->setRedirectUrl($entity->toUrl('edit-form'));
         }
+      }
+    }
+    elseif (!empty($url_value) && $type == 'url') {
+      $entity = $service->createEntityFromUrl($url_value);
+      if ($entity) {
+        $ast = $service->getAstFromUrl($url_value);
+        $flatten = $service->flattenAst($ast->content);
+        $content->create($flatten, $entity);
+        $form_state->setRedirectUrl($entity->toUrl('edit-form'));
       }
     }
 

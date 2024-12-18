@@ -6,10 +6,14 @@ namespace Drupal\silverback_ai_import;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Session\AccountProxyInterface;
+use Drupal\file\Entity\File;
 use Drupal\file\FileInterface;
+use Drupal\node\Entity\Node;
+use Drupal\node\NodeInterface;
 use Drupal\silverback_ai\HttpClient\OpenAiHttpClient;
 use GuzzleHttp\Exception\RequestException;
 
@@ -19,6 +23,7 @@ use GuzzleHttp\Exception\RequestException;
 final class ContentImportAiService {
 
   private const DEFAULT_AI_MODEL = 'gpt-4o-mini';
+  private const ADMINISTRATOR_ID = 1;
 
   /**
    * Constructs a ContentImportAiService object.
@@ -504,6 +509,66 @@ final class ContentImportAiService {
     }
 
     return $data;
+  }
+
+  /**
+   *
+   */
+  public function createEntityFromDocxAst($ast) {
+    $markdown = file_get_contents($ast->outputDirectory . '/content.md');
+    $data = $this->extractBaseDataFromMarkdown($markdown);
+    // @todo Surround with try-catch
+    if (isset($data['choices'][0]['message']['content'])) {
+      $data = json_decode($data['choices'][0]['message']['content'], TRUE);
+      $entity = Node::create([
+        'type' => 'page',
+        'title' => $data['title'],
+        'langcode' => strtolower($data['language']),
+      ]);
+      $entity->save();
+      return $entity;
+    }
+    return NULL;
+  }
+
+  /**
+   *
+   */
+  public function createEntityFromUrl($url) {
+    $data = $this->extractPageDataFromUrl($url);
+    // @todo Handle exceptions
+    if (!empty($data['title']) && !empty($data['language'])) {
+      $entity = Node::create([
+        'type' => 'page',
+        'title' => $data['title'],
+        'langcode' => strtolower($data['language']),
+      ]);
+      $entity->save();
+      return $entity;
+    }
+    return NULL;
+  }
+
+  /**
+   *
+   */
+  public function createFileEntityFromDropzoneData($file_data) {
+    // @todo Handle exceptions
+    $filepath = $file_data['uploaded_files'][0]['path'];
+    $directory = 'public://converted';
+    $file_system = \Drupal::service('file_system');
+    $file_system->prepareDirectory($directory, FileSystemInterface:: CREATE_DIRECTORY | FileSystemInterface::MODIFY_PERMISSIONS);
+    $file_system->copy($filepath, $directory . '/' . basename($filepath), FileSystemInterface::EXISTS_REPLACE);
+
+    $file = File::create([
+      'filename' => basename($filepath),
+      'uri' => "{$directory}/" . basename($filepath),
+      'status' => NodeInterface::PUBLISHED,
+      'uid' => $this->currentUser->id() ?? self::ADMINISTRATOR_ID,
+    ]);
+    $file->setPermanent();
+    $file->save();
+    return $file;
   }
 
 }

@@ -5,9 +5,7 @@
  * Primary module hooks for silverback_ai_import module.
  */
 
-use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\file\Entity\File;
 
 /**
  * {@inheritdoc}
@@ -115,21 +113,7 @@ function _silverback_ai_import_form_submit(array $form, FormStateInterface $form
       return;
     }
 
-    $filepath = $file['uploaded_files'][0]['path'];
-    $directory = 'public://converted';
-    $file_system = \Drupal::service('file_system');
-    $file_system->prepareDirectory($directory, FileSystemInterface:: CREATE_DIRECTORY | FileSystemInterface::MODIFY_PERMISSIONS);
-    $file_system->copy($filepath, $directory . '/' . basename($filepath), FileSystemInterface::EXISTS_REPLACE);
-
-    $file = File::create([
-      'filename' => basename($filepath),
-      'uri' => "{$directory}/" . basename($filepath),
-      'status' => 1,
-      'uid' => \Drupal::currentUser()->id() ?? 1,
-    ]);
-
-    $file->setPermanent();
-    $file->save();
+    $file = $service->createFileEntityFromDropzoneData($file);
 
     if ($file) {
       $ast = $service->getAstFromFilePath($file);
