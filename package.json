@@ -11,7 +11,6 @@
   "scripts": {
     "postinstall": "husky install || true",
     "commit": "git-cz",
-    "tb": "pnpm turbo --filter @custom/website",
     "test:format": "pnpm test:format:root --check && pnpm test:format:workspaces --check",
     "test:format:fix": "pnpm test:format:root --write && pnpm test:format:workspaces --write",
     "test:format:root": "pnpm prettier --ignore-unknown '**/**' --ignore-path .prettierignore-root",
