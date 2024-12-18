@@ -1,10 +1,10 @@
-import { extract } from '@extractus/article-extractor'
+import { extract } from '@extractus/article-extractor';
 import crypto from 'crypto';
 import fs from 'fs-extra';
 import imageType from 'image-type';
 import { JSDOM } from 'jsdom';
-import { applyFixes } from "markdownlint";
-import { lint as lintSync } from "markdownlint/sync";
+import { applyFixes } from 'markdownlint';
+import { lint as lintSync } from 'markdownlint/sync';
 import fetch from 'node-fetch';
 import path from 'path';
 import TurndownService from 'turndown';
@@ -23,36 +23,36 @@ function extractImagesWithPositions(markdown) {
   let index = 0;
 
   while ((match = imageRegex.exec(markdown)) !== null) {
-      const placeholder = `__IMAGE_PLACEHOLDER_${index}__`;
-      extractedImages.push({
-          alt: match[1] || '',
-          url: match[2],
-          position: match.index,
-          placeholder
-      });
-      index++;
+    const placeholder = `__IMAGE_PLACEHOLDER_${index}__`;
+    extractedImages.push({
+      alt: match[1] || '',
+      url: match[2],
+      position: match.index,
+      placeholder,
+    });
+    index++;
   }
 
   // Replace images with placeholders
-  extractedImages.forEach(image => {
-      cleanMarkdown = cleanMarkdown.replace(
-          `![${image.alt}](${image.url})`,
-          image.placeholder
-      );
+  extractedImages.forEach((image) => {
+    cleanMarkdown = cleanMarkdown.replace(
+      `![${image.alt}](${image.url})`,
+      image.placeholder,
+    );
   });
 
   return {
-      cleanMarkdown,
-      extractedImages
+    cleanMarkdown,
+    extractedImages,
   };
 }
 
 /**
-* Reinserts images just above their original link positions
-* @param {string} markdown - Markdown content with placeholders
-* @param {Array<{alt: string, url: string, placeholder: string}>} images - Extracted images
-* @returns {string} - Markdown with images reinserted
-*/
+ * Reinserts images just above their original link positions
+ * @param {string} markdown - Markdown content with placeholders
+ * @param {Array<{alt: string, url: string, placeholder: string}>} images - Extracted images
+ * @returns {string} - Markdown with images reinserted
+ */
 function reinsertImages(markdown, images) {
   let result = markdown;
 
@@ -60,23 +60,21 @@ function reinsertImages(markdown, images) {
   const sortedImages = [...images].sort((a, b) => b.position - a.position);
 
   for (const image of sortedImages) {
-      const imageMarkdown = `![${image.alt}](${image.url})\n\n`;
-      const placeholderPosition = result.indexOf(image.placeholder);
+    const imageMarkdown = `![${image.alt}](${image.url})\n\n`;
+    const placeholderPosition = result.indexOf(image.placeholder);
 
-      if (placeholderPosition !== -1) {
-          // Find the start of the line containing the placeholder
-          let lineStart = result.lastIndexOf('\n', placeholderPosition);
-          lineStart = lineStart === -1 ? 0 : lineStart + 1;
+    if (placeholderPosition !== -1) {
+      // Find the start of the line containing the placeholder
+      let lineStart = result.lastIndexOf('\n', placeholderPosition);
+      lineStart = lineStart === -1 ? 0 : lineStart + 1;
 
-          // Insert the image above the line containing the placeholder
-          result =
-              result.slice(0, lineStart) +
-              imageMarkdown +
-              result.slice(lineStart);
+      // Insert the image above the line containing the placeholder
+      result =
+        result.slice(0, lineStart) + imageMarkdown + result.slice(lineStart);
 
-          // Remove the placeholder
-          result = result.replace(image.placeholder, '');
-      }
+      // Remove the placeholder
+      result = result.replace(image.placeholder, '');
+    }
   }
 
   // Clean up any double blank lines created during the process
@@ -114,15 +112,13 @@ function validateAndFixMarkdown(markdown) {
     }
 
     // Rebuild the image syntax
-    return title
-      ? `![${altText}](${url} "${title}")`
-      : `![${altText}](${url})`;
+    return title ? `![${altText}](${url} "${title}")` : `![${altText}](${url})`;
   });
 
   // Trim leading and trailing whitespace
   const trimmedMarkdown = markdown.trim();
   if (markdown !== trimmedMarkdown) {
-    warnings.push("Leading or trailing whitespace detected and removed.");
+    warnings.push('Leading or trailing whitespace detected and removed.');
     markdown = trimmedMarkdown;
   }
 
@@ -136,16 +132,15 @@ const __dirname = isLagoon
   ? '/app/web/sites/default/files/converted'
   : path.dirname(__filename);
 
-
 async function extractMainContentFromUrl(url) {
-      try {
-        const mainContent = await extract(url);
-        return mainContent ? mainContent.content : '';
-      } catch (err) {
-        console.error(err)
-      }
-      return '';
+  try {
+    const mainContent = await extract(url);
+    return mainContent ? mainContent.content : '';
+  } catch (err) {
+    console.error(err);
   }
+  return '';
+}
 
 async function getImageExtension(buffer) {
   const type = await imageType(buffer);
@@ -267,27 +262,28 @@ export async function htmlToMarkdown(url) {
     .replace(/!\[\]\(/g, '![image](')
     .trim();
 
-    const results = lintSync({ "strings": { "content": markdown } });
-    const fixed = applyFixes(markdown, results.content);
-    const { markdown: fixedMarkdown, warnings } = validateAndFixMarkdown(fixed);
+  const results = lintSync({ strings: { content: markdown } });
+  const fixed = applyFixes(markdown, results.content);
+  const { markdown: fixedMarkdown, warnings } = validateAndFixMarkdown(fixed);
 
-    const { cleanMarkdown, extractedImages } = extractImagesWithPositions(fixedMarkdown);
-    const correctedMarkdown = reinsertImages(cleanMarkdown, extractedImages);
+  const { cleanMarkdown, extractedImages } =
+    extractImagesWithPositions(fixedMarkdown);
+  const correctedMarkdown = reinsertImages(cleanMarkdown, extractedImages);
 
-    const fixEmptyMarkdownLinks = (markdown) => {
-      // Regular expression to match markdown links with empty URL but with title
-      // Captures: []("title")
-      const emptyLinkRegex = /\[\]\(([^)]+)\s+"([^"]+)"\)/g;
+  const fixEmptyMarkdownLinks = (markdown) => {
+    // Regular expression to match markdown links with empty URL but with title
+    // Captures: []("title")
+    const emptyLinkRegex = /\[\]\(([^)]+)\s+"([^"]+)"\)/g;
 
-      // Replace empty links with their title text as link text
-      return markdown.replace(emptyLinkRegex, (match, url, title) => {
-        return `[${title}](${url} "${title}")`;
-      });
-    };
+    // Replace empty links with their title text as link text
+    return markdown.replace(emptyLinkRegex, (match, url, title) => {
+      return `[${title}](${url} "${title}")`;
+    });
+  };
 
-    const fixedLinksMarkdown = fixEmptyMarkdownLinks(correctedMarkdown);
+  const fixedLinksMarkdown = fixEmptyMarkdownLinks(correctedMarkdown);
 
-    // Save markdown file
+  // Save markdown file
   const mdPath = path.join(outputDir, 'content.md');
   await fs.writeFile(mdPath, fixedLinksMarkdown);
 
