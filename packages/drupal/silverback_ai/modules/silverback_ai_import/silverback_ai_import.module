@@ -118,6 +118,7 @@ function _silverback_ai_import_form_submit(array $form, FormStateInterface $form
     'status' => 1,
     'uid' => \Drupal::currentUser()->id() ?? 1,
   ]);
+  $file->setPermanent();
   $file->save();
 
   if ($file && $type == 'docx') {
