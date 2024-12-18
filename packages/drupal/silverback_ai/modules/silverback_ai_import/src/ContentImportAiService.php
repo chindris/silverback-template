@@ -61,7 +61,6 @@ final class ContentImportAiService {
     $uri = $file->getFileUri();
     $stream_wrapper_manager = \Drupal::service('stream_wrapper_manager')->getViaUri($uri);
     $file_path = $stream_wrapper_manager->realpath();
-
     $parse_service_url = $this->configFactory->get('silverback_ai_import.settings')->get('converter_service_url');
 
     $client = \Drupal::httpClient();

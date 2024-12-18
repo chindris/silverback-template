@@ -5,6 +5,7 @@
  * Primary module hooks for silverback_ai_import module.
  */
 
+use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\file\Entity\File;
 
@@ -70,6 +71,7 @@ function silverback_ai_import_form_node_page_split_form_alter(&$form, FormStateI
     '#dropzone_description' => 'DropzoneJS description',
     '#max_filesize' => '1M',
     '#extensions' => 'doc docx',
+    '#upload_location' => 'public://converted/',
   ];
 
   $form['import']['container_url'] = [
@@ -111,10 +113,19 @@ function _silverback_ai_import_form_submit(array $form, FormStateInterface $form
 
   // @todo Surround with try-catch
   $file = $form_state->getValue('file');
+
   $filepath = $file['uploaded_files'][0]['path'];
+
+  // $filename = $file['uploaded_files'][0]['filename'];
+  // $filename = \Drupal::service('file_system')->basename($filepath);
+  $directory = 'public://converted';
+  $file_system = \Drupal::service('file_system');
+  $file_system->prepareDirectory($directory, FileSystemInterface:: CREATE_DIRECTORY | FileSystemInterface::MODIFY_PERMISSIONS);
+  $file_system->copy($filepath, $directory . '/' . basename($filepath), FileSystemInterface::EXISTS_REPLACE);
+
   $file = File::create([
     'filename' => basename($filepath),
-    'uri' => $filepath,
+    'uri' => 'public://converted/' . basename($filepath),
     'status' => 1,
     'uid' => \Drupal::currentUser()->id() ?? 1,
   ]);
