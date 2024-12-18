@@ -20,6 +20,7 @@ function silverback_ai_import_form_alter(&$form, &$form_state, $form_id) {
  * {@inheritdoc}
  */
 function silverback_ai_import_form_node_page_split_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+
   $form['import'] = [
     '#type' => 'details',
     '#title' => t('Import content'),
@@ -75,7 +76,8 @@ function silverback_ai_import_form_node_page_split_form_alter(&$form, FormStateI
   $form['import']['container_url']['url_value'] = [
     '#type' => 'url',
     '#title' => t('URL'),
-    '#maxlength' => 1024,
+    '#maxlength' => 2048,
+    '#size' => 128,
     '#states' => [
       'required' => [
         'input[name="import_type"]' => ['value' => 'url'],

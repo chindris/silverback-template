@@ -242,6 +242,66 @@ final class ContentImportAiService {
   }
 
   /**
+   * {Helper method}
+   */
+  public function extractBaseDataFromMarkdown(string $markdown) {
+    // @todo Get some of these from settings
+    $model = $this->configFactory->get('silverback_image_ai.settings')->get('ai_model') ?: self::DEFAULT_AI_MODEL;
+
+    $prompt = <<<EOD
+    You are an expert Markdown data extraction assistant. Your task is to analyze and extract specific information from provided Markdown text.
+
+    Input Markdown Context:
+    $markdown
+
+    Follow these steps carefully:
+
+    1. Extract the following information from the markdown:
+    - Title
+    - Language (in language code format, e.g. EN, EL etc)
+
+    2. Format your output strictly as JSON using this template:
+      {
+        'title' : extracted_title,
+        'language' : extracted_langcode,
+      }
+
+    Rules:
+    - Only return the JSON output.
+    - The output should be valid JSON, not markdown.
+    - Ensure the language code adheres to ISO 639-1 format.
+    - Be precise and concise in extracting the required information.
+    EOD;
+
+    $payload = [
+      'model' => $model,
+      'messages' => [
+        [
+          'role' => 'user',
+          'content' => [
+                [
+                  'type' => 'text',
+                  'text' => $prompt,
+                ],
+          ],
+        ],
+      ],
+    ];
+
+    try {
+      $response = $this->silverbackAiOpenaiHttpClient->post('chat/completions', [
+        'json' => $payload,
+      ]);
+    }
+    catch (\Exception $e) {
+      throw new \Exception('HTTP request failed: ' . $e->getMessage());
+    }
+
+    $responseBodyContents = $response->getBody()->getContents();
+    return json_decode($responseBodyContents, TRUE, 512, JSON_THROW_ON_ERROR);
+  }
+
+  /**
    * Retrieves a plugin instance that matches the specified chunk.
    *
    * This method creates an instance of the default AI plugin and then

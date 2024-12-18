@@ -4,10 +4,16 @@ declare(strict_types=1);
 
 namespace Drupal\silverback_ai_import\Form;
 
+use Drupal\Core\Ajax\AjaxResponse;
+use Drupal\Core\Ajax\ReplaceCommand;
+use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Markup;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
+use Drupal\file\Entity\File;
+use Drupal\node\Entity\Node;
+use Drupal\node\NodeInterface;
 
 /**
  * Provides a Silverback Import AI form.
@@ -28,6 +34,8 @@ final class PageDropForm extends FormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state): array {
 
+    // End debug
+    // ---------------------.
     $form['message'] = [
       '#type' => 'item',
       '#markup' => Markup::create('<em>Create content by importing either a file or an existing URL.</em>'),
@@ -88,7 +96,8 @@ final class PageDropForm extends FormBase {
     $form['import']['container_url']['url_value'] = [
       '#type' => 'url',
       '#title' => $this->t('URL'),
-      '#maxlength' => 1024,
+      '#maxlength' => 2048,
+      '#size' => 128,
       '#states' => [
         'required' => [
           'input[name="import_type"]' => ['value' => 'url'],
@@ -96,18 +105,38 @@ final class PageDropForm extends FormBase {
       ],
     ];
 
-    $form['actions']['submit']['#submit'][] = '_silverback_ai_import_form_submit';
+    $form['import']['container_output'] = [
+      '#type' => 'container',
+    ];
+    $form['import']['container_output']['output'] = [
+      '#type' => 'item',
+      '#prefix' => '<div id="edit-output">',
+      '#suffix' => '</div>',
+    ];
 
-    // Better to have this unpublished originally, and then
-    // we will display a message to the user (esp. if there is AI content)
-    $form['moderation_state']['#access'] = FALSE;
-    $form['actions']['submit']['#value'] = t('Create');
-
+    // $form['actions']['submit']['#submit'][] = '_silverback_ai_import_form_submit';
     $form['actions'] = [
       '#type' => 'actions',
+      '#states' => [
+        'visible' => [
+          'input[name="import_type"]' => ['value' => 'docx'],
+        ],
+      ],
       'submit' => [
         '#type' => 'submit',
-        '#value' => $this->t('Create'),
+        '#value' => $this->t('Process document'),
+      /*         '#attributes' => [
+          'class' => [
+            'use-ajax-submit',
+          ],
+        ],
+        '#ajax' => [
+          '#progress_indicator' => 'throbber',
+          '#progress_message' => $this->t('Validating input'),
+          'callback' => '::myAjaxCallbackDocx',
+          'event' => 'click',
+          'wrapper' => 'edit-output',
+        ], */
       ],
     ];
 
@@ -115,26 +144,75 @@ final class PageDropForm extends FormBase {
   }
 
   /**
+   * The textbox with the selected text.
+   */
+  public function myAjaxCallbackDocx(array &$form, FormStateInterface $form_state) {
+    $file = $form_state->getValue('file');
+
+    $response = new AjaxResponse();
+
+    $response->addCommand(new ReplaceCommand('#edit-output', '<div id="edit-output"><em>' . $this->t('Please upload a file') . '</em></div>'));
+    return $response;
+  }
+
+  /**
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state): void {
-    // @todo Validate the form here.
-    // Example:
-    // @code
-    //   if (mb_strlen($form_state->getValue('message')) < 10) {
-    //     $form_state->setErrorByName(
-    //       'message',
-    //       $this->t('Message should be at least 10 characters.'),
-    //     );
-    //   }
-    // @endcode
+    $file = $form_state->getValue('file');
+    $type = $form_state->getValue('import_type');
+    if ($type == 'docx' && empty($file['uploaded_files'])) {
+      $form_state->setErrorByName('file', $this->t('Please upload a file to import.'));
+    }
   }
 
   /**
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state): void {
-    $this->messenger()->addStatus($this->t('The message has been sent.'));
+    $type = $form_state->getValue('import_type');
+    if ($type == 'docx') {
+      $file = $form_state->getValue('file');
+      $filepath = $file['uploaded_files'][0]['path'];
+      $directory = 'public://converted';
+      $file_system = \Drupal::service('file_system');
+      $file_system->prepareDirectory($directory, FileSystemInterface:: CREATE_DIRECTORY | FileSystemInterface::MODIFY_PERMISSIONS);
+      $file_system->copy($filepath, $directory . '/' . basename($filepath), FileSystemInterface::EXISTS_REPLACE);
+
+      $file = File::create([
+        'filename' => basename($filepath),
+        'uri' => "{$directory}/" . basename($filepath),
+        'status' => NodeInterface::PUBLISHED,
+        'uid' => \Drupal::currentUser()->id() ?? 1,
+      ]);
+
+      $file->setPermanent();
+      $file->save();
+
+      if ($file) {
+        $service = \Drupal::service('silverback_ai_import.content');
+        $ast = $service->getAstFromFilePath($file);
+
+        $markdown = file_get_contents($ast->outputDirectory . '/content.md');
+        $openai = \Drupal::service('silverback_ai_import.content');
+        $data = $openai->extractBaseDataFromMarkdown($markdown);
+        if (isset($data['choices'][0]['message']['content'])) {
+          $content = \Drupal::service('silverback_ai_import.batch.import');
+          $data = json_decode($data['choices'][0]['message']['content'], TRUE);
+          $entity = Node::create([
+            'type' => 'page',
+            'title' => $data['title'],
+            'langcode' => strtolower($data['language']),
+          ]);
+          $entity->save();
+          $ast = $service->getAstFromFilePath($file);
+          $flatten = $service->flattenAst($ast->content);
+          $content->create($flatten, $entity);
+          $form_state->setRedirectUrl($entity->toUrl());
+        }
+      }
+    }
+
   }
 
 }
