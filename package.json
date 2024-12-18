@@ -35,7 +35,8 @@
   "resolutions": {
     "gatsby-plugin-sharp": "5.13.1",
     "sharp": "0.33.1",
-    "graphql": "16.8.1"
+    "graphql": "16.8.1",
+    "pdf-parse@1.1.1": "patch:pdf-parse@npm%3A1.1.1#./.yarn/patches/pdf-parse-npm-1.1.1-04a6109b2a.patch"
   },
   "pnpm": {
     "patchedDependencies": {}

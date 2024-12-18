@@ -274,7 +274,22 @@ final class ContentImportAiService {
   }
 
   /**
+   * Flattens a hierarchical AST (Abstract Syntax Tree) into a linear array of nodes.
    *
+   * This function converts a nested AST structure into a flat array where each node
+   * is assigned a unique ID and maintains a reference to its parent. It processes
+   * specific node types differently and handles recursive traversal of child nodes.
+   *
+   * @param array|null $ast
+   *   The AST structure to flatten.
+   * @param int|null $parent
+   *   The ID of the parent node (used in recursion)
+   *
+   * @return array An array of flattened nodes, where each node contains:
+   *   - type: The capitalized node type
+   *               - id: A unique identifier
+   *               - parent: Reference to the parent node's ID
+   *               - Additional properties specific to each node type
    */
   public function flattenAst($ast, $parent = NULL) {
 
@@ -287,15 +302,22 @@ final class ContentImportAiService {
     }
 
     foreach ($ast as $chunk) {
-
       if (isset($chunk['type'])
         && in_array($chunk['type'], [
           'Strong',
           'Text',
           'ListItem',
           'Emphasis',
-          'Link',
         ])) {
+        continue;
+      }
+
+      if (isset($chunk['type'])
+        && $chunk['type'] == 'Link'
+        && isset($chunk['children'])
+        && count($chunk['children']) == 1
+        && $chunk['children'][0]['type'] !== 'Image'
+        ) {
         continue;
       }
 
@@ -323,13 +345,106 @@ final class ContentImportAiService {
     foreach ($data as &$item) {
       // Process item here.
       if (isset($item['type'])) {
-        $item['gutenberg'] = $this->processChunk($item);
+        if ($item['type'] == 'Image') {
+          $item['gutenberg'] = $this->processChunk($item);
+        }
       }
-
       if (isset($item['children']) && is_array($item['children'])) {
         $this->iterateArray($item['children'], $depth + 1);
       }
     }
+
+  }
+
+  /**
+   * Extracts various metadata from a given URL by fetching and parsing its HTML content.
+   *
+   * This function attempts to retrieve the HTML content of a URL and extract key information
+   * including title, path, meta tags, and language settings. It includes error handling for
+   * various failure scenarios.
+   *
+   * @param string $url
+   *   The URL to extract data from.
+   *
+   * @return array An associative array containing:
+   *   - title: string|null The page title if found
+   *               - path: string The URL path component, defaults to "/" if not found
+   *               - metatags: array Meta tag name-content pairs
+   *               - language: string|null The page language if specified
+   *               - error: string|null Error message if any error occurred, null otherwise
+   *
+   * @throws \Exception Caught internally and returned as error in result array
+   */
+  public function extractPageDataFromUrl($url) {
+    $data = [
+      'title' => NULL,
+      'path' => NULL,
+      'metatags' => [],
+      'language' => NULL,
+    // Add an error key.
+      'error' => NULL,
+    ];
+
+    // Validate URL.
+    if (!filter_var($url, FILTER_VALIDATE_URL)) {
+      $data['error'] = "Invalid URL";
+      return $data;
+    }
+
+    try {
+      // Use file_get_contents with a user agent to avoid being blocked by some servers.
+      $options = [
+        'http' => [
+          'method' => 'GET',
+      // Example user agent.
+          'user_agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36',
+      // Timeout in seconds.
+          'timeout' => 10,
+        ],
+      ];
+      $context = stream_context_create($options);
+      // Use @ to suppress warnings for invalid URLs or network issues.
+      $html = @file_get_contents($url, FALSE, $context);
+
+      if ($html === FALSE) {
+        $error = error_get_last();
+        $data['error'] = "Failed to fetch URL: " . ($error ? $error['message'] : "Unknown error");
+        return $data;
+      }
+
+      // Extract Title.
+      if (preg_match('/<title>(.*?)<\/title>/i', $html, $matches)) {
+        $data['title'] = trim(html_entity_decode($matches[1]));
+      }
+
+      // Extract Path.
+      $data['path'] = parse_url($url, PHP_URL_PATH);
+      if ($data['path'] === NULL) {
+        // Handle cases where there's no path.
+        $data['path'] = "/";
+      }
+
+      // Extract Meta Tags.
+      preg_match_all('/<meta\s+(?:name|http-equiv)="([^"]*)"\s+content="([^"]*)"/i', $html, $matches);
+      for ($i = 0; $i < count($matches[0]); $i++) {
+        $name = strtolower($matches[1][$i]);
+        $data['metatags'][$name] = trim(html_entity_decode($matches[2][$i]));
+      }
+
+      // Extract Language.
+      if (preg_match('/<html.*?lang="([^"]*)"/i', $html, $matches)) {
+        $data['language'] = $matches[1];
+      }
+      elseif (preg_match('/<meta\s+http-equiv="Content-Language"\s+content="([^"]*)"/i', $html, $matches)) {
+        $data['language'] = $matches[1];
+      }
+
+    }
+    catch (\Exception $e) {
+      $data['error'] = "An error occurred: " . $e->getMessage();
+    }
+
+    return $data;
   }
 
 }
