@@ -116,8 +116,9 @@ function _silverback_ai_import_form_submit(array $form, FormStateInterface $form
     'filename' => basename($filepath),
     'uri' => $filepath,
     'status' => 1,
-    'uid' => 1,
+    'uid' => \Drupal::currentUser()->id() ?? 1,
   ]);
+  $file->save();
 
   if ($file && $type == 'docx') {
     // $file = \Drupal::entityTypeManager()->getStorage('file')->load($fid);
