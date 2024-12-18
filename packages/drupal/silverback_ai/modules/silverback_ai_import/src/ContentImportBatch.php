@@ -87,6 +87,7 @@ class ContentImportBatch {
     $content = $service->processChunk($batch['item']['chunk']);
     \Drupal::logger('silverback_ai_import')->debug($content);
     $context['results']['content'][] = $content;
+
     $context['results']['nid'] = $batch['item']['nid'];
 
     $context['message'] = t('Processing chunk @processed/@total', [

@@ -86,7 +86,8 @@ class ParagraphImportPlugin extends PluginBase implements AiImportPluginManagerI
    * {@inheritDoc}
    */
   public function convert(array $chunk) {
-    $data['paragraphText'] = $chunk['htmlValue'];
+    $val = $chunk['htmlValue'];
+    $data['paragraphText'] = preg_replace('/<img[^>]+>/i', '', $val);
     return $this->generateBlock($data);
   }
 

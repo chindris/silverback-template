@@ -42,12 +42,13 @@ interface AiImportPluginManagerInterface {
   public function convert(array $chunk);
 
   /**
-   * Generates a block string by replacing template placeholders with parsed header data.
+   * Generates a block string by replacing template placeholders.
    *
-   * This function takes a chunk of markdown content and a template string. It uses
-   * the parsed data from the markdown header to replace placeholders in the template
-   * with actual values corresponding to the markdown header's level, text, and HTML tag.
-   * Before processing, it ensures that all required keys are available in the parsed data.
+   * This function takes a chunk of markdown content and a template string.
+   * It uses the parsed data from the markdown header to replace placeholders
+   * in the template with actual values corresponding to the markdown header's
+   * level, text, and HTML tag. Before processing, it ensures that all required
+   * keys are available in the parsed data.
    *
    * @param array $data
    *   The template string containing placeholders for replacement.

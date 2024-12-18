@@ -33,7 +33,7 @@ function silverback_ai_schema() {
         'not null' => TRUE,
       ],
       'timestamp' => [
-        'description' => 'Date/time when the form submission failed, as Unix timestamp.',
+        'description' => 'Date/time when the ai request, as Unix timestamp.',
         'type' => 'int',
         'unsigned' => TRUE,
         'not null' => TRUE,
