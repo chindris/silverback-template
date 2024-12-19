@@ -183,7 +183,7 @@ export async function htmlToMarkdown(url) {
 
   const html = await extractMainContentFromUrl(url);
   // Generate folder name based on HTML content
-  const folderName = generateFolderName(html);
+  const folderName = generateFolderName(url);
   const outputDir = path.join(__dirname, folderName);
   const imagesDir = path.join(outputDir, 'images');
 

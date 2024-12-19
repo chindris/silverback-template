@@ -1,8 +1,57 @@
+import pdf2md from '@opendocsg/pdf2md';
 import crypto from 'crypto';
-import fs from 'fs';
+import fs from 'fs-extra';
 import path from 'path';
-import pdf from 'pdf-parse';
-import PDFParser from 'pdf2json';
+import { fileURLToPath } from 'url';
+
+// @todo Fix this to work locally and live
+const isLagoon = !!process.env.LAGOON;
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = isLagoon
+  ? '/app/web/sites/default/files/converted'
+  : path.dirname(__filename);
+
+function validateAndFixMarkdown(markdown) {
+  const warnings = [];
+
+  // Regex to match the entire image syntax
+  const imageRegex = /!\[.*?\]\(.*?\)/g;
+
+  markdown = markdown.replace(imageRegex, (match) => {
+    // Parse the components of the Markdown image syntax
+    const altMatch = match.match(/!\[(.*?)\]/); // Match alt text
+    const urlMatch = match.match(/\((.*?)(?=\s|$)/); // Match URL
+    const titleMatch = match.match(/"([^"]*?)"\)$/); // Match title (if it exists)
+
+    let altText = altMatch ? altMatch[1] : '';
+    let url = urlMatch ? urlMatch[1] : '';
+    let title = titleMatch ? titleMatch[1] : null;
+
+    // Fix double quotes in alt text
+    if (altText.includes('"')) {
+      warnings.push(`Double quotes in alt text fixed: "${altText}"`);
+      altText = altText.replace(/"/g, "'");
+    }
+
+    // Fix double quotes in title
+    if (title && title.includes('"')) {
+      warnings.push(`Double quotes in title fixed: "${title}"`);
+      title = title.replace(/"/g, "'");
+    }
+
+    // Rebuild the image syntax
+    return title ? `![${altText}](${url} "${title}")` : `![${altText}](${url})`;
+  });
+
+  // Trim leading and trailing whitespace
+  const trimmedMarkdown = markdown.trim();
+  if (markdown !== trimmedMarkdown) {
+    warnings.push('Leading or trailing whitespace detected and removed.');
+    markdown = trimmedMarkdown;
+  }
+
+  return { markdown, warnings };
+}
 
 export function generateFolderName(filePath) {
   const fileContent = fs.readFileSync(filePath);
@@ -19,7 +68,7 @@ export async function pdfToMarkdown(pdfPath) {
 
     // Generate output folder name
     const folderName = generateFolderName(pdfPath);
-    const outputDir = path.join(path.dirname(pdfPath), folderName);
+    const outputDir = path.join(__dirname, folderName);
     const imagesDir = path.join(outputDir, 'images');
 
     // Create output directories
@@ -30,83 +79,22 @@ export async function pdfToMarkdown(pdfPath) {
       fs.mkdirSync(imagesDir);
     }
 
-    // Extract text content from all pages
-    const dataBuffer = fs.readFileSync(pdfPath);
-    const data = await pdf(dataBuffer);
-    // Combine text from all pages
-    const markdownContent = data.text;
+    const pdfBuffer = fs.readFileSync(pdfPath);
+    const fullMarkdown = await pdf2md(pdfBuffer);
 
-    // Save markdown content
-    fs.writeFileSync(path.join(outputDir, 'content.md'), markdownContent);
+    // const fullMarkdown = await convertToMarkdown(markdown);
+    const { markdown: fixedMarkdown, warnings } =
+      validateAndFixMarkdown(fullMarkdown);
 
-    // Extract images
-    const pdfParser = new PDFParser(null, 1); // Added parameter to preserve images
+    // Save markdown file
+    const mdPath = path.join(outputDir, 'content.md');
+    await fs.writeFile(mdPath, fixedMarkdown);
 
-    return new Promise((resolve, reject) => {
-      pdfParser.on('pdfParser_dataReady', (pdfData) => {
-        try {
-          // Extract and save images
-          let imageCount = 0;
-
-          if (pdfData.Pages) {
-            pdfData.Pages.forEach((page, pageIndex) => {
-              console.log('🚀 ~ pdfData.Pages.forEach ~ page:1');
-              // Handle both Images and Bg (background) images
-              const images = [...(page.Images || []), ...(page.Bg || [])];
-
-              images.forEach((image) => {
-                try {
-                  // Check if image data exists and is valid
-                  if (image.data) {
-                    let imageBuffer;
-
-                    // Handle different image data formats
-                    if (Buffer.isBuffer(image.data)) {
-                      imageBuffer = image.data;
-                    } else if (typeof image.data === 'string') {
-                      imageBuffer = Buffer.from(image.data, 'base64');
-                    } else {
-                      console.warn(
-                        `Skipping invalid image data at page ${pageIndex + 1}`,
-                      );
-                      return;
-                    }
-
-                    const imagePath = path.join(
-                      imagesDir,
-                      `image_${pageIndex + 1}_${++imageCount}.png`,
-                    );
-
-                    fs.writeFileSync(imagePath, imageBuffer);
-                  }
-                } catch (imageError) {
-                  console.warn(
-                    `Error processing image at page ${pageIndex + 1}:`,
-                    imageError,
-                  );
-                }
-              });
-            });
-          }
-
-          resolve({
-            outputDir,
-            markdownPath: path.join(outputDir, 'content.md'),
-            imagesDir,
-            totalPages: pdfData.Pages.length,
-            totalImages: imageCount,
-          });
-        } catch (extractError) {
-          reject(extractError);
-        }
-      });
-
-      pdfParser.on('pdfParser_dataError', (error) => {
-        reject(error);
-      });
-
-      pdfParser.loadPDF(pdfPath);
-    });
+    return {
+      markdownPath: mdPath,
+      warnings: warnings, // You could add warnings for failed image downloads etc.
+      outputDir,
+    };
   } catch (error) {
     throw new Error(`PDF conversion failed: ${error.message}`);
   }

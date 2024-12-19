@@ -6,6 +6,7 @@ import { fromMarkdown } from 'mdast-util-from-markdown';
 import { toHast } from 'mdast-util-to-hast';
 
 import { htmlToMarkdown } from './htmlToMarkdown.js';
+import { fetchContentJinaAi } from './jinaAi.js';
 import { pdfToMarkdown } from './pdfToMarkdown.js';
 import { wordToMarkdown } from './wordToMarkdown.js';
 
@@ -223,10 +224,10 @@ app.get('/html-convert', async (req, res) => {
   }
 });
 
-app.get('/pdf-convert', async (req, res) => {
-  const filePath = req.query.path;
+app.get('/jina-convert', async (req, res) => {
+  const url = req.query.path;
 
-  if (!filePath) {
+  if (!url) {
     return res.status(400).json({
       error: "Please provide a URLas 'path' query parameter",
     });
@@ -234,7 +235,7 @@ app.get('/pdf-convert', async (req, res) => {
 
   try {
     // First convert Word to Markdown
-    const { markdownPath, outputDir } = await pdfToMarkdown(filePath);
+    const { markdownPath, warnings, outputDir } = await fetchContentJinaAi(url);
 
     // Then read and process the Markdown
     const markdown = readFileSync(markdownPath, 'utf-8');
@@ -252,12 +253,58 @@ app.get('/pdf-convert', async (req, res) => {
     });
 
     const enhanced = await enhanceMdastNodesRecursive(mdast, outputDir);
-
     // Return the processed content along with conversion info
     res.json({
       content: enhanced.children,
       outputDirectory: outputDir,
-      // warnings: warnings,
+      warnings: warnings,
+    });
+  } catch (error) {
+    if (error.code === 'ENOENT') {
+      res.status(404).json({ error: `File not found: ${url}` });
+    } else {
+      res.status(500).json({
+        error: 'Error processing document',
+        details: error.message,
+      });
+    }
+  }
+});
+
+app.get('/pdf-convert', async (req, res) => {
+  const filePath = req.query.path;
+
+  if (!filePath) {
+    return res.status(400).json({
+      error: "Please provide a URLas 'path' query parameter",
+    });
+  }
+
+  try {
+    // First convert Word to Markdown
+    const { markdownPath, warnings, outputDir } = await pdfToMarkdown(filePath);
+
+    // Then read and process the Markdown
+    const markdown = readFileSync(markdownPath, 'utf-8');
+    const mdast = fromMarkdown(markdown);
+
+    const md = readFileSync(markdownPath, 'utf-8');
+    const ast = parse(md);
+
+    mdast.children.forEach(async (element, index) => {
+      const hast = toHast(element, { allowDangerousHtml: true });
+      const html = toHtml(hast, { allowDangerousHtml: true });
+      element.type = ast.children[index].type;
+      element.raw = ast.children[index].raw;
+      element.htmlValue = html;
+    });
+
+    const enhanced = await enhanceMdastNodesRecursive(mdast, outputDir);
+    // Return the processed content along with conversion info
+    res.json({
+      content: enhanced.children,
+      outputDirectory: outputDir,
+      warnings: warnings,
     });
   } catch (error) {
     if (error.code === 'ENOENT') {

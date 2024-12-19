@@ -13,7 +13,6 @@ use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\file\Entity\File;
 use Drupal\file\FileInterface;
 use Drupal\node\Entity\Node;
-use Drupal\node\NodeInterface;
 use Drupal\silverback_ai\HttpClient\OpenAiHttpClient;
 use GuzzleHttp\Exception\RequestException;
 
@@ -95,6 +94,32 @@ final class ContentImportAiService {
     try {
       // @todo For now this is working only for docx files.
       $response = $client->request('GET', "{$parse_service_url}/html-convert?path={$url}", [
+        'headers' => [
+          'Accept' => 'application/json',
+        ],
+      ]);
+      $body = $response->getBody()->getContents();
+      $response = json_decode($body);
+    }
+    catch (RequestException $e) {
+      // Handle any errors.
+      \Drupal::logger('silverback_ai_import')->error($e->getMessage());
+    }
+    return $response;
+  }
+
+  /**
+   *
+   */
+  public function getPdfAstFromFile(FileInterface $file) {
+    $uri = $file->getFileUri();
+    $stream_wrapper_manager = \Drupal::service('stream_wrapper_manager')->getViaUri($uri);
+    $file_path = $stream_wrapper_manager->realpath();
+    $parse_service_url = $this->configFactory->get('silverback_ai_import.settings')->get('converter_service_url');
+
+    $client = \Drupal::httpClient();
+    try {
+      $response = $client->request('GET', "{$parse_service_url}/pdf-convert?path={$file_path}", [
         'headers' => [
           'Accept' => 'application/json',
         ],
@@ -563,7 +588,7 @@ final class ContentImportAiService {
     $file = File::create([
       'filename' => basename($filepath),
       'uri' => "{$directory}/" . basename($filepath),
-      'status' => NodeInterface::PUBLISHED,
+      'status' => FileInterface::STATUS_PERMANENT,
       'uid' => $this->currentUser->id() ?? self::ADMINISTRATOR_ID,
     ]);
     $file->setPermanent();
