@@ -38,7 +38,25 @@ final class ContentImportAiService {
   ) {}
 
   /**
+   * Processes a content chunk by converting it using an appropriate plugin.
    *
+   * Takes a content chunk (either object or array), ensures it's in array format,
+   * finds the appropriate conversion plugin, and performs the conversion.
+   *
+   * @param mixed $chunk
+   *   The content chunk to process. Can be either object or array.
+   *   Will be converted to array format before processing.
+   *
+   * @return mixed
+   *   The processed chunk after plugin conversion
+   *
+   * @throws \JsonException
+   *   When JSON encoding/decoding fails
+   * @throws \RuntimeException
+   *   When no appropriate plugin is found for the chunk
+   *
+   * @see getPlugin()
+   * @see \Drupal\[module_name]\Plugin\ChunkConverterInterface::convert()
    */
   public function processChunk($chunk) {
     // Convert to array.
@@ -86,7 +104,26 @@ final class ContentImportAiService {
   }
 
   /**
+   * Retrieves an Abstract Syntax Tree (AST) from a URL using an external conversion service.
    *
+   * Currently only supports DOCX files. Sends the URL to a configured HTML conversion
+   * service and returns the AST representation of the document.
+   *
+   * @param string $url
+   *   The URL of the document to convert (currently only DOCX files)
+   *
+   * @return object|null
+   *   Returns the decoded JSON response containing the AST if successful,
+   *   or NULL if the request fails
+   *
+   * @throws \GuzzleHttp\Exception\GuzzleException
+   *   When the HTTP request fails
+   * @throws \JsonException
+   *   When JSON decoding fails
+   *
+   * @todo Extend support for other file types besides DOCX
+   *
+   * @see \GuzzleHttp\ClientInterface::request()
    */
   public function getAstFromUrl(string $url) {
     $parse_service_url = $this->configFactory->get('silverback_ai_import.settings')->get('converter_service_url');
@@ -109,7 +146,28 @@ final class ContentImportAiService {
   }
 
   /**
+   * Converts a PDF file to an Abstract Syntax Tree (AST) using an external service.
    *
+   * Takes a Drupal file entity containing a PDF, resolves its real path, and sends it
+   * to a configured conversion service. The service returns a JSON response containing
+   * the PDF's AST representation.
+   *
+   * @param \Drupal\file\FileInterface $file
+   *   The PDF file entity to convert.
+   *
+   * @return object|null
+   *   Returns the decoded JSON response containing the AST if successful,
+   *   or NULL if the request fails
+   *
+   * @throws \GuzzleHttp\Exception\GuzzleException
+   *   When the HTTP request fails
+   * @throws \JsonException
+   *   When JSON decoding fails
+   * @throws \RuntimeException
+   *   When stream wrapper manager fails to resolve the file path
+   *
+   * @see \Drupal\Core\StreamWrapper\StreamWrapperManagerInterface::getViaUri()
+   * @see \GuzzleHttp\ClientInterface::request()
    */
   public function getPdfAstFromFile(FileInterface $file) {
     $uri = $file->getFileUri();
@@ -428,7 +486,24 @@ final class ContentImportAiService {
   }
 
   /**
+   * Recursively iterates through a nested array to process Image type items.
    *
+   * Traverses through the array and its nested children, processing any items
+   * of type 'Image' by adding a 'gutenberg' property. The function modifies
+   * the array in place using reference parameters.
+   *
+   * @param array &$data
+   *   The array to process, passed by reference
+   *   Expected structure: [
+   *                       'type' => string,
+   *                       'children' => array (optional)
+   *                     ].
+   * @param int $depth
+   *   Current depth in the recursive traversal (default: 0)
+   *
+   * @return void
+   *
+   * @see processChunk() Method used to process Image type items
    */
   public function iterateArray(array &$data, int $depth = 0): void {
     foreach ($data as &$item) {
@@ -537,7 +612,28 @@ final class ContentImportAiService {
   }
 
   /**
+   * Creates a Node entity from a DOCX Abstract Syntax Tree (AST).
    *
+   * Processes the content.md file from the AST's output directory,
+   * extracts data through markdown processing, and creates a new node
+   * entity if valid data is present in the expected JSON structure.
+   *
+   * @param object $ast
+   *   The AST object containing outputDirectory property
+   *   with path to the processed DOCX content.
+   *
+   * @return \Drupal\node\Entity\Node|null
+   *   Returns a Node entity if creation is successful and data is valid,
+   *   or NULL if required data structure is not found
+   *
+   * @throws \Drupal\Core\Entity\EntityStorageException
+   *   When there's an error saving the node entity
+   * @throws \RuntimeException
+   *   When the content.md file cannot be read
+   * @throws \JsonException
+   *   When JSON decoding fails
+   *
+   * @see \Drupal\node\Entity\Node::create()
    */
   public function createEntityFromDocxAst($ast) {
     $markdown = file_get_contents($ast->outputDirectory . '/content.md');
@@ -557,7 +653,22 @@ final class ContentImportAiService {
   }
 
   /**
+   * Creates a Node entity of type 'page' from a given URL.
    *
+   * Extracts page data from the provided URL and creates a new node entity
+   * if the required data (title and language) is available.
+   *
+   * @param string $url
+   *   The URL to extract page data from.
+   *
+   * @return \Drupal\node\Entity\Node|null
+   *   Returns a Node entity if creation is successful,
+   *   or NULL if required data is missing
+   *
+   * @throws \Drupal\Core\Entity\EntityStorageException
+   *   When there's an error saving the node entity
+   *
+   * @see \Drupal\node\Entity\Node::create()
    */
   public function createEntityFromUrl($url) {
     $data = $this->extractPageDataFromUrl($url);
@@ -575,7 +686,23 @@ final class ContentImportAiService {
   }
 
   /**
+   * Creates a File entity from Dropzone uploaded file data.
    *
+   * This function handles the process of copying an uploaded file to a designated
+   * public directory and creating a corresponding File entity in Drupal.
+   *
+   * @param array $file_data
+   *   The file data from Dropzone upload
+   *   Expected structure: ['uploaded_files'][0]['path'].
+   *
+   * @return \Drupal\file\Entity\File The created and saved file entity
+   *
+   * @throws \Drupal\Core\File\Exception\FileException When file operations fail
+   * @throws \Drupal\Core\Entity\EntityStorageException When file entity creation fails
+   *
+   * @see \Drupal\Core\File\FileSystemInterface::prepareDirectory()
+   * @see \Drupal\Core\File\FileSystemInterface::copy()
+   * @see \Drupal\file\Entity\File::create()
    */
   public function createFileEntityFromDropzoneData($file_data) {
     // @todo Handle exceptions

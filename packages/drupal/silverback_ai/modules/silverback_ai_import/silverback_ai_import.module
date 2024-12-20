@@ -31,7 +31,7 @@ function silverback_ai_import_form_node_page_split_form_alter(&$form, FormStateI
     '#options' => [
       'none' => t('Do not import any content'),
       'docx' => t('Microsoft Word file'),
-      // 'pdf' => t("PDF file"),
+      'pdf' => t("PDF file"),
       'url' => t("Remote HTML page"),
     ],
     '#default_value' => 'none',
@@ -83,6 +83,31 @@ function silverback_ai_import_form_node_page_split_form_alter(&$form, FormStateI
     ],
   ];
 
+  $form['import']['container_pdf'] = [
+    '#type' => 'container',
+    '#states' => [
+      'visible' => [
+        'input[name="import_type"]' => ['value' => 'pdf'],
+      ],
+    ],
+  ];
+
+  $form['import']['container_pdf']['pdf_file'] = [
+    '#title' => t('Drag and drop a PDF file'),
+    '#type' => 'dropzonejs',
+    '#required' => TRUE,
+    '#dropzone_description' => 'Drag and drop a file here',
+    '#max_filesize' => '24M',
+    '#max_files' => 1,
+    '#extensions' => 'pdf',
+    '#upload_location' => 'public://converted/',
+    '#states' => [
+      'required' => [
+        'input[name="import_type"]' => ['value' => 'pdf'],
+      ],
+    ],
+  ];
+
   $form['actions']['submit']['#submit'][] = '_silverback_ai_import_form_submit';
 
   // Better to have this unpublished originally, and then
@@ -124,5 +149,18 @@ function _silverback_ai_import_form_submit(array $form, FormStateInterface $form
     $ast = $service->getAstFromUrl($url_value);
     $flatten = $service->flattenAst($ast->content);
     $content->create($flatten, $entity);
+  }
+  elseif ($type == 'pdf') {
+
+    $file_data = $form_state->getValue('pdf_file');
+    if (empty($file_data['uploaded_files'])) {
+      return;
+    }
+    $file = $service->createFileEntityFromDropzoneData($file_data);
+    if ($file) {
+      $ast = $service->getPdfAstFromFile($file);
+      $flatten = $service->flattenAst($ast->content);
+      $content->create($flatten, $entity);
+    }
   }
 }
