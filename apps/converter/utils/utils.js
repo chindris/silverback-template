@@ -50,38 +50,38 @@ export function generateFolderName(path) {
 }
 
 export function convertToMarkdown(input) {
-    const turndownService = new TurndownService({
-      headingStyle: 'atx',
-      codeBlockStyle: 'fenced',
-      hr: '---',
-      bulletListMarker: '-',
-      strongDelimiter: '**',
-    });
+  const turndownService = new TurndownService({
+    headingStyle: 'atx',
+    codeBlockStyle: 'fenced',
+    hr: '---',
+    bulletListMarker: '-',
+    strongDelimiter: '**',
+  });
 
-    turndownService.addRule('tables', {
-      filter: 'table',
-      replacement: function (content, node) {
-        const rows = node.querySelectorAll('tr');
-        const headers = Array.from(rows[0]?.querySelectorAll('th,td') || [])
-          .map((cell) => cell.textContent.trim())
-          .join(' | ');
+  turndownService.addRule('tables', {
+    filter: 'table',
+    replacement: function (content, node) {
+      const rows = node.querySelectorAll('tr');
+      const headers = Array.from(rows[0]?.querySelectorAll('th,td') || [])
+        .map((cell) => cell.textContent.trim())
+        .join(' | ');
 
-        const separator = headers
-          .split('|')
-          .map(() => '---')
-          .join(' | ');
+      const separator = headers
+        .split('|')
+        .map(() => '---')
+        .join(' | ');
 
-        const body = Array.from(rows)
-          .slice(1)
-          .map((row) =>
-            Array.from(row.querySelectorAll('td'))
-              .map((cell) => cell.textContent.trim())
-              .join(' | '),
-          )
-          .join('\n');
+      const body = Array.from(rows)
+        .slice(1)
+        .map((row) =>
+          Array.from(row.querySelectorAll('td'))
+            .map((cell) => cell.textContent.trim())
+            .join(' | '),
+        )
+        .join('\n');
 
-        return `\n${headers}\n${separator}\n${body}\n\n`;
-      },
-    });
-    return turndownService.turndown(input);
+      return `\n${headers}\n${separator}\n${body}\n\n`;
+    },
+  });
+  return turndownService.turndown(input);
 }

@@ -9,7 +9,11 @@ import fetch from 'node-fetch';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-import { convertToMarkdown,generateFolderName,validateAndFixMarkdown } from './utils/utils.js';
+import {
+  convertToMarkdown,
+  generateFolderName,
+  validateAndFixMarkdown,
+} from './utils/utils.js';
 
 /**
  * Extracts images from markdown content while preserving their positions

@@ -50,7 +50,7 @@ function silverback_ai_import_form_node_page_split_form_alter(&$form, FormStateI
     '#title' => t('Drag and drop a Microsoft Word file'),
     '#type' => 'dropzonejs',
     '#required' => TRUE,
-    '#dropzone_description' => 'DropzoneJS description',
+    '#dropzone_description' => 'Drag and drop a file here',
     '#max_filesize' => '1M',
     '#max_files' => 1,
     '#extensions' => 'doc docx',

@@ -51,9 +51,9 @@ final class ContentImportAiService {
    *   The processed chunk after plugin conversion
    *
    * @throws \JsonException
-   *   When JSON encoding/decoding fails
+   *   When JSON encoding/decoding fails.
    * @throws \RuntimeException
-   *   When no appropriate plugin is found for the chunk
+   *   When no appropriate plugin is found for the chunk.
    *
    * @see getPlugin()
    * @see \Drupal\[module_name]\Plugin\ChunkConverterInterface::convert()
