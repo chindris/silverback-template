@@ -43,41 +43,6 @@ async function enhanceMdastNodesRecursive(tree, outputDir) {
     return node;
   }
 
-  // Helper function to generate HTML for each node type
-  function generateHtml(node) {
-    switch (node.type.toLowerCase()) {
-      case 'paragraph':
-        return `<p>${node.children?.map((child) => child.htmlValue || '').join('')}</p>`;
-      case 'heading':
-        return `<h${node.depth}>${node.children?.map((child) => child.htmlValue || '').join('')}</h${node.depth}>`;
-      case 'text':
-        return node.value;
-      case 'emphasis':
-        return `<em>${node.children?.map((child) => child.htmlValue || '').join('')}</em>`;
-      case 'strong':
-        return `<strong>${node.children?.map((child) => child.htmlValue || '').join('')}</strong>`;
-      case 'link':
-        return `<a href="${node.url}">${node.children?.map((child) => child.htmlValue || '').join('')}</a>`;
-      case 'image':
-        return `<img src="${node.url}" alt="${node.alt || ''}" />`;
-      case 'list':
-        const tag = node.ordered ? 'ol' : 'ul';
-        return `<${tag}>${node.children?.map((child) => child.raw || '').join('')}</${tag}>`;
-      case 'listItem':
-        return `<li>${node.children?.map((child) => child.htmlValue || '').join('')}</li>`;
-      case 'blockquote':
-        return `<blockquote>${node.children?.map((child) => child.htmlValue || '').join('')}</blockquote>`;
-      case 'code':
-        return `<pre><code${node.lang ? ` class="language-${node.lang}"` : ''}>${node.value}</code></pre>`;
-      case 'inlineCode':
-        return `<code>${node.value}</code>`;
-      case 'thematicBreak':
-        return '<hr />';
-      default:
-        return '';
-    }
-  }
-
   return processNode(tree);
 }
 

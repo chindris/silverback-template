@@ -1,8 +1,9 @@
 import pdf2md from '@opendocsg/pdf2md';
-import crypto from 'crypto';
 import fs from 'fs-extra';
 import path from 'path';
 import { fileURLToPath } from 'url';
+
+import { generateFolderName,validateAndFixMarkdown } from './utils/utils.js';
 
 // @todo Fix this to work locally and live
 const isLagoon = !!process.env.LAGOON;
@@ -11,53 +12,6 @@ const __dirname = isLagoon
   ? '/app/web/sites/default/files/converted'
   : path.dirname(__filename);
 
-function validateAndFixMarkdown(markdown) {
-  const warnings = [];
-
-  // Regex to match the entire image syntax
-  const imageRegex = /!\[.*?\]\(.*?\)/g;
-
-  markdown = markdown.replace(imageRegex, (match) => {
-    // Parse the components of the Markdown image syntax
-    const altMatch = match.match(/!\[(.*?)\]/); // Match alt text
-    const urlMatch = match.match(/\((.*?)(?=\s|$)/); // Match URL
-    const titleMatch = match.match(/"([^"]*?)"\)$/); // Match title (if it exists)
-
-    let altText = altMatch ? altMatch[1] : '';
-    let url = urlMatch ? urlMatch[1] : '';
-    let title = titleMatch ? titleMatch[1] : null;
-
-    // Fix double quotes in alt text
-    if (altText.includes('"')) {
-      warnings.push(`Double quotes in alt text fixed: "${altText}"`);
-      altText = altText.replace(/"/g, "'");
-    }
-
-    // Fix double quotes in title
-    if (title && title.includes('"')) {
-      warnings.push(`Double quotes in title fixed: "${title}"`);
-      title = title.replace(/"/g, "'");
-    }
-
-    // Rebuild the image syntax
-    return title ? `![${altText}](${url} "${title}")` : `![${altText}](${url})`;
-  });
-
-  // Trim leading and trailing whitespace
-  const trimmedMarkdown = markdown.trim();
-  if (markdown !== trimmedMarkdown) {
-    warnings.push('Leading or trailing whitespace detected and removed.');
-    markdown = trimmedMarkdown;
-  }
-
-  return { markdown, warnings };
-}
-
-export function generateFolderName(filePath) {
-  const fileContent = fs.readFileSync(filePath);
-  const hash = crypto.createHash('md5').update(fileContent).digest('hex');
-  return hash.substring(0, 12);
-}
 
 export async function pdfToMarkdown(pdfPath) {
   try {

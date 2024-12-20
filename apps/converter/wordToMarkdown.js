@@ -3,8 +3,9 @@ import fs from 'fs-extra';
 import imageType from 'image-type';
 import mammoth from 'mammoth';
 import path from 'path';
-import TurndownService from 'turndown';
 import { fileURLToPath } from 'url';
+
+import { convertToMarkdown, generateFolderName } from './utils/utils.js';
 
 // @todo Fix this to work locally and live
 const isLagoon = !!process.env.LAGOON;
@@ -16,12 +17,6 @@ const __dirname = isLagoon
 async function getImageExtension(buffer) {
   const type = await imageType(buffer);
   return type ? `.${type.ext}` : '.png';
-}
-
-function generateFolderName(filePath) {
-  const fileContent = fs.readFileSync(filePath);
-  const hash = crypto.createHash('md5').update(fileContent).digest('hex');
-  return hash.substring(0, 12);
 }
 
 export async function wordToMarkdown(filePath) {
@@ -54,41 +49,7 @@ export async function wordToMarkdown(filePath) {
 
   const result = await mammoth.convertToHtml({ path: filePath }, options);
 
-  const turndownService = new TurndownService({
-    headingStyle: 'atx',
-    codeBlockStyle: 'fenced',
-    hr: '---',
-    bulletListMarker: '-',
-    strongDelimiter: '**',
-  });
-
-  turndownService.addRule('tables', {
-    filter: 'table',
-    replacement: function (content, node) {
-      const rows = node.querySelectorAll('tr');
-      const headers = Array.from(rows[0]?.querySelectorAll('th,td') || [])
-        .map((cell) => cell.textContent.trim())
-        .join(' | ');
-
-      const separator = headers
-        .split('|')
-        .map(() => '---')
-        .join(' | ');
-
-      const body = Array.from(rows)
-        .slice(1)
-        .map((row) =>
-          Array.from(row.querySelectorAll('td'))
-            .map((cell) => cell.textContent.trim())
-            .join(' | '),
-        )
-        .join('\n');
-
-      return `\n${headers}\n${separator}\n${body}\n\n`;
-    },
-  });
-
-  let markdown = turndownService.turndown(result.value);
+  let markdown = convertToMarkdown(result.value);
 
   markdown = markdown
     .replace(/\n\s*\n\s*\n/g, '\n\n')
