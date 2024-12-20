@@ -211,7 +211,7 @@ export async function htmlToMarkdown(url) {
 
   return {
     markdownPath: mdPath,
-    warnings: warnings, // You could add warnings for failed image downloads etc.
+    warnings: warnings,
     outputDir,
   };
 }

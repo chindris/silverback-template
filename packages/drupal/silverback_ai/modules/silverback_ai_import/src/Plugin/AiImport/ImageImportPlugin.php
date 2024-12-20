@@ -17,6 +17,8 @@ use Drupal\silverback_ai_import\AiImportPluginManagerInterface;
  */
 class ImageImportPlugin extends PluginBase implements AiImportPluginManagerInterface {
 
+  private const PUBLISHED = 1;
+
   /**
    * The schema to use.
    *
@@ -181,7 +183,7 @@ class ImageImportPlugin extends PluginBase implements AiImportPluginManagerInter
         'bundle' => $media_bundle,
         'name' => $file->getFilename(),
         'uid' => $user_id,
-        'status' => 1,
+        'status' => self::PUBLISHED,
         'field_media_image' => [
           'target_id' => $file->id(),
           // @todo Improve alt text generation.

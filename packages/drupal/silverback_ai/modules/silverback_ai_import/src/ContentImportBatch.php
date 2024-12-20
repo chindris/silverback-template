@@ -70,6 +70,21 @@ class ContentImportBatch {
       ];
       $batchBuilder->addOperation([ContentImportBatch::class, 'process'], [$batch]);
     }
+
+    // @todo Add DI
+    $service = \Drupal::service('silverback_ai_import.content');
+    $post_import_plugins = $service->getPostImportPlugins();
+    foreach ($post_import_plugins as $plugin) {
+      $batch = [
+        'plugin_id' => $plugin,
+        'entity' => $entity,
+        'count' => $count++,
+        'total' => $total,
+      ];
+      $batchBuilder->addOperation([ContentImportBatch::class, 'postProcess'], [$batch]);
+    }
+
+    // @todo Here, discover all post import plugins and add an operation at the end of this array.
     batch_set($batchBuilder->toArray());
   }
 
@@ -90,6 +105,25 @@ class ContentImportBatch {
 
     $context['results']['nid'] = $batch['item']['nid'];
 
+    $context['message'] = t('Processing chunk @processed/@total', [
+      '@processed' => $processed,
+      '@total' => $batch['total'],
+    ]);
+  }
+
+  /**
+   * Batch operation callback.
+   *
+   * @param array $batch
+   *   Information about batch (items, size, total, ...).
+   * @param array $context
+   *   Batch context.
+   */
+  public static function postProcess(array $batch, array &$context) {
+    $service = \Drupal::service('silverback_ai_import.content');
+    $processed_chunks = $service->postProcessChunks($batch['plugin_id'], $context['results']['content']);
+    $context['results']['content'] = $processed_chunks;
+    $processed = !empty($context['results']) ? count($context['results']) : $batch['count'];
     $context['message'] = t('Processing chunk @processed/@total', [
       '@processed' => $processed,
       '@total' => $batch['total'],
@@ -129,7 +163,7 @@ class ContentImportBatch {
       <!-- /wp:custom/content -->
       EOD;
 
-      // @todo Surround with try catch here
+      // @todo Add post import process here
       try {
         $node->body->value = $content;
         $node->save();

@@ -35,6 +35,7 @@ final class ContentImportAiService {
     private readonly ConfigFactoryInterface $configFactory,
     private readonly OpenAiHttpClient $silverbackAiOpenaiHttpClient,
     private readonly AiImportPluginManager $pluginManager,
+    private readonly AiPostImportPluginManager $pluginManagerPost,
   ) {}
 
   /**
@@ -56,7 +57,6 @@ final class ContentImportAiService {
    *   When no appropriate plugin is found for the chunk.
    *
    * @see getPlugin()
-   * @see \Drupal\[module_name]\Plugin\ChunkConverterInterface::convert()
    */
   public function processChunk($chunk) {
     // Convert to array.
@@ -721,6 +721,27 @@ final class ContentImportAiService {
     $file->setPermanent();
     $file->save();
     return $file;
+  }
+
+  /**
+   *
+   */
+  public function getPostImportPlugins() {
+    $definitions = $this->pluginManagerPost->getDefinitions();
+    $plugins = [];
+    foreach ($definitions as $definition) {
+      $plugins[] = $definition['id'];
+
+    }
+    return $plugins;
+  }
+
+  /**
+   *
+   */
+  public function postProcessChunks($plugin_id, $chunks,) {
+    $plugin = $this->pluginManagerPost->createInstance($plugin_id);
+    return $plugin->convert($chunks);
   }
 
 }

@@ -47,8 +47,8 @@ final class PageDropForm extends FormBase {
       '#description' => $this->t('<em>* Experimental, use with caution</em>'),
       '#options' => [
         'docx' => $this->t('Microsoft Word file'),
-        'url' => $this->t("Remote HTML page (*)"),
         'pdf' => $this->t("PDF file (*)"),
+        'url' => $this->t("Remote web page (*)"),
       ],
       '#default_value' => 'none',
       '#required' => TRUE,
@@ -242,7 +242,6 @@ final class PageDropForm extends FormBase {
           $form_state->setRedirectUrl($entity->toUrl('edit-form'));
         }
       }
-
     }
 
   }

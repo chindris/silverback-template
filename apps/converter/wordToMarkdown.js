@@ -25,7 +25,6 @@ export async function wordToMarkdown(filePath) {
   }
 
   const folderName = generateFolderName(filePath);
-  // const outputDir = path.join(__dirname, folderName);
   const outputDir = path.join(__dirname, folderName);
   const imagesDir = path.join(outputDir, 'images');
 
