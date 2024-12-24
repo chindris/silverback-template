@@ -51,6 +51,7 @@ RUN --mount=type=cache,target=/tmp/cache pnpm i && \
 RUN --mount=type=cache,target=/tmp/cache pnpm deploy --filter "@custom/cms" /tmp/.deploy/cms --prod
 RUN --mount=type=cache,target=/tmp/cache pnpm deploy --filter "@custom/publisher" /tmp/.deploy/publisher --prod
 RUN --mount=type=cache,target=/tmp/cache pnpm deploy --filter "@custom/preview" /tmp/.deploy/preview --prod
+RUN --mount=type=cache,target=/tmp/cache pnpm deploy --filter "@custom/authorizer" /tmp/.deploy/authorizer --prod
 
 # ====================================================================================================
 # CLI IMAGE
@@ -124,3 +125,13 @@ ARG LAGOON_GIT_BRANCH
 ENV VITE_DECAP_BRANCH="$LAGOON_GIT_BRANCH"
 
 CMD pnpm publisher
+
+# ====================================================================================================
+# AUTHORIZER IMAGE
+# ====================================================================================================
+
+FROM uselagoon/node-18 as authorizer
+
+RUN npm install -g pnpm@8.15.9
+COPY --from=builder /tmp/.deploy/authorizer /app
+CMD pnpm start

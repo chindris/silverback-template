@@ -1,0 +1,9 @@
+{
+  "extends": ["//"],
+  "tasks": {
+    "prep": {
+      "inputs": ["src/**"],
+      "outputs": ["build/**"]
+    }
+  }
+}

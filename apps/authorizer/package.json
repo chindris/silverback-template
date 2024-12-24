@@ -1,0 +1,25 @@
+{
+  "name": "@custom/authorizer",
+  "private": true,
+  "version": "0.0.0",
+  "description": "OpenAuth node authorizer",
+  "type": "module",
+  "main": "./build/index.js",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "prep": "swc ./src -d ./build",
+    "start": "node build/index.js"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.13.7",
+    "@openauthjs/openauth": "^0.2.5",
+    "valibot": "1.0.0-beta.9"
+  },
+  "devDependencies": {
+    "@swc/cli": "^0.1.63",
+    "@swc/core": "^1.3.102",
+    "tsx": "^4.7.1",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.5"
+  }
+}
