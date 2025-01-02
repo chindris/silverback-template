@@ -10,7 +10,7 @@ default:
       value: true
   name:
     -
-      value: Blocks
+      value: Block
   weight:
     -
       value: 1
