@@ -7,6 +7,7 @@ import { z } from 'zod';
 
 const formValueSchema = z.object({
   keyword: z.string().optional(),
+  terms: z.string().optional(),
 });
 
 export function useSearchParameters() {
@@ -16,7 +17,12 @@ export function useSearchParameters() {
   );
 }
 
-export function SearchForm() {
+/** Create a key for a term. */
+export function createKeyForTerm(term: string) {
+  return term.toLowerCase().replace(/[^a-z0-9]/g, '_');
+}
+
+export function SearchForm(props: { termOptions?: string[] }) {
   const intl = useIntl();
   type FormValues = z.infer<typeof formValueSchema>;
   const { register, handleSubmit } = useForm<FormValues>({
@@ -33,6 +39,33 @@ export function SearchForm() {
             navigate(location, { ...values, page: 1 });
           })}
         >
+          {props.termOptions && props.termOptions.length > 0 ? (
+            <div className="mb-2 mr-2 w-full sm:max-w-xs">
+              <label htmlFor="terms" className="sr-only">
+                {intl.formatMessage({
+                  defaultMessage: 'Filter by terms',
+                  id: '7h7Z2A',
+                })}
+              </label>
+              <select
+                {...register('terms')}
+                defaultValue={'default'}
+                className="block w-full rounded-lg border p-3 text-sm bg-gray-50 border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500"
+              >
+                <option key="default" value="">
+                  {intl.formatMessage({
+                    defaultMessage: 'Filter by terms',
+                    id: '7h7Z2A',
+                  })}
+                </option>
+                {props.termOptions.map((term) => (
+                  <option key={term} value={createKeyForTerm(term)}>
+                    {term}
+                  </option>
+                ))}
+              </select>
+            </div>
+          ) : null}
           <div className="mb-2 mr-2 w-full sm:max-w-xs">
             <label htmlFor="keyword" className="sr-only">
               {intl.formatMessage({
@@ -42,7 +75,7 @@ export function SearchForm() {
             </label>
             <input
               {...register('keyword')}
-              className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-3 text-sm text-gray-900 shadow-sm focus-within:border-gray-300 focus:ring-0"
+              className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-3 text-sm text-gray-900 shadow-sm focus-within:border-gray-300 focus:ring-blue-500 focus:border-blue-500"
               placeholder={intl.formatMessage({
                 defaultMessage: 'Keyword',
                 id: 'fe0rMF',

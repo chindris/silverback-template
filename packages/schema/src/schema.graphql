@@ -152,6 +152,7 @@ interface Page implements CardItem & Editable @resolveEntityBundle {
   hero: Hero
   content: [PageContent]
   metaTags: [MetaTag]
+  terms: [String]
 }
 
 type DecapPage implements Page & Editable & CardItem
@@ -166,6 +167,7 @@ type DecapPage implements Page & Editable & CardItem
   hero: Hero
   content: [PageContent]
   metaTags: [MetaTag]
+  terms: [String]
 }
 
 """
@@ -201,6 +203,7 @@ type DrupalPage implements Page & Editable & CardItem
     @seek(pos: 1)
     @resolveEditorBlockChildren
   metaTags: [MetaTag] @resolveProperty(path: "metatag")
+  terms: [String]
 }
 
 type Hero {
@@ -395,6 +398,7 @@ interface CardItem @resolveEntityBundle {
   title: String!
   hero: Hero
   teaserImage: MediaImage
+  terms: [String]
 }
 
 type BlockConditional @type(id: "custom/conditional") {
