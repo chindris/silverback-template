@@ -44,7 +44,7 @@ export function SearchForm(props: { termOptions?: string[] }) {
               <label htmlFor="terms" className="sr-only">
                 {intl.formatMessage({
                   defaultMessage: 'Filter by terms',
-                  id: '7h7Z2A',
+                  id: 'EqfeAF',
                 })}
               </label>
               <select
@@ -55,7 +55,7 @@ export function SearchForm(props: { termOptions?: string[] }) {
                 <option key="default" value="">
                   {intl.formatMessage({
                     defaultMessage: 'Filter by terms',
-                    id: '7h7Z2A',
+                    id: 'EqfeAF',
                   })}
                 </option>
                 {props.termOptions.map((term) => (
