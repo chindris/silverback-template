@@ -50,7 +50,7 @@ export function SearchForm(props: { termOptions?: string[] }) {
               <select
                 {...register('terms')}
                 defaultValue={'default'}
-                className="block w-full rounded-lg border p-3 text-sm bg-gray-50 border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500"
+                className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-3 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
               >
                 <option key="default" value="">
                   {intl.formatMessage({
@@ -75,7 +75,7 @@ export function SearchForm(props: { termOptions?: string[] }) {
             </label>
             <input
               {...register('keyword')}
-              className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-3 text-sm text-gray-900 shadow-sm focus-within:border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+              className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-3 text-sm text-gray-900 shadow-sm focus-within:border-gray-300 focus:border-blue-500 focus:ring-blue-500"
               placeholder={intl.formatMessage({
                 defaultMessage: 'Keyword',
                 id: 'fe0rMF',

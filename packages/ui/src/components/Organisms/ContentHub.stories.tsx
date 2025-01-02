@@ -13,9 +13,9 @@ import qs from 'query-string';
 import React from 'react';
 
 import { image } from '../../helpers/image';
-import { ContentHub, ContentHubQueryArgs } from './ContentHub';
-import SearchFormStories from '../Molecules/SearchForm.stories';
 import { createKeyForTerm } from '../Molecules/SearchForm';
+import SearchFormStories from '../Molecules/SearchForm.stories';
+import { ContentHub, ContentHubQueryArgs } from './ContentHub';
 
 type ContentHubExecutor = (
   id: typeof ContentHubQuery,
