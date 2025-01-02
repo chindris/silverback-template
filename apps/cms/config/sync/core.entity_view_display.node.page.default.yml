@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.page.body
+    - field.field.node.page.field_content_hub_terms
     - field.field.node.page.field_metatags
     - node.type.page
   module:
@@ -29,6 +30,14 @@ content:
       view_live_link: true
     third_party_settings: {  }
     weight: 1
+    region: content
+  field_content_hub_terms:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 3
     region: content
   field_metatags:
     type: metatag_empty_formatter
