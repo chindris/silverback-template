@@ -34,5 +34,4 @@ class OpenAiHttpClient extends Client {
 
     parent::__construct($options);
   }
-
 }

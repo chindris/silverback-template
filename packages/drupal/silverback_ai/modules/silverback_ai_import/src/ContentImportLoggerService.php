@@ -2,24 +2,26 @@
 
 declare(strict_types=1);
 
-namespace Drupal\silverback_ai;
+namespace Drupal\silverback_ai_import;
 
 use Drupal\Component\Serialization\Json;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Database\Connection;
 use Drupal\Core\Datetime\DrupalDateTime;
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Link;
 use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 use Drupal\Core\Render\Markup;
 use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
+use Drupal\file\FileInterface;
 use Drupal\user\Entity\User;
 
 /**
  * @todo Add class description.
  */
-final class TokenUsage implements TokenUsageInterface {
+final class ContentImportLoggerService {
 
   private const USER_ADMIN = 1;
   private const PAGER_LIMIT = 25;
@@ -41,11 +43,7 @@ final class TokenUsage implements TokenUsageInterface {
   /**
    * {@inheritdoc}
    */
-  public function createUsageEntry(array $context): void {
-
-    $tokens_out = $context['usage']['prompt_tokens'];
-    $tokens_in = $context['usage']['completion_tokens'];
-    $tokens_total = $context['usage']['total_tokens'];
+  public function createEntry($ast, EntityInterface $entity, string $source): void {
 
     $uid = self::USER_ADMIN;
     if ($this->currentUser) {
@@ -55,24 +53,19 @@ final class TokenUsage implements TokenUsageInterface {
     // @todo Validate input array
     try {
       $this->connection
-        ->insert('silverback_ai_usage')
+        ->insert('silverback_ai_import')
         ->fields([
           'uid' => $uid,
           'timestamp' => (new DrupalDateTime())->getTimestamp(),
-          'target_entity_type_id' => $context['entity_type_id'] ?? NULL,
-          'target_entity_id' => $context['entity_id'] ?? NULL,
-          'target_entity_revision_id' => $context['entity_revision_id'] ?? NULL,
-          'tokens_in' => $tokens_in,
-          'tokens_out' => $tokens_out,
-          'total_count' => $tokens_total,
-          'provider' => 'Open AI',
-          'model' => $context['model'],
-          'module' => $context['module'],
-          'response' => json_encode($context),
+          'target_entity_type_id' => $$entity->bundle(),
+          'target_entity_id' => $entity->id(),
+          'target_entity_revision_id' => NULL,
+          'source' => $source ?? '',
+          'output_folder' => $ast->outputDirectory,
+          'data' => '-', // @todo serialise ast perhaps?
         ])
         ->execute();
-    }
-    catch (\Exception $e) {
+    } catch (\Exception $e) {
       $this->loggerFactory->get('silverback_ai')->error($e->getMessage());
     }
   }
@@ -89,7 +82,7 @@ final class TokenUsage implements TokenUsageInterface {
    *   An array of processed database records.
    */
   public function getEntries() {
-    $query = $this->connection->select('silverback_ai_usage', 's')
+    $query = $this->connection->select('silverback_ai_import', 's')
       ->fields('s', [
         'id',
         'uid',
@@ -97,13 +90,9 @@ final class TokenUsage implements TokenUsageInterface {
         'target_entity_id',
         'target_entity_type_id',
         'target_entity_revision_id',
-        'tokens_in',
-        'tokens_out',
-        'total_count',
-        'provider',
-        'model',
-        'module',
-        'response',
+        'source',
+        'output_folder',
+        'data',
       ])
       ->orderBy('id', 'DESC');
     $pager = $query->extend('Drupal\Core\Database\Query\PagerSelectExtender')->limit(self::PAGER_LIMIT);
@@ -134,9 +123,6 @@ final class TokenUsage implements TokenUsageInterface {
    *   - 'username': The display name of the user associated with the entry.
    *   - 'entity_id': The capitalized entity bundle string or empty string if
    *     the entity is not found.
-   *   - 'tokens_total': The total token count from the row's data.
-   *   - 'ai_provider': A string indicating the AI provider and model used.
-   *   - 'module_name': The name of the module associated with the entry.
    *   - 'info': A renderable link to detailed usage information displayed in
    *     a modal dialog.
    *
@@ -186,12 +172,7 @@ final class TokenUsage implements TokenUsageInterface {
       'timestamp' => DrupalDateTime::createFromTimestamp($row->timestamp)->format('d.m.Y H:i'),
       'username' => $username,
       'entity_id' => ucfirst($entity_info),
-      'tokens_total' => $row->total_count,
-      'ai_provider' => $row->provider . ' / ' . ($row->model ?: 'gpt-4o-mini'),
-      'module_name' => $row->module,
       'info' => $link,
-      'response' => $row->response,
     ];
   }
-
 }

@@ -41,10 +41,6 @@ class ContentImportBatch {
    * This method initializes a batch process for updating media images, setting
    * up the batch operations and conditions for Drush integration if run via CLI.
    *
-   * @param array $items
-   *   An array of items to be processed in the batch. Each item represents
-   *   a single media entity requiring updates.
-   *
    * @return void
    */
   public function create(array $chunks, $entity): void {
@@ -167,8 +163,7 @@ class ContentImportBatch {
       try {
         $node->body->value = $content;
         $node->save();
-      }
-      catch (\Exception $e) {
+      } catch (\Exception $e) {
         // @todo
       }
     }
@@ -176,15 +171,15 @@ class ContentImportBatch {
     $messenger = \Drupal::messenger();
     if ($success) {
       $messenger->addStatus(t('Items processed successfully.'));
-    }
-    else {
+    } else {
       // An error occurred.
       // $operations contains the operations that remained unprocessed.
       $error_operation = reset($operations);
-      $message = t('An error occurred while processing %error_operation with arguments: @arguments',
-      ['%error_operation' => $error_operation[0], '@arguments' => print_r($error_operation[1], TRUE)]);
+      $message = t(
+        'An error occurred while processing %error_operation with arguments: @arguments',
+        ['%error_operation' => $error_operation[0], '@arguments' => print_r($error_operation[1], TRUE)]
+      );
       $messenger->addError($message);
     }
   }
-
 }

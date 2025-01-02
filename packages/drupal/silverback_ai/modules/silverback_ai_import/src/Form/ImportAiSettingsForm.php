@@ -47,9 +47,9 @@ final class ImportAiSettingsForm extends ConfigFormBase {
       ],
       '#empty_option' => $this->t('- Select model -'),
       '#description' => $this->t('Leave empty to use the default <strong><em>gpt-4o-mini</em></strong> model.') . '<br />' .
-      $this->t('<strong><a href="@href" target="_blank">Learn more</a></strong> about the models.', [
-        '@href' => 'https://openai.com/index/gpt-4o-mini-advancing-cost-efficient-intelligence',
-      ]),
+        $this->t('<strong><a href="@href" target="_blank">Learn more</a></strong> about the models.', [
+          '@href' => 'https://openai.com/index/gpt-4o-mini-advancing-cost-efficient-intelligence',
+        ]),
     ];
 
     $form['general'] = [
@@ -79,8 +79,8 @@ final class ImportAiSettingsForm extends ConfigFormBase {
   public function submitForm(array &$form, FormStateInterface $form_state): void {
     $this->config('silverback_ai_import.settings')
       ->set('converter_service_url', $form_state->getValue('converter_service_url'))
+      ->set('ai_model', $form_state->getValue('ai_model'))
       ->save();
     parent::submitForm($form, $form_state);
   }
-
 }

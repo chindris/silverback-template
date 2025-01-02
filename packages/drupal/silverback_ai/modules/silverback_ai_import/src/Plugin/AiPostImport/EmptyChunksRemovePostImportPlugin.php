@@ -10,7 +10,7 @@ use Drupal\silverback_ai_import\AiPostImportPluginManagerInterface;
  *
  * @Plugin(
  *   id = "ai_empty_chunks",
- *   label = @Translation("Filters empty chunks"),
+ *   label = @Translation("Fllters empty chunks"),
  *   weight = 0,
  * )
  */
@@ -52,5 +52,4 @@ class EmptyChunksRemovePostImportPlugin extends PluginBase implements AiPostImpo
     });
     return $chunks;
   }
-
 }

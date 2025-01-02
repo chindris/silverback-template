@@ -117,5 +117,4 @@ class DefaultImportPlugin extends PluginBase implements AiImportPluginManagerInt
 
     return $template;
   }
-
 }

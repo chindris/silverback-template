@@ -6,6 +6,8 @@
  */
 
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\silverback_ai_import\ContentImportAiService;
 
 /**
  * {@inheritdoc}
@@ -114,21 +116,23 @@ function silverback_ai_import_form_node_page_split_form_alter(&$form, FormStateI
   // we will display a message to the user (esp. if there is AI content)
   $form['moderation_state']['#access'] = FALSE;
   $form['actions']['submit']['#value'] = t('Create');
-
 }
 
 /**
  * {@inheritdoc}
  */
 function _silverback_ai_import_form_submit(array $form, FormStateInterface $form_state) {
-  $entity = $form_state->getFormObject()->getEntity();
 
+  /** @var \Drupal\Core\Entity\EntityInterface $entity */
+  $entity = $form_state->getFormObject()->getEntity();
   $url_value = $form_state->getValue('url_value');
 
   $service = \Drupal::service('silverback_ai_import.content');
   $content = \Drupal::service('silverback_ai_import.batch.import');
   $type = $form_state->getValue('import_type');
+  $contentImportLogger = \Drupal::service('silverback_ai_imoprt.logger');
 
+  // @todo Remove magic strings
   if ($type == 'docx') {
     // @todo Surround with try-catch
     $file = $form_state->getValue('file');
@@ -140,17 +144,17 @@ function _silverback_ai_import_form_submit(array $form, FormStateInterface $form
     $file = $service->createFileEntityFromDropzoneData($file);
 
     if ($file) {
-      $ast = $service->getAstFromFilePath($file);
+      $ast = $service->getAst($file);
       $flatten = $service->flattenAst($ast->content);
       $content->create($flatten, $entity);
+      $contentImportLogger->createEntry($ast, $entity, $file->getFileUri());
     }
-  }
-  elseif (!empty($url_value) && $type == 'url') {
-    $ast = $service->getAstFromUrl($url_value);
+  } elseif (!empty($url_value) && $type == 'url') {
+    $ast = $service->getAst($url_value, ContentImportAiService::URL);
     $flatten = $service->flattenAst($ast->content);
     $content->create($flatten, $entity);
-  }
-  elseif ($type == 'pdf') {
+    $contentImportLogger->createEntry($ast, $entity, $url_value);
+  } elseif ($type == 'pdf') {
 
     $file_data = $form_state->getValue('pdf_file');
     if (empty($file_data['uploaded_files'])) {
@@ -158,9 +162,10 @@ function _silverback_ai_import_form_submit(array $form, FormStateInterface $form
     }
     $file = $service->createFileEntityFromDropzoneData($file_data);
     if ($file) {
-      $ast = $service->getPdfAstFromFile($file);
+      $ast = $service->getAst($file, ContentImportAiService::PDF);
       $flatten = $service->flattenAst($ast->content);
       $content->create($flatten, $entity);
+      $contentImportLogger->createEntry($ast, $entity, $file->getFileUri());
     }
   }
 }

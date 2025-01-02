@@ -33,7 +33,8 @@ final class ImageAiUtilities implements ImageAiUtilitiesInterface {
     private readonly TokenUsageInterface $silverbackAiTokenUsage,
     private readonly OpenAiHttpClient $openAiHttpClient,
     private readonly EntityTypeManager $entityTypeManager,
-  ) {}
+  ) {
+  }
 
   /**
    * Generates an ALT text for an image using the OpenAI API.
@@ -63,8 +64,7 @@ final class ImageAiUtilities implements ImageAiUtilitiesInterface {
 
     if (getenv('SILVERBACK_IMAGE_AI_DRY_RUN')) {
       $response_body = $this->getFakeResponseBody($base_64_data, $langcode);
-    }
-    else {
+    } else {
       $response_body = $this->sendOpenAiRequest($base_64_data, $langcode);
     }
 
@@ -119,8 +119,7 @@ final class ImageAiUtilities implements ImageAiUtilitiesInterface {
         $image_style->createDerivative($image_uri, $derivative_uri);
       }
       $absolute_path = $fileSystem->realpath($derivative_uri);
-    }
-    else {
+    } else {
       $absolute_path = $fileSystem->realpath($image_uri);
     }
 
@@ -158,8 +157,7 @@ final class ImageAiUtilities implements ImageAiUtilitiesInterface {
     if (!empty($context)) {
       $prompt = "Given the following context:\r\n'{$context}' \r\n";
       $prompt .= "generate a concise and descriptive ALT text for this image. The ALT text should be a single sentence, no more than {$words} words long. The Alt text should be in the {$language_name} language.";
-    }
-    else {
+    } else {
       $prompt = "Generate a concise and descriptive ALT text for this image. The ALT text should be a single sentence, no more than {$words} words long. The Alt text should be in the {$language_name} language.";
     }
 
@@ -169,16 +167,16 @@ final class ImageAiUtilities implements ImageAiUtilitiesInterface {
         [
           'role' => 'user',
           'content' => [
-                [
-                  'type' => 'text',
-                  'text' => $prompt,
-                ],
-                [
-                  'type' => 'image_url',
-                  'image_url' => [
-                    "url" => $base_64_data,
-                  ],
-                ],
+            [
+              'type' => 'text',
+              'text' => $prompt,
+            ],
+            [
+              'type' => 'image_url',
+              'image_url' => [
+                "url" => $base_64_data,
+              ],
+            ],
           ],
         ],
       ],
@@ -189,8 +187,7 @@ final class ImageAiUtilities implements ImageAiUtilitiesInterface {
       $response = $this->openAiHttpClient->post('chat/completions', [
         'json' => $payload,
       ]);
-    }
-    catch (\Exception $e) {
+    } catch (\Exception $e) {
       throw new \Exception('HTTP request failed: ' . $e->getMessage());
     }
 
@@ -216,6 +213,7 @@ final class ImageAiUtilities implements ImageAiUtilitiesInterface {
       'bundle' => 'image',
     ]);
     foreach ($media_entities as $media) {
+      /** @var \Drupal\media\Entity\Media $media */
       foreach ($media->getTranslationLanguages() as $langcode => $translation) {
         $entity = $media->getTranslation($langcode);
         if (!$entity->field_media_image->alt) {
@@ -323,6 +321,7 @@ final class ImageAiUtilities implements ImageAiUtilitiesInterface {
       'bundle' => 'image',
     ]);
     foreach ($media_entities as $media) {
+      /** @var \Drupal\media\Entity\Media $media */
       foreach ($media->getTranslationLanguages() as $langcode => $translation) {
         $entity = $media->getTranslation($langcode);
         $entities[] = [
@@ -355,6 +354,7 @@ final class ImageAiUtilities implements ImageAiUtilitiesInterface {
       'bundle' => 'image',
     ]);
     foreach ($media_entities as $media) {
+      /** @var \Drupal\media\Entity\Media $media */
       foreach ($media->getTranslationLanguages() as $langcode => $translation) {
         $entity = $media->getTranslation($langcode);
         if (!$entity->field_media_image->alt) {
@@ -383,7 +383,6 @@ final class ImageAiUtilities implements ImageAiUtilitiesInterface {
    * @throws \Exception
    */
   public function logUsage(array $response_body, EntityInterface $entity = NULL) {
-    // ..
     $response_body['module'] = 'Silverback Image AI';
 
     if ($entity) {
@@ -396,5 +395,4 @@ final class ImageAiUtilities implements ImageAiUtilitiesInterface {
 
     $this->silverbackAiTokenUsage->createUsageEntry($response_body);
   }
-
 }

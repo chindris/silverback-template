@@ -24,6 +24,11 @@ final class ContentImportAiService {
   private const DEFAULT_AI_MODEL = 'gpt-4o-mini';
   private const ADMINISTRATOR_ID = 1;
 
+  public const DOCX = 'docx';
+  public const URL = 'url';
+  public const PDF = 'pdf';
+
+
   /**
    * Constructs a ContentImportAiService object.
    */
@@ -36,7 +41,9 @@ final class ContentImportAiService {
     private readonly OpenAiHttpClient $silverbackAiOpenaiHttpClient,
     private readonly AiImportPluginManager $pluginManager,
     private readonly AiPostImportPluginManager $pluginManagerPost,
-  ) {}
+    private readonly AiRequestService $aiRequestService,
+  ) {
+  }
 
   /**
    * Processes a content chunk by converting it using an appropriate plugin.
@@ -66,6 +73,25 @@ final class ContentImportAiService {
   }
 
   /**
+   * Get Abstract Syntax Tree (AST) from different source types
+   *
+   * @param FileInterface|string $source The source to parse (can be a FileInterface object or string path/URL)
+   * @param int $type The type of source (self::DOCX by default, self::URL, or self::PDF)
+   * @return mixed The Abstract Syntax Tree representation of the source
+   *
+   * @throws \Exception If the source is invalid or cannot be parsed
+   */
+  public function getAst(FileInterface|string $source, $type =  self::DOCX) {
+    $handlers = [
+      self::DOCX => 'getAstFromFilePath',
+      self::URL => 'getAstFromUrl',
+      self::PDF => 'getAstFromPdfFile',
+    ];
+    $handler = $handlers[$type];
+    return $this->$handler($source);
+  }
+
+  /**
    * Retrieves the AST (Abstract Syntax Tree) from a given file path using an HTTP service.
    *
    * @param \Drupal\file\FileInterface $file
@@ -79,7 +105,7 @@ final class ContentImportAiService {
    *
    * @todo Implement configuration handling for service endpoints or client headers.
    */
-  public function getAstFromFilePath(FileInterface $file) {
+  private function getAstFromFilePath(FileInterface $file) {
     $uri = $file->getFileUri();
     $stream_wrapper_manager = \Drupal::service('stream_wrapper_manager')->getViaUri($uri);
     $file_path = $stream_wrapper_manager->realpath();
@@ -95,8 +121,7 @@ final class ContentImportAiService {
       ]);
       $body = $response->getBody()->getContents();
       $response = json_decode($body);
-    }
-    catch (RequestException $e) {
+    } catch (RequestException $e) {
       // Handle any errors.
       \Drupal::logger('silverback_ai_import')->error($e->getMessage());
     }
@@ -125,7 +150,7 @@ final class ContentImportAiService {
    *
    * @see \GuzzleHttp\ClientInterface::request()
    */
-  public function getAstFromUrl(string $url) {
+  private function getAstFromUrl(string $url) {
     $parse_service_url = $this->configFactory->get('silverback_ai_import.settings')->get('converter_service_url');
     $client = \Drupal::httpClient();
     try {
@@ -137,8 +162,7 @@ final class ContentImportAiService {
       ]);
       $body = $response->getBody()->getContents();
       $response = json_decode($body);
-    }
-    catch (RequestException $e) {
+    } catch (RequestException $e) {
       // Handle any errors.
       \Drupal::logger('silverback_ai_import')->error($e->getMessage());
     }
@@ -169,7 +193,7 @@ final class ContentImportAiService {
    * @see \Drupal\Core\StreamWrapper\StreamWrapperManagerInterface::getViaUri()
    * @see \GuzzleHttp\ClientInterface::request()
    */
-  public function getPdfAstFromFile(FileInterface $file) {
+  private function getAstFromPdfFile(FileInterface $file) {
     $uri = $file->getFileUri();
     $stream_wrapper_manager = \Drupal::service('stream_wrapper_manager')->getViaUri($uri);
     $file_path = $stream_wrapper_manager->realpath();
@@ -184,8 +208,7 @@ final class ContentImportAiService {
       ]);
       $body = $response->getBody()->getContents();
       $response = json_decode($body);
-    }
-    catch (RequestException $e) {
+    } catch (RequestException $e) {
       // Handle any errors.
       \Drupal::logger('silverback_ai_import')->error($e->getMessage());
     }
@@ -196,8 +219,7 @@ final class ContentImportAiService {
    * {Helper method}
    */
   public function extractData(string $ast, string $schema) {
-    // @todo Get some of these from settings
-    $model = $this->configFactory->get('silverback_image_ai.settings')->get('ai_model') ?: self::DEFAULT_AI_MODEL;
+    $model = $this->configFactory->get('silverback_ai_import.settings')->get('ai_model') ?: self::DEFAULT_AI_MODEL;
 
     $prompt = <<<EOD
     You are a precise JSON data extraction and template rendering assistant. Follow these steps carefully:
@@ -226,40 +248,15 @@ final class ContentImportAiService {
     - Complete token replacement
     EOD;
 
-    $payload = [
-      'model' => $model,
-      'messages' => [
-        [
-          'role' => 'user',
-          'content' => [
-                [
-                  'type' => 'text',
-                  'text' => $prompt,
-                ],
-          ],
-        ],
-      ],
-    ];
-
-    try {
-      $response = $this->silverbackAiOpenaiHttpClient->post('chat/completions', [
-        'json' => $payload,
-      ]);
-    }
-    catch (\Exception $e) {
-      throw new \Exception('HTTP request failed: ' . $e->getMessage());
-    }
-
-    $responseBodyContents = $response->getBody()->getContents();
-    return json_decode($responseBodyContents, TRUE, 512, JSON_THROW_ON_ERROR);
+    return $this->aiRequestService->request($prompt, $model);
   }
 
   /**
    * {Helper method}
    */
   public function sendOpenAiRequest(string $ast, string $type, string $template, string $schema) {
-    // @todo Get some of these from settings
-    $model = $this->configFactory->get('silverback_image_ai.settings')->get('ai_model') ?: self::DEFAULT_AI_MODEL;
+
+    $model = $this->configFactory->get('silverback_ai_import.settings')->get('ai_model') ?: self::DEFAULT_AI_MODEL;
 
     $prompt = <<<EOD
     You are a precise JSON data extraction and template rendering assistant. Follow these steps carefully:
@@ -301,40 +298,15 @@ final class ContentImportAiService {
     - Complete token replacement
     EOD;
 
-    $payload = [
-      'model' => $model,
-      'messages' => [
-        [
-          'role' => 'user',
-          'content' => [
-                [
-                  'type' => 'text',
-                  'text' => $prompt,
-                ],
-          ],
-        ],
-      ],
-    ];
-
-    try {
-      $response = $this->silverbackAiOpenaiHttpClient->post('chat/completions', [
-        'json' => $payload,
-      ]);
-    }
-    catch (\Exception $e) {
-      throw new \Exception('HTTP request failed: ' . $e->getMessage());
-    }
-
-    $responseBodyContents = $response->getBody()->getContents();
-    return json_decode($responseBodyContents, TRUE, 512, JSON_THROW_ON_ERROR);
+    return $this->aiRequestService->request($prompt, $model);
   }
 
   /**
    * {Helper method}
    */
   public function extractBaseDataFromMarkdown(string $markdown) {
-    // @todo Get some of these from settings
-    $model = $this->configFactory->get('silverback_image_ai.settings')->get('ai_model') ?: self::DEFAULT_AI_MODEL;
+
+    $model = $this->configFactory->get('silverback_ai_import.settings')->get('ai_model') ?: self::DEFAULT_AI_MODEL;
 
     $prompt = <<<EOD
     You are an expert Markdown data extraction assistant. Your task is to analyze and extract specific information from provided Markdown text.
@@ -361,32 +333,7 @@ final class ContentImportAiService {
     - Be precise and concise in extracting the required information.
     EOD;
 
-    $payload = [
-      'model' => $model,
-      'messages' => [
-        [
-          'role' => 'user',
-          'content' => [
-                [
-                  'type' => 'text',
-                  'text' => $prompt,
-                ],
-          ],
-        ],
-      ],
-    ];
-
-    try {
-      $response = $this->silverbackAiOpenaiHttpClient->post('chat/completions', [
-        'json' => $payload,
-      ]);
-    }
-    catch (\Exception $e) {
-      throw new \Exception('HTTP request failed: ' . $e->getMessage());
-    }
-
-    $responseBodyContents = $response->getBody()->getContents();
-    return json_decode($responseBodyContents, TRUE, 512, JSON_THROW_ON_ERROR);
+    return $this->aiRequestService->request($prompt, $model);
   }
 
   /**
@@ -404,7 +351,7 @@ final class ContentImportAiService {
    *
    * @return object
    *   The plugin instance that matches the provided chunk or the default
-   *   plugin if no matches are found.   *   *   *   *   *   *   *   *   *   *   *   *   *
+   *   plugin if no matches are found.
    */
   public function getPlugin(array $chunk) {
     $default_plugin = $this->pluginManager->createInstance('ai_default');
@@ -427,7 +374,7 @@ final class ContentImportAiService {
    * is assigned a unique ID and maintains a reference to its parent. It processes
    * specific node types differently and handles recursive traversal of child nodes.
    *
-   * @param array|null $ast
+   * @param $ast
    *   The AST structure to flatten.
    * @param int|null $parent
    *   The ID of the parent node (used in recursion)
@@ -449,27 +396,29 @@ final class ContentImportAiService {
     }
 
     foreach ($ast as $chunk) {
-      if (isset($chunk['type'])
+      if (
+        isset($chunk['type'])
         && in_array($chunk['type'], [
           'Strong',
           'Text',
           'ListItem',
           'Emphasis',
-        ])) {
+        ])
+      ) {
         continue;
       }
 
-      if (isset($chunk['type'])
+      if (
+        isset($chunk['type'])
         && $chunk['type'] == 'Link'
         && isset($chunk['children'])
         && count($chunk['children']) == 1
         && $chunk['children'][0]['type'] !== 'Image'
-        ) {
+      ) {
         continue;
       }
 
       $children = $chunk['children'] ?? [];
-      // unset($chunk['children']);
       // Chunk preprocessing.
       $chunk['type'] = ucfirst($chunk['type']);
       $chunk['id'] = ++$id;
@@ -517,7 +466,6 @@ final class ContentImportAiService {
         $this->iterateArray($item['children'], $depth + 1);
       }
     }
-
   }
 
   /**
@@ -531,11 +479,11 @@ final class ContentImportAiService {
    *   The URL to extract data from.
    *
    * @return array An associative array containing:
-   *   - title: string|null The page title if found
-   *               - path: string The URL path component, defaults to "/" if not found
-   *               - metatags: array Meta tag name-content pairs
-   *               - language: string|null The page language if specified
-   *               - error: string|null Error message if any error occurred, null otherwise
+   *  - title: string|null The page title if found
+   *  - path: string The URL path component, defaults to "/" if not found
+   *  - metatags: array Meta tag name-content pairs
+   *  - language: string|null The page language if specified
+   *  - error: string|null Error message if any error occurred, null otherwise
    *
    * @throws \Exception Caught internally and returned as error in result array
    */
@@ -545,7 +493,7 @@ final class ContentImportAiService {
       'path' => NULL,
       'metatags' => [],
       'language' => NULL,
-    // Add an error key.
+      // Add an error key.
       'error' => NULL,
     ];
 
@@ -560,14 +508,13 @@ final class ContentImportAiService {
       $options = [
         'http' => [
           'method' => 'GET',
-      // Example user agent.
+          // Example user agent.
           'user_agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36',
-      // Timeout in seconds.
+          // Timeout in seconds.
           'timeout' => 10,
         ],
       ];
       $context = stream_context_create($options);
-      // Use @ to suppress warnings for invalid URLs or network issues.
       $html = @file_get_contents($url, FALSE, $context);
 
       if ($html === FALSE) {
@@ -576,12 +523,10 @@ final class ContentImportAiService {
         return $data;
       }
 
-      // Extract Title.
       if (preg_match('/<title>(.*?)<\/title>/i', $html, $matches)) {
         $data['title'] = trim(html_entity_decode($matches[1]));
       }
 
-      // Extract Path.
       $data['path'] = parse_url($url, PHP_URL_PATH);
       if ($data['path'] === NULL) {
         // Handle cases where there's no path.
@@ -598,13 +543,10 @@ final class ContentImportAiService {
       // Extract Language.
       if (preg_match('/<html.*?lang="([^"]*)"/i', $html, $matches)) {
         $data['language'] = $matches[1];
-      }
-      elseif (preg_match('/<meta\s+http-equiv="Content-Language"\s+content="([^"]*)"/i', $html, $matches)) {
+      } elseif (preg_match('/<meta\s+http-equiv="Content-Language"\s+content="([^"]*)"/i', $html, $matches)) {
         $data['language'] = $matches[1];
       }
-
-    }
-    catch (\Exception $e) {
+    } catch (\Exception $e) {
       $data['error'] = "An error occurred: " . $e->getMessage();
     }
 
@@ -709,7 +651,7 @@ final class ContentImportAiService {
     $filepath = $file_data['uploaded_files'][0]['path'];
     $directory = 'public://converted';
     $file_system = \Drupal::service('file_system');
-    $file_system->prepareDirectory($directory, FileSystemInterface:: CREATE_DIRECTORY | FileSystemInterface::MODIFY_PERMISSIONS);
+    $file_system->prepareDirectory($directory, FileSystemInterface::CREATE_DIRECTORY | FileSystemInterface::MODIFY_PERMISSIONS);
     $file_system->copy($filepath, $directory . '/' . basename($filepath), FileSystemInterface::EXISTS_REPLACE);
 
     $file = File::create([
@@ -724,24 +666,22 @@ final class ContentImportAiService {
   }
 
   /**
-   *
+   * @todo Add comment
    */
   public function getPostImportPlugins() {
     $definitions = $this->pluginManagerPost->getDefinitions();
     $plugins = [];
     foreach ($definitions as $definition) {
       $plugins[] = $definition['id'];
-
     }
     return $plugins;
   }
 
   /**
-   *
+   * @todo Add comment
    */
   public function postProcessChunks($plugin_id, $chunks,) {
     $plugin = $this->pluginManagerPost->createInstance($plugin_id);
     return $plugin->convert($chunks);
   }
-
 }
