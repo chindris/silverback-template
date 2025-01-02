@@ -48,9 +48,9 @@ export function SearchForm(props: { termOptions?: string[] }) {
                 })}
               </label>
               <select
+                id="terms"
                 {...register('terms')}
                 defaultValue={'default'}
-                name="terms"
                 className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-3 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
               >
                 <option key="default" value="">
