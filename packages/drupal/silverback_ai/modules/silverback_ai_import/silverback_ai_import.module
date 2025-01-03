@@ -14,8 +14,9 @@ use Drupal\silverback_ai_import\ContentImportAiService;
  */
 function silverback_ai_import_form_alter(&$form, &$form_state, $form_id) {
   // @todo
-  $logger = Drupal::service('silverback_ai_imoprt.logger');
-  dpm($logger->getEntries());
+  //$logger = Drupal::service('silverback_ai_imoprt.logger');
+  //dpm($logger->getEntries());
+
 }
 
 /**

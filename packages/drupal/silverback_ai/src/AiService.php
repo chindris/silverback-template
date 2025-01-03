@@ -35,7 +35,15 @@ final class AiService {
   }
 
   /**
-   * @todo
+   * Makes a chat completion request to the OpenAI API.
+   *
+   * @param string $prompt The text prompt to send to the AI model
+   * @param string $model The AI model to use for the request (defaults to class constant DEFAULT_AI_MODEL)
+   * @param array $context Additional context data for logging purposes
+   *
+   * @return array The decoded JSON response from the API
+   *
+   * @throws \Exception If the HTTP request fails or JSON decoding fails
    */
   public function request(string $prompt, string $model = self::DEFAULT_AI_MODEL, array $context = []) {
 
@@ -67,6 +75,21 @@ final class AiService {
     $this->logUsage($response, $context);
 
     return $response;
+  }
+
+  /**
+   * ...
+   */
+  public function listModels() {
+    try {
+      $response = $this->silverbackAiOpenaiHttpClient->get('models');
+      $responseBodyContents = $response->getBody()->getContents();
+      $response = json_decode($responseBodyContents, TRUE, 512, JSON_THROW_ON_ERROR);
+      return $response['data'];
+    } catch (\Exception $e) {
+      throw new \Exception('HTTP request failed: ' . $e->getMessage());
+    }
+    return [];
   }
 
   /**

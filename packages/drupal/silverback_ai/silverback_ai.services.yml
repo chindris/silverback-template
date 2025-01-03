@@ -5,6 +5,6 @@ services:
   silverback_ai.openai_http_client:
     class: Drupal\silverback_ai\HttpClient\OpenAiHttpClient
     arguments: ['@http_client_factory', '@config.factory']
-  silverback_ai.request:
+  silverback_ai.service:
     class: Drupal\silverback_ai\AiService
     arguments: ['@current_route_match', '@current_user', '@entity_type.manager', '@logger.factory', '@config.factory', '@silverback_ai.openai_http_client','@silverback_ai.token.usage']

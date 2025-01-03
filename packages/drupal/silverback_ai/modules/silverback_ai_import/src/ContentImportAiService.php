@@ -29,7 +29,6 @@ final class ContentImportAiService {
   public const URL = 'url';
   public const PDF = 'pdf';
 
-
   /**
    * Constructs a ContentImportAiService object.
    */
@@ -111,7 +110,7 @@ final class ContentImportAiService {
     $stream_wrapper_manager = \Drupal::service('stream_wrapper_manager')->getViaUri($uri);
     $file_path = $stream_wrapper_manager->realpath();
     $parse_service_url = $this->configFactory->get('silverback_ai_import.settings')->get('converter_service_url');
-
+    // @todo Add DI.
     $client = \Drupal::httpClient();
     try {
       // @todo For now this is working only for docx files.
@@ -124,7 +123,7 @@ final class ContentImportAiService {
       $response = json_decode($body);
     } catch (RequestException $e) {
       // Handle any errors.
-      \Drupal::logger('silverback_ai_import')->error($e->getMessage());
+      $this->loggerFactory->get('silverback_ai_import')->error($e->getMessage());
     }
     return $response;
   }
@@ -165,7 +164,7 @@ final class ContentImportAiService {
       $response = json_decode($body);
     } catch (RequestException $e) {
       // Handle any errors.
-      \Drupal::logger('silverback_ai_import')->error($e->getMessage());
+      $this->loggerFactory->get('silverback_ai_import')->error($e->getMessage());
     }
     return $response;
   }
@@ -211,7 +210,7 @@ final class ContentImportAiService {
       $response = json_decode($body);
     } catch (RequestException $e) {
       // Handle any errors.
-      \Drupal::logger('silverback_ai_import')->error($e->getMessage());
+      $this->loggerFactory->get('silverback_ai_import')->error($e->getMessage());
     }
     return $response;
   }
@@ -381,10 +380,10 @@ final class ContentImportAiService {
    *   The ID of the parent node (used in recursion)
    *
    * @return array An array of flattened nodes, where each node contains:
-   *   - type: The capitalized node type
-   *               - id: A unique identifier
-   *               - parent: Reference to the parent node's ID
-   *               - Additional properties specific to each node type
+   *  - type: The capitalized node type
+   *  - id: A unique identifier
+   *  - parent: Reference to the parent node's ID
+   *  - Additional properties specific to each node type
    */
   public function flattenAst($ast, $parent = NULL) {
 
@@ -494,7 +493,6 @@ final class ContentImportAiService {
       'path' => NULL,
       'metatags' => [],
       'language' => NULL,
-      // Add an error key.
       'error' => NULL,
     ];
 

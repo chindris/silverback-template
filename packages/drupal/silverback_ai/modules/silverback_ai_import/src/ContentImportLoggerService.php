@@ -62,7 +62,7 @@ final class ContentImportLoggerService {
           'target_entity_revision_id' => NULL,
           'source' => $source ?? '',
           'output_folder' => $ast->outputDirectory,
-          'data' => '-', // @todo serialise ast perhaps?
+          'data' => serialize($ast),
         ])
         ->execute();
     } catch (\Exception $e) {
@@ -102,7 +102,7 @@ final class ContentImportLoggerService {
     foreach ($rsc->fetchAll() as $row) {
       $rows[] = $this->buildRow($row);
     }
-    dpm($rows);
+
     return $rows;
   }
 
