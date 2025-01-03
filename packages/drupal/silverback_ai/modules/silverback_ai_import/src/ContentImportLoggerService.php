@@ -57,7 +57,7 @@ final class ContentImportLoggerService {
         ->fields([
           'uid' => $uid,
           'timestamp' => (new DrupalDateTime())->getTimestamp(),
-          'target_entity_type_id' => $$entity->bundle(),
+          'target_entity_type_id' => $entity->getEntityTypeId(),
           'target_entity_id' => $entity->id(),
           'target_entity_revision_id' => NULL,
           'source' => $source ?? '',
@@ -71,7 +71,7 @@ final class ContentImportLoggerService {
   }
 
   /**
-   * Retrieves a list of entries from the 'silverback_ai_usage' table.
+   * Retrieves a list of entries from the 'silverback_ai_import' table.
    *
    * This function queries the database to select fields related to AI usage
    * and orders them by ID in descending order. It paginates the result
@@ -102,6 +102,7 @@ final class ContentImportLoggerService {
     foreach ($rsc->fetchAll() as $row) {
       $rows[] = $this->buildRow($row);
     }
+    dpm($rows);
     return $rows;
   }
 

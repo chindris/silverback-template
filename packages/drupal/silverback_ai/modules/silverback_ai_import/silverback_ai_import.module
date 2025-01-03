@@ -14,6 +14,8 @@ use Drupal\silverback_ai_import\ContentImportAiService;
  */
 function silverback_ai_import_form_alter(&$form, &$form_state, $form_id) {
   // @todo
+  $logger = Drupal::service('silverback_ai_imoprt.logger');
+  dpm($logger->getEntries());
 }
 
 /**
@@ -53,7 +55,7 @@ function silverback_ai_import_form_node_page_split_form_alter(&$form, FormStateI
     '#type' => 'dropzonejs',
     '#required' => TRUE,
     '#dropzone_description' => 'Drag and drop a file here',
-    '#max_filesize' => '1M',
+    '#max_filesize' => '20M',
     '#max_files' => 1,
     '#extensions' => 'doc docx',
     '#upload_location' => 'public://converted/',
@@ -111,7 +113,7 @@ function silverback_ai_import_form_node_page_split_form_alter(&$form, FormStateI
   ];
 
   $form['actions']['submit']['#submit'][] = '_silverback_ai_import_form_submit';
-
+  $form['#validate'][] = '_silverback_ai_import_form_submit_validate';
   // Better to have this unpublished originally, and then
   // we will display a message to the user (esp. if there is AI content)
   $form['moderation_state']['#access'] = FALSE;
@@ -121,7 +123,30 @@ function silverback_ai_import_form_node_page_split_form_alter(&$form, FormStateI
 /**
  * {@inheritdoc}
  */
+function _silverback_ai_import_form_submit_validate(array $form, FormStateInterface $form_state) {
+  // @todo
+  $type = $form_state->getValue('import_type');
+  if ($type == ContentImportAiService::PDF) {
+    $file = $form_state->getValue('pdf_file');
+    if (empty($file['uploaded_files'])) {
+      $form_state->setErrorByName('pdf_file', t('PDF file is required.'));
+    }
+  }
+
+  if ($type == ContentImportAiService::DOCX) {
+    $file = $form_state->getValue('file');
+    if (empty($file['uploaded_files'])) {
+      $form_state->setErrorByName('file', t('DOCX file is required.'));
+    }
+  }
+}
+
+/**
+ * {@inheritdoc}
+ */
 function _silverback_ai_import_form_submit(array $form, FormStateInterface $form_state) {
+
+  // @todo Refactor this function
 
   /** @var \Drupal\Core\Entity\EntityInterface $entity */
   $entity = $form_state->getFormObject()->getEntity();
@@ -132,40 +157,25 @@ function _silverback_ai_import_form_submit(array $form, FormStateInterface $form
   $type = $form_state->getValue('import_type');
   $contentImportLogger = \Drupal::service('silverback_ai_imoprt.logger');
 
-  // @todo Remove magic strings
-  if ($type == 'docx') {
-    // @todo Surround with try-catch
-    $file = $form_state->getValue('file');
+  switch ($type) {
+    case ContentImportAiService::PDF:
+      $file = $form_state->getValue('pdf_file');
+      break;
+    case ContentImportAiService::URL:
+      $file = $url_value;
+      break;
+    default:
+      $file = $form_state->getValue('file');
+  }
 
-    if (empty($file['uploaded_files'])) {
-      return;
-    }
-
+  if ($type != ContentImportAiService::URL) {
     $file = $service->createFileEntityFromDropzoneData($file);
+  }
 
-    if ($file) {
-      $ast = $service->getAst($file);
-      $flatten = $service->flattenAst($ast->content);
-      $content->create($flatten, $entity);
-      $contentImportLogger->createEntry($ast, $entity, $file->getFileUri());
-    }
-  } elseif (!empty($url_value) && $type == 'url') {
-    $ast = $service->getAst($url_value, ContentImportAiService::URL);
+  if (!empty($file)) {
+    $ast = $service->getAst($file, $type);
     $flatten = $service->flattenAst($ast->content);
     $content->create($flatten, $entity);
-    $contentImportLogger->createEntry($ast, $entity, $url_value);
-  } elseif ($type == 'pdf') {
-
-    $file_data = $form_state->getValue('pdf_file');
-    if (empty($file_data['uploaded_files'])) {
-      return;
-    }
-    $file = $service->createFileEntityFromDropzoneData($file_data);
-    if ($file) {
-      $ast = $service->getAst($file, ContentImportAiService::PDF);
-      $flatten = $service->flattenAst($ast->content);
-      $content->create($flatten, $entity);
-      $contentImportLogger->createEntry($ast, $entity, $file->getFileUri());
-    }
+    $contentImportLogger->createEntry($ast, $entity, $file->getFileUri());
   }
 }

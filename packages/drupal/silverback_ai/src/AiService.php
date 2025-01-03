@@ -2,25 +2,21 @@
 
 declare(strict_types=1);
 
-namespace Drupal\silverback_ai_import;
+namespace Drupal\silverback_ai;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Session\AccountProxyInterface;
-use Drupal\file\Entity\File;
-use Drupal\file\FileInterface;
-use Drupal\node\Entity\Node;
 use Drupal\silverback_ai\HttpClient\OpenAiHttpClient;
 use Drupal\silverback_ai\TokenUsage;
 use GuzzleHttp\Exception\RequestException;
 
 /**
- * Contains general AI services, such as a genberal request method and more.
+ * Contains general AI services, such as a general request method and more.
  */
-final class AiRequestService {
+final class AiService {
 
   private const DEFAULT_AI_MODEL = 'gpt-4o-mini';
 
@@ -74,7 +70,7 @@ final class AiRequestService {
   }
 
   /**
-   * Logs the usage of the Silverback Image AI module.
+   * Logs the tokens usage.
    *
    * This method updates the response body with module and entity details and
    * creates a new usage entry using the Silverback AI Token Usage service.
@@ -87,7 +83,7 @@ final class AiRequestService {
    *
    * @throws \Exception
    */
-  public function logUsage(array $response_body, array $context) {
+  private function logUsage(array $response_body, array $context) {
     $response_body['module'] = $context['module'] ?? 'silverback_ai';
     if ($context['entity']) {
       $entity = $context['entity'];

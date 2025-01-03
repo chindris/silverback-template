@@ -45,9 +45,9 @@ class ImageCaptionPostImport extends PluginBase implements AiPostImportPluginMan
   public function convert(array $chunks) {
     // @todo Find a better way to explode/implode chunks
     // @todo Add DI
-    // $service = \Drupal::service('silverback_ai_import.content');
+    // $ai = \Drupal::service('silverback_ai_import.content');
     // $input = implode('\n', $chunks);
-    // $out = $service->aiRequest($this->getPrompt($input));
+    // $out = $ai->request($this->getPrompt($input));
     return $chunks;
   }
 

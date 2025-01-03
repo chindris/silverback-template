@@ -15,6 +15,7 @@ use Drupal\file\FileInterface;
 use Drupal\node\Entity\Node;
 use Drupal\silverback_ai\HttpClient\OpenAiHttpClient;
 use GuzzleHttp\Exception\RequestException;
+use Drupal\silverback_ai\AiService;
 
 /**
  * @todo Add class description.
@@ -41,7 +42,7 @@ final class ContentImportAiService {
     private readonly OpenAiHttpClient $silverbackAiOpenaiHttpClient,
     private readonly AiImportPluginManager $pluginManager,
     private readonly AiPostImportPluginManager $pluginManagerPost,
-    private readonly AiRequestService $aiRequestService,
+    private readonly AiService $ai
   ) {
   }
 
@@ -248,7 +249,7 @@ final class ContentImportAiService {
     - Complete token replacement
     EOD;
 
-    return $this->aiRequestService->request($prompt, $model);
+    return $this->ai->request($prompt, $model, ['module' => 'silverback_import_ai']);
   }
 
   /**
@@ -298,7 +299,7 @@ final class ContentImportAiService {
     - Complete token replacement
     EOD;
 
-    return $this->aiRequestService->request($prompt, $model);
+    return $this->ai->request($prompt, $model, ['module' => 'silverback_import_ai']);
   }
 
   /**
@@ -333,7 +334,7 @@ final class ContentImportAiService {
     - Be precise and concise in extracting the required information.
     EOD;
 
-    return $this->aiRequestService->request($prompt, $model);
+    return $this->ai->request($prompt, $model, ['module' => 'silverback_import_ai']);
   }
 
   /**
