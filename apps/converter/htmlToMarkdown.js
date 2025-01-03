@@ -90,10 +90,9 @@ function reinsertImages(markdown, images) {
 
 // @todo Fix this to work locally and live
 const isLagoon = !!process.env.LAGOON;
-const __filename = fileURLToPath(import.meta.url);
 const __dirname = isLagoon
   ? '/app/web/sites/default/files/converted'
-  : path.dirname(__filename);
+  : '/tmp/converted';
 
 async function extractMainContentFromUrl(url) {
   try {

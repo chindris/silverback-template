@@ -7,10 +7,9 @@ import { generateFolderName, validateAndFixMarkdown } from './utils/utils.js';
 
 // @todo Fix this to work locally and live
 const isLagoon = !!process.env.LAGOON;
-const __filename = fileURLToPath(import.meta.url);
 const __dirname = isLagoon
   ? '/app/web/sites/default/files/converted'
-  : path.dirname(__filename);
+  : '/tmp/converted';
 
 export async function pdfToMarkdown(pdfPath) {
   try {
