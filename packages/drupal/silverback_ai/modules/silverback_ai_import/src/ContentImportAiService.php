@@ -16,6 +16,7 @@ use Drupal\node\Entity\Node;
 use Drupal\silverback_ai\HttpClient\OpenAiHttpClient;
 use GuzzleHttp\Exception\RequestException;
 use Drupal\silverback_ai\AiService;
+use JsonException as JsonExceptionAlias;
 
 /**
  * @todo Add class description.
@@ -58,7 +59,7 @@ final class ContentImportAiService {
    * @return mixed
    *   The processed chunk after plugin conversion
    *
-   * @throws \JsonException
+   * @throws JsonExceptionAlias
    *   When JSON encoding/decoding fails.
    * @throws \RuntimeException
    *   When no appropriate plugin is found for the chunk.
@@ -100,7 +101,7 @@ final class ContentImportAiService {
    * @return mixed
    *   The decoded JSON response containing the AST from the external service, or NULL if the request fails.
    *
-   * @throws \GuzzleHttp\Exception\RequestException
+   * @throws \GuzzleHttp\Exception\RequestException|\GuzzleHttp\Exception\GuzzleException
    *   Thrown when the HTTP request fails, though it is caught and logged within this method.
    *
    * @todo Implement configuration handling for service endpoints or client headers.
@@ -143,7 +144,6 @@ final class ContentImportAiService {
    *
    * @throws \GuzzleHttp\Exception\GuzzleException
    *   When the HTTP request fails
-   * @throws \JsonException
    *   When JSON decoding fails
    *
    * @todo Extend support for other file types besides DOCX
@@ -161,12 +161,13 @@ final class ContentImportAiService {
         ],
       ]);
       $body = $response->getBody()->getContents();
-      $response = json_decode($body);
+      return json_decode($body);
     } catch (RequestException $e) {
       // Handle any errors.
       $this->loggerFactory->get('silverback_ai_import')->error($e->getMessage());
     }
-    return $response;
+
+    return NULL;
   }
 
   /**
@@ -185,8 +186,6 @@ final class ContentImportAiService {
    *
    * @throws \GuzzleHttp\Exception\GuzzleException
    *   When the HTTP request fails
-   * @throws \JsonException
-   *   When JSON decoding fails
    * @throws \RuntimeException
    *   When stream wrapper manager fails to resolve the file path
    *
@@ -216,7 +215,13 @@ final class ContentImportAiService {
   }
 
   /**
-   * {Helper method}
+   * Helper method.
+   *
+   * @param string $ast
+   * @param string $schema
+   *
+   * @return array
+   * @throws \Exception
    */
   public function extractData(string $ast, string $schema) {
     $model = $this->configFactory->get('silverback_ai_import.settings')->get('ai_model') ?: self::DEFAULT_AI_MODEL;
@@ -252,7 +257,15 @@ final class ContentImportAiService {
   }
 
   /**
-   * {Helper method}
+   * Send the AI request.
+   *
+   * @param string $ast
+   * @param string $type
+   * @param string $template
+   * @param string $schema
+   *
+   * @return array
+   * @throws \Exception
    */
   public function sendOpenAiRequest(string $ast, string $type, string $template, string $schema) {
 
@@ -302,7 +315,12 @@ final class ContentImportAiService {
   }
 
   /**
-   * {Helper method}
+   * Extract data from markdown using AI.
+   *
+   * @param string $markdown
+   *
+   * @return array
+   * @throws \Exception
    */
   public function extractBaseDataFromMarkdown(string $markdown) {
 
@@ -344,14 +362,15 @@ final class ContentImportAiService {
    * that matches the provided chunk. The first matching plugin instance
    * will be selected and returned.
    *
-   * @todo Order the plugin definitions by weight before attempting to find a match.
-   *
    * @param array $chunk
    *   The input data that will be used to match against plugin definitions.
    *
    * @return object
    *   The plugin instance that matches the provided chunk or the default
    *   plugin if no matches are found.
+   * @throws \Drupal\Component\Plugin\Exception\PluginException
+   * @todo Order the plugin definitions by weight before attempting to find a match.
+   *
    */
   public function getPlugin(array $chunk) {
     $default_plugin = $this->pluginManager->createInstance('ai_default');
@@ -385,7 +404,7 @@ final class ContentImportAiService {
    *  - parent: Reference to the parent node's ID
    *  - Additional properties specific to each node type
    */
-  public function flattenAst($ast, $parent = NULL) {
+  public function flattenAst($ast, int $parent = NULL) {
 
     $ast = json_decode(json_encode($ast), TRUE);
     static $flatNodes = [];
@@ -449,9 +468,8 @@ final class ContentImportAiService {
    *                     ].
    * @param int $depth
    *   Current depth in the recursive traversal (default: 0)
-   *
-   * @return void
-   *
+Ω   *
+   * @throws \JsonException
    * @see processChunk() Method used to process Image type items
    */
   public function iterateArray(array &$data, int $depth = 0): void {
@@ -571,8 +589,6 @@ final class ContentImportAiService {
    *   When there's an error saving the node entity
    * @throws \RuntimeException
    *   When the content.md file cannot be read
-   * @throws \JsonException
-   *   When JSON decoding fails
    *
    * @see \Drupal\node\Entity\Node::create()
    */
@@ -607,6 +623,7 @@ final class ContentImportAiService {
    *   or NULL if required data is missing
    *
    * @throws \Drupal\Core\Entity\EntityStorageException
+   * @throws \Exception
    *   When there's an error saving the node entity
    *
    * @see \Drupal\node\Entity\Node::create()
@@ -665,7 +682,9 @@ final class ContentImportAiService {
   }
 
   /**
-   * @todo Add comment
+   * Get all post import plugins.
+   *
+   * @return array
    */
   public function getPostImportPlugins() {
     $definitions = $this->pluginManagerPost->getDefinitions();
@@ -677,7 +696,13 @@ final class ContentImportAiService {
   }
 
   /**
-   * @todo Add comment
+   * Post import process for plugin.
+   *
+   * @param $plugin_id
+   * @param $chunks
+   *
+   * @return mixed
+   * @throws \Drupal\Component\Plugin\Exception\PluginException
    */
   public function postProcessChunks($plugin_id, $chunks,) {
     $plugin = $this->pluginManagerPost->createInstance($plugin_id);

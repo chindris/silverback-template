@@ -87,6 +87,8 @@ final class TokenUsage implements TokenUsageInterface {
    *
    * @return array
    *   An array of processed database records.
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
   public function getEntries() {
     $query = $this->connection->select('silverback_ai_usage', 's')

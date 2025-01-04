@@ -41,7 +41,11 @@ final class ContentImportLoggerService {
   }
 
   /**
-   * {@inheritdoc}
+   * @param $ast
+   * @param \Drupal\Core\Entity\EntityInterface $entity
+   * @param string $source
+   *
+   * @return void
    */
   public function createEntry($ast, EntityInterface $entity, string $source): void {
 
@@ -119,7 +123,7 @@ final class ContentImportLoggerService {
    *   'model', and 'module'.
    *
    * @return array
-   *   A renderable array with the following elements:
+   *   Array with the following elements:
    *   - 'timestamp': The formatted timestamp of when the entry was created.
    *   - 'username': The display name of the user associated with the entry.
    *   - 'entity_id': The capitalized entity bundle string or empty string if

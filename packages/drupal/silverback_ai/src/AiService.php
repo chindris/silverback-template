@@ -78,7 +78,10 @@ final class AiService {
   }
 
   /**
-   * ...
+   * List OpenAI available models.
+   *
+   * @return array
+   * @throws \GuzzleHttp\Exception\GuzzleException
    */
   public function listModels() {
     try {
