@@ -32,7 +32,17 @@ We use Vitest for testing:
 1. **Prepare Your Environment**:
 
    - Define your GraphQL schema and add resolvers.
-   - Create some default content that will be used in the tests.
+   - **Create default content that will be used in the tests**:
+     - Create content in Drupal by navigating to Content > Add content. Choose
+       the appropriate content type and fill in the necessary fields.
+     - Export your content for persistence using Drush:
+       ```bash
+       drush content:export --entity_type=node --bundle=article --id=1
+       ```
+       Replace `article` and `1` with your content type and content ID as
+       needed. This command exports the content, including all its dependencies,
+       into a `.yml` file which can then be committed to your version control
+       system.
 
 2. **Develop Test Cases**:
 
