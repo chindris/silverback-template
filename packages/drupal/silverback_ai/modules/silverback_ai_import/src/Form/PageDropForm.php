@@ -8,6 +8,7 @@ use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Markup;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
+use Drupal\silverback_ai_import\ContentImportAiService;
 
 /**
  * Provides a Silverback Import AI form.
@@ -196,54 +197,50 @@ final class PageDropForm extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state): void {
-    $type = $form_state->getValue('import_type');
+
+    /** @var \Drupal\Core\Entity\EntityInterface $entity */
+
     $url_value = $form_state->getValue('url_value');
 
-    // @todo Add DI
     $service = \Drupal::service('silverback_ai_import.content');
     $content = \Drupal::service('silverback_ai_import.batch.import');
+    $type = $form_state->getValue('import_type');
+    $contentImportLogger = \Drupal::service('silverback_ai_imoprt.logger');
 
-    if ($type == 'docx') {
-      $file_data = $form_state->getValue('file');
-      $file = $service->createFileEntityFromDropzoneData($file_data);
-
-      if ($file) {
-        $ast = $service->getAstFromFilePath($file);
-        $entity = $service->createEntityFromDocxAst($ast);
-
-        if ($entity) {
-          // @todo Add DI
-          $flatten = $service->flattenAst($ast->content);
-          $content->create($flatten, $entity);
-          $form_state->setRedirectUrl($entity->toUrl('edit-form'));
-        }
-      }
-    }
-    elseif (!empty($url_value) && $type == 'url') {
-      $entity = $service->createEntityFromUrl($url_value);
-      if ($entity) {
-        $ast = $service->getAstFromUrl($url_value);
-        $flatten = $service->flattenAst($ast->content);
-        $content->create($flatten, $entity);
-        $form_state->setRedirectUrl($entity->toUrl('edit-form'));
-      }
-    }
-    elseif ($type == 'pdf') {
-      $file_data = $form_state->getValue('pdf_file');
-      $file = $service->createFileEntityFromDropzoneData($file_data);
-      if ($file) {
-        // $file_uri = $file->getFileUri();
-        // $pdf_url = \Drupal::service('file_url_generator')->generateAbsoluteString($file_uri);
-        $ast = $service->getPdfAstFromFile($file);
-        $entity = $service->createEntityFromDocxAst($ast);
-        if ($entity) {
-          $flatten = $service->flattenAst($ast->content);
-          $content->create($flatten, $entity);
-          $form_state->setRedirectUrl($entity->toUrl('edit-form'));
-        }
-      }
+    switch ($type) {
+      case ContentImportAiService::PDF:
+        $file = $form_state->getValue('pdf_file');
+        break;
+      case ContentImportAiService::URL:
+        $file = $url_value;
+        break;
+      default:
+        $file = $form_state->getValue('file');
     }
 
+    if ($type != ContentImportAiService::URL) {
+      $file = $service->createFileEntityFromDropzoneData($file);
+    }
+
+    if (!empty($file)) {
+      $ast = $service->getAst($file, $type);
+      $entity = NULL;
+
+      switch ($type) {
+        case ContentImportAiService::PDF:
+          $entity = $service->createEntityFromDocxAst($ast);
+          break;
+        case ContentImportAiService::URL:
+          $entity = $service->createEntityFromUrl($file);
+          break;
+        default:
+          $entity = $service->createEntityFromDocxAst($ast);
+      }
+
+      $flatten = $service->flattenAst($ast->content);
+      $content->create($flatten, $entity);
+      $contentImportLogger->createEntry($ast, $entity, $file->getFileUri());
+      $form_state->setRedirectUrl($entity->toUrl('edit-form'));
+    }
   }
-
 }

@@ -111,7 +111,7 @@ final class AiService {
    */
   private function logUsage(array $response_body, array $context) {
     $response_body['module'] = $context['module'] ?? 'silverback_ai';
-    if ($context['entity']) {
+    if (isset($context['entity'])) {
       $entity = $context['entity'];
       $response_body['entity_id'] = (string) $entity->id();
       $response_body['entity_type_id'] = (string) $entity->getEntityTypeId();

@@ -151,8 +151,6 @@ function _silverback_ai_import_form_submit_validate(array $form, FormStateInterf
  */
 function _silverback_ai_import_form_submit(array $form, FormStateInterface $form_state) {
 
-  // @todo Refactor this function
-
   /** @var \Drupal\Core\Entity\EntityInterface $entity */
   $entity = $form_state->getFormObject()->getEntity();
   $url_value = $form_state->getValue('url_value');
