@@ -64,16 +64,6 @@ test('Page', async () => {
             },
             {
               "attributes": {
-                "content": "Headline Lead text Paragraph",
-                "href": null,
-                "name": "description",
-                "property": null,
-                "rel": null,
-              },
-              "tag": "meta",
-            },
-            {
-              "attributes": {
                 "content": null,
                 "href": "http://127.0.0.1:8000/en/page-complete",
                 "name": null,
