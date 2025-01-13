@@ -12,11 +12,18 @@ import { CardItem } from './Card';
 
 export type ContentHubQueryArgs = {
   title: string | undefined;
+  terms: string | undefined;
   page: string | undefined;
   pageSize: string | undefined;
 };
 
-export function ContentHub({ pageSize = 10 }: { pageSize: number }) {
+export function ContentHub({
+  pageSize = 10,
+  termOptions,
+}: {
+  pageSize: number;
+  termOptions?: string[];
+}) {
   const intl = useIntl();
   const page = useCurrentPage();
   const search = useSearchParameters();
@@ -25,6 +32,7 @@ export function ContentHub({ pageSize = 10 }: { pageSize: number }) {
     args: qs.stringify(
       {
         title: search.keyword,
+        terms: search.terms,
         page: `${page}`,
         pageSize: `${pageSize}`,
       } satisfies ContentHubQueryArgs,
@@ -34,7 +42,7 @@ export function ContentHub({ pageSize = 10 }: { pageSize: number }) {
   return (
     <div className="bg-white px-6 py-12 lg:px-8">
       <div className="mx-auto max-w-6xl">
-        <SearchForm />
+        <SearchForm termOptions={termOptions ?? []} />
         {error ? (
           <div className="flex items-center justify-center">
             <div className="my-8 rounded-full bg-red-100 px-3 py-1 text-center text-xs font-medium leading-none text-red-500">

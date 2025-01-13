@@ -13,6 +13,8 @@ import qs from 'query-string';
 import React from 'react';
 
 import { image } from '../../helpers/image';
+import { createKeyForTerm } from '../Molecules/SearchForm';
+import SearchFormStories from '../Molecules/SearchForm.stories';
 import { ContentHub, ContentHubQueryArgs } from './ContentHub';
 
 type ContentHubExecutor = (
@@ -29,7 +31,10 @@ export default {
       <OperationExecutorsProvider
         executors={[{ executor: args.exec, id: ContentHubQuery }]}
       >
-        <ContentHub pageSize={pageSize} />
+        <ContentHub
+          pageSize={pageSize}
+          termOptions={SearchFormStories.args.termOptions}
+        />
       </OperationExecutorsProvider>
     );
   },
@@ -81,12 +86,23 @@ export const WithResults: ContentHubStory = {
                       height: 300,
                     }),
                   },
+            terms: [
+              createKeyForTerm(SearchFormStories.args.termOptions![i % 4]),
+            ],
           }) satisfies CardItemFragment,
       );
       const args = qs.parse(vars.args || '') as ContentHubQueryArgs;
-      const filtered = items.filter(
+
+      // filter by title
+      let filtered = items.filter(
         (item) => !args.title || item.title.includes(args.title),
       );
+      // filter by terms
+      filtered = filtered.filter(
+        (item) =>
+          !args.terms || item.terms.includes(createKeyForTerm(args.terms)),
+      );
+
       const offset = args.page
         ? ((parseInt(args.page) || 1) - 1) * pageSize
         : 0;
@@ -103,7 +119,7 @@ export const WithResults: ContentHubStory = {
 export const Filtered: ContentHubStory = {
   ...WithResults,
   parameters: {
-    location: new URL('local:/content-hub?keyword=Article'),
+    location: new URL('local:/content-hub?keyword=Article&terms=block'),
   },
 };
 
