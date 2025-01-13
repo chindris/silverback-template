@@ -1,6 +1,15 @@
 name: Test
 on:
   push:
+  workflow_dispatch:
+    inputs:
+      turborepo_caching:
+        description: 'Turborepo caching'
+        type: choice
+        options:
+          - 'On'
+          - 'Off'
+        default: 'On'
 
 jobs:
   test:
@@ -25,6 +34,7 @@ jobs:
         run: pnpm test:format
 
       - name: TurboRepo local server
+        if: ${{ github.event.inputs.turborepo_caching != 'Off' }}
         uses: felixmosh/turborepo-gh-artifacts@v2
         with:
           server-token: 'local'
@@ -121,6 +131,22 @@ jobs:
           JIRA_PROJECT_ID: ${{ vars.JIRA_PROJECT_ID }}
           DASHBOARD_ACCESS_TOKEN: ${{ secrets.DASHBOARD_ACCESS_TOKEN }}
         run: amazeelabs-estimator update
+
+  init_script:
+    name: Init script
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Setup
+        uses: ./.github/actions/setup
+      - name: Test init script
+        run:
+          pnpm --filter @custom/init run init --project-human-name "Foo Bar"
+          --project-machine-name foo_bar | grep 'Run `pnpm i` to update the lock
+          file'
 
   docker_build:
     name: Docker Build
