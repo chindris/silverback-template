@@ -103,7 +103,7 @@ registerBlockType<{
           keepPlaceholderOnFocus={true}
           onChange={(text) => {
             props.setAttributes({
-              text: cleanUpText(text),
+              text: cleanUpText(text, ['strong']),
             });
           }}
         />

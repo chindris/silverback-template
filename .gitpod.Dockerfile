@@ -1,8 +1,8 @@
 FROM gitpod/workspace-full
 
-RUN bash -c 'VERSION="18.19.0" \
-  && source $HOME/.nvm/nvm.sh && nvm install $VERSION \
-  && nvm use $VERSION && nvm alias default $VERSION'
+RUN bash -c 'VERSION="20.18.1" \
+    && source $HOME/.nvm/nvm.sh && nvm install $VERSION \
+    && nvm use $VERSION && nvm alias default $VERSION'
 
 RUN echo "nvm use default &>/dev/null" >> ~/.bashrc.d/51-nvm-fix
 
@@ -19,8 +19,8 @@ RUN /home/gitpod/.deno/bin/deno completions bash > /home/gitpod/.bashrc.d/90-den
   echo 'export PATH="$DENO_INSTALL/bin:$PATH"' >> /home/gitpod/.bashrc.d/90-deno
 
 RUN sudo add-apt-repository ppa:maveonair/helix-editor && \
-  sudo apt update && \
-  sudo apt install helix
+    sudo apt update && \
+    sudo apt install helix
 
 # Install phpactor
 RUN curl -Lo phpactor.phar https://github.com/phpactor/phpactor/releases/latest/download/phpactor.phar
