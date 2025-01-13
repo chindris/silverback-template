@@ -1,9 +1,11 @@
 _meta:
   version: '1.0'
   entity_type: node
-  uuid: 52ee5cc7-0ac5-49b5-8550-ce59476bd4ac
+  uuid: a48adc4b-6b05-44e0-9a05-30e2d206d726
   bundle: page
   default_langcode: en
+  depends:
+    3a0fe860-a6d6-428a-9474-365bd57509aa: media
 default:
   revision_uid:
     -
@@ -16,10 +18,10 @@ default:
       target_id: 1
   title:
     -
-      value: 'Conditional blocks'
+      value: 'Block: Hero'
   created:
     -
-      value: 1715684657
+      value: 1734005766
   promote:
     -
       value: false
@@ -37,7 +39,7 @@ default:
       value: false
   path:
     -
-      alias: /conditional-blocks
+      alias: /block-hero
       langcode: en
       pathauto: 0
   content_translation_source:
@@ -49,20 +51,12 @@ default:
   body:
     -
       value: |-
-        <!-- wp:custom/hero /-->
+        <!-- wp:custom/hero {"mediaEntityIds":["3a0fe860-a6d6-428a-9474-365bd57509aa"],"headline":"Block: Hero","lead":"Block: Hero"} /-->
 
         <!-- wp:custom/content -->
-        <!-- wp:custom/conditional {"displayFrom":"2024-05-16T11:05:00.000Z","displayTo":"2024-05-23T13:03:00.000Z","purpose":"Summer Campaign"} -->
         <!-- wp:paragraph -->
-        <p>Complete</p>
+        <p></p>
         <!-- /wp:paragraph -->
-        <!-- /wp:custom/conditional -->
-
-        <!-- wp:custom/conditional -->
-        <!-- wp:paragraph -->
-        <p>No conditions</p>
-        <!-- /wp:paragraph -->
-        <!-- /wp:custom/conditional -->
         <!-- /wp:custom/content -->
       format: gutenberg
       summary: ''
