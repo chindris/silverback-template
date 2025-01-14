@@ -16,6 +16,8 @@ use Drupal\silverback_ai_import\AiPostImportPluginManagerInterface;
  */
 class ImageCaptionPostImport extends PluginBase implements AiPostImportPluginManagerInterface {
 
+  private const DEFAULT_AI_MODEL = 'gpt-4o-mini';
+
   /**
    * Constructs a \Drupal\Component\Plugin\PluginBase object.
    *
@@ -43,11 +45,7 @@ class ImageCaptionPostImport extends PluginBase implements AiPostImportPluginMan
    * {@inheritDoc}
    */
   public function convert(array $chunks) {
-    // @todo Find a better way to explode/implode chunks
-    // @todo Add DI
-    // $ai = \Drupal::service('silverback_ai_import.content');
-    // $input = implode('\n', $chunks);
-    // $out = $ai->request($this->getPrompt($input));
+    // @todo Find a way to explode/implode chunks
     return $chunks;
   }
 

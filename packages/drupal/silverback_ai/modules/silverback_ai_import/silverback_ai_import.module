@@ -6,15 +6,51 @@
  */
 
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Entity\EntityInterface;
 use Drupal\silverback_ai_import\ContentImportAiService;
+
 
 /**
  * {@inheritdoc}
  */
 function silverback_ai_import_form_alter(&$form, &$form_state, $form_id) {
   // @todo
-  //$logger = Drupal::service('silverback_ai_imoprt.logger');
+}
+
+
+// Helper function to render individual blocks
+function renderGutenbergBlock($block) {
+  $output = '';
+
+  // Get block content
+  if (!empty($block['innerHTML'])) {
+    $content = $block['innerHTML'];
+  } else {
+    $content = '';
+  }
+
+  // Get block attributes
+  $attrs = !empty($block['attrs']) ? $block['attrs'] : [];
+
+  // Build the block representation
+  $output .= '<!-- wp:' . $block['blockName'];
+
+  // Add attributes if they exist
+  if (!empty($attrs)) {
+    $output .= ' ' . json_encode($attrs);
+  }
+
+  $output .= ' -->' . PHP_EOL;
+  $output .= $content . PHP_EOL;
+  $output .= '<!-- /wp:' . $block['blockName'] . ' -->' . PHP_EOL;
+
+  // Recursively render inner blocks if they exist
+  if (!empty($block['innerBlocks'])) {
+    foreach ($block['innerBlocks'] as $inner_block) {
+      $output .= renderGutenbergBlock($inner_block);
+    }
+  }
+
+  return $output;
 }
 
 /**
