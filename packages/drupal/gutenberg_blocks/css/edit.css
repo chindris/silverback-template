@@ -312,3 +312,7 @@ details[open] > summary svg {
 .col-start-2 {
   grid-column-start: 2;
 }
+
+.entity-meta .media-library-selection .media-library-item--grid {
+  width: 100%;
+}
