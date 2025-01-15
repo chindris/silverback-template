@@ -29,8 +29,8 @@ test.describe('content-editing', () => {
     await page
       .getByLabel('Title', { exact: true })
       .fill('Will have a draft translation');
-    await page.getByLabel('Save as').selectOption('published');
-    await page.getByRole('button', { name: 'Save' }).click();
+    await page.getByRole('button', { name: /Save|Create/ }).click();
+    await page.getByLabel('Change to').selectOption('published');
     await page.getByLabel('Headline').fill('Will have a draft translation');
     await page.getByText('Save', { exact: true }).click();
     await page.getByRole('link', { name: 'Translate' }).click();
