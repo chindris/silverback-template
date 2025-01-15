@@ -1,5 +1,9 @@
 import { GraphQLFieldResolver } from 'graphql';
 
+// The generated file can be missing during the build process.
+// TODO: Can we change the build process to avoid this TS error?
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 import { DecapPageSource } from './generated/source';
 
 // TODO: Generate typing helpers to make this easier.
@@ -7,6 +11,7 @@ import { DecapPageSource } from './generated/source';
 
 const internalTypes = ['Site', 'SiteBuildMetadata', 'SitePage', 'SitePlugin'];
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const loadEntity: GraphQLFieldResolver<URL, { nodeModel: any }> = async (
   url,
   _,
@@ -26,6 +31,7 @@ export const loadEntity: GraphQLFieldResolver<URL, { nodeModel: any }> = async (
       if (result) {
         return result;
       }
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (e) {
       // Ignore:
       // Gatsby breaks when trying to query a field that
@@ -39,7 +45,7 @@ export const loadEntity: GraphQLFieldResolver<URL, { nodeModel: any }> = async (
 
 export const route: GraphQLFieldResolver<
   undefined,
-  { nodeModel: any },
+  { nodeModel: unknown },
   { path: string }
 > = (_, { path }) => {
   try {
@@ -53,6 +59,7 @@ export const route: GraphQLFieldResolver<
 
 export const decapTranslations: GraphQLFieldResolver<
   DecapPageSource & { _decap_id: string },
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   { nodeModel: any }
 > = async (page, _, { nodeModel }) => {
   return (

@@ -200,6 +200,7 @@ export const getPages: SilverbackSource<DecapPageSource> = () => {
     .forEach((file) => {
       const content = yaml.parse(fs.readFileSync(`${dir}/${file}`, 'utf-8'));
       const id = Object.values(content)
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         .map((page: any) => page.id)
         .filter((id) => !!id)
         .pop();
@@ -214,9 +215,18 @@ export const getPages: SilverbackSource<DecapPageSource> = () => {
         };
         const page = pageSchema.safeParse(input);
         if (page.success) {
+          const editUrl = `${process.env.NETLIFY_URL || 'http://127.0.0.1:8000'}/admin/#/collections/page/entries/${file.replace(/\.yml$/, '')}`;
           pages.push([
             `${page.data.id}:${lang}`,
-            { ...page.data, _decap_id: id },
+            {
+              ...page.data,
+              _decap_id: id,
+              editLink: {
+                __typename: 'EditLink',
+                url: editUrl,
+                type: 'decap',
+              },
+            },
           ]);
         } else {
           console.warn(`Error parsing ${file} (${lang}):`);

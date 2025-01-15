@@ -1,22 +1,10 @@
 {
   "extends": ["//"],
   "tasks": {
-    "prep": {
-      "cache": false
-    },
-    "webform-snapshots": {
-      "cache": false,
-      "dependsOn": ["@custom/cms#prep:database", "prep"]
-    },
-    "test:integration:decap": {
-      "dependsOn": ["@custom/website#build", "prep"],
-      "env": ["PLAYWRIGHT_WEBSITE_URL"],
-      "inputs": ["specs/decap/**", "playwright.config.decap.ts"]
-    },
-    "test:integration:drupal": {
-      "dependsOn": ["@custom/website#build", "prep"],
+    "test:integration": {
+      "dependsOn": ["@custom/website#build"],
       "env": ["PLAYWRIGHT_WEBSITE_URL", "PLAYWRIGHT_CMS_URL"],
-      "inputs": ["specs/drupal/**", "playwright.config.drupal.ts"]
+      "inputs": ["helpers/**", "specs/**", "playwright.config.ts"]
     }
   }
 }

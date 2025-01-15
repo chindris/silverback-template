@@ -64,7 +64,7 @@ export function BlockAccordion(props: BlockAccordionFragment) {
                   <Heading level={props.headingLevel}>
                     <DisclosureButton
                       className={clsx(
-                        'flex w-full items-center justify-between p-4 pl-1 text-left font-medium text-lg hover:bg-gray-100',
+                        'flex w-full items-center justify-between p-4 pl-1 text-left text-lg font-medium hover:bg-gray-100',
                         { 'text-black': open, 'text-gray-500': !open },
                       )}
                     >
@@ -75,12 +75,12 @@ export function BlockAccordion(props: BlockAccordionFragment) {
                       <span>
                         {open ? (
                           <ChevronUpIcon
-                            className={'h-6 w-6'}
+                            className={'size-6'}
                             focusable={false}
                           />
                         ) : (
                           <ChevronDownIcon
-                            className={'h-6 w-6'}
+                            className={'size-6'}
                             focusable={false}
                           />
                         )}
@@ -142,21 +142,21 @@ function AccordionIcon({
     case 'questionmark':
       return (
         <QuestionMarkCircleIcon
-          className="w-5 h-5 me-2 shrink-0 text-gray-500"
+          className="me-2 size-5 shrink-0 text-gray-500"
           focusable={focusable}
         />
       );
     case 'checkmark':
       return (
         <CheckCircleIcon
-          className="w-5 h-5 me-2 shrink-0 text-gray-500"
+          className="me-2 size-5 shrink-0 text-gray-500"
           focusable={focusable}
         />
       );
     case 'arrow':
       return (
         <ArrowRightCircleIcon
-          className="w-5 h-5 me-2 shrink-0 text-gray-500"
+          className="me-2 size-5 shrink-0 text-gray-500"
           focusable={focusable}
         />
       );

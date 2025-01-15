@@ -1,5 +1,4 @@
 import {
-  // @ts-ignore
   __experimentalLinkControl as LinkControl,
   InnerBlocks,
   InspectorControls,
@@ -81,12 +80,11 @@ registerBlockType<{
           <div>
             <div>
               <RichText
-                className={'font-bold text-2xl mt-3'}
+                className={'mt-3 text-2xl font-bold'}
                 identifier="title"
                 tagName="div"
                 value={props.attributes.title}
                 allowedFormats={[]}
-                // @ts-ignore
                 disableLineBreaks={true}
                 placeholder={__('Title')}
                 keepPlaceholderOnFocus={true}
@@ -102,7 +100,6 @@ registerBlockType<{
                 multiline={false}
                 value={props.attributes.ctaText}
                 allowedFormats={[]}
-                // @ts-ignore
                 disableLineBreaks={true}
                 placeholder={__('CTA text')}
                 keepPlaceholderOnFocus={true}

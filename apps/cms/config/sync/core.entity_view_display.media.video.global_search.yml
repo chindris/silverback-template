@@ -1,0 +1,36 @@
+uuid: 9dfe81b7-833b-42c9-b468-ab9725180311
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.global_search
+    - field.field.media.video.field_media_video_file
+    - media.type.video
+  module:
+    - file
+id: media.video.global_search
+targetEntityType: media
+bundle: video
+mode: global_search
+content:
+  field_media_video_file:
+    type: file_url_plain
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  name:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  created: true
+  langcode: true
+  search_api_excerpt: true
+  thumbnail: true
+  uid: true

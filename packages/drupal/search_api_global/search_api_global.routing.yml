@@ -1,0 +1,6 @@
+search_api_global.global-search:
+  path: '/global-search'
+  defaults:
+    _controller: 'Drupal\search_api_global\Controller\GlobalSearchCoffeeController::search'
+  requirements:
+    _permission: 'access coffee'

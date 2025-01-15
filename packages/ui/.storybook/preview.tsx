@@ -1,9 +1,9 @@
 import '../src/tailwind.css';
 
+import { IntlProvider } from '@amazeelabs/react-intl';
 import { LocationProvider } from '@custom/schema';
 import { Decorator } from '@storybook/react';
 import React from 'react';
-import { IntlProvider } from '@amazeelabs/react-intl';
 import { SWRConfig, useSWRConfig } from 'swr';
 
 // Every story is wrapped in an IntlProvider by default.
@@ -19,6 +19,14 @@ const LocationDecorator: Decorator = (Story, ctx) => {
       <Story />
     </LocationProvider>
   );
+};
+
+const IsStorybookDecorator: Decorator = (Story) => {
+  // This var is documented but does not exist in our setup for some reason.
+  // https://storybook.js.org/docs/faq#how-can-my-code-detect-if-it-is-running-in-storybook
+  // @ts-expect-error Custom global variable.
+  window.IS_STORYBOOK = true;
+  return <Story />;
 };
 
 declare global {
@@ -117,4 +125,9 @@ export const parameters = {
   },
 };
 
-export const decorators = [LocationDecorator, IntlDecorator, SWRCacheDecorator];
+export const decorators = [
+  LocationDecorator,
+  IntlDecorator,
+  SWRCacheDecorator,
+  IsStorybookDecorator,
+];

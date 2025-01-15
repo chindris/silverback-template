@@ -53,6 +53,7 @@ const responsiveImage: GraphQLFieldResolver<
 
 export async function query<TOperation extends AnyOperationId>(
   operation: TOperation,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   rootValue: any,
   variables: OperationVariables<TOperation> = {},
   getAssetUrl: (path: string) => string,
@@ -86,6 +87,7 @@ export async function query<TOperation extends AnyOperationId>(
 
 export function useQuery<TOperation extends AnyOperationId>(
   operation: TOperation,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   rootValue: any,
   variables: OperationVariables<TOperation> = {},
   getAssetUrl: (path: string) => string,
@@ -116,6 +118,7 @@ export type useQueryType = typeof useQuery;
 
 export function createPreview<TOperation extends AnyOperationId>(
   query: TOperation,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   schema: ZodType<any, ZodTypeDef, unknown>,
   Component: React.FC<{
     preview: Exclude<OperationResult<TOperation>['preview'], undefined>;
@@ -151,7 +154,7 @@ export function createPreview<TOperation extends AnyOperationId>(
         {data?.preview ? (
           <Component preview={data.preview} />
         ) : (
-          <div className="flex flex-col items-center mb-8 pt-12 pb-36">
+          <div className="mb-8 flex flex-col items-center pb-36 pt-12">
             <p>Loading...</p>
             <p>Please make sure all required fields are filled.</p>
           </div>

@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title></title>
+    <meta charset="UTF-8" />
+    <script>
+      const sessionExpire = new URLSearchParams(window.location.search).get(
+        'session_expire',
+      );
+      if (sessionExpire) {
+        localStorage.setItem('drupalSessionExpire', sessionExpire);
+      } else {
+        localStorage.removeItem('drupalSessionExpire');
+      }
+    </script>
+  </head>
+  <body></body>
+</html>

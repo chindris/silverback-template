@@ -46,13 +46,13 @@ export function Header() {
     <MobileMenuProvider>
       <div className="container-page">
         <header className="container-content">
-          <div className="hidden md:flex py-2 border-b border-gray-200 md:align-bottom md:gap-x-8">
-            <nav className={'flex justify-end gap-x-6 w-full'}>
+          <div className="hidden border-b border-gray-200 py-2 md:flex md:gap-x-8 md:align-bottom">
+            <nav className={'flex w-full justify-end gap-x-6'}>
               {metaItems.map((item, key) => (
                 <Link
                   key={key}
                   href={item.target}
-                  className="text-sm font-medium text-gray-900 hover:text-blue-600 leading-6 mt-px"
+                  className="mt-px text-sm font-medium leading-6 text-gray-900 hover:text-blue-600"
                   activeClassName={'font-bold text-blue-200'}
                 >
                   {item.title}
@@ -62,7 +62,7 @@ export function Header() {
             <UserActions />
           </div>
           <nav
-            className="border-b border-b-gray-200 z-20 relative mx-auto flex items-center justify-between py-6"
+            className="relative z-20 mx-auto flex items-center justify-between border-b border-b-gray-200 py-6"
             aria-label="Global"
           >
             <div className="flex lg:flex-1">
@@ -87,7 +87,7 @@ export function Header() {
             </div>
             <div className="flex md:hidden">
               <UserActions />
-              <MobileMenuButton className="inline-flex items-center justify-center rounded-md text-gray-700 ml-5 sm:ml-7 cursor-pointer"></MobileMenuButton>
+              <MobileMenuButton className="ml-5 inline-flex cursor-pointer items-center justify-center rounded-md text-gray-700 sm:ml-7"></MobileMenuButton>
             </div>
             <div className={'hidden md:flex'}>
               {items.map((item, key) =>
@@ -95,7 +95,7 @@ export function Header() {
                   <Link
                     key={key}
                     href={item.target}
-                    className="text-base font-medium text-gray-900 ml-8 hover:text-blue-600"
+                    className="ml-8 text-base font-medium text-gray-900 hover:text-blue-600"
                     activeClassName={'font-bold text-blue-200'}
                   >
                     {item.title}
@@ -105,7 +105,7 @@ export function Header() {
                     <Link
                       key={item.target}
                       href={item.target}
-                      className="m-1.5 block hover:text-blue-600 p-2 text-sm leading-[1.25rem] text-gray-900 font-bold"
+                      className="m-1.5 block p-2 text-sm font-bold leading-5 text-gray-900 hover:text-blue-600"
                     >
                       {item.title}
                     </Link>
@@ -114,7 +114,7 @@ export function Header() {
                         <Link
                           key={child.target}
                           href={child.target}
-                          className="m-1.5 block hover:text-blue-600 p-2 text-sm leading-[1.25rem] text-gray-500"
+                          className="m-1.5 block p-2 text-sm leading-5 text-gray-500 hover:text-blue-600"
                         >
                           {child.title}
                         </Link>
@@ -127,7 +127,7 @@ export function Header() {
                             <Link
                               key={grandChild.target}
                               href={grandChild.target}
-                              className="block p-2 pl-5 text-sm leading-[1.25rem] text-gray-500 hover:text-blue-600"
+                              className="block p-2 pl-5 text-sm leading-5 text-gray-500 hover:text-blue-600"
                             >
                               {grandChild.title}
                             </Link>
@@ -149,7 +149,7 @@ export function Header() {
                       <Link
                         key={item.title}
                         href={item.target}
-                        className="block hover:text-blue-600 py-4 px-8 text-lg text-gray-900 border-b border-b-blue-100"
+                        className="block border-b border-b-blue-100 px-8 py-4 text-lg text-gray-900 hover:text-blue-600"
                       >
                         {item.title}
                       </Link>
@@ -163,7 +163,7 @@ export function Header() {
                           key={item.target}
                           href={item.target}
                           title={item.title}
-                          className="block hover:text-blue-600 py-4 pr-8 pl-10 text-base text-gray-900"
+                          className="block py-4 pl-10 pr-8 text-base text-gray-900 hover:text-blue-600"
                         >
                           {item.title}
                         </Link>
@@ -173,7 +173,7 @@ export function Header() {
                               key={child.target}
                               href={child.target}
                               title={child.title}
-                              className="block hover:text-blue-600 py-4 pr-8 pl-10 text-base text-gray-900"
+                              className="block py-4 pl-10 pr-8 text-base text-gray-900 hover:text-blue-600"
                             >
                               {child.title}
                             </Link>
@@ -199,7 +199,7 @@ export function Header() {
                 </div>
               </div>
             </div>
-            <nav className={'flex flex-col gap-y-6 w-full mt-10 px-8'}>
+            <nav className={'mt-10 flex w-full flex-col gap-y-6 px-8'}>
               {metaItems.map((item, key) => (
                 <Link
                   key={key}

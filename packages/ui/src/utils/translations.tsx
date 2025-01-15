@@ -39,7 +39,7 @@ export function TranslationsProvider({
   );
 }
 
-function deepCompare(a: any, b: any) {
+function deepCompare(a: Record<string, unknown>, b: Record<string, unknown>) {
   return (
     a &&
     b &&

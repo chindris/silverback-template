@@ -7,6 +7,7 @@ import {
 } from '@custom/schema';
 import { Page } from '@custom/ui/routes/Page';
 import CMS from 'decap-cms-app';
+import { CmsBackendType, InitOptions } from 'decap-cms-core';
 
 import css from '../node_modules/@custom/ui/build/styles.css?raw';
 import { PageCollection, pageSchema } from './collections/page';
@@ -31,12 +32,11 @@ if (
   );
 }
 
-CMS.init({
+const cmsConfig: InitOptions = {
   config: {
     load_config_file: false,
     publish_mode: 'editorial_workflow',
     media_folder: 'apps/decap/media',
-    // @ts-ignore
     backend: import.meta.env.DEV
       ? {
           // In development, use the in-memory backend.
@@ -52,7 +52,7 @@ CMS.init({
           }
         : {
             // Otherwise, its production. Use the token auth backend.
-            name: 'token-auth',
+            name: 'token-auth' as CmsBackendType,
             api_root: '/.netlify/functions/github-proxy',
             repo: import.meta.env.VITE_DECAP_REPO,
             branch: import.meta.env.VITE_DECAP_BRANCH,
@@ -86,7 +86,21 @@ CMS.init({
       PageCollection,
     ],
   },
-});
+};
+
+// Make CMS readonly on non-prod environments.
+if (
+  window.location.hostname !== 'localhost' &&
+  import.meta.env.VITE_DECAP_BRANCH !== 'prod'
+) {
+  cmsConfig.config.collections.forEach((collection) => {
+    collection.publish = false;
+    collection.create = false;
+    collection.delete = false;
+  });
+}
+
+CMS.init(cmsConfig);
 
 CMS.registerPreviewTemplate(
   'page',

@@ -14,7 +14,11 @@ $config['silverback_external_preview.settings'] = [
 
 $config['graphql.graphql_servers.main']['schema_configuration']['directable']['build_webhook'] = $publisherUrl . '/___status/build';
 $config['graphql.graphql_servers.main']['schema_configuration']['directable']['update_webhook'] = $publisherUrl . '/___status/update';
-$config['graphql.graphql_servers.main']['schema_configuration']['directable']['build_url'] = $publisherUrl;
+if (getenv('SB_ENVIRONMENT')) {
+  $config['graphql.graphql_servers.main']['schema_configuration']['directable']['build_url'] = $publisherUrl;
+} else {
+  $config['graphql.graphql_servers.main']['schema_configuration']['directable']['build_url'] = $netlifyUrl;
+}
 
 $settings['silverback_graphql_persisted_map'] = '../node_modules/@custom/schema/build/operations.json';
 
@@ -65,3 +69,13 @@ if (getenv('LAGOON_ENVIRONMENT') !== 'prod') {
 // Disable key permissions check for Simple OAuth.
 // https://www.drupal.org/project/simple_oauth/issues/3021054
 $settings['simple_oauth.key_permissions_check'] = FALSE;
+
+// Repeat this declaration, so it is possible to override any setting or service.
+if (file_exists(__DIR__ . '/settings.local.php')) {
+  include __DIR__ . '/settings.local.php';
+}
+if (file_exists(__DIR__ . '/services.local.yml')) {
+  $settings['container_yamls'][] = __DIR__ . '/services.local.yml';
+}
+
+$config['silverback_ai.settings']['open_ai_api_key'] = getenv('OPEN_AI_API_KEY');

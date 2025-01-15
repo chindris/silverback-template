@@ -1,0 +1,11 @@
+uuid: 8a58c23a-3a33-428f-a2ba-312a2e968833
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+id: media.global_search
+label: 'Global search'
+description: 'View mode used for indexing the content in the administrative global search.'
+targetEntityType: media
+cache: true

@@ -22,8 +22,7 @@ declare module 'express-session' {
 }
 
 // In seconds
-export const SESSION_MAX_AGE = 300;
-export const ACCESS_TOKEN_EXPIRATION_TIME = 300;
+export const SESSION_MAX_AGE = 60 * 60 * 12;
 
 const ENCRYPTION_KEY =
   process.env.ENCRYPTION_KEY || crypto.randomBytes(32).toString('hex');
@@ -90,7 +89,7 @@ export const initializeSession = (server: Express): void => {
   const sessionMaxAgeInMilliseconds = SESSION_MAX_AGE * 1000;
   const MemoryStore = createMemoryStore(session);
 
-  const config = {
+  const config: Parameters<typeof session>[0] = {
     secret:
       oAuth2Config.sessionSecret || crypto.randomBytes(64).toString('hex'),
     resave: true, // seems to be needed for MemoryStore
@@ -107,7 +106,6 @@ export const initializeSession = (server: Express): void => {
 
   if (oAuth2Config.environmentType === 'production') {
     server.set('trust proxy', 1); // trust first proxy
-    // @ts-ignore
     config.cookie.secure = true; // serve secure cookies
   }
 
@@ -173,6 +171,7 @@ const encrypt = (text: string): string => {
     let encrypted = cipher.update(text);
     encrypted = Buffer.concat([encrypted, cipher.final()]);
     return iv.toString('hex') + ':' + encrypted.toString('hex');
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
     throw new Error('Encryption failed.');
   }
@@ -185,7 +184,6 @@ const decrypt = (encryptedText: string): string => {
 
   try {
     const textParts = encryptedText.split(':');
-    // @ts-ignore
     const iv = Buffer.from(textParts.shift(), 'hex');
 
     const encryptedData = Buffer.from(textParts.join(':'), 'hex');
@@ -199,6 +197,7 @@ const decrypt = (encryptedText: string): string => {
     const decrypted = decipher.update(encryptedData);
     const decryptedText = Buffer.concat([decrypted, decipher.final()]);
     return decryptedText.toString();
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
     throw new Error('Decryption failed.');
   }
@@ -250,7 +249,7 @@ export const isAuthenticated = async (req: Request): Promise<boolean> => {
   let result = false;
   let accessToken = getPersistedAccessToken(req);
   if (accessToken) {
-    if (!accessToken.expired(ACCESS_TOKEN_EXPIRATION_TIME)) {
+    if (!accessToken.expired()) {
       result = true;
     } else {
       try {

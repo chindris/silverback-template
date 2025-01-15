@@ -1,0 +1,39 @@
+diff --git a/js/coffee.js b/js/coffee.js
+index 23c4e09..f4ee07a 100644
+--- a/js/coffee.js
++++ b/js/coffee.js
+@@ -13,10 +13,31 @@
+   var initSource = proto._initSource;
+ 
+   function filter(array, term) {
+-    var matcher = new RegExp($.ui.autocomplete.escapeRegex(term), 'i');
+-    return $.grep(array, function (value) {
+-      return matcher.test(value.command) || matcher.test(value.label) || matcher.test(value.value);
++    var matcher = new RegExp($.ui.autocomplete.escapeRegex(term.startsWith('#') ? term.substring(1) : term), 'i');
++    // By default, we do an ajax request to get the available options using a
++    // search feature implemented on the server. However, if the command starts
++    // with '#', then juts use the default behavior to search through the array
++    // parameter, which contains all the static entries.
++    if (term.startsWith('#')) {
++      return $.grep(array, function (value) {
++        return matcher.test(value.command) || matcher.test(value.label) || matcher.test(value.value);
++      })
++    }
++
++    var results;
++    $.ajax({
++      url: Drupal.url('global-search?search=' + encodeURIComponent(term)),
++      dataType: 'json',
++      // We have to wait for the request to complete before returning the
++      // results.
++      async: false,
++      success: function (data) {
++        results = $.grep(data, function (value) {
++          return matcher.test(value.command) || matcher.test(value.label) || matcher.test(value.value);
++        });
++      }
+     });
++    return results;
+   }
+ 
+   $.extend(proto, {

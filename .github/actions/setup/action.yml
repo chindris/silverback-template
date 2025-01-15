@@ -7,29 +7,38 @@ runs:
       uses: jetify-com/devbox-install-action@v0.9.0
       with:
         enable-cache: 'true'
+        devbox-version: '0.13.3' # Setting a version is required to make the devbox fully cached.
     - name: Load devbox via direnv
       uses: HatsuneMiku3939/direnv-action@v1
 
     - name: Check xdebug config
       shell: bash
       run: |
-        if ! php --info | grep 'xdebug.mode => develop => develop'; then
+        if ! php --info | grep 'xdebug.mode => no value => no value'; then
           echo 'Error: xdebug.mode should not be set in CI. Have you committed xdebug config by accident? Check devbox.d/php/php.ini'
           exit 1
         fi
 
-    - name: Get pnpm store directory
-      id: pnpm-cache
-      shell: bash
-      run: echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
-
-    - uses: actions/cache@v4
-      name: Setup pnpm cache
+    - name: Cache dependencies
+      uses: actions/cache@v4
       with:
-        path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
-        key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+        path: /tmp/cache
+        key: |
+          cache-${{ hashFiles('**/pnpm-lock.yaml') }}-${{ hashFiles('**/composer.lock') }}
         restore-keys: |
-          ${{ runner.os }}-pnpm-store-
+          cache-${{ hashFiles('**/pnpm-lock.yaml') }}-
+          cache-
+    - name: Set composer cache dir
+      run: composer config --global cache-files-dir /tmp/cache/composer
+      shell: bash
+    - name: Set pnpm cache dir
+      run: pnpm config set store-dir /tmp/cache/pnpm
+      shell: bash
+    - name: Set Playwright browsers dir
+      run:
+        echo "PLAYWRIGHT_BROWSERS_PATH=/tmp/cache/playwright-browsers" >>
+        $GITHUB_ENV
+      shell: bash
 
     - name: Install dependencies
       shell: bash

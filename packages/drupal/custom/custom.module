@@ -5,6 +5,7 @@
  */
 
 use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Entity\ContentEntityFormInterface;
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Language\LanguageInterface;
@@ -15,6 +16,7 @@ use Drupal\Core\StreamWrapper\StreamWrapperInterface;
 use Drupal\Core\Utility\Error as ErrorUtil;
 use Drupal\file\Entity\File;
 use Drupal\media\Entity\Media;
+use Drupal\node\NodeInterface;
 use Drupal\silverback_gutenberg\LinkProcessor;
 use Drupal\user\Entity\Role;
 use Drupal\user\UserInterface;
@@ -54,7 +56,7 @@ function custom_default_content_exported_fields_alter(array &$fields, ContentEnt
 function custom_silverback_gutenberg_link_processor_outbound_url_alter(
   string &$url,
   LanguageInterface $language,
-  LinkProcessor $linkProcessor
+  LinkProcessor $linkProcessor,
 ) {
 
   // For some links pointing to media, we want to print the direct file URL
@@ -82,14 +84,15 @@ function custom_silverback_gutenberg_link_processor_outbound_url_alter(
             $file = File::load($source);
             $url = $file->createFileUrl();
           }
-        } catch (\Throwable $e) {
+        }
+        catch (\Throwable $e) {
           \Drupal::logger('custom')->error(
             'Error turning media (id: "{mediaId}") route into file url. Error: {error}',
             [
               'mediaId' => $mediaId,
               'error' => ErrorUtil::renderExceptionSafe($e),
             ]
-          );
+                  );
         }
       }
     );
@@ -109,7 +112,7 @@ function custom_silverback_gutenberg_link_processor_outbound_url_alter(
  */
 function custom_silverback_gutenberg_link_processor_inbound_link_alter(
   \DOMElement $link,
-  LinkProcessor $linkProcessor
+  LinkProcessor $linkProcessor,
 ) {
   // For inbound links (when data gets saved), if the link points to a public
   // file, then we want to replace the href value with "media/uuid/edit" and
@@ -170,41 +173,68 @@ function custom_silverback_gutenberg_link_processor_inbound_link_alter(
 /**
  * Implements hook_form_alter().
  *
- * Executed at the very late stage.
+ * Using global form_alter as it's to be executed at the very late stage.
  *
  * @see custom_heavy_module_implements_alter
  */
 function custom_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-  $gutenbergModeratedForms = ['node_page_form', 'node_page_edit_form'];
-  if (in_array($form_id, $gutenbergModeratedForms) && array_key_exists('moderation_state', $form)) {
+  $form_object = $form_state->getFormObject();
 
-    // Move the moderation state widget on pages into the gutenberg sidebar.
+  if (!$form_object instanceof ContentEntityFormInterface) {
+    return;
+  }
+
+  // Gutenberg v2 is only enabled for nodes.
+  $entity = $form_state->getFormObject()->getEntity();
+  if (!$entity instanceof NodeInterface) {
+    return;
+  }
+
+  if (!_gutenberg_is_gutenberg_enabled($entity)) {
+    return;
+  }
+
+  // Move the moderation state widget into the gutenberg sidebar.
+  if (array_key_exists('moderation_state', $form)) {
     $form['moderation_state']['#group'] = 'meta';
-    // For some reason the above method does not work for regular fields.
-    // But we need to move metatags into the sidebar as well.
-    $form['meta']['field_metatags'] = $form['field_metatags'];
-    unset($form['field_metatags']);
+  }
 
-    // If the "More settings" fieldset is empty, remove it completely.
-    $metaboxHasFields = FALSE;
-    foreach (Element::children($form) as $key) {
-      if (($form[$key]['#group'] ?? '') === 'metabox_fields') {
+  // Move metatags in the sidebar.
+  // #group won't work here.
+  if (
+    array_key_exists('field_metatags', $form) &&
+    !empty($form['#fields_with_details'])
+  ) {
+    foreach ($form['#fields_with_details'] as $key => $value) {
+      if ($value === 'field_metatags') {
+        unset($form['#fields_with_details'][$key]);
+        break;
+      }
+    }
+  }
+
+  // If the "More settings" fieldset is empty, remove it completely.
+  $metaboxHasFields = FALSE;
+  foreach (Element::children($form) as $key) {
+    if (($form[$key]['#group'] ?? '') === 'metabox_fields') {
+      $metaboxHasFields = TRUE;
+      break;
+    }
+  }
+
+  if (!$metaboxHasFields && isset($form['#fieldgroups'])) {
+    foreach ($form['#fieldgroups'] as $group) {
+      if (($group->parent_name ?? '') === 'metabox_fields') {
         $metaboxHasFields = TRUE;
         break;
       }
     }
-    if (!$metaboxHasFields && isset($form['#fieldgroups'])) {
-      foreach ($form['#fieldgroups'] as $group) {
-        if (($group->parent_name ?? '') === 'metabox_fields') {
-          $metaboxHasFields = TRUE;
-          break;
-        }
-      }
-    }
-    if (!$metaboxHasFields) {
-      unset($form['metabox_fields']);
-    }
   }
+
+  if (!$metaboxHasFields) {
+    $form['metabox_fields']['#access'] = FALSE;
+  }
+
 }
 
 /**
@@ -250,7 +280,8 @@ function _custom_key_auth_form_access(UserInterface $user): AccessResult {
   $access = AccessResult::forbidden();
   if (\Drupal::currentUser()->id() == 1) {
     $access = AccessResult::allowed();
-  } else {
+  }
+  else {
     $roleIds = \Drupal::currentUser()->getRoles();
     if ($roleIds) {
       foreach (Role::loadMultiple($roleIds) as $role) {
@@ -299,4 +330,60 @@ function custom_views_data_alter(array &$data) {
       'click sortable' => FALSE,
     ],
   ];
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for "html".
+ */
+function custom_preprocess_html(&$variables) {
+  _custom_add_session_iframe_to_page($variables);
+}
+
+/**
+ * Adds a hidden iframe to set the session expiration time on the frontend.
+ *
+ * @param array $variables
+ *   Variables passed to hook_preprocess_html().
+ *
+ * @return void
+ */
+function _custom_add_session_iframe_to_page(array &$variables): void {
+  $variables['page_bottom']['frontend_session_iframe'] = [
+    '#cache' => [
+      'max-age' => 0,
+    ],
+  ];
+  // Do not add the iframe if silverback_iframe_theme is the current theme. We
+  // don't want to load the iframe in the iframe.
+  $isDefaultTheme = \Drupal::theme()->getActiveTheme()->getName() === \Drupal::config('system.theme')->get('default');
+  if ($isDefaultTheme) {
+    // Currently, any authenticated user is considered an editor.
+    $isEditor = \Drupal::currentUser()->isAuthenticated();
+    if ($isEditor) {
+      // Guess the probable session expiration time.
+      /** @var \Drupal\Core\Session\MetadataBag $sessionMeta */
+      $sessionMeta = \Drupal::service('session_manager.metadata_bag');
+      /** @var \Drupal\Core\Session\SessionConfiguration $sessionConfig */
+      $sessionConfig = \Drupal::service('session_configuration');
+      $sessionOptions = $sessionConfig->getOptions(\Drupal::request());
+      $cookieLifetime = $sessionOptions['cookie_lifetime'];
+      $gcLifetime = $sessionOptions['gc_maxlifetime'];
+      $gcExpire = $sessionMeta->getLastUsed() + $gcLifetime;
+      $cookieExpire = $sessionMeta->getCreated() + $cookieLifetime;
+      $sessionExpire = date('c', min($cookieExpire, $gcExpire));
+    }
+    else {
+      // Unset the session expiration time.
+      $sessionExpire = '';
+    }
+    $variables['page_bottom']['frontend_session_iframe'] += [
+      '#type' => 'html_tag',
+      '#tag' => 'iframe',
+      '#value' => '',
+      '#attributes' => [
+        'src' => (getenv('NETLIFY_URL') ?: 'http://127.0.0.1:8000') . '/set-drupal-session?session_expire=' . rawurlencode($sessionExpire),
+        'style' => 'width: 0; height: 0; border: none;',
+      ],
+    ];
+  }
 }

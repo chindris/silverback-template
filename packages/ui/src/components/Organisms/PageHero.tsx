@@ -14,31 +14,48 @@ export function PageHero(props: NonNullable<PageFragment['hero']>) {
   );
 }
 
-function DefaultHero(props: NonNullable<PageFragment['hero']>) {
+const HeroImage = (
+  props: NonNullable<PageFragment['hero']> & { enableOverlay?: boolean },
+) => {
   return (
     <>
-      <section className="default-hero relative isolate overflow-hidden bg-gray-900 pt-12 pb-24 min-h-[20rem] lg:min-h-[33rem] container-page h-[50rem] lg:h-auto">
-        {props.image ? (
-          <>
+      {props.image ? (
+        <>
+          {props.image.landscape ? (
             <Image
               alt={props.image.alt}
               source={props.image.landscape}
               priority={true}
-              className="absolute inset-0 -z-10 h-full w-full object-cover hidden lg:block"
+              className="absolute inset-0 -z-10 hidden size-full object-cover lg:block"
               data-test-id={'hero-image'}
             />
+          ) : null}
+          {props.image.portrait ? (
             <Image
               alt={props.image.alt}
               source={props.image.portrait}
               priority={true}
-              className="absolute inset-0 -z-10 h-full w-full object-cover block lg:hidden"
+              className="absolute inset-0 -z-10 block size-full object-cover lg:hidden"
               data-test-id={'hero-image'}
             />
-          </>
-        ) : null}
+          ) : null}
+          {props.enableOverlay ? (
+            <div className="absolute inset-0 size-full bg-black opacity-40" />
+          ) : null}
+        </>
+      ) : null}
+    </>
+  );
+};
+
+function DefaultHero(props: NonNullable<PageFragment['hero']>) {
+  return (
+    <>
+      <section className="default-hero container-page relative isolate h-[50rem] min-h-80 overflow-hidden bg-gray-900 pb-24 pt-12 lg:h-auto lg:min-h-[33rem]">
+        <HeroImage {...props} />
         <div className="container-content">
           <div className="mx-auto max-w-2xl lg:mx-0">
-            <h1 className="text-5xl font-extrabold tracking-tight leading-tight text-white drop-shadow-md">
+            <h1 className="text-5xl font-extrabold leading-tight tracking-tight text-white drop-shadow-md">
               {props.headline}
             </h1>
             {props.lead ? (
@@ -49,10 +66,10 @@ function DefaultHero(props: NonNullable<PageFragment['hero']>) {
             {props.ctaText && props.ctaUrl ? (
               <Link
                 href={props.ctaUrl}
-                className="mt-7 px-5 py-2.5 text-sm font-medium text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                className="mt-7 inline-flex items-center rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
               >
                 <svg
-                  className="mr-2 -ml-1 w-4 h-4"
+                  className="-ml-1 mr-2 size-4"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
@@ -78,22 +95,10 @@ function FormHero(props: NonNullable<PageFragment['hero']>) {
   return (
     <section>
       <div className="relative isolate overflow-hidden bg-gray-900 py-12 md:py-24">
-        {props.image ? (
-          <>
-            <Image
-              alt={props.image.alt}
-              source={props.image.landscape}
-              priority={true}
-              className="absolute inset-0 h-full w-full object-cover"
-              data-test-id={'hero-image'}
-            />
-            <div className="absolute inset-0 h-full w-full bg-black opacity-40" />
-          </>
-        ) : null}
-
-        <div className="px-4 pb-[22rem] lg:pb-96 container-page text-center lg:px-6 relative">
-          <div className="max-w-screen-xl mx-auto">
-            <h1 className="text-4xl tracking-tight font-extrabold text-white drop-shadow-md">
+        <HeroImage {...props} enableOverlay={true} />
+        <div className="container-page relative px-4 pb-[22rem] text-center lg:px-6 lg:pb-96">
+          <div className="mx-auto max-w-screen-xl">
+            <h1 className="text-4xl font-extrabold tracking-tight text-white drop-shadow-md">
               {props.headline}
             </h1>
             {props.lead ? (
@@ -104,10 +109,10 @@ function FormHero(props: NonNullable<PageFragment['hero']>) {
             {props.ctaText && props.ctaUrl ? (
               <Link
                 href={props.ctaUrl}
-                className="mt-7 px-5 py-2.5 text-sm font-medium text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                className="mt-7 inline-flex items-center rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
               >
                 <svg
-                  className="mr-2 -ml-1 w-4 h-4"
+                  className="-ml-1 mr-2 size-4"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
@@ -125,8 +130,8 @@ function FormHero(props: NonNullable<PageFragment['hero']>) {
         </div>
       </div>
       {props.formUrl ? (
-        <div className="px-4 mx-auto mt-[-22rem] lg:-mt-96 max-w-screen-xl lg:px-6 relative">
-          <div className="p-6 mx-auto max-w-[52rem] bg-white rounded-lg border border-gray-200 shadow-sm nested-container">
+        <div className="relative mx-auto mt-[-22rem] max-w-screen-xl px-4 lg:-mt-96 lg:px-6">
+          <div className="nested-container mx-auto max-w-[52rem] rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
             <BlockForm url={props.formUrl} />
           </div>
         </div>
@@ -139,10 +144,10 @@ function NoImageHero(props: NonNullable<PageFragment['hero']>) {
   return (
     <>
       <BreadCrumbs />
-      <section className="relative isolate overflow-hidden pt-12 sm:pt-20 container-page">
+      <section className="container-page relative isolate overflow-hidden pt-12 sm:pt-20">
         <div className="container-content">
           <div className="container-text">
-            <h1 className="text-4xl font-extrabold tracking-tight leading-tight">
+            <h1 className="text-4xl font-extrabold leading-tight tracking-tight">
               {props.headline}
             </h1>
             {props.lead ? (
@@ -153,10 +158,10 @@ function NoImageHero(props: NonNullable<PageFragment['hero']>) {
             {props.ctaText && props.ctaUrl ? (
               <Link
                 href={props.ctaUrl}
-                className="mt-5 px-5 py-2.5 text-sm font-medium text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                className="mt-5 inline-flex items-center rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
               >
                 <svg
-                  className="mr-2 -ml-1 w-4 h-4"
+                  className="-ml-1 mr-2 size-4"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"

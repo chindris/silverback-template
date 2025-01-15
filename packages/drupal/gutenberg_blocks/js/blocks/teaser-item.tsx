@@ -1,7 +1,4 @@
-import {
-  // @ts-ignore
-  __experimentalLinkControl as LinkControl,
-} from 'wordpress__block-editor';
+import { __experimentalLinkControl as LinkControl } from 'wordpress__block-editor';
 import { registerBlockType } from 'wordpress__blocks';
 
 registerBlockType<{
@@ -39,7 +36,6 @@ registerBlockType<{
           }}
           settings={{}}
           suggestionsQuery={{
-            type: 'post',
             // Use the teaser_list linkit profile to fetch suggestions.
             subtype: 'teaser_list',
           }}
